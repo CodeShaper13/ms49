@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
+  m_Name: RailCrossing
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 0}
+  objectTile: {fileID: 11400000, guid: ad63941777d61234e83b650bfa340b7e, type: 2}
+  overlayTile: {fileID: 0}
+  rotationalOverride: 0
+  up:
+    tile: {fileID: 0}
+    effect: 0
+  right:
+    tile: {fileID: 0}
+    effect: 0
+  down:
+    tile: {fileID: 0}
+    effect: 0
+  left:
+    tile: {fileID: 0}
+    effect: 0
+  isWalkable: 0
+  canBuildOver: 0
+  isDestroyable: 1
+  zMoveDirections: 0
+  tintGroundTile: 0
+  tintObjectTile: 0
+  behaviorPrefab: {fileID: 0}
+  connections:
+  - to: 0
+    from: 3
+    bothWays: 1
+  - to: 1
+    from: 2
+    bothWays: 1

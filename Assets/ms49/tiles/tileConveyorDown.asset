@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91b4ddc41b19194792f871e3fda95f5, type: 3}
+  m_Name: tileConveyorDown
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -5855449555812356414, guid: 76049c470a04da84f89e8f4260580934,
+    type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Neighbors: 01000000
+    m_NeighborPositions:
+    - {x: 0, y: -1, z: 0}
+    m_Sprites:
+    - {fileID: 5492801243489710988, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: -580841201731703993, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 5816714569166673733, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 8830272116680296137, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 1721189150879579908, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 2216199926672136643, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 8634011796210034997, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 8692280767601912476, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    m_GameObject: {fileID: 0}
+    m_AnimationSpeed: 8
+    m_PerlinScale: 0.5
+    m_RuleTransform: 0
+    m_Output: 2
+    m_ColliderType: 1
+    m_RandomTransform: 0
+  - m_Neighbors: 02000000
+    m_NeighborPositions:
+    - {x: 0, y: -1, z: 0}
+    m_Sprites:
+    - {fileID: -5855449555812356414, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: -5077910960140238672, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 5963251134358741189, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 1138457579988626181, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: -4695861953458111290, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 5489894014197626774, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: -5589557332981178165, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 1580745672073654748, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    m_GameObject: {fileID: 0}
+    m_AnimationSpeed: 8
+    m_PerlinScale: 0.5
+    m_RuleTransform: 0
+    m_Output: 2
+    m_ColliderType: 1
+    m_RandomTransform: 0
+  siblings:
+  - {fileID: 11400000, guid: cb7b938176ec5e544a1760d270be4035, type: 2}
+  - {fileID: 11400000, guid: 696b8f5690463494496e66b3a1992c19, type: 2}
+  - {fileID: 11400000, guid: 28e60888f5db744438de0592c86266b4, type: 2}

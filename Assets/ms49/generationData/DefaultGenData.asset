@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522d155579a13d646bb5ce5d62198585, type: 3}
+  m_Name: DefaultGenData
+  m_EditorClassIdentifier: 
+  mapSize: 64
+  unbreakableRockTiles: {fileID: 11400000, guid: 93c873b7c3e8a28419682700c1e3330b,
+    type: 2}
+  tiles:
+    waterTile: {fileID: 11400000, guid: ce497ab37796c984fb4231bb7c6d3d94, type: 2}
+    lavaTile: {fileID: 11400000, guid: e77239bff4cdc0c4a83e4145d0652fd1, type: 2}
+    amethystTile: {fileID: 11400000, guid: 4e91e160e2f037549b5a699c729a34a7, type: 2}
+    coalTile: {fileID: 11400000, guid: a59a1921820c7174d956a088eb133e3c, type: 2}
+    emeraldTile: {fileID: 11400000, guid: ba43be8abde0aca4ebb7a5af35cfbfd2, type: 2}
+    rubyTile: {fileID: 11400000, guid: b3a0c4c11c71bef46ae7f0c59256b274, type: 2}
+    sapphireTile: {fileID: 11400000, guid: 409d1ddf943b9a3479be33bec427faa2, type: 2}
+    goldTile: {fileID: 11400000, guid: c2748d19876cb3c488d8600108a00812, type: 2}
+  layerGenerators:
+  - {fileID: 11400000, guid: d8d49954f458e4b4494b3ebc8f98ab0c, type: 2}
+  - {fileID: 11400000, guid: 3fc454ff267f9a943b2fb661c489c6cb, type: 2}
+  - {fileID: 11400000, guid: 8b7fb56d4f3e0bc4d9a4b91e4706d839, type: 2}
+  - {fileID: 11400000, guid: 452bde97bcffc344a8f321bb8aa33bab, type: 2}
+  - {fileID: 11400000, guid: 521a6fbd29ac9f5458821f3ff7da76ab, type: 2}
+  - {fileID: 11400000, guid: 369e04f90e31b2945b4cb15fe29f53ef, type: 2}
+  - {fileID: 11400000, guid: 9b066e97a2ef36f4c8f4fd896a1f7a56, type: 2}
+  - {fileID: 11400000, guid: bc295ce61ca54a449b29a3994e91b513, type: 2}
+  - {fileID: 11400000, guid: a0b8f625fa0bc7b4ea8726f5523fec71, type: 2}
+  - {fileID: 11400000, guid: 2297a0b72a860e44caf650a09bdc4920, type: 2}
+  - {fileID: 11400000, guid: 57f47a4bb67e60846b3f6368c9247d0f, type: 2}
+  startingStructures:
+  - pos:
+      x: 25
+      y: 25
+      depth: 1
+    structure: {fileID: 11400000, guid: 5dd9f0f7defd0bc479c8234ee7c33968, type: 2}
+  - pos:
+      x: 25
+      y: 25
+      depth: 0
+    structure: {fileID: 11400000, guid: 3504838e89078bf43a3255cc02a408df, type: 2}

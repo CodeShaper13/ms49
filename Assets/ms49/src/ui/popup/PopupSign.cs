@@ -1,0 +1,25 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+public class PopupSign : PopupWindow {
+
+    [SerializeField]
+    private InputField inputField = null;
+
+    private CellBehaviorSign behavior;
+
+    public void setMeta(CellBehaviorSign behavior) {
+        this.behavior = behavior;
+        this.inputField.text = behavior.message;
+    }
+
+    public void callback_ok() {
+        this.behavior.message = this.inputField.text;
+
+        this.close();
+    }
+
+    public override bool blockInput() {
+        return true;
+    }
+}

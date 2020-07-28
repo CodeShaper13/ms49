@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74ee29c20e655c4cbc63fb0a739a5f9, type: 3}
+  m_Name: LayerSurface
+  m_EditorClassIdentifier: 
+  tintColor: {r: 1, g: 1, b: 1, a: 1}
+  tile: {fileID: 11400000, guid: 1e6054218c19ce24a9958cd36ad6b459, type: 2}
+  floorTile: {fileID: 11400000, guid: 342b332ff476f7c48b3631130fa0c4bd, type: 2}
+  hasFog: 0
+  generateCaves: 0
+  caveFillPercent: 0
+  caveSmoothPases: 5
+  oreSpawnSettings: []
+  lakeType: 0
+  lakeChance: 10
+  treeCell: {fileID: 11400000, guid: e0d7c53bfaab1834ab324e0397dc80f0, type: 2}
+  treeChance: 0.211

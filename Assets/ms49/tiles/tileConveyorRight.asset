@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91b4ddc41b19194792f871e3fda95f5, type: 3}
+  m_Name: tileConveyorRight
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -4272522009112487493, guid: 76049c470a04da84f89e8f4260580934,
+    type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_Sprites:
+    - {fileID: -4272522009112487493, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 7445307736582658891, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: -1895538147484124694, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 124934165367795405, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: -9169722469289934752, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 1231270999587266046, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: -1441372281125975043, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    - {fileID: 5019057822696707660, guid: 76049c470a04da84f89e8f4260580934, type: 3}
+    m_GameObject: {fileID: 0}
+    m_AnimationSpeed: 8
+    m_PerlinScale: 0.5
+    m_RuleTransform: 0
+    m_Output: 2
+    m_ColliderType: 1
+    m_RandomTransform: 0
+  siblings:
+  - {fileID: 11400000, guid: 9c7237ff24eb52043b8e3a96d82ff814, type: 2}
+  - {fileID: 11400000, guid: cb7b938176ec5e544a1760d270be4035, type: 2}
+  - {fileID: 11400000, guid: 28e60888f5db744438de0592c86266b4, type: 2}

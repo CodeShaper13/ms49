@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1e8330f25d04b40999ce0c05b5b59c, type: 3}
+  m_Name: Minecart
+  m_EditorClassIdentifier: 
+  structureName: Minecart
+  cost: 500
+  description: 
+  railSprite: {fileID: -9198056691032318685, guid: 83e6f32abdc9b244cbe11ac906944047,
+    type: 3}
+  minecartSprite: {fileID: -1631286982127175646, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
+    type: 3}

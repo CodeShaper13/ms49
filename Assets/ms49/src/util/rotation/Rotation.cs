@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Rotation {
 
@@ -41,6 +42,10 @@ public class Rotation {
 
     public Rotation opposite() {
         return this.func(2);
+    }
+
+    public Rotation rotate(Rotation cellRotation) {
+        return this.func(cellRotation.id);
     }
 
     private Rotation func(int dir) {

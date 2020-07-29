@@ -36,3 +36,4 @@ MonoBehaviour:
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}
   connections: []
+  moveType: 2

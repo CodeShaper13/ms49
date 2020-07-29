@@ -6938,12 +6938,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 880b7315fcfd029489266c9f8e9c1f02, type: 2}
   - {fileID: 11400000, guid: c9ebaa171e7c6aa4788b614f09d45c65, type: 2}
   - {fileID: 11400000, guid: e8ed24ed658fef647815e97fc84df27d, type: 2}
-  - {fileID: 11400000, guid: 0737886ad47f30e4a88ad68a5e659ebb, type: 2}
-  - {fileID: 11400000, guid: a47c702b248684f4d8693a541e660bc0, type: 2}
   - {fileID: 11400000, guid: 28552ad5f88474e41aed230d2f113a39, type: 2}
   - {fileID: 11400000, guid: 090145f60c82cce4fa4afb9ae4017cb3, type: 2}
   - {fileID: 11400000, guid: 3d935c3a12ef5ed4d9a528178db64099, type: 2}
   - {fileID: 11400000, guid: e7014072569d3b345adf2429498e5997, type: 2}
+  - {fileID: 11400000, guid: 0737886ad47f30e4a88ad68a5e659ebb, type: 2}
+  - {fileID: 11400000, guid: a47c702b248684f4d8693a541e660bc0, type: 2}
   btnPrefab: {fileID: 6206199302929523976, guid: cfbb2ed209eca654e8a2ffe427ddb39c,
     type: 3}
   area: {fileID: 239235670}

@@ -42,3 +42,4 @@ MonoBehaviour:
   - to: 1
     from: 2
     bothWays: 1
+  moveType: 1

@@ -29,13 +29,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3fc454ff267f9a943b2fb661c489c6cb, type: 2}
   - {fileID: 11400000, guid: 8b7fb56d4f3e0bc4d9a4b91e4706d839, type: 2}
   - {fileID: 11400000, guid: 452bde97bcffc344a8f321bb8aa33bab, type: 2}
-  - {fileID: 11400000, guid: 521a6fbd29ac9f5458821f3ff7da76ab, type: 2}
-  - {fileID: 11400000, guid: 369e04f90e31b2945b4cb15fe29f53ef, type: 2}
-  - {fileID: 11400000, guid: 9b066e97a2ef36f4c8f4fd896a1f7a56, type: 2}
-  - {fileID: 11400000, guid: bc295ce61ca54a449b29a3994e91b513, type: 2}
-  - {fileID: 11400000, guid: a0b8f625fa0bc7b4ea8726f5523fec71, type: 2}
-  - {fileID: 11400000, guid: 2297a0b72a860e44caf650a09bdc4920, type: 2}
-  - {fileID: 11400000, guid: 57f47a4bb67e60846b3f6368c9247d0f, type: 2}
   startingStructures:
   - pos:
       x: 25
@@ -47,3 +40,8 @@ MonoBehaviour:
       y: 25
       depth: 0
     structure: {fileID: 11400000, guid: 3504838e89078bf43a3255cc02a408df, type: 2}
+  - pos:
+      x: 26
+      y: 31
+      depth: 0
+    structure: {fileID: 11400000, guid: 08ee3d16e815b3a4ba25db91909c8a72, type: 2}

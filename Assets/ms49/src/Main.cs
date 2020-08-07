@@ -39,8 +39,8 @@ public class Main : MonoBehaviour {
 
             World world = GameObject.FindObjectOfType<World>();
             if(world != null) {
-                Vector2Int pos = CameraController.instance.getMousePos();
-                CellState state = world.getCellState(pos.x, pos.y, CameraController.instance.currentLayer);
+                Position pos = CameraController.instance.getMousePos();
+                CellState state = world.getCellState(pos);
                 if(state != null) {
                     GUI.Label(new Rect(10, 50, 400, 40), "Tile: " + state.data.name);
                     GUI.Label(new Rect(10, 70, 400, 40), "Pos: " + pos.ToString());

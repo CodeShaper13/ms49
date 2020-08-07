@@ -7,7 +7,7 @@ public class NavigationManager {
     private NavGrid[] grids;
     private Storage storage;
 
-    private Heap<Node> cachedOpenSetHeap;
+    private Heap<Node> openSet;
 
     public NavigationManager(Storage storage) {
         this.storage = storage;
@@ -18,7 +18,7 @@ public class NavigationManager {
             this.grids[i] = new NavGrid(this.storage.mapSize);
         }
 
-        this.cachedOpenSetHeap = new Heap<Node>(this.storage.mapSize * this.storage.mapSize * layerCount);
+        this.openSet = new Heap<Node>(this.storage.mapSize * this.storage.mapSize * layerCount);
     }
 
     public void update() {
@@ -36,49 +36,47 @@ public class NavigationManager {
         return this.grids[pos.depth].getNode(pos.vec2);
     }
 
-    public PathPoint[] findPath(Position start, Position end, bool ignoreUnwalkableStartAndEnd, bool stopAdjacentToFinish) {
+    public PathPoint[] findPath(Position start, Position end, bool stopAdjacentToFinish) {
         Node startNode = this.getNode(start);
         Node endNode = this.getNode(end);
 
-        //if(ignoreUnwalkableStartAndEnd || (startNode.isWalkable && endNode.isWalkable)) {
-            // Both the start and end can be walked on.
+        this.openSet = new Heap<Node>(this.storage.mapSize * this.storage.mapSize * this.storage.layerCount); //.Clear(); // Get the heap ready to reuse
+        HashSet<Node> closedSet = new HashSet<Node>();
+        this.openSet.Add(startNode);
 
-            this.cachedOpenSetHeap.Clear(); // Get the heap ready to reuse
+        while(this.openSet.count > 0) {
+            Node currentNode = this.openSet.RemoveFirst();
+            closedSet.Add(currentNode);
 
-            HashSet<Node> closedSet = new HashSet<Node>();
-            this.cachedOpenSetHeap.Add(startNode);
+            if(currentNode == endNode) {
+                return this.retracePath(startNode, endNode, stopAdjacentToFinish);
+            }
 
-            while(this.cachedOpenSetHeap.count > 0) {
-                Node currentNode = this.cachedOpenSetHeap.RemoveFirst();
-                closedSet.Add(currentNode);
-
-                if(currentNode == endNode) {
-                    return this.retracePath(startNode, endNode, stopAdjacentToFinish);
+            foreach(Node neighbor in this.getAdjacentNodes(currentNode)) {
+                if(closedSet.Contains(neighbor)) {
+                    continue; // already visited this node.
                 }
 
-                foreach(Node neighbor in this.getAdjacentNodes(currentNode)) {
-                    if(closedSet.Contains(neighbor)) {
-                        continue; // already visited this node.
-                    }
-                    if(!neighbor.isWalkable) {
-                        // Node can't be walked on, only continue if ignoreUnwalkableStartAndEnd is true and node is end node.
-                        if(!(ignoreUnwalkableStartAndEnd == true && neighbor == endNode)) {
-                            continue;
-                        }
-                    }
+                if(!neighbor.isWalkable && neighbor != endNode) {
+                    continue;
+                }
 
-                    int newMovementCostToNeighbour = currentNode.gCost + this.getDistance(currentNode, neighbor);
-                    if(newMovementCostToNeighbour < neighbor.gCost || !this.cachedOpenSetHeap.Contains(neighbor)) {
-                        neighbor.gCost = newMovementCostToNeighbour;
-                        neighbor.hCost = this.getDistance(neighbor, endNode);
-                        neighbor.parent = currentNode;
+                int newMovementCostToNeighbour = currentNode.gCost + this.getDistance(currentNode, neighbor);
+                if(newMovementCostToNeighbour < neighbor.gCost || !this.openSet.Contains(neighbor)) {
+                    neighbor.gCost = newMovementCostToNeighbour;
+                    neighbor.hCost = this.getDistance(neighbor, endNode);
+                    neighbor.parent = currentNode;
 
-                        if(!this.cachedOpenSetHeap.Contains(neighbor)) {
-                            this.cachedOpenSetHeap.Add(neighbor);
-                        }
+                    if(!this.openSet.Contains(neighbor)) {
+                        this.openSet.Add(neighbor);
+
+                        //Debug.DrawLine(currentNode.worldPosition, neighbor.worldPosition, Color.white, 3);
+                        //Vector3 v = neighbor.worldPosition;
+                        //Debug.DrawLine(v + (Vector3.up + Vector3.right) * 0.1f, v + (Vector3.down + Vector3.left) * 0.1f, Color.black, 3f);
+                        //Debug.DrawLine(v + (Vector3.down + Vector3.right) * 0.1f, v + (Vector3.up + Vector3.left) * 0.1f, Color.black, 3f);
                     }
                 }
-            //}
+            }
         }
 
         return null;
@@ -123,28 +121,43 @@ public class NavigationManager {
             currentNode = currentNode.parent;
         }
 
-        PathPoint[] waypoints;
-        if(path.Count == 1) {
-            waypoints = new PathPoint[] { path[0].asPathPoint() };
+        if(path.Count == 0) {
+            // The path has a length of 1 (destination is an adjacent cell) and stopAdjacentToFinish is true.
+            return new PathPoint[] { startNode.asPathPoint() };
         }
-        else {
-            waypoints = new PathPoint[path.Count];
-            for(int i = 0; i < path.Count; i++) {
-                waypoints[i] = path[i].asPathPoint();
-            }
-            Array.Reverse(waypoints);
+
+        // Convert the List of Nodes into an Array of PathPoints.
+        PathPoint[] waypoints = new PathPoint[path.Count];
+        for(int i = 0; i < path.Count; i++) {
+            waypoints[i] = path[i].asPathPoint();
         }
+        Array.Reverse(waypoints);
+
 
         return waypoints;
     }
 
     private int getDistance(Node nodeA, Node nodeB) {
+        /*
         int dstX = Mathf.Abs(nodeA.x - nodeB.x);
         int dstY = Mathf.Abs(nodeA.y - nodeB.y);
 
-        if(dstX > dstY)
+        if(dstX > dstY) {
             return 14 * dstY + 10 * (dstX - dstY);
-        return 14 * dstX + 10 * (dstY - dstX);
+        } else {
+            return 14 * dstX + 10 * (dstY - dstX);
+        }
+        */
+
+        int distX = Mathf.Abs(nodeA.x - nodeB.x);
+        int distZ = Mathf.Abs(nodeA.depth - nodeB.depth);
+        int distY = Mathf.Abs(nodeA.y - nodeB.y);
+
+        if(distX > distZ) {
+            return 14 * distZ + 10 * (distX - distZ) + 10 * distY;
+        } else {
+            return 14 * distX + 10 * (distZ - distX) + 10 * distY;
+        }
     }
 
     private void rebakeNavGridIfDirty(NavGrid grid, Layer layer) {

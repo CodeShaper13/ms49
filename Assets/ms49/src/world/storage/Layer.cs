@@ -6,8 +6,6 @@ public class Layer {
     public int depth { get; private set; }
     public Fog fog { get; private set; }
     public int size { get { return this.world.storage.mapSize; } }
-    //public NavGrid navGrid { get; private set; }
-    //public PathFinderOld pathFinder { get; private set; }
 
     private CellState[] tiles;
     public bool navGridDirty;
@@ -25,9 +23,6 @@ public class Layer {
             this.tiles[i] = new CellState(Main.instance.tileRegistry.getAir(), null, Rotation.UP);
         }
 
-        //this.navGrid = new NavGrid(this.size);
-        //this.pathFinder = new PathFinderOld(this.navGrid);
-
         // Setup Fog.
         if(this.world.mapGenData.getLayerFromDepth(this.depth).hasFog) {
             this.fog = new Fog(this.worldRenderer, this.world.storage.mapSize);
@@ -35,15 +30,7 @@ public class Layer {
         }
     }
 
-    /*
-    private void OnDrawGizmosSelected() {
-        if(this.pathFinder != null) {
-            this.pathFinder.grid.debugDraw();
-        }
-    }
-    */
-
-    public void setCell(int x, int y, CellData data, Rotation rotation) {
+    public void setCell(int x, int y, CellData data, Rotation rotation, bool alertNeighbors = true, bool callBehaviorCreateCallback = true) {
         CellState oldState = this.getCellState(x, y);
 
         // Cleanup the old meta object if it exists.
@@ -57,8 +44,7 @@ public class Layer {
 
         CellBehavior behavior;
         if(data.behaviorPrefab != null) {
-            GameObject obj = GameObject.Instantiate(data.behaviorPrefab);
-            behavior = obj.GetComponent<CellBehavior>();
+            behavior = GameObject.Instantiate(data.behaviorPrefab).GetComponent<CellBehavior>();
             if(behavior == null) {
                 Debug.LogWarning("Cell " + data.name + "had a meta object assigned but it did not have a CellMeta componenet on it's root.");
             } else {
@@ -70,29 +56,32 @@ public class Layer {
         } else {
             behavior = null;
         }
-        if(rotation == null) {
-            Debug.Log(rotation.name);
-        }
+
         CellState state = new CellState(data, behavior, rotation);
         this.tiles[this.world.storage.mapSize * x + y] = state;
 
-        if(behavior != null) {
+        if(callBehaviorCreateCallback && behavior != null) {
             behavior.onCreate(this.world, state, new Position(x, y, this.depth));
+        }
+
+        // Alert neighbors of the change.
+        if(alertNeighbors) {
+            int mapSize = this.world.storage.mapSize;
+            foreach(Rotation r in Rotation.ALL) {
+                int x1 = x + r.vector.x;
+                int y1 = y + r.vector.y;
+                if(x1 >= 0 && y1 >= 0 && x1 < mapSize && y1 < mapSize) {
+                    CellBehavior b = this.getCellState(x1, y1).behavior;
+                    if(b != null) {
+                        b.onNeighborChange(state, new Position(x1, this.depth, y1));
+                    }
+                }
+            }
         }
 
         this.navGridDirty = true;
 
         this.worldRenderer.dirtyTile(x, y);
-    }
-
-    public void setCells(CellData[] tiles) {
-        int size = this.world.storage.mapSize;
-        for(int x = 0; x < size; x++) {
-            for(int y = 0; y < size; y++) {
-                int index = this.size * x + y;
-                this.setCell(x, y, tiles[index], Rotation.UP);
-            }
-        }
     }
 
     public CellState getCellState(int x, int y) {
@@ -125,11 +114,11 @@ public class Layer {
             for(int y = 0; y < this.size; y++) {
                 CellBehavior meta = this.getCellState(x, y).behavior;
                 if(meta != null && meta is IHasData) {
-                    NbtCompound compound = new NbtCompound();
-                    compound.setTag("xPos", x);
-                    compound.setTag("yPos", y);
-                    ((IHasData)meta).writeToNbt(compound);
-                    listTileMeta.Add(compound);
+                    NbtCompound behaviorTag = new NbtCompound();
+                    behaviorTag.setTag("xPos", x);
+                    behaviorTag.setTag("yPos", y);
+                    ((IHasData)meta).writeToNbt(behaviorTag);
+                    listTileMeta.Add(behaviorTag);
                 }
             }
         }
@@ -153,22 +142,24 @@ public class Layer {
         for(int x  = 0; x < this.size; x++) {
             for(int y = 0; y < this.size; y++) {
                 int i = this.size * x + y;
+                CellData d = Main.instance.tileRegistry.getElement(tileIds[i]);
                 this.setCell(
                     x,
                     y,
-                    Main.instance.tileRegistry.getElement(tileIds[i]),
-                    Rotation.ALL[rotations[i]]);
-
+                    d == null ? Main.instance.tileRegistry.getAir() : d,
+                    Rotation.ALL[rotations[i]],
+                    false,
+                    false);
                 index++;
             }
         }
 
         // Read tile meta:
-        NbtList listMetaTags = tag.getList("meta");
-        foreach(NbtCompound metaTag in listMetaTags) {
-            CellBehavior meta = this.getCellState(tag.getInt("xPos"), tag.getInt("yPos")).behavior;
+        NbtList listBehaviorTags = tag.getList("meta");
+        foreach(NbtCompound behaviorTag in listBehaviorTags) {
+            CellBehavior meta = this.getCellState(behaviorTag.getInt("xPos"), behaviorTag.getInt("yPos")).behavior;
             if(meta != null && meta is IHasData) {
-                ((IHasData)meta).readFromNbt(tag);
+                ((IHasData)meta).readFromNbt(behaviorTag);
             }
         }
 

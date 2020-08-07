@@ -97,11 +97,11 @@ public class CameraController : MonoBehaviour {
     /// <summary>
     /// Returns the mouse pos in cell units
     /// </summary>
-    public Vector2Int getMousePos() {
+    public Position getMousePos() {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2Int coords = this.world.worldToCell(mouseWorldPos);
 
-        return new Vector2Int(coords.x, coords.y);
+        return new Position(coords.x, coords.y, this.currentLayer);
     }
 
     public NbtCompound writeToNbt() {
@@ -128,23 +128,24 @@ public class CameraController : MonoBehaviour {
         // Detect clicking
         if((leftMouse || rightMouse || middleMouse) && !EventSystem.current.IsPointerOverGameObject()) {
             if(rightMouse) {
-                Vector2Int coords = this.getMousePos();
-                CellBehavior meta = world.getCellState(coords.x, coords.y, this.currentLayer).behavior;
+                CellBehavior meta = world.getCellState(this.getMousePos()).behavior;
                 if(meta != null) {
                     meta.onRightClick();
                 }
-
-                //world.setCell(coords.x, coords.y, this.currentLayer, TileRegistry.reference.air);
             }
 
             // Debug
             if(Input.GetKey(KeyCode.LeftControl) && leftMouse) {
-                Vector2Int coords = this.getMousePos();
                 foreach(EntityBase e in this.world.entityList) {
                     if(e is EntityWorker) {
-                        ((EntityWorker)e).moveHelper.setDestination(new Position(coords.x, coords.y, this.currentLayer));
+                        ((EntityWorker)e).moveHelper.setDestination(this.getMousePos());
                     }
                 }
+            }
+            if(leftMouse && Input.GetKey(KeyCode.Delete)) {
+                Position pos = this.getMousePos();
+                world.setCell(pos, Main.instance.tileRegistry.getAir());
+                world.liftFog(pos);
             }
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

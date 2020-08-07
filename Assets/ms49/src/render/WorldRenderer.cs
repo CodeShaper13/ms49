@@ -141,28 +141,17 @@ public class WorldRenderer : MonoBehaviour {
         // Object Tile
         this.objectMap.GetTileFlags(pos);
 
-        TileBase tile;
-        Matrix4x4? matrix = null;
-        if(data.rotationalOverride) {
-            DirectionalTile dt = data.getObjectTile(state.rotation);
-            tile = dt.tile;
-
-            if(dt.effect != RotationEffect.NOTHING) {
-                matrix = dt.getMatrix();
-            }
-        } else {
-            tile = data.objectTile;
-        }
+        DirectionalTile dt = data.getObjectTile(state.rotation);
 
         // If the Cell's behavior implements IRenderTileOverride, let it adject the tile, even if the tile is rotatable.
         if(state.hasBehavior() && state.behavior is IRenderTileOverride) {
-            ((IRenderTileOverride)state.behavior).getObjectTile(ref tile);            
+            ((IRenderTileOverride)state.behavior).getObjectTile(ref dt.tile);            
         }
 
         // Set the tile on the map.
-        this.objectMap.SetTile(pos, tile);
-        if(matrix != null) {
-            this.objectMap.SetTransformMatrix(pos, (Matrix4x4)matrix);
+        this.objectMap.SetTile(pos, dt.tile);
+        if(dt.effect != RotationEffect.NOTHING) {
+            this.objectMap.SetTransformMatrix(pos, dt.getMatrix());
         }
 
 

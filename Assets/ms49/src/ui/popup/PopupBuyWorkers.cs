@@ -2,14 +2,18 @@
 
 public class PopupBuyWorkers : PopupWindow {
 
-    public void btnCallback(BuyWorkerBtn btn) {
-        Money.remove(btn.cost);
+    [Min(0)]
+    public int workerCost = 1000;
+
+    [SerializeField]
+    private Position workerSpawnPoint = new Position(27, 25, 0);
+
+    public void btnCallback(int entityId) {
+        Money.remove(this.workerCost);
 
         // Add worker(s)
         World world = GameObject.FindObjectOfType<World>();
 
-        for(int i = 0; i < btn.workersGiven; i++) {
-            world.spawnEntity(new Position(27, 25, 0), 1); // 1 = miner id
-        }
+        world.spawnEntity(this.workerSpawnPoint, entityId);
     }
 }

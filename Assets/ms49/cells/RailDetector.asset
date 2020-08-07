@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
+  m_Name: RailDetector
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 0}
+  objectTile: {fileID: 11400000, guid: f078a2698d5b1404786675531e06bef3, type: 2}
+  overlayTile: {fileID: 0}
+  rotationalOverride: 1
+  up:
+    tile: {fileID: 11400000, guid: 3e75da72d0e380c4ab629b160b3037b7, type: 2}
+    effect: 0
+  right:
+    tile: {fileID: 11400000, guid: f078a2698d5b1404786675531e06bef3, type: 2}
+    effect: 0
+  down:
+    tile: {fileID: 11400000, guid: 3e75da72d0e380c4ab629b160b3037b7, type: 2}
+    effect: 0
+  left:
+    tile: {fileID: 11400000, guid: f078a2698d5b1404786675531e06bef3, type: 2}
+    effect: 0
+  isWalkable: 0
+  canBuildOver: 0
+  isDestroyable: 1
+  zMoveDirections: 0
+  tintGroundTile: 0
+  tintObjectTile: 0
+  behaviorPrefab: {fileID: 8184032802236328887, guid: bce36a3ab12518c448c3c21a9cb48aa5,
+    type: 3}
+  moveType: 0

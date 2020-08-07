@@ -53,7 +53,7 @@ public static class NbtExtension {
     }
 
     public static void setTag(this NbtCompound tag, string name, string value) {
-        tag.Add(new NbtString(name, value));
+        tag.Add(new NbtString(name, value == null ? string.Empty : value));
     }
 
     public static void setTag(this NbtCompound tag, string name, Guid value) {

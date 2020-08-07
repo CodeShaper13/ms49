@@ -25,11 +25,12 @@ public abstract class CellHighlightBase : MonoBehaviour {
             this.setInvisible();
         }
         else {
-            // Move the highlight
-            this.transform.position = this.world.cellToWorld(CameraController.instance.getMousePos()) + (Vector3)this.cellOffset;
-
             CameraController cc = CameraController.instance;
-            Position pos = new Position(cc.getMousePos(), cc.currentLayer);
+            Position pos = cc.getMousePos();
+
+            // Move the highlight
+            this.transform.position = this.world.cellToWorld(pos.x, pos.y) + (Vector3)this.cellOffset;
+
             bool valid = this.onUpdate(pos);
 
             if(valid) {

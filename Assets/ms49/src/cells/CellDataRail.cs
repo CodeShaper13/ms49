@@ -9,5 +9,6 @@ public class CellDataRail : CellData {
         STRAIGHT = 0,
         CROSSING = 1,
         CURVE = 2,
+        STOPPER = 3,
     }
 }

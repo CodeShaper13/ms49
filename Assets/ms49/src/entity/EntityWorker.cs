@@ -5,6 +5,9 @@ using System.Text;
 
 public class EntityWorker : EntityBase, IClickable {
 
+    public const float HUNGER_COST_ALIVE = 0.5f;
+    public const float HUNGER_COST_MINE = 5f;
+
     [SerializeField]
     protected Slider healthSlider = null;
     [SerializeField]
@@ -39,19 +42,18 @@ public class EntityWorker : EntityBase, IClickable {
     public override void initialize(World world, int id, int depth) {
         base.initialize(world, id, depth);
 
-        this.aiManager = new AiManager<EntityWorker>(this);
-        this.aiManager.addTask(1, new TaskSleep(this, this.moveHelper));
-        this.aiManager.addTask(2, new TaskFindFood(this, this.moveHelper));
-
-        this.stats = new WorkerStats();
         this.moveHelper = this.GetComponent<MoveHelper>();
-
         this.faces = this.GetComponent<WorkerFaces>();
+        this.stats = new WorkerStats();
+
+        this.OnMouseExit(); // Hide ui.
 
         this.setEnergy(100);
         this.setHunger(100);
 
-        this.OnMouseExit(); // Hide ui.
+        this.aiManager = new AiManager<EntityWorker>(this);
+        this.aiManager.addTask(1, new TaskSleep(this, this.moveHelper));
+        this.aiManager.addTask(2, new TaskFindFood(this, this.moveHelper));
     }
 
     public override void onUpdate() {
@@ -70,11 +72,11 @@ public class EntityWorker : EntityBase, IClickable {
                     // Miner has moved since last frame.
                 }
 
-                // Decrease stamina as the miner lives
-                this.setHunger(this.getHunger() - 0.5f * Time.deltaTime);
+                // Decrease stamina as the miner lives.
+                this.reduceHunger(HUNGER_COST_ALIVE * Time.deltaTime);
 
                 // Decrease energy as the miner is Awake
-                this.setEnergy(this.getEnergy() - 0.1f * Time.deltaTime);
+                this.reduceEnergy(0.1f * Time.deltaTime);
 
                 this.posLastFrame = this.worldPos;
             }
@@ -90,6 +92,11 @@ public class EntityWorker : EntityBase, IClickable {
         return this.energy;
     }
 
+    public void reduceEnergy(float amount) {
+        this.setEnergy(this.getEnergy() - amount);
+
+    }
+
     public void setEnergy(float amount) {
         amount = Mathf.Clamp(amount, 0, 100);
         this.energy = amount;
@@ -100,6 +107,10 @@ public class EntityWorker : EntityBase, IClickable {
 
     public float getHunger() {
         return this.hunger;
+    }
+
+    public void reduceHunger(float amount) {
+        this.setHunger(this.getHunger() - amount);
     }
 
     public void setHunger(float amount) {
@@ -125,6 +136,10 @@ public class EntityWorker : EntityBase, IClickable {
     public virtual void writeWorkerInfo(StringBuilder sb) {
         sb.AppendLine("Energy: " + (int)this.getEnergy());
         sb.AppendLine("Hunger: " + (int)this.getHunger());
+
+        if(Main.DEBUG) {
+            sb.Append(this.aiManager.generateDebugText());
+        }
     } 
 
     public override void writeToNbt(NbtCompound tag) {

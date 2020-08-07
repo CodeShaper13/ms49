@@ -316,7 +316,7 @@ namespace UnityEngine
             tileData.sprite = m_DefaultSprite;
             tileData.gameObject = m_DefaultGameObject;
             tileData.colliderType = m_DefaultColliderType;
-            //tileData.flags = TileFlags.LockTransform; ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //tileData.flags = TileFlags.LockTransform; // REMOVED ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             tileData.transform = iden;
 
             foreach (TilingRule rule in m_TilingRules)
@@ -329,6 +329,7 @@ namespace UnityEngine
                         case TilingRule.OutputSprite.Single:
                         case TilingRule.OutputSprite.Animation:
                             tileData.sprite = rule.m_Sprites[0];
+                            if(rule.m_RuleTransform != TilingRule.Transform.Fixed) { tileData.flags = TileFlags.LockTransform; } // ADDED ///////////////////////////////////////////////////////////
                             break;
                         case TilingRule.OutputSprite.Random:
                             int index = Mathf.Clamp(Mathf.FloorToInt(GetPerlinValue(position, rule.m_PerlinScale, 100000f) * rule.m_Sprites.Length), 0, rule.m_Sprites.Length - 1);

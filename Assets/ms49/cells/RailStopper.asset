@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
+  m_Name: RailStopper
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 0}
+  objectTile: {fileID: 11400000, guid: 23529a1236ae8e94fb3e90cd0499f698, type: 2}
+  overlayTile: {fileID: 0}
+  rotationalOverride: 1
+  up:
+    tile: {fileID: 11400000, guid: ddf91ec90072353419b2229ee9cc6e0a, type: 2}
+    effect: 0
+  right:
+    tile: {fileID: 11400000, guid: 23529a1236ae8e94fb3e90cd0499f698, type: 2}
+    effect: 0
+  down:
+    tile: {fileID: 11400000, guid: 82d9797ae45320e47b4edad0f3aaabf7, type: 2}
+    effect: 0
+  left:
+    tile: {fileID: 11400000, guid: 468f2bccc67612348be5f76d1152d607, type: 2}
+    effect: 0
+  isWalkable: 0
+  canBuildOver: 0
+  isDestroyable: 1
+  zMoveDirections: 0
+  tintGroundTile: 0
+  tintObjectTile: 0
+  behaviorPrefab: {fileID: 0}
+  moveType: 3

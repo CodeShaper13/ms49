@@ -7,7 +7,6 @@ public class MoveHelper : MonoBehaviour {
     [Tooltip("The Worker's speed in units per second.")]
     private float speed = 1f;
 
-    private float stoppingDistance = 0;
     private EntityWorker worker;
 
     private PathPoint[] path;
@@ -19,14 +18,6 @@ public class MoveHelper : MonoBehaviour {
 
     public void update() {
         if(this.hasPath()) {
-            if(this.stoppingDistance > 0) {
-                if(this.getDirectDistanceToEnd() <= this.stoppingDistance) {
-                    print("MH: stopping early!");
-                    this.stop();
-                    return;
-                }
-            }
-
             PathPoint currentWaypoint = this.path[this.targetIndex];
             Vector3 workerPos = this.worker.worldPos;
             if(workerPos.x == currentWaypoint.x && workerPos.y == currentWaypoint.y) {
@@ -147,7 +138,6 @@ public class MoveHelper : MonoBehaviour {
         PathPoint[] newPath = this.worker.world.navManager.findPath(
             new Position(this.worker.getCellPos(), this.worker.depth),
             destination,
-            true, //ignoreUnwalkableStartAndEnd,
             stopAdjacentToFinish);
 
         if(newPath == null) {

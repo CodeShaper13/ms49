@@ -18,7 +18,7 @@ public class MapGenerator {
         this.oreGenerator = new OreGenerator(this.genData.tiles);
     }
 
-    public Layer generateLayer(int depth) {
+    public void generateLayer(int depth) {
         int radius = this.world.storage.mapSize;
         int layerSeed = this.seed ^ depth;
 
@@ -71,9 +71,14 @@ public class MapGenerator {
         }
 
         Layer layer = new Layer(this.world, depth);
-        layer.setCells(accessor.cells);
+        this.world.storage.setLayer(layer, depth);
 
-        return layer;
+        int mapSize = this.world.storage.mapSize;
+        for(int x = 0; x < mapSize; x++) {
+            for(int y = 0; y < mapSize; y++) {
+                this.world.setCell(x, y, depth, accessor.getCell(x, y), false);
+            }
+        }
     }
 
     public void generateStartRoom() {

@@ -15,8 +15,7 @@ public class World : MonoBehaviour {
     public int seed { get; private set; }
     public NavigationManager navManager { get; private set; }
 
-    private Transform ENTITY_HOLDER;
-    private Transform STRUCTURE_HOLDER;
+    private Transform entityHolder;
 
     private void Awake() {
         this.entityList = new List<EntityBase>();
@@ -26,9 +25,12 @@ public class World : MonoBehaviour {
         this.mapGenerator = new MapGenerator(this, this.mapGenData);
 
         // Create holder objects.
-        this.ENTITY_HOLDER = new GameObject("ENTITY_HOLDER").transform;
+        this.entityHolder = new GameObject("ENTITY_HOLDER").transform;
     }
 
+    /// <summary>
+    /// Initializes the World.  rootTag should be null for new worlds.
+    /// </summary>
     public void initialize(NbtCompound rootTag) {
         if(rootTag == null) {
             // New world:
@@ -37,18 +39,25 @@ public class World : MonoBehaviour {
 
             // Generate the first layer.
             for(int i = 0; i < this.storage.layerCount; i++) {
-                this.storage.setLayer(this.mapGenerator.generateLayer(i), i);
+                this.mapGenerator.generateLayer(i);
             }
 
-            // Place the starting room.
             this.mapGenerator.generateStartRoom();
 
-            // Setup new player
             CameraController.instance.initNewPlayer();
         }
         else {
             // Load world:
             this.readFromNbt(rootTag);
+
+            // In the event of addition Layers being added in development,
+            //there will be more layers in the MapGenerationData than
+            //layers read.  Generate the new ones.
+            for(int i = 0; i < this.storage.layerCount; i++) {
+                if(this.storage.getLayer(i) == null) {
+                    this.mapGenerator.generateLayer(i);
+                }
+            }
         }
 
         this.navManager = new NavigationManager(this.storage);
@@ -84,24 +93,24 @@ public class World : MonoBehaviour {
         return this.storage.getCellState(pos);
     }
 
-    public void setCell(int x, int y, int depth, CellData cell) {
-        this.setCell(x, y, depth, cell, Rotation.UP);
+    public void setCell(int x, int y, int depth, CellData cell, bool updateNeighbors = false) {
+        this.setCell(x, y, depth, cell, Rotation.UP, updateNeighbors);
     }
 
-    public void setCell(Position pos, CellData cell) {
-        this.setCell(pos, cell, Rotation.UP);
+    public void setCell(Position pos, CellData cell, bool updateNeighbors = false) {
+        this.setCell(pos, cell, Rotation.UP, updateNeighbors);
     }
 
-    public void setCell(int x, int y, int depth, CellData tile, Rotation rotation) {
-        this.setCell(new Position(x, y, depth), tile, rotation);
+    public void setCell(int x, int y, int depth, CellData tile, Rotation rotation, bool updateNeighbors = false) {
+        this.setCell(new Position(x, y, depth), tile, rotation, updateNeighbors);
     }
 
-    public void setCell(Position pos, CellData tile, Rotation rotation) {
+    public void setCell(Position pos, CellData tile, Rotation rotation, bool updateNeighbors = false) {
         if(this.isOutOfBounds(pos)) {
             return;
         }
 
-        this.storage.setCell(pos, tile, rotation == null ? Rotation.UP : rotation);
+        this.storage.setCell(pos, tile, rotation == null ? Rotation.UP : rotation, updateNeighbors);
     }
 
     public bool isTargeted(Position pos) {
@@ -160,7 +169,7 @@ public class World : MonoBehaviour {
     public EntityBase spawnEntity(Vector2 postion, int depth, int entityId) {
         GameObject prefab = Main.instance.entityRegistry.getElement(entityId);
         if(prefab != null) {
-            EntityBase entity = GameObject.Instantiate(prefab, this.ENTITY_HOLDER).GetComponent<EntityBase>();
+            EntityBase entity = GameObject.Instantiate(prefab, this.entityHolder).GetComponent<EntityBase>();
             entity.transform.position = postion;
             entity.initialize(this, entityId, depth);
 
@@ -280,7 +289,7 @@ public class World : MonoBehaviour {
         NbtCompound tagStorage = tag.getCompound("storage");
         this.storage.readFromNbt(tagStorage);
 
-        // Read miners:
+        // Read Entities:
         NbtList entityTags = tag.getList("entities");
         foreach(NbtCompound t in entityTags) {
             EntityBase entity = this.spawnEntity(
@@ -292,8 +301,7 @@ public class World : MonoBehaviour {
             }
         }
 
-        // Read player:
-        NbtCompound tagPlayer = tag.getCompound("player");
-        CameraController.instance.readFromNbt(tagPlayer);
+        // Read Player:
+        CameraController.instance.readFromNbt(tag.getCompound("player"));
     }
 }

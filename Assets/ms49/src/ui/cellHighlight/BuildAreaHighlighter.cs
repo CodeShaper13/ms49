@@ -33,7 +33,7 @@ public class BuildAreaHighlighter : CellHighlightBase {
                         this.tilemap.SetTile(pod, dt.tile);
 
                         // Apply rotation
-                        if(this.buildable.isRotatable()) {
+                        if(dt.effect != RotationEffect.NOTHING) {
                             this.tilemap.SetTransformMatrix(pod, dt.getMatrix());
                         }
 

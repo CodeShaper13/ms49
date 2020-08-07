@@ -29,6 +29,9 @@ TextureImporter:
   - first:
       213: -1117712006827767782
     second: workerFaces_mouthOpen
+  - first:
+      213: -8011904589259688325
+    second: workerFaces_chefHat
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -235,6 +238,27 @@ TextureImporter:
       bones: []
       spriteID: 962b1d7794fe8fa43ba565e5ae5a4511
       internalID: -1117712006827767782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: workerFaces_chefHat
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b76bad6993fffc090800000000000000
+      internalID: -8011904589259688325
       vertices: []
       indices: 
       edges: []

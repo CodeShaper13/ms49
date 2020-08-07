@@ -1481,7 +1481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 116.149536}
+  m_AnchoredPosition: {x: 0, y: 116.14957}
   m_SizeDelta: {x: 0, y: 558.61554}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &239235672
@@ -1506,7 +1506,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
 --- !u!1 &242368250
@@ -3083,7 +3083,7 @@ GameObject:
   - component: {fileID: 500657659}
   - component: {fileID: 500657658}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ImageGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3443,7 +3443,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -4611,7 +4611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dac9dbf008b41a4a9bc5d91255ffa8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tryLoadSave: 1
+  tryLoadSave: 0
 --- !u!156049354 &868345958
 Grid:
   m_ObjectHideFlags: 0
@@ -4635,6 +4635,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ButtonGreen (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259566975600758034, guid: 71821e849b302f44493801d3ea167764,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7259566975600758035, guid: 71821e849b302f44493801d3ea167764,
         type: 3}
@@ -4791,8 +4796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da5d4568387eed40881db464ab65535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 2500
-  workersGiven: 3
+  entityId: 4
 --- !u!1001 &889638008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5302,7 +5306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panSpeed: 10
   minZoom: 2
-  maxZoom: 8
+  maxZoom: 16
   layerLowerKey: 120
   layerHigherKey: 122
 --- !u!114 &963194230
@@ -6941,9 +6945,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28552ad5f88474e41aed230d2f113a39, type: 2}
   - {fileID: 11400000, guid: 090145f60c82cce4fa4afb9ae4017cb3, type: 2}
   - {fileID: 11400000, guid: 3d935c3a12ef5ed4d9a528178db64099, type: 2}
+  - {fileID: 11400000, guid: 0f51cfbb90cf8fd4996104122a5b39b5, type: 2}
+  - {fileID: 11400000, guid: 29d12b39658fa7e489b0387b4021b28c, type: 2}
   - {fileID: 11400000, guid: e7014072569d3b345adf2429498e5997, type: 2}
   - {fileID: 11400000, guid: 0737886ad47f30e4a88ad68a5e659ebb, type: 2}
   - {fileID: 11400000, guid: a47c702b248684f4d8693a541e660bc0, type: 2}
+  - {fileID: 11400000, guid: bfed229c672d73249bd99da218450826, type: 2}
+  - {fileID: 11400000, guid: 6489902349ef4aa4e8d6b82331e23aed, type: 2}
+  - {fileID: 11400000, guid: b0898c46014ee8c409b50eb29d339a63, type: 2}
+  - {fileID: 11400000, guid: c717ff1433ae9804b973e948e46e045d, type: 2}
+  - {fileID: 11400000, guid: 78e97245eafd4354aa9ae607fc00893b, type: 2}
   btnPrefab: {fileID: 6206199302929523976, guid: cfbb2ed209eca654e8a2ffe427ddb39c,
     type: 3}
   area: {fileID: 239235670}
@@ -7332,6 +7343,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1616030500}
     m_Modifications:
+    - target: {fileID: 7259566975355493082, guid: 71821e849b302f44493801d3ea167764,
+        type: 3}
+      propertyPath: m_Text
+      value: Cook
+      objectReference: {fileID: 0}
     - target: {fileID: 7259566975600758034, guid: 71821e849b302f44493801d3ea167764,
         type: 3}
       propertyPath: m_Name
@@ -7492,8 +7508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da5d4568387eed40881db464ab65535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 1700
-  workersGiven: 2
+  entityId: 4
 --- !u!1001 &1262757543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7671,6 +7686,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1616030500}
     m_Modifications:
+    - target: {fileID: 7259566975355493082, guid: 71821e849b302f44493801d3ea167764,
+        type: 3}
+      propertyPath: m_Text
+      value: Miner
+      objectReference: {fileID: 0}
     - target: {fileID: 7259566975600758034, guid: 71821e849b302f44493801d3ea167764,
         type: 3}
       propertyPath: m_Name
@@ -7831,8 +7851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da5d4568387eed40881db464ab65535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 1000
-  workersGiven: 1
+  entityId: 1
 --- !u!1 &1345700508 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8678552912946101916, guid: 416309fcb4437ed4ebeacfada6e70e0b,
@@ -8536,6 +8555,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec577a26d0c02743966aa4bf070170f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  workerCost: 1000
+  workerSpawnPoint:
+    x: 27
+    y: 25
+    depth: 0
 --- !u!1001 &1375069634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9326,7 +9350,7 @@ GameObject:
   - component: {fileID: 1528033848}
   - component: {fileID: 1528033847}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: ImageObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11595,8 +11619,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91e7e2e1f6b833942ac49bd4bfe5c78b, type: 2}
   - {fileID: 11400000, guid: 1f89aca96b2205444b6cf59dfcf70eda, type: 2}
   - {fileID: 11400000, guid: 79f1095c1a4eda945b14dbc4248bc22d, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 49ae411b5304048419a5291f4e160983, type: 2}
+  - {fileID: 11400000, guid: 068b01132a2e67b4b867dbf81bef5ebe, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -11617,9 +11641,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 67eac8bddba432a4192680e576edfbc5, type: 2}
   - {fileID: 11400000, guid: 7c9485d17673bcb4ebeab4ce0b9aa8e8, type: 2}
   - {fileID: 11400000, guid: 56e3c1273d440e6419126c90040306a0, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 41717420aab41a145972cb2cd2bfb33c, type: 2}
+  - {fileID: 11400000, guid: 90fca26ecf243f443bbcfe4a59f9999a, type: 2}
+  - {fileID: 11400000, guid: d6745c8dacf45804fa647a0f79a480cc, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
@@ -11629,7 +11653,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 90914b99a0298f0489339fd6b6cdb69c, type: 2}
   - {fileID: 11400000, guid: e0d7c53bfaab1834ab324e0397dc80f0, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: d5b2b0bd2ba17514dbb5461c54fd46ef, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: ce497ab37796c984fb4231bb7c6d3d94, type: 2}
@@ -11637,13 +11661,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 11400000, guid: 66dbcffd6eec3e349948a99ecf0835e7, type: 2}
+  - {fileID: 11400000, guid: 36840cd41f9d95647a77cd48b3b81e63, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: aba9b2a5cbd3ab34f94c75018dd6b1ba, type: 2}
+  - {fileID: 11400000, guid: 41569e4f8330f984796508f730c2fc34, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   airId: 0
@@ -11659,12 +11683,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59890dd368175d04f9f1faf3d42cf2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registrySize: 4
+  registrySize: 8
   elements:
   - {fileID: 0}
   - {fileID: 6744992594683351372, guid: 558ccb68eea643f478844cd219b5b4d8, type: 3}
   - {fileID: 2445739090162371687, guid: c7baed6b015ac6b47838b0f2a25d1e7d, type: 3}
   - {fileID: 3284266016375032909, guid: 0e5f23a661e166248b01d8091fee01ce, type: 3}
+  - {fileID: 3323605310254105475, guid: c2cb2ec78735d9f42852b8101ed2869a, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1865947493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11917,7 +11945,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -13302,7 +13330,7 @@ PrefabInstance:
     - target: {fileID: 3487146298511018836, guid: 588c0bea2afb0b64a97691b7c713113f,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.000000054630743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3487146298511018836, guid: 588c0bea2afb0b64a97691b7c713113f,
         type: 3}

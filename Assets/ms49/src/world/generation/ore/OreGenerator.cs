@@ -38,7 +38,7 @@ public class OreGenerator {
         int size = rnd.Next(setting.veinSize.x, setting.veinSize.y + 1);
 
         for(int i = 0; i < size; i++) {
-            if(accessor.getCell(x, y) != null) {
+            if(accessor.getCell(x, y) != Main.instance.tileRegistry.getAir()) {
                 accessor.setCell(x, y, cell);
             }
 

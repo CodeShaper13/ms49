@@ -4,23 +4,25 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class BuyWorkerBtn : MonoBehaviour {
 
-    public int cost;
-    public int workersGiven;
+    [SerializeField]
+    private int entityId = 1;
 
+    private PopupBuyWorkers popup;
     private Button btn;
 
     private void Awake() {
-        Text text = this.GetComponentInChildren<Text>();
-        text.text = this.workersGiven + " Workers ($" + this.cost + ")";
-
+        this.popup = this.GetComponentInParent<PopupBuyWorkers>();
         this.btn = this.GetComponent<Button>();
+
+        Text text = this.GetComponentInChildren<Text>();
+        text.text = text.text + " ($" + this.popup.workerCost + ")";
     }
 
     private void Update() {
-        this.btn.interactable = Money.get() >= this.cost;
+        this.btn.interactable = Money.get() >= this.popup.workerCost;
     }
 
     public void callback() {
-        this.GetComponentInParent<PopupBuyWorkers>().btnCallback(this);
+        this.GetComponentInParent<PopupBuyWorkers>().btnCallback(this.entityId);
     }
 }

@@ -50,23 +50,25 @@ public class CellData : ScriptableObject {
         return this.groundTile;
     }
 
-    public DirectionalTile getObjectTile(Rotation rot) {
-        if(rot == null) {
-            return new DirectionalTile(this.objectTile);
-        } else {
-            if(rot == Rotation.UP) {
-                return this.up;
-            }
-            else if(rot == Rotation.RIGHT) {
-                return this.right;
-            }
-            else if(rot == Rotation.DOWN) {
-                return this.down;
-            }
-            else {
-                return this.left;
+    public DirectionalTile getObjectTile(Rotation rotation) {
+        if(this.rotationalOverride) {            
+            if(rotation != null) {
+                if(rotation == Rotation.UP) {
+                    return this.up;
+                }
+                else if(rotation == Rotation.RIGHT) {
+                    return this.right;
+                }
+                else if(rotation == Rotation.DOWN) {
+                    return this.down;
+                }
+                else {
+                    return this.left;
+                }
             }
         }
+
+        return new DirectionalTile(this.objectTile);
     }
 
     public TileBase getOverlayTile() {

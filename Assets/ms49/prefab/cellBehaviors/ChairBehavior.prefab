@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
+  tableCell: {fileID: 11400000, guid: 77152f49f62615b428e73607b7dc38e4, type: 2}

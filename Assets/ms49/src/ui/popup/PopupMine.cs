@@ -22,11 +22,9 @@ public class PopupMine : PopupWindow {
         base.onUpdate();
 
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
-            Vector2Int coords = CameraController.instance.getMousePos();
-            int depth = CameraController.instance.currentLayer;
+            Position pos = CameraController.instance.getMousePos();
 
-            CellData cell = this.world.getCellState(coords.x, coords.y, depth).data;
-            Position pos = new Position(coords.x, coords.y, depth);
+            CellData cell = this.world.getCellState(pos).data;
             bool isTargeted = this.world.isTargeted(pos);
 
             if(cell is CellDataMineable) {

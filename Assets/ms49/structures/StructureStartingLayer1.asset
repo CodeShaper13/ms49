@@ -15,16 +15,18 @@ MonoBehaviour:
   liftFog: 1
   gridSize: {x: 5, y: 3}
   tiles:
-  - character: 100
-    buildable: {fileID: 11400000, guid: 0a474b521e8e4244193d4c3b5f00088a, type: 2}
+  - character: 98
+    buildable: {fileID: 11400000, guid: 4dc57877eda741a4a86fc333b1ce3de2, type: 2}
+    cell: {fileID: 0}
     rotation: 0
   - character: 99
     buildable: {fileID: 11400000, guid: 5c0ed959ac70ee646a9aa49a68d584f5, type: 2}
+    cell: {fileID: 0}
     rotation: 0
   cells:
   - row:
     - 
-    - d
+    - b
     - 
   - row:
     - 

@@ -74,7 +74,12 @@ public class Structure : ScriptableObject {
                 if(entry == null) {
                     world.setCell(pos1, Main.instance.tileRegistry.getAir());
                 } else {
-                    entry.buildable.placeIntoWorld(world, pos1, Rotation.fromEnum(entry.rotation));
+                    if(entry.buildable != null) {
+                        entry.buildable.placeIntoWorld(world, pos1, Rotation.fromEnum(entry.rotation));
+                    } else if(entry.cell != null) {
+                        world.setCell(pos1, entry.cell);
+                        world.liftFog(pos1);
+                    }
                 }
 
                 if(this.liftFog) {
@@ -120,6 +125,7 @@ public class Structure : ScriptableObject {
 
         public char character;
         public BuildableBase buildable;
+        public CellData cell;
         public EnumRotation rotation = EnumRotation.UP;
     }
 
@@ -227,6 +233,7 @@ public class Structure : ScriptableObject {
 
                     EditorGUILayout.PropertyField(prop.FindPropertyRelative("character"));
                     EditorGUILayout.PropertyField(prop.FindPropertyRelative("buildable"));
+                    EditorGUILayout.PropertyField(prop.FindPropertyRelative("cell"));
                     EditorGUILayout.PropertyField(prop.FindPropertyRelative("rotation"));
 
                     EditorGUILayout.Separator();

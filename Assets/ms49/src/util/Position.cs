@@ -77,9 +77,13 @@ public struct Position {
     }
 
     public float distance(Position other) {
-        float xyDis = Vector2.Distance(this.vec2, other.vec2);
+        float xyDis = this.distanceXY(other);
         float zDis = Mathf.Abs(this.depth - other.depth);
         return xyDis + (zDis * LAYER_DISTANCE_COST);
+    }
+
+    public float distanceXY(Position other) {
+        return Vector2.Distance(this.vec2, other.vec2);
     }
 
     public static Position operator +(Position b, Position b1) {

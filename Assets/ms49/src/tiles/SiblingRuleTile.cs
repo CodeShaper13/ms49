@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName = "New Sibling Rule Tile", menuName = "MS49 Tiles/Sibling Rule Tile")]
+[CreateAssetMenu(fileName = "New Sibling Rule Tile", menuName = "Tiles/Sibling Rule Tile (MS49)")]
 public class SiblingRuleTile : RuleTile {
 
     public List<TileBase> siblings;

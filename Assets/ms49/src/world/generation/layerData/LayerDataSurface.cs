@@ -4,16 +4,14 @@
 public class LayerDataSurface : LayerDataBase {
 
     [SerializeField]
-    private CellData treeCell = null;
-    [SerializeField]
-    [Range(0, 1)]
-    public float treeChance = 0.5f;
+    private PrimitiveRndObject[] rndObjects = null;
 
     public override CellData getFillCell() {
-        if(Random.Range(0f, 1f) < this.treeChance) {
-            return this.treeCell;
-        } else {
-            return this.tile;
+        CellData cell = this.tile;
+        foreach(PrimitiveRndObject pro in this.rndObjects) {
+            pro.getRnd(ref cell);
         }
+
+        return cell;
     }
 }

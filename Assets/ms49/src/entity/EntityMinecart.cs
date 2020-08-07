@@ -33,6 +33,12 @@ public class EntityMinecart : EntityBase {
             // Move on the track
             CellDataRail railData = (CellDataRail)state.data;
 
+            if(state.behavior is CellBehaviorDetectorRail) {
+                ((CellBehaviorDetectorRail)state.behavior).setTripped();
+            }
+
+            Vector2 cellCenter = this.position.vec2 + new Vector2(0.5f, 0.5f);
+
             switch(railData.moveType) {
                 case CellDataRail.EnumRailMoveType.STRAIGHT:
                     this.move(this.facing.vector);
@@ -41,26 +47,17 @@ public class EntityMinecart : EntityBase {
                     this.move(this.facing.vector);
                     break;
                 case CellDataRail.EnumRailMoveType.CURVE:
-                    // Get the distance from the middle
-                    Position cellPos = this.position;
-                    Vector2 cellCenter = cellPos.vec2 + new Vector2(0.5f, 0.5f);
-
                     Rotation startRot = state.rotation;
                     Rotation endRot = state.rotation.clockwise();
-                    float disToStart = Vector2.Distance(this.worldPos, cellCenter + state.rotation.vectorF * 0.5f);
-                    float disToEnd = Vector2.Distance(this.worldPos, cellCenter + state.rotation.clockwise().vectorF * 0.5f);
 
+                    // If the Minecart is moving "backwards" along curve, switch the values.
                     if(this.facing.axis != state.rotation.axis) {
-                        // Minecart is moving backwards along curve, switch the values.
-                        float temp = disToStart;
                         Rotation temp1 = startRot;
-                        disToStart = disToEnd;
                         startRot = endRot;
-                        disToEnd = temp;
                         endRot = temp1;
                     }
 
-                    // Move the cart
+                    // Move the cart.
                     this.move(this.facing.vector);
 
                     float dis = Vector2.Distance(this.worldPos, cellCenter + startRot.vectorF * 0.5f);
@@ -69,6 +66,18 @@ public class EntityMinecart : EntityBase {
                         this.worldPos = cellCenter;
                         this.move(this.facing.vectorF * (dis - 0.5f));
                     }
+                    break;
+                case CellDataRail.EnumRailMoveType.STOPPER:
+                    this.move(this.facing.vector);
+
+                    float d = Vector2.Distance(this.worldPos, cellCenter + state.rotation.opposite().vectorF * 0.5f);
+                    if(this.facing == state.rotation && d > 0.25f) {
+                        this.facing = this.facing.opposite();
+                        this.move(this.facing.vectorF * (d - 0.5f));
+                    }
+
+                    // TODO does the cart ever overshoot?
+
                     break;
             }
         }
@@ -121,7 +130,7 @@ public class EntityMinecart : EntityBase {
         public Sprite frontFull;
 
         public Sprite getSprite(Rotation rot, bool empty) {
-            if(rot.vector.x == 0) { // Facing up or down
+            if(rot.axis == EnumAxis.Y) {
                 return empty ? this.frontEmpty : this.frontFull;
             } else {
                 return empty ? this.sideEmpty : this.sideFull;

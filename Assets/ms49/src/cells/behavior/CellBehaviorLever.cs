@@ -10,7 +10,9 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
     private bool isOn;
 
     public void getObjectTile(ref TileBase tile) {
-        tile = this.isOn ? this.onTile : this.data.objectTile;
+        if(this.isOn) {
+            tile = this.onTile;
+        }
     }
 
     public override void onRightClick() {

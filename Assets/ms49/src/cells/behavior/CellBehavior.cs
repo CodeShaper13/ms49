@@ -45,6 +45,10 @@ public class CellBehavior : MonoBehaviour {
     /// </summary>
     public virtual void onDestroy() { }
 
+    public virtual void onNeighborChange(CellState triggererCell, Position triggererPos) {
+
+    }
+
     /// <summary>
     /// Dirties the Cell.  This causes it to be redrawn at the end of the frame.
     /// </summary>

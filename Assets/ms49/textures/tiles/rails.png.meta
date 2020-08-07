@@ -4,16 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -722444350209975644
-    second: rails_switchOn_y
+    second: rails_detectorOn_y
   - first:
       213: -8759596612790423954
-    second: rails_switchOff_y
+    second: rails_detectorOff_y
   - first:
       213: -6191017241119240835
-    second: rails_switchOff_x
+    second: rails_detectorOff_x
   - first:
       213: 1104520424889008021
-    second: rails_switchOn_x
+    second: rails_detectorOn_x
   - first:
       213: -7644595703860231664
     second: rails_end_2
@@ -156,7 +156,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rails_switchOn_y
+      name: rails_detectorOn_y
       rect:
         serializedVersion: 2
         x: 112
@@ -177,7 +177,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rails_switchOff_y
+      name: rails_detectorOff_y
       rect:
         serializedVersion: 2
         x: 112
@@ -198,7 +198,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rails_switchOff_x
+      name: rails_detectorOff_x
       rect:
         serializedVersion: 2
         x: 96
@@ -219,7 +219,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rails_switchOn_x
+      name: rails_detectorOn_x
       rect:
         serializedVersion: 2
         x: 96

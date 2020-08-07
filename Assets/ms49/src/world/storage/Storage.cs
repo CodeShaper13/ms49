@@ -31,8 +31,8 @@ public class Storage {
         return depth >= 0 && depth < this.layerCount;
     }
 
-    public void setCell(Position pos, CellData tile, Rotation rotation) {
-        this.getLayer(pos.depth).setCell(pos.x, pos.y, tile, rotation);
+    public void setCell(Position pos, CellData tile, Rotation rotation, bool updateNeighbors = false) {
+        this.getLayer(pos.depth).setCell(pos.x, pos.y, tile, rotation, updateNeighbors);
     }
 
     public CellState getCellState(Position pos) {
@@ -102,6 +102,16 @@ public class Storage {
             Layer layer = new Layer(this.world, i);
             layer.readFromNbt(layers.Get<NbtCompound>(i));
             this.layers[layer.depth] = layer;
+
+            // Call onCreate method for all the behaviors, not that all Cell's have been loaded.
+            for(int x = 0; x < this.mapSize; x++) {
+                for(int y = 0; y < this.mapSize; y++) {
+                    CellState state = layer.getCellState(x, y);
+                    if(state.behavior != null) {
+                        state.behavior.onCreate(this.world, state, new Position(x, y, layer.depth));
+                    }
+                }
+            }
         }
 
         // Read targeted sqaures.

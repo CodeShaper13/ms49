@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
   m_Name: VentShaft
   m_EditorClassIdentifier: 
-  structureName: 
+  structureName: Vent Shaft
   cost: 0
   description: 
   gridSize: {x: 1, y: 1}
   tiles: []
-  singularTile: {fileID: 0}
+  singularTile: {fileID: 11400000, guid: 36840cd41f9d95647a77cd48b3b81e63, type: 2}
   cells:
   - row:
     - 
-  structurePrefab: {fileID: 0}
-  structureOrgin: {x: 0, y: 0}

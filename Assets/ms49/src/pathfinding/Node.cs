@@ -14,6 +14,8 @@ public class Node : IHeapItem<Node> {
 
     public Vector2 worldPosition;
 
+    int heapIndex;
+
     public Node(bool walkable, Vector2 worldPos, int x, int y, int depth, EnumZMoveDirection zMoveDir) {
         this.isWalkable = walkable;
         this.worldPosition = worldPos;
@@ -47,7 +49,14 @@ public class Node : IHeapItem<Node> {
         return "Node(" + this.x + "," + this.y + ")(walkable:" + this.isWalkable.ToString() + ")";
     }
 
-    public int HeapIndex { get; set; }
+    public int HeapIndex {
+        get {
+            return heapIndex;
+        }
+        set {
+            heapIndex = value;
+        }
+    }
 
     public int CompareTo(Node nodeToCompare) {
         int compare = fCost.CompareTo(nodeToCompare.fCost);

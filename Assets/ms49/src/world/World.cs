@@ -10,6 +10,7 @@ public class World : MonoBehaviour {
     public MapGenerationData mapGenData;
     public WorldRenderer worldRenderer;
     public IntVariable money;
+    public ParticleList particles;
 
     private MapGenerator mapGenerator;
     private Grid grid;

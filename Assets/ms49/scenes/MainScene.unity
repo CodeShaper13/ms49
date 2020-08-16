@@ -5064,6 +5064,7 @@ GameObject:
   - component: {fileID: 868345955}
   - component: {fileID: 868345957}
   - component: {fileID: 868345958}
+  - component: {fileID: 868345959}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -5086,6 +5087,7 @@ MonoBehaviour:
   mapGenData: {fileID: 11400000, guid: 35cb0ced30428474dbee547550c85c87, type: 2}
   worldRenderer: {fileID: 1398694476}
   money: {fileID: 11400000, guid: f4c82f2a7bfb2eb4787544a0dc3b0dd4, type: 2}
+  particles: {fileID: 868345959}
 --- !u!4 &868345956
 Transform:
   m_ObjectHideFlags: 0
@@ -5126,6 +5128,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &868345959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868345954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d08c457bcb7b39498e0371e6f7dff87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  world: {fileID: 868345955}
 --- !u!1001 &874329757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7918,6 +7933,8 @@ MonoBehaviour:
   sr: {fileID: 1202741489}
   popup: {fileID: 1665658552}
   money: {fileID: 11400000, guid: f4c82f2a7bfb2eb4787544a0dc3b0dd4, type: 2}
+  particlePrefab: {fileID: 4334713544733170696, guid: 7be00c2bd70c34c4c8b78dc5d6d9679d,
+    type: 3}
 --- !u!212 &1202741489
 SpriteRenderer:
   m_ObjectHideFlags: 0

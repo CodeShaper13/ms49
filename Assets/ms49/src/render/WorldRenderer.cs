@@ -49,6 +49,15 @@ public class WorldRenderer : MonoBehaviour {
                 e.gameObject.SetActive(false);
             }
         }
+
+        foreach(Particle particle in this.world.particles.list) {
+            if(particle.depth == this.targetLayer.depth) {
+                particle.gameObject.SetActive(true);
+            }
+            else {
+                particle.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void dirtyTile(int x, int y) {

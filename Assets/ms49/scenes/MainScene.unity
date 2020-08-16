@@ -5781,7 +5781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panSpeed: 10
   minZoom: 1
-  maxZoom: 3
+  maxZoom: 4
   layerLowerKey: 120
   layerHigherKey: 122
 --- !u!114 &963194230
@@ -8617,12 +8617,12 @@ PrefabInstance:
     - target: {fileID: 3807192845233943640, guid: 83b11db92910e234ba348aceb1d1232b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3807192845378120923, guid: 83b11db92910e234ba348aceb1d1232b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3807192846645564360, guid: 83b11db92910e234ba348aceb1d1232b,
         type: 3}
@@ -9080,7 +9080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1372809681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13656,12 +13656,12 @@ PrefabInstance:
     - target: {fileID: 3807192845233943640, guid: 83b11db92910e234ba348aceb1d1232b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3807192845378120923, guid: 83b11db92910e234ba348aceb1d1232b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3807192846645564360, guid: 83b11db92910e234ba348aceb1d1232b,
         type: 3}

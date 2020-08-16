@@ -88,7 +88,7 @@ PrefabInstance:
     - target: {fileID: 7238231038273066792, guid: 84379f5c2e5408949a50fed655daaa6f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 7238231038273066792, guid: 84379f5c2e5408949a50fed655daaa6f,
         type: 3}
@@ -129,42 +129,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ButtonStructureEntry
-      objectReference: {fileID: 0}
-    - target: {fileID: 7238231038273066799, guid: 84379f5c2e5408949a50fed655daaa6f,
-        type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7238231038442766561, guid: 84379f5c2e5408949a50fed655daaa6f,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 86cebab1f801e7c46a4d71fb4a7dcfb6,
-        type: 2}
-    - target: {fileID: 7238231038442766561, guid: 84379f5c2e5408949a50fed655daaa6f,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7238231038442766561, guid: 84379f5c2e5408949a50fed655daaa6f,
-        type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7238231038442766562, guid: 84379f5c2e5408949a50fed655daaa6f,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7238231038442766562, guid: 84379f5c2e5408949a50fed655daaa6f,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7238231038442766562, guid: 84379f5c2e5408949a50fed655daaa6f,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84379f5c2e5408949a50fed655daaa6f, type: 3}

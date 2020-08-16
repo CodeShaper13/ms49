@@ -11,6 +11,10 @@ public class EntityMinecart : EntityBase {
     private int maxCapacity = 4;
     [SerializeField, Min(0), Tooltip("How fast the mine cart moves in meters per second.")]
     private float movementSpeed = 1f;
+    [SerializeField]
+    private SpriteRenderer fillRenderer = null;
+    [SerializeField]
+    private GameObject explodeParticlePrefab = null;
 
     private SpriteRenderer sr;
     public Inventory inventory { get; private set; }
@@ -94,16 +98,26 @@ public class EntityMinecart : EntityBase {
     private void LateUpdate() {
         if(!Pause.isPaused()) {
 
-            // Update sprite renderer
-            this.sr.sprite = this.sprites.getSprite(this.facing, this.inventory.isEmpty());
-            if(this.facing.vector.x != 0) { // Side to side
-                this.sr.flipX = this.facing == Rotation.LEFT;
+            // Set main sprite
+            this.sr.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
+            this.sr.flipX = this.facing == Rotation.LEFT;
+
+            // Set fill sprite
+            if(this.inventory.isEmpty()) {
+                this.fillRenderer.sprite = null;
+            } else {
+                this.fillRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
+                this.fillRenderer.flipX = this.facing == Rotation.LEFT;
+                this.fillRenderer.color = this.world.mapGenData.getLayerFromDepth(this.depth).getGroundTint();
             }
         }
     }
 
+    /// <summary>
+    /// Causes the Minecart to explode, removing it from the world and playing a particle effect.
+    /// </summary>
     public void explode() {
-        print("Minecart Explode!");
+        this.world.particles.spawn(this.position, this.explodeParticlePrefab);
         this.world.removeEntity(this);
     }
 

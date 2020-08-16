@@ -19,9 +19,7 @@ public class WorkerAnimator : MonoBehaviour {
         "WalkSideways"
     };
 
-    [SerializeField]
-    private EntityWorker worker = null;
-
+    private EntityWorker worker;
     private SpriteRenderer sr;
     private Animator animator;
 
@@ -30,6 +28,7 @@ public class WorkerAnimator : MonoBehaviour {
     private bool playingCustom;
 
     private void Awake() {
+        this.worker = this.GetComponentInParent<EntityWorker>();
         this.sr = this.GetComponent<SpriteRenderer>();
         this.animator = this.GetComponent<Animator>();
     }

@@ -14,6 +14,8 @@ public struct Position {
     public int y;
     public int depth;
 
+    public Position(Vector3Int v) : this(v.x, v.y, v.z) { }
+
     public Position(int x, int y, int depth) {
         this.x = x;
         this.y = y;
@@ -42,6 +44,14 @@ public struct Position {
         }
     }
 
+    public Vector3Int vec3Int {
+        get { return new Vector3Int(this.x, this.y, this.depth); }
+    }
+
+    public Vector3 vec3 {
+        get { return new Vector3(this.x, this.y, this.depth); }
+    }
+
     public Vector2Int vec2Int {
         get { return new Vector2Int(this.x, this.y); }
     }
@@ -51,15 +61,15 @@ public struct Position {
     }
 
     public Position setX(int x) {
-        return new Position(this.x + x, this.y, this.depth);
+        return new Position(x, this.y, this.depth);
     }
 
     public Position setY(int y) {
-        return new Position(this.x, this.y + y, this.depth);
+        return new Position(this.x, y, this.depth);
     }
 
     public Position setDepth(int depth) {
-        return new Position(this.x, this.y, this.depth + depth);
+        return new Position(this.x, this.y, depth);
     }
 
     /// <summary>

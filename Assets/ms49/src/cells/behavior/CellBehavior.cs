@@ -45,14 +45,12 @@ public class CellBehavior : MonoBehaviour {
     /// </summary>
     public virtual void onDestroy() { }
 
-    public virtual void onNeighborChange(CellState triggererCell, Position triggererPos) {
-
-    }
+    public virtual void onNeighborChange(CellState triggererCell, Position triggererPos) { }
 
     /// <summary>
     /// Dirties the Cell.  This causes it to be redrawn at the end of the frame.
     /// </summary>
     public void dirty() {
-        WorldRenderer.instance.dirtyTile(this.pos.vec2Int);
+        this.world.worldRenderer.dirtyTile(this.pos.x, this.pos.y);
     }
 }

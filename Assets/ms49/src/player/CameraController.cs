@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour {
 
     [SerializeField]
     private float panSpeed = 10f;
-    [SerializeField, Min(2)]
+    [SerializeField, Min(1)]
     private int minZoom = 2;
     [SerializeField, Min(2)]
     private int maxZoom = 16;

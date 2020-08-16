@@ -34,6 +34,7 @@ public class AiManager<T> where T : EntityWorker {
 
             if(terminateRest) {
                 if(entry.isRunning()) {
+                    //this.character.StopCoroutine("preform");
                     entry.task.resetTask();
                     entry.setRunning(false);
                 }
@@ -45,6 +46,7 @@ public class AiManager<T> where T : EntityWorker {
                 if(!task.continueExecuting()) {
                     // End task.
                     entry.setRunning(false);
+                    //this.character.StopCoroutine("preform");
                     task.resetTask();
                 }
             } else {
@@ -52,6 +54,7 @@ public class AiManager<T> where T : EntityWorker {
                 if(task.shouldExecute()) {
                     entry.setRunning(true);
                     task.startExecute();
+                    //this.character.StartCoroutine(task.preform()); // mut be called ater others have been shut down
                 }
             }
 

@@ -8,6 +8,8 @@ public class World : MonoBehaviour {
 
     public Storage storage;
     public MapGenerationData mapGenData;
+    public WorldRenderer worldRenderer;
+    public IntVariable money;
 
     private MapGenerator mapGenerator;
     private Grid grid;
@@ -127,12 +129,30 @@ public class World : MonoBehaviour {
         }
 
         this.storage.setTargeted(pos, targeted);
+
+        this.worldRenderer.dirtyExcavationTarget(pos, targeted);
     }
 
-    public void liftFog(Position pos, int distance = 0) {
+    public void liftFog(Position pos, int revealDistance = 0) {
         Layer layer = this.storage.getLayer(pos.depth);
         if(layer.fog != null) {
-            layer.fog.liftFog(pos.vec2Int, distance);
+            if(revealDistance == 0) {
+                layer.fog.setFog(pos.x, pos.y, false);
+                this.worldRenderer.dirtyFogmap(pos, false);
+            }
+            else {
+                for(int x = -revealDistance; x <= revealDistance; x++) {
+                    for(int y = -revealDistance; y <= revealDistance; y++) {
+                        Vector2Int v = new Vector2Int(pos.x + x, pos.y + y);
+                        int aX = Mathf.Abs(x);
+                        if(!(aX == revealDistance && Mathf.Abs(y) == revealDistance)) {
+                            layer.fog.setFog(v.x, v.y, false);
+                            Position p1 = new Position(v.x, v.y, pos.depth);
+                            this.worldRenderer.dirtyFogmap(p1, false);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -254,7 +274,7 @@ public class World : MonoBehaviour {
         tag.setTag("seed", this.seed);
 
         // Write money:
-        tag.setTag("money", Money.get());
+        tag.setTag("money", this.money.value);
 
         // Write level:
         NbtCompound tagStorage = new NbtCompound("storage");
@@ -283,7 +303,7 @@ public class World : MonoBehaviour {
         this.seed = tag.getInt("seed");
 
         // Read money:
-        Money.setMoney(tag.getInt("money"));
+        this.money.value = tag.getInt("money");
 
         // Read level:
         NbtCompound tagStorage = tag.getCompound("storage");

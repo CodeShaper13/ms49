@@ -19,7 +19,7 @@ public class BuyWorkerBtn : MonoBehaviour {
     }
 
     private void Update() {
-        this.btn.interactable = Money.get() >= this.popup.workerCost;
+        this.btn.interactable = this.popup.money.value >= this.popup.workerCost;
     }
 
     public void callback() {

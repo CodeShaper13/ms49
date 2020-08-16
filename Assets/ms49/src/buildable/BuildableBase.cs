@@ -36,9 +36,9 @@ public abstract class BuildableBase : ScriptableObject {
     public abstract void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite);
 
     /// <summary>
-    /// Places the structure into the world.
+    /// Places the structure into the world.  highlight is null if a structure is placing this buildable.
     /// </summary>
-    public abstract void placeIntoWorld(World world, Position pos, Rotation rotation);
+    public abstract void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation);
 
     /// <summary>
     /// Returns true if the structure can go at the passed position.

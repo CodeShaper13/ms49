@@ -11,6 +11,10 @@ public class MoveHelper : MonoBehaviour {
 
     private PathPoint[] path;
     private int targetIndex;
+    private float layerChangeProgress;
+
+    // not implemented
+    private Rotation finalFacingDirection;
 
     private void Awake() {
         this.worker = this.GetComponent<EntityWorker>();
@@ -20,13 +24,35 @@ public class MoveHelper : MonoBehaviour {
         if(this.hasPath()) {
             PathPoint currentWaypoint = this.path[this.targetIndex];
             Vector3 workerPos = this.worker.worldPos;
-            if(workerPos.x == currentWaypoint.x && workerPos.y == currentWaypoint.y) {
-                this.targetIndex++;
-                if(this.targetIndex >= path.Length) {
-                    this.stop();
-                    return;
+
+            bool posMatch = workerPos.x == currentWaypoint.x && workerPos.y == currentWaypoint.y;
+            bool depthMatch = worker.depth == currentWaypoint.depth;
+
+            if(posMatch) {
+                if(depthMatch) {
+                    this.targetIndex++;
+                    if(this.targetIndex >= path.Length) {
+                        this.stop();
+                        return;
+                    }
+                    currentWaypoint = this.path[this.targetIndex];
+                } else {
+                    if(this.layerChangeProgress == 0) {
+                        // First frame climbing, start an animation
+                        if(this.worker.depth > currentWaypoint.depth) {
+                            this.worker.animator.playClip("ClimbLadderUp");
+                        } else {
+                            this.worker.animator.playClip("ClimbLadderDown");
+                        }
+                    }
+
+                    this.layerChangeProgress += Time.deltaTime;
+
+                    if(this.layerChangeProgress > 1f) { // 1 is seconds to climb
+                        this.layerChangeProgress = 0;
+                        this.worker.depth = currentWaypoint.depth;
+                    }
                 }
-                currentWaypoint = this.path[this.targetIndex];
             }
 
             // Move the Worker towards the next point on the X and Y axis.
@@ -34,11 +60,6 @@ public class MoveHelper : MonoBehaviour {
                 transform.position,
                 currentWaypoint.worldPos,
                 speed * Time.deltaTime);
-
-            // Change the Workers Z
-            if(currentWaypoint.depth != this.worker.depth) {
-                this.worker.depth = currentWaypoint.depth;
-            }
         }
     }
 

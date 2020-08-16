@@ -44,18 +44,13 @@ public class Storage {
     }
 
     public void setTargeted(Position pos, bool targeted) {
-        WorldRenderer renderer = GameObject.FindObjectOfType<WorldRenderer>(); // TODO remove find call
         if(targeted) {
             if(!this.targetedForRemovalSquares.Contains(pos)) {
-                //if(this.targetedForRemovalSquares.Count < 100) { // Limit 100 targeted squares
-                    this.targetedForRemovalSquares.Add(pos);
-                    renderer.setExcavationTargetVisability(pos.x, pos.y, true);
-                //}
+                this.targetedForRemovalSquares.Add(pos);
             }
         }
         else {
             this.targetedForRemovalSquares.Remove(pos);
-            renderer.setExcavationTargetVisability(pos.x, pos.y, false);
         }
     }
 
@@ -100,16 +95,28 @@ public class Storage {
         NbtList layers = tag.getList("layers");
         for(int i = 0; i < layers.Count; i++) {
             Layer layer = new Layer(this.world, i);
-            layer.readFromNbt(layers.Get<NbtCompound>(i));
+            NbtCompound layerCompound = layers.Get<NbtCompound>(i);
+            layer.readFromNbt(layerCompound);
             this.layers[layer.depth] = layer;
 
-            // Call onCreate method for all the behaviors, not that all Cell's have been loaded.
+            // Call onCreate method for all the behaviors, now that all Cell's
+            // have been loaded.
             for(int x = 0; x < this.mapSize; x++) {
                 for(int y = 0; y < this.mapSize; y++) {
                     CellState state = layer.getCellState(x, y);
                     if(state.behavior != null) {
                         state.behavior.onCreate(this.world, state, new Position(x, y, layer.depth));
                     }
+                }
+            }
+
+            // After onCreate is called for all of the behaviors, let them read their
+            // state from NBT.
+            NbtList listBehaviorTags = layerCompound.getList("meta");
+            foreach(NbtCompound behaviorTag in listBehaviorTags) {
+                CellBehavior meta = layer.getCellState(behaviorTag.getInt("xPos"), behaviorTag.getInt("yPos")).behavior;
+                if(meta != null && meta is IHasData) {
+                    ((IHasData)meta).readFromNbt(behaviorTag);
                 }
             }
         }

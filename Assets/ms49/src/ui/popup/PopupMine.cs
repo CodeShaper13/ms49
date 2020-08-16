@@ -8,6 +8,8 @@ public class PopupMine : PopupWindow {
 
     [SerializeField]
     private Text text = null;
+    [SerializeField]
+    private IntVariable money = null;
 
     private World world;
 
@@ -28,14 +30,14 @@ public class PopupMine : PopupWindow {
             bool isTargeted = this.world.isTargeted(pos);
 
             if(cell is CellDataMineable) {
-                if(!isTargeted && Money.get() >= this.costPerSquare) {
+                if(!isTargeted && this.money.value >= this.costPerSquare) {
                     this.world.setTargeted(pos, true);
-                    Money.remove(costPerSquare);
+                    this.money.value -= this.costPerSquare;
                 }
 
                 else if(isTargeted) {
                     this.world.setTargeted(pos, false);
-                    Money.add(costPerSquare);
+                    this.money.value += this.costPerSquare;
                 }
             }
         }

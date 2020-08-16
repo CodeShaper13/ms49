@@ -8,6 +8,10 @@ public class BtnOpenPopup : MonoBehaviour {
     private PopupWindow popup = null;
 
     private void Awake() {
-        this.GetComponent<Button>().onClick.AddListener(() => { popup.open(); });
+        this.GetComponent<Button>().onClick.AddListener(() => {
+            if(this.popup != null) {
+                this.popup.open();
+            }
+        });
     }
 }

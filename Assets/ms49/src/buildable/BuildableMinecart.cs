@@ -17,7 +17,7 @@ public class BuildableMinecart : BuildableBase {
         return !world.isOutOfBounds(pos) && world.getCellState(pos).data is CellDataRail;
     }
 
-    public override void placeIntoWorld(World world, Position pos, Rotation rotation) {
+    public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
         EntityMinecart minecart = (EntityMinecart)world.spawnEntity(pos, 2); // Minecart id.
         minecart.facing = world.getCellState(pos).rotation;
     }

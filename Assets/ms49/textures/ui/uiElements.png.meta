@@ -107,6 +107,24 @@ TextureImporter:
   - first:
       213: -9085703086787801938
     second: uiElements_workerStatBar
+  - first:
+      213: -4301812554164386538
+    second: uiElements_iconPickaxe
+  - first:
+      213: -6111124632629325258
+    second: uiElements_iconPickaxeSelected
+  - first:
+      213: -4013774020271426388
+    second: uiElements_iconBuild
+  - first:
+      213: -288767809017954755
+    second: uiElements_iconBuildSelected
+  - first:
+      213: -828014037364288638
+    second: uiElements_iconTermometer
+  - first:
+      213: -1499172257263834807
+    second: uiElements_iconTermometerSelected
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -804,10 +822,10 @@ TextureImporter:
       name: uiElements_iconDemo
       rect:
         serializedVersion: 2
-        x: 177
-        y: 146
-        width: 16
-        height: 21
+        x: 109
+        y: 124
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -825,10 +843,10 @@ TextureImporter:
       name: uiElements_iconDemoSelected
       rect:
         serializedVersion: 2
-        x: 195
-        y: 146
-        width: 16
-        height: 21
+        x: 131
+        y: 124
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -922,6 +940,132 @@ TextureImporter:
       bones: []
       spriteID: eacc7514e2919e180800000000000000
       internalID: -9085703086787801938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconPickaxe
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 168
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61547b22644ec44c0800000000000000
+      internalID: -4301812554164386538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconPickaxeSelected
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 168
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6325df5568ce03ba0800000000000000
+      internalID: -6111124632629325258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconBuild
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 146
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca4b7016bc53c48c0800000000000000
+      internalID: -4013774020271426388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconBuildSelected
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 146
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3ebae825371efbf0800000000000000
+      internalID: -288767809017954755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconTermometer
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 102
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2835dd9be9d4284f0800000000000000
+      internalID: -828014037364288638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconTermometerSelected
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 102
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9492ba466ced13be0800000000000000
+      internalID: -1499172257263834807
       vertices: []
       indices: 
       edges: []

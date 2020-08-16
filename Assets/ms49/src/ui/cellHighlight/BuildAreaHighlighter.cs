@@ -1,16 +1,17 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class BuildAreaHighlighter : CellHighlightBase {
 
     [SerializeField]
-    private Tilemap tilemap = null;
-    [SerializeField]
     private Color transparentColor = Color.white;
+    [SerializeField]
+    public CellData buildSiteCell = null;
 
     private BuildableBase buildable;
     private PopupBuild popup;
+
+    public CellTilemapRenderer cellRenderer;
 
     protected override void Awake() {
         base.Awake();
@@ -19,52 +20,50 @@ public class BuildAreaHighlighter : CellHighlightBase {
     }
 
     protected override bool onUpdate(Position pos) {
-        // TODO Bad, make better
-        if(this.buildable is BuildableTile) {
+        bool isValid = this.buildable.isValidLocation(this.world, pos);
+
+        if(this.buildable is BuildableTile && isValid) {
             BuildableTile b = (BuildableTile)this.buildable;
-            for(int x = 0; x < this.buildable.getWidth(); x++) {
-                for(int y = 0; y < this.buildable.getHeight(); y++) {
-                    CellData data = b.getTile(x, y);
-                    if(data != null) {
-                        DirectionalTile dt = data.getObjectTile(this.buildable.isRotatable() ? this.popup.rot : null);
-                        Vector3Int pod = new Vector3Int(x, y, 0);
 
-                        // Set the tile
-                        this.tilemap.SetTile(pod, dt.tile);
+            this.cellRenderer.gameObject.SetActive(true);
 
-                        // Apply rotation
-                        if(dt.effect != RotationEffect.NOTHING) {
-                            this.tilemap.SetTransformMatrix(pod, dt.getMatrix());
-                        }
+            this.cellRenderer.mapSize = Math.Max(this.buildable.getWidth(), this.buildable.getHeight());
 
-                        // Make the tile semi transparent.
-                        this.tilemap.SetColor(pod, this.transparentColor);
-                    }
+            this.cellRenderer.cellStateGetterFunc = (x, y) => {
+                CellData data = b.getTile(x, y);
+                if(data == null) {
+                    return null;
+                } else {
+                    return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : null);
                 }
-            }
+            };
+            this.cellRenderer.totalRedraw = true;
+
+        } else {
+            this.cellRenderer.gameObject.SetActive(false);
         }
 
-        return this.buildable.isValidLocation(this.world, pos);
+        return isValid;
     }
 
     protected override void onClick(Position pos, bool isValid) {
-        if(isValid && Money.get() >= this.buildable.getCost()) {
-            Money.remove(this.buildable.getCost());
+        if(isValid && world.money.value >= this.buildable.getCost()) {
+            world.money.value -= this.buildable.getCost();
 
-            this.buildable.placeIntoWorld(world, pos, this.popup.rot);
+            this.buildable.placeIntoWorld(world, this, pos, this.popup.rot);
         }
     }
 
     public override void hide() {
         base.hide();
 
-        this.tilemap.ClearAllTiles();
+        this.cellRenderer.clear();
     }
 
     public override void setInvisible() {
         base.setInvisible();
 
-        this.tilemap.ClearAllTiles();
+        this.cellRenderer.clear();
     }
 
     public void setBuildable(BuildableBase buildable) {

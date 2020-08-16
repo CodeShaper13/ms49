@@ -18,9 +18,9 @@ public class BuildableLadder : BuildableTile {
         return isTopClear && isBottomClear;
     }
 
-    public override void placeIntoWorld(World world, Position pos, Rotation rotation) {
+    public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
         // Place the normal structure, the top.
-        base.placeIntoWorld(world, pos, rotation);
+        base.placeIntoWorld(world, highlight, pos, rotation);
 
         // Place the bottom.
         Position pos1 = pos.add(0, 0, 1);

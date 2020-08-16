@@ -92,6 +92,17 @@ public static class NbtExtension {
     }
 
     /// <summary>
+    /// Writes the passed Vector3Int to the passed tag.
+    /// </summary>
+    public static void setTag(this NbtCompound tag, string name, Vector3Int vector) {
+        NbtCompound compound = new NbtCompound(name);
+        compound.setTag("x", vector.x);
+        compound.setTag("y", vector.y);
+        compound.setTag("z", vector.z);
+        tag.Add(compound);
+    }
+
+    /// <summary>
     /// Writes the passed Quaternion to the passed tag.
     /// </summary>
     public static void setTag(this NbtCompound tag, string name, Quaternion quaternion) {
@@ -266,6 +277,18 @@ public static class NbtExtension {
             compound.getFloat("x", ((Vector3)defaultValue).x),
             compound.getFloat("y", ((Vector3)defaultValue).y),
             compound.getFloat("z", ((Vector3)defaultValue).z));
+    }
+
+    public static Vector3Int getVector3Int(this NbtCompound tag, string name, Vector3Int? defaultValue = null) {
+        if(defaultValue == null) {
+            defaultValue = Vector3Int.zero;
+        }
+
+        NbtCompound compound = tag.getCompound(name);
+        return new Vector3Int(
+            compound.getInt("x", ((Vector3Int)defaultValue).x),
+            compound.getInt("y", ((Vector3Int)defaultValue).y),
+            compound.getInt("z", ((Vector3Int)defaultValue).z));
     }
 
     public static Quaternion getQuaternion(this NbtCompound tag, string name, Quaternion? defaultValue = null) {

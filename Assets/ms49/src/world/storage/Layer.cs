@@ -25,7 +25,7 @@ public class Layer {
 
         // Setup Fog.
         if(this.world.mapGenData.getLayerFromDepth(this.depth).hasFog) {
-            this.fog = new Fog(this.worldRenderer, this.world.storage.mapSize);
+            this.fog = new Fog(this.world.storage.mapSize);
             this.fog.setAll(true);
         }
     }
@@ -151,15 +151,6 @@ public class Layer {
                     false,
                     false);
                 index++;
-            }
-        }
-
-        // Read tile meta:
-        NbtList listBehaviorTags = tag.getList("meta");
-        foreach(NbtCompound behaviorTag in listBehaviorTags) {
-            CellBehavior meta = this.getCellState(behaviorTag.getInt("xPos"), behaviorTag.getInt("yPos")).behavior;
-            if(meta != null && meta is IHasData) {
-                ((IHasData)meta).readFromNbt(behaviorTag);
             }
         }
 

@@ -20,7 +20,7 @@ public class PopupWorkerStats : PopupWindow {
 
         WorkerStats stats = this.worker.stats;
 
-        this.nameText.text = (stats.getGender() == EnumGender.MALE ? "Mr. " : "Miss") + stats.getLastName();
+        this.nameText.text = (stats.getGender() == EnumGender.MALE ? "Mr. " : "Miss") + stats.getLastName() + "   (" + this.worker.typeName + ")";
 
         this.infoText.text = "Name: " + stats.getFullName() + "\nAge: " + 0; 
     }
@@ -28,7 +28,7 @@ public class PopupWorkerStats : PopupWindow {
     public override void onUpdate() {
         if(this.worker != null) {
             // Update face.
-            this.img.sprite = this.worker.faces.getFace();
+            this.img.sprite = this.worker.animator.getSprite();
 
             StringBuilder sb = new StringBuilder();
 

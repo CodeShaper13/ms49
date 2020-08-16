@@ -75,13 +75,37 @@ public class BuildableTile : BuildableBase {
         }       
     }
 
-    public override void placeIntoWorld(World world, Position pos, Rotation rotation) {
+    public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
+        bool instantBuild = Input.GetKey(KeyCode.F5) || highlight == null;
+
+        CellBehaviorBuildSite site = null;
+
+        if(!instantBuild) {
+            world.setCell(pos, highlight.buildSiteCell, rotation);
+            world.liftFog(pos);
+            site = world.getBehavior<CellBehaviorBuildSite>(pos);
+            site.isPrimary = true;
+        }
+
         for(int x = 0; x < this.getWidth(); x++) {
             for(int y = 0; y < this.getHeight(); y++) {
                 CellData data = this.getTile(x, y);
                 if(data != null) {
                     Position pos1 = pos.add(x, y);
-                    world.setCell(pos1, data, rotation);
+
+                    if(instantBuild) {
+                        world.setCell(pos1, data, rotation);
+                    } else {
+                        site.addCell(data, pos.add(x, y));
+
+                        // Skip over the middle cell, it's already been placed.
+                        if(x == 0 && y == 0) {
+                            continue;
+                        }
+
+                        world.setCell(pos1, highlight.buildSiteCell, rotation);
+                    }
+
                     world.liftFog(pos1);
                 }
             }

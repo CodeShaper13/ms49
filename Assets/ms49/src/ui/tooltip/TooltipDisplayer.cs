@@ -18,10 +18,10 @@ public class TooltipDisplayer : MonoBehaviour {
     }
 
     public void setText(string text) {
-        if(string.IsNullOrEmpty(text)) {
-            this.img.enabled = false;
-        } else {
-            this.img.enabled = true;
+        if(this.img != null) {
+            this.img.enabled = !string.IsNullOrEmpty(text);
+        }
+        if(this.textHeldItemName != null) {
             this.textHeldItemName.text = text;
         }
     }

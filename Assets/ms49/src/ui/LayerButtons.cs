@@ -39,7 +39,7 @@ public class LayerButtons : MonoBehaviour {
             this.text.text = i.ToString();
         }
         else {
-            this.text.text = (i == 0 ? "Surface" : "-" + (i * 100) + " Feet");
+            this.text.text = (i == 0 ? "surface" : "-" + (i * 100) + " feet");
         }
     }
 }

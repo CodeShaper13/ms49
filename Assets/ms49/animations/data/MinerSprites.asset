@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aead7d47f6c97344a9f96792f5c05ea, type: 3}
+  m_Name: MinerSprites
+  m_EditorClassIdentifier: 
+  idleUp: {fileID: -3731237820331945577, guid: 9bfaf90c51b982146a44a3fe2177393b, type: 3}
+  idleSideways: {fileID: -1298610170901319419, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}
+  idleDown: {fileID: -1410988191491350563, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}
+  walkUp1: {fileID: -8127899902773281806, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}
+  walkUp2: {fileID: -5643556006692713134, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}
+  walkSideways1: {fileID: -8110038564777196914, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}
+  walkSideways2: {fileID: -3142331517705915777, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}
+  walkDown1: {fileID: 7470796999014631477, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}
+  walkDown2: {fileID: -6447073012350995735, guid: 9bfaf90c51b982146a44a3fe2177393b,
+    type: 3}

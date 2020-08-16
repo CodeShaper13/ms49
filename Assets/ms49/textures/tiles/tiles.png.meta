@@ -85,10 +85,10 @@ TextureImporter:
     second: tiles_tableStandalone
   - first:
       213: 5541110501864291823
-    second: tiles_14
+    second: buildSite
   - first:
       213: -5012251703786577423
-    second: tiles_15
+    second: tiles_shadow
   - first:
       213: 2252217939642970804
     second: tiles_16
@@ -181,10 +181,10 @@ TextureImporter:
     second: tiles_tableLeft
   - first:
       213: 349400682170951965
-    second: tiles_14
+    second: buildSite
   - first:
       213: 173019162897000831
-    second: tiles_15
+    second: tiles_shadow
   - first:
       213: -1941492207181004388
     second: tiles_16
@@ -1717,6 +1717,48 @@ TextureImporter:
       bones: []
       spriteID: e7b3ecb5277c457e0800000000000000
       internalID: -1777576658924061826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildSite
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fedbec4b4aaf5ec40800000000000000
+      internalID: 5541110501864291823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_shadow
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f164f6a1a7e07ab0800000000000000
+      internalID: -5012251703786577423
       vertices: []
       indices: 
       edges: []

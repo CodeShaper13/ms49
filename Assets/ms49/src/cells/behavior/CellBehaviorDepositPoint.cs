@@ -42,7 +42,7 @@ public class CellBehaviorDepositPoint : CellBehavior, IHasData {
 
     public Item deposit(Item item) {
         if(this.isMaster) {
-            Money.add(item.moneyValue);
+            this.world.money.value += item.moneyValue;
             return null;
         } else {
             if(this.inventory.isFull()) {

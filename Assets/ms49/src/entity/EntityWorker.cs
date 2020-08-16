@@ -9,6 +9,11 @@ public class EntityWorker : EntityBase, IClickable {
     public const float HUNGER_COST_MINE = 5f;
 
     [SerializeField]
+    private string _typeName = "???";
+
+    [Space]
+
+    [SerializeField]
     protected Slider healthSlider = null;
     [SerializeField]
     protected Image healthSliderFill = null;
@@ -18,16 +23,17 @@ public class EntityWorker : EntityBase, IClickable {
     protected ParticleSystem sleepingEffect = null;
 
     /// <summary> The miner's energy from 0 to 100. </summary>
-    public float energy;
+    public float energy { get; private set; }
     /// <summary> The miner's hunger from 0 to 100. </summary>
-    public float hunger;
+    public float hunger { get; set; }
     protected Vector2 posLastFrame;
     public MoveHelper moveHelper { get; private set; }
     protected AiManager<EntityWorker> aiManager;
     protected bool sleeping;
 
     public WorkerStats stats { get; private set; }
-    public WorkerFaces faces { get; private set; }
+    public WorkerAnimator animator { get; private set; }
+    public string typeName { get { return this._typeName; } }
 
     private void OnMouseEnter() {
         this.healthSlider.gameObject.SetActive(true);
@@ -43,8 +49,8 @@ public class EntityWorker : EntityBase, IClickable {
         base.initialize(world, id, depth);
 
         this.moveHelper = this.GetComponent<MoveHelper>();
-        this.faces = this.GetComponent<WorkerFaces>();
         this.stats = new WorkerStats();
+        this.animator = this.GetComponentInChildren<WorkerAnimator>();
 
         this.OnMouseExit(); // Hide ui.
 
@@ -61,7 +67,7 @@ public class EntityWorker : EntityBase, IClickable {
 
         // Remove dead miners.
         if(this.energy <= 0) {
-            this.faces.setFace(WorkerFaces.EnumFace.DEAD);
+            this.animator.playClip("Dead");
         } else {
             this.aiManager.updateAi();
 
@@ -88,13 +94,8 @@ public class EntityWorker : EntityBase, IClickable {
         this.staminaSlider.gameObject.SetActive(visible);
     }
 
-    public float getEnergy() {
-        return this.energy;
-    }
-
     public void reduceEnergy(float amount) {
-        this.setEnergy(this.getEnergy() - amount);
-
+        this.setEnergy(this.energy - amount);
     }
 
     public void setEnergy(float amount) {
@@ -105,12 +106,8 @@ public class EntityWorker : EntityBase, IClickable {
         this.healthSliderFill.color = this.energy >= 50 ? Color.green : this.energy <= 25 ? new Color(1, 0.5f, 0) : Color.red;
     }
 
-    public float getHunger() {
-        return this.hunger;
-    }
-
     public void reduceHunger(float amount) {
-        this.setHunger(this.getHunger() - amount);
+        this.setHunger(this.hunger - amount);
     }
 
     public void setHunger(float amount) {
@@ -134,8 +131,8 @@ public class EntityWorker : EntityBase, IClickable {
     }
 
     public virtual void writeWorkerInfo(StringBuilder sb) {
-        sb.AppendLine("Energy: " + (int)this.getEnergy());
-        sb.AppendLine("Hunger: " + (int)this.getHunger());
+        sb.AppendLine("Energy: " + (int)this.energy);
+        sb.AppendLine("Hunger: " + (int)this.hunger);
 
         if(Main.DEBUG) {
             sb.Append(this.aiManager.generateDebugText());
@@ -145,8 +142,8 @@ public class EntityWorker : EntityBase, IClickable {
     public override void writeToNbt(NbtCompound tag) {
         base.writeToNbt(tag);
 
-        tag.setTag("energy", this.getEnergy());
-        tag.setTag("hunger", this.getHunger());
+        tag.setTag("energy", this.energy);
+        tag.setTag("hunger", this.hunger);
     }
 
     public override void readFromNbt(NbtCompound tag) {

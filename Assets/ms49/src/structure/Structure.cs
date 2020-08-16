@@ -75,7 +75,7 @@ public class Structure : ScriptableObject {
                     world.setCell(pos1, Main.instance.tileRegistry.getAir());
                 } else {
                     if(entry.buildable != null) {
-                        entry.buildable.placeIntoWorld(world, pos1, Rotation.fromEnum(entry.rotation));
+                        entry.buildable.placeIntoWorld(world, null, pos1, Rotation.fromEnum(entry.rotation));
                     } else if(entry.cell != null) {
                         world.setCell(pos1, entry.cell);
                         world.liftFog(pos1);

@@ -4,6 +4,8 @@ public class DemoHighlighter : CellHighlightBase {
 
     [SerializeField]
     private PopupDemo popup = null;
+    [SerializeField]
+    private IntVariable money = null;
 
     protected override bool onUpdate(Position pos) {   
         if(!this.world.isOutOfBounds(pos)) {
@@ -17,8 +19,8 @@ public class DemoHighlighter : CellHighlightBase {
     protected override void onClick(Position pos, bool isValid) {
         if(isValid) {
             int cost = this.popup.getDemoCost();
-            if(Money.get() >= this.popup.getDemoCost()) {
-                Money.remove(cost);
+            if(this.money.value >= this.popup.getDemoCost()) {
+                this.money.value -= cost;
                 this.world.setCell(
                     pos.x,
                     pos.y,

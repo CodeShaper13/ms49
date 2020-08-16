@@ -1648,6 +1648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 1374921897}
+  hotkey: 52
 --- !u!114 &283642907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1743,7 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: workers
+  _text: workers (4)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!1001 &307380781
@@ -2285,6 +2286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 1665658552}
+  hotkey: 53
 --- !u!114 &339412467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2297,7 +2299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: demo
+  _text: demo (5)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!1 &350991227
@@ -2932,6 +2934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 1194419525}
+  hotkey: 51
 --- !u!114 &415667906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2944,7 +2947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: build
+  _text: build (3)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!1 &439027934
@@ -5293,6 +5296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 1665658552}
+  hotkey: 55
 --- !u!114 &941302989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5388,7 +5392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: temperature
+  _text: temperature (7)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!1001 &943161482
@@ -5940,6 +5944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 114764197}
+  hotkey: 54
 --- !u!114 &973504266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5952,7 +5957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: mine
+  _text: mine (6)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!1 &993845046
@@ -8939,6 +8944,7 @@ GameObject:
   - component: {fileID: 1371368036}
   - component: {fileID: 1371368035}
   - component: {fileID: 1371368038}
+  - component: {fileID: 1371368039}
   m_Layer: 5
   m_Name: Button_Infoscreens
   m_TagString: Untagged
@@ -9061,6 +9067,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 0}
+  hotkey: 49
+--- !u!114 &1371368039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371368033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: info (1)
+  delay: 0.5
+  pullFromTextComponent: 0
 --- !u!1 &1372809680
 GameObject:
   m_ObjectHideFlags: 0
@@ -13501,7 +13523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: budget
+  _text: budget (2)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!114 &2134126159
@@ -13517,6 +13539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 0}
+  hotkey: 50
 --- !u!1001 &1116859733363503042
 PrefabInstance:
   m_ObjectHideFlags: 0

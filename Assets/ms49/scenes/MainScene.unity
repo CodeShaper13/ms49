@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: go up
+  _text: go down (x)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!1001 &47029743
@@ -5994,7 +5994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 12.11, y: 4.99}
+  m_AnchoredPosition: {x: 0.000015258789, y: 4.9886}
   m_SizeDelta: {x: 24.229248, y: 9.977169}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &993845048
@@ -6023,13 +6023,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 3
-    m_AlignByGeometry: 0
+    m_Alignment: 4
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: tooltip
 --- !u!222 &993845049
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13076,7 +13076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: go down
+  _text: go up (z)
   delay: 0.5
   pullFromTextComponent: 0
 --- !u!1001 &2075903291

@@ -61,7 +61,7 @@ public class NavigationManager {
                     continue;
                 }
 
-                int newMovementCostToNeighbour = currentNode.gCost + this.getDistance(currentNode, neighbor);
+                int newMovementCostToNeighbour = currentNode.gCost + this.getDistance(currentNode, neighbor) + neighbor.movementPenalty;
                 if(newMovementCostToNeighbour < neighbor.gCost || !this.openSet.Contains(neighbor)) {
                     neighbor.gCost = newMovementCostToNeighbour;
                     neighbor.hCost = this.getDistance(neighbor, endNode);
@@ -74,6 +74,8 @@ public class NavigationManager {
                         //Vector3 v = neighbor.worldPosition;
                         //Debug.DrawLine(v + (Vector3.up + Vector3.right) * 0.1f, v + (Vector3.down + Vector3.left) * 0.1f, Color.black, 3f);
                         //Debug.DrawLine(v + (Vector3.down + Vector3.right) * 0.1f, v + (Vector3.up + Vector3.left) * 0.1f, Color.black, 3f);
+                    } else {
+                        this.openSet.UpdateItem(neighbor);
                     }
                 }
             }
@@ -171,12 +173,12 @@ public class NavigationManager {
                     Vector2 worldPoint = new Vector2(x + 0.5f, y + 0.5f);
                     CellData data = layer.getCellState(x, y).data;
                     nodes[x, y] = new Node(
-                        data.isWalkable,
                         worldPoint,
                         x,
                         y,
                         layer.depth,
-                        data.zMoveDirections);
+                        data.zMoveDirections,
+                        data.movementCost);
                 }
             }
             grid.nodes = nodes;

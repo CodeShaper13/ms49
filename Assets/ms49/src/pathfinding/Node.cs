@@ -2,11 +2,11 @@
 
 public class Node : IHeapItem<Node> {
 
-    public readonly bool isWalkable;
     public readonly int x;
     public readonly int y;
     public readonly int depth;
-    public EnumZMoveDirection zMoveDir;
+    public readonly EnumZMoveDirection zMoveDir;
+    public readonly int movementPenalty;
 
     public int gCost;
     public int hCost;
@@ -16,13 +16,13 @@ public class Node : IHeapItem<Node> {
 
     int heapIndex;
 
-    public Node(bool walkable, Vector2 worldPos, int x, int y, int depth, EnumZMoveDirection zMoveDir) {
-        this.isWalkable = walkable;
+    public Node(Vector2 worldPos, int x, int y, int depth, EnumZMoveDirection zMoveDir, int penalty) {
         this.worldPosition = worldPos;
         this.x = x;
         this.y = y;
         this.depth = depth;
         this.zMoveDir = zMoveDir;
+        this.movementPenalty = penalty;
     }
 
     public PathPoint asPathPoint() {
@@ -37,6 +37,12 @@ public class Node : IHeapItem<Node> {
     public bool connectsDown() {
         return this.zMoveDir == EnumZMoveDirection.DOWN ||
             this.zMoveDir == EnumZMoveDirection.BOTH;
+    }
+
+    public bool isWalkable {
+        get {
+            return this.movementPenalty >= 0;
+        }
     }
 
     public int fCost {

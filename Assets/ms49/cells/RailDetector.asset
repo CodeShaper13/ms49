@@ -29,6 +29,7 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f078a2698d5b1404786675531e06bef3, type: 2}
     effect: 0
   isWalkable: 1
+  movementCost: 5
   canBuildOver: 0
   isDestroyable: 1
   zMoveDirections: 0

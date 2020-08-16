@@ -28,8 +28,8 @@ public class CellData : ScriptableObject {
 
     [Space]
 
-    [Tooltip("If true, Workers will be able to walk on this Cell.")]
-    public bool isWalkable = false;
+    [SerializeField, Tooltip("-1 = not walkable, 0 = walkable, greater than 1 is walkable with a penalty"), Min(-1)]
+    private int _movementCost = 0;
     [Tooltip("If ture, this Cell we be treated as empty space and Cell will be able to be built in this Cell's place.")]
     public bool canBuildOver = false;
     [Tooltip("If true, this Cell will be able to be destroyed and converted to air.")]
@@ -45,6 +45,9 @@ public class CellData : ScriptableObject {
 
     [Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
     public GameObject behaviorPrefab;
+
+    public int movementCost { get { return this._movementCost; } }
+    public bool isWalkable { get { return this.movementCost >= 0; }}
 
     public TileBase getGroundTile() {
         return this.groundTile;

@@ -42,7 +42,7 @@ public class WorldRenderer : MonoBehaviour {
 
     private void LateUpdate() {
         // Only show Entities that at the depth being rendered.
-        foreach(EntityBase e in this.world.entityList) {
+        foreach(EntityBase e in this.world.entities.entityList) {
             if(e.depth == this.targetLayer.depth) {
                 e.gameObject.SetActive(true);
             } else {

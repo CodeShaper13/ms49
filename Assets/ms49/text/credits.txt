@@ -8,3 +8,6 @@ Grass: https://opengameart.org/content/tiled-terrains
 
 Smoke particles
 https://opengameart.org/content/smoke-fire-animated-particle-16x16
+
+Font:
+https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059#reviews

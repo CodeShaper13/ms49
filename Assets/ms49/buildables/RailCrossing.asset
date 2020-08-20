@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: RailCrossing
   m_EditorClassIdentifier: 
   structureName: Crossing Rails
-  cost: 150
-  description: 
+  _cost: 150
+  _description: 
+  _unlockedAt: {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 91e7e2e1f6b833942ac49bd4bfe5c78b, type: 2}

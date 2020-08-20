@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: MedicalLocker
   m_EditorClassIdentifier: 
   structureName: Locker
-  cost: 100
-  rotationMode: 0
-  description: Chuck full of life saving medical supplies
+  _cost: 100
+  _description: Stuffed full of life saving medical supplies
+  _unlockedAt: {fileID: 0}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 55b8819e1323d7b4ca9faad86caa2626, type: 2}
   cells:
   - row:
     - 
-  structurePrefab: {fileID: 0}
-  structureOrgin: {x: 0, y: 0}

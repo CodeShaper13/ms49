@@ -15,9 +15,23 @@ MonoBehaviour:
   groundTile: {fileID: 0}
   objectTile: {fileID: 11400000, guid: b3a1c384fa9ab9a44828689f09ea32b7, type: 2}
   overlayTile: {fileID: 0}
-  isWalkable: 0
+  rotationalOverride: 0
+  up:
+    tile: {fileID: 0}
+    effect: 0
+  right:
+    tile: {fileID: 0}
+    effect: 0
+  down:
+    tile: {fileID: 0}
+    effect: 0
+  left:
+    tile: {fileID: 0}
+    effect: 0
+  _movementCost: -1
   canBuildOver: 0
   isDestroyable: 1
+  zMoveDirections: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 547054148478071769, guid: 245decad7778eae44b97a4601b5d8d88,

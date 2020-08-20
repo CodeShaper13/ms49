@@ -26,6 +26,8 @@ public class PopupWorkerStats : PopupWindow {
     }
 
     public override void onUpdate() {
+        base.onUpdate();
+
         if(this.worker != null) {
             // Update face.
             this.img.sprite = this.worker.animator.getSprite();

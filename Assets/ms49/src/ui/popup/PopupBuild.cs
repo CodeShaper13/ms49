@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditorInternal;
-using UnityEngine.UI;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -9,9 +8,8 @@ using UnityEngine.UI;
 
 public class PopupBuild : PopupWindow {
 
-    [SerializeField]
     [HideInInspector]
-    private List<BuildableBase> buildings = new List<BuildableBase>();
+    public List<BuildableBase> buildings = new List<BuildableBase>();
 
     [Space]
 
@@ -23,11 +21,15 @@ public class PopupBuild : PopupWindow {
     private BuildAreaHighlighter areaHighlighter = null;
     [SerializeField]
     public SelectedCellPreview preview = null;
+    [SerializeField]
+    private MilestoneManager milestones = null;
 
     private BuildableBase sData;
     public Rotation rot { get; private set; }
 
     public override void onAwake() {
+        base.onAwake();
+
         this.setSelected(null);
 
         // Add all of the button
@@ -37,7 +39,7 @@ public class PopupBuild : PopupWindow {
         rt.sizeDelta = new Vector2(rt.sizeDelta.x, this.buildings.Count * BTN_HEIGHT);
 
         foreach(BuildableBase c in this.buildings) {
-            if(c != null) {
+            if(c != null && (c.unlockedAt == null || this.milestones.isUnlocked(c.unlockedAt))) {
                 BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
                 btn.transform.SetParent(this.area, false);
                 btn.setStructureData(c);

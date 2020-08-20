@@ -15,11 +15,24 @@ MonoBehaviour:
   groundTile: {fileID: 11400000, guid: b9062077652f86f4f9f0d3dce0ef9ba8, type: 2}
   objectTile: {fileID: 11400000, guid: c112bfa7ad6e7734988bbe6382915c0a, type: 2}
   overlayTile: {fileID: 0}
-  isWalkable: 0
+  rotationalOverride: 0
+  up:
+    tile: {fileID: 0}
+    effect: 0
+  right:
+    tile: {fileID: 0}
+    effect: 0
+  down:
+    tile: {fileID: 0}
+    effect: 0
+  left:
+    tile: {fileID: 0}
+    effect: 0
+  _movementCost: -1
   canBuildOver: 0
   isDestroyable: 0
+  zMoveDirections: 0
   tintGroundTile: 1
   tintObjectTile: 1
-  tileType: 1
-  metaObject: {fileID: 0}
+  behaviorPrefab: {fileID: 0}
   droppedItem: {fileID: 11400000, guid: 3dd87f65ab6b64246810d9c201a03013, type: 2}

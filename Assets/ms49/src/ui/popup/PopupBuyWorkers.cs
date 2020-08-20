@@ -15,6 +15,6 @@ public class PopupBuyWorkers : PopupWindow {
         // Add worker(s)
         World world = GameObject.FindObjectOfType<World>();
 
-        world.spawnEntity(this.workerSpawnPoint, entityId);
+        world.entities.spawn(this.workerSpawnPoint, entityId);
     }
 }

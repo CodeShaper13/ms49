@@ -47,7 +47,7 @@ public class CellBehaviorConveyorBelt : CellBehavior {
             } else if(behavior is CellBehaviorDepositPoint) {
                 if(distance > 0.5f) {
                     this.trackedItems.RemoveAt(i);
-                    this.world.removeEntity(e);
+                    this.world.entities.remove(e);
                     ((CellBehaviorDepositPoint)behavior).deposit(e.item);
                 }
             } else {
@@ -55,7 +55,7 @@ public class CellBehaviorConveyorBelt : CellBehavior {
                 if(distance > 0.5f) {
                     // Destory item
                     this.trackedItems.RemoveAt(i);
-                    this.world.removeEntity(e);
+                    this.world.entities.remove(e);
                     print("Item Bang!");
                 }
             }
@@ -70,7 +70,7 @@ public class CellBehaviorConveyorBelt : CellBehavior {
         float yOffset = this.rotation.axis == EnumAxis.X ? 0.4f : 0f;
         Vector2 v = this.rotation.opposite().vectorF * 0.5f + new Vector2(0, yOffset);
 
-        EntityItem e = (EntityItem)this.world.spawnEntity(this.pos.vec2 + v, this.pos.depth, 3);
+        EntityItem e = (EntityItem)this.world.entities.spawn(this.pos.vec2 + v, this.pos.depth, 3);
         e.item = item;
         this.startTracking(e);
     }

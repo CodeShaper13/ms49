@@ -28,7 +28,7 @@ MonoBehaviour:
   left:
     tile: {fileID: 0}
     effect: 0
-  isWalkable: 1
+  _movementCost: -1
   canBuildOver: 0
   isDestroyable: 0
   zMoveDirections: 0

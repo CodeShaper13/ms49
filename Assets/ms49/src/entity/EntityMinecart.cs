@@ -118,7 +118,7 @@ public class EntityMinecart : EntityBase {
     /// </summary>
     public void explode() {
         this.world.particles.spawn(this.position, this.explodeParticlePrefab);
-        this.world.removeEntity(this);
+        this.world.entities.remove(this);
     }
 
     public override void writeToNbt(NbtCompound tag) {

@@ -11,24 +11,20 @@ public class World : MonoBehaviour {
     public WorldRenderer worldRenderer;
     public IntVariable money;
     public ParticleList particles;
+    public EntityList entities;
+    public MilestoneManager milestones;
 
     private MapGenerator mapGenerator;
     private Grid grid;
-    public List<EntityBase> entityList { get; private set; }
     public int seed { get; private set; }
     public NavigationManager navManager { get; private set; }
-
-    private Transform entityHolder;
+    public int stoneExcavated { get; set; }
 
     private void Awake() {
-        this.entityList = new List<EntityBase>();
         this.grid = this.GetComponent<Grid>();
 
         this.storage = new Storage(this);
         this.mapGenerator = new MapGenerator(this, this.mapGenData);
-
-        // Create holder objects.
-        this.entityHolder = new GameObject("ENTITY_HOLDER").transform;
     }
 
     /// <summary>
@@ -69,12 +65,6 @@ public class World : MonoBehaviour {
     private void Update() {
         if(!Pause.isPaused()) {
             this.navManager.update();
-
-            // Update the Entities.
-            for(int i = this.entityList.Count - 1; i >= 0; i--) {
-                EntityBase entity = this.entityList[i];
-                entity.onUpdate();
-            }
         }
     }
 
@@ -183,32 +173,6 @@ public class World : MonoBehaviour {
         return p.x < 0 || p.y < 0 || p.x >= r || p.y >= r || p.depth < 0 || p.depth >= this.storage.layerCount;
     }
 
-    public EntityBase spawnEntity(Position postion, int entityId) {
-        return this.spawnEntity(postion.vec2 + new Vector2(0.5f, 0.5f), postion.depth, entityId);
-    }
-
-    public EntityBase spawnEntity(Vector2 postion, int depth, int entityId) {
-        GameObject prefab = Main.instance.entityRegistry.getElement(entityId);
-        if(prefab != null) {
-            EntityBase entity = GameObject.Instantiate(prefab, this.entityHolder).GetComponent<EntityBase>();
-            entity.transform.position = postion;
-            entity.initialize(this, entityId, depth);
-
-            this.entityList.Add(entity);
-
-            return entity;
-        } else {
-            Debug.LogWarning("Tried to spawn an Entity with an unknown Id ( " + entityId + ")");
-            return null;
-        }
-    }
-
-    public void removeEntity(EntityBase entity) {
-        this.entityList.Remove(entity);
-        entity.onDestroy();
-        GameObject.Destroy(entity.gameObject);
-    }
-
     public CellBehavior getBehavior(Position pos) {
         foreach(CellBehavior behavior in this.storage.cachedBehaviors) {
             if(behavior.pos.Equals(pos)) {
@@ -273,9 +237,11 @@ public class World : MonoBehaviour {
 
         // Write general world info:
         tag.setTag("seed", this.seed);
+        tag.setTag("stoneExcavated", this.stoneExcavated);
 
-        // Write money:
-        tag.setTag("money", this.money.value);
+        if(this.money != null) {
+            tag.setTag("money", this.money.value);
+        }
 
         // Write level:
         NbtCompound tagStorage = new NbtCompound("storage");
@@ -283,16 +249,19 @@ public class World : MonoBehaviour {
         tag.Add(tagStorage);
 
         // Write Entities:
-        NbtList list = new NbtList(NbtTagType.Compound);
-        foreach(EntityBase e in this.entityList) {
-            NbtCompound compound = new NbtCompound();
-            e.writeToNbt(compound);
-            list.Add(compound);
+        if(this.entities != null) {
+            this.entities.writeToNbt(tag);
         }
-        tag.setTag("entities", list);
 
         // Write Player:
-        tag.setTag("player", CameraController.instance.writeToNbt());
+        if(CameraController.instance != null) {
+            tag.setTag("player", CameraController.instance.writeToNbt());
+        }
+
+        // Write Milestones:
+        if(this.milestones != null) {
+            this.milestones.writeToNbt(tag);
+        }
 
         return tag;
     }
@@ -302,27 +271,29 @@ public class World : MonoBehaviour {
 
         // Read general world info:
         this.seed = tag.getInt("seed");
+        this.stoneExcavated = tag.getInt("stoneExcavated");
 
-        // Read money:
-        this.money.value = tag.getInt("money");
+        if(this.money != null) {
+            this.money.value = tag.getInt("money");
+        }
 
         // Read level:
         NbtCompound tagStorage = tag.getCompound("storage");
         this.storage.readFromNbt(tagStorage);
 
         // Read Entities:
-        NbtList entityTags = tag.getList("entities");
-        foreach(NbtCompound t in entityTags) {
-            EntityBase entity = this.spawnEntity(
-                t.getVector2("position"),
-                t.getInt("depth"),
-                t.getInt("id"));
-            if(entity != null) {
-                entity.readFromNbt(t);
-            }
+        if(this.entities != null) {
+            this.entities.readFromNbt(tag);
         }
 
         // Read Player:
-        CameraController.instance.readFromNbt(tag.getCompound("player"));
+        if(CameraController.instance != null) {
+            CameraController.instance.readFromNbt(tag.getCompound("player"));
+        }
+
+        // Read Milestones:
+        if(this.milestones != null) {
+            this.milestones.readFromNbt(tag);
+        }
     }
 }

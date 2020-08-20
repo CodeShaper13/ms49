@@ -16,12 +16,16 @@ public class PopupWindow : MonoBehaviour {
     }
 
     private void Update() {
-        this.onUpdate();
-
         float f = Mathf.Clamp01(this.timeOpen * 14);
         this.getFrameTransform().localScale = Vector3.one * f;
 
         this.timeOpen += Time.fixedUnscaledDeltaTime;
+
+        this.onUpdate();
+    }
+
+    public static bool blockingInput() {
+        return PopupWindow.openPopup != null && PopupWindow.openPopup.blockInput();
     }
 
     public void open() {
@@ -77,6 +81,6 @@ public class PopupWindow : MonoBehaviour {
     }
 
     private Transform getFrameTransform() {
-        return this.transform.GetChild(this.transform.childCount - 1);
+        return this.transform.Find("Frame");
     }
 }

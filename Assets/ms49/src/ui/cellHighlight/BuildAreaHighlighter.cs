@@ -47,8 +47,8 @@ public class BuildAreaHighlighter : CellHighlightBase {
     }
 
     protected override void onClick(Position pos, bool isValid) {
-        if(isValid && world.money.value >= this.buildable.getCost()) {
-            world.money.value -= this.buildable.getCost();
+        if(isValid && world.money.value >= this.buildable.cost) {
+            world.money.value -= this.buildable.cost;
 
             this.buildable.placeIntoWorld(world, this, pos, this.popup.rot);
         }

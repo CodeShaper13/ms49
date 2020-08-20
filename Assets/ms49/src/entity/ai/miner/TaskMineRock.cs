@@ -57,6 +57,9 @@ public class TaskMineRock : TaskBase<EntityMiner> {
                 this.owner.world.setCell(this.stonePos, Main.instance.tileRegistry.getAir());
                 this.owner.world.setTargeted(this.stonePos, false);
                 this.owner.world.liftFog(this.stonePos);
+
+                // Add to statistic
+                this.owner.world.stoneExcavated++;
                 
                 this.timeMining = 0f;
             }

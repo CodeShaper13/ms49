@@ -57,7 +57,7 @@ public class CameraController : MonoBehaviour {
             }
         }
 
-        if(!Pause.isPaused()) {
+        if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
             this.moveCamera();
             if(!EventSystem.current.IsPointerOverGameObject()) {
                 this.detectClicks();
@@ -136,7 +136,7 @@ public class CameraController : MonoBehaviour {
 
             // Debug
             if(Input.GetKey(KeyCode.LeftControl) && leftMouse) {
-                foreach(EntityBase e in this.world.entityList) {
+                foreach(EntityBase e in this.world.entities.entityList) {
                     if(e is EntityWorker) {
                         ((EntityWorker)e).moveHelper.setDestination(this.getMousePos());
                     }

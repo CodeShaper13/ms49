@@ -14,7 +14,9 @@ public class PopupSign : PopupWindow {
     }
 
     public void callback_ok() {
-        this.behavior.message = this.inputField.text;
+        if(this.behavior != null) {
+            this.behavior.message = this.inputField.text;
+        }
 
         this.close();
     }

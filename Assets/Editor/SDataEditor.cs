@@ -11,6 +11,7 @@ public class SDataEditor : Editor {
     private SerializedProperty cost;
     private SerializedProperty rotationMode;
     private SerializedProperty description;
+    private SerializedProperty unlockedAt;
     private SerializedProperty gridSize;
     private SerializedProperty cells;
     private SerializedProperty singularTile;
@@ -41,8 +42,9 @@ public class SDataEditor : Editor {
 
     private void OnEnable() {
         this.structureName = this.serializedObject.FindProperty("structureName");
-        this.cost = this.serializedObject.FindProperty("cost");
-        this.description = this.serializedObject.FindProperty("description");
+        this.cost = this.serializedObject.FindProperty("_cost");
+        this.description = this.serializedObject.FindProperty("_description");
+        this.unlockedAt = this.serializedObject.FindProperty("_unlockedAt");
         this.gridSize = this.serializedObject.FindProperty("gridSize");
         this.cells = this.serializedObject.FindProperty("cells");
         this.singularTile = this.serializedObject.FindProperty("singularTile");
@@ -58,8 +60,9 @@ public class SDataEditor : Editor {
         serializedObject.Update(); // Always do this at the beginning of InspectorGUI.
 
         EditorGUILayout.PropertyField(this.structureName);
-        EditorGUILayout.PropertyField(this.description);
         EditorGUILayout.PropertyField(this.cost);
+        EditorGUILayout.PropertyField(this.description);
+        EditorGUILayout.PropertyField(this.unlockedAt);
 
         EditorGUILayout.Space();
 

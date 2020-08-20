@@ -15,7 +15,9 @@ public class PopupDemo : PopupWindow {
 
     private Sprite originalSprite;
 
-    private void Awake() {
+    public override void onAwake() {
+        base.onAwake();
+
         this.originalSprite = this.btnImage.sprite;
 
         this.text.text = this.text.text.Replace("%", this.demoCost.ToString());

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49032f279ee0a9a478ae5eccda094746, type: 3}
   m_Name: ColorMoneyOk
   m_EditorClassIdentifier: 
-  initialValue: {r: 0.1745283, g: 1, b: 0.23402172, a: 1}
+  initialValue: {r: 0.19695568, g: 0.759, b: 0.30263916, a: 1}

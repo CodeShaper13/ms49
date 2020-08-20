@@ -37,14 +37,19 @@ public class BuildableTile : BuildableBase {
         return this.gridSize.y;
     }
 
-    public override void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite) {
+    public override void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
         CellData data = this.getTile(0, 0);
         groundSprite = TileSpriteGetter.retrieveSprite(data.groundTile);
         objectSprite = TileSpriteGetter.retrieveSprite(data.objectTile);
+        overlaySprite = TileSpriteGetter.retrieveSprite(data.overlayTile);
     }
 
     public override bool isRotatable() {
         return this.getTile(0, 0).rotationalOverride;
+    }
+
+    public override string getRotationMsg() {
+        return "rotate with r and shift + r";
     }
 
     public CellData getTile(int x, int y) {

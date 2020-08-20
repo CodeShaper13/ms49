@@ -43,11 +43,13 @@ public class CellData : ScriptableObject {
     [Tooltip("If true, the object tile (if set) will be tinted.")]
     public bool tintObjectTile;
 
+    [Space]
+
     [Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
     public GameObject behaviorPrefab;
 
     public int movementCost { get { return this._movementCost; } }
-    public bool isWalkable { get { return this.movementCost >= 0; }}
+    public bool isWalkable { get { return this.movementCost >= 0; } }
 
     public TileBase getGroundTile() {
         return this.groundTile;

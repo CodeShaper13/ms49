@@ -35,6 +35,8 @@ public class CellData : ScriptableObject {
     [Tooltip("If true, this Cell will be able to be destroyed and converted to air.")]
     public bool isDestroyable = true;
     public EnumZMoveDirection zMoveDirections = EnumZMoveDirection.NEITHER;
+    [SerializeField]
+    private bool _flammable = false;
 
     [Space]
 
@@ -50,6 +52,7 @@ public class CellData : ScriptableObject {
 
     public int movementCost { get { return this._movementCost; } }
     public bool isWalkable { get { return this.movementCost >= 0; } }
+    public bool isFlammable { get { return this._flammable; } }
 
     public TileBase getGroundTile() {
         return this.groundTile;

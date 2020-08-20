@@ -32,6 +32,7 @@ MonoBehaviour:
   canBuildOver: 0
   isDestroyable: 0
   zMoveDirections: 0
+  _flammable: 1
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}

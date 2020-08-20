@@ -134,20 +134,6 @@ public class CameraController : MonoBehaviour {
                 }
             }
 
-            // Debug
-            if(Input.GetKey(KeyCode.LeftControl) && leftMouse) {
-                foreach(EntityBase e in this.world.entities.entityList) {
-                    if(e is EntityWorker) {
-                        ((EntityWorker)e).moveHelper.setDestination(this.getMousePos());
-                    }
-                }
-            }
-            if(leftMouse && Input.GetKey(KeyCode.Delete)) {
-                Position pos = this.getMousePos();
-                world.setCell(pos, Main.instance.tileRegistry.getAir());
-                world.liftFog(pos);
-            }
-
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 

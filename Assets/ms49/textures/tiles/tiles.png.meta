@@ -91,10 +91,10 @@ TextureImporter:
     second: tiles_shadow
   - first:
       213: 2252217939642970804
-    second: tiles_16
+    second: tiles_fire1
   - first:
       213: 3048892388686381023
-    second: tiles_17
+    second: tiles_fire2
   - first:
       213: -2734800647392024937
     second: tiles_sign
@@ -112,7 +112,7 @@ TextureImporter:
     second: tiles_wallWithTopper
   - first:
       213: 922424046108175333
-    second: tiles_23
+    second: tiles_fire3
   - first:
       213: -4016574229998233168
     second: tiles_24
@@ -142,10 +142,10 @@ TextureImporter:
     second: tiles_ladderTop
   - first:
       213: -8473965523027447877
-    second: tiles_32
+    second: tiles_fire4
   - first:
       213: 4410115334632175332
-    second: tiles_33
+    second: tiles_ash
   - first:
       213: 8189123915696156741
     second: tiles_34
@@ -187,10 +187,10 @@ TextureImporter:
     second: tiles_shadow
   - first:
       213: -1941492207181004388
-    second: tiles_16
+    second: tiles_fire1
   - first:
       213: 840704855183532996
-    second: tiles_17
+    second: tiles_fire2
   - first:
       213: 2147015527136506264
     second: tiles_45
@@ -1751,7 +1751,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1759,6 +1759,111 @@ TextureImporter:
       bones: []
       spriteID: 1f164f6a1a7e07ab0800000000000000
       internalID: -5012251703786577423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_fire1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b27e29884c714f10800000000000000
+      internalID: 2252217939642970804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_fire2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf3b0a4977df4a20800000000000000
+      internalID: 3048892388686381023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_fire3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eb6e8068cb1dcc00800000000000000
+      internalID: 922424046108175333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_fire4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbfaa09f04d666a80800000000000000
+      internalID: -8473965523027447877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_ash
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e6f043f780e33d30800000000000000
+      internalID: 4410115334632175332
       vertices: []
       indices: 
       edges: []

@@ -28,10 +28,11 @@ MonoBehaviour:
   left:
     tile: {fileID: 0}
     effect: 0
-  isWalkable: 0
+  _movementCost: 0
   canBuildOver: 0
   isDestroyable: 1
   zMoveDirections: 0
+  _flammable: 1
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 1997737952895361443, guid: 2adc0b615ed12904ea117acbc5321b52,

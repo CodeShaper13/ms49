@@ -10677,6 +10677,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10786,6 +10787,19 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80874e546e56c2346bab5edba8bb1f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  world: {fileID: 868345955}
 --- !u!1 &973504260
 GameObject:
   m_ObjectHideFlags: 0
@@ -16933,7 +16947,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: ce497ab37796c984fb4231bb7c6d3d94, type: 2}
   - {fileID: 11400000, guid: e77239bff4cdc0c4a83e4145d0652fd1, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: af19016fdbd37b943b11c3d84932ceb2, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 66dbcffd6eec3e349948a99ecf0835e7, type: 2}
@@ -16958,7 +16972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59890dd368175d04f9f1faf3d42cf2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registrySize: 8
+  registrySize: 16
   elements:
   - {fileID: 0}
   - {fileID: 6744992594683351372, guid: 558ccb68eea643f478844cd219b5b4d8, type: 3}
@@ -16966,6 +16980,14 @@ MonoBehaviour:
   - {fileID: 3284266016375032909, guid: 0e5f23a661e166248b01d8091fee01ce, type: 3}
   - {fileID: 3323605310254105475, guid: c2cb2ec78735d9f42852b8101ed2869a, type: 3}
   - {fileID: 709793071540934285, guid: c4ec54ec341c7e94593537a432cd5fa5, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 7974092827828467287, guid: fb2f3b5719552704da575cb2a81e78c7, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &1865947493

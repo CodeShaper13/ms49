@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: RailStopper
   m_EditorClassIdentifier: 
   structureName: Stopper Rail
-  cost: 150
-  description: 
+  _cost: 0
+  _description: 
+  _unlockedAt: {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 068b01132a2e67b4b867dbf81bef5ebe, type: 2}

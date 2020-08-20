@@ -12,6 +12,8 @@ public class PopupDemo : PopupWindow {
     private Text text = null;
     [SerializeField]
     private Image btnImage = null;
+    [SerializeField]
+    private DemoHighlighter demoHighlighter = null;
 
     private Sprite originalSprite;
 
@@ -27,12 +29,16 @@ public class PopupDemo : PopupWindow {
         base.onOpen();
 
         this.btnImage.sprite = this.selectedIcon;
+
+        this.demoHighlighter.show();
     }
 
     public override void onClose() {
         base.onClose();
 
         this.btnImage.sprite = this.originalSprite;
+
+        this.demoHighlighter.hide();
     }
 
     public int getDemoCost() {

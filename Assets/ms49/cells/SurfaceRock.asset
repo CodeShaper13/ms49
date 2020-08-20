@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: SurfaceRock
   m_EditorClassIdentifier: 
-  groundTile: {fileID: 11400000, guid: 342b332ff476f7c48b3631130fa0c4bd, type: 2}
+  groundTile: {fileID: 11400000, guid: f4dff4c3822cc87479543eeae0fae003, type: 2}
   objectTile: {fileID: 11400000, guid: 11f3c40308cccac4ca144dfd8d2e9f92, type: 2}
   overlayTile: {fileID: 0}
   rotationalOverride: 0
@@ -32,6 +32,7 @@ MonoBehaviour:
   canBuildOver: 0
   isDestroyable: 1
   zMoveDirections: 0
+  _flammable: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}

@@ -48,11 +48,12 @@ public class PopupMilestones : PopupWindow {
             }
 
             if(buildable.unlockedAt == this.currentMilestone.data) {
-                BuildableUiRenderer buildableRenderer = GameObject.Instantiate(
+                GameObject obj = GameObject.Instantiate(
                     this.prefabBuildableRenderer,
-                    this.unlockedArea).GetComponent<BuildableUiRenderer>();
+                    this.unlockedArea);
 
-                buildableRenderer.setBuildable(buildable);
+                obj.GetComponent<BuildableUiRenderer>().setBuildable(buildable);
+                obj.GetComponent<Tooltip>().text = buildable.getName();
             }
         }
     }

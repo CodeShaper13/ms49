@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: Refrigerator
   _cost: 200
   _description: 
-  _unlockedAt: {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
+  _unlockedAt: {fileID: 0}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 90fca26ecf243f443bbcfe4a59f9999a, type: 2}

@@ -7,8 +7,6 @@ public class EntityFire : EntityBase {
     [SerializeField]
     private CellData ashCell = null;
     [SerializeField]
-    private int entityFireId = 0;
-    [SerializeField]
     private Vector2 burnTimeRange = new Vector2(1f, 2f);
     [SerializeField]
     private Vector2 fireSpreadRange = new Vector2(1f, 2f);
@@ -20,7 +18,7 @@ public class EntityFire : EntityBase {
 
         this.timeRemaining = Random.Range(this.burnTimeRange.x, this.burnTimeRange.y);
 
-        this.StartCoroutine(this.fireSpread());
+        this.StartCoroutine(EntityFire.fireSpread(this.world, this.position, this.fireSpreadRange));
     }
 
     public override void onUpdate() {
@@ -45,22 +43,24 @@ public class EntityFire : EntityBase {
         this.timeRemaining = tag.getFloat("fireTime");
     }
 
-    private IEnumerator fireSpread() {
-        yield return new WaitForSeconds(Random.Range(this.fireSpreadRange.x, this.fireSpreadRange.y));
+    public static IEnumerator fireSpread(World world, Position thisPos, Vector2 fireSpreadRateRange) {
+        yield return new WaitForSeconds(Random.Range(fireSpreadRateRange.x, fireSpreadRateRange.y));
 
         Rotation r = Rotation.ALL[Random.Range(0, 3)];
-        Position newFirePos = this.position + r;
+        Position newFirePos = thisPos + r;
 
-        bool spaceFree = true;
-        foreach(EntityBase e in this.world.entities.entityList) {
-            if(e is EntityFire && e.position == newFirePos) {
-                spaceFree = false;
-                break;
+        if(world.getCellState(newFirePos).data.isFlammable) {
+            bool spaceFree = true;
+            foreach(EntityBase e in world.entities.entityList) {
+                if(e is EntityFire && e.position == newFirePos) {
+                    spaceFree = false;
+                    break;
+                }
             }
-        }
 
-        if(spaceFree && this.world.getCellState(newFirePos).data.isFlammable) {
-            this.world.entities.spawn(newFirePos, this.entityFireId);
+            if(spaceFree) {
+                world.entities.spawn(newFirePos, 10);
+            }
         }
     }
 }

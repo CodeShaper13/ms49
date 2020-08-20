@@ -65,7 +65,7 @@ public class WorldRenderer : MonoBehaviour {
     }
 
     public void dirtyFogmap(Position pos, bool visible) {
-        if(pos.depth == this.targetLayer.depth) {
+        if(this.targetLayer != null && pos.depth == this.targetLayer.depth) {
             this.fogRenderer.setTile(pos.x, pos.y, visible);
         }
     }

@@ -40,9 +40,9 @@ public class MoveHelper : MonoBehaviour {
                     if(this.layerChangeProgress == 0) {
                         // First frame climbing, start an animation
                         if(this.worker.depth > currentWaypoint.depth) {
-                            this.worker.animator.playClip("ClimbLadderUp");
+                            //this.worker.animator.playClip("ClimbLadderUp");
                         } else {
-                            this.worker.animator.playClip("ClimbLadderDown");
+                            //this.worker.animator.playClip("ClimbLadderDown");
                         }
                     }
 

@@ -7,17 +7,12 @@ public class BuildAreaHighlighter : CellHighlightBase {
     private Color transparentColor = Color.white;
     [SerializeField]
     public CellData buildSiteCell = null;
+    [SerializeField]
+    private PopupBuild popup = null;
 
     private BuildableBase buildable;
-    private PopupBuild popup;
 
     public CellTilemapRenderer cellRenderer;
-
-    protected override void Awake() {
-        base.Awake();
-
-        this.popup = this.GetComponentInParent<PopupBuild>();
-    }
 
     protected override bool onUpdate(Position pos) {
         bool isValid = this.buildable.isValidLocation(this.world, pos);
@@ -57,13 +52,13 @@ public class BuildAreaHighlighter : CellHighlightBase {
     public override void hide() {
         base.hide();
 
-        this.cellRenderer.clear();
+        //this.cellRenderer.clear();
     }
 
     public override void setInvisible() {
         base.setInvisible();
 
-        this.cellRenderer.clear();
+        //this.cellRenderer.clear();
     }
 
     public void setBuildable(BuildableBase buildable) {

@@ -17,11 +17,15 @@ public class PopupMilestones : PopupWindow {
     private PopupBuild popupBuild = null;
     [SerializeField]
     private Animator animator = null;
+    [SerializeField]
+    private ParticleSystem particles = null;
+    [SerializeField]
+    private AudioSource unlockAudioSource = null;
 
-    private Milestone currentMilestone;
+    private MilestoneData currentMilestone;
 
-    public override void onAwake() {
-        base.onAwake();
+    public override void initialize() {
+        base.initialize();
     }
 
     public override void onOpen() {
@@ -30,7 +34,7 @@ public class PopupMilestones : PopupWindow {
         this.currentMilestone = this.world.milestones.getCurrent();
 
         // Create progress bars for each of the requirements
-        foreach(MilestoneRequirerment r in this.currentMilestone.data.requirements) {
+        foreach(MilestoneRequirerment r in this.currentMilestone.requirements) {
             if(r == null) {
                 continue;
             }
@@ -43,11 +47,15 @@ public class PopupMilestones : PopupWindow {
 
         // Show what the Milestone unlocks
         foreach(BuildableBase buildable in this.popupBuild.buildings) {
+            if(buildable == null) {
+                continue;
+            }
+
             if(buildable.unlockedAt == null) { // Always unlocked
                 continue;
             }
 
-            if(buildable.unlockedAt == this.currentMilestone.data) {
+            if(buildable.unlockedAt == this.currentMilestone) {
                 GameObject obj = GameObject.Instantiate(
                     this.prefabBuildableRenderer,
                     this.unlockedArea);
@@ -63,7 +71,20 @@ public class PopupMilestones : PopupWindow {
     /// Popup, it must be opened with Popup#open().
     /// </summary>
     public void playUnlockEffect() {
-        this.animator.enabled = true;
+        if(this.animator != null) {
+            this.animator.enabled = true;
+        }
+
+        if(this.unlockAudioSource != null) {
+            this.unlockAudioSource.Play();
+        }
+    }
+
+    public void playParticles() {
+        if(this.particles != null) {
+            this.particles.gameObject.SetActive(true);
+            this.particles.Play();
+        }
     }
 
     public override void onClose() {
@@ -78,6 +99,8 @@ public class PopupMilestones : PopupWindow {
         }
 
         // Turn off in case animator was on
-        this.animator.enabled = false;
+        if(this.animator != null) {
+            this.animator.enabled = false;
+        }
     }
 }

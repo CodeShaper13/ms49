@@ -14,15 +14,22 @@ public class PopupWorkerStats : PopupWindow {
     private Image img = null;
 
     private EntityWorker worker;
-    
+    private string infoTextTemplate;
+
+    public override void initialize() {
+        base.initialize();
+
+        this.infoTextTemplate = this.infoText.text;
+    }
+
     public void setWorker(EntityWorker worker) {
         this.worker = worker;
 
         WorkerStats stats = this.worker.stats;
 
-        this.nameText.text = (stats.getGender() == EnumGender.MALE ? "Mr. " : "Miss") + stats.getLastName() + "   (" + this.worker.typeName + ")";
+        this.nameText.text = stats.getFullName().ToLower();
 
-        this.infoText.text = "Name: " + stats.getFullName() + "\nAge: " + 0; 
+        this.infoText.text = string.Format(this.infoTextTemplate, stats.getFullName(), this.worker.typeName, "todo");
     }
 
     public override void onUpdate() {
@@ -33,10 +40,13 @@ public class PopupWorkerStats : PopupWindow {
             this.img.sprite = this.worker.animator.getSprite();
 
             StringBuilder sb = new StringBuilder();
-
             this.worker.writeWorkerInfo(sb);
-
             this.statsText.text = sb.ToString();
         }
+    }
+
+    public void callback_fire() {
+        this.worker.world.entities.remove(this.worker);
+        this.close();
     }
 }

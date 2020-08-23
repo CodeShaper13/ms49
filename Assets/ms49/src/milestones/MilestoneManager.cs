@@ -10,27 +10,26 @@ public class MilestoneManager : MonoBehaviour {
     [SerializeField]
     private World world = null;
 
-    public Milestone[] milestones { get; private set; }
+    public MilestoneData[] milestones { get { return this._milestoneData; } }
 
     private void Awake() {
+        /*
         // Construct an array of Milestone objects from the data.
         this.milestones = new Milestone[this._milestoneData.Length];
         for(int i = 0; i < this._milestoneData.Length; i++) {
             MilestoneData data = this._milestoneData[i];
             this.milestones[i] = new Milestone(data);
         }
+        */
     }
 
     private void Update() {
         if(!Pause.isPaused()) {
             // Check if the next milestone is unlocked
 
-            Milestone current = this.getCurrent();
+            MilestoneData current = this.getCurrent();
             if(current != null && current.allRequiermentMet(this.world)) {
-                this.popup.open();
-                this.popup.playUnlockEffect();
-
-                current.isLocked = false;
+                this.unlock(current, true);
             }
         }
     }
@@ -39,9 +38,9 @@ public class MilestoneManager : MonoBehaviour {
     /// Returns the Milestone the Player is currently working on.
     /// If they have completed all of the Milestones, null is returned.
     /// </summary>
-    public Milestone getCurrent() {
-        foreach(Milestone milestone in this.milestones) {
-            if(milestone.isLocked) {
+    public MilestoneData getCurrent() {
+        foreach(MilestoneData milestone in this._milestoneData) {
+            if(!milestone.isUnlocked) {
                 return milestone;
             }
         }
@@ -50,35 +49,38 @@ public class MilestoneManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Checks if the passed Milestone is unlocked.  If the passed
-    /// Milestone is not registered, false is returned.
+    /// Unlocks the passed milestone.  Safe to pass null.
     /// </summary>
-    public bool isUnlocked(MilestoneData milestoneData) {
-        foreach(Milestone m in this.milestones) {
-            if(m.data == milestoneData) {
-                return !m.isLocked;
-            }
+    public void unlock(MilestoneData milestone, bool openPopup) {
+        if(milestone == null) {
+            return;
         }
-        return false;
+
+        if(openPopup) {
+            this.popup.open();
+            this.popup.playUnlockEffect();
+        }
+
+        milestone.isUnlocked = true;
     }
 
     public void writeToNbt(NbtCompound tag) {
-        int[] milestoneLockFlags = tag.getIntArray("milestoneLockFlags");
-        for(int i = 0; i < this.milestones.Length; i++) {
+        int[] milestoneLockFlags = tag.getIntArray("milestoneUnlockFlags");
+        for(int i = 0; i < this._milestoneData.Length; i++) {
             if(i >= milestoneLockFlags.Length) {
                 // No data about this milestone, assume it's locked
-                this.milestones[i].isLocked = true;
+                this._milestoneData[i].isUnlocked = false;
             } else {
-                this.milestones[i].isLocked = milestoneLockFlags[i] == 1;
+                this._milestoneData[i].isUnlocked = milestoneLockFlags[i] == 1;
             }
         }
     }
 
     public void readFromNbt(NbtCompound tag) {
-        int[] lockFlags = new int[this.milestones.Length];
-        for(int i = 0; i < this.milestones.Length; i++) {
-            lockFlags[i] = this.milestones[i].isLocked ? 1 : 0;
+        int[] lockFlags = new int[this._milestoneData.Length];
+        for(int i = 0; i < this._milestoneData.Length; i++) {
+            lockFlags[i] = this._milestoneData[i].isUnlocked ? 1 : 0;
         }
-        tag.setTag("milestoneLockFlags", lockFlags);
+        tag.setTag("milestoneUnlockFlags", lockFlags);
     }
 }

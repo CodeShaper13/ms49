@@ -10,14 +10,16 @@ public class PopupMine : PopupWindow {
     private Text text = null;
     [SerializeField]
     private IntVariable money = null;
+    [SerializeField]
+    private AudioSource audioCellToggle = null;
 
     private World world;
 
-    public override void onAwake() {
-        base.onAwake();
+    public override void initialize() {
+        base.initialize();
 
         this.world = GameObject.FindObjectOfType<World>();
-        this.text.text = this.text.text + this.costPerSquare;
+        this.text.text = string.Format(this.text.text, this.costPerSquare);
     }
 
     public override void onUpdate() {
@@ -33,13 +35,21 @@ public class PopupMine : PopupWindow {
                 if(!isTargeted && this.money.value >= this.costPerSquare) {
                     this.world.setTargeted(pos, true);
                     this.money.value -= this.costPerSquare;
+                    this.playSfx();
                 }
 
                 else if(isTargeted) {
                     this.world.setTargeted(pos, false);
                     this.money.value += this.costPerSquare;
+                    this.playSfx();
                 }
             }
+        }
+    }
+
+    private void playSfx() {
+        if(this.audioCellToggle != null) {
+            this.audioCellToggle.Play();
         }
     }
 }

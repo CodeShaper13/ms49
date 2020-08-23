@@ -16,8 +16,7 @@ public class TaskFindFood : TaskBase<EntityWorker> {
 
     public override void preform() {
         if(this.table.plateState == CellBehaviorTable.EnumPlateState.FULL && this.owner.position.distance(table.chairPos) <= 1) {
-            this.owner.hunger += EAT_SPEED * Time.deltaTime;
-            //this.owner.faces.setFace(((int)Time.time) % 2 == 0 ? WorkerFaces.EnumFace.EATING_1 : WorkerFaces.EnumFace.EATING_2);
+            this.owner.increaseHunger(EAT_SPEED * Time.deltaTime);
             if(this.owner.hunger >= EAT_STOP_AT) {
                 this.table.plateState = CellBehaviorTable.EnumPlateState.DIRTY;
             }

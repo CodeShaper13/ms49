@@ -7,7 +7,7 @@ public class WorkerStats {
     private EnumGender gender;
 
     public WorkerStats() {
-        int easterEggRnd = Random.Range(0, 100000); // 100 thousand
+        int easterEggRnd = Random.Range(0, 100_000); // 100 thousand
         if(easterEggRnd == 1) {
             this.firstName = "Dalton";
             this.lastName = "Didelot";
@@ -19,8 +19,8 @@ public class WorkerStats {
             this.gender = EnumGender.MALE;
         }
         else {
-            Names.getRandomName(this.gender, out this.firstName, out this.lastName);
             this.gender = Random.Range(0, 2) == 0 ? EnumGender.MALE : EnumGender.FEMALE;
+            Names.getRandomName(this.gender, out this.firstName, out this.lastName);
         }
     }
 

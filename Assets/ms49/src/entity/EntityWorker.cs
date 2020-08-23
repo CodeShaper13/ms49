@@ -21,11 +21,13 @@ public class EntityWorker : EntityBase, IClickable {
     protected Slider staminaSlider = null;
     [SerializeField]
     protected ParticleSystem sleepingEffect = null;
+    [SerializeField, Tooltip("If this milestone is unlocked, hunger and energy are lowered")]
+    private MilestoneData milestone = null;
 
     /// <summary> The miner's energy from 0 to 100. </summary>
     public float energy { get; private set; }
     /// <summary> The miner's hunger from 0 to 100. </summary>
-    public float hunger { get; set; }
+    public float hunger { get; private set; }
     protected Vector2 posLastFrame;
     public MoveHelper moveHelper { get; private set; }
     protected AiManager<EntityWorker> aiManager;
@@ -36,13 +38,13 @@ public class EntityWorker : EntityBase, IClickable {
     public string typeName { get { return this._typeName; } }
 
     private void OnMouseEnter() {
-        this.healthSlider.gameObject.SetActive(true);
-        this.staminaSlider.gameObject.SetActive(true);
+        if(this.statGameplayEnabled()) {
+            this.setBarsVisible(true);
+        }
     }
 
     private void OnMouseExit() {
-        this.healthSlider.gameObject.SetActive(false);
-        this.staminaSlider.gameObject.SetActive(false);
+        this.setBarsVisible(false);
     }
 
     public override void initialize(World world, int id, int depth) {
@@ -78,11 +80,13 @@ public class EntityWorker : EntityBase, IClickable {
                     // Miner has moved since last frame.
                 }
 
-                // Decrease stamina as the miner lives.
-                this.reduceHunger(HUNGER_COST_ALIVE * Time.deltaTime);
+                if(this.statGameplayEnabled()) {
+                    // Decrease stamina as the miner lives.
+                    this.reduceHunger(HUNGER_COST_ALIVE * Time.deltaTime);
 
-                // Decrease energy as the miner is Awake
-                this.reduceEnergy(0.1f * Time.deltaTime);
+                    // Decrease energy as the miner is Awake
+                    this.reduceEnergy(0.1f * Time.deltaTime);
+                }
 
                 this.posLastFrame = this.worldPos;
             }
@@ -95,7 +99,9 @@ public class EntityWorker : EntityBase, IClickable {
     }
 
     public void reduceEnergy(float amount) {
-        this.setEnergy(this.energy - amount);
+        if(this.statGameplayEnabled()) {
+            this.setEnergy(this.energy - amount);
+        }
     }
 
     public void setEnergy(float amount) {
@@ -107,7 +113,15 @@ public class EntityWorker : EntityBase, IClickable {
     }
 
     public void reduceHunger(float amount) {
-        this.setHunger(this.hunger - amount);
+        if(this.statGameplayEnabled()) {
+            this.setHunger(this.hunger - amount);
+        }
+    }
+
+    public void increaseHunger(float amount) {
+        if(this.statGameplayEnabled()) {
+            this.setHunger(this.hunger + amount);
+        }
     }
 
     public void setHunger(float amount) {
@@ -154,11 +168,18 @@ public class EntityWorker : EntityBase, IClickable {
     }
 
     public void onRightClick() {
-        UiManager.singleton.popupStats.open();
-        UiManager.singleton.popupStats.setWorker(this);
+        PopupWorkerStats popup = Resources.FindObjectsOfTypeAll<PopupWorkerStats>()[0];
+        if(popup != null) {
+            popup.open();
+            popup.setWorker(this);
+        }
     }
 
     public void onLeftClick() { }
 
     public void onMiddleClick() { }
+
+    private bool statGameplayEnabled() {
+        return this.milestone == null || this.milestone.isUnlocked;
+    }
 }

@@ -13,6 +13,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 6206199302764344000}
+--- !u!114 &4732689463112151659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206199302929523976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e1a03a16009694dab78f2dde7dbeee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3626389072271716897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93,7 +105,7 @@ PrefabInstance:
     - target: {fileID: 7238231038273066792, guid: 84379f5c2e5408949a50fed655daaa6f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 32
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7238231038273066792, guid: 84379f5c2e5408949a50fed655daaa6f,
         type: 3}
@@ -129,6 +141,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ButtonStructureEntry
+      objectReference: {fileID: 0}
+    - target: {fileID: 7238231038442766561, guid: 84379f5c2e5408949a50fed655daaa6f,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b,
+        type: 2}
+    - target: {fileID: 7238231038442766561, guid: 84379f5c2e5408949a50fed655daaa6f,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7238231038442766562, guid: 84379f5c2e5408949a50fed655daaa6f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7238231038442766562, guid: 84379f5c2e5408949a50fed655daaa6f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7238231038442766562, guid: 84379f5c2e5408949a50fed655daaa6f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84379f5c2e5408949a50fed655daaa6f, type: 3}

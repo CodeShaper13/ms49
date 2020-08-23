@@ -10,6 +10,8 @@ public class EnableWithMilestone : MonoBehaviour {
     private GameObject targetObject = null;
     [SerializeField]
     private MilestoneData milestone = null;
+    [SerializeField]
+    private bool invertResult = false;
 
     private MilestoneManager manager;
 
@@ -22,7 +24,11 @@ public class EnableWithMilestone : MonoBehaviour {
 
     private void Update() {
         if(this.targetObject != null && this.milestone != null && this.manager != null) {
-            bool enabled = this.manager.isUnlocked(this.milestone);
+            bool enabled = this.milestone.isUnlocked;
+            if(this.invertResult) {
+                enabled = !enabled;
+            }
+
             if(this.targetObject.activeSelf != enabled) {
                 this.targetObject.SetActive(enabled);
             }

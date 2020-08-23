@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5277781d601674142a63fe11286f9e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worker: {fileID: 6744992594683351373}
 --- !u!114 &1907753090106410971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +368,7 @@ MonoBehaviour:
   healthSliderFill: {fileID: 2999742974749486861}
   staminaSlider: {fileID: 5559810396006857762}
   sleepingEffect: {fileID: 7399738196080785355}
+  milestone: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
 --- !u!114 &8134422384178296594
 MonoBehaviour:
   m_ObjectHideFlags: 0

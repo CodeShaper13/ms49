@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BedTop
   m_EditorClassIdentifier: 
   groundTile: {fileID: 0}
-  objectTile: {fileID: 11400000, guid: f221f5df653a13c478a0697a57c788f1, type: 2}
+  objectTile: {fileID: 0}
   overlayTile: {fileID: 0}
   rotationalOverride: 0
   up:
@@ -33,6 +33,7 @@ MonoBehaviour:
   isDestroyable: 1
   zMoveDirections: 0
   _flammable: 1
+  _temperatureOutput: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}

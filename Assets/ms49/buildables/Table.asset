@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: Table
   m_EditorClassIdentifier: 
   structureName: Table
-  cost: 100
-  rotationMode: 0
-  description: 
+  _cost: 0
+  _description: 
+  _unlockedAt: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 77152f49f62615b428e73607b7dc38e4, type: 2}
   cells:
   - row:
     - 
-  structurePrefab: {fileID: 0}
-  structureOrgin: {x: 0, y: 0}

@@ -3,18 +3,22 @@ using UnityEngine;
 
 public class Layer {
 
-    public int depth { get; private set; }
-    public Fog fog { get; private set; }
-    public int size { get { return this.world.storage.mapSize; } }
+    public bool navGridDirty;
 
     private CellState[] tiles;
-    public bool navGridDirty;
+    public float[] temperatures;
+    private float[] heatSources;
     private World world;
     private WorldRenderer worldRenderer;
+
+    public int depth { get; private set; }
+    public Fog fog { get; private set; }
+    public int size; // { get { return this.world.storage.mapSize; } }
 
     public Layer(World world, int depth) {
         this.world = world;
         this.depth = depth;
+        this.size = this.world.storage.mapSize;
 
         this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
 
@@ -22,6 +26,9 @@ public class Layer {
         for(int i = 0; i < this.tiles.Length; i++) {
             this.tiles[i] = new CellState(Main.instance.tileRegistry.getAir(), null, Rotation.UP);
         }
+
+        this.temperatures = new float[this.size * this.size];
+        this.heatSources = new float[this.size * this.size];
 
         // Setup Fog.
         if(this.world.mapGenData.getLayerFromDepth(this.depth).hasFog) {
@@ -64,6 +71,10 @@ public class Layer {
             behavior.onCreate(this.world, state, new Position(x, y, this.depth));
         }
 
+        // Update heat soruce map.
+        this.setTemperature(x, y, data.temperatureOutput);
+        this.heatSources[this.size * x + y] = data.temperatureOutput;
+
         // Alert neighbors of the change.
         if(alertNeighbors) {
             int mapSize = this.world.storage.mapSize;
@@ -85,7 +96,31 @@ public class Layer {
     }
 
     public CellState getCellState(int x, int y) {
-        return this.tiles[this.world.storage.mapSize * x + y];
+        return this.tiles[this.size * x + y];
+    }
+
+    public void setTemperature(int x, int y, float temperature) {
+        if(!this.inBounds(x, y)) {
+            return;
+        }
+
+        this.temperatures[this.size * x + y] = temperature;
+    }
+
+    public float getTemperature(int x, int y) {
+        if(!this.inBounds(x, y)) {
+            return 0;
+        }
+
+        return this.temperatures[this.size * x + y];
+    }
+
+    public float getHeatSource(int x, int y) {
+        if(!this.inBounds(x, y)) {
+            return 0;
+        }
+
+        return this.heatSources[this.size * x + y];
     }
 
     public bool hasFog() {
@@ -93,7 +128,7 @@ public class Layer {
     }
 
     public void writeToNbt(NbtCompound tag) {
-        // Write tiles.
+        // Write tiles:
         int[] idArray = new int[this.tiles.Length];
         int[] rotationArray = new int[this.tiles.Length];
         for(int i = 0; i < this.tiles.Length; i++) {
@@ -108,7 +143,7 @@ public class Layer {
         tag.setTag("rotations", rotationArray);
 
 
-        // Write tile meta.
+        // Write tile meta:
         NbtList listTileMeta = new NbtList(NbtTagType.Compound);
         for(int x = 0; x < this.size; x++) {
             for(int y = 0; y < this.size; y++) {
@@ -124,11 +159,19 @@ public class Layer {
         }
         tag.setTag("meta", listTileMeta);
 
+        // Write fog:
         if(this.hasFog()) {
             NbtCompound fogTag = new NbtCompound();
             this.fog.writeToNbt(fogTag);
             tag.setTag("fog", fogTag);
         }
+
+        // Write temperature:
+        int[] tempArray = new int[this.temperatures.Length];
+        for(int i = 0; i < this.temperatures.Length; i++) {
+            tempArray[i] = (int)(this.temperatures[i] * 1_000_000f);
+        }
+        tag.setTag("temperature", tempArray);
     }
 
     public void readFromNbt(NbtCompound tag) {
@@ -154,8 +197,19 @@ public class Layer {
             }
         }
 
+        // Read fog:
         if(this.hasFog()) {
             this.fog.readFromNbt(tag.getCompound("fog"));
         }
+
+        // Read temperatures:
+        int[] tempArray = tag.getIntArray("temperature");
+        for(int i = 0; i < Mathf.Min(this.temperatures.Length, tempArray.Length); i++) {
+            this.temperatures[i] = tempArray[i] / 1_000_000f;
+        }
+    }
+
+    private bool inBounds(int x, int y) {
+        return x >= 0 && x < this.size && y >= 0 && y < this.size;
     }
 }

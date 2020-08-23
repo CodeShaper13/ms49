@@ -2,7 +2,7 @@
 
 [CreateAssetMenu(
     fileName = "Requirement",
-    menuName = "MS49/Milestone Requirement/Int Amout",
+    menuName = "MS49/Milestone/Requirement/Int Amout",
     order = 1)]
 public class RequirementMethodIntVarValue : RequirementMethodBase {
 

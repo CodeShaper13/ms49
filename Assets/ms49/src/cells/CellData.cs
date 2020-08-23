@@ -37,6 +37,8 @@ public class CellData : ScriptableObject {
     public EnumZMoveDirection zMoveDirections = EnumZMoveDirection.NEITHER;
     [SerializeField]
     private bool _flammable = false;
+    [SerializeField]
+    private float _temperatureOutput = 0f;
 
     [Space]
 
@@ -53,6 +55,7 @@ public class CellData : ScriptableObject {
     public int movementCost { get { return this._movementCost; } }
     public bool isWalkable { get { return this.movementCost >= 0; } }
     public bool isFlammable { get { return this._flammable; } }
+    public float temperatureOutput { get { return this._temperatureOutput; } }
 
     public TileBase getGroundTile() {
         return this.groundTile;

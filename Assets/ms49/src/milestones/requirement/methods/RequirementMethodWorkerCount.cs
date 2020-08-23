@@ -2,7 +2,7 @@
 
 [CreateAssetMenu(
     fileName = "Requirement",
-    menuName = "MS49/Milestone Requirement/Worker Count",
+    menuName = "MS49/Milestone/Requirement/Worker Count",
     order = 1)]
 public class RequirementMethodWorkerCount : RequirementMethodBase {
 

@@ -1,5 +1,6 @@
 ﻿using fNbt;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,10 @@ public class World : MonoBehaviour {
 
         this.storage = new Storage(this);
         this.mapGenerator = new MapGenerator(this, this.mapGenData);
+    }
+
+    private void Start() {
+        this.StartCoroutine(this.updateHeat());
     }
 
     /// <summary>
@@ -65,6 +70,39 @@ public class World : MonoBehaviour {
     private void Update() {
         if(!Pause.isPaused()) {
             this.navManager.update();
+        }
+    }
+
+    private IEnumerator updateHeat() {
+        int size = this.storage.mapSize;
+        float[] readBuffer = new float[size * size];
+
+        while(true) {
+            yield return new WaitForSeconds(0.1f);
+
+            // Update heat
+            for(int i = 0; i < this.storage.layerCount; i++) {
+                Layer layer = this.storage.getLayer(i);
+
+                Array.Copy(layer.temperatures, readBuffer, size * size);
+
+                for(int x = 0; x < size; x++) {
+                    for(int y = 0; y < size; y++) {
+                        float f = 0.25f * (
+                            layer.getTemperature(x - 1, y) +
+                            layer.getTemperature(x + 1, y) +
+                            layer.getTemperature(x, y - 1) +
+                            layer.getTemperature(x, y + 1)
+                            ) + layer.getHeatSource(x, y);
+
+                        f = Mathf.MoveTowards(f, 0, 0.005f);
+
+                        readBuffer[size * x + y] = f;
+                    }
+                }
+
+                Array.Copy(readBuffer, layer.temperatures, size * size);
+            }
         }
     }
 
@@ -214,6 +252,24 @@ public class World : MonoBehaviour {
             }
         }
         return closest;
+    }
+
+    /// <summary>
+    /// Checks if the passed Layer is unlocked.
+    /// </summary>
+    public bool isDepthUnlocked(int depth) {
+        if(depth == 0 || depth == 1) { // Always unlocked
+            return true;
+        }
+
+        int maxUnlocked = 1;
+        foreach(var milestone in this.milestones.milestones) {
+            if(milestone.isUnlocked && milestone.unlocksLayer) {
+                maxUnlocked++;
+            }
+        }
+
+        return depth <= maxUnlocked;
     }
 
     /// <summary>

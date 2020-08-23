@@ -9,27 +9,34 @@ public class LayerButtons : MonoBehaviour {
     private Button downBtn = null;
     [SerializeField]
     private Text text = null;
+    [SerializeField]
+    private World world = null;
 
     private void Update() {
         this.updateText();
+        this.updateButtonInteracability();
     }
 
     public void callback(bool moveUp) {
         CameraController cc = CameraController.instance;
 
+        // Attempt to change the Layer
         cc.changeLayer(cc.currentLayer + (moveUp ? -1 : 1));
+    }
 
-        // Update button interactability
+    private void updateButtonInteracability() {
+        CameraController cc = CameraController.instance;
+
         if(cc.currentLayer == 0) {
             this.upBtn.interactable = false;
         } else {
             this.upBtn.interactable = true;
         }
 
-        if(cc.currentLayer == 10) {
-            this.downBtn.interactable = false;
-        } else {
+        if(this.world.isDepthUnlocked(cc.currentLayer + 1)) {
             this.downBtn.interactable = true;
+        } else {
+            this.downBtn.interactable = false;
         }
     }
 

@@ -33,6 +33,7 @@ MonoBehaviour:
   isDestroyable: 1
   zMoveDirections: 0
   _flammable: 1
+  _temperatureOutput: -1
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}

@@ -4,19 +4,6 @@ public class UiManager : MonoBehaviour {
 
     public static UiManager singleton;
 
-    [Header("Popups:")]
-
-    public PopupBuild popupBuild;
-    public PopupBuyWorkers popupWorkers;
-    public PopupMine popupMine;
-    public PopupSign popupSign;
-    public PopupWorkerStats popupStats;
-    public PopupDemo popupDemo;
-    public PopupWindow popupWire;
-    public PopupPause popupPause;
-    public PopupConfirmQuit popupConfirmQuit;
-    public PopupOptions popupOptions;
-
     [Space]
 
     /// <summary> The UI that is currenlty open.  May be null. </summary>

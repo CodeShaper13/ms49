@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Ladder
   m_EditorClassIdentifier: 
   structureName: Ladder
-  cost: 500
-  description: A cheap, but dangerous way of moving between floors
+  _cost: 0
+  _description: Lets workers move between floors
+  _unlockedAt: {fileID: 0}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 67eac8bddba432a4192680e576edfbc5, type: 2}
   cells:
   - row:
     - 
-  structureOrgin: {x: 0, y: 0}
   ladderBottom: {fileID: 11400000, guid: 34c59dee4233aab44a7ad451d8e24288, type: 2}

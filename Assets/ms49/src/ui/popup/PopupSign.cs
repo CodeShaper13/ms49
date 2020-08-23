@@ -20,8 +20,4 @@ public class PopupSign : PopupWindow {
 
         this.close();
     }
-
-    public override bool blockInput() {
-        return true;
-    }
 }

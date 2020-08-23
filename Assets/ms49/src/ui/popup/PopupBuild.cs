@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditorInternal;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
 
 public class PopupBuild : PopupWindow {
@@ -23,28 +24,35 @@ public class PopupBuild : PopupWindow {
     public SelectedCellPreview preview = null;
     [SerializeField]
     private MilestoneManager milestones = null;
+    [SerializeField]
+    private Scrollbar scrollbar = null;
 
     private BuildableBase sData;
     public Rotation rot { get; private set; }
 
-    public override void onAwake() {
-        base.onAwake();
+    public override void initialize() {
+        base.initialize();
 
         this.setSelected(null);
 
         // Add all of the button
-        const float BTN_HEIGHT = 35f;
 
         RectTransform rt = this.area.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(rt.sizeDelta.x, this.buildings.Count * BTN_HEIGHT);
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, this.buildings.Count * this.btnPrefab.GetComponent<RectTransform>().sizeDelta.y);
 
-        foreach(BuildableBase c in this.buildings) {
-            if(c != null && (c.unlockedAt == null || this.milestones.isUnlocked(c.unlockedAt))) {
+        foreach(BuildableBase buildable in this.buildings) {
+            if(buildable == null) {
+                continue;
+            }
+
+            if(buildable.unlockedAt == null || buildable.unlockedAt.isUnlocked) {
                 BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
                 btn.transform.SetParent(this.area, false);
-                btn.setStructureData(c);
+                btn.setStructureData(buildable);
             }
         }
+
+        this.scrollbar.value = 1f;
     }
 
     public override void onUpdate() {

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Stool
   m_EditorClassIdentifier: 
   structureName: Stool
-  cost: 45
-  description: 
+  _cost: 0
+  _description: 
+  _unlockedAt: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 42cc7342651e6b4429546c5145a0edba, type: 2}
   cells:
   - row:
     - 
-  structureOrgin: {x: 0, y: 0}

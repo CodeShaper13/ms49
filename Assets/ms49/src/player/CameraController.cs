@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour {
 
     [SerializeField]
     private float panSpeed = 10f;
+    [SerializeField]
+    private float mousePanSpeed = 10f;
     [SerializeField, Min(1)]
     private int minZoom = 2;
     [SerializeField, Min(2)]
@@ -19,23 +21,29 @@ public class CameraController : MonoBehaviour {
     private KeyCode layerLowerKey = KeyCode.X;
     [SerializeField]
     private KeyCode layerHigherKey = KeyCode.Z;
+    [SerializeField]
+    private PopupWindow pausePopup = null;
+    [SerializeField]
+    private World world = null;
 
     private int currentZoom;
     private Camera mainCam;
     private PixelPerfectCamera ppc;
-    private World world;
+    private Vector3 mousePosLastFrame;
 
     public int currentLayer {
         get;
         private set;
     } = -1;
 
+    public bool creative { get; set; }
+
     private void Awake() {
         CameraController.instance = this;
 
         this.mainCam = this.GetComponent<Camera>();
         this.ppc = this.GetComponent<PixelPerfectCamera>();
-        this.world = GameObject.FindObjectOfType<World>();
+        this.mousePosLastFrame = Input.mousePosition;
 
         this.setZoom(this.maxZoom);
     }
@@ -51,7 +59,7 @@ public class CameraController : MonoBehaviour {
     private void Update() {
         if(Input.GetKeyDown(KeyCode.Escape)) {
             if(PopupWindow.openPopup == null) {
-                UiManager.singleton.popupPause.open();
+                this.pausePopup.open();
             } else {
                 PopupWindow.openPopup.close();
             }
@@ -59,6 +67,7 @@ public class CameraController : MonoBehaviour {
 
         if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
             this.moveCamera();
+
             if(!EventSystem.current.IsPointerOverGameObject()) {
                 this.detectClicks();
                 this.handleZoom();
@@ -74,9 +83,11 @@ public class CameraController : MonoBehaviour {
                 this.changeLayer(this.currentLayer + 1);
             }
         }
+
+        this.mousePosLastFrame = Input.mousePosition;
     }
 
-    public void changeLayer(int depth) {
+    public void changeLayer(int depth, bool checkMilestones = true) {
         if(depth == this.currentLayer) {
             return;  // Nothing's changed.
         }
@@ -87,6 +98,10 @@ public class CameraController : MonoBehaviour {
 
         if(depth > this.world.storage.layerCount - 1) {
             return; // Target depth too deep.
+        }
+
+        if(!this.world.isDepthUnlocked(depth)) {
+            return;
         }
 
         this.currentLayer = depth;
@@ -156,17 +171,24 @@ public class CameraController : MonoBehaviour {
     }
 
     private void moveCamera() {
+        // Pan with Midlde Mouse Button and Mouse
+        if(Input.GetMouseButton(2)) {
+            Vector3 movement = this.mousePosLastFrame - Input.mousePosition;
+            this.transform.position += movement * this.mousePanSpeed * Time.deltaTime;
+        }
+
+        // Pan with WASD
         if(Input.GetKey(KeyCode.A)) {
             this.transform.position += new Vector3(-this.panSpeed, 0, 0) * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.D)) {
-            this.transform.transform.position += new Vector3(this.panSpeed, 0, 0) * Time.deltaTime;
+            this.transform.position += new Vector3(this.panSpeed, 0, 0) * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.W)) {
-            this.transform.transform.position += new Vector3(0, this.panSpeed, 0) * Time.deltaTime;
+            this.transform.position += new Vector3(0, this.panSpeed, 0) * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.S)) {
-            this.transform.transform.position += new Vector3(0, -this.panSpeed, 0) * Time.deltaTime;
+            this.transform.position += new Vector3(0, -this.panSpeed, 0) * Time.deltaTime;
         }
     }
 

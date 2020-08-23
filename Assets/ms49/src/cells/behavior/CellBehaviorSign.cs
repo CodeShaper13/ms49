@@ -8,7 +8,7 @@ public class CellBehaviorSign : CellBehavior, IHasData {
     public override void onRightClick() {
         base.onRightClick();
 
-        PopupSign popup = UiManager.singleton.popupSign;
+        PopupSign popup = GameObject.FindObjectOfType<PopupSign>();
         if(popup != null) {
             popup.open();
             popup.setMeta(this);

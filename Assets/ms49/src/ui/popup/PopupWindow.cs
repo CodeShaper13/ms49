@@ -5,19 +5,31 @@ public class PopupWindow : MonoBehaviour {
     /// <summary> The currently open popup window.  May be null. </summary>
     public static PopupWindow openPopup;
 
+    [SerializeField]
+    private Transform frameTransform = null;
+    [SerializeField]
+    private bool _pauseGameWhenOpen = false;
+    [SerializeField]
+    private bool _blockInput = false;
+
+    [Space]
+
     private float timeOpen;
 
+    public bool pauseGameWhenOpen { get { return this._pauseGameWhenOpen; } }
+    public bool blockInput { get { return this._blockInput; } }
+
     private void Awake() {
-        this.onAwake();
+        this.initialize();
     }
 
     private void OnEnable() {
-        this.getFrameTransform().localScale = Vector3.zero;
+        this.frameTransform.localScale = Vector3.zero;
     }
 
     private void Update() {
         float f = Mathf.Clamp01(this.timeOpen * 14);
-        this.getFrameTransform().localScale = Vector3.one * f;
+        this.frameTransform.localScale = Vector3.one * f;
 
         this.timeOpen += Time.fixedUnscaledDeltaTime;
 
@@ -25,7 +37,7 @@ public class PopupWindow : MonoBehaviour {
     }
 
     public static bool blockingInput() {
-        return PopupWindow.openPopup != null && PopupWindow.openPopup.blockInput();
+        return PopupWindow.openPopup != null && PopupWindow.openPopup.blockInput;
     }
 
     public void open() {
@@ -37,7 +49,7 @@ public class PopupWindow : MonoBehaviour {
         PopupWindow.openPopup = this;
 
         // Pause the game if the popup requires it.
-        if(this.pauseGameWhenOpen()) {
+        if(this.pauseGameWhenOpen) {
             Pause.pause();
         }
 
@@ -51,7 +63,7 @@ public class PopupWindow : MonoBehaviour {
 
         // Unpause the game if the open popup requires the game to be paused.
         if(PopupWindow.openPopup != null) {
-            if(PopupWindow.openPopup.pauseGameWhenOpen()) {
+            if(PopupWindow.openPopup.pauseGameWhenOpen) {
                 Pause.unPause();
             }
         }
@@ -64,23 +76,11 @@ public class PopupWindow : MonoBehaviour {
         return PopupWindow.openPopup == this;
     }
 
-    public virtual void onAwake() { }
+    public virtual void initialize() { }
 
     public virtual void onUpdate() { }
 
     public virtual void onOpen() { }
 
     public virtual void onClose() { }
-
-    public virtual bool blockInput() {
-        return false;
-    }
-
-    public virtual bool pauseGameWhenOpen() {
-        return false;
-    }
-
-    private Transform getFrameTransform() {
-        return this.transform.Find("Frame");
-    }
 }

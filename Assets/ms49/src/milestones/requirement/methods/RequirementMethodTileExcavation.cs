@@ -2,7 +2,7 @@
 
 [CreateAssetMenu(
     fileName = "Requirement",
-    menuName = "MS49/Milestone Requirement/Tile Excavation",
+    menuName = "MS49/Milestone/Requirement/Tile Excavation",
     order = 1)]
 public class RequirementMethodTileExcavation : RequirementMethodBase {
 

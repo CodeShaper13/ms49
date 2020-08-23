@@ -17,8 +17,8 @@ public class PopupDemo : PopupWindow {
 
     private Sprite originalSprite;
 
-    public override void onAwake() {
-        base.onAwake();
+    public override void initialize() {
+        base.initialize();
 
         this.originalSprite = this.btnImage.sprite;
 

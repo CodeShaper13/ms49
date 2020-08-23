@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Sign
   m_EditorClassIdentifier: 
   structureName: Sign
-  cost: 75
-  rotationMode: 0
-  description: 'Decoration
-
-    Perfect for displaying messages'
+  _cost: 75
+  _description: Decoration
+  _unlockedAt: {fileID: 0}
   gridSize: {x: 1, y: 1}
   tiles:
   - character: 114
@@ -28,5 +26,3 @@ MonoBehaviour:
   cells:
   - row:
     - 
-  structurePrefab: {fileID: 0}
-  structureOrgin: {x: 0, y: 0}

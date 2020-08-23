@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: ConveyorBelt
   m_EditorClassIdentifier: 
   structureName: Conveyor Belt
-  cost: 500
-  rotationMode: 0
-  description: 
+  _cost: 0
+  _description: 
+  _unlockedAt: {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: 56e3c1273d440e6419126c90040306a0, type: 2}
   cells:
   - row:
     - 
-  structurePrefab: {fileID: 0}
-  structureOrgin: {x: 0, y: 0}

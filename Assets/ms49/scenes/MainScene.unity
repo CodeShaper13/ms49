@@ -9605,7 +9605,6 @@ MonoBehaviour:
   area: {fileID: 239235670}
   areaHighlighter: {fileID: 146460062}
   preview: {fileID: 1870618873}
-  milestones: {fileID: 868345960}
   scrollbar: {fileID: 539114183}
 --- !u!1 &641146336
 GameObject:
@@ -9672,7 +9671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &656245564
 Transform:
   m_ObjectHideFlags: 0
@@ -16334,6 +16333,7 @@ GameObject:
   - component: {fileID: 1628346047}
   - component: {fileID: 1628346048}
   - component: {fileID: 1628346049}
+  - component: {fileID: 1628346050}
   m_Layer: 0
   m_Name: CmdManager
   m_TagString: Untagged
@@ -16496,6 +16496,21 @@ MonoBehaviour:
   _syntax: '{on, off}'
   _description: hides or shows the overlay
   component: {fileID: 1814354418}
+--- !u!114 &1628346050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628346039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e693d2142f851e4194dd931f262d8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandName: creative
+  _syntax: creative {on, off}
+  _description: turns creative mode on or off
 --- !u!1 &1635026184
 GameObject:
   m_ObjectHideFlags: 0

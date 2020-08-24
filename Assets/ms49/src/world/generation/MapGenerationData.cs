@@ -38,6 +38,7 @@ public class MapGenerationData : ScriptableObject {
         public CellData rubyTile = null;
         public CellData sapphireTile = null;
         public CellData goldTile = null;
+        public CellData boneTile = null;
     }
 
     [Serializable]

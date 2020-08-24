@@ -21,14 +21,13 @@ public class DemoHighlighter : CellHighlightBase {
     protected override void onClick(Position pos, bool isValid) {
         if(isValid) {
             int cost = this.popup.getDemoCost();
-            if(this.money.value >= this.popup.getDemoCost()) {
-                this.money.value -= cost;
-                this.world.setCell(
-                    pos.x,
-                    pos.y,
-                    pos.depth,
-                    Main.instance.tileRegistry.getAir());
+            bool inCreative = CameraController.instance.inCreativeMode;
+            if(inCreative || this.money.value >= this.popup.getDemoCost()) {
+                if(!inCreative) {
+                    this.money.value -= cost;
+                }
 
+                this.world.setCell(pos, Main.instance.tileRegistry.getAir());
                 this.world.particles.spawn(pos, particlePrefab);
             }
         }

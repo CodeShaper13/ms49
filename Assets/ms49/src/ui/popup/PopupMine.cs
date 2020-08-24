@@ -32,16 +32,27 @@ public class PopupMine : PopupWindow {
             bool isTargeted = this.world.isTargeted(pos);
 
             if(cell is CellDataMineable) {
-                if(!isTargeted && this.money.value >= this.costPerSquare) {
-                    this.world.setTargeted(pos, true);
-                    this.money.value -= this.costPerSquare;
+                if(CameraController.instance.inCreativeMode) {
+                    this.world.setCell(pos, Main.instance.tileRegistry.getAir(), true);
+                    this.world.liftFog(pos);
+
+                    if(isTargeted) {
+                        this.world.setTargeted(pos, false);
+                    }
+
                     this.playSfx();
                 }
-
-                else if(isTargeted) {
-                    this.world.setTargeted(pos, false);
-                    this.money.value += this.costPerSquare;
-                    this.playSfx();
+                else {
+                    if(!isTargeted && this.money.value >= this.costPerSquare) {
+                        this.world.setTargeted(pos, true);
+                        this.money.value -= this.costPerSquare;
+                        this.playSfx();
+                    }
+                    else if(isTargeted) {
+                        this.world.setTargeted(pos, false);
+                        this.money.value += this.costPerSquare;
+                        this.playSfx();
+                    }
                 }
             }
         }

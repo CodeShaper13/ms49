@@ -29,7 +29,7 @@ public class TaskMakeFood : TaskBase<EntityCook> {
 
     public override void preform() {
         if(this.stage == 0) {
-            if(this.owner.position.distance(this.stove.pos) <= 1) {
+            if(!this.moveHelper.hasPath()) {
                 // cook food...
                 this.cookTimer += Time.deltaTime;
                 if(this.cookTimer >= FOOD_COOK_TIME) {
@@ -38,11 +38,12 @@ public class TaskMakeFood : TaskBase<EntityCook> {
                     this.stage = 1;
                     if(this.moveHelper.setDestination(this.table.pos, true) == null) {
                         // Can no longer go to table...
+                        //TODO
                     }
                 }
             }
         } else { // state == 1
-            if(this.owner.position.distance(this.table.pos) <= 1) {
+            if(!this.moveHelper.hasPath()) {
                 this.owner.plateState = CellBehaviorTable.EnumPlateState.NONE;
                 this.table.plateState = CellBehaviorTable.EnumPlateState.FULL;
             }
@@ -66,8 +67,11 @@ public class TaskMakeFood : TaskBase<EntityCook> {
                 if(table.plateState == CellBehaviorTable.EnumPlateState.NONE && table.isOccupantSitting()) {
                     // Someone needs food.
 
-                    // Make use there is a stove, and go to it
+                    // Make sure there is both a fridge and stove that the cook can get to
                     bool foundStove = false;
+                    bool foundFridge = false;
+
+                    // Make use there is a stove, and go to it
                     foreach(CellBehaviorStove stove in this.owner.world.getAllBehaviors<CellBehaviorStove>()) {
                         if(this.moveHelper.setDestination(stove.pos + Rotation.DOWN, false) != null) {
                             foundStove = true;
@@ -92,4 +96,22 @@ public class TaskMakeFood : TaskBase<EntityCook> {
 
         return false;
     }
+
+    /*
+    private void find<T>(out CellBehavior behaviorRef) where T : CellBehavior {
+        foreach(T stove in this.owner.world.getAllBehaviors<T>()) {
+            if(this.moveHelper.setDestination(stove.pos + Rotation.DOWN, false) != null) {
+                foundStove = true;
+
+                this.stove = stove;
+                this.stove.setOccupant(this.owner);
+
+                this.table = table;
+                this.stage = 0;
+
+                return true;
+            }
+        }
+    }
+    */
 }

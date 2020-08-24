@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Ladder
   _cost: 0
-  _description: Lets workers move between floors
+  _description: Lets Workers move between floors
   _unlockedAt: {fileID: 0}
   gridSize: {x: 1, y: 1}
   tiles: []

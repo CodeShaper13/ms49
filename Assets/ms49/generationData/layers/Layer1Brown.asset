@@ -21,8 +21,11 @@ MonoBehaviour:
   caveSmoothPases: 3
   oreSpawnSettings:
   - type: 2
+    veinCount: 60
+    veinSize: {x: 3, y: 5}
+  - type: 7
     veinCount: 30
-    veinSize: {x: 5, y: 7}
+    veinSize: {x: 1, y: 1}
   lakeType: 0
   lakeChance: 0
   boulderSpawnChance: 0

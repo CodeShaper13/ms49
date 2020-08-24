@@ -24,6 +24,7 @@ MonoBehaviour:
     rubyTile: {fileID: 11400000, guid: b3a0c4c11c71bef46ae7f0c59256b274, type: 2}
     sapphireTile: {fileID: 11400000, guid: 409d1ddf943b9a3479be33bec427faa2, type: 2}
     goldTile: {fileID: 11400000, guid: c2748d19876cb3c488d8600108a00812, type: 2}
+    boneTile: {fileID: 11400000, guid: 21c8e8396c7ff6b4a8c81fae3f42d70f, type: 2}
   layerGenerators:
   - {fileID: 11400000, guid: d8d49954f458e4b4494b3ebc8f98ab0c, type: 2}
   - {fileID: 11400000, guid: 3fc454ff267f9a943b2fb661c489c6cb, type: 2}

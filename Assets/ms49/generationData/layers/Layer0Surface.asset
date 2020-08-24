@@ -19,10 +19,7 @@ MonoBehaviour:
   generateCaves: 1
   caveFillPercent: 60.7
   caveSmoothPases: 5
-  oreSpawnSettings:
-  - type: 0
-    veinCount: 0
-    veinSize: {x: 0, y: 0}
+  oreSpawnSettings: []
   lakeType: 0
   lakeChance: 100
   rndObjects:

@@ -68,7 +68,7 @@ public class EntityWorker : EntityBase, IClickable {
         base.onUpdate();
 
         // Remove dead miners.
-        if(this.energy <= 0) {
+        if(this.energy <= 0 || this.hunger <= 0) {
             this.animator.playClip("Dead");
         } else {
             this.aiManager.updateAi();

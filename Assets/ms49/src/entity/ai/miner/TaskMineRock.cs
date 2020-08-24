@@ -38,9 +38,7 @@ public class TaskMineRock : TaskBase<EntityMiner> {
     }
 
     public override void preform() {
-        // Traveling to stone/mine.
-
-        if(this.owner.position.distance(this.stonePos) <= 1f) {
+        if(!this.moveHelper.hasPath()) {
             this.timeMining += Time.deltaTime;
 
             if(this.timeMining >= TIME_TO_MINE) {
@@ -60,8 +58,6 @@ public class TaskMineRock : TaskBase<EntityMiner> {
 
                 // Add to statistic
                 this.owner.world.stoneExcavated++;
-                
-                this.timeMining = 0f;
             }
         }
     }

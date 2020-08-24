@@ -42,8 +42,12 @@ public class BuildAreaHighlighter : CellHighlightBase {
     }
 
     protected override void onClick(Position pos, bool isValid) {
-        if(isValid && world.money.value >= this.buildable.cost) {
-            world.money.value -= this.buildable.cost;
+        bool inCreative = CameraController.instance.inCreativeMode;
+
+        if(isValid && (inCreative || world.money.value >= this.buildable.cost)) {
+            if(!inCreative) {
+                this.world.money.value -= this.buildable.cost;
+            }
 
             this.buildable.placeIntoWorld(world, this, pos, this.popup.rot);
         }

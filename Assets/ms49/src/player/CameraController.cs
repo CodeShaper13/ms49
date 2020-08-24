@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour {
         private set;
     } = -1;
 
-    public bool creative { get; set; }
+    public bool inCreativeMode { get; set; }
 
     private void Awake() {
         CameraController.instance = this;
@@ -100,7 +100,7 @@ public class CameraController : MonoBehaviour {
             return; // Target depth too deep.
         }
 
-        if(!this.world.isDepthUnlocked(depth)) {
+        if(checkMilestones && !this.inCreativeMode && !this.world.isDepthUnlocked(depth)) {
             return;
         }
 
@@ -125,6 +125,7 @@ public class CameraController : MonoBehaviour {
         tag.setTag("layer", this.currentLayer);
         tag.setTag("zoomLevel", this.currentZoom);
         tag.setTag("cameraPos", new Vector2(this.transform.position.x, this.transform.position.y));
+        tag.setTag("inCreativeMode", this.inCreativeMode);
 
         return tag;
     }
@@ -133,6 +134,7 @@ public class CameraController : MonoBehaviour {
         this.changeLayer(tag.getInt("layer"));
         this.setZoom(tag.getInt("zoomLevel", this.minZoom));
         this.transform.position = tag.getVector2("cameraPos");
+        this.inCreativeMode = tag.getBool("inCreativeMode");
     }
 
     private void detectClicks() {

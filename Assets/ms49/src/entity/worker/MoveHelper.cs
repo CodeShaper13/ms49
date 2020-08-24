@@ -154,15 +154,28 @@ public class MoveHelper : MonoBehaviour {
     /// </summary>
     /// <param name="destination">The destination in Grid units</param>
     /// <param name="stopAdjacentToFinish"> If true, the path will end on the closest adjacent cell. </param>
-    /// <returns> The end point of the path (not the same as destination if stopAdjacentToFinish is true).  If no path can be found, null is returned. </returns>
+    /// <returns>
+    /// The end point of the path (not the same as destination if stopAdjacentToFinish is true). 
+    /// If the worker is at the destination, the destination is returned.
+    /// If stopAdjacentToFinish is true and the destination is adjacent to the Worker, the Worker's postion is returned.
+    /// If no path can be found, null is returned.
+    /// </returns>
     public Position? setDestination(Position destination, bool stopAdjacentToFinish = false) {
+        if(this.worker.position == destination) {
+            // Worker is already at destination.
+            return destination;
+        }
+        if(stopAdjacentToFinish && this.worker.position.distance(destination) == 1) {
+            return destination;
+        }
+
         PathPoint[] newPath = this.worker.world.navManager.findPath(
             new Position(this.worker.getCellPos(), this.worker.depth),
             destination,
             stopAdjacentToFinish);
 
         if(newPath == null) {
-            Debug.Log("No path found");
+            Debug.Log(this.worker.name + " could not find a path to " + destination);
             return null;
         }
         else {

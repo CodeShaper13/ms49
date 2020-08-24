@@ -62,6 +62,8 @@ public class OreGenerator {
                 return this.tiles.sapphireTile;
             case OreType.GOLD:
                 return this.tiles.goldTile;
+            case OreType.BONE:
+                return this.tiles.boneTile;
         }
 
         return null;

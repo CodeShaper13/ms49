@@ -84,7 +84,7 @@ public class Layer {
                 if(x1 >= 0 && y1 >= 0 && x1 < mapSize && y1 < mapSize) {
                     CellBehavior b = this.getCellState(x1, y1).behavior;
                     if(b != null) {
-                        b.onNeighborChange(state, new Position(x1, this.depth, y1));
+                        b.onNeighborChange(state, new Position(x, y, this.depth));
                     }
                 }
             }

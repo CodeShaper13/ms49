@@ -23,8 +23,6 @@ public class PopupBuild : PopupWindow {
     [SerializeField]
     public SelectedCellPreview preview = null;
     [SerializeField]
-    private MilestoneManager milestones = null;
-    [SerializeField]
     private Scrollbar scrollbar = null;
 
     private BuildableBase sData;
@@ -45,7 +43,7 @@ public class PopupBuild : PopupWindow {
                 continue;
             }
 
-            if(buildable.unlockedAt == null || buildable.unlockedAt.isUnlocked) {
+            if(CameraController.instance.inCreativeMode || (buildable.unlockedAt == null || buildable.unlockedAt.isUnlocked)) {
                 BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
                 btn.transform.SetParent(this.area, false);
                 btn.setStructureData(buildable);

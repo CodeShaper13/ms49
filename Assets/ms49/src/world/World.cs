@@ -124,19 +124,19 @@ public class World : MonoBehaviour {
         return this.storage.getCellState(pos);
     }
 
-    public void setCell(int x, int y, int depth, CellData cell, bool updateNeighbors = false) {
+    public void setCell(int x, int y, int depth, CellData cell, bool updateNeighbors = true) {
         this.setCell(x, y, depth, cell, Rotation.UP, updateNeighbors);
     }
 
-    public void setCell(Position pos, CellData cell, bool updateNeighbors = false) {
+    public void setCell(Position pos, CellData cell, bool updateNeighbors = true) {
         this.setCell(pos, cell, Rotation.UP, updateNeighbors);
     }
 
-    public void setCell(int x, int y, int depth, CellData tile, Rotation rotation, bool updateNeighbors = false) {
+    public void setCell(int x, int y, int depth, CellData tile, Rotation rotation, bool updateNeighbors = true) {
         this.setCell(new Position(x, y, depth), tile, rotation, updateNeighbors);
     }
 
-    public void setCell(Position pos, CellData tile, Rotation rotation, bool updateNeighbors = false) {
+    public void setCell(Position pos, CellData tile, Rotation rotation, bool updateNeighbors = true) {
         if(this.isOutOfBounds(pos)) {
             return;
         }

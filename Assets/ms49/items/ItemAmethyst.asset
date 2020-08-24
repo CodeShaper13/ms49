@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 3818660318709977233, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Amethyst
-  moneyValue: 100
+  moneyValue: 200

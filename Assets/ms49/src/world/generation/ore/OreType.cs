@@ -9,4 +9,5 @@ public enum OreType {
     RUBY = 4,
     SAPPHIRE = 5,
     GOLD = 6,
+    BONE = 7,
 }

@@ -81,7 +81,7 @@ public class BuildableTile : BuildableBase {
     }
 
     public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
-        bool instantBuild = Input.GetKey(KeyCode.F5) || highlight == null;
+        bool instantBuild = CameraController.instance.inCreativeMode || highlight == null;
 
         CellBehaviorBuildSite site = null;
 

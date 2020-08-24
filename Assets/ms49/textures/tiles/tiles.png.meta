@@ -151,7 +151,7 @@ TextureImporter:
     second: tiles_white
   - first:
       213: 49598692365941603
-    second: tiles_35
+    second: tiles_itemBone
   - first:
       213: 57701541896607731
     second: tiles_36
@@ -335,6 +335,9 @@ TextureImporter:
   - first:
       213: -1777576658924061826
     second: tiles_sinkFilled
+  - first:
+      213: -4672163745296329812
+    second: tiles_oreBone
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -637,8 +640,8 @@ TextureImporter:
         y: 32
         width: 16
         height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1864,6 +1867,48 @@ TextureImporter:
       bones: []
       spriteID: 540b9b040dc95a170800000000000000
       internalID: 8189123915696156741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_oreBone
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca3572de3d3292fb0800000000000000
+      internalID: -4672163745296329812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemBone
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36bbbc77fb530b000800000000000000
+      internalID: 49598692365941603
       vertices: []
       indices: 
       edges: []

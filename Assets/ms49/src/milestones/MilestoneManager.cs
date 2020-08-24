@@ -12,17 +12,6 @@ public class MilestoneManager : MonoBehaviour {
 
     public MilestoneData[] milestones { get { return this._milestoneData; } }
 
-    private void Awake() {
-        /*
-        // Construct an array of Milestone objects from the data.
-        this.milestones = new Milestone[this._milestoneData.Length];
-        for(int i = 0; i < this._milestoneData.Length; i++) {
-            MilestoneData data = this._milestoneData[i];
-            this.milestones[i] = new Milestone(data);
-        }
-        */
-    }
-
     private void Update() {
         if(!Pause.isPaused()) {
             // Check if the next milestone is unlocked
@@ -65,22 +54,23 @@ public class MilestoneManager : MonoBehaviour {
     }
 
     public void writeToNbt(NbtCompound tag) {
-        int[] milestoneLockFlags = tag.getIntArray("milestoneUnlockFlags");
-        for(int i = 0; i < this._milestoneData.Length; i++) {
-            if(i >= milestoneLockFlags.Length) {
-                // No data about this milestone, assume it's locked
-                this._milestoneData[i].isUnlocked = false;
-            } else {
-                this._milestoneData[i].isUnlocked = milestoneLockFlags[i] == 1;
-            }
-        }
-    }
-
-    public void readFromNbt(NbtCompound tag) {
         int[] lockFlags = new int[this._milestoneData.Length];
         for(int i = 0; i < this._milestoneData.Length; i++) {
             lockFlags[i] = this._milestoneData[i].isUnlocked ? 1 : 0;
         }
         tag.setTag("milestoneUnlockFlags", lockFlags);
+    }
+
+    public void readFromNbt(NbtCompound tag) {
+        int[] milestoneLockFlags = tag.getIntArray("milestoneUnlockFlags");
+        for(int i = 0; i < this._milestoneData.Length; i++) {
+            if(i >= milestoneLockFlags.Length) {
+                // No data about this milestone, assume it's locked
+                this._milestoneData[i].isUnlocked = false;
+            }
+            else {
+                this._milestoneData[i].isUnlocked = milestoneLockFlags[i] == 1;
+            }
+        }
     }
 }

@@ -19,43 +19,7 @@ MonoBehaviour:
   generateCaves: 1
   caveFillPercent: 60
   caveSmoothPases: 3
-  oreSpawnSettings:
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
-  - type: 0
-    veinCount: 1
-    veinSize: {x: 1, y: 1}
+  oreSpawnSettings: []
   lakeType: 0
   lakeChance: 20
   boulderSpawnChance: 0

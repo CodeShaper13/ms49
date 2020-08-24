@@ -17,15 +17,9 @@ public class OreGenerator {
 
     public void generateOres(System.Random rnd, LayerDataBase layerData, MapAccessor accessor) {
         foreach(OreSettings setting in layerData.oreSpawnSettings) {
-            if(setting != null && setting.type != OreType.NONE) {
-
-                CellData cell = this.getOreCell(setting.type);
-                if(cell != null) {
-                    for(int i = 0; i < setting.veinCount; i++) {
-                        this.makeVein(rnd, cell, setting, accessor);
-                    }
-                } else {
-                    Debug.LogWarning("OreGenerator could not find a Cell for OreType." + setting.type);
+            if(setting != null && setting.cell != null) {
+                for(int i = 0; i < setting.veinCount; i++) {
+                    this.makeVein(rnd, setting.cell, setting, accessor);
                 }
             }
         }
@@ -46,26 +40,5 @@ public class OreGenerator {
             x += v.x;
             y += v.y;
         }
-    }
-
-    private CellData getOreCell(OreType type) {
-        switch(type) {
-            case OreType.AMETHYST:
-                return this.tiles.amethystTile;
-            case OreType.COAL:
-                return this.tiles.coalTile;
-            case OreType.EMERALD:
-                return this.tiles.emeraldTile;
-            case OreType.RUBY:
-                return this.tiles.rubyTile;
-            case OreType.SAPPHIRE:
-                return this.tiles.sapphireTile;
-            case OreType.GOLD:
-                return this.tiles.goldTile;
-            case OreType.BONE:
-                return this.tiles.boneTile;
-        }
-
-        return null;
     }
 }

@@ -20,10 +20,10 @@ MonoBehaviour:
   caveFillPercent: 58
   caveSmoothPases: 3
   oreSpawnSettings:
-  - type: 2
+  - _cell: {fileID: 11400000, guid: a59a1921820c7174d956a088eb133e3c, type: 2}
     veinCount: 25
     veinSize: {x: 4, y: 6}
-  - type: 1
+  - _cell: {fileID: 11400000, guid: 4e91e160e2f037549b5a699c729a34a7, type: 2}
     veinCount: 10
     veinSize: {x: 3, y: 7}
   lakeType: 1

@@ -24,7 +24,7 @@ public class BuildableMinecart : BuildableBase {
         overlaySprite = this.fillSprite;
     }
 
-    public override bool isValidLocation(World world, Position pos) {
+    public override bool isValidLocation(World world, Position pos, Rotation rotation) {
         return !world.isOutOfBounds(pos) && world.getCellState(pos).data is CellDataRail;
     }
 

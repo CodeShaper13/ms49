@@ -33,35 +33,37 @@ public class PopupMilestones : PopupWindow {
 
         this.currentMilestone = this.world.milestones.getCurrent();
 
-        // Create progress bars for each of the requirements
-        foreach(MilestoneRequirerment r in this.currentMilestone.requirements) {
-            if(r == null) {
-                continue;
+        if(this.currentMilestone != null) {
+            // Create progress bars for each of the requirements
+            foreach(MilestoneRequirerment r in this.currentMilestone.requirements) {
+                if(r == null) {
+                    continue;
+                }
+
+                MilestoneProgressSlider slider = GameObject.Instantiate(
+                    this.prefabMilestoneProgressSlider,
+                    this.milestoneBtnArea).GetComponent<MilestoneProgressSlider>();
+                slider.setRequirement(r, this.world);
             }
 
-            MilestoneProgressSlider slider = GameObject.Instantiate(
-                this.prefabMilestoneProgressSlider,
-                this.milestoneBtnArea).GetComponent<MilestoneProgressSlider>();
-            slider.setRequirement(r, this.world);
-        }
+            // Show what the Milestone unlocks
+            foreach(BuildableBase buildable in this.popupBuild.buildings) {
+                if(buildable == null) {
+                    continue;
+                }
 
-        // Show what the Milestone unlocks
-        foreach(BuildableBase buildable in this.popupBuild.buildings) {
-            if(buildable == null) {
-                continue;
-            }
+                if(buildable.unlockedAt == null) { // Always unlocked
+                    continue;
+                }
 
-            if(buildable.unlockedAt == null) { // Always unlocked
-                continue;
-            }
+                if(buildable.unlockedAt == this.currentMilestone) {
+                    GameObject obj = GameObject.Instantiate(
+                        this.prefabBuildableRenderer,
+                        this.unlockedArea);
 
-            if(buildable.unlockedAt == this.currentMilestone) {
-                GameObject obj = GameObject.Instantiate(
-                    this.prefabBuildableRenderer,
-                    this.unlockedArea);
-
-                obj.GetComponent<BuildableUiRenderer>().setBuildable(buildable);
-                obj.GetComponent<Tooltip>().text = buildable.getName();
+                    obj.GetComponent<BuildableUiRenderer>().setBuildable(buildable);
+                    obj.GetComponent<Tooltip>().text = buildable.getName();
+                }
             }
         }
     }

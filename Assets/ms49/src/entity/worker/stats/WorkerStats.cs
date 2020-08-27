@@ -20,7 +20,7 @@ public class WorkerStats {
         }
         else {
             this.gender = Random.Range(0, 2) == 0 ? EnumGender.MALE : EnumGender.FEMALE;
-            Names.getRandomName(this.gender, out this.firstName, out this.lastName);
+            Main.instance.names.getRandomName(this.gender, out this.firstName, out this.lastName);
         }
     }
 

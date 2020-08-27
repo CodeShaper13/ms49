@@ -32,6 +32,15 @@ TextureImporter:
   - first:
       213: -8790697252245402611
     second: surface_rock3
+  - first:
+      213: -5565831994763144607
+    second: surface_grassEdge1
+  - first:
+      213: 6743488595883105960
+    second: surface_grassEdge2
+  - first:
+      213: 738696810334781392
+    second: surface_grassEdge3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -322,6 +331,69 @@ TextureImporter:
       bones: []
       spriteID: d0c09e79c6b210680800000000000000
       internalID: -8790697252245402611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: surface_grassEdge1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16293a03a4132c2b0800000000000000
+      internalID: -5565831994763144607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: surface_grassEdge2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ae9280462fa59d50800000000000000
+      internalID: 6743488595883105960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: surface_grassEdge3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dff7b0d5d0604a00800000000000000
+      internalID: 738696810334781392
       vertices: []
       indices: 
       edges: []

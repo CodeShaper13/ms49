@@ -31,7 +31,7 @@ public class CaveGenerator {
                 if(id == 0) {
                     cell = null;
                 } else if(id == 1) {
-                    cell = layerData.getFillCell();
+                    cell = layerData.getFillCell(x, y);
                 } else if(id == 2) {
                     cell = this.tiles.waterTile;
                 } else { // 3

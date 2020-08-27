@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tintColor: {r: 0.3882353, g: 0.29485488, b: 0.21568628, a: 1}
   tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
-  floorTile: {fileID: 11400000, guid: ed23d514092eea048b2c1d96f5db6aa6, type: 2}
-  hasFog: 1
+  floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
+  _hasFog: 1
   generateCaves: 1
   caveFillPercent: 58
   caveSmoothPases: 3
@@ -28,4 +28,3 @@ MonoBehaviour:
     veinSize: {x: 3, y: 7}
   lakeType: 1
   lakeChance: 20
-  boulderSpawnChance: 0

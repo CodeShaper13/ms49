@@ -9,33 +9,50 @@ public class BuildAreaHighlighter : CellHighlightBase {
     public CellData buildSiteCell = null;
     [SerializeField]
     private PopupBuild popup = null;
+    [SerializeField]
+    public CellTilemapRenderer cellRenderer;
+    [SerializeField]
+    public SpriteRenderer tileSr = null;
 
     private BuildableBase buildable;
 
-    public CellTilemapRenderer cellRenderer;
-
     protected override bool onUpdate(Position pos) {
-        bool isValid = this.buildable.isValidLocation(this.world, pos);
+        bool isValid = this.buildable.isValidLocation(this.world, pos, this.popup.rot);
 
-        if(this.buildable is BuildableTile && isValid) {
-            BuildableTile b = (BuildableTile)this.buildable;
+        if(isValid) {
+            if(this.buildable is BuildableTile) {
+                BuildableTile b = (BuildableTile)this.buildable;
 
-            this.cellRenderer.gameObject.SetActive(true);
+                this.cellRenderer.gameObject.SetActive(true);
+                this.tileSr.gameObject.SetActive(false);
 
-            this.cellRenderer.mapSize = Math.Max(this.buildable.getWidth(), this.buildable.getHeight());
+                this.cellRenderer.mapSize = Math.Max(this.buildable.getWidth(), this.buildable.getHeight());
 
-            this.cellRenderer.cellStateGetterFunc = (x, y) => {
-                CellData data = b.getTile(x, y);
-                if(data == null) {
-                    return null;
-                } else {
-                    return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : null);
-                }
-            };
-            this.cellRenderer.totalRedraw = true;
+                this.cellRenderer.cellStateGetterFunc = (x, y) => {
+                    CellData data = b.getTile(x, y);
+                    if(data == null) {
+                        return null;
+                    }
+                    else {
+                        return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : null);
+                    }
+                };
+                this.cellRenderer.totalRedraw = true;
+            }
+            else {
+                this.cellRenderer.gameObject.SetActive(false);
+                this.tileSr.gameObject.SetActive(true);
 
+                Sprite groundSprite = null;
+                Sprite objectSprite = null;
+                Sprite overlaySprite = null;
+                this.buildable.getPreviewSprites(ref groundSprite, ref objectSprite, ref overlaySprite);
+
+                this.tileSr.sprite = objectSprite;
+            }
         } else {
             this.cellRenderer.gameObject.SetActive(false);
+            this.tileSr.gameObject.SetActive(false);
         }
 
         return isValid;

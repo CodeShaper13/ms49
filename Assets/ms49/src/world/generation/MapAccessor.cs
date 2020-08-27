@@ -13,12 +13,6 @@
         this.size = mapSize;
     }
 
-    public void fill(LayerDataBase layerData) {
-        for(int i = 0; i < this.cells.Length; i++) {
-            this.cells[i] = layerData.getFillCell();
-        }
-    }
-
     /// <summary>
     /// Sets a Cell.  Pass null to set air.
     /// </summary>

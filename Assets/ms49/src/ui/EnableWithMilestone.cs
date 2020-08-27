@@ -12,6 +12,8 @@ public class EnableWithMilestone : MonoBehaviour {
     private MilestoneData milestone = null;
     [SerializeField]
     private bool invertResult = false;
+    [SerializeField]
+    private bool enableWithCreative = true;
 
     private MilestoneManager manager;
 
@@ -24,7 +26,7 @@ public class EnableWithMilestone : MonoBehaviour {
 
     private void Update() {
         if(this.targetObject != null && this.milestone != null && this.manager != null) {
-            bool enabled = this.milestone.isUnlocked;
+            bool enabled = this.milestone.isUnlocked || this.enableWithCreative;
             if(this.invertResult) {
                 enabled = !enabled;
             }

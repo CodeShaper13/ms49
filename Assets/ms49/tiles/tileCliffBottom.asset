@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f942ca9511f354a8efbf325740f4ab, type: 3}
-  m_Name: tileGrassRnd
+  m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: tileCliffBottom
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -3109950417928512648, guid: e8fad20e546ee954eb1317d1e7454d3e,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,13 +35,3 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  Sprites:
-  - Sprite: {fileID: 2294901307440678441, guid: 3370ef2a8d2ac184a8314919c0f85c37,
-      type: 3}
-    Weight: 2
-  - Sprite: {fileID: 3097706294212459729, guid: 3370ef2a8d2ac184a8314919c0f85c37,
-      type: 3}
-    Weight: 5
-  - Sprite: {fileID: 1728003604062260267, guid: 3370ef2a8d2ac184a8314919c0f85c37,
-      type: 3}
-    Weight: 2

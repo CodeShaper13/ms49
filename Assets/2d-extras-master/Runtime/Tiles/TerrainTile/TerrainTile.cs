@@ -72,7 +72,7 @@ namespace UnityEngine.Tilemaps
                 tileData.sprite = m_Sprites[index];
                 tileData.transform = GetTransform((byte)mask);
                 tileData.color = Color.white;
-                tileData.flags = TileFlags.LockTransform | TileFlags.LockColor;
+                tileData.flags = TileFlags.LockTransform; // | TileFlags.LockColor;
                 tileData.colliderType = Tile.ColliderType.Sprite;
             }
         }

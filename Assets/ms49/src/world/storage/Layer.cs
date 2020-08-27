@@ -10,6 +10,7 @@ public class Layer {
     private float[] heatSources;
     private World world;
     private WorldRenderer worldRenderer;
+    private float cachedLayerHeat = 0;
 
     public int depth { get; private set; }
     public Fog fog { get; private set; }
@@ -30,10 +31,22 @@ public class Layer {
         this.temperatures = new float[this.size * this.size];
         this.heatSources = new float[this.size * this.size];
 
-        // Setup Fog.
-        if(this.world.mapGenData.getLayerFromDepth(this.depth).hasFog) {
-            this.fog = new Fog(this.world.storage.mapSize);
-            this.fog.setAll(true);
+        LayerDataBase layerData = this.world.mapGenData.getLayerFromDepth(this.depth);
+        if(layerData != null) { // Null if a layer is added through an external editor or the layer count is reduced
+
+            // Set heat sourcess
+            this.cachedLayerHeat = layerData.defaultTemperature;
+            if(this.cachedLayerHeat != 0) {
+                for(int i = 0; i < this.heatSources.Length; i++) {
+                    this.heatSources[i] = this.cachedLayerHeat;
+                }
+            }
+
+            // Setup Fog.
+            if(layerData.hasFog) {
+                this.fog = new Fog(this.size);
+                this.fog.setAll(true);
+            }
         }
     }
 
@@ -71,7 +84,7 @@ public class Layer {
             behavior.onCreate(this.world, state, new Position(x, y, this.depth));
         }
 
-        // Update heat soruce map.
+        // Update heat source map.
         this.setTemperature(x, y, data.temperatureOutput);
         this.heatSources[this.size * x + y] = data.temperatureOutput;
 
@@ -107,12 +120,26 @@ public class Layer {
         this.temperatures[this.size * x + y] = temperature;
     }
 
-    public float getTemperature(int x, int y) {
+    /// <summary>
+    /// Returns the temperature before it is modified by the Layer's base temperature.  If the position is out of range, 0 is returned.
+    /// </summary>
+    public float getUnmodifiedTemperature(int x, int y) {
         if(!this.inBounds(x, y)) {
             return 0;
         }
 
         return this.temperatures[this.size * x + y];
+    }
+
+    /// <summary>
+    /// Returns the temperature with the Layer's base temperature modification.  If the position is out of range, 0 is returned.
+    /// </summary>
+    public float getTemperature(int x, int y) {
+        if(!this.inBounds(x, y)) {
+            return 0;
+        }
+
+        return this.getUnmodifiedTemperature(x, y) + this.cachedLayerHeat;
     }
 
     public float getHeatSource(int x, int y) {

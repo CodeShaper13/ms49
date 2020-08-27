@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Grid))]
@@ -49,6 +50,8 @@ public class World : MonoBehaviour {
             this.mapGenerator.generateStartRoom();
 
             CameraController.instance.initNewPlayer();
+            CameraController.instance.changeLayer(this.mapGenData.playerStartLayer);
+
         }
         else {
             // Load world:
@@ -78,7 +81,7 @@ public class World : MonoBehaviour {
         float[] readBuffer = new float[size * size];
 
         while(true) {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
 
             // Update heat
             for(int i = 0; i < this.storage.layerCount; i++) {
@@ -88,14 +91,19 @@ public class World : MonoBehaviour {
 
                 for(int x = 0; x < size; x++) {
                     for(int y = 0; y < size; y++) {
-                        float f = 0.25f * (
-                            layer.getTemperature(x - 1, y) +
-                            layer.getTemperature(x + 1, y) +
-                            layer.getTemperature(x, y - 1) +
-                            layer.getTemperature(x, y + 1)
-                            ) + layer.getHeatSource(x, y);
-
-                        f = Mathf.MoveTowards(f, 0, 0.005f);
+                        float heatSource = layer.getHeatSource(x, y);
+                        float f;
+                        if(heatSource == 0) {
+                            f = 0.25f * (
+                                layer.getUnmodifiedTemperature(x - 1, y) +
+                                layer.getUnmodifiedTemperature(x + 1, y) +
+                                layer.getUnmodifiedTemperature(x, y - 1) +
+                                layer.getUnmodifiedTemperature(x, y + 1)
+                                );
+                            f = Mathf.MoveTowards(f, 0, 0.01f);
+                        } else {
+                            f = heatSource;
+                        }
 
                         readBuffer[size * x + y] = f;
                     }
@@ -162,26 +170,49 @@ public class World : MonoBehaviour {
         this.worldRenderer.dirtyExcavationTarget(pos, targeted);
     }
 
-    public void liftFog(Position pos, int revealDistance = 0) {
+    public void liftFog(Position pos, bool floodLiftFog = true) {
+        if(this.isOutOfBounds(pos)) {
+            return;
+        }
+
         Layer layer = this.storage.getLayer(pos.depth);
         if(layer.fog != null) {
-            if(revealDistance == 0) {
-                layer.fog.setFog(pos.x, pos.y, false);
-                this.worldRenderer.dirtyFogmap(pos, false);
-            }
-            else {
-                for(int x = -revealDistance; x <= revealDistance; x++) {
-                    for(int y = -revealDistance; y <= revealDistance; y++) {
-                        Vector2Int v = new Vector2Int(pos.x + x, pos.y + y);
-                        int aX = Mathf.Abs(x);
-                        if(!(aX == revealDistance && Mathf.Abs(y) == revealDistance)) {
-                            layer.fog.setFog(v.x, v.y, false);
-                            Position p1 = new Position(v.x, v.y, pos.depth);
-                            this.worldRenderer.dirtyFogmap(p1, false);
+            if(floodLiftFog) {
+                // Lift fog in the event of this cell being in a cave
+                CellData air = Main.instance.tileRegistry.getAir();
+                Stack<Position> pixels = new Stack<Position>();
+                List<Position> changedCells = new List<Position>();
+                pixels.Push(pos);
+
+                while(pixels.Count > 0) {
+                    Position a = pixels.Pop();
+                    if(!this.isOutOfBounds(a)) {
+                        if((this.getCellState(a).data == air || a == pos) && layer.fog.isFogPresent(a.x, a.y) && !changedCells.Contains(a)) {
+                            changedCells.Add(a);
+                            pixels.Push(new Position(a.x - 1, a.y, pos.depth));
+                            pixels.Push(new Position(a.x + 1, a.y, pos.depth));
+                            pixels.Push(new Position(a.x, a.y - 1, pos.depth));
+                            pixels.Push(new Position(a.x, a.y + 1, pos.depth));
                         }
                     }
                 }
+
+                changedCells = changedCells.OrderBy(
+                    x => Vector2.Distance(pos.vec2, x.vec2)).ToList();
+
+                this.StartCoroutine(this.floodLiftFog(changedCells));                
+            } else {
+                layer.fog.setFog(pos.x, pos.y, false);
             }
+
+            this.worldRenderer.dirtyFogmap(pos, false);
+        }
+    }
+
+    private IEnumerator floodLiftFog(List<Position> changedCells) {
+        foreach(Position p in changedCells) {
+            this.liftFog(p, false);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
@@ -258,18 +289,27 @@ public class World : MonoBehaviour {
     /// Checks if the passed Layer is unlocked.
     /// </summary>
     public bool isDepthUnlocked(int depth) {
-        if(depth == 0 || depth == 1) { // Always unlocked
+        if(depth == 0) {
             return true;
         }
 
-        int maxUnlocked = 1;
+        /*
+        for(int i = 0; i < this.mapGenData.layerCount; i++) {
+            LayerDataBase ld = this.mapGenData.getLayerFromDepth(i);
+            if(ld != null && ld.unlockedAtStart) {
+                firstLockedIndex++;
+            }
+        }
+        */
+
+        int maxUnlockedIndex = 0;
         foreach(var milestone in this.milestones.milestones) {
             if(milestone.isUnlocked && milestone.unlocksLayer) {
-                maxUnlocked++;
+                maxUnlockedIndex++;
             }
         }
 
-        return depth <= maxUnlocked;
+        return depth <= maxUnlockedIndex;
     }
 
     /// <summary>
@@ -282,10 +322,6 @@ public class World : MonoBehaviour {
 
     public Vector3 cellToWorld(int cellX, int cellY) {
         return this.grid.CellToWorld(new Vector3Int(cellX, cellY, 0));
-    }
-
-    public Vector3 cellToWorld(Vector2Int cellPos) {
-        return this.cellToWorld(cellPos.x, cellPos.y);
     }
 
     public NbtCompound writeToNbt() {

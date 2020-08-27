@@ -30,9 +30,10 @@ MonoBehaviour:
     effect: 0
   _movementCost: -1
   canBuildOver: 0
-  isDestroyable: 0
+  isDestroyable: 1
   zMoveDirections: 0
   _flammable: 1
+  _temperatureOutput: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}

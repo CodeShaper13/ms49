@@ -31,11 +31,7 @@ public class CameraController : MonoBehaviour {
     private PixelPerfectCamera ppc;
     private Vector3 mousePosLastFrame;
 
-    public int currentLayer {
-        get;
-        private set;
-    } = -1;
-
+    public int currentLayer { get; private set; } = -1;
     public bool inCreativeMode { get; set; }
 
     private void Awake() {
@@ -48,9 +44,7 @@ public class CameraController : MonoBehaviour {
         this.setZoom(this.maxZoom);
     }
 
-    public void initNewPlayer() {
-        this.changeLayer(1);
-    }
+    public void initNewPlayer() { }
 
     private void OnValidate() {
         this.maxZoom = Mathf.Max(this.minZoom, this.maxZoom);

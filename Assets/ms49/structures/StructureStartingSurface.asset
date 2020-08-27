@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad088b332689da448bb0415d16b9aa5d, type: 3}
   m_Name: StructureStartingSurface
   m_EditorClassIdentifier: 
-  liftFog: 0
+  liftFog: 1
   gridSize: {x: 5, y: 6}
   tiles:
   - character: 108

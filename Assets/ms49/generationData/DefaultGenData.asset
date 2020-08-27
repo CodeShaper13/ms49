@@ -13,36 +13,34 @@ MonoBehaviour:
   m_Name: DefaultGenData
   m_EditorClassIdentifier: 
   mapSize: 64
+  _playerStartLayer: 0
   unbreakableRockTiles: {fileID: 11400000, guid: 93c873b7c3e8a28419682700c1e3330b,
     type: 2}
   tiles:
     waterTile: {fileID: 11400000, guid: ce497ab37796c984fb4231bb7c6d3d94, type: 2}
     lavaTile: {fileID: 11400000, guid: e77239bff4cdc0c4a83e4145d0652fd1, type: 2}
-    amethystTile: {fileID: 11400000, guid: 4e91e160e2f037549b5a699c729a34a7, type: 2}
-    coalTile: {fileID: 11400000, guid: a59a1921820c7174d956a088eb133e3c, type: 2}
-    emeraldTile: {fileID: 11400000, guid: ba43be8abde0aca4ebb7a5af35cfbfd2, type: 2}
-    rubyTile: {fileID: 11400000, guid: b3a0c4c11c71bef46ae7f0c59256b274, type: 2}
-    sapphireTile: {fileID: 11400000, guid: 409d1ddf943b9a3479be33bec427faa2, type: 2}
-    goldTile: {fileID: 11400000, guid: c2748d19876cb3c488d8600108a00812, type: 2}
-    boneTile: {fileID: 11400000, guid: 21c8e8396c7ff6b4a8c81fae3f42d70f, type: 2}
   layerGenerators:
-  - {fileID: 11400000, guid: d8d49954f458e4b4494b3ebc8f98ab0c, type: 2}
   - {fileID: 11400000, guid: 3fc454ff267f9a943b2fb661c489c6cb, type: 2}
   - {fileID: 11400000, guid: 8b7fb56d4f3e0bc4d9a4b91e4706d839, type: 2}
   - {fileID: 11400000, guid: 452bde97bcffc344a8f321bb8aa33bab, type: 2}
   startingStructures:
   - pos:
-      x: 25
-      y: 25
-      depth: 1
-    structure: {fileID: 11400000, guid: 5dd9f0f7defd0bc479c8234ee7c33968, type: 2}
-  - pos:
-      x: 25
-      y: 25
+      x: 0
+      y: 0
       depth: 0
-    structure: {fileID: 11400000, guid: 3504838e89078bf43a3255cc02a408df, type: 2}
+    structure: {fileID: 11400000, guid: 2f6f6ad10fa9bbc49a73eec17d8d6143, type: 2}
+  - pos:
+      x: 28
+      y: 5
+      depth: 0
+    structure: {fileID: 11400000, guid: 9e96e71bde25e714597dc14780f11e47, type: 2}
   - pos:
       x: 26
-      y: 31
+      y: 13
+      depth: 0
+    structure: {fileID: 11400000, guid: 5dd9f0f7defd0bc479c8234ee7c33968, type: 2}
+  - pos:
+      x: 27
+      y: 4
       depth: 0
     structure: {fileID: 11400000, guid: 08ee3d16e815b3a4ba25db91909c8a72, type: 2}

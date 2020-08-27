@@ -30,7 +30,11 @@ public class MapGenerator {
             // Generate caves.  This will populate the accessor cell array with non null values.
             this.caveGenerator.generateCaves(rnd, layerData, accessor);
         } else {
-            accessor.fill(layerData);
+            for(int x = 0; x < accessor.size; x++) {
+                for(int y = 0; y < accessor.size; y++) {
+                    accessor.setCell(x, y, layerData.getFillCell(x, y));
+                }
+            }
         }
 
         this.oreGenerator.generateOres(rnd, layerData, accessor);

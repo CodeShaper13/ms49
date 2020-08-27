@@ -1,41 +1,40 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Names {
+public class Names : MonoBehaviour {
 
-    private static Names maleNames;
-    private static Names femaleNames;
-    private static Names lastNames;
+    [SerializeField]
+    private TextAsset maleNamesTextAsset;
+    [SerializeField]
+    private TextAsset femaleNamesTextAsset;
+    [SerializeField]
+    private TextAsset lastNamesTextAsset;
 
-    private readonly TextAsset textAsset;
-    private string[] names;
+    private string[] maleNames;
+    private string[] femaleNames;
+    private string[] lastNames;
 
-    public static void bootstrap() {
-        Names.maleNames = new Names(References.list.maleNames);
-        Names.femaleNames = new Names(References.list.femaleNames);
-        Names.lastNames = new Names(References.list.lastNames);
-    }
-
-    public Names(TextAsset text) {
-        this.textAsset = text;
-        this.names = this.readTextAsset(this.textAsset, true).ToArray();
+    private void Start() {
+        this.maleNames = this.readTextAsset(this.maleNamesTextAsset, true).ToArray();
+        this.femaleNames = this.readTextAsset(this.femaleNamesTextAsset, true).ToArray();
+        this.lastNames = this.readTextAsset(this.lastNamesTextAsset, true).ToArray();
     }
 
     /// <summary>
     /// Returns a random name for the list.
     /// </summary>
-    public string getRndName() {
-        return this.names[Random.Range(0, this.names.Length)];
+    public string rnd(string[] names) {
+        return names[Random.Range(0, names.Length)];
     }
 
-    public static void getRandomName(EnumGender gender, out string firstName, out string lastName) {
+    public void getRandomName(EnumGender gender, out string firstName, out string lastName) {
         if(gender == EnumGender.MALE) {
-            firstName = Names.maleNames.getRndName();
+            firstName = this.rnd(this.maleNames);
         }
         else {
-            firstName = Names.femaleNames.getRndName();
+            firstName = this.rnd(this.femaleNames);
         }
-        lastName = Names.lastNames.getRndName();
+        lastName = this.rnd(this.lastNames);
     }
 
     /// <summary>

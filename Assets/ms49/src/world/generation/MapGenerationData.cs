@@ -6,6 +6,9 @@ public class MapGenerationData : ScriptableObject {
 
     public int mapSize = 128;
 
+    [SerializeField, Min(0)]
+    private int _playerStartLayer = 0;
+
     public UnbreakableRockTiles unbreakableRockTiles;
     public TileReferences tiles;
     [SerializeField]
@@ -18,7 +21,13 @@ public class MapGenerationData : ScriptableObject {
             return this.layerGenerators == null ? 0 : this.layerGenerators.Length;
         }
     }
+    public int playerStartLayer { get { return this._playerStartLayer; } }
 
+    /// <summary>
+    /// If there is no LayerData for the passed layer, null is returned.
+    /// </summary>
+    /// <param name="depth"></param>
+    /// <returns></returns>
     public LayerDataBase getLayerFromDepth(int depth) {
         if(depth < 0 || depth >= this.layerGenerators.Length) {
             return null;
@@ -32,19 +41,12 @@ public class MapGenerationData : ScriptableObject {
 
         public CellData waterTile = null;
         public CellData lavaTile = null;
-        public CellData amethystTile = null;
-        public CellData coalTile = null;
-        public CellData emeraldTile = null;
-        public CellData rubyTile = null;
-        public CellData sapphireTile = null;
-        public CellData goldTile = null;
-        public CellData boneTile = null;
     }
 
     [Serializable]
     public class StartingStructure {
 
         public Position pos;
-        public Structure structure;
+        public StructureBase structure;
     }
 }

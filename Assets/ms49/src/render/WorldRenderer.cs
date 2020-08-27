@@ -20,13 +20,13 @@ public class WorldRenderer : MonoBehaviour {
 
         this.cellRenderer.mapSize = size;
         this.cellRenderer.floorTintGetterFunc = (x, y) => {
-            return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTint();
+            return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTint(x, y);
         };
         this.cellRenderer.cellStateGetterFunc = (x, y) => {
             return this.targetLayer.getCellState(x, y);
         };
         this.cellRenderer.fallbackFloorGetterFunc = (x, y) => {
-            return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getFloorTile();
+            return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTile(x, y);
         };
 
         this.fogRenderer.mapSize = size;

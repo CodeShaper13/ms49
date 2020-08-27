@@ -6,47 +6,34 @@ public class Main : MonoBehaviour {
 
     public static bool DEBUG = false;
 
-    public TileRegistry tileRegistry;
-    public EntityRegistry entityRegistry;
-    public MinedItemRegistry itemRegistry;
+    [SerializeField]
+    private TileRegistry _tileRegistry;
+    [SerializeField]
+    public EntityRegistry _entityRegistry;
+    [SerializeField]
+    public MinedItemRegistry _itemRegistry;
+    [SerializeField]
+    public Names _names;
+
+    public TileRegistry tileRegistry { get { return this._tileRegistry; } }
+    public EntityRegistry entityRegistry { get { return this._entityRegistry; } }
+    public MinedItemRegistry itemRegistry { get { return this._itemRegistry; } }
+    public Names names { get { return this._names; } }
+
 
     private void Awake() {
         if(Main.instance == null) {
             Main.instance = this;
-            //GameObject.DontDestroyOnLoad(this.gameObject);
+            GameObject.DontDestroyOnLoad(this.gameObject);
         } else {
-            //GameObject.Destroy(this.gameObject);
+            GameObject.Destroy(this.gameObject);
             return;
         }
-
-        References.bootstrap();
-        Names.bootstrap();
     }
 
     private void Update() {
         if(Input.GetKeyDown(KeyCode.F3)) {
             Main.DEBUG = !Main.DEBUG;
-        }
-    }
-
-    private void OnGUI() {
-        if(Main.DEBUG) {
-            GUI.contentColor = Color.white;
-
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 30;
-            GUI.Label(new Rect(10, 10, 100, 40), "DEBUG", style);
-
-            World world = GameObject.FindObjectOfType<World>();
-            if(world != null) {
-                Position pos = CameraController.instance.getMousePos();
-                CellState state = world.getCellState(pos);
-                if(state != null) {
-                    GUI.Label(new Rect(10, 50, 400, 40), "Tile: " + state.data.name);
-                    GUI.Label(new Rect(10, 70, 400, 40), "Pos: " + pos.ToString());
-                    GUI.Label(new Rect(10, 90, 400, 40), "Rotation: " + state.rotation.name);
-                }
-            }
         }
     }
 }

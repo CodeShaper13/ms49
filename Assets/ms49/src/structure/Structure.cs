@@ -5,8 +5,8 @@ using UnityEngine;
     using UnityEditor;
 #endif
 
-[CreateAssetMenu(fileName = "Structure", menuName = "MS49/Structure", order = 1)]
-public class Structure : ScriptableObject {
+[CreateAssetMenu(fileName = "Structure", menuName = "MS49/Structure/Structure", order = 1)]
+public class Structure : StructureBase {
 
     [SerializeField, Tooltip("If true, fog is lifted when the structure is placed.")]
     private bool liftFog = false;
@@ -66,7 +66,7 @@ public class Structure : ScriptableObject {
     /// <summary>
     /// Places the structure into the world.
     /// </summary>
-    public virtual void placeIntoWorld(World world, Position pos) {
+    public override void placeIntoWorld(World world, Position pos) {
         for(int x = 0; x < this.width; x++) {
             for(int y = 0; y < this.height; y++) {
                 TileEntry entry = this.getEntry(x, y);
@@ -130,7 +130,7 @@ public class Structure : ScriptableObject {
     }
 
 #if UNITY_EDITOR
-    [CustomEditor(typeof(Structure), true)]
+    [CustomEditor(typeof(Structure))]
     public class StructureEditor : Editor {
 
         private const int margin = 5;

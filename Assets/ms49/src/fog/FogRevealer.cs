@@ -32,6 +32,6 @@ public class FogRevealer : MonoBehaviour {
     }
 
     private void liftFog() {
-        this.entity.world.liftFog(new Position(this.entity), this.revealDistance);
+        this.entity.world.liftFog(new Position(this.entity));
     }
 }

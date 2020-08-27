@@ -37,4 +37,4 @@ MonoBehaviour:
   tintGroundTile: 1
   tintObjectTile: 1
   behaviorPrefab: {fileID: 0}
-  droppedItem: {fileID: 0}
+  droppedItem: {fileID: 11400000, guid: 0192f8c5537481843a753b1d25d01bf2, type: 2}

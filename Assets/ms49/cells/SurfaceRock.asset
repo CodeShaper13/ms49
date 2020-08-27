@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
+  m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
   m_Name: SurfaceRock
   m_EditorClassIdentifier: 
   groundTile: {fileID: 11400000, guid: f4dff4c3822cc87479543eeae0fae003, type: 2}
@@ -33,6 +33,8 @@ MonoBehaviour:
   isDestroyable: 1
   zMoveDirections: 0
   _flammable: 0
+  _temperatureOutput: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}
+  droppedItem: {fileID: 11400000, guid: 3dd87f65ab6b64246810d9c201a03013, type: 2}

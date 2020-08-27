@@ -108,7 +108,7 @@ public class EntityMinecart : EntityBase {
             } else {
                 this.fillRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
                 this.fillRenderer.flipX = this.facing == Rotation.LEFT;
-                this.fillRenderer.color = this.world.mapGenData.getLayerFromDepth(this.depth).getGroundTint();
+                this.fillRenderer.color = this.world.mapGenData.getLayerFromDepth(this.depth).getGroundTint(this.position.x, this.position.y);
             }
         }
     }

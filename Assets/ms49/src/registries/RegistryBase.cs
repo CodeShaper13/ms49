@@ -14,6 +14,9 @@ public abstract class RegistryBase<T> : MonoBehaviour {
     [SerializeField]
     [HideInInspector]
     private T[] elements = null;
+    /// <summary> Used by the inspector to know if the dropdown is open. </summary>
+    [SerializeField]
+    private bool isInspectorDropdownOpen;
 
     /// <summary>
     /// Returns the element at the passed location.
@@ -51,11 +54,12 @@ public abstract class RegistryBase<T> : MonoBehaviour {
 
         private SerializedProperty objs;
         private SerializedProperty regSize;
-        private bool foldoutOpen;
+        private SerializedProperty isInspectorDropdownOpen;
 
         protected void OnEnable() {
             this.objs = this.serializedObject.FindProperty("elements");
             this.regSize = this.serializedObject.FindProperty("registrySize");
+            this.isInspectorDropdownOpen = this.serializedObject.FindProperty("isInspectorDropdownOpen");
         }
 
         public override void OnInspectorGUI() {
@@ -78,9 +82,9 @@ public abstract class RegistryBase<T> : MonoBehaviour {
 
             EditorGUILayout.EndHorizontal();
 
-            this.foldoutOpen = EditorGUILayout.Foldout(this.foldoutOpen, "REGISTRY");
+            this.isInspectorDropdownOpen.boolValue = EditorGUILayout.Foldout(this.isInspectorDropdownOpen.boolValue, "REGISTRY");
 
-            if(this.foldoutOpen) {
+            if(this.isInspectorDropdownOpen.boolValue) {
                 EditorGUI.indentLevel += 1;
 
                 if(this.objs.arraySize == 0) {

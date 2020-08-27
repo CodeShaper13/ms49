@@ -33,7 +33,7 @@ public class LayerButtons : MonoBehaviour {
             this.upBtn.interactable = true;
         }
 
-        if(this.world.isDepthUnlocked(cc.currentLayer + 1)) {
+        if(this.world.isDepthUnlocked(cc.currentLayer + 1) || CameraController.instance.inCreativeMode) {
             this.downBtn.interactable = true;
         } else {
             this.downBtn.interactable = false;

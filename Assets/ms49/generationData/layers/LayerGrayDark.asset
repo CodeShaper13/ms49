@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tintColor: {r: 0.3921569, g: 0.38823533, b: 0.432, a: 1}
   tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
-  floorTile: {fileID: 11400000, guid: ed23d514092eea048b2c1d96f5db6aa6, type: 2}
-  hasFog: 1
+  floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
+  _unlockedAtStart: 0
+  _hasFog: 1
   generateCaves: 1
   caveFillPercent: 60
   caveSmoothPases: 3

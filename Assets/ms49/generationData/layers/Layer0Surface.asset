@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74ee29c20e655c4cbc63fb0a739a5f9, type: 3}
   m_Name: Layer0Surface
   m_EditorClassIdentifier: 
-  tintColor: {r: 1, g: 1, b: 1, a: 1}
-  tile: {fileID: 11400000, guid: 1e6054218c19ce24a9958cd36ad6b459, type: 2}
-  floorTile: {fileID: 11400000, guid: 342b332ff476f7c48b3631130fa0c4bd, type: 2}
-  hasFog: 0
+  tintColor: {r: 0.5176471, g: 0.4509804, b: 0.39215687, a: 1}
+  tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
+  floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
+  _unlockedAtStart: 0
+  _hasFog: 1
   generateCaves: 1
   caveFillPercent: 60.7
   caveSmoothPases: 5
   oreSpawnSettings: []
   lakeType: 0
   lakeChance: 100
+  grassCell: {fileID: 11400000, guid: 90914b99a0298f0489339fd6b6cdb69c, type: 2}
+  grassTile: {fileID: 11400000, guid: f4dff4c3822cc87479543eeae0fae003, type: 2}
   rndObjects:
   - cell: {fileID: 11400000, guid: e0d7c53bfaab1834ab324e0397dc80f0, type: 2}
     chance: 0.12

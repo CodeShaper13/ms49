@@ -56,5 +56,5 @@ public abstract class BuildableBase : ScriptableObject {
     /// <summary>
     /// Returns true if the Structure can go at the passed position.
     /// </summary>
-    public abstract bool isValidLocation(World world, Position pos);
+    public abstract bool isValidLocation(World world, Position pos, Rotation rotation);
 }

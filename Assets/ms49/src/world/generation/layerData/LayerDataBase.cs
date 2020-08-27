@@ -8,9 +8,11 @@ public abstract class LayerDataBase : ScriptableObject {
     [SerializeField]
     protected CellData tile = null;
     [SerializeField]
-    private TileBase floorTile = null;
-
-    public bool hasFog = false;
+    protected TileBase floorTile = null;
+    [SerializeField]
+    private bool _hasFog = false;
+    [SerializeField]
+    private float _defaultTemperature = 0;
 
     [Space]
 
@@ -31,18 +33,24 @@ public abstract class LayerDataBase : ScriptableObject {
     [Tooltip("The percent of caves that become lakes.  Lakes only spawn on layers with generateCaves set to true.")]
     public int lakeChance = 10;
 
-    public virtual Color getGroundTint() {
+    public bool hasFog { get { return this._hasFog; } }
+    public float defaultTemperature { get { return this._defaultTemperature; } }
+
+    public virtual Color getGroundTint(int x, int y) {
         return this.tintColor;
     }
 
     /// <summary>
     /// Returns the Cell to fill the Layer with.
     /// </summary>
-    public virtual CellData getFillCell() {
+    public virtual CellData getFillCell(int x, int y) {
         return this.tile;
     }
 
-    public virtual TileBase getFloorTile() {
+    /// <summary>
+    /// Returns the Layer's ground Tile that is placed under cells without a ground tile set (Like a table).
+    /// </summary>
+    public virtual TileBase getGroundTile(int x, int y) {
         return this.floorTile;
     }
 }

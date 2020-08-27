@@ -26,7 +26,12 @@ public class EnableWithMilestone : MonoBehaviour {
 
     private void Update() {
         if(this.targetObject != null && this.milestone != null && this.manager != null) {
-            bool enabled = this.milestone.isUnlocked || this.enableWithCreative;
+            bool enabled = this.milestone.isUnlocked;
+
+            if(this.enableWithCreative && CameraController.instance.inCreativeMode) {
+                enabled = true;
+            }
+
             if(this.invertResult) {
                 enabled = !enabled;
             }

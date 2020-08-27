@@ -8,25 +8,29 @@ using UnityEngine;
 [RequireComponent(typeof(Grid))]
 public class World : MonoBehaviour {
 
-    public Storage storage;
-    public MapGenerationData mapGenData;
-    public WorldRenderer worldRenderer;
-    public IntVariable money;
-    public ParticleList particles;
-    public EntityList entities;
-    public MilestoneManager milestones;
+    public MapGenerationData mapGenData = null;
+    public WorldRenderer worldRenderer = null;
+    public IntVariable money = null;
+    public ParticleList particles = null;
+    public EntityList entities = null;
+    public MilestoneManager milestones = null;
+    public MapOutline mapOutline = null;
 
-    private MapGenerator mapGenerator;
-    private Grid grid;
+    public Storage storage { get; private set; }
     public int seed { get; private set; }
     public NavigationManager navManager { get; private set; }
     public int stoneExcavated { get; set; }
+
+    private MapGenerator mapGenerator;
+    private Grid grid;
 
     private void Awake() {
         this.grid = this.GetComponent<Grid>();
 
         this.storage = new Storage(this);
         this.mapGenerator = new MapGenerator(this, this.mapGenData);
+
+        this.mapOutline.setSize(this.mapGenData.mapSize);
     }
 
     private void Start() {
@@ -81,10 +85,10 @@ public class World : MonoBehaviour {
         float[] readBuffer = new float[size * size];
 
         while(true) {
-            yield return new WaitForSeconds(0.01f);
-
             // Update heat
             for(int i = 0; i < this.storage.layerCount; i++) {
+                yield return new WaitForSeconds(0.1f);
+
                 Layer layer = this.storage.getLayer(i);
 
                 Array.Copy(layer.temperatures, readBuffer, size * size);

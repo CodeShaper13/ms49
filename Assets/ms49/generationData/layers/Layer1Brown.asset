@@ -16,7 +16,7 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
   _hasFog: 1
-  _defaultTemperature: 1
+  _defaultTemperature: 0
   generateCaves: 1
   caveFillPercent: 60
   caveSmoothPases: 3

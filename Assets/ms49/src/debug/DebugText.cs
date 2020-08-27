@@ -3,7 +3,7 @@
 public class DebugText : MonoBehaviour {
 
     [SerializeField]
-    private int lineSpacing;
+    private int lineSpacing = 20;
     [SerializeField]
     private int xSpacing = 10;
 

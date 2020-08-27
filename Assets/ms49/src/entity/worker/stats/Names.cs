@@ -4,11 +4,11 @@ using UnityEngine;
 public class Names : MonoBehaviour {
 
     [SerializeField]
-    private TextAsset maleNamesTextAsset;
+    private TextAsset maleNamesTextAsset = null;
     [SerializeField]
-    private TextAsset femaleNamesTextAsset;
+    private TextAsset femaleNamesTextAsset = null;
     [SerializeField]
-    private TextAsset lastNamesTextAsset;
+    private TextAsset lastNamesTextAsset = null;
 
     private string[] maleNames;
     private string[] femaleNames;

@@ -30,11 +30,14 @@ public class PopupBuild : PopupWindow {
 
     public override void initialize() {
         base.initialize();
+    }
+
+    public override void onOpen() {
+        base.onOpen();
 
         this.setSelected(null);
 
-        // Add all of the button
-
+        // Add all of the buttons
         RectTransform rt = this.area.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(rt.sizeDelta.x, this.buildings.Count * this.btnPrefab.GetComponent<RectTransform>().sizeDelta.y);
 

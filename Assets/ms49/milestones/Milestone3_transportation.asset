@@ -10,14 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08fc1acf14bf19a43845fadd9e1a4b1d, type: 3}
-  m_Name: Milestone2_transportation
+  m_Name: Milestone3_transportation
   m_EditorClassIdentifier: 
   _milestoneName: established mine
   _requirements:
   - _method: {fileID: 11400000, guid: 9f54f5a9a2799344e9c8d25e21cb564b, type: 2}
     _targetAmount: 5
   - _method: {fileID: 11400000, guid: 9539fda1430df6744a87cf6d585d7e47, type: 2}
-    _targetAmount: 50
+    _targetAmount: 100
   - _method: {fileID: 11400000, guid: f7aca805155299d479ab1d333d64c509, type: 2}
     _targetAmount: 2500
   _unlocksLayer: 1
+  _unlockedBuildables:
+  - {fileID: 11400000, guid: 28552ad5f88474e41aed230d2f113a39, type: 2}
+  - {fileID: 11400000, guid: 090145f60c82cce4fa4afb9ae4017cb3, type: 2}
+  - {fileID: 11400000, guid: 3d935c3a12ef5ed4d9a528178db64099, type: 2}
+  - {fileID: 11400000, guid: 29d12b39658fa7e489b0387b4021b28c, type: 2}
+  - {fileID: 11400000, guid: e7014072569d3b345adf2429498e5997, type: 2}
+  - {fileID: 11400000, guid: a47c702b248684f4d8693a541e660bc0, type: 2}
+  - {fileID: 11400000, guid: 0737886ad47f30e4a88ad68a5e659ebb, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -8,6 +8,8 @@ public class WorkerPathPreview : MonoBehaviour {
     private LineRenderer lr = null;
     [SerializeField]
     private MoveHelper moveHelper = null;
+    [SerializeField]
+    private float zValue = -1;
 
     private void Update() {
         if(!Pause.isPaused()) {
@@ -20,7 +22,7 @@ public class WorkerPathPreview : MonoBehaviour {
                 points.Add(this.transform.position - Vector3.forward);
 
                 for(int i = path.targetIndex; i < path.getPointCount(); i++) {
-                    points.Add((Vector3)path.getPoint(i) - Vector3.forward);
+                    points.Add((Vector3)path.getPoint(i) + Vector3.forward * this.zValue);
                 }
 
                 this.lr.positionCount = points.Count;

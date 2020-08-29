@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PopupBuyWorkers : PopupWindow {
+public class PopupBuyWorkers : PopupWorldReference {
 
     [Min(0)]
     public int workerCost = 1000;
@@ -15,8 +15,6 @@ public class PopupBuyWorkers : PopupWindow {
         }
 
         // Add worker(s)
-        World world = GameObject.FindObjectOfType<World>();
-
-        world.entities.spawn(this.workerSpawnPoint, entityId);
+        this.world.entities.spawn(this.workerSpawnPoint, entityId);
     }
 }

@@ -27,15 +27,16 @@ public class EntityWorker : EntityBase, IClickable {
     /// <summary> The miner's energy from 0 to 100. </summary>
     public float energy { get; private set; }
     /// <summary> The miner's hunger from 0 to 100. </summary>
-    public float hunger { get; private set; }
-    protected Vector2 posLastFrame;
-    public MoveHelper moveHelper { get; private set; }
-    protected AiManager<EntityWorker> aiManager;
-    protected bool sleeping;
+    public float hunger; // { get; private set; }
+    public Vector2 posLastFrame { get; private set; }
+    public string typeName { get { return this._typeName; } }
+    public bool isDead { get; private set; }
+    public bool isSleeping { get; private set; }
 
+    public MoveHelper moveHelper { get; private set; }
+    public AiManager aiManager { get; private set; }
     public WorkerStats stats { get; private set; }
     public WorkerAnimator animator { get; private set; }
-    public string typeName { get { return this._typeName; } }
 
     private void OnMouseEnter() {
         if(this.statGameplayEnabled()) {
@@ -59,7 +60,7 @@ public class EntityWorker : EntityBase, IClickable {
         this.setEnergy(100);
         this.setHunger(100);
 
-        this.aiManager = new AiManager<EntityWorker>(this);
+        this.aiManager = new AiManager();
         this.aiManager.addTask(1, new TaskSleep(this, this.moveHelper));
         this.aiManager.addTask(2, new TaskFindFood(this, this.moveHelper));
     }
@@ -67,15 +68,15 @@ public class EntityWorker : EntityBase, IClickable {
     public override void onUpdate() {
         base.onUpdate();
 
-        // Remove dead miners.
-        if(this.energy <= 0 || this.hunger <= 0) {
+        if(this.isDead) {
             this.animator.playClip("Dead");
-        } else {
+        }
+        else {
             this.aiManager.updateAi();
 
             this.moveHelper.update();
 
-            if(!this.isSleeping()) {
+            if(!this.isSleeping) {
                 if(this.posLastFrame != this.worldPos) {
                     // Miner has moved since last frame.
                 }
@@ -90,7 +91,20 @@ public class EntityWorker : EntityBase, IClickable {
 
                 this.posLastFrame = this.worldPos;
             }
+
+            // Kill the Worker if there heath or energy is too low.
+            if(this.hunger <= 0 || this.energy <= 0) {
+                this.kill();
+            }
         }
+    }
+
+    public void kill() {
+        this.isDead = true;
+
+        this.aiManager.stopAllTasks();
+
+        this.onDeath();
     }
 
     public void setBarsVisible(bool visible) {
@@ -98,12 +112,18 @@ public class EntityWorker : EntityBase, IClickable {
         this.staminaSlider.gameObject.SetActive(visible);
     }
 
+    /// <summary>
+    /// Reduces the Workers hunger, only if stats are enabled (depending on if the Milestones in the EntityWorker#milestone field is set).
+    /// </summary>
     public void reduceEnergy(float amount) {
         if(this.statGameplayEnabled()) {
             this.setEnergy(this.energy - amount);
         }
     }
 
+    /// <summary>
+    /// Reduces the Workers hunger, only if stats are enabled (depending on if the Milestones in the EntityWorker#milestone field is set).
+    /// </summary>
     public void setEnergy(float amount) {
         amount = Mathf.Clamp(amount, 0, 100);
         this.energy = amount;
@@ -112,12 +132,18 @@ public class EntityWorker : EntityBase, IClickable {
         this.healthSliderFill.color = this.energy >= 50 ? Color.green : this.energy <= 25 ? new Color(1, 0.5f, 0) : Color.red;
     }
 
+    /// <summary>
+    /// Reduces the Workers hunger, only if stats are enabled (depending on if the Milestones in the EntityWorker#milestone field is set).
+    /// </summary>
     public void reduceHunger(float amount) {
         if(this.statGameplayEnabled()) {
             this.setHunger(this.hunger - amount);
         }
     }
 
+    /// <summary>
+    /// Increases the Workers hunger, only if stats are enabled (depending on if the Milestones in the EntityWorker#milestone field is set).
+    /// </summary>
     public void increaseHunger(float amount) {
         if(this.statGameplayEnabled()) {
             this.setHunger(this.hunger + amount);
@@ -131,17 +157,13 @@ public class EntityWorker : EntityBase, IClickable {
     }
 
     public void setSleeping(bool isSleeping) {
-        this.sleeping = isSleeping;
+        this.isSleeping = isSleeping;
         if(isSleeping) {
             this.sleepingEffect.Play();
         }
         else {
             this.sleepingEffect.Stop();
         }
-    }
-
-    public bool isSleeping() {
-        return this.sleeping;
     }
 
     public virtual void writeWorkerInfo(StringBuilder sb) {
@@ -158,6 +180,7 @@ public class EntityWorker : EntityBase, IClickable {
 
         tag.setTag("energy", this.energy);
         tag.setTag("hunger", this.hunger);
+        tag.setTag("isDead", this.isDead);
     }
 
     public override void readFromNbt(NbtCompound tag) {
@@ -165,9 +188,18 @@ public class EntityWorker : EntityBase, IClickable {
 
         this.setEnergy(tag.getFloat("energy"));
         this.setHunger(tag.getFloat("hunger"));
+        this.isDead = tag.getBool("isDead");
     }
 
-    public void onRightClick() {
+    /// <summary>
+    /// Called when the Worker dies
+    /// </summary>
+    public virtual void onDeath() { }
+
+    /// <summary>
+    /// Called when the Worker is right clicked.
+    /// </summary>
+    public virtual void onRightClick() {
         PopupWorkerStats popup = Resources.FindObjectsOfTypeAll<PopupWorkerStats>()[0];
         if(popup != null) {
             popup.open();
@@ -175,9 +207,15 @@ public class EntityWorker : EntityBase, IClickable {
         }
     }
 
-    public void onLeftClick() { }
+    /// <summary>
+    /// Called when the Worker is left clicked.
+    /// </summary>
+    public virtual void onLeftClick() { }
 
-    public void onMiddleClick() { }
+    /// <summary>
+    /// Called when the Worker is clicking with the middle mouse button.
+    /// </summary>
+    public virtual void onMiddleClick() { }
 
     private bool statGameplayEnabled() {
         return this.milestone == null || this.milestone.isUnlocked;

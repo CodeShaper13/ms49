@@ -8,12 +8,9 @@ public abstract class BuildableBase : ScriptableObject {
     private int _cost = 0;
     [SerializeField, TextArea(3, 10)]
     private string _description = string.Empty;
-    [SerializeField, Tooltip("What Milestone is required to unlock this Cell in the build screen.  If null, it is always unlocked.")]
-    private MilestoneData _unlockedAt = null;
 
     public int cost { get { return this._cost; } }
     public string description { get { return this._description; } }
-    public MilestoneData unlockedAt { get { return this._unlockedAt; } }
 
     public virtual string getName() {
         return this.structureName;

@@ -6,9 +6,9 @@ public class Fog {
     private bool[] fogMap; // True = fog
     private int size;
 
-    public Fog(int size) {
-        this.size = size;
-        this.fogMap = new bool[size * size];
+    public Fog(int s) {
+        this.size = s;
+        this.fogMap = new bool[this.size * this.size];
     }
 
     /// <summary>

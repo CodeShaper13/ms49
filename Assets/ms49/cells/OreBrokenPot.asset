@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
+  m_Name: OreBrokenPot
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 11400000, guid: b9062077652f86f4f9f0d3dce0ef9ba8, type: 2}
+  objectTile: {fileID: 11400000, guid: c112bfa7ad6e7734988bbe6382915c0a, type: 2}
+  overlayTile: {fileID: 11400000, guid: d13f5275416d9c541baf3fea39302c18, type: 2}
+  rotationalOverride: 0
+  up:
+    tile: {fileID: 0}
+    effect: 0
+  right:
+    tile: {fileID: 0}
+    effect: 0
+  down:
+    tile: {fileID: 0}
+    effect: 0
+  left:
+    tile: {fileID: 0}
+    effect: 0
+  _movementCost: -1
+  canBuildOver: 0
+  isDestroyable: 0
+  zMoveDirections: 0
+  _flammable: 0
+  _temperatureOutput: 0
+  _supportsCeiling: 1
+  tintGroundTile: 1
+  tintObjectTile: 1
+  behaviorPrefab: {fileID: 0}
+  droppedItem: {fileID: 11400000, guid: 5fe05dc958c8a9e4b9b91630adb3f6f5, type: 2}

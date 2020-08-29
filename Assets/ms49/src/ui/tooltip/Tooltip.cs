@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -26,6 +27,9 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
 
     private void Start() {
         this.tooltip = GameObject.FindObjectOfType<TooltipDisplayer>();
+        if(this.tooltip == null) {
+            Debug.LogWarning("Could not find TooltipDisplayer Component.  Tooltip will not be visible.");
+        }
 
         if(this.pullFromTextComponent) {
             Text textComponent = this.GetComponent<Text>();
@@ -36,19 +40,18 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if(this.tooltip != null) {
-            this.Invoke("updateTooltip", this.delay);
-        }
+        this.StartCoroutine("func");
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         if(this.tooltip != null) {
             this.tooltip.setText(string.Empty);
-            this.CancelInvoke("updateTooltip");
+            this.StopCoroutine("func");
         }
     }
 
-    private void updateTooltip() {
+    private IEnumerator func() {
+        yield return new WaitForSecondsRealtime(this.delay);
         if(this.tooltip != null) {
             this.tooltip.setText(this.text);
         }

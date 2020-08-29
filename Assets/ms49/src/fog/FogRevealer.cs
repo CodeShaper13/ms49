@@ -2,10 +2,6 @@
 
 [RequireComponent(typeof(EntityBase))]
 public class FogRevealer : MonoBehaviour {
-    
-    [SerializeField]
-    [Min(0)]
-    private int revealDistance = 3;
 
     private Vector2Int cellPosLastFrame;
     private EntityBase entity;

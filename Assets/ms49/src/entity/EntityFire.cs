@@ -27,6 +27,7 @@ public class EntityFire : EntityBase {
         this.timeRemaining -= Time.deltaTime;
         if(this.timeRemaining <= 0) {
             this.world.setCell(this.position, this.ashCell);
+            this.world.tryCollapse(this.position);
             this.world.entities.remove(this);
         }
     }
@@ -51,7 +52,7 @@ public class EntityFire : EntityBase {
 
         if(world.getCellState(newFirePos).data.isFlammable) {
             bool spaceFree = true;
-            foreach(EntityBase e in world.entities.entityList) {
+            foreach(EntityBase e in world.entities.list) {
                 if(e is EntityFire && e.position == newFirePos) {
                     spaceFree = false;
                     break;

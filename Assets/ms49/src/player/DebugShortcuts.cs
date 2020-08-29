@@ -12,7 +12,7 @@ public class DebugShortcuts : MonoBehaviour {
             if(Input.GetMouseButtonDown(0)) {
 
                 if(Input.GetKey(KeyCode.LeftControl)) {
-                    foreach(EntityBase e in this.world.entities.entityList) {
+                    foreach(EntityBase e in this.world.entities.list) {
                         if(e is EntityWorker) {
                             ((EntityWorker)e).moveHelper.setDestination(pos);
                         }

@@ -9,7 +9,7 @@ public class RequirementMethodWorkerCount : RequirementMethodBase {
     public override int getProgress(World world) {
         int count = 0;
 
-        foreach(EntityBase e in world.entities.entityList) {
+        foreach(EntityBase e in world.entities.list) {
             if(e is EntityWorker) {
                 count++;
             }

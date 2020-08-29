@@ -14,12 +14,12 @@ public class Layer {
 
     public int depth { get; private set; }
     public Fog fog { get; private set; }
-    public int size; // { get { return this.world.storage.mapSize; } }
+    public int size;
 
     public Layer(World world, int depth) {
         this.world = world;
         this.depth = depth;
-        this.size = this.world.storage.mapSize;
+        this.size = this.world.mapSize;
 
         this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
 
@@ -64,7 +64,7 @@ public class Layer {
 
         CellBehavior behavior;
         if(data.behaviorPrefab != null) {
-            behavior = GameObject.Instantiate(data.behaviorPrefab).GetComponent<CellBehavior>();
+            behavior = GameObject.Instantiate(data.behaviorPrefab, this.world.storage.behaviorHolder).GetComponent<CellBehavior>();
             if(behavior == null) {
                 Debug.LogWarning("Cell " + data.name + "had a meta object assigned but it did not have a CellMeta componenet on it's root.");
             } else {
@@ -78,7 +78,7 @@ public class Layer {
         }
 
         CellState state = new CellState(data, behavior, rotation);
-        this.tiles[this.world.storage.mapSize * x + y] = state;
+        this.tiles[this.world.mapSize * x + y] = state;
 
         if(callBehaviorCreateCallback && behavior != null) {
             behavior.onCreate(this.world, state, new Position(x, y, this.depth));
@@ -90,7 +90,7 @@ public class Layer {
 
         // Alert neighbors of the change.
         if(alertNeighbors) {
-            int mapSize = this.world.storage.mapSize;
+            int mapSize = this.world.mapSize;
             foreach(Rotation r in Rotation.ALL) {
                 int x1 = x + r.vector.x;
                 int y1 = y + r.vector.y;

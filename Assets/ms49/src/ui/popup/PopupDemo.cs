@@ -17,7 +17,7 @@ public class PopupDemo : PopupWindow {
 
     private Sprite originalSprite;
 
-    public override void initialize() {
+    protected override void initialize() {
         base.initialize();
 
         this.originalSprite = this.btnImage.sprite;
@@ -25,7 +25,7 @@ public class PopupDemo : PopupWindow {
         this.text.text = this.text.text.Replace("%", this.demoCost.ToString());
     }
 
-    public override void onOpen() {
+    protected override void onOpen() {
         base.onOpen();
 
         this.btnImage.sprite = this.selectedIcon;
@@ -33,7 +33,7 @@ public class PopupDemo : PopupWindow {
         this.demoHighlighter.show();
     }
 
-    public override void onClose() {
+    protected override void onClose() {
         base.onClose();
 
         this.btnImage.sprite = this.originalSprite;

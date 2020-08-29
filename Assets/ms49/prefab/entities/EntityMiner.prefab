@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1686305682045238074, guid: 6e114e1ab8cfb064c80e31a8676a11f9,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -369,6 +369,7 @@ MonoBehaviour:
   staminaSlider: {fileID: 5559810396006857762}
   sleepingEffect: {fileID: 7399738196080785355}
   milestone: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
+  hunger: 0
 --- !u!114 &8134422384178296594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51bcd21879a75d94d96b55a767ac98d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revealDistance: 0
 --- !u!1 &7762312394458560629
 GameObject:
   m_ObjectHideFlags: 0
@@ -5192,7 +5192,7 @@ Transform:
   m_GameObject: {fileID: 8479168754256228601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 6744992594683351371}
   m_RootOrder: 2
@@ -5235,7 +5235,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
@@ -5245,7 +5245,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.125
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -5284,11 +5284,11 @@ LineRenderer:
       m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 1
     numCapVertices: 0
     alignment: 1
-    textureMode: 0
-    shadowBias: 0.5
+    textureMode: 3
+    shadowBias: 0
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
@@ -5306,6 +5306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lr: {fileID: 3037188266815952055}
   moveHelper: {fileID: 8134422384178296594}
+  zValue: -1
 --- !u!1 &8605352210397424044
 GameObject:
   m_ObjectHideFlags: 0
@@ -5375,7 +5376,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5012251703786577423, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

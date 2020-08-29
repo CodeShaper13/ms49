@@ -71,7 +71,7 @@ public class CellBehaviorConveyorBelt : CellBehavior {
         Vector2 v = this.rotation.opposite().vectorF * 0.5f + new Vector2(0, yOffset);
 
         EntityItem e = (EntityItem)this.world.entities.spawn(this.pos.vec2 + v, this.pos.depth, 3);
-        e.item = item;
+        e.setItem(item);
         this.startTracking(e);
     }
 }

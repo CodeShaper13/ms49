@@ -4,8 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GenerationData", menuName = "MS49/Generation/Main", order = 1)]
 public class MapGenerationData : ScriptableObject {
 
-    public int mapSize = 128;
-
     [SerializeField, Min(0)]
     private int _playerStartLayer = 0;
 

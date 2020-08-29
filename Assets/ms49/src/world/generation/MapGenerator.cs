@@ -19,10 +19,10 @@ public class MapGenerator {
     }
 
     public void generateLayer(int depth) {
-        int radius = this.world.storage.mapSize;
-        int layerSeed = this.seed ^ depth;
+        int radius = this.world.mapSize;
+        int layerSeed = this.seed * depth;
 
-        MapAccessor accessor = new MapAccessor(this.genData.mapSize);
+        MapAccessor accessor = new MapAccessor(this.world.mapSize);
         LayerDataBase layerData = this.genData.getLayerFromDepth(depth);
         System.Random rnd = new System.Random(layerSeed);
 
@@ -77,7 +77,7 @@ public class MapGenerator {
         Layer layer = new Layer(this.world, depth);
         this.world.storage.setLayer(layer, depth);
 
-        int mapSize = this.world.storage.mapSize;
+        int mapSize = this.world.mapSize;
         for(int x = 0; x < mapSize; x++) {
             for(int y = 0; y < mapSize; y++) {
                 this.world.setCell(x, y, depth, accessor.getCell(x, y), false);

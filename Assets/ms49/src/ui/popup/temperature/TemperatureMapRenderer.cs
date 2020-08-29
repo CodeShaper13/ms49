@@ -14,7 +14,7 @@ public class TemperatureMapRenderer : MonoBehaviour {
     [SerializeField]
     private ColorVariable colorHigh = null;
     [SerializeField]
-    private World world = null;
+    private PopupTemperature popup = null;
 
     private bool isInitialized = false;
     private float[] oldTemps;
@@ -34,7 +34,7 @@ public class TemperatureMapRenderer : MonoBehaviour {
     }
 
     private void Update() {
-        Layer layer = this.world.storage.getLayer(CameraController.instance.currentLayer);
+        Layer layer = this.popup.world.storage.getLayer(CameraController.instance.currentLayer);
 
         if(!this.isInitialized) {
             this.initalSetup(layer);

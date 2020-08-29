@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class PopupTemperature : PopupWindow {
+public class PopupTemperature : PopupWorldReference {
 
 }

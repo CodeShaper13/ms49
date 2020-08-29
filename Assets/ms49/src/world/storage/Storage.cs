@@ -2,8 +2,6 @@
 using fNbt;
 using UnityEngine;
 
-// No safety checks are done for the passed position in all of the getters and setters.
-
 public class Storage {
 
     private World world;
@@ -12,15 +10,15 @@ public class Storage {
     public HashSet<Position> targetedForRemovalSquares { get; private set; }
 
     public int layerCount { get; private set; }
-    public int mapSize { get;  private set; }
+    public Transform behaviorHolder { get; private set; }
 
     public Storage(World world) {
         this.world = world;
-        this.mapSize = this.world.mapGenData.mapSize;
         this.layerCount = this.world.mapGenData.layerCount;
         this.layers = new Layer[layerCount];
         this.cachedBehaviors = new HashSet<CellBehavior>();
         this.targetedForRemovalSquares = new HashSet<Position>();
+        this.behaviorHolder = this.world.createHolder("BEHAVIORS");
     }
 
     public bool isLayerGenerated(int depth) {
@@ -101,8 +99,8 @@ public class Storage {
 
             // Call onCreate method for all the behaviors, now that all Cell's
             // have been loaded.
-            for(int x = 0; x < this.mapSize; x++) {
-                for(int y = 0; y < this.mapSize; y++) {
+            for(int x = 0; x < this.world.mapSize; x++) {
+                for(int y = 0; y < this.world.mapSize; y++) {
                     CellState state = layer.getCellState(x, y);
                     if(state.behavior != null) {
                         state.behavior.onCreate(this.world, state, new Position(x, y, layer.depth));

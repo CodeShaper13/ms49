@@ -14,7 +14,7 @@ public class Names : MonoBehaviour {
     private string[] femaleNames;
     private string[] lastNames;
 
-    private void Start() {
+    private void Awake() {
         this.maleNames = this.readTextAsset(this.maleNamesTextAsset, true).ToArray();
         this.femaleNames = this.readTextAsset(this.femaleNamesTextAsset, true).ToArray();
         this.lastNames = this.readTextAsset(this.lastNamesTextAsset, true).ToArray();

@@ -10,7 +10,7 @@ public class TaskDepositStone : TaskBase<EntityMiner> {
         if(this.owner.heldItem != null) {
 
             foreach(CellBehaviorDepositPoint point in this.owner.world.getAllBehaviors<CellBehaviorDepositPoint>()) {
-                if(this.moveHelper.setDestination(point.pos, false) != null) {
+                if(this.moveHelper.setDestination(point.pos, true) != null) {
                     this.depositPoint = point;
                     return true;
                 }

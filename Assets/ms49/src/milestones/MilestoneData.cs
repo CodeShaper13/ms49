@@ -9,11 +9,14 @@ public class MilestoneData : ScriptableObject, ISerializationCallbackReceiver {
     private MilestoneRequirerment[] _requirements = null;
     [SerializeField, Tooltip("If true, a layer is unlocked when completing this milestone")]
     private bool _unlocksLayer = false;
+    [SerializeField]
+    private BuildableBase[] _unlockedBuildables = null;
 
     public string milestoneName { get { return this._milestoneName; } }
     public MilestoneRequirerment[] requirements { get { return this._requirements; } }
     public bool unlocksLayer { get { return this._unlocksLayer; } }
     public bool isUnlocked { get; set; }
+    public BuildableBase[] unlockedBuildables { get { return this._unlockedBuildables; } }
 
     public void OnAfterDeserialize() {
         this.isUnlocked = false;

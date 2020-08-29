@@ -16,7 +16,7 @@ public class PopupWorkerStats : PopupWindow {
     private EntityWorker worker;
     private string infoTextTemplate;
 
-    public override void initialize() {
+    protected override void initialize() {
         base.initialize();
 
         this.infoTextTemplate = this.infoText.text;
@@ -32,7 +32,7 @@ public class PopupWorkerStats : PopupWindow {
         this.infoText.text = string.Format(this.infoTextTemplate, stats.getFullName(), this.worker.typeName, "todo");
     }
 
-    public override void onUpdate() {
+    protected override void onUpdate() {
         base.onUpdate();
 
         if(this.worker != null) {

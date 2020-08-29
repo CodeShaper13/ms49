@@ -8,15 +8,15 @@ public class WorldRenderer : MonoBehaviour {
     [SerializeField]
     private CellTilemapRenderer cellRenderer = null;
     [SerializeField]
-    private BinaryTilemapRenderer fogRenderer = null;
+    private FogRenderer fogRenderer = null;
     [SerializeField]
     private BinaryTilemapRenderer targetedRenderer = null;
 
     /// <summary> The Layer the renderer is rendering. </summary>
-    private Layer targetLayer;
+    public Layer targetLayer;
 
-    private void Awake() {
-        int size = this.world.storage.mapSize;
+    public void setup() {
+        int size = this.world.mapSize;
 
         this.cellRenderer.mapSize = size;
         this.cellRenderer.floorTintGetterFunc = (x, y) => {
@@ -40,33 +40,13 @@ public class WorldRenderer : MonoBehaviour {
         }
     }
 
-    private void LateUpdate() {
-        // Only show Entities that at the depth being rendered.
-        foreach(EntityBase e in this.world.entities.entityList) {
-            if(e.depth == this.targetLayer.depth) {
-                e.gameObject.SetActive(true);
-            } else {
-                e.gameObject.SetActive(false);
-            }
-        }
-
-        foreach(Particle particle in this.world.particles.list) {
-            if(particle.depth == this.targetLayer.depth) {
-                particle.gameObject.SetActive(true);
-            }
-            else {
-                particle.gameObject.SetActive(false);
-            }
-        }
-    }
-
     public void dirtyTile(int x, int y) {
         this.cellRenderer.dirtyTile(x, y);
     }
 
     public void dirtyFogmap(Position pos, bool visible) {
         if(this.targetLayer != null && pos.depth == this.targetLayer.depth) {
-            this.fogRenderer.setTile(pos.x, pos.y, visible);
+            this.fogRenderer.dirtyTile(pos.x, pos.y, visible);
         }
     }
 
@@ -83,13 +63,7 @@ public class WorldRenderer : MonoBehaviour {
         this.cellRenderer.clear();
         this.cellRenderer.totalRedraw = true;
 
-        this.fogRenderer.redraw((x, y) => {
-            if(layer.hasFog()) {
-                return layer.fog.isFogPresent(x, y);
-            } else {
-                return false;
-            }
-        });
+        this.fogRenderer.redraw(layer);
 
         this.targetedRenderer.clear();
         foreach(Position p in this.world.storage.targetedForRemovalSquares) {

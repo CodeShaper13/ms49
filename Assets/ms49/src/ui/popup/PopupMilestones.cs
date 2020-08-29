@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupMilestones : PopupWindow {
+public class PopupMilestones : PopupWorldReference {
 
     [SerializeField]
     private RectTransform milestoneBtnArea = null;
@@ -11,8 +11,6 @@ public class PopupMilestones : PopupWindow {
     private GameObject prefabMilestoneProgressSlider = null;
     [SerializeField]
     private GameObject prefabBuildableRenderer = null;
-    [SerializeField]
-    private World world = null;
     [SerializeField]
     private PopupBuild popupBuild = null;
     [SerializeField]
@@ -24,11 +22,11 @@ public class PopupMilestones : PopupWindow {
 
     private MilestoneData currentMilestone;
 
-    public override void initialize() {
+    protected override void initialize() {
         base.initialize();
     }
 
-    public override void onOpen() {
+    protected override void onOpen() {
         base.onOpen();
 
         this.currentMilestone = this.world.milestones.getCurrent();
@@ -47,23 +45,17 @@ public class PopupMilestones : PopupWindow {
             }
 
             // Show what the Milestone unlocks
-            foreach(BuildableBase buildable in this.popupBuild.buildings) {
+            foreach(BuildableBase buildable in this.currentMilestone.unlockedBuildables) {
                 if(buildable == null) {
                     continue;
                 }
 
-                if(buildable.unlockedAt == null) { // Always unlocked
-                    continue;
-                }
+                GameObject obj = GameObject.Instantiate(
+                    this.prefabBuildableRenderer,
+                    this.unlockedArea);
 
-                if(buildable.unlockedAt == this.currentMilestone) {
-                    GameObject obj = GameObject.Instantiate(
-                        this.prefabBuildableRenderer,
-                        this.unlockedArea);
-
-                    obj.GetComponent<BuildableUiRenderer>().setBuildable(buildable);
-                    obj.GetComponent<Tooltip>().text = buildable.getName();
-                }
+                obj.GetComponent<BuildableUiRenderer>().setBuildable(buildable);
+                obj.GetComponent<Tooltip>().text = buildable.getName();
             }
         }
     }
@@ -89,7 +81,7 @@ public class PopupMilestones : PopupWindow {
         }
     }
 
-    public override void onClose() {
+    protected override void onClose() {
         base.onClose();
 
         // Destroy generated ui elements.

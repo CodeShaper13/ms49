@@ -3,7 +3,7 @@
 public class MapOutline : MonoBehaviour {
 
     [SerializeField]
-    private RectTransform rectTrans;
+    private RectTransform rectTrans = null;
 
     public void setSize(int size) {
         this.rectTrans.sizeDelta = Vector2.one * size;

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
+  m_Name: Rubble
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 0}
+  objectTile: {fileID: 11400000, guid: bff0da83d41d58841a3ce591da3f43c3, type: 2}
+  overlayTile: {fileID: 0}
+  rotationalOverride: 0
+  up:
+    tile: {fileID: 0}
+    effect: 0
+  right:
+    tile: {fileID: 0}
+    effect: 0
+  down:
+    tile: {fileID: 0}
+    effect: 0
+  left:
+    tile: {fileID: 0}
+    effect: 0
+  _movementCost: -1
+  canBuildOver: 0
+  isDestroyable: 1
+  zMoveDirections: 0
+  _flammable: 0
+  _temperatureOutput: 0
+  _supportsCeiling: 0
+  tintGroundTile: 0
+  tintObjectTile: 1
+  behaviorPrefab: {fileID: 0}

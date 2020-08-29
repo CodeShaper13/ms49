@@ -7,21 +7,37 @@ public class EntityList : MonoBehaviour {
     [SerializeField]
     private World world = null;
 
-    public List<EntityBase> entityList { get; private set; }
+    public List<EntityBase> list { get; private set; }
+
     private Transform entityHolder;
+    private WorldRenderer worldRenderer;
 
     private void Awake() {
-        this.entityList = new List<EntityBase>();
+        this.list = new List<EntityBase>();
+        this.entityHolder = this.world.createHolder("ENTITY_HOLDER");
+    }
 
-        this.entityHolder = new GameObject("ENTITY_HOLDER").transform;
+    private void Start() {
+        this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
     }
 
     private void Update() {
         if(!Pause.isPaused()) {
             // Update the Entities.
-            for(int i = this.entityList.Count - 1; i >= 0; i--) {
-                EntityBase entity = this.entityList[i];
-                entity.onUpdate();
+            for(int i = this.list.Count - 1; i >= 0; i--) {
+                this.list[i].onUpdate();
+            }
+        }
+    }
+
+    private void LateUpdate() {
+        // Only show Entities that at the depth being rendered.
+        foreach(EntityBase e in this.list) {
+            if(e.depth == this.worldRenderer.targetLayer.depth) {
+                e.gameObject.SetActive(true);
+            }
+            else {
+                e.gameObject.SetActive(false);
             }
         }
     }
@@ -37,7 +53,7 @@ public class EntityList : MonoBehaviour {
             entity.transform.position = postion;
             entity.initialize(this.world, entityId, depth);
 
-            this.entityList.Add(entity);
+            this.list.Add(entity);
 
             return entity;
         }
@@ -48,14 +64,14 @@ public class EntityList : MonoBehaviour {
     }
 
     public void remove(EntityBase entity) {
-        this.entityList.Remove(entity);
+        this.list.Remove(entity);
         entity.onDestroy();
         GameObject.Destroy(entity.gameObject);
     }
 
     public void writeToNbt(NbtCompound tag) {
         NbtList list = new NbtList(NbtTagType.Compound);
-        foreach(EntityBase e in this.entityList) {
+        foreach(EntityBase e in this.list) {
             NbtCompound compound = new NbtCompound();
             e.writeToNbt(compound);
             list.Add(compound);

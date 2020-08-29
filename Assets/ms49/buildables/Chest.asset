@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: Chest
   _cost: 75
   _description: Decoration
-  _unlockedAt: {fileID: 0}
+  _unlockedAt: {fileID: 11400000, guid: e1ccd1a61383761449887546a28a6e18, type: 2}
   gridSize: {x: 1, y: 1}
   tiles: []
   singularTile: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}

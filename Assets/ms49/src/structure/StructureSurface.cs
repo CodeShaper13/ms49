@@ -7,8 +7,8 @@ public class StructureSurface : StructureBase {
     private PrimitiveRndObject[] rndObjects = null;
 
     public override void placeIntoWorld(World world, Position pos) {
-        for(int x = 0; x < world.storage.mapSize; x++) {
-            for(int y = 0; y < world.storage.mapSize; y++) {
+        for(int x = 0; x < world.mapSize; x++) {
+            for(int y = 0; y < world.mapSize; y++) {
                 if(LayerDataSurface.isOutside(x, y)) {
                     Position pos1 = new Position(x, y, pos.depth);
 

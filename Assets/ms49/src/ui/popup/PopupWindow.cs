@@ -6,33 +6,21 @@ public class PopupWindow : MonoBehaviour {
     public static PopupWindow openPopup;
 
     [SerializeField]
-    private Transform frameTransform = null;
-    [SerializeField]
     private bool _pauseGameWhenOpen = false;
     [SerializeField]
     private bool _blockInput = false;
-
-    [Space]
-
-    private float timeOpen;
+    [SerializeField]
+    private bool _closeableWithEscape = true;
 
     public bool pauseGameWhenOpen { get { return this._pauseGameWhenOpen; } }
     public bool blockInput { get { return this._blockInput; } }
+    public bool closeableWithEscape { get { return this._closeableWithEscape; } }
 
     private void Awake() {
         this.initialize();
     }
 
-    private void OnEnable() {
-        this.frameTransform.localScale = Vector3.zero;
-    }
-
     private void Update() {
-        float f = Mathf.Clamp01(this.timeOpen * 14);
-        this.frameTransform.localScale = Vector3.one * f;
-
-        this.timeOpen += Time.fixedUnscaledDeltaTime;
-
         this.onUpdate();
     }
 
@@ -54,8 +42,6 @@ public class PopupWindow : MonoBehaviour {
         }
 
         this.onOpen();
-
-        this.timeOpen = 0f;
     }
 
     public void close() {
@@ -76,11 +62,11 @@ public class PopupWindow : MonoBehaviour {
         return PopupWindow.openPopup == this;
     }
 
-    public virtual void initialize() { }
+    protected virtual void initialize() { }
 
-    public virtual void onUpdate() { }
+    protected virtual void onUpdate() { }
 
-    public virtual void onOpen() { }
+    protected virtual void onOpen() { }
 
-    public virtual void onClose() { }
+    protected virtual void onClose() { }
 }

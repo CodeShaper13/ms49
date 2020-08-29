@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bed
   m_EditorClassIdentifier: 
   structureName: Bed
-  _cost: 0
+  _cost: 300
   _description: Provide Workers with a place to sleep so they can replenish their
     energy
   _unlockedAt: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}

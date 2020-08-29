@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D;
 
-[RequireComponent(typeof(PixelPerfectCamera))]
-[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour {
 
     public static CameraController instance; // TODO messy?
@@ -23,9 +21,8 @@ public class CameraController : MonoBehaviour {
     private KeyCode layerHigherKey = KeyCode.Z;
     [SerializeField]
     private PopupWindow pausePopup = null;
-    [SerializeField]
-    private World world = null;
 
+    private World world;
     private int currentZoom;
     private Camera mainCam;
     private PixelPerfectCamera ppc;
@@ -37,25 +34,37 @@ public class CameraController : MonoBehaviour {
     private void Awake() {
         CameraController.instance = this;
 
-        this.mainCam = this.GetComponent<Camera>();
-        this.ppc = this.GetComponent<PixelPerfectCamera>();
+        this.mainCam = Camera.main;
+        if(this.mainCam == null) {
+            Debug.LogWarning("Could not find Camera with tag MainCamera");
+        }
+        this.ppc = this.mainCam.GetComponent<PixelPerfectCamera>();
+
         this.mousePosLastFrame = Input.mousePosition;
 
         this.setZoom(this.maxZoom);
+
+        this.world = GameObject.FindObjectOfType<World>();
     }
 
-    public void initNewPlayer() { }
+    public void initNewPlayer(NewWorldSettings settings) {
+        this.inCreativeMode = settings.creativeEnabled;
+        this.setCameraPos(new Vector2(settings.getMapSize() / 2, 0));
+    }
 
     private void OnValidate() {
         this.maxZoom = Mathf.Max(this.minZoom, this.maxZoom);
     }
 
     private void Update() {
+        // Close the current popup if escape is pressed.
         if(Input.GetKeyDown(KeyCode.Escape)) {
             if(PopupWindow.openPopup == null) {
                 this.pausePopup.open();
             } else {
-                PopupWindow.openPopup.close();
+                if(PopupWindow.openPopup.closeableWithEscape) {
+                    PopupWindow.openPopup.close();
+                }
             }
         }
 
@@ -111,6 +120,10 @@ public class CameraController : MonoBehaviour {
         Vector2Int coords = this.world.worldToCell(mouseWorldPos);
 
         return new Position(coords.x, coords.y, this.currentLayer);
+    }
+
+    public void setCameraPos(Vector3 pos) {
+        this.mainCam.transform.position = pos;
     }
 
     public NbtCompound writeToNbt() {
@@ -170,21 +183,21 @@ public class CameraController : MonoBehaviour {
         // Pan with Midlde Mouse Button and Mouse
         if(Input.GetMouseButton(2)) {
             Vector3 movement = this.mousePosLastFrame - Input.mousePosition;
-            this.transform.position += movement * this.mousePanSpeed * Time.deltaTime;
+            this.mainCam.transform.position += movement * this.mousePanSpeed * Time.deltaTime;
         }
 
         // Pan with WASD
         if(Input.GetKey(KeyCode.A)) {
-            this.transform.position += new Vector3(-this.panSpeed, 0, 0) * Time.deltaTime;
+            this.mainCam.transform.position += new Vector3(-this.panSpeed, 0, 0) * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.D)) {
-            this.transform.position += new Vector3(this.panSpeed, 0, 0) * Time.deltaTime;
+            this.mainCam.transform.position += new Vector3(this.panSpeed, 0, 0) * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.W)) {
-            this.transform.position += new Vector3(0, this.panSpeed, 0) * Time.deltaTime;
+            this.mainCam.transform.position += new Vector3(0, this.panSpeed, 0) * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.S)) {
-            this.transform.position += new Vector3(0, -this.panSpeed, 0) * Time.deltaTime;
+            this.mainCam.transform.position += new Vector3(0, -this.panSpeed, 0) * Time.deltaTime;
         }
     }
 

@@ -28,6 +28,7 @@ public class DemoHighlighter : CellHighlightBase {
                 }
 
                 this.world.setCell(pos, Main.instance.tileRegistry.getAir());
+                this.world.tryCollapse(pos);
                 this.world.particles.spawn(pos, particlePrefab);
             }
         }

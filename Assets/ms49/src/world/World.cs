@@ -2,76 +2,104 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Grid))]
 public class World : MonoBehaviour {
 
+    // References to Scriptable Objects
     public MapGenerationData mapGenData = null;
-    public WorldRenderer worldRenderer = null;
     public IntVariable money = null;
+
+    // References to other Components:
+    public WorldRenderer worldRenderer = null;
     public ParticleList particles = null;
     public EntityList entities = null;
     public MilestoneManager milestones = null;
     public MapOutline mapOutline = null;
+    public Grid grid = null;
 
+    // References to Cells
+    public CellData rubbleCell;
+
+    // State:
     public Storage storage { get; private set; }
+    public string saveName { get; private set; }
     public int seed { get; private set; }
-    public NavigationManager navManager { get; private set; }
+    public int mapSize { get; private set; }
     public int stoneExcavated { get; set; }
+    public NavigationManager navManager { get; private set; }
 
     private MapGenerator mapGenerator;
-    private Grid grid;
 
-    private void Awake() {
-        this.grid = this.GetComponent<Grid>();
+    /// <summary>
+    /// Initializes the World and reads it from NBT.
+    /// </summary>
+    public void initialize(string saveName, NbtCompound rootTag) {
+        this.saveName = saveName;
 
-        this.storage = new Storage(this);
-        this.mapGenerator = new MapGenerator(this, this.mapGenData);
+        this.preInitialization();
 
-        this.mapOutline.setSize(this.mapGenData.mapSize);
-    }
+        this.readFromNbt(rootTag);
 
-    private void Start() {
-        this.StartCoroutine(this.updateHeat());
+        // In the event of addition Layers being added in development,
+        // there will be more layers in the MapGenerationData than
+        // layers read.  Generate the new ones.
+        for(int i = 0; i < this.storage.layerCount; i++) {
+            if(this.storage.getLayer(i) == null) {
+                this.mapGenerator.generateLayer(i);
+            }
+        }
+
+        this.postInitialization();
+
+        // Read Player:
+        if(CameraController.instance != null) {
+            CameraController.instance.readFromNbt(rootTag.getCompound("world").getCompound("player"));
+        }
     }
 
     /// <summary>
-    /// Initializes the World.  rootTag should be null for new worlds.
+    /// Initialized a new World.
     /// </summary>
-    public void initialize(NbtCompound rootTag) {
-        if(rootTag == null) {
-            // New world:
+    public void initialize(string saveName, NewWorldSettings settings) {
+        this.saveName = saveName;
+        this.seed = settings.getSeed();
+        this.mapSize = settings.getMapSize();
 
-            this.seed = (int)DateTime.Now.Ticks;
+        this.preInitialization();
 
-            // Generate the first layer.
-            for(int i = 0; i < this.storage.layerCount; i++) {
-                this.mapGenerator.generateLayer(i);
-            }
-
-            this.mapGenerator.generateStartRoom();
-
-            CameraController.instance.initNewPlayer();
-            CameraController.instance.changeLayer(this.mapGenData.playerStartLayer);
-
+        // Generate the map.
+        for(int i = 0; i < this.storage.layerCount; i++) {
+            this.mapGenerator.generateLayer(i);
         }
-        else {
-            // Load world:
-            this.readFromNbt(rootTag);
+        this.mapGenerator.generateStartRoom();
 
-            // In the event of addition Layers being added in development,
-            //there will be more layers in the MapGenerationData than
-            //layers read.  Generate the new ones.
-            for(int i = 0; i < this.storage.layerCount; i++) {
-                if(this.storage.getLayer(i) == null) {
-                    this.mapGenerator.generateLayer(i);
-                }
-            }
-        }
+        // Set starting money.
+        this.money.value = 3000;
 
-        this.navManager = new NavigationManager(this.storage);
+        // Setup the new Player.
+        CameraController.instance.initNewPlayer(settings);
+
+        this.postInitialization();
+
+        CameraController.instance.changeLayer(this.mapGenData.playerStartLayer);
+    }
+
+    private void preInitialization() {
+        this.storage = new Storage(this);
+        this.mapGenerator = new MapGenerator(this, this.mapGenData);
+    }
+
+    private void postInitialization() {
+        this.worldRenderer.setup();
+
+        this.navManager = new NavigationManager(this, this.mapSize);
+
+        this.mapOutline.setSize(this.mapSize);
+
+        this.StartCoroutine(this.updateHeat());
     }
 
     private void Update() {
@@ -81,7 +109,7 @@ public class World : MonoBehaviour {
     }
 
     private IEnumerator updateHeat() {
-        int size = this.storage.mapSize;
+        int size = this.mapSize;
         float[] readBuffer = new float[size * size];
 
         while(true) {
@@ -148,12 +176,12 @@ public class World : MonoBehaviour {
         this.setCell(new Position(x, y, depth), tile, rotation, updateNeighbors);
     }
 
-    public void setCell(Position pos, CellData tile, Rotation rotation, bool updateNeighbors = true) {
+    public void setCell(Position pos, CellData data, Rotation rotation, bool updateNeighbors = true) {
         if(this.isOutOfBounds(pos)) {
             return;
         }
 
-        this.storage.setCell(pos, tile, rotation == null ? Rotation.UP : rotation, updateNeighbors);
+        this.storage.setCell(pos, data, rotation == null ? Rotation.UP : rotation, updateNeighbors);
     }
 
     public bool isTargeted(Position pos) {
@@ -213,6 +241,42 @@ public class World : MonoBehaviour {
         }
     }
 
+    public void tryCollapse(Position pos) {
+        const int radius = 2;
+
+        for(int potentialCollapseX = -radius; potentialCollapseX <= radius; potentialCollapseX++) {
+            for(int potentialCollapseY = -radius; potentialCollapseY <= radius; potentialCollapseY++) {
+                // For each cell, check if it is supported
+                bool supported = false;
+                Position potential = pos.add(potentialCollapseX, potentialCollapseY);
+
+                for(int x1 = -radius; x1 <= radius; x1++) {
+                    for(int y1 = -radius; y1 <= radius; y1++) {
+                        Position p1 = potential.add(x1, y1);
+                        if(!this.isOutOfBounds(p1)) {
+                            CellState state = this.getCellState(p1);
+                            if(state.data.supportsCeiling) {
+                                supported = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if(!supported) {
+                    for(int x = -1; x <= 1; x++) {
+                        for(int y = -1; y <= 1; y++) {
+                            Position p = potential.add(x, y);
+                            if(!this.isOutOfBounds(p) && ((x == 0 && y == 0) || UnityEngine.Random.Range(0f, 1f) < 0.6f) && this.getCellState(p).data.isDestroyable) {
+                                this.setCell(p, this.rubbleCell);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private IEnumerator floodLiftFog(List<Position> changedCells) {
         foreach(Position p in changedCells) {
             this.liftFog(p, false);
@@ -242,7 +306,7 @@ public class World : MonoBehaviour {
     /// Returns true if the passed coordinates or depth are outside of the map.
     /// </summary>
     public bool isOutOfBounds(Position p) {
-        int r = this.storage.mapSize;
+        int r = this.mapSize;
         return p.x < 0 || p.y < 0 || p.x >= r || p.y >= r || p.depth < 0 || p.depth >= this.storage.layerCount;
     }
 
@@ -328,11 +392,33 @@ public class World : MonoBehaviour {
         return this.grid.CellToWorld(new Vector3Int(cellX, cellY, 0));
     }
 
+    public Transform createHolder(string name) {
+        GameObject obj = new GameObject(name);
+        obj.transform.parent = this.transform;
+        obj.transform.position = Vector3.zero;
+        return obj.transform;
+    }
+
+    /// <summary>
+    /// Saves the World.  If the world has no save name, nothing happens.
+    /// </summary>
+    public void saveGame() {
+        if(!string.IsNullOrEmpty(this.saveName)) {
+            NbtCompound rootTag = new NbtCompound("root");
+            rootTag.Add(this.writeToNbt());
+            NbtFile nbtFile = new NbtFile(rootTag);
+
+            Directory.CreateDirectory("saves/");
+            nbtFile.SaveToFile("saves/" + this.saveName + ".nbt", NbtCompression.None);
+        }
+    }
+
     public NbtCompound writeToNbt() {
         NbtCompound tag = new NbtCompound("world");
 
         // Write general world info:
         tag.setTag("seed", this.seed);
+        tag.setTag("mapSize", this.mapSize);
         tag.setTag("stoneExcavated", this.stoneExcavated);
 
         if(this.money != null) {
@@ -367,6 +453,7 @@ public class World : MonoBehaviour {
 
         // Read general world info:
         this.seed = tag.getInt("seed");
+        this.mapSize = tag.getInt("mapSize");
         this.stoneExcavated = tag.getInt("stoneExcavated");
 
         if(this.money != null) {
@@ -380,11 +467,6 @@ public class World : MonoBehaviour {
         // Read Entities:
         if(this.entities != null) {
             this.entities.readFromNbt(tag);
-        }
-
-        // Read Player:
-        if(CameraController.instance != null) {
-            CameraController.instance.readFromNbt(tag.getCompound("player"));
         }
 
         // Read Milestones:

@@ -7,10 +7,10 @@ using UnityEngine.UI;
 using UnityEditor;
 #endif
 
-public class PopupBuild : PopupWindow {
+public class PopupBuild : PopupWorldReference {
 
     [HideInInspector]
-    public List<BuildableBase> buildings = new List<BuildableBase>();
+    public List<BuildableBase> unlockedByDefault = new List<BuildableBase>();
 
     [Space]
 
@@ -28,19 +28,45 @@ public class PopupBuild : PopupWindow {
     private BuildableBase sData;
     public Rotation rot { get; private set; }
 
-    public override void initialize() {
+    protected override void initialize() {
         base.initialize();
     }
 
-    public override void onOpen() {
+    protected override void onOpen() {
         base.onOpen();
 
         this.setSelected(null);
 
         // Add all of the buttons
         RectTransform rt = this.area.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(rt.sizeDelta.x, this.buildings.Count * this.btnPrefab.GetComponent<RectTransform>().sizeDelta.y);
 
+        int btnCount = 0;
+
+        // Add the Buildables that are unlocked by default.
+        foreach(BuildableBase buildable in this.unlockedByDefault) {
+            if(buildable != null) {
+                this.addBtn(buildable, ref btnCount);
+            }
+        }
+
+        // Add the Buildables Milestones unlock.
+        foreach(MilestoneData milestone in this.world.milestones.milestones) {
+            if(milestone == null) {
+                continue;
+            }
+
+            if(CameraController.instance.inCreativeMode || milestone.isUnlocked) {
+                foreach(BuildableBase buildable in milestone.unlockedBuildables) {
+                    BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
+                    btn.transform.SetParent(this.area, false);
+                    btn.setStructureData(buildable);
+
+                    btnCount++;
+                }
+            }
+        }
+
+        /*
         foreach(BuildableBase buildable in this.buildings) {
             if(buildable == null) {
                 continue;
@@ -50,13 +76,16 @@ public class PopupBuild : PopupWindow {
                 BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
                 btn.transform.SetParent(this.area, false);
                 btn.setStructureData(buildable);
+
+                btnCount++;
             }
         }
+        */
 
         this.scrollbar.value = 1f;
     }
 
-    public override void onUpdate() {
+    protected override void onUpdate() {
         base.onUpdate();
 
         if(this.sData != null && this.sData.isRotatable()) {
@@ -69,8 +98,13 @@ public class PopupBuild : PopupWindow {
         }
     }
 
-    public override void onClose() {
+    protected override void onClose() {
         base.onClose();
+
+        // Destroy generated ui elements.
+        foreach(Transform t in this.area.transform) {
+            GameObject.Destroy(t.gameObject);
+        }
 
         this.areaHighlighter.hide();
     }
@@ -99,6 +133,14 @@ public class PopupBuild : PopupWindow {
         this.areaHighlighter.setBuildable(this.sData);
         this.areaHighlighter.show();
         this.preview.hide();
+    }
+
+    private void addBtn(BuildableBase buildable, ref int btnCount) {
+        BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
+        btn.transform.SetParent(this.area, false);
+        btn.setStructureData(buildable);
+
+        btnCount++;
     }
 
 #if UNITY_EDITOR

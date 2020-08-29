@@ -20,7 +20,7 @@ public class TaskBuild : TaskBase<EntityBuilder> {
 
     public override void preform() {
         if(!this.isHammering) {
-            if(this.owner.position.distance(this.buildSite.pos) <= 1f) {
+            if(!this.moveHelper.hasPath()) {
                 this.isHammering = true;
                 this.buildSite.startPs();
             }

@@ -52,7 +52,7 @@ public class BinaryTilemapRenderer : MonoBehaviour {
         this.dirtiedTiles.Add(new DirtyTile(new Vector2Int(x, y), visible));
     }
 
-    private struct DirtyTile {
+    public struct DirtyTile {
 
         public Vector2Int position;
         public bool visible;

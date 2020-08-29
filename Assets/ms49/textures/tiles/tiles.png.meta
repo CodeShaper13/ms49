@@ -380,6 +380,21 @@ TextureImporter:
   - first:
       213: 1739492175354726415
     second: tiles_lava
+  - first:
+      213: -3042433863185972550
+    second: tiles_itemPot
+  - first:
+      213: 3132585409767327958
+    second: tiles_orePot
+  - first:
+      213: -3109950417928512648
+    second: tiles_itemBrick
+  - first:
+      213: 5076840621122836206
+    second: tiles_support
+  - first:
+      213: 8736261515240804949
+    second: tiles_rubble
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -425,7 +440,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -2271,11 +2286,74 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_wallBottom
+      name: tiles_lava
       rect:
         serializedVersion: 2
-        x: 120
-        y: 123
+        x: 240
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f080791daeae32810800000000000000
+      internalID: 1739492175354726415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemPot
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab24e2c558a17c5d0800000000000000
+      internalID: -3042433863185972550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_orePot
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d8c0c145dd297b20800000000000000
+      internalID: 3132585409767327958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemBrick
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -2292,11 +2370,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_lava
+      name: tiles_support
       rect:
         serializedVersion: 2
-        x: 240
-        y: 32
+        x: 64
+        y: 80
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee6dc4b85af847640800000000000000
+      internalID: 5076840621122836206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_rubble
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 144
         width: 16
         height: 16
       alignment: 0
@@ -2306,8 +2405,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f080791daeae32810800000000000000
-      internalID: 1739492175354726415
+      spriteID: 55218d8bf8f6d3970800000000000000
+      internalID: 8736261515240804949
       vertices: []
       indices: 
       edges: []

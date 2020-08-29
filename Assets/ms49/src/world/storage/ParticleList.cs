@@ -8,17 +8,33 @@ public class ParticleList : MonoBehaviour {
 
     public List<Particle> list { get; private set; }
     private Transform particleHolder;
+    private WorldRenderer worldRenderer;
 
     private void Awake() {
         this.list = new List<Particle>();
 
-        this.particleHolder = new GameObject("PARTICLE_HOLDER").transform;
+        this.particleHolder = this.world.createHolder("PARTICLE_HOLDER");
+    }
+
+    private void Start() {
+        this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
     }
 
     private void Update() {
         if(!Pause.isPaused()) {
             for(int i = this.list.Count - 1; i >= 0; i--) {
                 this.list[i].onUpdate();
+            }
+        }
+    }
+
+    private void LateUpdate() {
+        foreach(Particle particle in this.list) {
+            if(particle.depth == this.worldRenderer.targetLayer.depth) {
+                particle.gameObject.SetActive(true);
+            }
+            else {
+                particle.gameObject.SetActive(false);
             }
         }
     }

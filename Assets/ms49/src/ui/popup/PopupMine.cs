@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PopupMine : PopupWindow {
+public class PopupMine : PopupWorldReference {
 
     public int costPerSquare;
 
@@ -13,16 +13,13 @@ public class PopupMine : PopupWindow {
     [SerializeField]
     private AudioSource audioCellToggle = null;
 
-    private World world;
-
-    public override void initialize() {
+    protected override void initialize() {
         base.initialize();
 
-        this.world = GameObject.FindObjectOfType<World>();
         this.text.text = string.Format(this.text.text, this.costPerSquare);
     }
 
-    public override void onUpdate() {
+    protected override void onUpdate() {
         base.onUpdate();
 
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
@@ -35,6 +32,7 @@ public class PopupMine : PopupWindow {
                 if(CameraController.instance.inCreativeMode) {
                     this.world.setCell(pos, Main.instance.tileRegistry.getAir(), true);
                     this.world.liftFog(pos);
+                    this.world.tryCollapse(pos);
 
                     if(isTargeted) {
                         this.world.setTargeted(pos, false);

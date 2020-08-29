@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sink
   m_EditorClassIdentifier: 
   structureName: Sink
-  _cost: 0
+  _cost: 250
   _description: Cooks need a place to wash dishes, like a sink
   _unlockedAt: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   gridSize: {x: 1, y: 1}

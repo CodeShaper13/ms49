@@ -39,6 +39,8 @@ public class CellData : ScriptableObject {
     private bool _flammable = false;
     [SerializeField]
     private float _temperatureOutput = 0f;
+    [SerializeField]
+    private bool _supportsCeiling = false;
 
     [Space]
 
@@ -56,6 +58,7 @@ public class CellData : ScriptableObject {
     public bool isWalkable { get { return this.movementCost >= 0; } }
     public bool isFlammable { get { return this._flammable; } }
     public float temperatureOutput { get { return this._temperatureOutput; } }
+    public bool supportsCeiling { get { return this._supportsCeiling; } }
 
     public TileBase getGroundTile() {
         return this.groundTile;

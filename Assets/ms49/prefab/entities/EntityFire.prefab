@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ashCell: {fileID: 11400000, guid: af19016fdbd37b943b11c3d84932ceb2, type: 2}
-  entityFireId: 10
   burnTimeRange: {x: 4, y: 6}
   fireSpreadRange: {x: 2, y: 3}
 --- !u!212 &7974092827828467284
@@ -87,7 +86,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2252217939642970804, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

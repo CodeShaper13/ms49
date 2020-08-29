@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StructureDumptruck
   m_EditorClassIdentifier: 
   liftFog: 1
-  gridSize: {x: 4, y: 3}
+  gridSize: {x: 3, y: 3}
   tiles:
   - character: 120
     buildable: {fileID: 0}
@@ -32,29 +32,16 @@ MonoBehaviour:
     - 
     - x
     - 
-    - x
-    - 
-    - 
-  - row:
     - 
     - x
-    - 
-    - x
-    - 
-    - 
-    - x
-    - 
     - 
   - row:
     - 
     - d
     - 
-    - x
-    - 
     - 
     - x
     - 
     - 
     - x
-    - 
     - 

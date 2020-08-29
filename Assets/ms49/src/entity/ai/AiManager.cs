@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 
-public class AiManager<T> where T : EntityWorker {
+public class AiManager {
 
     private List<TaskListEntry> tasks;
-    private T character;
 
-    public AiManager(T character) {
+    public AiManager() {
         this.tasks = new List<TaskListEntry>();
-        this.character = character;
     }
 
     /// <summary>
@@ -20,6 +17,18 @@ public class AiManager<T> where T : EntityWorker {
         this.tasks.Add(new TaskListEntry(priority, task));
 
         this.tasks = this.tasks.OrderBy(e => e.priority).ToList();
+    }
+
+    /// <summary>
+    /// Stops all running tasks and invokes the resetTask() method on them.
+    /// </summary>
+    public void stopAllTasks() {
+        foreach(TaskListEntry entry in this.tasks) {
+            if(entry.isRunning()) {
+                entry.task.resetTask();
+                entry.setRunning(false);
+            }
+        }
     }
 
     /// <summary>

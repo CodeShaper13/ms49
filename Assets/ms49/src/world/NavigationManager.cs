@@ -5,26 +5,28 @@ using System.Collections.Generic;
 public class NavigationManager {
 
     private NavGrid[] grids;
-    private Storage storage;
+    private World world;
+    private int mapSize;
 
     private Heap<Node> openSet;
 
-    public NavigationManager(Storage storage) {
-        this.storage = storage;
+    public NavigationManager(World world, int mapSize) {
+        this.world = world;
+        this.mapSize = mapSize;
 
-        int layerCount = storage.layerCount;
+        int layerCount = this.world.storage.layerCount;
         this.grids = new NavGrid[layerCount];
         for(int i = 0; i < layerCount; i++) {
-            this.grids[i] = new NavGrid(this.storage.mapSize);
+            this.grids[i] = new NavGrid(mapSize);
         }
 
-        this.openSet = new Heap<Node>(this.storage.mapSize * this.storage.mapSize * layerCount);
+        this.openSet = new Heap<Node>(mapSize * mapSize * layerCount);
     }
 
     public void update() {
         // Update Layers
-        for(int i = 0; i < this.storage.layerCount; i++) {
-            this.rebakeNavGridIfDirty(this.grids[i], this.storage.getLayer(i));
+        for(int i = 0; i < this.world.storage.layerCount; i++) {
+            this.rebakeNavGridIfDirty(this.grids[i], this.world.storage.getLayer(i));
         }
     }
 
@@ -40,7 +42,7 @@ public class NavigationManager {
         Node startNode = this.getNode(start);
         Node endNode = this.getNode(end);
 
-        this.openSet = new Heap<Node>(this.storage.mapSize * this.storage.mapSize * this.storage.layerCount); //.Clear(); // Get the heap ready to reuse
+        this.openSet = new Heap<Node>(this.mapSize * this.mapSize * this.world.storage.layerCount); //.Clear(); // Get the heap ready to reuse
         HashSet<Node> closedSet = new HashSet<Node>();
         this.openSet.Add(startNode);
 
@@ -166,7 +168,7 @@ public class NavigationManager {
         if(layer.navGridDirty) {
 
             // Regenerate the NavGrid.
-            int size = this.storage.mapSize;
+            int size = layer.size;
             Node[,] nodes = grid.nodes;
             for(int x = 0; x < size; x++) {
                 for(int y = 0; y < size; y++) {

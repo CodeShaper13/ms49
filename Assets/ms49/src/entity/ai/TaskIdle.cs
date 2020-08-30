@@ -10,7 +10,7 @@ public class TaskIdle : TaskBase<EntityWorker> {
 
     private float timeExecuting;
 
-    public TaskIdle(EntityWorker owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
+    //public TaskIdle(EntityWorker owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
 
     public override bool continueExecuting() {
         throw new System.NotImplementedException();

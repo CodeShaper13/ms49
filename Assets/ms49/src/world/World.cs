@@ -18,6 +18,7 @@ public class World : MonoBehaviour {
     public EntityList entities = null;
     public MilestoneManager milestones = null;
     public MapOutline mapOutline = null;
+    public TargetedSquares targetedSquares = null;
     public Grid grid = null;
 
     // References to Cells
@@ -184,24 +185,6 @@ public class World : MonoBehaviour {
         this.storage.setCell(pos, data, rotation == null ? Rotation.UP : rotation, updateNeighbors);
     }
 
-    public bool isTargeted(Position pos) {
-        if(this.isOutOfBounds(pos)) {
-            return false;
-        }
-
-        return this.storage.isTargeted(pos);
-    }
-
-    public void setTargeted(Position pos, bool targeted) {
-        if(this.isOutOfBounds(pos)) {
-            return;
-        }
-
-        this.storage.setTargeted(pos, targeted);
-
-        this.worldRenderer.dirtyExcavationTarget(pos, targeted);
-    }
-
     public void liftFog(Position pos, bool floodLiftFog = true) {
         if(this.isOutOfBounds(pos)) {
             return;
@@ -282,24 +265,6 @@ public class World : MonoBehaviour {
             this.liftFog(p, false);
             yield return new WaitForSeconds(0.05f);
         }
-    }
-
-    /// <summary>
-    /// Returns the targeted square closest to the passed point.
-    /// If no points can be found, null is returned.
-    /// </summary>
-    public Position? getClosestTargeted(Position pos) {
-        float dis = float.PositiveInfinity;
-        Position? closest = null;
-
-        foreach(Position p in this.storage.targetedForRemovalSquares) {
-            float f = p.distance(pos);
-            if(f < dis) {
-                dis = f;
-                closest = p;
-            }
-        }
-        return closest;
     }
 
     /// <summary>
@@ -445,6 +410,10 @@ public class World : MonoBehaviour {
             this.milestones.writeToNbt(tag);
         }
 
+        if(this.targetedSquares != null) {
+            this.targetedSquares.writeToNbt(tag);
+        }
+
         return tag;
     }
 
@@ -472,6 +441,10 @@ public class World : MonoBehaviour {
         // Read Milestones:
         if(this.milestones != null) {
             this.milestones.readFromNbt(tag);
+        }
+
+        if(this.targetedSquares != null) {
+            this.targetedSquares.readFromNbt(tag);
         }
     }
 }

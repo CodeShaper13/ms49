@@ -6,10 +6,6 @@ public class EntityCook : EntityWorker {
 
     public override void initialize(World world, int id, int depth) {
         base.initialize(world, id, depth);
-
-        this.aiManager.addTask(5, new TaskMakeFood(this, this.moveHelper));
-        this.aiManager.addTask(8, new TaskCollectDishes(this, this.moveHelper));
-        this.aiManager.addTask(9, new TaskWashPlate(this, this.moveHelper));
     }
 
     public override void writeWorkerInfo(System.Text.StringBuilder sb) {

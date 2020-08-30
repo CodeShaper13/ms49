@@ -5952,6 +5952,50 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: unlocks
+--- !u!1 &6372983764328089040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8099659954162208871}
+  - component: {fileID: 4421435247615274853}
+  m_Layer: 0
+  m_Name: TargetedSquares
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8099659954162208871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372983764328089040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7469874513568837899}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4421435247615274853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372983764328089040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8d4cf9cc343f348a26f780bd1fd49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldRenderer: {fileID: 7469874515189447459}
 --- !u!1 &6567094104572066955
 GameObject:
   m_ObjectHideFlags: 0
@@ -6695,6 +6739,7 @@ Transform:
   m_Children:
   - {fileID: 7469874515189447460}
   - {fileID: 7469874514756610942}
+  - {fileID: 8099659954162208871}
   m_Father: {fileID: 4458246438895600148}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6717,6 +6762,7 @@ MonoBehaviour:
   entities: {fileID: 7469874513568837894}
   milestones: {fileID: 7469874513568837895}
   mapOutline: {fileID: 7469874514756610913}
+  targetedSquares: {fileID: 4421435247615274853}
   grid: {fileID: 7469874513568837897}
   rubbleCell: {fileID: 11400000, guid: 545b74eb5c727d0428b06571cbf64d5d, type: 2}
 --- !u!156049354 &7469874513568837897
@@ -10654,7 +10700,7 @@ MonoBehaviour:
   targetObject: {fileID: 7469874513700289957}
   milestone: {fileID: 11400000, guid: a0f22d443a9e4d94a805c1fa2e95d27b, type: 2}
   invertResult: 0
-  enableWithCreative: 0
+  enableWithCreative: 1
 --- !u!1 &7469874514496113293
 GameObject:
   m_ObjectHideFlags: 0
@@ -19300,7 +19346,6 @@ MonoBehaviour:
     type: 3}
   prefabBuildableRenderer: {fileID: 4168973649031812808, guid: f7b41d34a4f7bfc49a74cef167b3b46b,
     type: 3}
-  popupBuild: {fileID: 7469874513881256672}
   animator: {fileID: 7469874515226046330}
   particles: {fileID: 7469874514566522856}
   unlockAudioSource: {fileID: 7469874515226046329}

@@ -3,8 +3,6 @@
 public class TaskDepositStone : TaskBase<EntityMiner> {
 
     private CellBehaviorDepositPoint depositPoint;
-
-    public TaskDepositStone(EntityMiner owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
     
     public override bool shouldExecute() {
         if(this.owner.heldItem != null) {

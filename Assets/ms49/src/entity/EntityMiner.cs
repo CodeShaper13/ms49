@@ -10,9 +10,6 @@ public class EntityMiner : EntityWorker {
 
     public override void initialize(World world, int id, int depth) {
         base.initialize(world, id, depth);
-
-        this.aiManager.addTask(5, new TaskMineRock(this, this.moveHelper));
-        this.aiManager.addTask(6, new TaskDepositStone(this, this.moveHelper));
     }
 
     public override void writeWorkerInfo(StringBuilder sb) {

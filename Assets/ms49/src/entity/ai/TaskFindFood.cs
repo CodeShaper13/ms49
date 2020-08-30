@@ -2,22 +2,23 @@
 
 public class TaskFindFood : TaskBase<EntityWorker> {
 
-    private const float EAT_STOP_AT = 99;
-    private const float EAT_SPEED = 20;
-    private const float START_HUNT_HUNGER = 20;
+    [SerializeField]
+    private float stopEattingValue = 99;
+    [SerializeField]
+    private float eatSpeed = 20;
+    [SerializeField]
+    private float startFoodHuntAt = 20;
 
     protected CellBehaviorTable table;
 
-    public TaskFindFood(EntityWorker owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
-
     public override bool continueExecuting() {
-        return this.owner.hunger < EAT_STOP_AT;
+        return this.owner.hunger.value < stopEattingValue;
     }
 
     public override void preform() {
         if(this.table.plateState == CellBehaviorTable.EnumPlateState.FULL && this.owner.position.distance(table.chairPos) <= 1) {
-            this.owner.increaseHunger(EAT_SPEED * Time.deltaTime);
-            if(this.owner.hunger >= EAT_STOP_AT) {
+            this.owner.hunger.increase(eatSpeed * Time.deltaTime);
+            if(this.owner.hunger.value >= stopEattingValue) {
                 this.table.plateState = CellBehaviorTable.EnumPlateState.DIRTY;
             }
 
@@ -26,7 +27,7 @@ public class TaskFindFood : TaskBase<EntityWorker> {
     }
 
     public override bool shouldExecute() {
-        if(this.owner.hunger <= START_HUNT_HUNGER) {
+        if(this.owner.hunger.value <= startFoodHuntAt) {
             // Find a table.
             foreach(CellBehaviorTable table in this.owner.world.getAllBehaviors<CellBehaviorTable>()) {
                 if(table.hasChair && !table.isOccupied()) {

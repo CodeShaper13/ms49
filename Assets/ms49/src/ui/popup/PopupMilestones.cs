@@ -12,8 +12,6 @@ public class PopupMilestones : PopupWorldReference {
     [SerializeField]
     private GameObject prefabBuildableRenderer = null;
     [SerializeField]
-    private PopupBuild popupBuild = null;
-    [SerializeField]
     private Animator animator = null;
     [SerializeField]
     private ParticleSystem particles = null;

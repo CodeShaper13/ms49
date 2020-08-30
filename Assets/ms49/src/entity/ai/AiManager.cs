@@ -1,22 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
-public class AiManager {
+public class AiManager : MonoBehaviour {
 
     private List<TaskListEntry> tasks;
 
-    public AiManager() {
+    [SerializeField, Header("Read only, used for finding the current task")]
+    [TextArea(1, 100)]
+    private string currentTask;
+
+    private void Awake() {
         this.tasks = new List<TaskListEntry>();
     }
 
-    /// <summary>
-    /// Adds a task to the Ai Manager.
-    /// </summary>
-    public void addTask(int priority, ITask task) {
-        this.tasks.Add(new TaskListEntry(priority, task));
+    private void Start() {
+        foreach(ITask task in this.GetComponentsInChildren<ITask>()) {
+            this.tasks.Add(new TaskListEntry(task.priority, task));
+        }
 
         this.tasks = this.tasks.OrderBy(e => e.priority).ToList();
+    }
+
+    private void LateUpdate() {
+        this.currentTask = this.generateDebugText();
     }
 
     /// <summary>

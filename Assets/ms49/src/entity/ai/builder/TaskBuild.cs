@@ -2,13 +2,12 @@
 
 public class TaskBuild : TaskBase<EntityBuilder> {
 
-    private const float BUILD_TIME = 4f;
+    [SerializeField]
+    private float buildSpeed = 4f;
 
     private float timeBuilding;
     private bool isHammering;
     private CellBehaviorBuildSite buildSite;
-
-    public TaskBuild(EntityBuilder owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
 
     public override bool continueExecuting() {
         if(this.buildSite == null) {
@@ -26,7 +25,7 @@ public class TaskBuild : TaskBase<EntityBuilder> {
             }
         } else {
             this.timeBuilding += Time.deltaTime;
-            if(this.timeBuilding >= BUILD_TIME) {
+            if(this.timeBuilding >= buildSpeed) {
                 this.buildSite.placeIntoWorld();
             }
         }

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class TaskMineRock : TaskBase<EntityMiner> {
 
-    public const float TIME_TO_MINE = 1f;
+    [SerializeField]
+    private float mineSpeed = 1f;
+    [SerializeField]
+    private float hungerCost = 5f;
 
     private float timeMining;
     private Position stonePos;
-
-    public TaskMineRock(EntityMiner owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
 
     public override bool shouldExecute() {
         if(this.owner.heldItem == null) {
@@ -30,7 +31,7 @@ public class TaskMineRock : TaskBase<EntityMiner> {
         if(!(this.owner.world.getCellState(this.stonePos).data is CellDataMineable)) {
             return false; // Targets cell is no longer a mineable cell (it was mined?).
         }
-        if(!this.owner.world.isTargeted(this.stonePos)) {
+        if(!this.owner.world.targetedSquares.isTargeted(this.stonePos)) {
             return false; // No more targeted squares (Player canceled it?).
         }
 
@@ -41,7 +42,7 @@ public class TaskMineRock : TaskBase<EntityMiner> {
         if(!this.moveHelper.hasPath()) {
             this.timeMining += Time.deltaTime;
 
-            if(this.timeMining >= TIME_TO_MINE) {
+            if(this.timeMining >= mineSpeed) {
                 // Pickup the dropped item from the stone.
                 CellData data = this.owner.world.getCellState(this.stonePos).data;
                 if(data is CellDataMineable) {
@@ -49,11 +50,11 @@ public class TaskMineRock : TaskBase<EntityMiner> {
                 }
 
                 // Reduce hunger
-                this.owner.reduceHunger(EntityWorker.HUNGER_COST_MINE);
+                this.owner.hunger.decrease(this.hungerCost);
 
                 // Remove the stone.
                 this.owner.world.setCell(this.stonePos, Main.instance.tileRegistry.getAir());
-                this.owner.world.setTargeted(this.stonePos, false);
+                this.owner.world.targetedSquares.setTargeted(this.stonePos, false);
                 this.owner.world.liftFog(this.stonePos);
                 this.owner.world.tryCollapse(this.stonePos);
 
@@ -76,7 +77,7 @@ public class TaskMineRock : TaskBase<EntityMiner> {
     /// no stone is found, false is returned.
     /// </summary>
     private bool findClosestStone(Vector2 searchOrgin) {
-        HashSet<Position> targetedPosList = this.owner.world.storage.targetedForRemovalSquares;
+        HashSet<Position> targetedPosList = this.owner.world.targetedSquares.list;
 
         foreach(Position targetedPos in targetedPosList.OrderBy(x => x.distance(this.owner.position)).ToList()) {
             // Quick check to make sure the targeted stone is not totally surrounded, as it often is

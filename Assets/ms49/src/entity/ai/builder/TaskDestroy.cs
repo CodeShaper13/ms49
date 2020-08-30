@@ -3,8 +3,6 @@ using System.Collections;
 
 public class TaskDestroy : TaskBase<EntityBuilder> {
 
-    public TaskDestroy(EntityBuilder owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
-
     public override bool continueExecuting() {
         throw new System.NotImplementedException();
     }

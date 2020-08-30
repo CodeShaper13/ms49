@@ -66,7 +66,7 @@ public class WorldRenderer : MonoBehaviour {
         this.fogRenderer.redraw(layer);
 
         this.targetedRenderer.clear();
-        foreach(Position p in this.world.storage.targetedForRemovalSquares) {
+        foreach(Position p in this.world.targetedSquares.list) {
             this.dirtyExcavationTarget(p, true);
         }
     }

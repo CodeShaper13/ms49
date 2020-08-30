@@ -26,7 +26,7 @@ public class PopupMine : PopupWorldReference {
             Position pos = CameraController.instance.getMousePos();
 
             CellData cell = this.world.getCellState(pos).data;
-            bool isTargeted = this.world.isTargeted(pos);
+            bool isTargeted = this.world.targetedSquares.isTargeted(pos);
 
             if(cell is CellDataMineable) {
                 if(CameraController.instance.inCreativeMode) {
@@ -35,19 +35,19 @@ public class PopupMine : PopupWorldReference {
                     this.world.tryCollapse(pos);
 
                     if(isTargeted) {
-                        this.world.setTargeted(pos, false);
+                        this.world.targetedSquares.setTargeted(pos, false);
                     }
 
                     this.playSfx();
                 }
                 else {
                     if(!isTargeted && this.money.value >= this.costPerSquare) {
-                        this.world.setTargeted(pos, true);
+                        this.world.targetedSquares.setTargeted(pos, true);
                         this.money.value -= this.costPerSquare;
                         this.playSfx();
                     }
                     else if(isTargeted) {
-                        this.world.setTargeted(pos, false);
+                        this.world.targetedSquares.setTargeted(pos, false);
                         this.money.value += this.costPerSquare;
                         this.playSfx();
                     }

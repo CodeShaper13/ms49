@@ -5,14 +5,15 @@ public class TaskSleep : TaskBase<EntityWorker> {
     protected CellBehaviorOccupiable occupiable;
     protected bool rechargingAtSpot;
 
-    private readonly float rechargeSpeed = 1;
-    private readonly float valueToStartHuntAt = 20;
-    private readonly float valueToStop = 99;
-
-    public TaskSleep(EntityWorker owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
+    [SerializeField]
+    private float energyRechargeSpeed = 1;
+    [SerializeField]
+    private float seekBedAt = 20;
+    [SerializeField]
+    private float valueToStop = 99;
 
     public override bool continueExecuting() {
-        return this.owner.energy < this.valueToStop;
+        return this.owner.energy.value < this.valueToStop;
     }
 
     public override void preform() {
@@ -28,12 +29,12 @@ public class TaskSleep : TaskBase<EntityWorker> {
         }
 
         if(this.rechargingAtSpot) {
-            this.owner.setEnergy(this.owner.energy + (this.rechargeSpeed * Time.deltaTime));
+            this.owner.energy.value = (this.owner.energy.value + (this.energyRechargeSpeed * Time.deltaTime));
         }
     }
 
     public override bool shouldExecute() {
-        if(this.owner.energy > this.valueToStartHuntAt) {
+        if(this.owner.energy.value > this.seekBedAt) {
             return false; // They don't need food/sleep yet.
         } else {
             // Find a structure

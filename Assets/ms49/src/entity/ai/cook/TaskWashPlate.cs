@@ -8,12 +8,12 @@
 /// </summary>
 public class TaskWashPlate : TaskBase<EntityCook> {
 
-    private const float WASH_TIME = 4f;
+    [SerializeField]
+    private float plateWashSpeed = 4f;
 
     private float washTimer;
     private CellBehaviorSink sink;
 
-    public TaskWashPlate(EntityCook owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
 
     public override bool continueExecuting() {
         if(this.sink == null || this.owner.plateState != CellBehaviorTable.EnumPlateState.DIRTY) {
@@ -28,7 +28,7 @@ public class TaskWashPlate : TaskBase<EntityCook> {
             this.sink.setFilled(true);
 
             this.washTimer += Time.deltaTime;
-            if(this.washTimer >= WASH_TIME) {
+            if(this.washTimer >= plateWashSpeed) {
                 this.owner.plateState = CellBehaviorTable.EnumPlateState.CLEAN;
                 this.sink.setOccupant(null);
                 this.sink.setFilled(false);

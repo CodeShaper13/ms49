@@ -9,8 +9,6 @@ public class TaskCollectDishes : TaskBase<EntityCook> {
 
     private CellBehaviorTable table;
 
-    public TaskCollectDishes(EntityCook owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
-
     public override bool continueExecuting() {
         if(this.table == null || this.table.plateState != CellBehaviorTable.EnumPlateState.DIRTY) {
             return false;

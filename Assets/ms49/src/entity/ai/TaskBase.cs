@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class TaskBase<T> : ITask where T : EntityBase {
+public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
+
+    [SerializeField]
+    private int _priority = 0;
 
     protected T owner;
     protected MoveHelper moveHelper;
 
-    public TaskBase(T owner, MoveHelper moveHelper) {
-        this.owner = owner;
-        this.moveHelper = moveHelper;
+    public int priority => this._priority;
 
-        //this.resetTask();
+    private void Start() {
+        this.owner = this.GetComponentInParent<T>();
+        this.moveHelper = this.GetComponentInParent<MoveHelper>();
     }
 
     /// <summary>
@@ -43,7 +46,7 @@ public abstract class TaskBase<T> : ITask where T : EntityBase {
     /// </summary>
     public virtual void resetTask() { }
 
-    public bool allowLowerPriority() {
+    public virtual bool allowLowerPriority() {
         return false;
     }
 

@@ -15,7 +15,7 @@ public abstract class RegistryBase<T> : MonoBehaviour {
     [HideInInspector]
     private T[] elements = null;
     /// <summary> Used by the inspector to know if the dropdown is open. </summary>
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private bool isInspectorDropdownOpen;
 
     /// <summary>

@@ -6,14 +6,13 @@
 /// </summary>
 public class TaskMakeFood : TaskBase<EntityCook> {
 
-    private const float FOOD_COOK_TIME = 4f;
+    [SerializeField]
+    private float cookSpeed = 4f;
 
     private CellBehaviorTable table;
     private CellBehaviorStove stove;
     private int stage; // 0 = making food, 1 = going to table
     private float cookTimer;
-
-    public TaskMakeFood(EntityCook owner, MoveHelper moveHelper) : base(owner, moveHelper) { }
 
     public override bool continueExecuting() {
         if(this.table == null || !this.table.isOccupied() || this.table.plateState != CellBehaviorTable.EnumPlateState.NONE) {
@@ -32,7 +31,7 @@ public class TaskMakeFood : TaskBase<EntityCook> {
             if(!this.moveHelper.hasPath()) {
                 // cook food...
                 this.cookTimer += Time.deltaTime;
-                if(this.cookTimer >= FOOD_COOK_TIME) {
+                if(this.cookTimer >= cookSpeed) {
                     this.owner.plateState = CellBehaviorTable.EnumPlateState.FULL;
                     this.stove.setOccupant(null);
                     this.stage = 1;

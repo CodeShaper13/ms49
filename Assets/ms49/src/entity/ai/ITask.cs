@@ -3,6 +3,8 @@ using System.Collections;
 
 public interface ITask {
 
+    int priority { get; }
+
     /// <summary>
     /// Called every frame the task is not running.
     /// If true is returned, that task will start running that frame.

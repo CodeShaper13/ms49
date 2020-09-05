@@ -15,5 +15,6 @@ MonoBehaviour:
   structureName: Chest
   _cost: 75
   _description: Decoration
-  cell: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}
-  displayRotation: 0
+  _cell: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}
+  _displayRotation: 0
+  overrideRotationMsg: 

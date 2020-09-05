@@ -48,6 +48,11 @@ public class BuildableTile : BuildableBase {
     }
 
     public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
+        if(this.cell == null) {
+            Debug.LogWarning("Can not place BuildableTile " + this.name + " into world, it has no Cell set.");
+            return;
+        }
+
         bool instantBuild = CameraController.instance.inCreativeMode || highlight == null;
 
         if(instantBuild) {

@@ -18,6 +18,7 @@ MonoBehaviour:
     energy
   _cell: {fileID: 0}
   _displayRotation: 0
+  overrideRotationMsg: 
   gridSize: {x: 1, y: 2}
   tiles:
   - character: 116

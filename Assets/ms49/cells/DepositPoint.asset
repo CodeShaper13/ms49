@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DepositPoint
   m_EditorClassIdentifier: 
   groundTile: {fileID: 0}
-  objectTile: {fileID: 11400000, guid: b0da90c2d34ef014ea2f367b5cfc7cf8, type: 2}
+  objectTile: {fileID: 11400000, guid: cffc7c8cc06bf7545b0302a4c3687e5c, type: 2}
   overlayTile: {fileID: 11400000, guid: b0da90c2d34ef014ea2f367b5cfc7cf8, type: 2}
   rotationalOverride: 0
   up:
@@ -33,6 +33,8 @@ MonoBehaviour:
   isDestroyable: 1
   zMoveDirections: 0
   _flammable: 1
+  _temperatureOutput: 0
+  _supportsCeiling: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 4417719939516446295, guid: eadd08ad1619d5346bfa47c572005493,

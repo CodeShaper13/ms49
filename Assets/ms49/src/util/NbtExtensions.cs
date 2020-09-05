@@ -306,6 +306,11 @@ public static class NbtExtension {
 
     #endregion
 
+    public static bool hasKey(this NbtCompound tag, string key) {
+        NbtTag result;
+        return tag.TryGet(key, out result);
+    }
+
     /*
     /// <summary>
     /// Writes the passed Vector3 as a compound with passed name.

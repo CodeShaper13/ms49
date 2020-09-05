@@ -11,14 +11,16 @@ public struct DirectionalTile {
 
     [Tooltip("If not set, the Cell's object tile will be used.")]
     public TileBase tile;
+    public TileBase overlayTile;
     public RotationEffect effect;
 
-    public DirectionalTile(TileBase tile, RotationEffect effect) {
+    public DirectionalTile(TileBase tile, TileBase overlayTile, RotationEffect effect) {
         this.tile = tile;
+        this.overlayTile = overlayTile;
         this.effect = effect;
     }
 
-    public DirectionalTile(TileBase tile) : this(tile, RotationEffect.NOTHING) { }
+    public DirectionalTile(TileBase tile, TileBase overlayTile) : this(tile, overlayTile, RotationEffect.NOTHING) { }
 
     public Matrix4x4 getMatrix() {
         return Matrix4x4.TRS(

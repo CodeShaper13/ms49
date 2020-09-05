@@ -21,20 +21,23 @@ public class BuildAreaHighlighter : CellHighlightBase {
 
         if(isValid) {
             if(this.buildable is BuildableTile) {
-                BuildableTile b = (BuildableTile)this.buildable;
-
                 this.cellRenderer.gameObject.SetActive(true);
                 this.tileSr.gameObject.SetActive(false);
 
-                this.cellRenderer.mapSize = Math.Max(this.buildable.getWidth(), this.buildable.getHeight());
+                this.cellRenderer.mapSize = Math.Max(this.buildable.getHighlightWidth(), this.buildable.getHighlightHeight());
 
                 this.cellRenderer.cellStateGetterFunc = (x, y) => {
-                    CellData data = b.getTile(x, y);
+                    CellData data;
+                    if(this.buildable is BuildableMultiCellTile) {
+                        data = ((BuildableMultiCellTile)this.buildable).getTile(x, y);
+                    } else {
+                        data = ((BuildableTile)this.buildable).cell;
+                    }
+
                     if(data == null) {
                         return null;
-                    }
-                    else {
-                        return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : null);
+                    } else {
+                        return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : Rotation.UP);
                     }
                 };
                 this.cellRenderer.totalRedraw = true;
@@ -49,6 +52,7 @@ public class BuildAreaHighlighter : CellHighlightBase {
                 this.buildable.getPreviewSprites(ref groundSprite, ref objectSprite, ref overlaySprite);
 
                 this.tileSr.sprite = objectSprite;
+                //this.tileSrOverlay.sprite = overlaySprite;
             }
         } else {
             this.cellRenderer.gameObject.SetActive(false);
@@ -73,19 +77,19 @@ public class BuildAreaHighlighter : CellHighlightBase {
     public override void hide() {
         base.hide();
 
-        //this.cellRenderer.clear();
+        this.cellRenderer.clear();
     }
 
     public override void setInvisible() {
         base.setInvisible();
 
-        //this.cellRenderer.clear();
+        this.cellRenderer.clear();
     }
 
     public void setBuildable(BuildableBase buildable) {
         this.buildable = buildable;
         this.sr.transform.localScale = new Vector3(
-            this.buildable.getWidth(),
-            this.buildable.getHeight());
+            this.buildable.getHighlightWidth(),
+            this.buildable.getHighlightHeight());
     }
 }

@@ -28,10 +28,6 @@ public class PopupBuild : PopupWorldReference {
     private BuildableBase sData;
     public Rotation rot { get; private set; }
 
-    protected override void initialize() {
-        base.initialize();
-    }
-
     protected override void onOpen() {
         base.onOpen();
 
@@ -57,6 +53,10 @@ public class PopupBuild : PopupWorldReference {
 
             if(CameraController.instance.inCreativeMode || milestone.isUnlocked) {
                 foreach(BuildableBase buildable in milestone.unlockedBuildables) {
+                    if(buildable == null) {
+                        continue;
+                    }
+
                     BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
                     btn.transform.SetParent(this.area, false);
                     btn.setStructureData(buildable);
@@ -66,22 +66,6 @@ public class PopupBuild : PopupWorldReference {
             }
         }
 
-        /*
-        foreach(BuildableBase buildable in this.buildings) {
-            if(buildable == null) {
-                continue;
-            }
-
-            if(CameraController.instance.inCreativeMode || (buildable.unlockedAt == null || buildable.unlockedAt.isUnlocked)) {
-                BtnStructureListEntry btn = GameObject.Instantiate(this.btnPrefab).GetComponent<BtnStructureListEntry>();
-                btn.transform.SetParent(this.area, false);
-                btn.setStructureData(buildable);
-
-                btnCount++;
-            }
-        }
-        */
-
         this.scrollbar.value = 1f;
     }
 
@@ -90,6 +74,7 @@ public class PopupBuild : PopupWorldReference {
 
         if(this.sData != null && this.sData.isRotatable()) {
             bool rPressed = Input.GetKeyDown(KeyCode.R);
+
             if(rPressed && Input.GetKey(KeyCode.LeftShift)) {
                 this.rot = this.rot.counterClockwise();
             } else if(rPressed) {
@@ -152,7 +137,7 @@ public class PopupBuild : PopupWorldReference {
 
         public void OnEnable() {
             this.popup = (PopupBuild)this.target;
-            this.list = new ReorderableList(this.serializedObject, this.serializedObject.FindProperty("buildings"), true, true, true, true);
+            this.list = new ReorderableList(this.serializedObject, this.serializedObject.FindProperty("unlockedByDefault"), true, true, true, true);
 
             list.drawElementCallback = DrawListItems; // Delegate to draw the elements on the list
             list.drawHeaderCallback = DrawHeader; // Skip this line if you set displayHeader to 'false' in your ReorderableList constructor.

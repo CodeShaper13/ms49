@@ -1,13 +1,15 @@
-﻿
-using fNbt;
+﻿using fNbt;
 using System.Collections.Generic;
 
 public class Inventory {
 
-    protected Stack<Item> items;
     protected int maxCapacity;
 
-    public Inventory(int size) {
+    public Stack<Item> items { get; protected set; }
+    public string inventoryName { get; protected set; }
+
+    public Inventory(string inventoryName, int size) {
+        this.inventoryName = inventoryName;
         this.maxCapacity = size;
         this.items = new Stack<Item>(this.maxCapacity);
     }

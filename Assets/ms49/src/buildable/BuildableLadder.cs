@@ -21,7 +21,7 @@ public class BuildableLadder : BuildableBase {
         }
 
         CellData cell = this.pointingDown(r) ? this.ladderTop : this.ladderBottom;
-        objectSprite = TileSpriteGetter.retrieveSprite(cell.objectTile);
+        objectSprite = TileSpriteGetter.retrieveSprite(cell.getObjectTile(Rotation.UP).tile);
     }
 
     public override bool isRotatable() {
@@ -35,7 +35,7 @@ public class BuildableLadder : BuildableBase {
     public override bool isValidLocation(World world, Position pos, Rotation rotation) {
         int otherDepth = pos.depth + (this.pointingDown(rotation) ? 1 : -1);
 
-        if(!world.isDepthUnlocked(otherDepth)) {
+        if(!CameraController.instance.inCreativeMode && !world.isDepthUnlocked(otherDepth)) {
             return false;
         }
 

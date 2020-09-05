@@ -16,13 +16,13 @@ public class WorkerPathPreview : MonoBehaviour {
             if(this.moveHelper != null && this.moveHelper.hasPath()) {
                 this.lr.enabled = true;
 
-                NavPath path = this.moveHelper.getPath();
+                NavPath path = this.moveHelper.path;
 
                 List<Vector3> points = new List<Vector3>();
                 points.Add(this.transform.position - Vector3.forward);
 
-                for(int i = path.targetIndex; i < path.getPointCount(); i++) {
-                    points.Add((Vector3)path.getPoint(i) + Vector3.forward * this.zValue);
+                for(int i = path.targetIndex; i < path.pointCount; i++) {
+                    points.Add((Vector3)path.getPoint(i).worldPos + Vector3.forward * this.zValue);
                 }
 
                 this.lr.positionCount = points.Count;

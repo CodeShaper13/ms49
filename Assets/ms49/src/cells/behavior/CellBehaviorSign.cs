@@ -1,5 +1,4 @@
 ﻿using fNbt;
-using UnityEngine;
 
 public class CellBehaviorSign : CellBehavior, IHasData {
 
@@ -8,12 +7,10 @@ public class CellBehaviorSign : CellBehavior, IHasData {
     public override void onRightClick() {
         base.onRightClick();
 
-        PopupSign popup = GameObject.FindObjectOfType<PopupSign>();
+        PopupSign popup = Main.instance.findPopup<PopupSign>();
         if(popup != null) {
             popup.open();
             popup.setMeta(this);
-        } else {
-            Debug.Log("Popup could not be found!");
         }
     }
 

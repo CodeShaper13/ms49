@@ -15,7 +15,6 @@ MonoBehaviour:
   _typeName: Cook
   tooltipCanvas: {fileID: 3336448849960213947}
   sleepingEffect: {fileID: 4301930398894417832}
-  milestone: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   hunger: {fileID: 6616778468984612927}
   energy: {fileID: 6883792762654474139}
   temperature: {fileID: 574738894760353997}
@@ -68,6 +67,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 48302764432458648, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: spriteSheetName
+      value: spritesheetCook
+      objectReference: {fileID: 0}
     - target: {fileID: 942847538810084662, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -251,6 +255,35 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8050371800757977470, guid: 95492674a4f74784c9220ac453d16aec,
         type: 3}
+    - target: {fileID: 7217758550356351289, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: partFront
+      value: 
+      objectReference: {fileID: -2394185236860905671, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7217758550356351289, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: partBack
+      value: 
+      objectReference: {fileID: 8050371800757977470, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7217758550356351289, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: partSide
+      value: 
+      objectReference: {fileID: 4884875884954926549, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7801550287872171817, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2394185236860905671, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7801550287872171817, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5136688866876790030, guid: 016f744bcb9f64c4ca35b84e7bc8f811, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 016f744bcb9f64c4ca35b84e7bc8f811, type: 3}

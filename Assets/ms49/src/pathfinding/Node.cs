@@ -26,7 +26,7 @@ public class Node : IHeapItem<Node> {
     }
 
     public PathPoint asPathPoint() {
-        return new PathPoint(this.worldPosition.x, this.worldPosition.y, this.depth);
+        return new PathPoint(this.x, this.y, this.depth);
     }
 
     public bool connectsUp() {

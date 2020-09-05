@@ -20,10 +20,6 @@ public class PopupMilestones : PopupWorldReference {
 
     private MilestoneData currentMilestone;
 
-    protected override void initialize() {
-        base.initialize();
-    }
-
     protected override void onOpen() {
         base.onOpen();
 

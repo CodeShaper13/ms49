@@ -50,7 +50,9 @@ public class TaskWashPlate : TaskBase<EntityCook> {
         if(this.owner.plateState == CellBehaviorTable.EnumPlateState.DIRTY) {
             foreach(CellBehaviorSink sink in this.owner.world.getAllBehaviors<CellBehaviorSink>()) {
                 if(!sink.isOccupied()) {
-                    if(this.moveHelper.setDestination(sink.pos, true) != null) {
+                    if(this.moveHelper.setDestination(sink.pos + Rotation.DOWN, true) != null) {
+                        this.moveHelper.setPathEndingRotation(Rotation.UP);
+
                         this.sink = sink;
                         this.sink.setOccupant(this.owner);
                         return true;

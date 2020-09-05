@@ -15,7 +15,6 @@ MonoBehaviour:
   _typeName: Miner
   tooltipCanvas: {fileID: 3111869985922012359}
   sleepingEffect: {fileID: 4526505930039832276}
-  milestone: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   hunger: {fileID: 6823344016880345411}
   energy: {fileID: 6551262760374367975}
   temperature: {fileID: 187750631081896369}
@@ -219,6 +218,35 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217758550356351289, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: partFront
+      value: 
+      objectReference: {fileID: -5058851175537142011, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7217758550356351289, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: partSide
+      value: 
+      objectReference: {fileID: -2305332917062886131, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7217758550356351289, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: partBack
+      value: 
+      objectReference: {fileID: -7578466957126592299, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7801550287872171817, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5058851175537142011, guid: 95492674a4f74784c9220ac453d16aec,
+        type: 3}
+    - target: {fileID: 7801550287872171817, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5136688866876790030, guid: 016f744bcb9f64c4ca35b84e7bc8f811, type: 3}

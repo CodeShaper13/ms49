@@ -13,13 +13,19 @@ public class Main : MonoBehaviour {
     [SerializeField]
     private GameObject _gamePrefab = null;
     [SerializeField]
+    private GameObject _uiOverlay = null;
+    [SerializeField]
     private TileRegistry _tileRegistry = null;
     [SerializeField]
-    public EntityRegistry _entityRegistry = null;
+    private EntityRegistry _entityRegistry = null;
     [SerializeField]
-    public MinedItemRegistry _itemRegistry = null;
+    private MinedItemRegistry _itemRegistry = null;
     [SerializeField]
-    public Names _names = null;
+    private Names _names = null;
+    [SerializeField]
+    private Transform _popupParent = null;
+    [SerializeField]
+    private Options _options = null;
     [SerializeField]
     private DebugLoadSettings _debugLoadSettings = new DebugLoadSettings();
 
@@ -28,12 +34,11 @@ public class Main : MonoBehaviour {
     [SerializeField]
     private PopupWindow titleScreenPopup = null;
 
-    public NewWorldSettings set;
-
-    public TileRegistry tileRegistry { get { return this._tileRegistry; } }
-    public EntityRegistry entityRegistry { get { return this._entityRegistry; } }
-    public MinedItemRegistry itemRegistry { get { return this._itemRegistry; } }
-    public Names names { get { return this._names; } }
+    public TileRegistry tileRegistry => this._tileRegistry;
+    public EntityRegistry entityRegistry => this._entityRegistry;
+    public MinedItemRegistry itemRegistry => this._itemRegistry;
+    public Names names => this._names;
+    public Options options => this._options;
 
     /// <summary>
     /// A reference to the World.  Null if the Player is not playing a save.
@@ -81,6 +86,18 @@ public class Main : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Finds a Popup window of the passed type.  If it could not be
+    /// found, null is returned and a warning is logged.
+    /// </summary>
+    public T findPopup<T>() where T : PopupWindow {
+        T popup = this._popupParent.GetComponentInChildren<T>(true);
+        if(popup == null) {
+            Debug.LogWarning("Could not find Popup of type " + typeof(T));
+        }
+        return popup;
+    }
+
     public List<string> getAllSaves(bool sortByLastPlayed = false) {
         List<string> saves = new List<string>();
 
@@ -111,6 +128,9 @@ public class Main : MonoBehaviour {
         // Destroy everything.
         GameObject.Destroy(this.mainGameObj);
 
+        // Close the overlay
+        this._uiOverlay.SetActive(false);
+
         // Open the title screen
         this.titleScreenPopup.open();
     }
@@ -125,6 +145,9 @@ public class Main : MonoBehaviour {
     private World instantiateGame() {
         GameObject obj = GameObject.Instantiate(this._gamePrefab);
         this.mainGameObj = obj;
+
+        this._uiOverlay.SetActive(true);
+
         return obj.GetComponentInChildren<World>();
     }
 

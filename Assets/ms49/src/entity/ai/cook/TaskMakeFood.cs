@@ -73,6 +73,8 @@ public class TaskMakeFood : TaskBase<EntityCook> {
                     // Make use there is a stove, and go to it
                     foreach(CellBehaviorStove stove in this.owner.world.getAllBehaviors<CellBehaviorStove>()) {
                         if(this.moveHelper.setDestination(stove.pos + Rotation.DOWN, false) != null) {
+                            this.moveHelper.setPathEndingRotation(Rotation.UP);
+
                             foundStove = true;
 
                             this.stove = stove;

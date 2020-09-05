@@ -4,7 +4,7 @@ using fNbt;
 
 public class InventoryInfinite : Inventory {
 
-    public InventoryInfinite() : base(1) {
+    public InventoryInfinite(string containerName) : base(containerName, 1) {
 
     }
 

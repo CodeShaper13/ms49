@@ -45,13 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
-  arrowSpriteRenderer: {fileID: 2591930927674241971}
-  mask: {fileID: 2864814623930090820}
-  arrowRight: {fileID: -5683334906312533103, guid: 76049c470a04da84f89e8f4260580934,
-    type: 3}
-  arrowUp: {fileID: -1660721804441088346, guid: 76049c470a04da84f89e8f4260580934,
-    type: 3}
-  arrowDown: {fileID: 3728466252144193717, guid: 76049c470a04da84f89e8f4260580934,
+  conveyorSpeed: 1
+  itemDestoryParticle: {fileID: 4334713544733170696, guid: 7be00c2bd70c34c4c8b78dc5d6d9679d,
     type: 3}
 --- !u!1 &2781604633546625781
 GameObject:

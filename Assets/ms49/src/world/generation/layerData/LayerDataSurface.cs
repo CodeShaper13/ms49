@@ -7,7 +7,7 @@ public class LayerDataSurface : LayerDataBase {
     [Space]
 
     [SerializeField]
-    private Tile grassTile = null;
+    private TileBase grassTile = null;
 
     public override Color getGroundTint(int x, int y) {
         return isOutside(x, y) ? Color.white : base.getGroundTint(x, y);

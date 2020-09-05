@@ -20,6 +20,30 @@ public class Rotation {
         return Rotation.ALL[(int)rotation];
     }
 
+    /// <summary>
+    /// Converts a direction vector to a Rotation.
+    /// </summary>
+    public static Rotation directionToRotation(Vector2 dir) {
+        //get the normalized direction
+        Vector2 normDir = dir.normalized;
+
+        //calculate how many degrees one slice is
+        float step = 360f / 4; // 4 slices
+
+        //get the angle from -180 to 180 of the direction vector relative to the Up vector.
+        //this will return the angle between dir and North.
+        float angle = Vector2.SignedAngle(Vector2.up, normDir);
+        angle *= -1;
+
+        //if angle is negative, then let's make it positive by adding 360 to wrap it around.
+        if(angle < 0) {
+            angle += 360;
+        }
+
+        int index = Mathf.FloorToInt(angle / step);
+        return Rotation.ALL[index];
+    }
+
     private Rotation(int id, string name, Vector2Int dir, EnumAxis axis) {
         this.id = id;
         this.name = name;

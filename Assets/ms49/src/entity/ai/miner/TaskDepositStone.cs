@@ -1,17 +1,15 @@
-﻿using UnityEngine;
-
-public class TaskDepositStone : TaskBase<EntityMiner> {
+﻿public class TaskDepositStone : TaskBase<EntityMiner> {
 
     private CellBehaviorDepositPoint depositPoint;
     
     public override bool shouldExecute() {
         if(this.owner.heldItem != null) {
-
-            foreach(CellBehaviorDepositPoint point in this.owner.world.getAllBehaviors<CellBehaviorDepositPoint>()) {
-                if(this.moveHelper.setDestination(point.pos, true) != null) {
-                    this.depositPoint = point;
-                    return true;
-                }
+            this.gotoClosestBehavior<CellBehaviorDepositPoint>(
+                ref this.depositPoint,
+                true,
+                b => b.isMaster || !b.isFull);
+            if(this.depositPoint != null) {
+                return true;
             }
         }
 
@@ -28,7 +26,10 @@ public class TaskDepositStone : TaskBase<EntityMiner> {
 
     public override void preform() {
         if(!this.moveHelper.hasPath()) {
-            this.owner.heldItem = this.depositPoint.deposit(this.owner.heldItem);
+            if(!this.depositPoint.isFull) {
+                this.depositPoint.deposit(this.owner.heldItem);
+                this.owner.heldItem = null;
+            }
         }
     }
 

@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: DepositPoint
   m_EditorClassIdentifier: 
   structureName: Deposit Point
-  _cost: 0
+  _cost: 1000
   _description: 
-  _unlockedAt: {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
-  gridSize: {x: 1, y: 1}
-  tiles: []
-  singularTile: {fileID: 11400000, guid: 7c9485d17673bcb4ebeab4ce0b9aa8e8, type: 2}
-  cells:
-  - row:
-    - 
+  _cell: {fileID: 11400000, guid: 7c9485d17673bcb4ebeab4ce0b9aa8e8, type: 2}
+  _displayRotation: 0

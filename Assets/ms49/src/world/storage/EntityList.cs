@@ -8,6 +8,7 @@ public class EntityList : MonoBehaviour {
     private World world = null;
 
     public List<EntityBase> list { get; private set; }
+    public int count => this.list.Count;
 
     private Transform entityHolder;
     private WorldRenderer worldRenderer;

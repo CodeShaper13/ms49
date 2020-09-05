@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: MedicalLocker
   m_EditorClassIdentifier: 
   structureName: Locker
   _cost: 100
   _description: Stuffed full of life saving medical supplies
-  _unlockedAt: {fileID: 0}
-  gridSize: {x: 1, y: 1}
-  tiles: []
-  singularTile: {fileID: 11400000, guid: 55b8819e1323d7b4ca9faad86caa2626, type: 2}
-  cells:
-  - row:
-    - 
+  _cell: {fileID: 0}
+  _displayRotation: 0

@@ -22,6 +22,26 @@ public class UiManager : MonoBehaviour {
 #endif
     }
 
+    private void Update() {
+        // Close the current popup if escape is pressed.
+        if(Input.GetButtonDown("Cancel")) {
+            if(PopupWindow.openPopup == null) {
+                // Open the Pause screen if there is a world loaded.
+                if(Main.instance.isPlaying()) {
+                    PopupPause popup = Main.instance.findPopup<PopupPause>();
+                    if(popup != null) {
+                        popup.open();
+                    }
+                }
+            }
+            else {
+                if(PopupWindow.openPopup.closeableWithEscape) {
+                    PopupWindow.openPopup.close();
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Closes the current UI and calls the UiBase#onHide() method for cleanup.
     /// </summary>

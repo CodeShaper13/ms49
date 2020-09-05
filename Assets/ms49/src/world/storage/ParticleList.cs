@@ -39,17 +39,23 @@ public class ParticleList : MonoBehaviour {
         }
     }
 
-    public void spawn(Position pos, GameObject particlePrefab) {
+    public Particle spawn(Position pos, GameObject particlePrefab) {
+        return this.spawn(pos.vec2, pos.depth, particlePrefab);
+    }
+
+    public Particle spawn(Vector2 pos, int depth, GameObject particlePrefab) {
         GameObject obj = GameObject.Instantiate(particlePrefab, this.particleHolder);
         Particle particle = obj.GetComponent<Particle>();
         if(particle == null) {
             Debug.LogWarning("Tried to create a particle from a prefab without a Particle Componenet!");
             GameObject.Destroy(obj.gameObject);
+            return null;
         }
         else {
-            particle.transform.position = pos.vec2;
-            particle.initialize(this.world, pos.depth);
+            particle.transform.position = pos;
+            particle.initialize(this.world, depth);
             this.list.Add(particle);
+            return particle;
         }
     }
 

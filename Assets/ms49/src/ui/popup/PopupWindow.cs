@@ -12,16 +12,27 @@ public class PopupWindow : MonoBehaviour {
     [SerializeField]
     private bool _closeableWithEscape = true;
 
+    //private Canvas canvas;
+    private bool isPopupOpen;
+
     public bool pauseGameWhenOpen { get { return this._pauseGameWhenOpen; } }
     public bool blockInput { get { return this._blockInput; } }
     public bool closeableWithEscape { get { return this._closeableWithEscape; } }
+    public bool isOpen => PopupWindow.openPopup == this;
 
     private void Awake() {
+        //this.canvas = this.GetComponentInChildren<Canvas>();
+        //if(this.canvas == null) {
+        //    Debug.LogWarning("Could not find Canvas for Popup named \"" + this.name + "\"");
+        //}
+
         this.initialize();
     }
 
     private void Update() {
-        this.onUpdate();
+        //if(this.isOpen) {
+            this.onUpdate();
+        //}
     }
 
     public static bool blockingInput() {
@@ -56,10 +67,6 @@ public class PopupWindow : MonoBehaviour {
 
         PopupWindow.openPopup = null;
         this.gameObject.SetActive(false);
-    }
-
-    public bool isOpen() {
-        return PopupWindow.openPopup == this;
     }
 
     protected virtual void initialize() { }

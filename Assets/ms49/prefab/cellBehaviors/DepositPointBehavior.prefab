@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
-  isMaster: 0
-  size: 10
+  inventorySize: 10
+  containerName: Deposit Point
+  _isMaster: 0

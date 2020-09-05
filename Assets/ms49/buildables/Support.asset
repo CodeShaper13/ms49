@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Support
   m_EditorClassIdentifier: 
   structureName: Support
   _cost: 25
   _description: Supports tunnels and rooms to prevent cave ins
-  _unlockedAt: {fileID: 0}
-  gridSize: {x: 1, y: 1}
-  tiles: []
-  singularTile: {fileID: 11400000, guid: 315a3d62d5f65e0409aec7720c86ce33, type: 2}
-  cells:
-  - row:
-    - 
+  _cell: {fileID: 11400000, guid: 315a3d62d5f65e0409aec7720c86ce33, type: 2}
+  _displayRotation: 0

@@ -18,6 +18,8 @@ public class CellBehavior : MonoBehaviour {
     public bool cache => this._cache;
     public CellData data => this.state.data;
     public Rotation rotation => this.state.rotation;
+    /// <summary> The center of the Behavior's cell in world units. </summary>
+    public Vector2 center => this.pos.vec2 + new Vector2(0.5f, 0.5f);
 
     private CellState state;
 
@@ -52,5 +54,9 @@ public class CellBehavior : MonoBehaviour {
     /// </summary>
     public void dirty() {
         this.world.worldRenderer.dirtyTile(this.pos.x, this.pos.y);
+    }
+
+    public virtual string getDebugText() {
+        return "Type: " + this.GetType().ToString();
     }
 }

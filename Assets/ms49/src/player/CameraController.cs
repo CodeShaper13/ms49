@@ -16,11 +16,7 @@ public class CameraController : MonoBehaviour {
     [SerializeField, Min(2)]
     private int maxZoom = 16;
     [SerializeField]
-    private KeyCode layerLowerKey = KeyCode.X;
-    [SerializeField]
-    private KeyCode layerHigherKey = KeyCode.Z;
-    [SerializeField]
-    private PopupWindow pausePopup = null;
+    private InputKeys keys = null;
 
     private World world;
     private int currentZoom;
@@ -49,7 +45,14 @@ public class CameraController : MonoBehaviour {
 
     public void initNewPlayer(NewWorldSettings settings) {
         this.inCreativeMode = settings.creativeEnabled;
-        this.setCameraPos(new Vector2(settings.getMapSize() / 2, 0));
+
+        // Center the camera on the Truck.
+        foreach(CellBehaviorDepositPoint behavior in this.world.getAllBehaviors<CellBehaviorDepositPoint>()) {
+            if(behavior.isMaster) {
+                this.setCameraPos(behavior.center);
+                break;
+            }
+        }
     }
 
     private void OnValidate() {
@@ -57,17 +60,6 @@ public class CameraController : MonoBehaviour {
     }
 
     private void Update() {
-        // Close the current popup if escape is pressed.
-        if(Input.GetKeyDown(KeyCode.Escape)) {
-            if(PopupWindow.openPopup == null) {
-                this.pausePopup.open();
-            } else {
-                if(PopupWindow.openPopup.closeableWithEscape) {
-                    PopupWindow.openPopup.close();
-                }
-            }
-        }
-
         if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
             this.moveCamera();
 
@@ -76,18 +68,33 @@ public class CameraController : MonoBehaviour {
                 this.handleZoom();
             }
 
-            // Move up and down in layers.
-            if(Input.GetKeyDown(this.layerHigherKey)) {
-                // Move towards surface.
+            // Go higher (up a layer).
+            if(Input.GetKeyDown(this.keys.layerHigherKey)) {
                 this.changeLayer(this.currentLayer - 1);
             }
-            if(Input.GetKeyDown(this.layerLowerKey)) {
-                // Move down depper.
+
+            // Go deeper (down a layer).
+            if(Input.GetKeyDown(this.keys.layerLowerKey)) {
                 this.changeLayer(this.currentLayer + 1);
+            }
+
+            // Toggle creative.
+            if(Input.GetKeyDown(this.keys.creativeToggleKey)) {
+                this.inCreativeMode = !this.inCreativeMode;
             }
         }
 
         this.mousePosLastFrame = Input.mousePosition;
+    }
+
+    private void LateUpdate() {
+        // Clamp the Camera so the world doesn't go out of view.
+        int size = this.world.mapSize;
+        Vector3 camPos = this.mainCam.transform.position;
+        this.setCameraPos(new Vector2(
+            Mathf.Clamp(camPos.x, 0, size),
+            Mathf.Clamp(camPos.y, 0, size)));
+
     }
 
     public void changeLayer(int depth, bool checkMilestones = true) {
@@ -122,7 +129,7 @@ public class CameraController : MonoBehaviour {
         return new Position(coords.x, coords.y, this.currentLayer);
     }
 
-    public void setCameraPos(Vector3 pos) {
+    public void setCameraPos(Vector2 pos) {
         this.mainCam.transform.position = pos;
     }
 
@@ -170,9 +177,6 @@ public class CameraController : MonoBehaviour {
                     }
                     if(rightMouse) {
                         clickable.onRightClick();
-                    }
-                    if(middleMouse) {
-                        clickable.onMiddleClick();
                     }
                 }
             }

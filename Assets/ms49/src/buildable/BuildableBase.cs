@@ -32,11 +32,11 @@ public abstract class BuildableBase : ScriptableObject {
         return "nul";
     }
 
-    public virtual int getWidth() {
+    public virtual int getHighlightWidth() {
         return 1;
     }
 
-    public virtual int getHeight() {
+    public virtual int getHighlightHeight() {
         return 1;
     }
 

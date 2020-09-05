@@ -2,7 +2,7 @@
 
 public class TaskSleep : TaskBase<EntityWorker> {
 
-    protected CellBehaviorOccupiable occupiable;
+    protected CellBehaviorBed occupiable;
     protected bool rechargingAtSpot;
 
     [SerializeField]
@@ -38,14 +38,15 @@ public class TaskSleep : TaskBase<EntityWorker> {
             return false; // They don't need food/sleep yet.
         } else {
             // Find a structure
-            CellBehaviorBed behavior = this.owner.world.getClosestBehavior<CellBehaviorBed>(this.owner.position, b => !b.isOccupied());
-            if(behavior != null) {
-                if(this.moveHelper.setDestination(behavior.pos) != null) {
-                    this.occupiable = behavior;
-                    this.occupiable.setOccupant(this.owner); // Reserve it, so no one takes it.
-                    return true;
-                }
+            this.gotoClosestBehavior<CellBehaviorBed>(
+                ref this.occupiable,
+                false,
+                b => !b.isOccupied());
+            if(this.occupiable != null) {
+                this.occupiable.setOccupant(this.owner); // Reserve it, so no one takes it.
+                return true;
             }
+
             return false;
         }
     }

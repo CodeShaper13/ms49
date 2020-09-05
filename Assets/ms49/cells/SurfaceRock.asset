@@ -12,21 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
   m_Name: SurfaceRock
   m_EditorClassIdentifier: 
-  groundTile: {fileID: 11400000, guid: f4dff4c3822cc87479543eeae0fae003, type: 2}
+  groundTile: {fileID: 0}
   objectTile: {fileID: 11400000, guid: 11f3c40308cccac4ca144dfd8d2e9f92, type: 2}
   overlayTile: {fileID: 0}
   rotationalOverride: 0
   up:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   right:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   down:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   left:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   _movementCost: -1
   canBuildOver: 0
@@ -34,6 +38,7 @@ MonoBehaviour:
   zMoveDirections: 0
   _flammable: 0
   _temperatureOutput: 0
+  _supportsCeiling: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}

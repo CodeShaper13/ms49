@@ -28,6 +28,9 @@ public abstract class EntityBase : MonoBehaviour {
         return this.world.worldToCell(this.transform.position);
     }
 
+    /// <summary>
+    /// Get's the Entity's position in cell units.
+    /// </summary>
     public Position position {
         get { return new Position(this.getCellPos(), this.depth); }
     }

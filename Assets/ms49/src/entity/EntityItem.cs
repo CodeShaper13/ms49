@@ -6,9 +6,6 @@ public class EntityItem : EntityBase {
 
     private SpriteRenderer sr;
 
-    /// <summary> The belt that is moving the item.  May be null. </summary>
-    private CellBehaviorConveyorBelt belt;
-
     public Item item { get; private set; }
 
     public override void initialize(World world, int id, int depth) {
@@ -25,17 +22,12 @@ public class EntityItem : EntityBase {
         base.writeToNbt(tag);
 
         tag.setTag("itemId", Main.instance.itemRegistry.getIdOfElement(this.item));
-        //if(this.belt != null) {
-        //    tag.setTag("beltPos")
-        //}
     }
 
     public override void readFromNbt(NbtCompound tag) {
         base.readFromNbt(tag);
 
-        this.item = Main.instance.itemRegistry.getElement(tag.getInt("itemId"));
-        //Position p = new Position
-        //this.belt = this.world.getBehavior<CellBehaviorConveyorBelt>(p);
+        this.setItem(Main.instance.itemRegistry.getElement(tag.getInt("itemId")));
     }
 
     public void setItem(Item item) {

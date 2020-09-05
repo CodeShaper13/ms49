@@ -9,12 +9,16 @@ public class LayerButtons : MonoBehaviour {
     private Button downBtn = null;
     [SerializeField]
     private Text text = null;
-    [SerializeField]
-    private World world = null;
+
+    private World world;
 
     private void Update() {
         this.updateText();
         this.updateButtonInteracability();
+    }
+
+    private void OnEnable() {
+        this.world = GameObject.FindObjectOfType<World>();
     }
 
     public void callback(bool moveUp) {

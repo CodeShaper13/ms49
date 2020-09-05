@@ -8,13 +8,9 @@ public class MoveHelper : MonoBehaviour {
     private float speed = 1f;
 
     private EntityWorker worker;
-
-    private PathPoint[] path;
-    private int targetIndex;
     private float layerChangeProgress;
 
-    // not implemented
-    private Rotation finalFacingDirection;
+    public NavPath path { get; private set; }
 
     private void Awake() {
         this.worker = this.GetComponent<EntityWorker>();
@@ -22,20 +18,27 @@ public class MoveHelper : MonoBehaviour {
 
     public void update() {
         if(this.hasPath()) {
-            PathPoint currentWaypoint = this.path[this.targetIndex];
-            Vector3 workerPos = this.worker.worldPos;
+            PathPoint currentWaypoint = this.path.targetPoint;
+            Vector2 workerPos = this.worker.worldPos;
 
-            bool posMatch = workerPos.x == currentWaypoint.x && workerPos.y == currentWaypoint.y;
+            bool posMatch = workerPos == currentWaypoint.worldPos;
             bool depthMatch = worker.depth == currentWaypoint.depth;
 
             if(posMatch) {
                 if(depthMatch) {
-                    this.targetIndex++;
-                    if(this.targetIndex >= path.Length) {
+                    this.path.nextPoint();
+                    if(this.path.targetIndex >= path.pointCount) {
+                        // Reached the end of the path.
+
+                        if(this.path.endingLookDirection != null) {
+                            this.worker.rotation = this.path.endingLookDirection;
+                        }
+
                         this.stop();
+
                         return;
                     }
-                    currentWaypoint = this.path[this.targetIndex];
+                    currentWaypoint = this.path.targetPoint;
                 } else {
                     if(this.layerChangeProgress == 0) {
                         // First frame climbing, start an animation
@@ -59,24 +62,32 @@ public class MoveHelper : MonoBehaviour {
             this.transform.position = Vector2.MoveTowards(
                 transform.position,
                 currentWaypoint.worldPos,
-                speed * Time.deltaTime);
+                this.speed * Time.deltaTime);
+
+            // Update the direction the Worker is looking.
+            Vector2 direction = workerPos - this.worker.posLastFrame;
+            this.worker.rotation = Rotation.directionToRotation(direction);
         }
     }
 
     private void OnDrawGizmos() {
         if(this.hasPath()) {
-            for(int i = targetIndex; i < path.Length; i++) {
+            for(int i = this.path.targetIndex; i < this.path.pointCount; i++) {
                 Gizmos.color = Color.yellow;
 
-                if(i == targetIndex) {
-                    Gizmos.DrawLine(transform.position, path[i].worldPos);
+                if(i == this.path.targetIndex) {
+                    Gizmos.DrawLine(
+                        this.transform.position,
+                        this.path.getPoint(i).worldPos);
                 } else {
-                    Gizmos.DrawLine(path[i - 1].worldPos, path[i].worldPos);
+                    Gizmos.DrawLine(
+                        this.path.getPoint(i - 1).worldPos,
+                        this.path.getPoint(i).worldPos);
                 }
             }
-            
-            foreach(PathPoint point in this.path) {
-                Gizmos.DrawSphere(point.worldPos, 0.1f);
+
+            for(int i = 0; i < this.path.pointCount; i++) {
+                Gizmos.DrawSphere(this.path.getPoint(i).worldPos, 0.1f);
             }
         }
     }
@@ -92,13 +103,7 @@ public class MoveHelper : MonoBehaviour {
     /// Returns true if the Worker has a path that they are following.
     /// </summary>
     public bool hasPath() {
-        return this.path != null && this.path.Length > 0;
-    }
-
-    public NavPath getPath() {
-        NavPath p = new NavPath(this.path);
-        p.targetIndex = this.targetIndex;
-        return p;
+        return this.path != null;
     }
 
     /// <summary>
@@ -110,10 +115,10 @@ public class MoveHelper : MonoBehaviour {
             return -1f;
         }
 
-        float dis = Vector2.Distance(this.worker.getCellPos(), this.path[this.path.Length - 1].worldPos);
+        float dis = Vector2.Distance(this.worker.getCellPos(), this.path.endPoint.worldPos);
 
         // Add the total number of levels that will be crossed
-        dis += Mathf.Abs(this.path[this.path.Length - 1].depth - this.worker.depth) * Position.LAYER_DISTANCE_COST;
+        dis += Mathf.Abs(this.path.endPoint.depth - this.worker.depth) * Position.LAYER_DISTANCE_COST;
 
         return dis;
     }
@@ -128,13 +133,13 @@ public class MoveHelper : MonoBehaviour {
         }
         
         // Start off with the distance from the Worker to the next node.
-        float dis = Vector2.Distance(this.worker.getCellPos(), this.path[this.targetIndex].worldPos);
-        dis += Mathf.Abs(this.worker.depth - this.path[this.targetIndex].depth) * Position.LAYER_DISTANCE_COST;
+        float dis = Vector2.Distance(this.worker.getCellPos(), this.path.targetPoint.worldPos);
+        dis += Mathf.Abs(this.worker.depth - this.path.targetPoint.depth) * Position.LAYER_DISTANCE_COST;
 
         // Total the distances between the nodes.
-        for(int i = this.targetIndex; i < this.path.Length - 1; i++) {
-            PathPoint p1 = this.path[i];
-            PathPoint p2 = this.path[i + 1];
+        for(int i = this.path.targetIndex; i < this.path.pointCount - 1; i++) {
+            PathPoint p1 = this.path.getPoint(i);
+            PathPoint p2 = this.path.getPoint(i + 1);
 
             // X and Y distance.
             dis += Vector2.Distance(p1.worldPos, p2.worldPos);
@@ -144,7 +149,7 @@ public class MoveHelper : MonoBehaviour {
         }
 
         // Add the total number of levels that will be crossed
-        dis += Mathf.Abs(this.path[this.path.Length - 1].depth - this.worker.depth) * Position.LAYER_DISTANCE_COST;
+        dis += Mathf.Abs(this.path.getPoint(this.path.pointCount - 1).depth - this.worker.depth) * Position.LAYER_DISTANCE_COST;
 
         return dis;
     }
@@ -165,10 +170,17 @@ public class MoveHelper : MonoBehaviour {
             // Worker is already at destination.
             return destination;
         }
+
         if(stopAdjacentToFinish && this.worker.position.distance(destination) == 1) {
+            // Worker is adjacent to the finish, they are where they should be.
+
+            // Look at the destination.
+            this.worker.rotation = Rotation.directionToRotation(destination.vec2 - this.worker.worldPos);
+
             return destination;
         }
 
+        // Try and find a path.
         PathPoint[] newPath = this.worker.world.navManager.findPath(
             new Position(this.worker.getCellPos(), this.worker.depth),
             destination,
@@ -178,16 +190,24 @@ public class MoveHelper : MonoBehaviour {
             Debug.Log(this.worker.name + " could not find a path to " + destination);
             return null;
         }
-        else {
-            this.path = newPath;
-            this.targetIndex = 0;
 
-            if(newPath.Length == 0) {
-                return destination;
-            } else {
-                PathPoint pp = newPath.Length == 1 ? newPath[0] : newPath[newPath.Length - 1];
-                return new Position((int)pp.x, (int)pp.y, pp.depth);
-            }
+        Rotation endRotation = stopAdjacentToFinish ?
+            Rotation.directionToRotation(destination.vec2Int - newPath[newPath.Length - 1].cellPos) :
+            null;
+        this.path = new NavPath(newPath, endRotation);
+
+        if(newPath.Length == 0) {
+            Debug.LogWarning("Path has a length of 0!");
+            return destination;
+        } else {
+            PathPoint pp = this.path.endPoint;
+            return new Position(pp.cellPos, pp.depth);
+        }
+    }
+
+    public void setPathEndingRotation(Rotation rotation) {
+        if(this.hasPath()) {
+            this.path.endingLookDirection = rotation;
         }
     }
 }

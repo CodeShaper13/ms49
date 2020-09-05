@@ -13,26 +13,32 @@ MonoBehaviour:
   m_Name: ConveyorBelt
   m_EditorClassIdentifier: 
   groundTile: {fileID: 0}
-  objectTile: {fileID: 11400000, guid: 696b8f5690463494496e66b3a1992c19, type: 2}
-  overlayTile: {fileID: 0}
+  objectTile: {fileID: 11400000, guid: 9c7237ff24eb52043b8e3a96d82ff814, type: 2}
+  overlayTile: {fileID: 11400000, guid: d40cf1b0c2376064282e45576e50cd49, type: 2}
   rotationalOverride: 1
   up:
     tile: {fileID: 11400000, guid: 28e60888f5db744438de0592c86266b4, type: 2}
+    overlayTile: {fileID: 11400000, guid: be57c819d9bb3bb4b9707bb054de4c43, type: 2}
     effect: 0
   right:
     tile: {fileID: 11400000, guid: 696b8f5690463494496e66b3a1992c19, type: 2}
+    overlayTile: {fileID: 11400000, guid: 7b84dfb61c39e654e9f584a39e20484d, type: 2}
     effect: 0
   down:
     tile: {fileID: 11400000, guid: 9c7237ff24eb52043b8e3a96d82ff814, type: 2}
+    overlayTile: {fileID: 11400000, guid: d40cf1b0c2376064282e45576e50cd49, type: 2}
     effect: 0
   left:
     tile: {fileID: 11400000, guid: 696b8f5690463494496e66b3a1992c19, type: 2}
+    overlayTile: {fileID: 11400000, guid: fc05a31a22b34a74f92c2f1aed9dbad9, type: 2}
     effect: 1
   _movementCost: -1
   canBuildOver: 0
   isDestroyable: 1
   zMoveDirections: 0
   _flammable: 1
+  _temperatureOutput: 0
+  _supportsCeiling: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 977370844653425137, guid: 214f5601d6a968d44a48c63986aacd01,

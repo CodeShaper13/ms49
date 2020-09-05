@@ -23,6 +23,7 @@ public class EntityWorker : EntityBase, IClickable {
     public string typeName { get { return this._typeName; } }
     public bool isDead { get; private set; }
     public bool isSleeping { get; private set; }
+    public Rotation rotation { get; set; }
 
     public MoveHelper moveHelper { get; private set; }
     public WorkerStats stats { get; private set; }
@@ -36,8 +37,18 @@ public class EntityWorker : EntityBase, IClickable {
         this.tooltipCanvas.enabled = false;
     }
 
+    private void OnDrawGizmos() {
+        // Draw a line pointing the direction the Worker is facing.
+        if(this.rotation != null) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(this.transform.position, this.transform.position + ((Vector3)this.rotation.vectorF) * 4);
+        }
+    }
+
     public override void initialize(World world, int id, int depth) {
         base.initialize(world, id, depth);
+
+        this.rotation = Rotation.DOWN;
 
         this.moveHelper = this.GetComponent<MoveHelper>();
         this.stats = new WorkerStats();
@@ -49,6 +60,8 @@ public class EntityWorker : EntityBase, IClickable {
     public override void onUpdate() {
         base.onUpdate();
 
+        Vector2 frameStatePos = this.worldPos;
+
         if(this.isDead) {
             this.animator.playClip("Dead");
         }
@@ -56,11 +69,11 @@ public class EntityWorker : EntityBase, IClickable {
             this.aiManager.updateAi();
             this.moveHelper.update();
 
-            if(this.posLastFrame != this.worldPos) {
+            if(this.posLastFrame != frameStatePos) {
                 // Miner has moved since last frame.
             }
 
-            this.posLastFrame = this.worldPos;
+            this.posLastFrame = frameStatePos;
 
             // Kill the Worker if there heath or energy is too low.
             if(this.hunger.value <= this.hunger.minValue || this.energy.value <= this.energy.minValue || this.temperature.value >= this.temperature.maxValue) {
@@ -99,6 +112,7 @@ public class EntityWorker : EntityBase, IClickable {
     public override void writeToNbt(NbtCompound tag) {
         base.writeToNbt(tag);
 
+        tag.setTag("facing", this.rotation.id);
         tag.setTag("energy", this.energy.value);
         tag.setTag("hunger", this.hunger.value);
         tag.setTag("temperature", this.temperature.value);
@@ -108,6 +122,7 @@ public class EntityWorker : EntityBase, IClickable {
     public override void readFromNbt(NbtCompound tag) {
         base.readFromNbt(tag);
 
+        this.rotation = Rotation.ALL[Mathf.Clamp(tag.getInt("facing"), 0, 3)];
         this.energy.value = tag.getFloat("energy");
         this.hunger.value = tag.getFloat("hunger");
         this.temperature.value = tag.getFloat("temperature");
@@ -123,7 +138,7 @@ public class EntityWorker : EntityBase, IClickable {
     /// Called when the Worker is right clicked.
     /// </summary>
     public virtual void onRightClick() {
-        PopupWorkerStats popup = Resources.FindObjectsOfTypeAll<PopupWorkerStats>()[0];
+        PopupWorkerStats popup = Main.instance.findPopup<PopupWorkerStats>();
         if(popup != null) {
             popup.open();
             popup.setWorker(this);
@@ -134,9 +149,4 @@ public class EntityWorker : EntityBase, IClickable {
     /// Called when the Worker is left clicked.
     /// </summary>
     public virtual void onLeftClick() { }
-
-    /// <summary>
-    /// Called when the Worker is clicked with the middle mouse button.
-    /// </summary>
-    public virtual void onMiddleClick() { }
 }

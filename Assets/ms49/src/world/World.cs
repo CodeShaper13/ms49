@@ -225,6 +225,8 @@ public class World : MonoBehaviour {
     }
 
     public void tryCollapse(Position pos) {
+        return; // TODO make better
+
         const int radius = 2;
 
         for(int potentialCollapseX = -radius; potentialCollapseX <= radius; potentialCollapseX++) {
@@ -275,6 +277,10 @@ public class World : MonoBehaviour {
         return p.x < 0 || p.y < 0 || p.x >= r || p.y >= r || p.depth < 0 || p.depth >= this.storage.layerCount;
     }
 
+    /// <summary>
+    /// Returns the CellBehavior at the passed postion.  If there is
+    /// no CellBehavior, null is returned.
+    /// </summary>
     public CellBehavior getBehavior(Position pos) {
         foreach(CellBehavior behavior in this.storage.cachedBehaviors) {
             if(behavior.pos.Equals(pos)) {
@@ -293,29 +299,19 @@ public class World : MonoBehaviour {
         }
     }
 
-    public List<T> getAllBehaviors<T>() where T : CellBehavior {
+    /// <summary>
+    /// Returns all CellBehaviors of the specified type.  If a
+    /// predicate is passed, only CellBehaviors that match are
+    /// included.
+    /// </summary>
+    public List<T> getAllBehaviors<T>(Predicate<T> predicate = null) where T : CellBehavior {
         List<T> list = new List<T>();
         foreach(CellBehavior behavior in this.storage.cachedBehaviors) {
-            if(behavior is T) {
+            if(behavior is T && (predicate == null || predicate((T)behavior))) {
                 list.Add((T)behavior);
             }
         }
         return list;
-    }
-
-    public T getClosestBehavior<T>(Position pos, Predicate<T> predicate = null) where T : CellBehavior {
-        float dis = float.PositiveInfinity;
-        T closest = null;
-        foreach(CellBehavior behavior in this.storage.cachedBehaviors) {
-            if(behavior is T && (predicate == null || predicate((T)behavior))) {
-                float f = pos.distance(behavior.pos);
-                if(f < dis) {
-                    dis = f;
-                    closest = (T)behavior;
-                }
-            }
-        }
-        return closest;
     }
 
     /// <summary>

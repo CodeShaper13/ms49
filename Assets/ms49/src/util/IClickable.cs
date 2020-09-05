@@ -1,11 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public interface IClickable {
+﻿public interface IClickable {
 
     void onRightClick();
 
     void onLeftClick();
-
-    void onMiddleClick();
 }

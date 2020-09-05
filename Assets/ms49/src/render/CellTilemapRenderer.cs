@@ -93,11 +93,11 @@ public class CellTilemapRenderer : MonoBehaviour {
         }
 
 
+        DirectionalTile dt = data.getObjectTile(state.rotation);
+
         // Draw Object Tile:
         if(this.objectMap != null) {
             this.objectMap.GetTileFlags(pos);
-
-            DirectionalTile dt = data.getObjectTile(state.rotation);
 
             // If the Cell's behavior implements IRenderTileOverride, let it adject the tile, even if the tile is rotatable.
             if(state.hasBehavior() && state.behavior is IRenderTileOverride) {
@@ -106,9 +106,9 @@ public class CellTilemapRenderer : MonoBehaviour {
 
             // Set the tile on the map.
             this.objectMap.SetTile(pos, dt.tile);
-            if(dt.effect != RotationEffect.NOTHING) {
-                this.objectMap.SetTransformMatrix(pos, dt.getMatrix());
-            }
+
+            // Set the tile's transform.
+            this.objectMap.SetTransformMatrix(pos, dt.getMatrix());
 
             // Color
             if(data.tintObjectTile) {
@@ -119,7 +119,7 @@ public class CellTilemapRenderer : MonoBehaviour {
 
         // Draw Overlay Tile:
         if(this.overlayMap != null) {
-            this.overlayMap.SetTile(pos, data.overlayTile);
+            this.overlayMap.SetTile(pos, dt.overlayTile);
         }
     }
 

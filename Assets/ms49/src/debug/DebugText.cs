@@ -8,6 +8,7 @@ public class DebugText : MonoBehaviour {
     private int xSpacing = 10;
 
     private int textY;
+    private string indent = string.Empty;
 
     private void OnGUI() {
         this.textY = 0;
@@ -32,13 +33,19 @@ public class DebugText : MonoBehaviour {
                     this.addLine("Temperature: " + layer.getTemperature(pos.x, pos.y));
                     this.addLine("Unmodified temperature: " + layer.getUnmodifiedTemperature(pos.x, pos.y));
                     this.addLine("Heat Source: " + layer.getHeatSource(pos.x, pos.y));
+                    CellBehavior behavior = world.getBehavior(pos);
+                    if(behavior != null) {
+                        this.addLine("Behavior:");
+                        this.indent = "  ";
+                        this.addLine(behavior.getDebugText());
+                    }
                 }
             }
         }
     }
 
     private void addLine(string text) {
-        GUI.Label(new Rect(this.xSpacing, this.textY, 400, 40), text);
+        GUI.Label(new Rect(this.xSpacing, this.textY, 400, 40), this.indent + text);
         this.textY += this.lineSpacing;
     }
 }

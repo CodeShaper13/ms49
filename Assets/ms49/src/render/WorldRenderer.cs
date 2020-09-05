@@ -51,7 +51,7 @@ public class WorldRenderer : MonoBehaviour {
     }
 
     public void dirtyExcavationTarget(Position pos, bool highlighted) {
-        if(pos.depth == this.targetLayer.depth) {
+        if(this.targetLayer != null && pos.depth == this.targetLayer.depth) {
             this.targetedRenderer.setTile(pos.x, pos.y, highlighted);
         }
     }

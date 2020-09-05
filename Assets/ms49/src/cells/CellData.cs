@@ -65,28 +65,34 @@ public class CellData : ScriptableObject {
     }
 
     public DirectionalTile getObjectTile(Rotation rotation) {
-        if(this.rotationalOverride) {            
-            if(rotation != null) {
-                if(rotation == Rotation.UP) {
-                    return this.up;
-                }
-                else if(rotation == Rotation.RIGHT) {
-                    return this.right;
-                }
-                else if(rotation == Rotation.DOWN) {
-                    return this.down;
-                }
-                else {
-                    return this.left;
-                }
+        if(this.rotationalOverride && rotation != null) {
+            DirectionalTile dt;
+
+            if(rotation == Rotation.UP) {
+                dt = this.up;
             }
+            else if(rotation == Rotation.RIGHT) {
+                dt = this.right;
+            }
+            else if(rotation == Rotation.DOWN) {
+                dt = this.down;
+            }
+            else {
+                dt = this.left;
+            }
+
+            // If the rotational override is missing data, pull from the defaults.
+            if(dt.tile == null) {
+                dt.tile = this.objectTile;
+            }
+            if(dt.overlayTile == null) {
+                dt.overlayTile = this.overlayTile;
+            }
+
+            return dt;
+        } else {
+            return new DirectionalTile(this.objectTile, this.overlayTile);
         }
-
-        return new DirectionalTile(this.objectTile);
-    }
-
-    public TileBase getOverlayTile() {
-        return this.overlayTile;
     }
 
 #if UNITY_EDITOR

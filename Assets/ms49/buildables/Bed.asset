@@ -16,14 +16,14 @@ MonoBehaviour:
   _cost: 300
   _description: Provide Workers with a place to sleep so they can replenish their
     energy
-  _unlockedAt: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
+  _cell: {fileID: 0}
+  _displayRotation: 0
   gridSize: {x: 1, y: 2}
   tiles:
   - character: 116
     tile: {fileID: 11400000, guid: 2412c06fbb8ac3142a4be37cc30c782d, type: 2}
   - character: 98
     tile: {fileID: 11400000, guid: b861f0e3c815d004f8a19d4623b68b8e, type: 2}
-  singularTile: {fileID: 11400000, guid: 2412c06fbb8ac3142a4be37cc30c782d, type: 2}
   cells:
   - row:
     - t

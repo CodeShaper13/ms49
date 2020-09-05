@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Table
   m_EditorClassIdentifier: 
   structureName: Table
   _cost: 100
   _description: Provides Workers with a place to eat. Requires an adjacent stool.
-  _unlockedAt: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
-  gridSize: {x: 1, y: 1}
-  tiles: []
-  singularTile: {fileID: 11400000, guid: 77152f49f62615b428e73607b7dc38e4, type: 2}
-  cells:
-  - row:
-    - 
+  _cell: {fileID: 11400000, guid: 77152f49f62615b428e73607b7dc38e4, type: 2}
+  _displayRotation: 0

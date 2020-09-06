@@ -18,15 +18,19 @@ MonoBehaviour:
   rotationalOverride: 0
   up:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   right:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   down:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   left:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   _movementCost: -1
   canBuildOver: 0
@@ -34,6 +38,8 @@ MonoBehaviour:
   zMoveDirections: 0
   _flammable: 0
   _temperatureOutput: 4
+  _supportsCeiling: 0
+  _includeInFogFloodLift: 1
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 1512164279168816054, guid: 80086700ae2a81f45819b5aa634a2f63,

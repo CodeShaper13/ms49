@@ -39,11 +39,12 @@ public class Options : MonoBehaviour {
     }
 
     /// <summary>
-    /// Saves all of the options, writing their values to disk.
+    /// Saves all of the options, writing their values to disk and applying them to the game.
     /// </summary>
     public void saveOptions() {
         foreach(IOption option in this.allOptions) {
             option.write();
+            option.applyValue();
         }
     }
 }

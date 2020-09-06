@@ -14,6 +14,8 @@ public struct Position {
     public int y;
     public int depth;
 
+    public Vector2 center => new Vector2(x + 0.5f, y + 0.5f);
+
     public Position(Vector3Int v) : this(v.x, v.y, v.z) { }
 
     public Position(int x, int y, int depth) {

@@ -6,8 +6,6 @@ public class MilestoneManager : MonoBehaviour {
     [SerializeField]
     private MilestoneData[] _milestoneData = null;
     [SerializeField]
-    private PopupMilestones popup = null;
-    [SerializeField]
     private World world = null;
 
     public MilestoneData[] milestones { get { return this._milestoneData; } }
@@ -46,8 +44,11 @@ public class MilestoneManager : MonoBehaviour {
         }
 
         if(openPopup) {
-            this.popup.open();
-            this.popup.playUnlockEffect();
+            PopupMilestones popup = Main.instance.findPopup<PopupMilestones>();
+            if(popup != null) {
+                popup.open();
+                popup.playUnlockEffect();
+            }
         }
 
         milestone.isUnlocked = true;

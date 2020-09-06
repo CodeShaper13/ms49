@@ -61,6 +61,7 @@ public class BuildableTile : BuildableBase {
         else {
             world.setCell(pos, highlight.buildSiteCell, rotation);
             CellBehaviorBuildSite site = world.getBehavior<CellBehaviorBuildSite>(pos);
+            site.addCell(this.cell, pos);
             site.isPrimary = true;
         }
 

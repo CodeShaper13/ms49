@@ -194,7 +194,6 @@ public class World : MonoBehaviour {
         if(layer.fog != null) {
             if(floodLiftFog) {
                 // Lift fog in the event of this cell being in a cave
-                CellData air = Main.instance.tileRegistry.getAir();
                 Stack<Position> pixels = new Stack<Position>();
                 List<Position> changedCells = new List<Position>();
                 pixels.Push(pos);
@@ -202,7 +201,7 @@ public class World : MonoBehaviour {
                 while(pixels.Count > 0) {
                     Position a = pixels.Pop();
                     if(!this.isOutOfBounds(a)) {
-                        if((this.getCellState(a).data == air || a == pos) && layer.fog.isFogPresent(a.x, a.y) && !changedCells.Contains(a)) {
+                        if((this.getCellState(a).data.includeInFogFloodLift || a == pos) && layer.fog.isFogPresent(a.x, a.y) && !changedCells.Contains(a)) {
                             changedCells.Add(a);
                             pixels.Push(new Position(a.x - 1, a.y, pos.depth));
                             pixels.Push(new Position(a.x + 1, a.y, pos.depth));

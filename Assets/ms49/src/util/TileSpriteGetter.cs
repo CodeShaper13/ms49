@@ -20,6 +20,9 @@ public static class TileSpriteGetter {
         else if(tile is RuleTile) {
             return ((RuleTile)tile).m_DefaultSprite;
         }
+        else if(tile is TerrainTile) {
+            return ((TerrainTile)tile).m_Sprites[14];
+        }
         else if(tile is Tile) {
             return ((Tile)tile).sprite;
         }

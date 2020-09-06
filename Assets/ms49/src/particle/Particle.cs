@@ -7,11 +7,18 @@ public class Particle : MonoBehaviour {
 
     public World world { get; private set; }
     public int depth { get; private set; }
+    public ParticleSystem ps { get; private set; }
+
     private float timeAlive;
 
     public virtual void initialize(World world, int depth) {
         this.world = world;
         this.depth = depth;
+
+        this.ps = this.GetComponentInChildren<ParticleSystem>();
+        if(ps != null) {
+            this.lifespan = ps.main.duration;
+        }
     }
 
     public virtual void onUpdate() {

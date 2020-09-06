@@ -49,7 +49,7 @@ public class CaveGenerator {
         foreach(List<Vector2Int> roomRegion in roomRegions) {
             if(rnd.Next(0, 101) < layerData.lakeChance) {
                 foreach(Vector2Int tile in roomRegion) {
-                    map[tile.x, tile.y] = layerData.lakeType == LakeType.WATER ? 2 : 3;
+                    map[tile.x, tile.y] = (layerData.lakeType == LakeType.WATER) ? 2 : 3;
                 }
             }
         }

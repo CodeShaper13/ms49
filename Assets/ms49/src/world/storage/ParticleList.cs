@@ -47,8 +47,12 @@ public class ParticleList : MonoBehaviour {
         GameObject obj = GameObject.Instantiate(particlePrefab, this.particleHolder);
         Particle particle = obj.GetComponent<Particle>();
         if(particle == null) {
-            Debug.LogWarning("Tried to create a particle from a prefab without a Particle Componenet!");
+            Debug.LogWarning("Can not spawn Particle, it has no Particle componenet on root GameObject");
             GameObject.Destroy(obj.gameObject);
+            return null;
+        }
+        else if(particle.GetComponentInChildren<ParticleSystem>() == null) {
+            Debug.LogWarning("Can not spawn Particle, it has no ParticleSystem component on it or it's children");
             return null;
         }
         else {

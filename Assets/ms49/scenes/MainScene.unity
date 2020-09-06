@@ -4558,10 +4558,10 @@ MonoBehaviour:
   _options: {fileID: 1865947491}
   _debugLoadSettings:
     instantLoad: 1
-    name: game1
+    name: 123
     settings:
       _mapSize: 1
-      _seed: orange
+      _seed: summertimeSadness
       _creativeEnabled: 1
   titleScreenPopup: {fileID: 1959382956}
 --- !u!4 &1865947488
@@ -4671,7 +4671,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41569e4f8330f984796508f730c2fc34, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  isInspectorDropdownOpen: 1
+  isInspectorDropdownOpen: 0
   airId: 0
 --- !u!114 &1865947491
 MonoBehaviour:

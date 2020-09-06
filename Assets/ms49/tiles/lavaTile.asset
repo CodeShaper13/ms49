@@ -9,12 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Script: {fileID: 11500000, guid: f6e4e4fc705376343a3e65b25d94f0e2, type: 3}
   m_Name: lavaTile
   m_EditorClassIdentifier: 
-  m_AnimatedSprites:
-  - {fileID: 1739492175354726415, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
-  m_AnimationStartTime: 0
-  m_TileColliderType: 0
+  m_Sprites:
+  - {fileID: 6673312695985084743, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: -7963212025696194793, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: -2205451468145830947, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 3422446650199752384, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 7980051161428454188, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: -3441515435797462596, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 3038978511664642165, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 768367608597295313, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 1317551704149024377, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: -4231902954657728308, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 1619499924484319085, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 4522110187869585359, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: -9033004229268278747, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: -7453316322680407908, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}
+  - {fileID: 1798176310934747527, guid: 5789fcd1e5852024b941c2b2af93c3ff, type: 3}

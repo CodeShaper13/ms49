@@ -8,6 +8,8 @@ public class TaskMineRock : TaskBase<EntityMiner> {
     private float mineSpeed = 1f;
     [SerializeField]
     private float hungerCost = 5f;
+    [SerializeField]
+    private GameObject mineParticlePrefab;
 
     private float timeMining;
     private Position stonePos;
@@ -47,6 +49,14 @@ public class TaskMineRock : TaskBase<EntityMiner> {
                 CellData data = this.owner.world.getCellState(this.stonePos).data;
                 if(data is CellDataMineable) {
                     this.owner.heldItem = ((CellDataMineable)data).droppedItem;
+                }
+
+                // Play particle (and color it)
+                Particle particle = this.owner.world.particles.spawn(this.stonePos.center, this.owner.depth, this.mineParticlePrefab);
+                if(particle != null) {
+                    LayerDataBase layerData = this.owner.world.mapGenData.getLayerFromDepth(this.owner.depth);
+                    ParticleSystem.MainModule main = particle.ps.main;
+                    main.startColor = layerData.getGroundTint(this.stonePos.x, this.stonePos.y);
                 }
 
                 // Reduce hunger

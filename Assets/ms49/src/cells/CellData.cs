@@ -41,6 +41,8 @@ public class CellData : ScriptableObject {
     private float _temperatureOutput = 0f;
     [SerializeField]
     private bool _supportsCeiling = false;
+    [SerializeField, Tooltip("If true, the fog from this cell will be lifted if an adjacent cell has it's fog lifted.")]
+    private bool _includeInFogFloodLift = false;
 
     [Space]
 
@@ -54,11 +56,12 @@ public class CellData : ScriptableObject {
     [Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
     public GameObject behaviorPrefab;
 
-    public int movementCost { get { return this._movementCost; } }
-    public bool isWalkable { get { return this.movementCost >= 0; } }
-    public bool isFlammable { get { return this._flammable; } }
-    public float temperatureOutput { get { return this._temperatureOutput; } }
-    public bool supportsCeiling { get { return this._supportsCeiling; } }
+    public int movementCost => this._movementCost;
+    public bool isWalkable => this.movementCost >= 0;
+    public bool isFlammable => this._flammable;
+    public float temperatureOutput => this._temperatureOutput;
+    public bool supportsCeiling => this._supportsCeiling;
+    public bool includeInFogFloodLift => this._includeInFogFloodLift;
 
     public TileBase getGroundTile() {
         return this.groundTile;

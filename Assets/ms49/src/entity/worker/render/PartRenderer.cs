@@ -30,7 +30,7 @@ public class PartRenderer : MonoBehaviour {
         if(!Pause.isPaused()) {
             Rotation r;
 
-            if(this.rotationOverride == EnumRotation.NONE) {
+            if(this.rotationOverride != EnumRotation.NONE) {
                 r = Rotation.fromEnum(this.rotationOverride);
             }
             else {

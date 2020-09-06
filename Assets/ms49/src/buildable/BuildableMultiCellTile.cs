@@ -79,6 +79,7 @@ public class BuildableMultiCellTile : BuildableTile {
             world.setCell(pos, highlight.buildSiteCell, rotation);
             world.liftFog(pos);
             site = world.getBehavior<CellBehaviorBuildSite>(pos);
+            site.addCell(this.cell, pos);
             site.isPrimary = true;
         }
 

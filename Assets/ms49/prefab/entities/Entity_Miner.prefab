@@ -34,6 +34,8 @@ MonoBehaviour:
   _priority: 5
   mineSpeed: 1
   hungerCost: 5
+  mineParticlePrefab: {fileID: 2761322515295637297, guid: 7f9313b9baae5014681a09bacf4711a8,
+    type: 3}
 --- !u!114 &5022933957205975958
 MonoBehaviour:
   m_ObjectHideFlags: 0

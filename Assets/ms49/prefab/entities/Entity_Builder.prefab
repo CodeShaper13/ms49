@@ -15,7 +15,6 @@ MonoBehaviour:
   _typeName: Builder
   tooltipCanvas: {fileID: 7656034211967674511}
   sleepingEffect: {fileID: 9205717073743827612}
-  milestone: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   hunger: {fileID: 2279178709526535435}
   energy: {fileID: 2016175621240851119}
   temperature: {fileID: 4867021183779542521}
@@ -41,6 +40,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 48302764432458648, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
+        type: 3}
+      propertyPath: spriteSheetName
+      value: spritesheetBuilder
+      objectReference: {fileID: 0}
     - target: {fileID: 942847538810084662, guid: 016f744bcb9f64c4ca35b84e7bc8f811,
         type: 3}
       propertyPath: m_AnchorMax.x

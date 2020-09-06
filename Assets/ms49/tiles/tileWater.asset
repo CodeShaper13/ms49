@@ -9,12 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Script: {fileID: 11500000, guid: f6e4e4fc705376343a3e65b25d94f0e2, type: 3}
   m_Name: tileWater
   m_EditorClassIdentifier: 
-  m_AnimatedSprites:
+  m_Sprites:
+  - {fileID: 8509550459451208454, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: 3559705528278350927, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
   - {fileID: -4124057691748712743, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
-  m_AnimationStartTime: 0
-  m_TileColliderType: 0
+  - {fileID: -7064220622572970029, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: -2740290441555968558, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: 7149751655148466542, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: -7655527456229970072, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: -1984912068192422301, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: -277465505295718648, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: 9222073198021860894, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: 3991568953898065832, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: 2673405975860536578, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: 6886954874036816709, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: -8209864517686610857, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}
+  - {fileID: 8664258913517867861, guid: 6d088fe7213e3a844ba69fc3de126ed5, type: 3}

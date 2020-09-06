@@ -1134,27 +1134,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_water
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e600855239746bd0800000000000000
-      internalID: -2637850224642488606
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: tiles_depositPoint
       rect:
         serializedVersion: 2
@@ -1738,27 +1717,6 @@ TextureImporter:
       bones: []
       spriteID: 20a4fcc58c30bbb40800000000000000
       internalID: 5456959532574919170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_lava
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f080791daeae32810800000000000000
-      internalID: 1739492175354726415
       vertices: []
       indices: 
       edges: []

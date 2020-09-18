@@ -17,15 +17,16 @@ MonoBehaviour:
   floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
   _hasFog: 1
   _defaultTemperature: 0.5
+  _generateBlockerRocks: 1
   generateCaves: 1
-  caveFillPercent: 56
-  caveSmoothPases: 3
+  caveFillPercent: 55
+  caveSmoothPases: 5
   oreSpawnSettings:
-  - _cell: {fileID: 11400000, guid: 4e91e160e2f037549b5a699c729a34a7, type: 2}
-    veinCount: 10
-    veinSize: {x: 3, y: 7}
-  - _cell: {fileID: 11400000, guid: ba43be8abde0aca4ebb7a5af35cfbfd2, type: 2}
-    veinCount: 40
-    veinSize: {x: 2, y: 3}
+  - _cell: {fileID: 11400000, guid: c2748d19876cb3c488d8600108a00812, type: 2}
+    veinCount: 150
+    veinSize: {x: 3, y: 6}
+  - _cell: {fileID: 11400000, guid: 21c8e8396c7ff6b4a8c81fae3f42d70f, type: 2}
+    veinCount: 30
+    veinSize: {x: 1, y: 1}
   lakeType: 2
-  lakeChance: 30
+  lakeChance: 40

@@ -18,7 +18,7 @@ public class PopupLoadGame : PopupWindow {
             g.GetComponent<LoadSaveButton>().init(save);
         }
 
-        this.worldTileWrapperObj.sizeDelta = new Vector2(this.worldTileWrapperObj.sizeDelta.x, (cachedSaves.Count * 130) + 10);
+        //this.worldTileWrapperObj.sizeDelta = new Vector2(this.worldTileWrapperObj.sizeDelta.x, (cachedSaves.Count * 130) + 10);
     }
 
     protected override void onClose() {

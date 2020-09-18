@@ -244,7 +244,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   - {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
   - {fileID: 11400000, guid: a0f22d443a9e4d94a805c1fa2e95d27b, type: 2}
-  popup: {fileID: 0}
   world: {fileID: 7469874513568837900}
 --- !u!114 &7469874513568837894
 MonoBehaviour:
@@ -864,7 +863,7 @@ Tilemap:
   m_TileColorArray: []
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.1882353, g: 0.17254902, b: 0.18039216, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

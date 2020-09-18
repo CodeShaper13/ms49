@@ -1,21 +1,15 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class OreGenerator {
+public class FeatureOres : FeatureBase {
 
-    private MapGenerationData.TileReferences tiles;
-    private List<Vector2Int> dirs;
+    private Vector2Int[] dirs = new Vector2Int[] {
+        Vector2Int.up,
+        Vector2Int.down,
+        Vector2Int.left,
+        Vector2Int.right,
+    };
 
-    public OreGenerator(MapGenerationData.TileReferences tiles) {
-        this.tiles = tiles;
-        this.dirs = new List<Vector2Int>();
-        this.dirs.Add(Vector2Int.up);
-        this.dirs.Add(Vector2Int.down);
-        this.dirs.Add(Vector2Int.left);
-        this.dirs.Add(Vector2Int.right);
-    }
-
-    public void generateOres(System.Random rnd, LayerDataBase layerData, MapAccessor accessor) {
+    public override void generate(System.Random rnd, LayerDataBase layerData, MapAccessor accessor) {
         foreach(OreSettings setting in layerData.oreSpawnSettings) {
             if(setting != null && setting.cell != null) {
                 for(int i = 0; i < setting.veinCount; i++) {
@@ -32,11 +26,12 @@ public class OreGenerator {
         int size = rnd.Next(setting.veinSize.x, setting.veinSize.y + 1);
 
         for(int i = 0; i < size; i++) {
-            if(accessor.getCell(x, y) != Main.instance.tileRegistry.getAir()) {
+            CellData c = accessor.getCell(x, y);
+            if(c is CellDataMineable) {
                 accessor.setCell(x, y, cell);
             }
 
-            Vector2Int v = this.dirs[rnd.Next(0, this.dirs.Count)];
+            Vector2Int v = this.dirs[rnd.Next(0, this.dirs.Length)];
             x += v.x;
             y += v.y;
         }

@@ -34,7 +34,7 @@ TextureImporter:
     second: tiles_itemElevatorUpOpen
   - first:
       213: -7708644975649761358
-    second: tiles_8
+    second: tiles_wallBlocker
   - first:
       213: -1530080802165054831
     second: tiles_dresser
@@ -67,7 +67,7 @@ TextureImporter:
     second: tiles_itemElevatorUpOpen
   - first:
       213: 1427480686868151490
-    second: tiles_8
+    second: tiles_wallBlocker
   - first:
       213: -5665760732212086345
     second: tiles_dresser
@@ -106,7 +106,7 @@ TextureImporter:
     second: tiles_ladderBottom
   - first:
       213: 2870286397712609369
-    second: tiles_21
+    second: tiles_surfaceRock2
   - first:
       213: -6925154376186504650
     second: tiles_wallWithTopper
@@ -115,25 +115,25 @@ TextureImporter:
     second: tiles_fire3
   - first:
       213: -4016574229998233168
-    second: tiles_24
+    second: tiles_surfaceRock4
   - first:
       213: -6292215929027113611
-    second: tiles_25
+    second: tiles_grass
   - first:
       213: 3017993688136988190
     second: tiles_wall
   - first:
       213: 6363912815652929497
-    second: tiles_27
+    second: tiles_grassLong1
   - first:
       213: 7397035649948849851
     second: tiles_tableRight
   - first:
       213: 61205593611490087
-    second: tiles_29
+    second: tiles_grassLong2
   - first:
       213: -7052531943125621977
-    second: tiles_30
+    second: tiles_tree1
   - first:
       213: -7728687057186952190
     second: tiles_ladderBottom
@@ -160,13 +160,13 @@ TextureImporter:
     second: tiles_floor2
   - first:
       213: 6568244172134801747
-    second: tiles_38
+    second: tiles_tree3
   - first:
       213: 8813815085496886684
     second: tiles_floor3
   - first:
       213: -6835276744072785760
-    second: tiles_40
+    second: tiles_dumptruck
   - first:
       213: 8402464592913180643
     second: tiles_locker
@@ -286,25 +286,25 @@ TextureImporter:
     second: tiles_depositPoint
   - first:
       213: 6702921449390896059
-    second: tiles_21
+    second: tiles_surfaceRock2
   - first:
       213: 7273882128217297462
-    second: tiles_24
+    second: tiles_surfaceRock4
   - first:
       213: 361118152636013296
-    second: tiles_25
+    second: tiles_grass
   - first:
       213: -6857393175032612277
-    second: tiles_29
+    second: tiles_grassLong2
   - first:
       213: 3060939820333492571
-    second: tiles_30
+    second: tiles_tree1
   - first:
       213: -6570068217692433054
-    second: tiles_38
+    second: tiles_tree3
   - first:
       213: -8937874668277660970
-    second: tiles_40
+    second: tiles_dumptruck
   - first:
       213: -87036673870637787
     second: tiles_45
@@ -398,6 +398,18 @@ TextureImporter:
   - first:
       213: -5861420241031547173
     second: tiles_itemElevator
+  - first:
+      213: 2252217939642970804
+    second: tiles_wallBlockerWithTopper
+  - first:
+      213: 3048892388686381023
+    second: tiles_surfaceRock1
+  - first:
+      213: 922424046108175333
+    second: tiles_surfaceRock3
+  - first:
+      213: -8473965523027447877
+    second: tiles_tree2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1990,6 +2002,279 @@ TextureImporter:
       bones: []
       spriteID: 7059379a44a3da5c0800000000000000
       internalID: -4202638810691693305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_wallBlocker
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b7dbce9c34650590800000000000000
+      internalID: -7708644975649761358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_wallBlockerWithTopper
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 144
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b27e29884c714f10800000000000000
+      internalID: 2252217939642970804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_surfaceRock1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf3b0a4977df4a20800000000000000
+      internalID: 3048892388686381023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_surfaceRock2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 950bb43754e45d720800000000000000
+      internalID: 2870286397712609369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_surfaceRock3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eb6e8068cb1dcc00800000000000000
+      internalID: 922424046108175333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_surfaceRock4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b997feb4034248c0800000000000000
+      internalID: -4016574229998233168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grass
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57dc84c33fe8da8a0800000000000000
+      internalID: -6292215929027113611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grassLong1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df7c860df8215850800000000000000
+      internalID: 6363912815652929497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_grassLong2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 723da71c92279d000800000000000000
+      internalID: 61205593611490087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_tree1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 723e6ea409f502e90800000000000000
+      internalID: -7052531943125621977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_tree2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 192
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbfaa09f04d666a80800000000000000
+      internalID: -8473965523027447877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_tree3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 351ef164647172b50800000000000000
+      internalID: 6568244172134801747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_dumptruck
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 222
+        width: 47
+        height: 34
+      alignment: 9
+      pivot: {x: 0.85106385, y: 0.29411766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a09d0024083421a0800000000000000
+      internalID: -6835276744072785760
       vertices: []
       indices: 
       edges: []

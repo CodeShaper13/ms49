@@ -13,6 +13,8 @@ public abstract class LayerDataBase : ScriptableObject {
     private bool _hasFog = false;
     [SerializeField]
     private float _defaultTemperature = 0;
+    [SerializeField]
+    private bool _generateBlockerRocks = true;
 
     [Space]
 
@@ -33,8 +35,9 @@ public abstract class LayerDataBase : ScriptableObject {
     [Tooltip("The percent of caves that become lakes.  Lakes only spawn on layers with generateCaves set to true.")]
     public int lakeChance = 10;
 
-    public bool hasFog { get { return this._hasFog; } }
-    public float defaultTemperature { get { return this._defaultTemperature; } }
+    public bool hasFog => this._hasFog;
+    public float defaultTemperature => this._defaultTemperature;
+    public bool generateBlockerRocks => this._generateBlockerRocks;
 
     public virtual Color getGroundTint(int x, int y) {
         return this.tintColor;

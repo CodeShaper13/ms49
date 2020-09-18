@@ -37,7 +37,7 @@ MonoBehaviour:
   isDestroyable: 0
   zMoveDirections: 0
   _flammable: 0
-  _temperatureOutput: 4
+  _temperatureOutput: 1.5
   _supportsCeiling: 0
   _includeInFogFloodLift: 1
   tintGroundTile: 0

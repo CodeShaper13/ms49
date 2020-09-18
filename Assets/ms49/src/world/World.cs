@@ -31,7 +31,6 @@ public class World : MonoBehaviour {
     public int mapSize { get; private set; }
     public int stoneExcavated { get; set; }
     public NavigationManager navManager { get; private set; }
-
     private MapGenerator mapGenerator;
 
     /// <summary>
@@ -49,7 +48,7 @@ public class World : MonoBehaviour {
         // layers read.  Generate the new ones.
         for(int i = 0; i < this.storage.layerCount; i++) {
             if(this.storage.getLayer(i) == null) {
-                this.mapGenerator.generateLayer(i);
+                this.mapGenerator.generateLayer(this, i);
             }
         }
 
@@ -73,9 +72,9 @@ public class World : MonoBehaviour {
 
         // Generate the map.
         for(int i = 0; i < this.storage.layerCount; i++) {
-            this.mapGenerator.generateLayer(i);
+            this.mapGenerator.generateLayer(this, i);
         }
-        this.mapGenerator.generateStartRoom();
+        this.mapGenerator.generateStartRoom(this);
 
         // Set starting money.
         this.money.value = 3000;
@@ -89,8 +88,8 @@ public class World : MonoBehaviour {
     }
 
     private void preInitialization() {
+        this.mapGenerator = GameObject.FindObjectOfType<MapGenerator>();
         this.storage = new Storage(this);
-        this.mapGenerator = new MapGenerator(this, this.mapGenData);
     }
 
     private void postInitialization() {

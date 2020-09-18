@@ -35,12 +35,12 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   Sprites:
-  - Sprite: {fileID: -1867837301810802817, guid: 3370ef2a8d2ac184a8314919c0f85c37,
+  - Sprite: {fileID: 6568244172134801747, guid: e8fad20e546ee954eb1317d1e7454d3e,
       type: 3}
     Weight: 3
-  - Sprite: {fileID: 8345755884909347589, guid: 3370ef2a8d2ac184a8314919c0f85c37,
+  - Sprite: {fileID: -8473965523027447877, guid: e8fad20e546ee954eb1317d1e7454d3e,
       type: 3}
     Weight: 5
-  - Sprite: {fileID: 5024209408504060177, guid: 3370ef2a8d2ac184a8314919c0f85c37,
+  - Sprite: {fileID: -7052531943125621977, guid: e8fad20e546ee954eb1317d1e7454d3e,
       type: 3}
     Weight: 1

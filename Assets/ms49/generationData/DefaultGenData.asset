@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522d155579a13d646bb5ce5d62198585, type: 3}
   m_Name: DefaultGenData
   m_EditorClassIdentifier: 
-  mapSize: 64
   _playerStartLayer: 0
-  unbreakableRockTiles: {fileID: 11400000, guid: 93c873b7c3e8a28419682700c1e3330b,
-    type: 2}
   tiles:
     waterTile: {fileID: 11400000, guid: ce497ab37796c984fb4231bb7c6d3d94, type: 2}
     lavaTile: {fileID: 11400000, guid: e77239bff4cdc0c4a83e4145d0652fd1, type: 2}
+    unbreakableTile: {fileID: 11400000, guid: 3e22596b622383c4a9bb4d5f09386626, type: 2}
   layerGenerators:
   - {fileID: 11400000, guid: 3fc454ff267f9a943b2fb661c489c6cb, type: 2}
   - {fileID: 11400000, guid: 8b7fb56d4f3e0bc4d9a4b91e4706d839, type: 2}

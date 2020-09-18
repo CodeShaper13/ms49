@@ -22,13 +22,13 @@ TextureImporter:
     second: vents_5
   - first:
       213: 6179178466566572557
-    second: vents_6
+    second: vents_curve_r_d
   - first:
       213: 1152684123446688089
     second: vents_7
   - first:
       213: 2769809355316503117
-    second: vents_8
+    second: vents_u_d_l
   - first:
       213: 5130957062848313136
     second: vents_9
@@ -40,7 +40,19 @@ TextureImporter:
     second: vents_standalone
   - first:
       213: 4546777563174778118
-    second: vents_12
+    second: vents_shaftOpenFront
+  - first:
+      213: 3175961109822053035
+    second: vents_curve_l_d
+  - first:
+      213: -2342582017436113514
+    second: vents_u_r_d
+  - first:
+      213: -76587911592465288
+    second: vents_15
+  - first:
+      213: -6968993248330430926
+    second: vents_shaft
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -192,7 +204,7 @@ TextureImporter:
       name: vents_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 192
         width: 16
         height: 32
@@ -213,7 +225,7 @@ TextureImporter:
       name: vents_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 80
         y: 192
         width: 16
         height: 32
@@ -252,7 +264,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vents_6
+      name: vents_curve_r_d
       rect:
         serializedVersion: 2
         x: 0
@@ -276,7 +288,7 @@ TextureImporter:
       name: vents_7
       rect:
         serializedVersion: 2
-        x: 16
+        x: 96
         y: 192
         width: 16
         height: 32
@@ -294,10 +306,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vents_8
+      name: vents_u_d_l
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 192
         width: 16
         height: 32
@@ -378,7 +390,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vents_12
+      name: vents_shaftOpenFront
       rect:
         serializedVersion: 2
         x: 96
@@ -394,6 +406,90 @@ TextureImporter:
       bones: []
       spriteID: 605bfb59a16691f30800000000000000
       internalID: 4546777563174778118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vents_curve_l_d
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 192
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baa166b6dc7431c20800000000000000
+      internalID: 3175961109822053035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vents_u_r_d
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 695a081111a7d7fd0800000000000000
+      internalID: -2342582017436113514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vents_15
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 192
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c217f33b7efeef0800000000000000
+      internalID: -76587911592465288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vents_shaft
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 224
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2364b2f5099294f90800000000000000
+      internalID: -6968993248330430926
       vertices: []
       indices: 
       edges: []

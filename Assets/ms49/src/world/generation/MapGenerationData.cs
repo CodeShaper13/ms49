@@ -6,9 +6,6 @@ public class MapGenerationData : ScriptableObject {
 
     [SerializeField, Min(0)]
     private int _playerStartLayer = 0;
-
-    public UnbreakableRockTiles unbreakableRockTiles;
-    public TileReferences tiles;
     [SerializeField]
     private LayerDataBase[] layerGenerators = null;
 
@@ -32,13 +29,6 @@ public class MapGenerationData : ScriptableObject {
         }
 
         return this.layerGenerators[depth];
-    }
-
-    [Serializable]
-    public class TileReferences {
-
-        public CellData waterTile = null;
-        public CellData lavaTile = null;
     }
 
     [Serializable]

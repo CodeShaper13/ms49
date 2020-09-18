@@ -1,93 +1,55 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
-public class MapGenerator {
+public class MapGenerator : MonoBehaviour {
 
-    private World world;
-    private MapGenerationData genData;
-    private int seed;
+    [SerializeField]
+    private MapGenerationData genData = null;
 
-    private CaveGenerator caveGenerator;
-    private OreGenerator oreGenerator;
+    private List<FeatureBase> features;
 
-    public MapGenerator(World world, MapGenerationData genData) {
-        this.world = world;
-        this.genData = genData;
-        this.seed = "summertimeSadness".GetHashCode();
-
-        this.caveGenerator = new CaveGenerator(this.genData.tiles);
-        this.oreGenerator = new OreGenerator(this.genData.tiles);
+    private void Awake() {
+        // Find all of the attached Feature components and sort them by priority.
+        this.features = new List<FeatureBase>();
+        foreach(FeatureBase task in this.GetComponentsInChildren<FeatureBase>()) {
+            this.features.Add(task);
+        }
+        this.features = this.features.OrderBy(e => e.priority).ToList();
     }
 
-    public void generateLayer(int depth) {
-        int radius = this.world.mapSize;
-        int layerSeed = this.seed * depth;
+    public void generateLayer(World world, int depth) {
+        int layerSeed = world.seed * depth;
 
-        MapAccessor accessor = new MapAccessor(this.world.mapSize);
+        MapAccessor accessor = new MapAccessor(world.mapSize);
         LayerDataBase layerData = this.genData.getLayerFromDepth(depth);
-        System.Random rnd = new System.Random(layerSeed);
 
-        if(layerData.generateCaves) {
-            // Generate caves.  This will populate the accessor cell array with non null values.
-            this.caveGenerator.generateCaves(rnd, layerData, accessor);
-        } else {
-            for(int x = 0; x < accessor.size; x++) {
-                for(int y = 0; y < accessor.size; y++) {
-                    accessor.setCell(x, y, layerData.getFillCell(x, y));
-                }
+        // Fill the map with the Layer's fill cell.
+        for(int x = 0; x < accessor.size; x++) {
+            for(int y = 0; y < accessor.size; y++) {
+                accessor.setCell(x, y, layerData.getFillCell(x, y));
             }
         }
 
-        this.oreGenerator.generateOres(rnd, layerData, accessor);
+        // Generate all of the features.
+        foreach(FeatureBase feature in this.features) {
+            feature.generate(new System.Random(layerSeed), layerData, accessor);
+        }        
 
-        if(layerData is LayerDataUnderground) {
-            LayerDataUnderground ldu = (LayerDataUnderground)layerData;
+        Layer layer = new Layer(world, depth);
+        world.storage.setLayer(layer, depth);
 
-            // Generate random rocks.
-            for(int i = 0; i < 10; i++) {
-                int x = rnd.Next(1, radius - 1);
-                int y = rnd.Next(1, radius - 1);
-
-                /*
-                // Don't let rocks spawn in the middle of the map (the start point).
-                if(Vector2.Distance(new Vector2Int(x, y), this.genData.startingRoomPosition.vec2Int) <= 8) {
-                    continue;
-                }
-                */
-
-                // Pick the size.
-                int width = rnd.Next(2, 5);
-                int heigth = width + rnd.Next(-1, 2);
-                if(rnd.Next(0, 2) == 0) {
-                    int temp = width;
-                    width = heigth;
-                    heigth = temp;
-                }
-
-                // Place tiles.
-                CellData cell;
-                for(int x1 = 0; x1 < width; x1++) {
-                    for(int y1 = 0; y1 < heigth; y1++) {
-                        cell = this.genData.unbreakableRockTiles.middle;
-                        accessor.setCell(x + x1, y + y1, cell);
-                    }
-                }
-            }
-        }
-
-        Layer layer = new Layer(this.world, depth);
-        this.world.storage.setLayer(layer, depth);
-
-        int mapSize = this.world.mapSize;
-        for(int x = 0; x < mapSize; x++) {
-            for(int y = 0; y < mapSize; y++) {
-                this.world.setCell(x, y, depth, accessor.getCell(x, y), false);
+        // Apply the accessor to the Layer.
+        for(int x = 0; x < accessor.size; x++) {
+            for(int y = 0; y < accessor.size; y++) {
+                world.setCell(x, y, depth, accessor.getCell(x, y), false);
             }
         }
     }
 
-    public void generateStartRoom() {
+    public void generateStartRoom(World world) {
         foreach(MapGenerationData.StartingStructure ss in this.genData.startingStructures) {
-            ss.structure.placeIntoWorld(this.world, ss.pos);
+            ss.structure.placeIntoWorld(world, ss.pos);
         }
     }
 }

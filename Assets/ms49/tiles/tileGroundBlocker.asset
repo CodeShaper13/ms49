@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91b4ddc41b19194792f871e3fda95f5, type: 3}
-  m_Name: tileVentShaft
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: tileGroundBlocker
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -6968993248330430926, guid: 8940718882d88fc43bd841fc1ed6f1ee,
+  m_DefaultSprite: {fileID: -7708644975649761358, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
-  - m_Neighbors: 01000000
+  - m_Neighbors: 02000000
     m_NeighborPositions:
-    - {x: 0, y: -1, z: 0}
+    - {x: 0, y: 1, z: 0}
     m_Sprites:
-    - {fileID: 4546777563174778118, guid: 8940718882d88fc43bd841fc1ed6f1ee, type: 3}
+    - {fileID: 2252217939642970804, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
     m_GameObject: {fileID: 0}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -29,6 +29,3 @@ MonoBehaviour:
     m_Output: 0
     m_ColliderType: 1
     m_RandomTransform: 0
-  siblings:
-  - {fileID: 11400000, guid: 646f5885892555e41952fa0b05eaa941, type: 2}
-  - {fileID: 11400000, guid: 2db041d70d9c1e64d9f6aba490da5eff, type: 2}

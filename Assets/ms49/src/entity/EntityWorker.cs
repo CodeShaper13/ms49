@@ -12,7 +12,7 @@ public class EntityWorker : EntityBase, IClickable {
     [SerializeField]
     protected Canvas tooltipCanvas = null;
     [SerializeField]
-    protected ParticleSystem sleepingEffect = null;
+    private GameObject sleepingParticlePrefab = null;
 
     public UnlockableStat hunger;
     public UnlockableStat energy;
@@ -28,6 +28,8 @@ public class EntityWorker : EntityBase, IClickable {
     public MoveHelper moveHelper { get; private set; }
     public WorkerStats stats { get; private set; }
     public WorkerAnimator animator { get; private set; }
+
+    private Particle sleepParticle;
 
     private void OnMouseEnter() {
         this.tooltipCanvas.enabled = true;
@@ -90,13 +92,18 @@ public class EntityWorker : EntityBase, IClickable {
         this.onDeath();
     }
 
-    public void setSleeping(bool isSleeping) {
-        this.isSleeping = isSleeping;
-        if(isSleeping) {
-            this.sleepingEffect.Play();
-        }
-        else {
-            this.sleepingEffect.Stop();
+    public void setSleeping(bool sleeping) {
+        if(sleeping) {
+            if(!this.isSleeping) {
+                this.sleepParticle = this.world.particles.spawn(this.worldPos + Vector2.up, this.depth, this.sleepingParticlePrefab);
+            }
+            this.isSleeping = true;
+        } else {
+            if(this.sleepParticle != null) {
+                this.world.particles.remove(this.sleepParticle);
+                this.sleepParticle = null;
+            }
+            this.isSleeping = false;
         }
     }
 

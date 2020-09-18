@@ -14,25 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTile: {fileID: 0}
   objectTile: {fileID: 11400000, guid: 646f5885892555e41952fa0b05eaa941, type: 2}
-  overlayTile: {fileID: 0}
+  overlayTile: {fileID: 11400000, guid: 2db041d70d9c1e64d9f6aba490da5eff, type: 2}
   rotationalOverride: 0
   up:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   right:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   down:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   left:
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   _movementCost: -1
   canBuildOver: 0
   isDestroyable: 1
   zMoveDirections: 0
   _flammable: 1
+  _temperatureOutput: 0
+  _supportsCeiling: 0
+  _includeInFogFloodLift: 0
   tintGroundTile: 0
   tintObjectTile: 0
   behaviorPrefab: {fileID: 0}

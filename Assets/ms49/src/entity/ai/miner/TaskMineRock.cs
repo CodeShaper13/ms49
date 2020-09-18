@@ -9,10 +9,13 @@ public class TaskMineRock : TaskBase<EntityMiner> {
     [SerializeField]
     private float hungerCost = 5f;
     [SerializeField]
-    private GameObject mineParticlePrefab;
+    private GameObject stoneCrackParticlePrefab = null;
+    [SerializeField]
+    private GameObject mineParticlePrefab = null;
 
     private float timeMining;
     private Position stonePos;
+    private Particle crackParticle;
 
     public override bool shouldExecute() {
         if(this.owner.heldItem == null) {
@@ -42,6 +45,11 @@ public class TaskMineRock : TaskBase<EntityMiner> {
 
     public override void preform() {
         if(!this.moveHelper.hasPath()) {
+
+            if(this.crackParticle == null) {
+                this.crackParticle = this.owner.world.particles.spawn(this.stonePos.center, this.owner.depth, this.stoneCrackParticlePrefab);
+            }
+
             this.timeMining += Time.deltaTime;
 
             if(this.timeMining >= mineSpeed) {
@@ -78,6 +86,10 @@ public class TaskMineRock : TaskBase<EntityMiner> {
         base.resetTask();
 
         this.timeMining = 0;
+        if(this.crackParticle != null) {
+            this.owner.world.particles.remove(this.crackParticle);
+            this.crackParticle = null;
+        }
 
         this.moveHelper.stop();
     }

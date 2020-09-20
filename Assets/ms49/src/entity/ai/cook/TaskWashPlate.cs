@@ -6,17 +6,18 @@
 /// 
 /// This will make them travel to a sink and wash the plate.
 /// </summary>
-public class TaskWashPlate : TaskBase<EntityCook> {
+public class TaskWashPlate : TaskBase<EntityWorker> {
 
     [SerializeField]
     private float plateWashSpeed = 4f;
+    [SerializeField]
+    private CookMetaData cookData = null;
 
     private float washTimer;
     private CellBehaviorSink sink;
 
-
     public override bool continueExecuting() {
-        if(this.sink == null || this.owner.plateState != CellBehaviorTable.EnumPlateState.DIRTY) {
+        if(this.sink == null || this.cookData.plateState != CellBehaviorTable.EnumPlateState.DIRTY) {
             return false;
         } else {
             return true;
@@ -29,7 +30,7 @@ public class TaskWashPlate : TaskBase<EntityCook> {
 
             this.washTimer += Time.deltaTime;
             if(this.washTimer >= plateWashSpeed) {
-                this.owner.plateState = CellBehaviorTable.EnumPlateState.CLEAN;
+                this.cookData.plateState = CellBehaviorTable.EnumPlateState.CLEAN;
                 this.sink.setOccupant(null);
                 this.sink.setFilled(false);
             }
@@ -47,7 +48,7 @@ public class TaskWashPlate : TaskBase<EntityCook> {
     }
 
     public override bool shouldExecute() {
-        if(this.owner.plateState == CellBehaviorTable.EnumPlateState.DIRTY) {
+        if(this.cookData.plateState == CellBehaviorTable.EnumPlateState.DIRTY) {
             foreach(CellBehaviorSink sink in this.owner.world.getAllBehaviors<CellBehaviorSink>()) {
                 if(!sink.isOccupied()) {
                     if(this.moveHelper.setDestination(sink.pos + Rotation.DOWN, true) != null) {

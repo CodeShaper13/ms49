@@ -17,7 +17,11 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
     private void Start() {
         this.owner = this.GetComponentInParent<T>();
         this.moveHelper = this.GetComponentInParent<MoveHelper>();
+
+        this.onStart();
     }
+
+    protected virtual void onStart() { }
 
     /// <summary>
     /// Called every frame the task is not running.

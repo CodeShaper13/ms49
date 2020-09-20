@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7301099004912455461}
   - component: {fileID: 7301099004912455466}
   - component: {fileID: 1711387222}
+  - component: {fileID: 6823527089509510739}
   m_Layer: 5
   m_Name: InventoryItemEntry
   m_TagString: Untagged
@@ -91,6 +92,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: {fileID: 8139582599662263655}
   img: {fileID: 7301099004912455466}
+  tooltip: {fileID: 6823527089509510739}
+--- !u!114 &6823527089509510739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301099004912455464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57af3e18e5f23e344b544998c89b5f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: 
+  delay: 0.5
+  pullFromTextComponent: 0
 --- !u!1001 &7301099004236213084
 PrefabInstance:
   m_ObjectHideFlags: 0

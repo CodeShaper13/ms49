@@ -11,7 +11,7 @@ public class PopupWorkerStats : PopupWindow {
     [SerializeField]
     private Text statsText = null;
     [SerializeField]
-    private Image img = null;
+    private FaceUiPreview preview = null;
 
     private EntityWorker worker;
     private string infoTextTemplate;
@@ -25,19 +25,21 @@ public class PopupWorkerStats : PopupWindow {
     public void setWorker(EntityWorker worker) {
         this.worker = worker;
 
-        WorkerStats stats = this.worker.stats;
+        WorkerInfo info = this.worker.info;
 
-        this.nameText.text = stats.getFullName().ToLower();
+        this.nameText.text = (info.firstName + " " + info.lastName).ToLower();
 
-        this.infoText.text = string.Format(this.infoTextTemplate, stats.getFullName(), this.worker.typeName, "todo");
+        this.infoText.text = string.Format(this.infoTextTemplate,
+            this.worker.type.typeName,
+            info.pay,
+            Main.instance.personalities.getDescription(info.personality));
     }
 
     protected override void onUpdate() {
         base.onUpdate();
 
         if(this.worker != null) {
-            // Update face.
-            this.img.sprite = this.worker.animator.getSprite();
+            this.preview.setTarget(this.worker.info, this.worker.type);
 
             StringBuilder sb = new StringBuilder();
             this.worker.writeWorkerInfo(sb);
@@ -45,8 +47,20 @@ public class PopupWorkerStats : PopupWindow {
         }
     }
 
+    /// <summary>
+    /// Centers the Camera on the Worker and closes the UI.
+    /// </summary>
+    public void callback_find() {
+        if(this.worker != null) {
+            CameraController.instance.setCameraPos(this.worker.worldPos);
+        }
+        this.close();
+    }
+
     public void callback_fire() {
-        this.worker.world.entities.remove(this.worker);
+        if(this.worker != null) {
+            this.worker.world.entities.remove(this.worker);
+        }
         this.close();
     }
 }

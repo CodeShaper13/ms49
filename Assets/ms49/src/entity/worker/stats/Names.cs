@@ -15,9 +15,9 @@ public class Names : MonoBehaviour {
     private string[] lastNames;
 
     private void Awake() {
-        this.maleNames = this.readTextAsset(this.maleNamesTextAsset, true).ToArray();
-        this.femaleNames = this.readTextAsset(this.femaleNamesTextAsset, true).ToArray();
-        this.lastNames = this.readTextAsset(this.lastNamesTextAsset, true).ToArray();
+        this.maleNames = readTextAsset(this.maleNamesTextAsset, true).ToArray();
+        this.femaleNames = readTextAsset(this.femaleNamesTextAsset, true).ToArray();
+        this.lastNames = readTextAsset(this.lastNamesTextAsset, true).ToArray();
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class Names : MonoBehaviour {
     /// Reads a Text Asset and returns the contents.  Empty
     /// line and lines starting with "#" are ignored.
     /// </summary>
-    private List<string> readTextAsset(TextAsset textAsset, bool removeComments = true) {
+    public static List<string> readTextAsset(TextAsset textAsset, bool removeComments = true) {
         string[] strings = textAsset.text.Split(new string[] { "\r\n", "\n" }, System.StringSplitOptions.RemoveEmptyEntries);
         List<string> list = new List<string>(strings);
         if(removeComments) {

@@ -10,21 +10,16 @@ public static class Pause {
     }
 
     public static void pause() {
-        Pause.func(true);
-    }
-
-    public static void unPause() {
-        Pause.func(false);
-    }
-
-    private static void func(bool isPaused) {
-        if(isPaused) {
+        if(!Pause.isPaused()) {
             Pause.flag = true;
 
             Pause.oldTimeScale = Time.timeScale;
             Time.timeScale = 0;
         }
-        else {
+    }
+
+    public static void unPause() {
+        if(Pause.isPaused()) {
             Pause.flag = false;
 
             Time.timeScale = Pause.oldTimeScale;

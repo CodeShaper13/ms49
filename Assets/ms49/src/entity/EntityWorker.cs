@@ -5,28 +5,25 @@ using System.Text;
 public class EntityWorker : EntityBase, IClickable {
 
     [SerializeField]
-    private string _typeName = "???";
-
-    [Space]
-
-    [SerializeField]
     protected Canvas tooltipCanvas = null;
     [SerializeField]
     private GameObject sleepingParticlePrefab = null;
 
+    // References
     public UnlockableStat hunger;
     public UnlockableStat energy;
     public UnlockableStat temperature;
     public AiManager aiManager;
+    public DirectionalSpriteSwapper hatSpriteSwapper;
 
     public Vector2 posLastFrame { get; private set; }
-    public string typeName { get { return this._typeName; } }
+    public WorkerType type { get; private set; }
     public bool isDead { get; private set; }
     public bool isSleeping { get; private set; }
     public Rotation rotation { get; set; }
 
     public MoveHelper moveHelper { get; private set; }
-    public WorkerStats stats { get; private set; }
+    public WorkerInfo info { get; set; }
     public WorkerAnimator animator { get; private set; }
 
     private Particle sleepParticle;
@@ -53,7 +50,6 @@ public class EntityWorker : EntityBase, IClickable {
         this.rotation = Rotation.DOWN;
 
         this.moveHelper = this.GetComponent<MoveHelper>();
-        this.stats = new WorkerStats();
         this.animator = this.GetComponentInChildren<WorkerAnimator>();
 
         this.OnMouseExit(); // Hide Canvas
@@ -81,6 +77,27 @@ public class EntityWorker : EntityBase, IClickable {
             if(this.hunger.value <= this.hunger.minValue || this.energy.value <= this.energy.minValue || this.temperature.value >= this.temperature.maxValue) {
                 this.kill();
             }
+        }
+    }
+
+    private void LateUpdate() {
+        this.animator.rotation = this.rotation;
+    }
+
+    public void setType(WorkerType type) {
+        if(this.type != null) {
+            Debug.LogWarning("A Worker's type can only be set once!");
+            return;
+        }
+
+        this.type = type;
+
+        // Setup hat
+        this.hatSpriteSwapper.sprites = this.type.hat;
+
+        // Setup extra AI
+        if(this.type.aiPrefab != null) {
+            GameObject.Instantiate(this.type.aiPrefab, this.aiManager.transform);
         }
     }
 
@@ -124,6 +141,13 @@ public class EntityWorker : EntityBase, IClickable {
         tag.setTag("hunger", this.hunger.value);
         tag.setTag("temperature", this.temperature.value);
         tag.setTag("isDead", this.isDead);
+        tag.setTag("workerInfo", this.info.writeToNbt());
+        tag.setTag("workerType", Main.instance.workerTypeRegistry.getIdOfElement(this.type));
+
+        // Write Ai Meta objects to NBT
+        foreach(IAiMeta meta in this.GetComponentsInChildren<IAiMeta>()) {
+            meta.writeToNbt(tag);
+        }
     }
 
     public override void readFromNbt(NbtCompound tag) {
@@ -134,6 +158,13 @@ public class EntityWorker : EntityBase, IClickable {
         this.hunger.value = tag.getFloat("hunger");
         this.temperature.value = tag.getFloat("temperature");
         this.isDead = tag.getBool("isDead");
+        this.info = new WorkerInfo(tag.getCompound("workerInfo"));
+        this.setType(Main.instance.workerTypeRegistry.getElement(tag.getInt("workerType")));
+
+        // Read Ai Meta objects from NBT
+        foreach(IAiMeta meta in this.GetComponentsInChildren<IAiMeta>()) {
+            meta.readFromNbt(tag);
+        }
     }
 
     /// <summary>

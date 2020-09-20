@@ -4,40 +4,53 @@
 [RequireComponent(typeof(Animator))]
 public class WorkerAnimator : MonoBehaviour {
 
-    public static readonly string[] STATIC_DIRECTIONS = {
+    private static readonly string[] STATIC_DIRECTIONS = {
         "IdleDown",
         "IdleSideways",
         "IdleUp",
         "IdleSideways"
     };
 
-    public static readonly string[] RUN_DIRECTIONS = {
+    private static readonly string[] RUN_DIRECTIONS = {
         "WalkDown",
         "WalkSideways",
         "WalkUp",
         "WalkSideways"
     };
 
-    private EntityWorker worker;
+    private Rotation _rot = Rotation.UP;
     private SpriteRenderer sr;
     private Animator animator;
-
     private Vector2 posLastframe;
     private bool playingCustom;
 
+    /// <summary>
+    /// Controlls the direction the Worker is facing.  If set to
+    /// null, the value is not changed.
+    /// </summary>
+    public Rotation rotation {
+        get {
+            return this._rot;
+        }
+        set {
+            if(value != null) {
+                this._rot = value;
+            }
+        }
+    }
+
     private void Awake() {
-        this.worker = this.GetComponentInParent<EntityWorker>();
         this.sr = this.GetComponent<SpriteRenderer>();
         this.animator = this.GetComponent<Animator>();
     }
 
     private void Start() {
-        this.posLastframe = this.worker.worldPos;
+        this.posLastframe = this.transform.position;
     }
 
     private void Update() {
         if(!Pause.isPaused()) {
-            Vector2 currentPos = this.worker.worldPos;
+            Vector2 currentPos = this.transform.position;
             Vector2 direction = currentPos - this.posLastframe;
 
             if(this.posLastframe != currentPos || !this.playingCustom) {
@@ -49,10 +62,10 @@ public class WorkerAnimator : MonoBehaviour {
                     RUN_DIRECTIONS;
 
                 // Flip the sprite if the Worker is facing right.
-                this.sr.flipX = this.worker.rotation == Rotation.RIGHT;
+                this.sr.flipX = this.rotation == Rotation.RIGHT;
 
                 // Tell the animator to play the requested state
-                this.animator.Play(directionArray[this.worker.rotation.id]);
+                this.animator.Play(directionArray[this.rotation.id]);
             }
 
             this.posLastframe = currentPos;
@@ -68,12 +81,5 @@ public class WorkerAnimator : MonoBehaviour {
 
     public void stopClip() {
         this.playingCustom = false;
-    }
-
-    /// <summary>
-    /// Returns the Sprite that the animator is applying to the sprite.
-    /// </summary>
-    public Sprite getSprite() {
-        return this.sr.sprite;
     }
 }

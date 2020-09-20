@@ -3,8 +3,6 @@
 public class CmdManager : MonoBehaviour {
 
     [SerializeField]
-    private World world = null;
-    [SerializeField]
     private CmdWindow cmdWindow = null;
 
     public CommandBase[] commands { get; private set; }
@@ -41,7 +39,9 @@ public class CmdManager : MonoBehaviour {
 
             if(cmdName == cmd.commandName) {
                 try {
-                    string result = cmd.runCommand(this.world, args);
+                    World world = GameObject.FindObjectOfType<World>();
+
+                    string result = cmd.runCommand(world, args);
                     if(result != null) {
                         this.logMsg(result);
                     }

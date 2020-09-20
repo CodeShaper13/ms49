@@ -30,3 +30,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _unlockedWorkerTypes:
+  - {fileID: 11400000, guid: 176a67013b39e214c8be9c16e761c6d1, type: 2}
+  _hireCandaditeCount: 4

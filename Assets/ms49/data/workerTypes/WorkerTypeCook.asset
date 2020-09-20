@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf9862f84b2f7d4cbf158823b36512a, type: 3}
+  m_Name: WorkerTypeCook
+  m_EditorClassIdentifier: 
+  _typeName: Cook
+  _hat: {fileID: 11400000, guid: aeec4a0aecc46be489326383be3e0b29, type: 2}
+  _spriteSheetName: spritesheetCook
+  _aiPrefab: {fileID: 9067229749441998773, guid: 07612a39ce80df64087a2fc693cc5256,
+    type: 3}

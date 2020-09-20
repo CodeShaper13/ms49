@@ -5,6 +5,8 @@ public class BuildableTile : BuildableBase {
 
     [SerializeField]
     protected CellData _cell = null;
+    [SerializeField]
+    private EnumFogOption _fogOption = EnumFogOption.LIFT;
     [SerializeField, Tooltip("The rotation to display the tile with in the preview")]
     private EnumRotation _displayRotation = EnumRotation.UP;
     [SerializeField, Tooltip("If not null or empty, this message will be used as the rotation msg")]
@@ -12,6 +14,7 @@ public class BuildableTile : BuildableBase {
 
     public virtual CellData cell => this._cell;
     public virtual EnumRotation displayRotation => this._displayRotation;
+    public EnumFogOption fogOption => this._fogOption;
 
     public override bool isRotatable() {
         return this.cell != null && this.cell.rotationalOverride;
@@ -65,6 +68,16 @@ public class BuildableTile : BuildableBase {
             site.isPrimary = true;
         }
 
-        world.liftFog(pos);
+        if(this.fogOption == EnumFogOption.LIFT) {
+            world.liftFog(pos);
+        } else if(this.fogOption == EnumFogOption.PLACE) {
+            world.placeFog(pos);
+        }
+    }
+
+    public enum EnumFogOption {
+        LIFT = 0,
+        PLACE = 1,
+        NOTHING = 2,
     }
 }

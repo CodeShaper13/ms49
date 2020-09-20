@@ -20,6 +20,8 @@ public class World : MonoBehaviour {
     public MapOutline mapOutline = null;
     public TargetedSquares targetedSquares = null;
     public Grid grid = null;
+    public HireCandidates hireCandidates = null;
+    public GameTime time;
 
     // References to Cells
     public CellData rubbleCell;
@@ -182,6 +184,18 @@ public class World : MonoBehaviour {
         }
 
         this.storage.setCell(pos, data, rotation == null ? Rotation.UP : rotation, updateNeighbors);
+    }
+
+    public void placeFog(Position pos) {
+        if(this.isOutOfBounds(pos)) {
+            return;
+        }
+
+        Layer layer = this.storage.getLayer(pos.depth);
+        if(layer.hasFog()) {
+            layer.fog.setFog(pos.x, pos.y, true);
+            this.worldRenderer.dirtyFogmap(pos, true);
+        }
     }
 
     public void liftFog(Position pos, bool floodLiftFog = true) {
@@ -408,6 +422,14 @@ public class World : MonoBehaviour {
             this.targetedSquares.writeToNbt(tag);
         }
 
+        if(this.hireCandidates != null) {
+            tag.setTag("hireCandidates", this.hireCandidates.writeToNbt());
+        }
+
+        if(this.time != null) {
+            tag.setTag("time", this.time.writeToNbt());
+        }
+
         return tag;
     }
 
@@ -439,6 +461,14 @@ public class World : MonoBehaviour {
 
         if(this.targetedSquares != null) {
             this.targetedSquares.readFromNbt(tag);
+        }
+
+        if(this.hireCandidates != null) {
+            this.hireCandidates.readFromNbt(tag.getCompound("hireCandidates"));
+        }
+
+        if(this.time != null) {
+            this.time.readFromNbt(tag.getCompound("time"));
         }
     }
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf9862f84b2f7d4cbf158823b36512a, type: 3}
+  m_Name: WorkerTypeMiner
+  m_EditorClassIdentifier: 
+  _typeName: Miner
+  _hat: {fileID: 11400000, guid: ca15741fc0227014db26eec6192ad0ee, type: 2}
+  _spriteSheetName: spritesheetMiner
+  _aiPrefab: {fileID: 6927264833654761311, guid: 5e3894e8db4157f40b1a73d47a36c9ca,
+    type: 3}

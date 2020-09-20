@@ -4,10 +4,12 @@
 /// Executes if there is a Worker at a table with no plate and the
 /// owner has a clean plate.
 /// </summary>
-public class TaskMakeFood : TaskBase<EntityCook> {
+public class TaskMakeFood : TaskBase<EntityWorker> {
 
     [SerializeField]
     private float cookSpeed = 4f;
+    [SerializeField]
+    private CookMetaData cookData = null;
 
     private CellBehaviorTable table;
     private CellBehaviorStove stove;
@@ -32,7 +34,7 @@ public class TaskMakeFood : TaskBase<EntityCook> {
                 // cook food...
                 this.cookTimer += Time.deltaTime;
                 if(this.cookTimer >= cookSpeed) {
-                    this.owner.plateState = CellBehaviorTable.EnumPlateState.FULL;
+                    this.cookData.plateState = CellBehaviorTable.EnumPlateState.FULL;
                     this.stove.setOccupant(null);
                     this.stage = 1;
                     if(this.moveHelper.setDestination(this.table.pos, true) == null) {
@@ -43,7 +45,7 @@ public class TaskMakeFood : TaskBase<EntityCook> {
             }
         } else { // state == 1
             if(!this.moveHelper.hasPath()) {
-                this.owner.plateState = CellBehaviorTable.EnumPlateState.NONE;
+                this.cookData.plateState = CellBehaviorTable.EnumPlateState.NONE;
                 this.table.plateState = CellBehaviorTable.EnumPlateState.FULL;
             }
         }
@@ -61,7 +63,7 @@ public class TaskMakeFood : TaskBase<EntityCook> {
     }
 
     public override bool shouldExecute() {
-        if(this.owner.plateState == CellBehaviorTable.EnumPlateState.CLEAN) {
+        if(this.cookData.plateState == CellBehaviorTable.EnumPlateState.CLEAN) {
             foreach(CellBehaviorTable table in this.owner.world.getAllBehaviors<CellBehaviorTable>()) {
                 if(table.plateState == CellBehaviorTable.EnumPlateState.NONE && table.isOccupantSitting()) {
                     // Someone needs food.

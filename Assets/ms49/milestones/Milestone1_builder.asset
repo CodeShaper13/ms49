@@ -22,3 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c0ed959ac70ee646a9aa49a68d584f5, type: 2}
   - {fileID: 11400000, guid: 138d72c227a0aa6468df9299294d7148, type: 2}
   - {fileID: 11400000, guid: 88ab77882846a2e48b4eea586f276eaf, type: 2}
+  - {fileID: 11400000, guid: 0a24f691c4f3c544f9e41b7017e56146, type: 2}
+  _unlockedWorkerTypes:
+  - {fileID: 11400000, guid: ff3b47dbd7dc22946ac380991da69c33, type: 2}
+  _hireCandaditeCount: 3

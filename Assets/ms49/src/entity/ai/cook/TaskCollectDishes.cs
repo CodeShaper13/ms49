@@ -1,11 +1,15 @@
-﻿/// <summary>
+﻿using UnityEngine;
+/// <summary>
 /// Executes if the owner has no plate in hand and there is
 /// a table with a dirt plate.
 /// 
 /// This will make the owner travel to a table with a dirty
 /// plate and pick it up.
 /// </summary>
-public class TaskCollectDishes : TaskBase<EntityCook> {
+public class TaskCollectDishes : TaskBase<EntityWorker> {
+
+    [SerializeField]
+    private CookMetaData cookData = null;
 
     private CellBehaviorTable table;
 
@@ -19,13 +23,13 @@ public class TaskCollectDishes : TaskBase<EntityCook> {
 
     public override void preform() {
         if(this.owner.position.distance(this.table.pos) <= 1) {
-            this.owner.plateState = CellBehaviorTable.EnumPlateState.DIRTY;
+            this.cookData.plateState = CellBehaviorTable.EnumPlateState.DIRTY;
             this.table.plateState = CellBehaviorTable.EnumPlateState.NONE;
         }
     }
 
     public override bool shouldExecute() {
-        if(this.owner.plateState == CellBehaviorTable.EnumPlateState.NONE) {
+        if(this.cookData.plateState == CellBehaviorTable.EnumPlateState.NONE) {
             foreach(CellBehaviorTable table in this.owner.world.getAllBehaviors<CellBehaviorTable>()) {
                 if(table.plateState == CellBehaviorTable.EnumPlateState.DIRTY || (table.plateState == CellBehaviorTable.EnumPlateState.FULL && !table.isOccupied())) {
                     if(this.moveHelper.setDestination(table.pos, true) != null) {

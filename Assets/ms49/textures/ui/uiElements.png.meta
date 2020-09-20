@@ -142,7 +142,7 @@ TextureImporter:
     second: uiElements_45
   - first:
       213: 5804274441044791401
-    second: uiElements_46
+    second: uiElements_frameSimple
   - first:
       213: 711329180378756903
     second: uiElements_divider
@@ -166,7 +166,7 @@ TextureImporter:
     second: uiElements_btnGrayDisabled
   - first:
       213: -6502608003125715983
-    second: uiElements_54
+    second: uiElements_mapPin
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1218,7 +1218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_46
+      name: uiElements_frameSimple
       rect:
         serializedVersion: 2
         x: 244
@@ -1381,6 +1381,27 @@ TextureImporter:
       bones: []
       spriteID: bbd2f272959f70c30800000000000000
       internalID: 4325700128417459643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_mapPin
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 204
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fb5414397812c5a0800000000000000
+      internalID: -6502608003125715983
       vertices: []
       indices: 
       edges: []

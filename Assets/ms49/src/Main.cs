@@ -23,6 +23,10 @@ public class Main : MonoBehaviour {
     [SerializeField]
     private Names _names = null;
     [SerializeField]
+    private Personalities _personalities = null;
+    [SerializeField]
+    private WorkerTypeRegistry _workerTypes = null;
+    [SerializeField]
     private Transform _popupParent = null;
     [SerializeField]
     private Options _options = null;
@@ -38,7 +42,9 @@ public class Main : MonoBehaviour {
     public EntityRegistry entityRegistry => this._entityRegistry;
     public MinedItemRegistry itemRegistry => this._itemRegistry;
     public Names names => this._names;
+    public Personalities personalities => this._personalities;
     public Options options => this._options;
+    public WorkerTypeRegistry workerTypeRegistry => this._workerTypes;
 
     /// <summary>
     /// A reference to the World.  Null if the Player is not playing a save.
@@ -81,7 +87,7 @@ public class Main : MonoBehaviour {
             Main.DEBUG = !Main.DEBUG;
         }
 
-        if(!this.isPlaying() && PopupWindow.openPopup == null) {
+        if(!this.isPlaying() && PopupWindow.getPopupsOpen() == 0) {
             this.titleScreenPopup.open();
         }
     }

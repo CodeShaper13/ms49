@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class TaskMineRock : TaskBase<EntityMiner> {
+public class TaskMineRock : TaskBase<EntityWorker> {
 
     [SerializeField]
     private float mineSpeed = 1f;
@@ -12,13 +12,15 @@ public class TaskMineRock : TaskBase<EntityMiner> {
     private GameObject stoneCrackParticlePrefab = null;
     [SerializeField]
     private GameObject mineParticlePrefab = null;
+    [SerializeField]
+    private MinerMetaData minerData = null;
 
     private float timeMining;
     private Position stonePos;
     private Particle crackParticle;
 
     public override bool shouldExecute() {
-        if(this.owner.heldItem == null) {
+        if(this.minerData.heldItem == null) {
             // No stone, Worker can mine.
             bool flag = this.findClosestStone(this.owner.getCellPos());
             if(flag) {
@@ -30,7 +32,7 @@ public class TaskMineRock : TaskBase<EntityMiner> {
     }
 
     public override bool continueExecuting() {
-        if(this.owner.heldItem != null) {
+        if(this.minerData.heldItem != null) {
             return false; // Worker carrying stone.
         }
         if(!(this.owner.world.getCellState(this.stonePos).data is CellDataMineable)) {
@@ -56,7 +58,7 @@ public class TaskMineRock : TaskBase<EntityMiner> {
                 // Pickup the dropped item from the stone.
                 CellData data = this.owner.world.getCellState(this.stonePos).data;
                 if(data is CellDataMineable) {
-                    this.owner.heldItem = ((CellDataMineable)data).droppedItem;
+                    this.minerData.heldItem = ((CellDataMineable)data).droppedItem;
                 }
 
                 // Play particle (and color it)

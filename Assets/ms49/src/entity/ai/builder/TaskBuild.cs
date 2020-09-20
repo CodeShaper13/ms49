@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TaskBuild : TaskBase<EntityBuilder> {
+public class TaskBuild : TaskBase<EntityWorker> {
 
     [SerializeField]
     private float buildSpeed = 4f;

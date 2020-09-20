@@ -4,7 +4,10 @@ public class UiManager : MonoBehaviour {
 
     public static UiManager singleton;
 
-    [Space]
+    [SerializeField]
+    private KeyCode toggleKey = KeyCode.F1;
+    [SerializeField]
+    private Transform uiHolder = null;
 
     /// <summary> The UI that is currenlty open.  May be null. </summary>
     private UIBase currentUI;
@@ -25,7 +28,7 @@ public class UiManager : MonoBehaviour {
     private void Update() {
         // Close the current popup if escape is pressed.
         if(Input.GetButtonDown("Cancel")) {
-            if(PopupWindow.openPopup == null) {
+            if(PopupWindow.getPopupsOpen() == 0) {
                 // Open the Pause screen if there is a world loaded.
                 if(Main.instance.isPlaying()) {
                     PopupPause popup = Main.instance.findPopup<PopupPause>();
@@ -35,10 +38,19 @@ public class UiManager : MonoBehaviour {
                 }
             }
             else {
-                if(PopupWindow.openPopup.closeableWithEscape) {
-                    PopupWindow.openPopup.close();
+                // Close all of the Popup windows that are open
+                for(int i = PopupWindow.openPopups.Count - 1; i >= 0; i--) {
+                    PopupWindow popup = PopupWindow.openPopups[i];
+                    if(popup.closeableWithEscape) {
+                        popup.close();
+                    }
                 }
             }
+        }
+
+        // Hide/show the ui if the toggle key is pressed.
+        if(Input.GetKeyDown(this.toggleKey)) {
+            this.uiHolder.gameObject.SetActive(!this.uiHolder.gameObject.activeSelf);
         }
     }
 

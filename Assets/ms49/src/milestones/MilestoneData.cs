@@ -11,12 +11,18 @@ public class MilestoneData : ScriptableObject, ISerializationCallbackReceiver {
     private bool _unlocksLayer = false;
     [SerializeField]
     private BuildableBase[] _unlockedBuildables = null;
+    [SerializeField]
+    private WorkerType[] _unlockedWorkerTypes = null;
+    [SerializeField]
+    private int _hireCandaditeCount = 0;
 
     public string milestoneName { get { return this._milestoneName; } }
     public MilestoneRequirerment[] requirements { get { return this._requirements; } }
     public bool unlocksLayer { get { return this._unlocksLayer; } }
     public bool isUnlocked { get; set; }
     public BuildableBase[] unlockedBuildables { get { return this._unlockedBuildables; } }
+    public WorkerType[] unlockedWorkerTypes => this._unlockedWorkerTypes;
+    public int hireCandaditeCount => this._hireCandaditeCount;
 
     public void OnAfterDeserialize() {
         this.isUnlocked = false;

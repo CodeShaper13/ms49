@@ -15,6 +15,8 @@ public class CameraController : MonoBehaviour {
     private int minZoom = 2;
     [SerializeField, Min(2)]
     private int maxZoom = 16;
+    [SerializeField, Min(0.01f)]
+    private float cameraSnapSpeed = 10f;
     [SerializeField]
     private InputKeys keys = null;
 
@@ -23,6 +25,7 @@ public class CameraController : MonoBehaviour {
     private Camera mainCam;
     private PixelPerfectCamera ppc;
     private Vector3 mousePosLastFrame;
+    private Vector2? cameraSnapDestination;
 
     public int currentLayer { get; private set; } = -1;
     public bool inCreativeMode { get; set; }
@@ -61,7 +64,14 @@ public class CameraController : MonoBehaviour {
 
     private void Update() {
         if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
-            this.moveCamera();
+            if(this.cameraSnapDestination != null) {
+                this.setCameraPos(Vector2.MoveTowards(this.getCameraPos(), (Vector2)this.cameraSnapDestination, this.cameraSnapSpeed * Time.deltaTime));
+                if(this.getCameraPos() == (Vector2)this.cameraSnapDestination) {
+                    this.cameraSnapDestination = null;
+                }
+            } else {
+                this.moveCamera();
+            }
 
             if(!EventSystem.current.IsPointerOverGameObject()) {
                 this.detectClicks();
@@ -129,8 +139,16 @@ public class CameraController : MonoBehaviour {
         return new Position(coords.x, coords.y, this.currentLayer);
     }
 
+    public Vector2 getCameraPos() {
+        return this.mainCam.transform.position;
+    }
+
     public void setCameraPos(Vector2 pos) {
         this.mainCam.transform.position = pos;
+    }
+
+    public void setCameraPosSmooth(Vector2 pos) {
+        this.cameraSnapDestination = pos;
     }
 
     public NbtCompound writeToNbt() {
@@ -138,7 +156,8 @@ public class CameraController : MonoBehaviour {
 
         tag.setTag("layer", this.currentLayer);
         tag.setTag("zoomLevel", this.currentZoom);
-        tag.setTag("cameraPos", new Vector2(this.transform.position.x, this.transform.position.y));
+        Transform camTrans = this.mainCam.transform;
+        tag.setTag("cameraPos", new Vector2(camTrans.position.x, camTrans.position.y));
         tag.setTag("inCreativeMode", this.inCreativeMode);
 
         return tag;
@@ -147,7 +166,7 @@ public class CameraController : MonoBehaviour {
     public void readFromNbt(NbtCompound tag) {
         this.changeLayer(tag.getInt("layer"));
         this.setZoom(tag.getInt("zoomLevel", this.minZoom));
-        this.transform.position = tag.getVector2("cameraPos");
+        this.setCameraPos(tag.getVector2("cameraPos"));
         this.inCreativeMode = tag.getBool("inCreativeMode");
     }
 

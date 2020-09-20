@@ -24,3 +24,4 @@ MonoBehaviour:
   _unlockedBuildables:
   - {fileID: 11400000, guid: c717ff1433ae9804b973e948e46e045d, type: 2}
   - {fileID: 11400000, guid: 78e97245eafd4354aa9ae607fc00893b, type: 2}
+  _hireCandaditeCount: 5

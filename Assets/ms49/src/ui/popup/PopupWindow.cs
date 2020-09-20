@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PopupWindow : MonoBehaviour {
 
     /// <summary> The currently open popup window.  May be null. </summary>
-    public static PopupWindow openPopup;
+    //public static PopupWindow openPopup;
+
+    public static List<PopupWindow> openPopups = new List<PopupWindow>();
 
     [SerializeField]
     private bool _pauseGameWhenOpen = false;
@@ -12,40 +15,51 @@ public class PopupWindow : MonoBehaviour {
     [SerializeField]
     private bool _closeableWithEscape = true;
 
-    //private Canvas canvas;
     private bool isPopupOpen;
 
     public bool pauseGameWhenOpen { get { return this._pauseGameWhenOpen; } }
     public bool blockInput { get { return this._blockInput; } }
     public bool closeableWithEscape { get { return this._closeableWithEscape; } }
-    public bool isOpen => PopupWindow.openPopup == this;
+    public bool isOpen => PopupWindow.openPopups.Contains(this);
+
+    /// <summary>
+    /// Returns true if at least one of the open Popups is blocking input
+    /// </summary>
+    public static bool blockingInput() {
+        foreach(PopupWindow popup in openPopups) {
+            if(popup.blockInput) {
+                print(popup.name + " is blocking input");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Returns the number of Popup Windows open.
+    /// </summary>
+    /// <returns></returns>
+    public static int getPopupsOpen() {
+        return openPopups.Count;
+    }
 
     private void Awake() {
-        //this.canvas = this.GetComponentInChildren<Canvas>();
-        //if(this.canvas == null) {
-        //    Debug.LogWarning("Could not find Canvas for Popup named \"" + this.name + "\"");
-        //}
-
         this.initialize();
     }
 
     private void Update() {
-        //if(this.isOpen) {
-            this.onUpdate();
-        //}
+        this.onUpdate();
     }
 
-    public static bool blockingInput() {
-        return PopupWindow.openPopup != null && PopupWindow.openPopup.blockInput;
-    }
-
-    public void open() {
-        if(PopupWindow.openPopup != null) {
-            PopupWindow.openPopup.close();
+    public void open(bool closeAllOpen = true) {
+        if(closeAllOpen) {
+            for(int i = openPopups.Count - 1; i >= 0; i--) {
+                openPopups[i].close();
+            }
         }
 
         this.gameObject.SetActive(true);
-        PopupWindow.openPopup = this;
+        openPopups.Add(this);
 
         // Pause the game if the popup requires it.
         if(this.pauseGameWhenOpen) {
@@ -58,15 +72,22 @@ public class PopupWindow : MonoBehaviour {
     public void close() {
         this.onClose();
 
-        // Unpause the game if the open popup requires the game to be paused.
-        if(PopupWindow.openPopup != null) {
-            if(PopupWindow.openPopup.pauseGameWhenOpen) {
-                Pause.unPause();
+        openPopups.Remove(this);
+        this.gameObject.SetActive(false);
+
+
+        // Unpause the game if none of the open windows require the game to be paused.
+        bool unPause = true;
+        foreach(PopupWindow popup in openPopups) {
+            if(popup.pauseGameWhenOpen) {
+                unPause = false;
+                break;
             }
         }
 
-        PopupWindow.openPopup = null;
-        this.gameObject.SetActive(false);
+        if(unPause) {
+            Pause.unPause();
+        }
     }
 
     protected virtual void initialize() { }

@@ -7,6 +7,8 @@ public class InventoryItemEntry : MonoBehaviour {
     private Text count = null;
     [SerializeField]
     private Image img = null;
+    [SerializeField]
+    private Tooltip tooltip = null;
 
     public Item item { get; private set; }
 
@@ -17,6 +19,10 @@ public class InventoryItemEntry : MonoBehaviour {
             this.img.sprite = null;
         } else {
             this.img.sprite = item.sprite;
+        }
+
+        if(this.tooltip != null) {
+            this.tooltip.text = this.item.itemName;
         }
     }
 

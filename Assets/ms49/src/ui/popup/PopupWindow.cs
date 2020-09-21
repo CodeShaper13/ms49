@@ -51,7 +51,11 @@ public class PopupWindow : MonoBehaviour {
         this.onUpdate();
     }
 
-    public void open(bool closeAllOpen = true) {
+    public void open() {
+        this.open(true);
+    }
+
+    public void open(bool closeAllOpen) {
         if(closeAllOpen) {
             for(int i = openPopups.Count - 1; i >= 0; i--) {
                 openPopups[i].close();

@@ -1,7 +1,7 @@
 ﻿using fNbt;
 using UnityEngine;
 
-public class MilestoneManager : MonoBehaviour {
+public class MilestoneManager : MonoBehaviour, ISaveableSate {
 
     [SerializeField]
     private MilestoneData[] _milestoneData = null;
@@ -9,6 +9,8 @@ public class MilestoneManager : MonoBehaviour {
     private World world = null;
 
     public MilestoneData[] milestones { get { return this._milestoneData; } }
+
+    public string tagName => "milestones";
 
     private void Update() {
         if(!Pause.isPaused()) {

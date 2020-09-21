@@ -403,31 +403,16 @@ public class World : MonoBehaviour {
         this.storage.writeToNbt(tagStorage);
         tag.Add(tagStorage);
 
-        // Write Entities:
-        if(this.entities != null) {
-            this.entities.writeToNbt(tag);
-        }
-
         // Write Player:
         if(CameraController.instance != null) {
             tag.setTag("player", CameraController.instance.writeToNbt());
         }
 
-        // Write Milestones:
-        if(this.milestones != null) {
-            this.milestones.writeToNbt(tag);
-        }
-
-        if(this.targetedSquares != null) {
-            this.targetedSquares.writeToNbt(tag);
-        }
-
-        if(this.hireCandidates != null) {
-            tag.setTag("hireCandidates", this.hireCandidates.writeToNbt());
-        }
-
-        if(this.time != null) {
-            tag.setTag("time", this.time.writeToNbt());
+        // Write all child componenets that implement ISaveableState to NBT
+        foreach(ISaveableSate saveable in this.GetComponentsInChildren<ISaveableSate>()) {
+            NbtCompound compound = new NbtCompound();
+            saveable.writeToNbt(compound);
+            tag.setTag(saveable.tagName, compound);
         }
 
         return tag;
@@ -448,27 +433,9 @@ public class World : MonoBehaviour {
         // Read level:
         NbtCompound tagStorage = tag.getCompound("storage");
         this.storage.readFromNbt(tagStorage);
-
-        // Read Entities:
-        if(this.entities != null) {
-            this.entities.readFromNbt(tag);
-        }
-
-        // Read Milestones:
-        if(this.milestones != null) {
-            this.milestones.readFromNbt(tag);
-        }
-
-        if(this.targetedSquares != null) {
-            this.targetedSquares.readFromNbt(tag);
-        }
-
-        if(this.hireCandidates != null) {
-            this.hireCandidates.readFromNbt(tag.getCompound("hireCandidates"));
-        }
-
-        if(this.time != null) {
-            this.time.readFromNbt(tag.getCompound("time"));
+        
+        foreach(ISaveableSate saveable in this.GetComponentsInChildren<ISaveableSate>()) {
+            saveable.readFromNbt(tag.getCompound(saveable.tagName));
         }
     }
 }

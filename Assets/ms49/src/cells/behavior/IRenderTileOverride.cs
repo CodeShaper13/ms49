@@ -6,5 +6,5 @@
 /// </summary>
 public interface IRenderTileOverride {
 
-    void getObjectTile(ref TileBase tile);
+    void replaceTiles(ref TileBase floorOverlay, ref TileBase tile, ref TileBase tileOverlay);
 }

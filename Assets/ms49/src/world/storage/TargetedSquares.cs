@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using fNbt;
 
-public class TargetedSquares : MonoBehaviour {
+public class TargetedSquares : MonoBehaviour, ISaveableSate {
 
     [SerializeField]
     private WorldRenderer worldRenderer = null;
 
     public HashSet<Position> list { get; private set; }
+
+    public string tagName => "targetedSquares";
 
     private void Awake() {
         this.list = new HashSet<Position>();

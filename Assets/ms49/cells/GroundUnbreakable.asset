@@ -12,23 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: GroundUnbreakable
   m_EditorClassIdentifier: 
-  groundTile: {fileID: 11400000, guid: b9062077652f86f4f9f0d3dce0ef9ba8, type: 2}
+  isSolid: 1
+  groundTile: {fileID: 0}
   objectTile: {fileID: 11400000, guid: 0b7539d7e64b2884298d0f51ba188283, type: 2}
   overlayTile: {fileID: 0}
   rotationalOverride: 0
   up:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
     overlayTile: {fileID: 0}
     effect: 0
   right:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
     overlayTile: {fileID: 0}
     effect: 0
   down:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
     overlayTile: {fileID: 0}
     effect: 0
   left:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
     overlayTile: {fileID: 0}
     effect: 0

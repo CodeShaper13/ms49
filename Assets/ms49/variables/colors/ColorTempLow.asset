@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49032f279ee0a9a478ae5eccda094746, type: 3}
   m_Name: ColorTempLow
   m_EditorClassIdentifier: 
-  initialValue: {r: 0, g: 0.44313726, b: 1, a: 1}
+  initialValue: {r: 0.23529413, g: 0.4666667, b: 0.654902, a: 1}

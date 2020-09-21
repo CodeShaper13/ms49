@@ -7,13 +7,10 @@ public class ParticleList : MonoBehaviour {
     private World world = null;
 
     public List<Particle> list { get; private set; }
-    private Transform particleHolder;
     private WorldRenderer worldRenderer;
 
     private void Awake() {
         this.list = new List<Particle>();
-
-        this.particleHolder = this.world.createHolder("PARTICLE_HOLDER");
     }
 
     private void Start() {
@@ -30,7 +27,7 @@ public class ParticleList : MonoBehaviour {
 
     private void LateUpdate() {
         foreach(Particle particle in this.list) {
-            if(particle.depth == this.worldRenderer.targetLayer.depth) {
+            if(particle.depth == this.worldRenderer.getDepthRendering()) {
                 particle.gameObject.SetActive(true);
             }
             else {
@@ -44,7 +41,7 @@ public class ParticleList : MonoBehaviour {
     }
 
     public Particle spawn(Vector2 pos, int depth, GameObject particlePrefab) {
-        GameObject obj = GameObject.Instantiate(particlePrefab, this.particleHolder);
+        GameObject obj = GameObject.Instantiate(particlePrefab, this.transform);
         Particle particle = obj.GetComponent<Particle>();
         if(particle == null) {
             Debug.LogWarning("Can not spawn Particle, it has no Particle componenet on root GameObject");

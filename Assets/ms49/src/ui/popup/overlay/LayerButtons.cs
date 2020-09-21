@@ -13,12 +13,16 @@ public class LayerButtons : MonoBehaviour {
     private World world;
 
     private void Update() {
-        this.updateText();
-        this.updateButtonInteracability();
-    }
+        if(this.world == null) {
+            this.world = GameObject.FindObjectOfType<World>();
+        }
 
-    private void OnEnable() {
-        this.world = GameObject.FindObjectOfType<World>();
+        if(this.world != null) {
+            this.updateText();
+            this.updateButtonInteracability();
+        } else {
+            Debug.LogWarning("Unable to find World Component.  LayerButtons will not work.");
+        }
     }
 
     public void callback(bool moveUp) {

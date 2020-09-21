@@ -4,7 +4,6 @@ public class WorldRenderer : MonoBehaviour {
 
     [SerializeField]
     private World world = null;
-
     [SerializeField]
     private CellTilemapRenderer cellRenderer = null;
     [SerializeField]
@@ -12,22 +11,17 @@ public class WorldRenderer : MonoBehaviour {
     [SerializeField]
     private BinaryTilemapRenderer targetedRenderer = null;
 
-    /// <summary> The Layer the renderer is rendering. </summary>
-    public Layer targetLayer;
+    private Layer targetLayer;
 
     public void setup() {
         int size = this.world.mapSize;
 
-        this.cellRenderer.mapSize = size;
-        this.cellRenderer.floorTintGetterFunc = (x, y) => {
-            return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTint(x, y);
-        };
-        this.cellRenderer.cellStateGetterFunc = (x, y) => {
-            return this.targetLayer.getCellState(x, y);
-        };
-        this.cellRenderer.fallbackFloorGetterFunc = (x, y) => {
-            return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTile(x, y);
-        };
+        this.cellRenderer.initializedRenderer(
+            size,
+            (x, y) => { return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTint(x, y); },
+            (x, y) => { return this.targetLayer.getCellState(x, y); },
+            (x, y) => { return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTile(x, y); }
+            );
 
         this.fogRenderer.mapSize = size;
         this.targetedRenderer.mapSize = size;
@@ -41,7 +35,7 @@ public class WorldRenderer : MonoBehaviour {
     }
 
     public void dirtyTile(int x, int y) {
-        this.cellRenderer.dirtyTile(x, y);
+        this.cellRenderer.dirtyCell(x, y);
     }
 
     public void dirtyFogmap(Position pos, bool visible) {
@@ -53,6 +47,18 @@ public class WorldRenderer : MonoBehaviour {
     public void dirtyExcavationTarget(Position pos, bool highlighted) {
         if(this.targetLayer != null && pos.depth == this.targetLayer.depth) {
             this.targetedRenderer.setTile(pos.x, pos.y, highlighted);
+        }
+    }
+
+    /// <summary>
+    /// Returns the depth of the Layer being rendered.  If no layer
+    /// is set, -1 is returned.
+    /// </summary>
+    public int getDepthRendering() {
+        if(this.targetLayer != null) {
+            return this.targetLayer.depth;
+        } else {
+            return -1;
         }
     }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HireCandidates : MonoBehaviour {
+public class HireCandidates : MonoBehaviour, ISaveableSate {
 
     [SerializeField]
     private World world = null;
@@ -28,6 +28,8 @@ public class HireCandidates : MonoBehaviour {
     public float workerTrainTime => this._workerTrainTime;
     public int hireCost => this._hireCost;
     public int candaditeCount => this.candidates.Count;
+
+    public string tagName => "hireCandidates";
 
     private void Awake() {
         this.candidates = new List<Candidate>();
@@ -131,9 +133,7 @@ public class HireCandidates : MonoBehaviour {
         }
     }
 
-    public NbtCompound writeToNbt() {
-        NbtCompound tag = new NbtCompound();
-
+    public void writeToNbt(NbtCompound tag) {
         NbtList list = new NbtList(NbtTagType.Compound);
         foreach(Candidate c in this.candidates) {
             if(c != null) {
@@ -146,8 +146,6 @@ public class HireCandidates : MonoBehaviour {
             tag.setTag("trainee", this.trainee.writeToNbt());
             tag.setTag("trainingTime", this.traineeTrainingTime);
         }
-
-        return tag;
     }
 
     public void readFromNbt(NbtCompound tag) {

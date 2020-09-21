@@ -9,7 +9,7 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
 
     private bool isOn;
 
-    public void getObjectTile(ref TileBase tile) {
+    public void replaceTiles(ref TileBase floorOverlay, ref TileBase tile, ref TileBase tileOverlay) {
         if(this.isOn) {
             tile = this.onTile;
         }

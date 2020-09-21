@@ -8,8 +8,10 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Cell", menuName = "MS49/Cell/Cell", order = 1)]
 public class CellData : ScriptableObject {
 
+    [SerializeField, Tooltip("If true, the floor is not drawn below and an edge will surround this tile.")]
+    public bool isSolid = false;
     [SerializeField]
-    public TileBase groundTile;
+    public TileBase groundTile; // Floor overlay
     [SerializeField]
     public TileBase objectTile;
     [SerializeField]
@@ -94,7 +96,7 @@ public class CellData : ScriptableObject {
 
             return dt;
         } else {
-            return new DirectionalTile(this.objectTile, this.overlayTile);
+            return new DirectionalTile(this.groundTile, this.objectTile, this.overlayTile);
         }
     }
 

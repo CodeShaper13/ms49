@@ -14,12 +14,6 @@ public class DebugText : MonoBehaviour {
         this.textY = 0;
 
         if(Main.DEBUG) {
-            GUI.contentColor = Color.white;
-
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 30;
-            GUI.Label(new Rect(10, 10, 100, 40), "DEBUG", style);
-
             World world = GameObject.FindObjectOfType<World>();
             if(world != null) {
                 Position pos = CameraController.instance.getMousePos();

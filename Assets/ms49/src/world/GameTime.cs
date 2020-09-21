@@ -1,30 +1,56 @@
 ﻿using UnityEngine;
 using fNbt;
+using System;
 
-public class GameTime : MonoBehaviour {
+public class GameTime : MonoBehaviour, ISaveableSate {
 
+    [SerializeField, Tooltip("Length of the day in seconds.")]
+    private int _dayLengthMultiplyer = 60;
     [SerializeField]
-    private int dayLength = 0;
+    private double _time;
     [SerializeField]
-    private float[] timeMultipliers = new float[] { 1 };
-
-    public double time { get; private set; }
+    private float[] _timeMultipliers = new float[] { 1 };
+    [SerializeField, Min(0)]
+    private int _startingYear = 2000;
 
     private int multiplyerIndex;
+    private double lastPayTime;
 
-    public float timeSpeed => this.timeMultipliers[this.multiplyerIndex];
+    public double time => this._time;
+    public float timeScale => this._timeMultipliers[this.multiplyerIndex];
+
+    public string tagName => "time";
 
     private void OnValidate() {
-        if(this.timeMultipliers == null || this.timeMultipliers.Length == 0) {
-            this.timeMultipliers = new float[1];
+        if(this._timeMultipliers == null || this._timeMultipliers.Length == 0) {
+            this._timeMultipliers = new float[1];
         }
 
-        this.timeMultipliers[0] = 1f;
+        this._timeMultipliers[0] = 1f;
     }
 
     private void Update() {
         if(!Pause.isPaused()) {
-            this.time += Time.deltaTime;
+            this._time += Time.deltaTime;
+        }
+    }
+
+    public string getFormattedTimeExact() {
+        DateTime timeState = new DateTime(this._startingYear, 01, 01);
+        timeState = timeState + this.getTimespan();
+        return timeState.ToString("MM/dd/yyyy H:mm");
+    }
+
+    public string getFormattedTime() {
+        if(Main.DEBUG) {
+            return this.time.ToString();
+        } else {
+            TimeSpan timeSpan = this.getTimespan();
+
+            return string.Format(
+                "{0:D2}:{1:D2}",
+                timeSpan.Hours,
+                timeSpan.Minutes);
         }
     }
 
@@ -32,26 +58,26 @@ public class GameTime : MonoBehaviour {
         this.func(1);
     }
 
-    public NbtCompound writeToNbt() {
-        NbtCompound tag = new NbtCompound();
-
+    public void writeToNbt(NbtCompound tag) {
         tag.setTag("time", this.time);
         tag.setTag("multiplyerIndex", this.multiplyerIndex);
-
-        return tag;
     }
 
     public void readFromNbt(NbtCompound tag) {
-        this.time = tag.getDouble("time");
-        this.multiplyerIndex = Mathf.Clamp(tag.getInt("multiplyerIndex"), 0, this.timeMultipliers.Length - 1);
+        this._time = tag.getDouble("time");
+        this.multiplyerIndex = Mathf.Clamp(tag.getInt("multiplyerIndex"), 0, this._timeMultipliers.Length - 1);
+    }
+
+    private TimeSpan getTimespan() {
+        return TimeSpan.FromSeconds(this.time * this._dayLengthMultiplyer);
     }
 
     private void func(int dir) {
         this.multiplyerIndex += dir;
 
         if(this.multiplyerIndex < 0) {
-            this.multiplyerIndex = this.timeMultipliers.Length - 1;
-        } else if(this.multiplyerIndex >= this.timeMultipliers.Length) {
+            this.multiplyerIndex = this._timeMultipliers.Length - 1;
+        } else if(this.multiplyerIndex >= this._timeMultipliers.Length) {
             this.multiplyerIndex = 0;
         }
     }

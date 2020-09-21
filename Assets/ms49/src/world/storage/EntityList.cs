@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using fNbt;
 
-public class EntityList : MonoBehaviour {
+public class EntityList : MonoBehaviour, ISaveableSate {
 
     [SerializeField]
     private World world = null;
@@ -10,12 +10,12 @@ public class EntityList : MonoBehaviour {
     public List<EntityBase> list { get; private set; }
     public int count => this.list.Count;
 
-    private Transform entityHolder;
+    public string tagName => "entities";
+
     private WorldRenderer worldRenderer;
 
     private void Awake() {
         this.list = new List<EntityBase>();
-        this.entityHolder = this.world.createHolder("ENTITY_HOLDER");
     }
 
     private void Start() {
@@ -34,7 +34,7 @@ public class EntityList : MonoBehaviour {
     private void LateUpdate() {
         // Only show Entities that at the depth being rendered.
         foreach(EntityBase e in this.list) {
-            if(e.depth == this.worldRenderer.targetLayer.depth) {
+            if(e.depth == this.worldRenderer.getDepthRendering()) {
                 e.gameObject.SetActive(true);
             }
             else {
@@ -50,7 +50,7 @@ public class EntityList : MonoBehaviour {
     public EntityBase spawn(Vector2 postion, int depth, int entityId) {
         GameObject prefab = Main.instance.entityRegistry.getElement(entityId);
         if(prefab != null) {
-            EntityBase entity = GameObject.Instantiate(prefab, this.entityHolder).GetComponent<EntityBase>();
+            EntityBase entity = GameObject.Instantiate(prefab, this.transform).GetComponent<EntityBase>();
             entity.transform.position = postion;
             entity.initialize(this.world, entityId, depth);
 

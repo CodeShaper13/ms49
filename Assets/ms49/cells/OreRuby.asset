@@ -12,21 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
   m_Name: OreRuby
   m_EditorClassIdentifier: 
-  groundTile: {fileID: 11400000, guid: b9062077652f86f4f9f0d3dce0ef9ba8, type: 2}
+  isSolid: 1
+  groundTile: {fileID: 0}
   objectTile: {fileID: 11400000, guid: c112bfa7ad6e7734988bbe6382915c0a, type: 2}
   overlayTile: {fileID: 11400000, guid: 2225d7e908106e44eb8cbf3eeabd3b99, type: 2}
   rotationalOverride: 0
   up:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   right:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   down:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   left:
+    floorOverlay: {fileID: 0}
     tile: {fileID: 0}
+    overlayTile: {fileID: 0}
     effect: 0
   _movementCost: -1
   canBuildOver: 0
@@ -35,6 +44,7 @@ MonoBehaviour:
   _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 1
+  _includeInFogFloodLift: 0
   tintGroundTile: 1
   tintObjectTile: 1
   behaviorPrefab: {fileID: 0}

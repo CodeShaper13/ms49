@@ -24,22 +24,27 @@ public class BuildAreaHighlighter : CellHighlightBase {
                 this.cellRenderer.gameObject.SetActive(true);
                 this.tileSr.gameObject.SetActive(false);
 
-                this.cellRenderer.mapSize = Math.Max(this.buildable.getHighlightWidth(), this.buildable.getHighlightHeight());
+                this.cellRenderer.initializedRenderer(
+                    Math.Max(this.buildable.getHighlightWidth(), this.buildable.getHighlightHeight()),
+                    null,
+                    (x, y) => {
+                        CellData data;
+                        if(this.buildable is BuildableMultiCellTile) {
+                            data = ((BuildableMultiCellTile)this.buildable).getTile(x, y);
+                        }
+                        else {
+                            data = ((BuildableTile)this.buildable).cell;
+                        }
 
-                this.cellRenderer.cellStateGetterFunc = (x, y) => {
-                    CellData data;
-                    if(this.buildable is BuildableMultiCellTile) {
-                        data = ((BuildableMultiCellTile)this.buildable).getTile(x, y);
-                    } else {
-                        data = ((BuildableTile)this.buildable).cell;
-                    }
+                        if(data == null) {
+                            return null;
+                        }
+                        else {
+                            return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : Rotation.UP);
+                        }
+                    },
+                    null);
 
-                    if(data == null) {
-                        return null;
-                    } else {
-                        return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : Rotation.UP);
-                    }
-                };
                 this.cellRenderer.totalRedraw = true;
             }
             else {

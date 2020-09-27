@@ -1,23 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class PopupMine : PopupWorldReference {
 
-    public int costPerSquare;
-
-    [SerializeField]
-    private Text text = null;
-    [SerializeField]
-    private IntVariable money = null;
     [SerializeField]
     private AudioSource audioCellToggle = null;
-
-    protected override void initialize() {
-        base.initialize();
-
-        this.text.text = string.Format(this.text.text, this.costPerSquare);
-    }
 
     protected override void onUpdate() {
         base.onUpdate();
@@ -28,7 +15,7 @@ public class PopupMine : PopupWorldReference {
             CellData cell = this.world.getCellState(pos).data;
             bool isTargeted = this.world.targetedSquares.isTargeted(pos);
 
-            if(cell is CellDataMineable) {
+            if(cell is CellDataMineable && this.world.plotManager.isOwned(pos)) {
                 if(CameraController.instance.inCreativeMode) {
                     this.world.setCell(pos, Main.instance.tileRegistry.getAir(), true);
                     this.world.liftFog(pos);
@@ -41,14 +28,12 @@ public class PopupMine : PopupWorldReference {
                     this.playSfx();
                 }
                 else {
-                    if(!isTargeted && this.money.value >= this.costPerSquare) {
+                    if(!isTargeted) {
                         this.world.targetedSquares.setTargeted(pos, true);
-                        this.money.value -= this.costPerSquare;
                         this.playSfx();
                     }
                     else if(isTargeted) {
                         this.world.targetedSquares.setTargeted(pos, false);
-                        this.money.value += this.costPerSquare;
                         this.playSfx();
                     }
                 }

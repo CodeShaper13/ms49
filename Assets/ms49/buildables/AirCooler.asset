@@ -15,10 +15,13 @@ MonoBehaviour:
   structureName: 
   _cost: 0
   _description: 
-  _unlockedAt: {fileID: 11400000, guid: a0f22d443a9e4d94a805c1fa2e95d27b, type: 2}
+  _cell: {fileID: 0}
+  _fogOption: 0
+  _displayRotation: 0
+  overrideRotationMsg: 
   gridSize: {x: 1, y: 1}
   tiles: []
-  singularTile: {fileID: 0}
+  _previewCell: {fileID: 0}
   cells:
   - row:
     - 

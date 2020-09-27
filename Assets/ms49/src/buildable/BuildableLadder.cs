@@ -64,7 +64,7 @@ public class BuildableLadder : BuildableBase {
         }
 
         CellData data = world.getCellState(pos).data;
-        return data.canBuildOver || (mustBeClear ? false : data is CellDataMineable);
+        return (data.canBuildOver || (mustBeClear ? false : data is CellDataMineable)) && world.plotManager.isOwned(pos);
     }
 
     private void func(World world, Position pos, CellData cell) {

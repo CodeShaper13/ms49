@@ -4,8 +4,6 @@ Cave Textures: https://wilfryed.itch.io/
 
 Cave Textures: https://opengameart.org/content/16x16-cave-tileset
 
-Grass: https://opengameart.org/content/tiled-terrains
-
 Smoke particles
 https://opengameart.org/content/smoke-fire-animated-particle-16x16
 

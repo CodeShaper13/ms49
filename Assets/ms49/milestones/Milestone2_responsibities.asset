@@ -18,6 +18,8 @@ MonoBehaviour:
     _targetAmount: 50
   - _method: {fileID: 11400000, guid: f7aca805155299d479ab1d333d64c509, type: 2}
     _targetAmount: 1500
+  - _method: {fileID: 11400000, guid: 67766418a730b964c937539e421e8f00, type: 2}
+    _targetAmount: 1
   _unlocksLayer: 0
   _unlockedBuildables:
   - {fileID: 11400000, guid: 880b7315fcfd029489266c9f8e9c1f02, type: 2}

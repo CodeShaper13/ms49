@@ -14,6 +14,8 @@ public class PopupHireWorkers : PopupWorldReference {
     private GameObject candidateButtonPrefab = null;
     [SerializeField]
     private Slider hireProgressSlider = null;
+    [SerializeField]
+    private Text hireCostText = null;
 
     private List<CandidateButton> candidateButtons;
     private bool refreshedCandidates;
@@ -22,6 +24,12 @@ public class PopupHireWorkers : PopupWorldReference {
         base.initialize();
 
         this.candidateButtons = new List<CandidateButton>();
+    }
+
+    protected override void onOpen() {
+        base.onOpen();
+
+        this.hireCostText.text = string.Format(this.hireCostText.text, this.world.hireCandidates.hireCost);
     }
 
     protected override void onClose() {

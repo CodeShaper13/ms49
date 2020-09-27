@@ -31,6 +31,8 @@ public class Main : MonoBehaviour {
     [SerializeField]
     private Options _options = null;
     [SerializeField]
+    private WorkerFactory _workerFactory = null;
+    [SerializeField]
     private DebugLoadSettings _debugLoadSettings = new DebugLoadSettings();
 
     [Space]
@@ -44,6 +46,7 @@ public class Main : MonoBehaviour {
     public Names names => this._names;
     public Personalities personalities => this._personalities;
     public Options options => this._options;
+    public WorkerFactory workerFactory => this._workerFactory;
     public WorkerTypeRegistry workerTypeRegistry => this._workerTypes;
 
     /// <summary>

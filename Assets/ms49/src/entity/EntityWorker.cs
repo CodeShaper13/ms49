@@ -5,7 +5,7 @@ using System.Text;
 public class EntityWorker : EntityBase, IClickable {
 
     [SerializeField]
-    protected Canvas tooltipCanvas = null;
+    protected GameObject statBarParent = null;
     [SerializeField]
     private GameObject sleepingParticlePrefab = null;
 
@@ -29,11 +29,11 @@ public class EntityWorker : EntityBase, IClickable {
     private Particle sleepParticle;
 
     private void OnMouseEnter() {
-        this.tooltipCanvas.enabled = true;
+        this.statBarParent.gameObject.SetActive(true);
     }
 
     private void OnMouseExit() {
-        this.tooltipCanvas.enabled = false;
+        this.statBarParent.gameObject.SetActive(false);
     }
 
     private void OnDrawGizmos() {

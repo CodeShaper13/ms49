@@ -25,7 +25,7 @@ public class TaskWashPlate : TaskBase<EntityWorker> {
     }
 
     public override void preform() {
-        if(this.owner.position.distance(this.sink.pos) <= 1f) {
+        if(!this.moveHelper.hasPath()) {
             this.sink.setFilled(true);
 
             this.washTimer += Time.deltaTime;
@@ -51,7 +51,7 @@ public class TaskWashPlate : TaskBase<EntityWorker> {
         if(this.cookData.plateState == CellBehaviorTable.EnumPlateState.DIRTY) {
             foreach(CellBehaviorSink sink in this.owner.world.getAllBehaviors<CellBehaviorSink>()) {
                 if(!sink.isOccupied()) {
-                    if(this.moveHelper.setDestination(sink.pos + Rotation.DOWN, true) != null) {
+                    if(this.moveHelper.setDestination(sink.pos + Rotation.DOWN, false) != null) {
                         this.moveHelper.setPathEndingRotation(Rotation.UP);
 
                         this.sink = sink;

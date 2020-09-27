@@ -2,6 +2,7 @@
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using static BinaryTilemapRenderer;
+using System;
 
 public class FogRenderer : MonoBehaviour {
 
@@ -56,6 +57,10 @@ public class FogRenderer : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void clear() {
+        this.tilemap.ClearAllTiles();
     }
 
     public void dirtyTile(int x, int y, bool visible) {

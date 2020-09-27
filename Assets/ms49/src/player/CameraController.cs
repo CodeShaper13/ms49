@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
     private Camera mainCam;
     private PixelPerfectCamera ppc;
     private Vector3 mousePosLastFrame;
-    private Vector2? cameraSnapDestination;
+    private Transform cameraSnapDestination;
 
     public int currentLayer { get; private set; } = -1;
     public bool inCreativeMode { get; set; }
@@ -65,13 +65,13 @@ public class CameraController : MonoBehaviour {
     private void Update() {
         if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
             if(this.cameraSnapDestination != null) {
-                this.setCameraPos(Vector2.MoveTowards(this.getCameraPos(), (Vector2)this.cameraSnapDestination, this.cameraSnapSpeed * Time.deltaTime));
-                if(this.getCameraPos() == (Vector2)this.cameraSnapDestination) {
-                    this.cameraSnapDestination = null;
-                }
-            } else {
-                this.moveCamera();
+                this.setCameraPos(Vector2.MoveTowards(
+                    this.getCameraPos(),
+                    this.cameraSnapDestination.position,
+                    this.cameraSnapSpeed * Time.deltaTime));
             }
+
+            this.moveCamera();
 
             if(!EventSystem.current.IsPointerOverGameObject()) {
                 this.detectClicks();
@@ -81,11 +81,15 @@ public class CameraController : MonoBehaviour {
             // Go higher (up a layer).
             if(Input.GetKeyDown(this.keys.layerHigherKey)) {
                 this.changeLayer(this.currentLayer - 1);
+
+                this.cameraSnapDestination = null;
             }
 
             // Go deeper (down a layer).
             if(Input.GetKeyDown(this.keys.layerLowerKey)) {
                 this.changeLayer(this.currentLayer + 1);
+
+                this.cameraSnapDestination = null;
             }
 
             // Toggle creative.
@@ -147,8 +151,15 @@ public class CameraController : MonoBehaviour {
         this.mainCam.transform.position = pos;
     }
 
-    public void setCameraPosSmooth(Vector2 pos) {
-        this.cameraSnapDestination = pos;
+    public void followTarget(Transform trans) {
+        this.cameraSnapDestination = trans;
+    }
+
+    public void setZoom(int newZoom) {
+        newZoom = Mathf.Clamp(newZoom, this.minZoom, this.maxZoom);
+        this.currentZoom = newZoom;
+        this.ppc.assetsPPU = this.currentZoom * 4;
+        this.mainCam.orthographicSize = this.currentZoom;
     }
 
     public NbtCompound writeToNbt() {
@@ -178,9 +189,12 @@ public class CameraController : MonoBehaviour {
         // Detect clicking
         if((leftMouse || rightMouse || middleMouse) && !EventSystem.current.IsPointerOverGameObject()) {
             if(rightMouse) {
-                CellBehavior meta = world.getCellState(this.getMousePos()).behavior;
-                if(meta != null) {
-                    meta.onRightClick();
+                Position pos = this.getMousePos();
+                if(this.world.plotManager.isOwned(pos)) {
+                    CellBehavior meta = world.getCellState(pos).behavior;
+                    if(meta != null) {
+                        meta.onRightClick();
+                    }
                 }
             }
 
@@ -207,7 +221,11 @@ public class CameraController : MonoBehaviour {
         if(Input.GetMouseButton(2)) {
             Vector3 movement = this.mousePosLastFrame - Input.mousePosition;
             this.mainCam.transform.position += movement * this.mousePanSpeed * Time.deltaTime;
+
+            this.cameraSnapDestination = null;
         }
+
+        Vector2 v = this.getCameraPos();
 
         // Pan with WASD
         if(Input.GetKey(KeyCode.A)) {
@@ -221,6 +239,10 @@ public class CameraController : MonoBehaviour {
         }
         if(Input.GetKey(KeyCode.S)) {
             this.mainCam.transform.position += new Vector3(0, -this.panSpeed, 0) * Time.deltaTime;
+        }
+
+        if(this.getCameraPos() != v) {
+            this.cameraSnapDestination = null;
         }
     }
 
@@ -237,12 +259,5 @@ public class CameraController : MonoBehaviour {
         if(newZoom != this.currentZoom) {
             this.setZoom(newZoom);
         }
-    }
-
-    private void setZoom(int newZoom) {
-        newZoom = Mathf.Clamp(newZoom, this.minZoom, this.maxZoom);
-        this.currentZoom = newZoom;
-        this.ppc.assetsPPU = this.currentZoom * 4;
-        this.mainCam.orthographicSize = this.currentZoom;
     }
 }

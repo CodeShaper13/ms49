@@ -5,6 +5,8 @@ public class WorkerListButton : MonoBehaviour {
 
     [SerializeField]
     private Text textName = null;
+    [SerializeField]
+    private FaceUiPreview preview = null;
 
     public EntityWorker worker { get; private set; }
 
@@ -12,6 +14,10 @@ public class WorkerListButton : MonoBehaviour {
         this.worker = worker;
 
         this.textName.text = worker.info.fullName;
+
+        if(this.preview != null) {
+            this.preview.setTarget(worker);
+        }
     }
 
     public void callback_click() {
@@ -23,6 +29,6 @@ public class WorkerListButton : MonoBehaviour {
     }
 
     public void callback_mapPin() {
-        CameraController.instance.setCameraPosSmooth(this.worker.worldPos);
+        CameraController.instance.followTarget(this.worker.transform);
     }
 }

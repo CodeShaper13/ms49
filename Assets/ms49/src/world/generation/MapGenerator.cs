@@ -47,8 +47,9 @@ public class MapGenerator : MonoBehaviour {
         }
     }
 
-    public void generateStartRoom(World world) {
+    public void generateStartingStructures(World world) {
         foreach(MapGenerationData.StartingStructure ss in this.genData.startingStructures) {
+            Random.InitState(world.seed);
             ss.structure.placeIntoWorld(world, ss.pos);
         }
     }

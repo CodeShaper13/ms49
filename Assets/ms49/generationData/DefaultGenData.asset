@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: DefaultGenData
   m_EditorClassIdentifier: 
   _playerStartLayer: 0
-  tiles:
-    waterTile: {fileID: 11400000, guid: ce497ab37796c984fb4231bb7c6d3d94, type: 2}
-    lavaTile: {fileID: 11400000, guid: e77239bff4cdc0c4a83e4145d0652fd1, type: 2}
-    unbreakableTile: {fileID: 11400000, guid: 3e22596b622383c4a9bb4d5f09386626, type: 2}
+  _startingMoney: 1000
+  _startingWorkers:
+  - {fileID: 11400000, guid: bf714f9bf23f89642bdf10ac8c2c5270, type: 2}
+  - {fileID: 11400000, guid: bf714f9bf23f89642bdf10ac8c2c5270, type: 2}
+  _workerSpawnPoint:
+    x: 47
+    y: 1
+    depth: 0
   layerGenerators:
   - {fileID: 11400000, guid: 3fc454ff267f9a943b2fb661c489c6cb, type: 2}
   - {fileID: 11400000, guid: 8b7fb56d4f3e0bc4d9a4b91e4706d839, type: 2}
@@ -28,17 +32,17 @@ MonoBehaviour:
       depth: 0
     structure: {fileID: 11400000, guid: 2f6f6ad10fa9bbc49a73eec17d8d6143, type: 2}
   - pos:
-      x: 28
-      y: 5
+      x: 47
+      y: 2
       depth: 0
     structure: {fileID: 11400000, guid: 9e96e71bde25e714597dc14780f11e47, type: 2}
   - pos:
-      x: 26
-      y: 13
+      x: 45
+      y: 10
       depth: 0
     structure: {fileID: 11400000, guid: 5dd9f0f7defd0bc479c8234ee7c33968, type: 2}
   - pos:
-      x: 27
-      y: 4
+      x: 46
+      y: 0
       depth: 0
     structure: {fileID: 11400000, guid: 08ee3d16e815b3a4ba25db91909c8a72, type: 2}

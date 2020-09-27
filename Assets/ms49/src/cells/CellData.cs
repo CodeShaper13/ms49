@@ -218,23 +218,10 @@ public class CellData : ScriptableObject {
             Sprite s = TileSpriteGetter.retrieveSprite(tile);
 
             if(s != null) {
-                return this.textureFromSprite(s);
+                return SpriteToTexture.convert(s);
             }
 
             return null;
-        }
-
-        private Texture2D textureFromSprite(Sprite sprite) {
-            Texture2D newText = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
-            Color[] newColors = sprite.texture.GetPixels(
-                (int)sprite.rect.x,
-                (int)sprite.rect.y,
-                (int)sprite.rect.width,
-                (int)sprite.rect.height);
-
-            newText.SetPixels(newColors);
-            newText.Apply();
-            return newText;
         }
     }
 #endif

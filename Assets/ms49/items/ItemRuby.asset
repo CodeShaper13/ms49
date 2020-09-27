@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -1199936339933312810, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Ruby
-  moneyValue: 2000
+  moneyValue: 500

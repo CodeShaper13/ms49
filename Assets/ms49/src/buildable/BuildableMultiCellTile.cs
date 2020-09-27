@@ -13,6 +13,8 @@ public class BuildableMultiCellTile : BuildableTile {
     private Vector2Int gridSize = new Vector2Int(1, 1);
     [SerializeField]
     private TileEntry[] tiles = null;
+    [SerializeField]
+    private CellData _previewCell = null;
 
     // Used by the inspector
     [SerializeField]
@@ -108,6 +110,10 @@ public class BuildableMultiCellTile : BuildableTile {
         }
     }
 
+    public override CellData getPreviewCell() {
+        return this._previewCell;
+    }
+
     public override bool isValidLocation(World world, Position pos, Rotation rotation) {
         for(int x = 0; x < this.getHighlightWidth(); x++) {
             for(int y = 0; y < this.getHighlightHeight(); y++) {
@@ -152,6 +158,7 @@ public class BuildableMultiCellTile : BuildableTile {
         private SerializedProperty gridSize;
         private SerializedProperty cells;
         private SerializedProperty tileArray;
+        private SerializedProperty previewCell;
 
         private Rect lastRect;
         protected Vector2Int newGridSize;
@@ -180,6 +187,7 @@ public class BuildableMultiCellTile : BuildableTile {
             this.gridSize = this.serializedObject.FindProperty("gridSize");
             this.cells = this.serializedObject.FindProperty("cells");
             this.tileArray = this.serializedObject.FindProperty("tiles");
+            this.previewCell = this.serializedObject.FindProperty("_previewCell");
 
             this.newGridSize = this.gridSize.vector2IntValue;
         }
@@ -190,6 +198,7 @@ public class BuildableMultiCellTile : BuildableTile {
             EditorGUILayout.PropertyField(this.structureName);
             EditorGUILayout.PropertyField(this.cost);
             EditorGUILayout.PropertyField(this.description);
+            EditorGUILayout.PropertyField(this.previewCell);
 
             EditorGUILayout.Space();
 

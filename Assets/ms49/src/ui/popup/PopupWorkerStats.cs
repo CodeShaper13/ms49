@@ -39,7 +39,7 @@ public class PopupWorkerStats : PopupWindow {
         base.onUpdate();
 
         if(this.worker != null) {
-            this.preview.setTarget(this.worker.info, this.worker.type);
+            this.preview.setTarget(this.worker);
 
             StringBuilder sb = new StringBuilder();
             this.worker.writeWorkerInfo(sb);

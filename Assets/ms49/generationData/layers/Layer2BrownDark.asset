@@ -19,8 +19,8 @@ MonoBehaviour:
   _defaultTemperature: 0
   _generateBlockerRocks: 1
   generateCaves: 1
-  caveFillPercent: 55
-  caveSmoothPases: 5
+  caveFillPercent: 50
+  caveSmoothPases: 2
   oreSpawnSettings:
   - _cell: {fileID: 11400000, guid: 21c8e8396c7ff6b4a8c81fae3f42d70f, type: 2}
     veinCount: 40

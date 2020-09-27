@@ -16,7 +16,7 @@ public class Particle : MonoBehaviour {
         this.depth = depth;
 
         this.ps = this.GetComponentInChildren<ParticleSystem>();
-        if(ps != null) {
+        if(ps != null && this.lifespan != -1) {
             this.lifespan = ps.main.duration;
         }
     }

@@ -5,7 +5,7 @@ using System;
 public class GameTime : MonoBehaviour, ISaveableSate {
 
     [SerializeField, Tooltip("Length of the day in seconds.")]
-    private int _dayLengthMultiplyer = 60;
+    private int _lengthOfDay = 60;
     [SerializeField]
     private double _time;
     [SerializeField]
@@ -14,7 +14,6 @@ public class GameTime : MonoBehaviour, ISaveableSate {
     private int _startingYear = 2000;
 
     private int multiplyerIndex;
-    private double lastPayTime;
 
     public double time => this._time;
     public float timeScale => this._timeMultipliers[this.multiplyerIndex];
@@ -69,7 +68,7 @@ public class GameTime : MonoBehaviour, ISaveableSate {
     }
 
     private TimeSpan getTimespan() {
-        return TimeSpan.FromSeconds(this.time * this._dayLengthMultiplyer);
+        return TimeSpan.FromSeconds(this.time * this._lengthOfDay);
     }
 
     private void func(int dir) {

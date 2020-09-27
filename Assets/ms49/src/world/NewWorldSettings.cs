@@ -5,22 +5,19 @@ using UnityEngine;
 public class NewWorldSettings {
 
     [SerializeField]
-    private int _mapSize;
+    private EnumMapSize _mapSize;
     [SerializeField]
     private string _seed;
     [SerializeField]
     private bool _creativeEnabled;
 
+    public EnumMapSize mapSize => this._mapSize;
     public bool creativeEnabled => this._creativeEnabled;
 
-    public NewWorldSettings(string seed, int mapSize, bool creativeEnabled) {
+    public NewWorldSettings(string seed, EnumMapSize mapSize, bool creativeEnabled) {
         this._seed = seed;
         this._mapSize = mapSize;
         this._creativeEnabled = creativeEnabled;
-    }
-
-    public int getMapSize() {
-        return (int)Mathf.Pow(2, Mathf.Clamp(this._mapSize, 0, 2) + 5);
     }
 
     public int getSeed() {

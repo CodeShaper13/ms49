@@ -41,10 +41,14 @@ public class LayerButtons : MonoBehaviour {
             this.upBtn.interactable = true;
         }
 
-        if(this.world.isDepthUnlocked(cc.currentLayer + 1) || cc.inCreativeMode) {
+        if(this.world.isDepthUnlocked(cc.currentLayer + 1)) {
             this.downBtn.interactable = true;
         } else {
-            this.downBtn.interactable = false;
+            if(cc.inCreativeMode && cc.currentLayer + 1 < this.world.storage.layerCount) {
+                this.downBtn.interactable = true;
+            } else {
+                this.downBtn.interactable = false;
+            }
         }
     }
 

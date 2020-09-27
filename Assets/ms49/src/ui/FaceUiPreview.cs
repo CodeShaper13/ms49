@@ -19,6 +19,17 @@ public class FaceUiPreview : MonoBehaviour {
         this.defaultBodySprite = this.bodyImg.sprite;
     }
 
+    public void setTarget(EntityWorker worker) {
+        this.setTarget(worker.info, worker.type);
+    }
+
+    public void setTarget(WorkerType type) {
+        this.setTarget(null, type);
+    }
+
+    /// <summary>
+    /// Safe to pass null for info parameter.
+    /// </summary>
     public void setTarget(WorkerInfo info, WorkerType type) {
         // Body/Clothes
         Sprite s = this.tryGetSprite(type);
@@ -29,8 +40,7 @@ public class FaceUiPreview : MonoBehaviour {
         }
 
         // Skin
-        GameObject prefab = Main.instance.entityRegistry.getElement(1); // TODO make this not hard coded
-        Color c = prefab.GetComponentInChildren<SkinColorer>().getColorFromTone(info.skinTone);
+        Color c = Main.instance.workerFactory.getSkinColorFromTone(info == null ? 0 : info.skinTone);
         this.skinCutoutImg.color = c;
 
         // Hair

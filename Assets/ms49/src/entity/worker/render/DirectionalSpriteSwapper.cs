@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[DefaultExecutionOrder(-100)]
 public class DirectionalSpriteSwapper : MonoBehaviour {
 
     [SerializeField]

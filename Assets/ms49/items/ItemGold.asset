@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 8867357604404364081, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Gold
-  moneyValue: 600
+  moneyValue: 1000

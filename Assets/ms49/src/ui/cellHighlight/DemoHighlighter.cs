@@ -11,7 +11,7 @@ public class DemoHighlighter : CellHighlightBase {
 
     protected override bool onUpdate(Position pos) {   
         if(!this.world.isOutOfBounds(pos)) {
-            if(this.world.getCellState(pos).data.isDestroyable) {
+            if(this.world.getCellState(pos).data.isDestroyable && this.world.plotManager.isOwned(pos)) {
                 return true;
             }
         }
@@ -22,7 +22,7 @@ public class DemoHighlighter : CellHighlightBase {
         if(isValid) {
             int cost = this.popup.getDemoCost();
             bool inCreative = CameraController.instance.inCreativeMode;
-            if(inCreative || this.money.value >= this.popup.getDemoCost()) {
+            if((inCreative || this.money.value >= this.popup.getDemoCost()) && this.world.plotManager.isOwned(pos)) {
                 if(!inCreative) {
                     this.money.value -= cost;
                 }

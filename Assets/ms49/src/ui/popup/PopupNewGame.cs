@@ -58,7 +58,7 @@ public class PopupNewGame : PopupWindow {
             this.fieldSaveName.text,
             new NewWorldSettings(
                 s.Length > 0 ? s : DateTime.Now.ToBinary().ToString(),
-                this.mapSize,
+                (EnumMapSize)this.mapSize,
                 this.creativeEnabled));
     }
 

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -3042433863185972550, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Broken Pot
-  moneyValue: 500
+  moneyValue: 75

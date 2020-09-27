@@ -24,15 +24,21 @@ public class BuildableTile : BuildableBase {
         return string.IsNullOrWhiteSpace(this.overrideRotationMsg) ? "rotate with r and shift + r" : this.overrideRotationMsg;
     }
 
+    public virtual CellData getPreviewCell() {
+        return this._cell;
+    }
+
     public override void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
-        if(this.cell == null) {
+        CellData previewCell = this.getPreviewCell();
+
+        if(previewCell == null) {
             Debug.LogWarning("Can not display preview for BuildableTile " + this.name + ", it has no cell set");
             return;
         }
 
-        groundSprite = TileSpriteGetter.retrieveSprite(this.cell.groundTile);
+        groundSprite = TileSpriteGetter.retrieveSprite(previewCell.groundTile);
 
-        DirectionalTile dt = this.cell.getObjectTile(Rotation.fromEnum(this.displayRotation));
+        DirectionalTile dt = previewCell.getObjectTile(Rotation.fromEnum(this.displayRotation));
 
         objectSprite = TileSpriteGetter.retrieveSprite(dt.tile);
         overlaySprite = TileSpriteGetter.retrieveSprite(dt.overlayTile);
@@ -44,6 +50,10 @@ public class BuildableTile : BuildableBase {
         }
 
         if(!world.getCellState(pos).data.canBuildOver) {
+            return false;
+        }
+
+        if(!world.plotManager.isOwned(pos)) {
             return false;
         }
 

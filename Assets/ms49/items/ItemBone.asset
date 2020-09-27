@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 49598692365941603, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Bone
-  moneyValue: 250
+  moneyValue: 150

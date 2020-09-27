@@ -17,11 +17,12 @@ public class World : MonoBehaviour {
     public ParticleList particles = null;
     public EntityList entities = null;
     public MilestoneManager milestones = null;
-    public MapOutline mapOutline = null;
     public TargetedSquares targetedSquares = null;
     public Grid grid = null;
     public HireCandidates hireCandidates = null;
-    public GameTime time;
+    public GameTime time = null;
+    public PlotManager plotManager = null;
+    public Payroll payroll = null;
 
     // References to Cells
     public CellData rubbleCell;
@@ -30,7 +31,7 @@ public class World : MonoBehaviour {
     public Storage storage { get; private set; }
     public string saveName { get; private set; }
     public int seed { get; private set; }
-    public int mapSize { get; private set; }
+    public int mapSize => this.plotManager.mapSize;
     public int stoneExcavated { get; set; }
     public NavigationManager navManager { get; private set; }
     private MapGenerator mapGenerator;
@@ -68,21 +69,39 @@ public class World : MonoBehaviour {
     public void initialize(string saveName, NewWorldSettings settings) {
         this.saveName = saveName;
         this.seed = settings.getSeed();
-        this.mapSize = settings.getMapSize();
 
         this.preInitialization();
+
+        // Create land plots
+        this.plotManager.initializeFirstTime();
 
         // Generate the map.
         for(int i = 0; i < this.storage.layerCount; i++) {
             this.mapGenerator.generateLayer(this, i);
         }
-        this.mapGenerator.generateStartRoom(this);
+        this.mapGenerator.generateStartingStructures(this);
 
         // Set starting money.
-        this.money.value = 3000;
+        this.money.value = this.mapGenData.startingMoney;
 
         // Setup the new Player.
         CameraController.instance.initNewPlayer(settings);
+
+        // Spawn the starting Workers.
+        WorkerFactory factory = Main.instance.workerFactory;
+        foreach(WorkerType workerType in this.mapGenData.startingWorkers) {
+            if(workerType != null) {
+                int xShift = UnityEngine.Random.Range(-1, 2);
+                int yShift = UnityEngine.Random.Range(0, 2);
+                EntityWorker worker = factory.spawnWorker(
+                    this,
+                    this.mapGenData.workerSpawnPoint.add(xShift, -yShift),
+                    factory.generateWorkerInfo(), workerType);
+
+                // Modify the starting Worker's pay so new players can't be hosed.
+                worker.info.pay = factory.payRange.x + UnityEngine.Random.Range(0, 6);
+            }
+        }
 
         this.postInitialization();
 
@@ -95,11 +114,9 @@ public class World : MonoBehaviour {
     }
 
     private void postInitialization() {
-        this.worldRenderer.setup();
+        this.worldRenderer.startup(this);
 
         this.navManager = new NavigationManager(this, this.mapSize);
-
-        this.mapOutline.setSize(this.mapSize);
 
         this.StartCoroutine(this.updateHeat());
     }
@@ -391,7 +408,6 @@ public class World : MonoBehaviour {
 
         // Write general world info:
         tag.setTag("seed", this.seed);
-        tag.setTag("mapSize", this.mapSize);
         tag.setTag("stoneExcavated", this.stoneExcavated);
 
         if(this.money != null) {
@@ -423,19 +439,18 @@ public class World : MonoBehaviour {
 
         // Read general world info:
         this.seed = tag.getInt("seed");
-        this.mapSize = tag.getInt("mapSize");
         this.stoneExcavated = tag.getInt("stoneExcavated");
 
         if(this.money != null) {
             this.money.value = tag.getInt("money");
         }
 
-        // Read level:
-        NbtCompound tagStorage = tag.getCompound("storage");
-        this.storage.readFromNbt(tagStorage);
-        
         foreach(ISaveableSate saveable in this.GetComponentsInChildren<ISaveableSate>()) {
             saveable.readFromNbt(tag.getCompound(saveable.tagName));
         }
+
+        // Read level:
+        NbtCompound tagStorage = tag.getCompound("storage");
+        this.storage.readFromNbt(tagStorage);
     }
 }

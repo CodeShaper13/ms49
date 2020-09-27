@@ -167,6 +167,15 @@ TextureImporter:
   - first:
       213: -6502608003125715983
     second: uiElements_mapPin
+  - first:
+      213: -8120742796439677797
+    second: uiElements_iconBuyLandSelected
+  - first:
+      213: -3335518766611409721
+    second: uiElements_iconBuyLand
+  - first:
+      213: -4425399643733064080
+    second: uiElements_plotOutline
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1394,7 +1403,7 @@ TextureImporter:
         width: 12
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1402,6 +1411,69 @@ TextureImporter:
       bones: []
       spriteID: 1fb5414397812c5a0800000000000000
       internalID: -6502608003125715983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconBuyLandSelected
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 58
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9496e1c3735d4f80800000000000000
+      internalID: -8120742796439677797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_iconBuyLand
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 58
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c45a76aa5bd5b1d0800000000000000
+      internalID: -3335518766611409721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_plotOutline
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 65
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07686268872d592c0800000000000000
+      internalID: -4425399643733064080
       vertices: []
       indices: 
       edges: []

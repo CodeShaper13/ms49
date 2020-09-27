@@ -25,7 +25,7 @@ public class BuildableMinecart : BuildableBase {
     }
 
     public override bool isValidLocation(World world, Position pos, Rotation rotation) {
-        return !world.isOutOfBounds(pos) && world.getCellState(pos).data is CellDataRail;
+        return !world.isOutOfBounds(pos) && world.getCellState(pos).data is CellDataRail && world.plotManager.isOwned(pos);
     }
 
     public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {

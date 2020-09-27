@@ -6,38 +6,38 @@ public class Payroll : MonoBehaviour, ISaveableSate {
     [SerializeField, Tooltip("How often in seconds Workers are paid")]
     private int _payRate = 60 * 24;
     [SerializeField]
-    private IntVariable money = null;
+    private IntVariable _money = null;
     [SerializeField]
-    private World world = null;
+    private World _world = null;
 
-    private double lastPayTime;
+    public double lastPayTime { get; private set; }
+    public int payRate => this._payRate;
 
     public string tagName => "payroll";
 
     private void Update() {
         if(!Pause.isPaused()) {
-            if(this.world.time.time > this.lastPayTime + _payRate) {
+            if(this._world.time.time > this.lastPayTime + _payRate) {
                 // Pay Workers.
-                Debug.Log("Paying Workers");
-                foreach(EntityBase e in this.world.entities.list) {
+                foreach(EntityBase e in this._world.entities.list) {
                     if(e is EntityWorker) {
                         EntityWorker worker = (EntityWorker)e;
                         if(!worker.isDead) {
-                            this.money.value -= worker.info.pay;
+                            this._money.value -= worker.info.pay;
                         }
                     }
                 }
 
-                this.lastPayTime = this.world.time.time;
+                this.lastPayTime = this._world.time.time;
             }
         }
     }
 
     public void readFromNbt(NbtCompound tag) {
-        tag.setTag("lastPayTime", this.lastPayTime);
+        this.lastPayTime = tag.getDouble("lastPayTime");
     }
 
     public void writeToNbt(NbtCompound tag) {
-        this.lastPayTime = tag.getDouble("lastPayTime");
+        tag.setTag("lastPayTime", this.lastPayTime);
     }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeName: Builder
   _hat: {fileID: 0}
-  _spriteSheetName: 
+  _spriteSheetName: spritesheetBuilder
   _aiPrefab: {fileID: 122510778850964854, guid: 1c5d995418a3c3a48a73eca9d8e81c8d,
     type: 3}

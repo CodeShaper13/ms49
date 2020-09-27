@@ -7,8 +7,6 @@ public class HireCandidates : MonoBehaviour, ISaveableSate {
     [SerializeField]
     private World world = null;
     [SerializeField]
-    private Position workerSpawnPoint = new Position(27, 25, 0);
-    [SerializeField]
     private int startingCandidateCount = 2;
     [SerializeField]
     private WorkerType[] startingUnlockedTypes = null;
@@ -18,8 +16,6 @@ public class HireCandidates : MonoBehaviour, ISaveableSate {
     private int _hireCost = 100;
     [SerializeField, MinMaxSlider(1, 60), Tooltip("Time is in minutes")]
     private Vector2 candidateAvailabilityTimeRange = new Vector2(2, 8);
-    [SerializeField]
-    private int workerEntityId = 1;
 
     private List<Candidate> candidates;
     private float traineeTrainingTime;
@@ -40,15 +36,11 @@ public class HireCandidates : MonoBehaviour, ISaveableSate {
             this.traineeTrainingTime += Time.deltaTime;
             if(this.traineeTrainingTime >= this.workerTrainTime || CameraController.instance.inCreativeMode) {
                 // Create a new Worker
-                EntityBase e = this.world.entities.spawn(
-                    this.workerSpawnPoint,
-                    this.workerEntityId);
-
-                if(e is EntityWorker) {
-                    EntityWorker worker = (EntityWorker)e;
-                    worker.info = this.trainee.info;
-                    worker.setType(this.trainee.type);
-                }
+                Main.instance.workerFactory.spawnWorker(
+                    this.world,
+                    this.world.mapGenData.workerSpawnPoint,
+                    trainee.info,
+                    trainee.type);
 
                 this.trainee = null;
             }
@@ -97,7 +89,7 @@ public class HireCandidates : MonoBehaviour, ISaveableSate {
             if(c != null) {
                 if(this.world.time.time > c.endAvailabilityTime) {
                     // Worker is not longer available to be hired
-                    this.candidates[i] = null;
+                    this.candidates.RemoveAt(0);
                 }
             }
         }
@@ -125,7 +117,7 @@ public class HireCandidates : MonoBehaviour, ISaveableSate {
             }
 
             this.candidates.Add(new Candidate(
-                new WorkerInfo(),
+                Main.instance.workerFactory.generateWorkerInfo(),
                 type,
                 this.world.time.time + Random.Range(
                     this.candidateAvailabilityTimeRange.x * 60,

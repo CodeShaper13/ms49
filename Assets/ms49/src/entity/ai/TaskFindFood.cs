@@ -7,7 +7,9 @@ public class TaskFindFood : TaskBase<EntityWorker> {
     [SerializeField]
     private float eatSpeed = 20;
     [SerializeField]
-    private float startFoodHuntAt = 20;
+    private float _startFoodHuntAt = 20;
+
+    public float startFoodHuntAt => this._startFoodHuntAt;
 
     protected CellBehaviorTable table;
 
@@ -17,12 +19,13 @@ public class TaskFindFood : TaskBase<EntityWorker> {
 
     public override void preform() {
         if(this.table.plateState == CellBehaviorTable.EnumPlateState.FULL && this.owner.position.distance(table.chairPos) <= 1) {
-            this.owner.hunger.increase(eatSpeed * Time.deltaTime);
-            if(this.owner.hunger.value >= stopEattingValue) {
+
+            this.owner.hunger.increase(this.eatSpeed * Time.deltaTime);
+            if(this.owner.hunger.value >= this.stopEattingValue) {
                 this.table.plateState = CellBehaviorTable.EnumPlateState.DIRTY;
             }
 
-            this.owner.animator.playClip("Eating");
+            //this.owner.animator.playClip("Eating"); // TODO remake animation
         }
     }
 
@@ -32,6 +35,7 @@ public class TaskFindFood : TaskBase<EntityWorker> {
             foreach(CellBehaviorTable table in this.owner.world.getAllBehaviors<CellBehaviorTable>()) {
                 if(table.hasChair && !table.isOccupied()) {
                     if(this.moveHelper.setDestination(table.chairPos) != null) {
+                        this.moveHelper.setPathEndingRotation(Rotation.directionToRotation(table.center - table.chair.behavior.center));
                         this.table = table;
                         this.table.setOccupant(this.owner); // Reserve it, so no one takes it.
                         return true;

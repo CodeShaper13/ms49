@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 4547986755193944361, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Dirt
-  moneyValue: 10
+  moneyValue: 25

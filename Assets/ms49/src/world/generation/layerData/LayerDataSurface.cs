@@ -27,7 +27,7 @@ public class LayerDataSurface : LayerDataBase {
 
     public static bool isOutside(int x, int y) {
         float noise = Mathf.PerlinNoise(x * 0.1f, 1);
-        int endY = Mathf.RoundToInt((noise * 10) + 5); // surfaceSize;
+        int endY = Mathf.RoundToInt((noise * 10) + 2); // surfaceSize;
         return y < endY;
     }
 }

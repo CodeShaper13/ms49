@@ -8,9 +8,11 @@ public class TaskSleep : TaskBase<EntityWorker> {
     [SerializeField]
     private float energyRechargeSpeed = 1;
     [SerializeField]
-    private float seekBedAt = 20;
+    private float _seekBedAt = 30;
     [SerializeField]
     private float valueToStop = 99;
+
+    public float seekBedAt => this._seekBedAt;
 
     public override bool continueExecuting() {
         return this.owner.energy.value < this.valueToStop;

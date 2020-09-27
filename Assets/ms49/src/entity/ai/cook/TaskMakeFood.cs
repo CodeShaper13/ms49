@@ -11,42 +11,23 @@ public class TaskMakeFood : TaskBase<EntityWorker> {
     [SerializeField]
     private CookMetaData cookData = null;
 
-    private CellBehaviorTable table;
     private CellBehaviorStove stove;
-    private int stage; // 0 = making food, 1 = going to table
     private float cookTimer;
 
     public override bool continueExecuting() {
-        if(this.table == null || !this.table.isOccupied() || this.table.plateState != CellBehaviorTable.EnumPlateState.NONE) {
-            return false;
-        }
-
-        if(this.stove == null) {
-            return false;
-        }
-
-        return true;
+        return
+            this.stove != null &&
+            this.cookData.plateState != CellBehaviorTable.EnumPlateState.FULL;
     }
 
     public override void preform() {
-        if(this.stage == 0) {
-            if(!this.moveHelper.hasPath()) {
-                // cook food...
-                this.cookTimer += Time.deltaTime;
-                if(this.cookTimer >= cookSpeed) {
-                    this.cookData.plateState = CellBehaviorTable.EnumPlateState.FULL;
-                    this.stove.setOccupant(null);
-                    this.stage = 1;
-                    if(this.moveHelper.setDestination(this.table.pos, true) == null) {
-                        // Can no longer go to table...
-                        //TODO
-                    }
-                }
-            }
-        } else { // state == 1
-            if(!this.moveHelper.hasPath()) {
-                this.cookData.plateState = CellBehaviorTable.EnumPlateState.NONE;
-                this.table.plateState = CellBehaviorTable.EnumPlateState.FULL;
+        if(!this.moveHelper.hasPath()) {
+            // Cook food...
+            this.cookTimer += Time.deltaTime;
+            if(this.cookTimer >= cookSpeed) {
+                this.stove.setOccupant(null);
+
+                this.cookData.plateState = CellBehaviorTable.EnumPlateState.FULL;
             }
         }
     }
@@ -58,7 +39,6 @@ public class TaskMakeFood : TaskBase<EntityWorker> {
             this.stove.setOccupant(null);
         }
 
-        this.table = null;
         this.cookTimer = 0;
     }
 
@@ -70,7 +50,6 @@ public class TaskMakeFood : TaskBase<EntityWorker> {
 
                     // Make sure there is both a fridge and stove that the cook can get to
                     bool foundStove = false;
-                    bool foundFridge = false;
 
                     // Make use there is a stove, and go to it
                     foreach(CellBehaviorStove stove in this.owner.world.getAllBehaviors<CellBehaviorStove>()) {
@@ -82,17 +61,12 @@ public class TaskMakeFood : TaskBase<EntityWorker> {
                             this.stove = stove;
                             this.stove.setOccupant(this.owner);
 
-                            this.table = table;
-                            this.stage = 0;
-
                             return true;
                         }
                     }
                     if(!foundStove) {
                         return false; // Even though someone needs food, there is no stove
                     }
-
-
                 }
             }
         }

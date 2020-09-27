@@ -10,7 +10,9 @@ public class PopupMilestones : PopupWorldReference {
     [SerializeField]
     private GameObject prefabMilestoneProgressSlider = null;
     [SerializeField]
-    private GameObject prefabBuildableRenderer = null;
+    private GameObject _prefabBuildablePreviw = null;
+    [SerializeField]
+    private GameObject _prefabWorkerTypePreview = null;
     [SerializeField]
     private Animator animator = null;
     [SerializeField]
@@ -45,11 +47,25 @@ public class PopupMilestones : PopupWorldReference {
                 }
 
                 GameObject obj = GameObject.Instantiate(
-                    this.prefabBuildableRenderer,
+                    this._prefabBuildablePreviw,
                     this.unlockedArea);
 
                 obj.GetComponent<BuildableUiRenderer>().setBuildable(buildable);
                 obj.GetComponent<Tooltip>().text = buildable.getName();
+            }
+
+
+            foreach(WorkerType type in this.currentMilestone.unlockedWorkerTypes) {
+                if(type == null) {
+                    continue;
+                }
+
+                GameObject obj = GameObject.Instantiate(
+                    this._prefabWorkerTypePreview,
+                    this.unlockedArea);
+
+                obj.GetComponent<FaceUiPreview>().setTarget(type);
+                obj.GetComponentInChildren<Tooltip>().text = type.typeName;
             }
         }
     }

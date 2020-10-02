@@ -12,40 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
   m_Name: RailStraight
   m_EditorClassIdentifier: 
-  isSolid: 0
-  groundTile: {fileID: 11400000, guid: b51e7c9a95abd954dbdcfa8924a0cf4d, type: 2}
-  objectTile: {fileID: 0}
-  overlayTile: {fileID: 0}
-  rotationalOverride: 1
+  _isSolid: 0
+  _floorOverlayTile: {fileID: 11400000, guid: 2fa34351e45c3b346856c34313239655, type: 2}
+  _objectTile: {fileID: 0}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 1
   up:
-    floorOverlay: {fileID: 11400000, guid: 2fa34351e45c3b346856c34313239655, type: 2}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 2fa34351e45c3b346856c34313239655,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   right:
-    floorOverlay: {fileID: 11400000, guid: b51e7c9a95abd954dbdcfa8924a0cf4d, type: 2}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: b51e7c9a95abd954dbdcfa8924a0cf4d,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   down:
-    floorOverlay: {fileID: 11400000, guid: 2fa34351e45c3b346856c34313239655, type: 2}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 2fa34351e45c3b346856c34313239655,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   left:
-    floorOverlay: {fileID: 11400000, guid: b51e7c9a95abd954dbdcfa8924a0cf4d, type: 2}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: b51e7c9a95abd954dbdcfa8924a0cf4d,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   _movementCost: 50
-  canBuildOver: 0
-  isDestroyable: 1
-  zMoveDirections: 0
+  _canBuildOver: 0
+  _isDestroyable: 1
+  _zMoveDirections: 0
   _flammable: 1
   _temperatureOutput: 0
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
-  tintGroundTile: 0
-  tintObjectTile: 0
-  behaviorPrefab: {fileID: 0}
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 0}
   moveType: 0

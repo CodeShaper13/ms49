@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2395fd02c8fcabb4ca2e2a01474bca22, type: 3}
   m_Name: StructureCliffline
   m_EditorClassIdentifier: 
-  grass: {fileID: 11400000, guid: 90914b99a0298f0489339fd6b6cdb69c, type: 2}
   rndObjects:
   - cell: {fileID: 11400000, guid: e0d7c53bfaab1834ab324e0397dc80f0, type: 2}
     chance: 0.12
+    _randomRotation: 0
   - cell: {fileID: 11400000, guid: d5b2b0bd2ba17514dbb5461c54fd46ef, type: 2}
     chance: 0.04
+    _randomRotation: 1

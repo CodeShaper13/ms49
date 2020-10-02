@@ -12,40 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: Dumptruck
   m_EditorClassIdentifier: 
-  isSolid: 0
-  groundTile: {fileID: 0}
-  objectTile: {fileID: 11400000, guid: c696e3062c5dcc14d8b0b6d7ab9c9761, type: 2}
-  overlayTile: {fileID: 0}
-  rotationalOverride: 0
+  _isSolid: 0
+  _floorOverlayTile: {fileID: 0}
+  _objectTile: {fileID: 11400000, guid: c696e3062c5dcc14d8b0b6d7ab9c9761, type: 2}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 0
   up:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   right:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   down:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   left:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   _movementCost: -1
-  canBuildOver: 0
-  isDestroyable: 0
-  zMoveDirections: 0
+  _canBuildOver: 0
+  _isDestroyable: 0
+  _zMoveDirections: 0
   _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
-  tintGroundTile: 0
-  tintObjectTile: 0
-  behaviorPrefab: {fileID: 9162732814748994402, guid: c0aba4b06964427458190e942e2b4f8f,
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 9162732814748994402, guid: c0aba4b06964427458190e942e2b4f8f,
     type: 3}

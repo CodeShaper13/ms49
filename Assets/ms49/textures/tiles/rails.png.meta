@@ -71,6 +71,18 @@ TextureImporter:
   - first:
       213: 2670065183018469332
     second: rails_22
+  - first:
+      213: -5034984911456320633
+    second: rails_unloaderLeft
+  - first:
+      213: 3006911661186945869
+    second: rails_unloaderUp
+  - first:
+      213: 6590090466514022855
+    second: rails_unloaderDown
+  - first:
+      213: 1642499148158260846
+    second: rails_unloaderRight
   externalObjects: {}
   serializedVersion: 11
   mipmaps:

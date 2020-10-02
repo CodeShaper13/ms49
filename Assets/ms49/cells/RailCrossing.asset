@@ -12,40 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
   m_Name: RailCrossing
   m_EditorClassIdentifier: 
-  isSolid: 0
-  groundTile: {fileID: 11400000, guid: ad63941777d61234e83b650bfa340b7e, type: 2}
-  objectTile: {fileID: 0}
-  overlayTile: {fileID: 0}
-  rotationalOverride: 0
+  _isSolid: 0
+  _floorOverlayTile: {fileID: 0}
+  _objectTile: {fileID: 11400000, guid: ad63941777d61234e83b650bfa340b7e, type: 2}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 0
   up:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   right:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   down:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   left:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   _movementCost: 50
-  canBuildOver: 0
-  isDestroyable: 1
-  zMoveDirections: 0
+  _canBuildOver: 0
+  _isDestroyable: 1
+  _zMoveDirections: 0
   _flammable: 1
   _temperatureOutput: 0
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
-  tintGroundTile: 0
-  tintObjectTile: 0
-  behaviorPrefab: {fileID: 0}
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 0}
   moveType: 1

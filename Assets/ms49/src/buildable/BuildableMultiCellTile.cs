@@ -9,18 +9,12 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Buildable", menuName = "MS49/Buildable/Buildable Multi-Cell Tile", order = 1)]
 public class BuildableMultiCellTile : BuildableTile {
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private Vector2Int gridSize = new Vector2Int(1, 1);
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private TileEntry[] tiles = null;
-    [SerializeField]
-    private CellData _previewCell = null;
-
-    // Used by the inspector
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private CellRow[] cells = new CellRow[1];
-
-    public override CellData cell => this.getTile(0, 0);
 
     public string[,] GetCells() {
         string[,] ret = new string[this.getHighlightWidth(), this.getHighlightHeight()];
@@ -44,32 +38,28 @@ public class BuildableMultiCellTile : BuildableTile {
         return this.gridSize.y;
     }
 
-    public CellData getTile(int x, int y) {
-        if(this.getHighlightWidth() == 1 && this.getHighlightHeight() == 1) {
-            return this._cell;
+    public CellData getCellAt(int x, int y) {
+        if(x < 0 || x >= this.getHighlightWidth() || y < 0 || y >= this.getHighlightHeight()) {
+            return null;
+        }
+
+        string s1 = this.GetCells()[x, y];
+
+        // Special case for air
+        if(string.IsNullOrWhiteSpace(s1)) {
+            return Main.instance.tileRegistry.getAir();
         } else {
-            if(x < 0 || x >= this.getHighlightWidth() || y < 0 || y >= this.getHighlightHeight()) {
-                return null;
-            }
+            char c = s1[0];
 
-            string s1 = this.GetCells()[x, y];
-
-            // Special case for air
-            if(string.IsNullOrWhiteSpace(s1)) {
-                return Main.instance.tileRegistry.getAir();
-            } else {
-                char c = s1[0];
-
-                // Find what tile the char belongs to
-                foreach(TileEntry e in this.tiles) {
-                    if(e.character == c) {
-                        return e.tile;
-                    }
+            // Find what Entry the char belongs to.
+            foreach(TileEntry entry in this.tiles) {
+                if(entry.character == c) {
+                    return entry.tile;
                 }
-
-                return null;
             }
-        }       
+
+            return null;
+        }
     }
 
     public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
@@ -81,13 +71,13 @@ public class BuildableMultiCellTile : BuildableTile {
             world.setCell(pos, highlight.buildSiteCell, rotation);
             world.liftFog(pos);
             site = world.getBehavior<CellBehaviorBuildSite>(pos);
-            site.addCell(this.cell, pos);
+            site.addCell(this.getCellAt(0, 0), pos);
             site.isPrimary = true;
         }
 
         for(int x = 0; x < this.getHighlightWidth(); x++) {
             for(int y = 0; y < this.getHighlightHeight(); y++) {
-                CellData data = this.getTile(x, y);
+                CellData data = this.getCellAt(x, y);
                 if(data != null) {
                     Position pos1 = pos.add(x, y);
 
@@ -104,14 +94,10 @@ public class BuildableMultiCellTile : BuildableTile {
                         world.setCell(pos1, highlight.buildSiteCell, rotation);
                     }
 
-                    world.liftFog(pos1);
+                    this.applyFogOpperation(world, pos1);
                 }
             }
         }
-    }
-
-    public override CellData getPreviewCell() {
-        return this._previewCell;
     }
 
     public override bool isValidLocation(World world, Position pos, Rotation rotation) {
@@ -151,14 +137,10 @@ public class BuildableMultiCellTile : BuildableTile {
 
         private const int margin = 5;
 
-        private SerializedProperty structureName;
-        private SerializedProperty cost;
-        private SerializedProperty rotationMode;
         private SerializedProperty description;
         private SerializedProperty gridSize;
         private SerializedProperty cells;
         private SerializedProperty tileArray;
-        private SerializedProperty previewCell;
 
         private Rect lastRect;
         protected Vector2Int newGridSize;
@@ -181,13 +163,9 @@ public class BuildableMultiCellTile : BuildableTile {
         }
 
         private void OnEnable() {
-            this.structureName = this.serializedObject.FindProperty("structureName");
-            this.cost = this.serializedObject.FindProperty("_cost");
-            this.description = this.serializedObject.FindProperty("_description");
             this.gridSize = this.serializedObject.FindProperty("gridSize");
             this.cells = this.serializedObject.FindProperty("cells");
             this.tileArray = this.serializedObject.FindProperty("tiles");
-            this.previewCell = this.serializedObject.FindProperty("_previewCell");
 
             this.newGridSize = this.gridSize.vector2IntValue;
         }
@@ -195,12 +173,9 @@ public class BuildableMultiCellTile : BuildableTile {
         public override void OnInspectorGUI() {
             serializedObject.Update(); // Always do this at the beginning of InspectorGUI.
 
-            EditorGUILayout.PropertyField(this.structureName);
-            EditorGUILayout.PropertyField(this.cost);
-            EditorGUILayout.PropertyField(this.description);
-            EditorGUILayout.PropertyField(this.previewCell);
+            this.DrawDefaultInspector();
 
-            EditorGUILayout.Space();
+            EditorGUILayout.Space(20);
 
             EditorGUILayout.BeginHorizontal();
             this.SetBoldDefaultFont(gridSizeChanged);
@@ -253,8 +228,10 @@ public class BuildableMultiCellTile : BuildableTile {
             // Display multiple tiles
             this.displayGrid(lastRect);
 
-            this.tileArray.isExpanded = EditorGUILayout.Foldout(this.tileArray.isExpanded, "Tiles:");
+            this.tileArray.isExpanded = EditorGUILayout.Foldout(this.tileArray.isExpanded, "Cells:");
             if(this.tileArray.isExpanded) {
+                EditorGUI.indentLevel = 1;
+
                 this.tileArray.arraySize = EditorGUILayout.IntField("Count", this.tileArray.arraySize);
                 EditorGUILayout.Separator();
 
@@ -266,6 +243,8 @@ public class BuildableMultiCellTile : BuildableTile {
 
                     EditorGUILayout.Separator();
                 }
+
+                EditorGUI.indentLevel = 1;
             }
 
             // Apply changes to all serializedProperties - always do this at the end of OnInspectorGUI.

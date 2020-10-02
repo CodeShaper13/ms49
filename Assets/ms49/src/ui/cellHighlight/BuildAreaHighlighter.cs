@@ -30,16 +30,14 @@ public class BuildAreaHighlighter : CellHighlightBase {
                     (x, y) => {
                         CellData data;
                         if(this.buildable is BuildableMultiCellTile) {
-                            data = ((BuildableMultiCellTile)this.buildable).getTile(x, y);
-                        }
-                        else {
+                            data = ((BuildableMultiCellTile)this.buildable).getCellAt(x, y);
+                        } else {
                             data = ((BuildableTile)this.buildable).cell;
                         }
 
                         if(data == null) {
                             return null;
-                        }
-                        else {
+                        } else {
                             return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : Rotation.UP);
                         }
                     },

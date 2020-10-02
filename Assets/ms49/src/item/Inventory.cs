@@ -1,5 +1,7 @@
 ﻿using fNbt;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class Inventory {
 
@@ -27,6 +29,11 @@ public class Inventory {
     /// returned if the item is added, false if it is not.
     /// </summary>
     public virtual bool addItem(Item item) {
+        if(item == null) {
+            Debug.LogWarning("Can't add null to an Inventory");
+            return true;
+        }
+
         if(!this.isFull()) {
             this.items.Push(item);
             return true;
@@ -53,7 +60,7 @@ public class Inventory {
         int count = this.items.Count;
         int[] ids = new int[count];
         for(int i = 0; i < count; i++) {
-            ids[i] = reg.getIdOfElement(items.Pop());
+            ids[i] = reg.getIdOfElement(items.ElementAt(i));
         }
         tag.setTag("itemIds", ids);
 

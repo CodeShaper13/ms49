@@ -2,7 +2,7 @@
 using fNbt;
 using System;
 
-public class GameTime : MonoBehaviour, ISaveableSate {
+public class GameTime : MonoBehaviour, ISaveableState {
 
     [SerializeField, Tooltip("Length of the day in seconds.")]
     private int _lengthOfDay = 60;

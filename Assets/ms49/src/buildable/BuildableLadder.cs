@@ -1,9 +1,5 @@
 ﻿using UnityEngine;
 
-#if UNITY_EDITOR
-    using UnityEditor;
-#endif
-
 [CreateAssetMenu(fileName = "Buildable", menuName = "MS49/Buildable/Buildable Ladder", order = 1)]
 public class BuildableLadder : BuildableBase {
 
@@ -21,7 +17,7 @@ public class BuildableLadder : BuildableBase {
         }
 
         CellData cell = this.pointingDown(r) ? this.ladderTop : this.ladderBottom;
-        objectSprite = TileSpriteGetter.retrieveSprite(cell.getObjectTile(Rotation.UP).tile);
+        objectSprite = TileSpriteGetter.retrieveSprite(cell.getRenderData(Rotation.UP).objectTile);
     }
 
     public override bool isRotatable() {

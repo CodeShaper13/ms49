@@ -57,5 +57,5 @@ MonoBehaviour:
     m_RandomTransform: 0
   siblings:
   - {fileID: 11400000, guid: 9c7237ff24eb52043b8e3a96d82ff814, type: 2}
-  - {fileID: 11400000, guid: cb7b938176ec5e544a1760d270be4035, type: 2}
+  - {fileID: 11400000}
   - {fileID: 11400000, guid: 696b8f5690463494496e66b3a1992c19, type: 2}

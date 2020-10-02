@@ -15,3 +15,5 @@ MonoBehaviour:
   sprite: {fileID: -1199936339933312810, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Ruby
   moneyValue: 500
+  _includeInEconemy: 1
+  _graphColor: {r: 1, g: 1, b: 1, a: 1}

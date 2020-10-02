@@ -40,6 +40,10 @@ public class MilestoneData : ScriptableObject, ISerializationCallbackReceiver {
         }
 
         foreach(MilestoneRequirerment r in this.requirements) {
+            if(r == null) {
+                continue;
+            }
+
             if(!r.isMet(world)) {
                 return false;
             }

@@ -15,3 +15,5 @@ MonoBehaviour:
   sprite: {fileID: 3818660318709977233, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Amethyst
   moneyValue: 200
+  _includeInEconemy: 1
+  _graphColor: {r: 0.5568628, g: 0.2784314, b: 0.54901963, a: 1}

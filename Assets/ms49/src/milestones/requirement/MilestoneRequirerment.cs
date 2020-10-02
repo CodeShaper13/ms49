@@ -42,6 +42,10 @@ public class MilestoneRequirerment {
     /// Returns the progress towards this requirement.
     /// </summary>
     public int getProgress(World world) {
-        return this._method.getProgress(world);
+        if(this._method == null) {
+            return 0;
+        } else {
+            return this._method.getProgress(world);
+        }
     }
 }

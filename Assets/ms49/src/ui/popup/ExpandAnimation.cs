@@ -3,6 +3,7 @@
 /// <summary>
 /// Causes the transfrom to expand to it's original size over time.
 /// </summary>
+[DisallowMultipleComponent]
 public class ExpandAnimation : MonoBehaviour {
 
     private const float EXPAND_TIME = 14f;

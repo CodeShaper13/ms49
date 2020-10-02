@@ -5,23 +5,16 @@ public class CellBehavior : MonoBehaviour {
     [SerializeField]
     private bool _cache = true;
 
-    public World world {
-        get;
-        private set;
-    }
+    protected CellState state;
 
-    public Position pos {
-        get;
-        private set;
-    }
+    public World world { get; private set; }
+    public Position pos { get; private set; }
 
     public bool cache => this._cache;
     public CellData data => this.state.data;
     public Rotation rotation => this.state.rotation;
     /// <summary> The center of the Behavior's cell in world units. </summary>
     public Vector2 center => this.pos.vec2 + new Vector2(0.5f, 0.5f);
-
-    private CellState state;
 
     private void Update() {
         if(!Pause.isPaused()) {
@@ -35,6 +28,9 @@ public class CellBehavior : MonoBehaviour {
         this.pos = pos;
     }
 
+    /// <summary>
+    /// Called every frame while the game is not paused.
+    /// </summary>
     public virtual void onUpdate() { }
 
     /// <summary>

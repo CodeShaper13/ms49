@@ -15,5 +15,7 @@ MonoBehaviour:
   structureName: Locker
   _cost: 100
   _description: Stuffed full of life saving medical supplies
-  _cell: {fileID: 0}
+  _cell: {fileID: 11400000, guid: 55b8819e1323d7b4ca9faad86caa2626, type: 2}
+  _fogOption: 0
   _displayRotation: 0
+  overrideRotationMsg: 

@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Lever
   _cost: 0
-  _description: 
+  _description: Changes the direction of adjacent Conveyor Belts and toggle adjacent
+    Switches
   _cell: {fileID: 11400000, guid: cbcd3884b1aba77438d1f95a3c60ea81, type: 2}
+  _fogOption: 0
   _displayRotation: 0
+  overrideRotationMsg: 

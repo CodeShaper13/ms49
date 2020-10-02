@@ -4,12 +4,15 @@ using fNbt;
 public class CellBehaviorMinecartLoader : CellBehaviorContainer {
 
     [SerializeField]
-    private float itemTransferSpeed = 1f;
+    private float _itemTransferSpeed = 1f;
+    [SerializeField]
+    private bool _isUnloader = false;
 
     private float transferTimer;
 
-    public bool isUnloader { get; private set; }
     public EntityMinecart minecart { get; set; }
+
+    public bool isUnloader => this._isUnloader;
 
     public override void onUpdate() {
         base.onUpdate();
@@ -19,7 +22,7 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer {
         if(this.minecart != null) {
             if(this.isUnloader) {
                 // Pull items from the cart
-                if(this.minecart.inventory.isEmpty()) {
+                if(this.minecart.inventory.isEmpty() || this.inventory.isFull()) {
                     // Cart is empty, send it off
                     this.releaseCart();
                     return;
@@ -27,12 +30,12 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer {
 
                 if(this.transferTimer <= 0) {
                     this.deposit(this.minecart.inventory.pullItem());
-                    this.transferTimer = this.itemTransferSpeed;
+                    this.transferTimer = this._itemTransferSpeed;
                 }
 
             } else {
                 // Add items to the cart.
-                if(this.minecart.inventory.isFull()) {
+                if(this.minecart.inventory.isFull() || this.inventory.isEmpty()) {
                     // Cart is full, send it off.
                     this.releaseCart();
                     return;
@@ -40,7 +43,7 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer {
 
                 if(this.transferTimer <= 0) {
                     this.minecart.inventory.addItem(this.pullItem());
-                    this.transferTimer = this.itemTransferSpeed;
+                    this.transferTimer = this._itemTransferSpeed;
                 }
             }
         }
@@ -58,14 +61,12 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer {
         base.readFromNbt(tag);
 
         this.transferTimer = tag.getFloat("transferTimer");
-        this.isUnloader = tag.getBool("isUnloader");
     }
 
     public override void writeToNbt(NbtCompound tag) {
         base.writeToNbt(tag);
 
         tag.setTag("transferTimer", this.transferTimer);
-        tag.setTag("isUnloader", this.isUnloader);
     }
 
     private void releaseCart() {

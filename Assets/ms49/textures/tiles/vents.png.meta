@@ -25,7 +25,7 @@ TextureImporter:
     second: vents_curve_r_d
   - first:
       213: 1152684123446688089
-    second: vents_7
+    second: vents_curve_ur
   - first:
       213: 2769809355316503117
     second: vents_u_d_l
@@ -49,7 +49,7 @@ TextureImporter:
     second: vents_u_r_d
   - first:
       213: -76587911592465288
-    second: vents_15
+    second: vents_curve_ul
   - first:
       213: -6968993248330430926
     second: vents_shaft
@@ -285,7 +285,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vents_7
+      name: vents_curve_ur
       rect:
         serializedVersion: 2
         x: 96
@@ -453,7 +453,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vents_15
+      name: vents_curve_ul
       rect:
         serializedVersion: 2
         x: 112

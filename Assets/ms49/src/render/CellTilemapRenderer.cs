@@ -97,17 +97,11 @@ public class CellTilemapRenderer : MonoBehaviour {
             this.floorTilemap.SetColor(pos, groundTint);
         }
 
-        DirectionalTile dt = data.getObjectTile(state.rotation);
-
+        TileRenderData dt = data.getRenderData(state.rotation);
 
         // Draw floor overlay:
         if(this.floorOverlayTilemap != null) {
-            this.floorOverlayTilemap.SetTile(pos, dt.floorOverlay);
-
-            // Color
-            if(data.tintGroundTile || data.groundTile == null) { // Tint air
-                this.colorSquare(this.floorOverlayTilemap, pos, groundTint);
-            }
+            this.floorOverlayTilemap.SetTile(pos, dt.floorOverlayTile);
         }
 
 
@@ -117,11 +111,11 @@ public class CellTilemapRenderer : MonoBehaviour {
 
             // If the Cell's behavior implements IRenderTileOverride, let it adject the tile, even if the tile is rotatable.
             if(state.hasBehavior() && state.behavior is IRenderTileOverride) {
-                ((IRenderTileOverride)state.behavior).replaceTiles(ref dt.floorOverlay, ref dt.tile, ref dt.overlayTile);
+                ((IRenderTileOverride)state.behavior).replaceTiles(ref dt);
             }
 
             // Set the tile on the map.
-            this.objectMap.SetTile(pos, dt.tile);
+            this.objectMap.SetTile(pos, dt.objectTile);
 
             // Set the tile's transform.
             this.objectMap.SetTransformMatrix(pos, dt.getMatrix());

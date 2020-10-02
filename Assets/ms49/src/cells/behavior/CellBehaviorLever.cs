@@ -9,9 +9,9 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
 
     private bool isOn;
 
-    public void replaceTiles(ref TileBase floorOverlay, ref TileBase tile, ref TileBase tileOverlay) {
+    public void replaceTiles(ref TileRenderData renderData) {
         if(this.isOn) {
-            tile = this.onTile;
+            renderData.objectTile = this.onTile;
         }
     }
 
@@ -20,6 +20,14 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
 
         this.isOn = !this.isOn;
         this.dirty();
+
+        // Alert neightbors of the lever being flipped.
+        foreach(Rotation r in Rotation.ALL) {
+            CellBehavior behavior = this.world.getBehavior<CellBehavior>(this.pos + r);
+            if(behavior is ILeverReciever) {
+                ((ILeverReciever)behavior).onLeverFlip(this);
+            }
+        }
     }
 
     public void readFromNbt(NbtCompound tag) {

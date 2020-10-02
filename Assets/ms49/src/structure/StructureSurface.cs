@@ -18,12 +18,13 @@ public class StructureSurface : StructureBase {
 
                     if(LayerDataSurface.isOutside(x, y + 1)) {
                         CellData cell = null;
+                        Rotation rotation = Rotation.UP;
                         foreach(PrimitiveRndObject pro in this.rndObjects) {
-                            pro.getRnd(ref cell);
+                            pro.getRnd(ref cell, ref rotation);
                         }
 
                         if(cell != null) {
-                            world.setCell(pos1, cell);
+                            world.setCell(pos1, cell, rotation);
                         }
                     }
 

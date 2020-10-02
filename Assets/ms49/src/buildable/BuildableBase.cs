@@ -24,6 +24,10 @@ public abstract class BuildableBase : ScriptableObject {
         return false;
     }
 
+    public virtual bool isRotationValid(Rotation rotation) {
+        return true;
+    }
+
     /// <summary>
     /// If this Buildable is rotatable (BuildableBase#isRotatable
     /// returns true) the rotate tip message uses the returned text.

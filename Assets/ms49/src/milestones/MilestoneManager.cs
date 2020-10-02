@@ -1,7 +1,7 @@
 ﻿using fNbt;
 using UnityEngine;
 
-public class MilestoneManager : MonoBehaviour, ISaveableSate {
+public class MilestoneManager : MonoBehaviour, ISaveableState {
 
     [SerializeField]
     private MilestoneData[] _milestoneData = null;

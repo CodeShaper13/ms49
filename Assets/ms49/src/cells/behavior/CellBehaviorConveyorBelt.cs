@@ -1,7 +1,7 @@
 ﻿using fNbt;
 using UnityEngine;
 
-public class CellBehaviorConveyorBelt : CellBehavior, IHasData {
+public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
 
     [SerializeField, Min(0)]
     private float conveyorSpeed = 1;
@@ -25,6 +25,11 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData {
                 this.destroyItem(entity);
             }
         }
+    }
+
+    public void onLeverFlip(CellBehaviorLever lever) {
+        this.state.rotation = this.state.rotation.opposite();
+        this.dirty();
     }
 
     public override void onUpdate() {

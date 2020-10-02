@@ -25,7 +25,7 @@ public class PopupBuild : PopupWorldReference {
     [SerializeField]
     private Scrollbar scrollbar = null;
 
-    private BuildableBase sData;
+    private BuildableBase selectedBuildable;
     public Rotation rot { get; private set; }
 
     protected override void onOpen() {
@@ -66,19 +66,35 @@ public class PopupBuild : PopupWorldReference {
             }
         }
 
-        this.scrollbar.value = 1f;
+        this.scrollbar.value = 0f;
+    }
+
+    private void rotateUntil(bool counterclockwise) {
+        Rotation startRot = this.rot;
+
+        while(true) {
+            this.rot = counterclockwise ? this.rot.counterClockwise() : this.rot.clockwise();
+
+            if(this.selectedBuildable.isRotationValid(this.rot)) {
+                return;
+            }
+
+            if(this.rot == startRot) {
+                return;
+            }
+        }
     }
 
     protected override void onUpdate() {
         base.onUpdate();
 
-        if(this.sData != null && this.sData.isRotatable()) {
-            bool rPressed = Input.GetKeyDown(KeyCode.R);
+        if(this.selectedBuildable != null) {
+            if(this.selectedBuildable.isRotatable()) {
+                bool rPressed = Input.GetKeyDown(KeyCode.R);
 
-            if(rPressed && Input.GetKey(KeyCode.LeftShift)) {
-                this.rot = this.rot.counterClockwise();
-            } else if(rPressed) {
-                this.rot = this.rot.clockwise();
+                if(rPressed) {
+                    this.rotateUntil(Input.GetKey(KeyCode.LeftShift));
+                }
             }
         }
     }
@@ -94,28 +110,34 @@ public class PopupBuild : PopupWorldReference {
         this.areaHighlighter.hide();
     }
 
-    public void setSelected(BuildableBase sData) {
-        this.sData = sData;
-        if(this.sData != null) {
-            if(this.sData.isRotatable()) {
+    public void setSelected(BuildableBase buildable) {
+        this.selectedBuildable = buildable;
+        if(this.selectedBuildable != null) {
+            if(this.selectedBuildable.isRotatable()) {
                 this.rot = Rotation.UP;
+                foreach(Rotation r in Rotation.ALL) {
+                    if(this.selectedBuildable.isRotationValid(r)) {
+                        this.rot = r;
+                        break;
+                    }
+                }
             } else {
                 this.rot = null;
             }
         }
 
-        if(this.sData == null) {
+        if(this.selectedBuildable == null) {
             this.preview.hide();
 
             this.areaHighlighter.hide();
         } else {
-            this.preview.show(this.sData);
+            this.preview.show(this.selectedBuildable);
             this.callback_buildClick();
         }
     }
 
     public void callback_buildClick() {
-        this.areaHighlighter.setBuildable(this.sData);
+        this.areaHighlighter.setBuildable(this.selectedBuildable);
         this.areaHighlighter.show();
         this.preview.hide();
     }

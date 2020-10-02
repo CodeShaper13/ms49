@@ -1,7 +1,7 @@
 ﻿using fNbt;
 using UnityEngine;
 
-public class Payroll : MonoBehaviour, ISaveableSate {
+public class Payroll : MonoBehaviour, ISaveableState {
 
     [SerializeField, Tooltip("How often in seconds Workers are paid")]
     private int _payRate = 60 * 24;

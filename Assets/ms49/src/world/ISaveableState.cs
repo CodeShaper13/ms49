@@ -1,6 +1,6 @@
 ﻿using fNbt;
 
-public interface ISaveableSate {
+public interface ISaveableState {
 
     string tagName { get; }
 

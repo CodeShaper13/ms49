@@ -21,7 +21,6 @@ MonoBehaviour:
   overrideRotationMsg: 
   gridSize: {x: 1, y: 1}
   tiles: []
-  _previewCell: {fileID: 0}
   cells:
   - row:
     - 

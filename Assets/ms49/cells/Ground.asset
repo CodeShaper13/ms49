@@ -12,40 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
   m_Name: Ground
   m_EditorClassIdentifier: 
-  isSolid: 1
-  groundTile: {fileID: 0}
-  objectTile: {fileID: 11400000, guid: c112bfa7ad6e7734988bbe6382915c0a, type: 2}
-  overlayTile: {fileID: 0}
-  rotationalOverride: 0
+  _isSolid: 1
+  _floorOverlayTile: {fileID: 0}
+  _objectTile: {fileID: 11400000, guid: c112bfa7ad6e7734988bbe6382915c0a, type: 2}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 0
   up:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   right:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   down:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   left:
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   _movementCost: -1
-  canBuildOver: 0
-  isDestroyable: 0
-  zMoveDirections: 0
+  _canBuildOver: 0
+  _isDestroyable: 0
+  _zMoveDirections: 0
   _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 1
   _includeInFogFloodLift: 0
-  tintGroundTile: 1
-  tintObjectTile: 1
-  behaviorPrefab: {fileID: 0}
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 0}
   droppedItem: {fileID: 11400000, guid: 3dd87f65ab6b64246810d9c201a03013, type: 2}

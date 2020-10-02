@@ -23,6 +23,7 @@ public class World : MonoBehaviour {
     public GameTime time = null;
     public PlotManager plotManager = null;
     public Payroll payroll = null;
+    public Economy economy = null;
 
     // References to Cells
     public CellData rubbleCell;
@@ -425,7 +426,7 @@ public class World : MonoBehaviour {
         }
 
         // Write all child componenets that implement ISaveableState to NBT
-        foreach(ISaveableSate saveable in this.GetComponentsInChildren<ISaveableSate>()) {
+        foreach(ISaveableState saveable in this.GetComponentsInChildren<ISaveableState>()) {
             NbtCompound compound = new NbtCompound();
             saveable.writeToNbt(compound);
             tag.setTag(saveable.tagName, compound);
@@ -445,7 +446,7 @@ public class World : MonoBehaviour {
             this.money.value = tag.getInt("money");
         }
 
-        foreach(ISaveableSate saveable in this.GetComponentsInChildren<ISaveableSate>()) {
+        foreach(ISaveableState saveable in this.GetComponentsInChildren<ISaveableState>()) {
             saveable.readFromNbt(tag.getCompound(saveable.tagName));
         }
 

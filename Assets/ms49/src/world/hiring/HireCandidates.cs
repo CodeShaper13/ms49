@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HireCandidates : MonoBehaviour, ISaveableSate {
+public class HireCandidates : MonoBehaviour, ISaveableState {
 
     [SerializeField]
     private World world = null;

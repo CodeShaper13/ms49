@@ -2,7 +2,7 @@
 
     public readonly CellData data;
     public readonly CellBehavior behavior;
-    public readonly Rotation rotation;
+    public Rotation rotation;
 
     public CellState(CellData data, CellBehavior behavior, Rotation rotation) {
         this.data = data;

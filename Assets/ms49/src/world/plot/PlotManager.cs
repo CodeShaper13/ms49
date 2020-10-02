@@ -2,7 +2,7 @@
 using fNbt;
 using UnityEngine.Tilemaps;
 
-public class PlotManager : MonoBehaviour, ISaveableSate {
+public class PlotManager : MonoBehaviour, ISaveableState {
 
     [SerializeField, Min(1)]
     private int _plotDiameter = 32;

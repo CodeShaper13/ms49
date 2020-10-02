@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using fNbt;
 
-public class EntityList : MonoBehaviour, ISaveableSate {
+public class EntityList : MonoBehaviour, ISaveableState {
 
     [SerializeField]
     private World world = null;

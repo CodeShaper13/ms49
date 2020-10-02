@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using fNbt;
-using System.Text;
 
 public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
 
@@ -27,6 +26,8 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
         if(popup != null) {
             popup.open();
             popup.setInventory(this.inventory);
+        } else {
+            Debug.LogWarning("Could not find PopupContainer");
         }
     }
 

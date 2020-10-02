@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using fNbt;
 
-public class TargetedSquares : MonoBehaviour, ISaveableSate {
+public class TargetedSquares : MonoBehaviour, ISaveableState {
 
     [SerializeField]
     private WorldRenderer worldRenderer = null;

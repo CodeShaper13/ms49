@@ -1,12 +1,31 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Rotation {
 
-    public static Rotation UP = new Rotation(0, "up", Vector2Int.up, EnumAxis.Y);
-    public static Rotation RIGHT = new Rotation(1, "right", Vector2Int.right, EnumAxis.X);
-    public static Rotation DOWN = new Rotation(2, "down", Vector2Int.down, EnumAxis.Y);
-    public static Rotation LEFT = new Rotation(3, "left", Vector2Int.left, EnumAxis.X);
+    public static Rotation UP = new Rotation(
+        0,
+        "up",
+        Vector2Int.up,
+        EnumAxis.Y,
+        EnumRotation.UP);
+    public static Rotation RIGHT = new Rotation(
+        1,
+        "right",
+        Vector2Int.right,
+        EnumAxis.X,
+        EnumRotation.RIGHT);
+    public static Rotation DOWN = new Rotation(
+        2,
+        "down",
+        Vector2Int.down,
+        EnumAxis.Y,
+        EnumRotation.DOWN);
+    public static Rotation LEFT = new Rotation(
+        3,
+        "left",
+        Vector2Int.left,
+        EnumAxis.X,
+        EnumRotation.LEFT);
 
     public static Rotation[] ALL = new Rotation[] { UP, RIGHT, DOWN, LEFT };
 
@@ -15,9 +34,14 @@ public class Rotation {
     public readonly Vector2Int vector;
     public readonly Vector2 vectorF;
     public readonly EnumAxis axis;
+    public readonly EnumRotation enumRot;
 
     public static Rotation fromEnum(EnumRotation rotation) {
-        return Rotation.ALL[(int)rotation];
+        if(rotation == EnumRotation.NONE) {
+            return null;
+        } else {
+            return Rotation.ALL[(int)rotation];
+        }
     }
 
     /// <summary>
@@ -44,12 +68,13 @@ public class Rotation {
         return Rotation.ALL[index];
     }
 
-    private Rotation(int id, string name, Vector2Int dir, EnumAxis axis) {
+    private Rotation(int id, string name, Vector2Int dir, EnumAxis axis, EnumRotation enumRot) {
         this.id = id;
         this.name = name;
         this.vector = dir;
         this.vectorF = this.vector;
         this.axis = axis;
+        this.enumRot = enumRot;
     }
 
     public override string ToString() {

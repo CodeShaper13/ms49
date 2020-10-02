@@ -23,9 +23,9 @@ public class CellBehaviorDetectorRail : CellBehavior, IHasData, IRenderTileOverr
         }
     }
 
-    public void replaceTiles(ref TileBase floorOverlay, ref TileBase tile, ref TileBase tileOverlay) {
+    public void replaceTiles(ref TileRenderData renderData) {
         if(this.isTripped) {
-            floorOverlay = this.rotation.axis == EnumAxis.X ? this.trippedTileX : this.trippedTileY;
+            renderData.floorOverlayTile = this.rotation.axis == EnumAxis.X ? this.trippedTileX : this.trippedTileY;
         }
     }
 

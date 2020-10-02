@@ -15,3 +15,5 @@ MonoBehaviour:
   sprite: {fileID: 4998937224500876124, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   itemName: Sapphire
   moneyValue: 500
+  _includeInEconemy: 1
+  _graphColor: {r: 0.15686275, g: 0.8000001, b: 0.8745099, a: 1}

@@ -16,6 +16,10 @@ public class EntityItem : EntityBase {
 
     public override void onUpdate() {
         base.onUpdate();
+
+        if(this.item == null) {
+            Debug.LogWarning("EntityItem has no item field set!");
+        }
     }
 
     public override void writeToNbt(NbtCompound tag) {
@@ -31,7 +35,11 @@ public class EntityItem : EntityBase {
     }
 
     public void setItem(Item item) {
-        this.item = item;
-        this.sr.sprite = item == null ? null : item.sprite;
+        if(item == null) {
+            Debug.LogWarning("Can't set EntityItem#item to null");
+        } else {
+            this.item = item;
+            this.sr.sprite = this.item.sprite;
+        }
     }
 }

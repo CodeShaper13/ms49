@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
+
 [CreateAssetMenu(fileName = "Buildable", menuName = "MS49/Buildable/Buildable Tile", order = 1)]
 public class BuildableTile : BuildableBase {
 
@@ -7,17 +11,45 @@ public class BuildableTile : BuildableBase {
     protected CellData _cell = null;
     [SerializeField]
     private EnumFogOption _fogOption = EnumFogOption.LIFT;
-    [SerializeField, Tooltip("The rotation to display the tile with in the preview")]
+    [SerializeField, HideInInspector, Tooltip("The rotation to display the tile with in the preview")]
     private EnumRotation _displayRotation = EnumRotation.UP;
-    [SerializeField, Tooltip("If not null or empty, this message will be used as the rotation msg")]
+    [SerializeField, HideInInspector, Tooltip("If not null or empty, this message will be used as the rotation msg")]
     private string overrideRotationMsg = null;
 
     public virtual CellData cell => this._cell;
     public virtual EnumRotation displayRotation => this._displayRotation;
     public EnumFogOption fogOption => this._fogOption;
 
+    private void OnValidate() {
+        if(this._displayRotation == EnumRotation.NONE) {
+            Debug.Log("Display Rotation can not be NONE");
+            this._displayRotation = EnumRotation.UP;
+        }
+
+        if(this.cell != null && !this.cell.isRotationOverrideEnabled(Rotation.fromEnum(this._displayRotation))) {
+            Rotation r = Rotation.fromEnum(this.displayRotation);
+            for(int i = 0; i < 4; i++) {
+                if(this.cell.isRotationOverrideEnabled(r)) {
+                    Debug.Log(this._displayRotation + " is not a valid rotation");
+                    this._displayRotation = r.enumRot;
+                    break;
+                }
+
+                r = r.clockwise();
+            }
+        }
+    }
+
     public override bool isRotatable() {
         return this.cell != null && this.cell.rotationalOverride;
+    }
+
+    public override bool isRotationValid(Rotation rotation) {
+        if(this.cell == null) {
+            return true;
+        } else {
+            return this.cell.isRotationOverrideEnabled(rotation);
+        }
     }
 
     public override string getRotationMsg() {
@@ -28,7 +60,7 @@ public class BuildableTile : BuildableBase {
         return this._cell;
     }
 
-    public override void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
+    public override void getPreviewSprites(ref Sprite floorOverlaySprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
         CellData previewCell = this.getPreviewCell();
 
         if(previewCell == null) {
@@ -36,11 +68,10 @@ public class BuildableTile : BuildableBase {
             return;
         }
 
-        groundSprite = TileSpriteGetter.retrieveSprite(previewCell.groundTile);
+        TileRenderData dt = previewCell.getRenderData(Rotation.fromEnum(this.displayRotation));
 
-        DirectionalTile dt = previewCell.getObjectTile(Rotation.fromEnum(this.displayRotation));
-
-        objectSprite = TileSpriteGetter.retrieveSprite(dt.tile);
+        floorOverlaySprite = TileSpriteGetter.retrieveSprite(dt.floorOverlayTile);
+        objectSprite = TileSpriteGetter.retrieveSprite(dt.objectTile);
         overlaySprite = TileSpriteGetter.retrieveSprite(dt.overlayTile);
     }
 
@@ -78,6 +109,10 @@ public class BuildableTile : BuildableBase {
             site.isPrimary = true;
         }
 
+        this.applyFogOpperation(world, pos);
+    }
+
+    protected virtual void applyFogOpperation(World world, Position pos) {
         if(this.fogOption == EnumFogOption.LIFT) {
             world.liftFog(pos);
         } else if(this.fogOption == EnumFogOption.PLACE) {
@@ -90,4 +125,33 @@ public class BuildableTile : BuildableBase {
         PLACE = 1,
         NOTHING = 2,
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(BuildableTile), true)]
+    public class BuildableTileEditor : Editor {
+
+        private SerializedProperty displayRotation;
+        private SerializedProperty overrideRotationMsg;
+
+        private void OnEnable() {
+            this.displayRotation = this.serializedObject.FindProperty("_displayRotation");
+            this.overrideRotationMsg = this.serializedObject.FindProperty("overrideRotationMsg");
+        }
+
+        public override void OnInspectorGUI() {
+            this.serializedObject.Update();
+
+            this.DrawDefaultInspector();
+
+            BuildableTile script = (BuildableTile)this.target;
+
+            if(script.cell != null && script.cell.rotationalOverride) {
+                EditorGUILayout.PropertyField(this.displayRotation);
+                EditorGUILayout.PropertyField(this.overrideRotationMsg);
+            }
+
+            this.serializedObject.ApplyModifiedProperties();
+        }
+    }
+#endif
 }

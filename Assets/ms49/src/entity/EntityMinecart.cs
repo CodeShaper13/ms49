@@ -20,6 +20,7 @@ public class EntityMinecart : EntityBase, IClickable {
 
     public Inventory inventory { get; private set; }
     public Rotation facing { get; set; }
+
     public CellBehaviorMinecartLoader foundLoader { get; set; }
 
     public override void initialize(World world, int id, int depth) {
@@ -57,15 +58,19 @@ public class EntityMinecart : EntityBase, IClickable {
                 foreach(Rotation r in Rotation.ALL) {
                     CellState adjacentState = this.world.getCellState(this.position + r);
                     if(adjacentState != null && adjacentState.behavior is CellBehaviorMinecartLoader) {
-                        CellBehaviorMinecartLoader cartLoader = (CellBehaviorMinecartLoader)adjacentState.behavior;
+                        CellBehaviorMinecartLoader cartInteracter = (CellBehaviorMinecartLoader)adjacentState.behavior;
 
-                        if(cartLoader.isUnloader && !this.inventory.isEmpty()) {
-                            // Stop and give the loader items.
-                            this.foundLoader = cartLoader;
-                        }
-                        else if(!cartLoader.isUnloader && !this.inventory.isFull()) {
-                            // Stop and take items from the loader.
-                            this.foundLoader = cartLoader;
+                        // If the loader/unload isn't facing the track, ignore it
+                        if(adjacentState.rotation.opposite() == r) {
+
+                            if(cartInteracter.isUnloader && !cartInteracter.isFull && !this.inventory.isEmpty()) {
+                                // Stop and give the unloader items.
+                                this.foundLoader = cartInteracter;
+                            }
+                            else if(!cartInteracter.isUnloader && !cartInteracter.isEmpty && !this.inventory.isFull()) {
+                                // Stop and take items from the loader.
+                                this.foundLoader = cartInteracter;
+                            }
                         }
                     }
                 }                

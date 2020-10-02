@@ -1,0 +1,2 @@
+test.hello=Hello World!
+test.args=Hello, {0}

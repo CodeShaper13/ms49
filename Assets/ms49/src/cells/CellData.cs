@@ -2,42 +2,44 @@
 using UnityEngine.Tilemaps;
 
 #if UNITY_EDITOR
-using UnityEditor;
+    using UnityEditor;
 #endif
 
 [CreateAssetMenu(fileName = "Cell", menuName = "MS49/Cell/Cell", order = 1)]
 public class CellData : ScriptableObject {
 
     [SerializeField, Tooltip("If true, the floor is not drawn below and an edge will surround this tile.")]
-    public bool isSolid = false;
+    private bool _isSolid = false;
     [SerializeField]
-    public TileBase groundTile; // Floor overlay
+    private TileBase _floorOverlayTile = null;
     [SerializeField]
-    public TileBase objectTile;
+    private TileBase _objectTile = null;
     [SerializeField]
-    public TileBase overlayTile;
-
-    public bool rotationalOverride;
+    private TileBase _objectOverlayTile = null;
 
     [SerializeField]
-    private DirectionalTile up = new DirectionalTile();
-    [SerializeField]
-    private DirectionalTile right = new DirectionalTile();
-    [SerializeField]
-    private DirectionalTile down = new DirectionalTile();
-    [SerializeField]
-    private DirectionalTile left = new DirectionalTile();
+    private bool _rotationalOverride = false;
+
+    [SerializeField, HideInInspector]
+    private RotationOverride up = null;
+    [SerializeField, HideInInspector]
+    private RotationOverride right = null;
+    [SerializeField, HideInInspector]
+    private RotationOverride down = null;
+    [SerializeField, HideInInspector]
+    private RotationOverride left = null;
 
     [Space]
 
     [SerializeField, Tooltip("-1 = not walkable, 0 = walkable, greater than 1 is walkable with a penalty"), Min(-1)]
     private int _movementCost = 0;
-    [Tooltip("If ture, this Cell we be treated as empty space and Cell will be able to be built in this Cell's place.")]
-    public bool canBuildOver = false;
-    [Tooltip("If true, this Cell will be able to be destroyed and converted to air.")]
-    public bool isDestroyable = true;
-    public EnumZMoveDirection zMoveDirections = EnumZMoveDirection.NEITHER;
+    [SerializeField, Tooltip("If ture, this Cell we be treated as empty space and Cell will be able to be built in this Cell's place.")]
+    private bool _canBuildOver = false;
+    [SerializeField, Tooltip("If true, this Cell will be able to be destroyed and converted to air.")]
+    private bool _isDestroyable = false;
     [SerializeField]
+    private EnumZMoveDirection _zMoveDirections = EnumZMoveDirection.NEITHER;
+    [SerializeField, Tooltip("If true, the Cell will burn")]
     private bool _flammable = false;
     [SerializeField]
     private float _temperatureOutput = 0f;
@@ -48,55 +50,61 @@ public class CellData : ScriptableObject {
 
     [Space]
 
-    [Tooltip("If true, the ground tile (if set) will be tinted.  If not set, the tint will be applied reguardless of this setting.")]
-    public bool tintGroundTile;
-    [Tooltip("If true, the object tile (if set) will be tinted.")]
-    public bool tintObjectTile;
+    [SerializeField, Tooltip("If true, the Object Tile will be tinted.")]
+    private bool _tintObjectTile = false;
 
     [Space]
 
-    [Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
-    public GameObject behaviorPrefab;
+    [SerializeField, Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
+    private GameObject _behaviorPrefab = null;
 
+    public bool isSolid => this._isSolid;
+    public bool rotationalOverride => this._rotationalOverride;
     public int movementCost => this._movementCost;
     public bool isWalkable => this.movementCost >= 0;
+    public bool canBuildOver => this._canBuildOver;
+    public bool isDestroyable => this._isDestroyable;
+    public EnumZMoveDirection zMoveDirections => this._zMoveDirections;
     public bool isFlammable => this._flammable;
     public float temperatureOutput => this._temperatureOutput;
     public bool supportsCeiling => this._supportsCeiling;
     public bool includeInFogFloodLift => this._includeInFogFloodLift;
+    public bool tintObjectTile => this._tintObjectTile;
+    public GameObject behaviorPrefab => this._behaviorPrefab;
 
-    public TileBase getGroundTile() {
-        return this.groundTile;
+    public TileRenderData getRenderData(Rotation rotation) {
+        if(this.rotationalOverride) {
+            RotationOverride rotOverride = this.overrideFromRotation(rotation);
+
+            if(rotOverride.isOverrideEnabled) {
+                // If the rotational override is missing data, pull from the defaults.
+                return new TileRenderData(
+                    rotOverride.floorOverlay == null ? this._floorOverlayTile : rotOverride.floorOverlay,
+                    rotOverride.objectTile == null ? this._objectTile : rotOverride.objectTile,
+                    rotOverride.overlayTile == null ? this._objectOverlayTile : rotOverride.overlayTile,
+                    rotOverride.effect);
+            }
+        }
+
+        return new TileRenderData(this._floorOverlayTile, this._objectTile, this._objectOverlayTile, RotationEffect.NOTHING);
     }
 
-    public DirectionalTile getObjectTile(Rotation rotation) {
-        if(this.rotationalOverride && rotation != null) {
-            DirectionalTile dt;
+    public bool isRotationOverrideEnabled(Rotation rotation) {
+        return this.overrideFromRotation(rotation).isOverrideEnabled;
+    }
 
-            if(rotation == Rotation.UP) {
-                dt = this.up;
-            }
-            else if(rotation == Rotation.RIGHT) {
-                dt = this.right;
-            }
-            else if(rotation == Rotation.DOWN) {
-                dt = this.down;
-            }
-            else {
-                dt = this.left;
-            }
-
-            // If the rotational override is missing data, pull from the defaults.
-            if(dt.tile == null) {
-                dt.tile = this.objectTile;
-            }
-            if(dt.overlayTile == null) {
-                dt.overlayTile = this.overlayTile;
-            }
-
-            return dt;
-        } else {
-            return new DirectionalTile(this.groundTile, this.objectTile, this.overlayTile);
+    private RotationOverride overrideFromRotation(Rotation rotation) {
+        if(rotation == Rotation.UP) {
+            return this.up;
+        }
+        else if(rotation == Rotation.RIGHT) {
+            return this.right;
+        }
+        else if(rotation == Rotation.DOWN) {
+            return this.down;
+        }
+        else {
+            return this.left;
         }
     }
 
@@ -104,7 +112,6 @@ public class CellData : ScriptableObject {
     [CustomEditor(typeof(CellData), true)]
     public class CellDataEditor : Editor {
 
-        /*
         private SerializedProperty up;
         private SerializedProperty right;
         private SerializedProperty down;
@@ -117,45 +124,47 @@ public class CellData : ScriptableObject {
             this.left = this.serializedObject.FindProperty("left");
         }
 
-        public override VisualElement CreateInspectorGUI() {
-            base.CreateInspectorGUI();
-
-            var container = new VisualElement();
-
-            // Draw the legacy IMGUI base
-            var imgui = new IMGUIContainer(OnInspectorGUI);
-            // container.Add(imgui);
-
-            // Create property fields.
-            // Add fields to the container.
-            container.Add(
-                new Label("UP"));
-            container.Add(
-                     new PropertyField(serializedObject.FindProperty("up")));
-            return container;
-
-        }
-
-        public override void OnInspectorGUI() {
-            DrawDefaultInspector();
-        }
-
         public override void OnInspectorGUI() {
             this.serializedObject.Update();
 
             this.DrawDefaultInspector();
 
-            CellData script = (CellData)target;
+            CellData script = (CellData)this.target;
 
             if(script.rotationalOverride) {
                 // Show rotation properties
 
-                EditorGUILayout.PropertyField(this.up, true);
+                EditorGUILayout.Space(16);
+                EditorGUILayout.LabelField("  -----  Rotation Overrides  -----  ", EditorStyles.boldLabel);
+
+                this.func(this.up);
+                this.func(this.right);
+                this.func(this.down);
+                this.func(this.left);
             }
 
             this.serializedObject.ApplyModifiedProperties();
         }
-        */
+
+        private void func(SerializedProperty prop) {
+            SerializedProperty p1 = prop.FindPropertyRelative("_enableOverride");
+
+            EditorGUILayout.BeginHorizontal();
+            prop.isExpanded = EditorGUILayout.Foldout(prop.isExpanded, prop.name.ToUpper());
+            p1.boolValue = EditorGUILayout.Toggle("Enable override", p1.boolValue);
+            EditorGUILayout.EndHorizontal();
+
+            if(prop.isExpanded && p1.boolValue) {
+                EditorGUI.indentLevel = 1;
+
+                EditorGUILayout.PropertyField(prop.FindPropertyRelative("_floorOverlayTile"));
+                EditorGUILayout.PropertyField(prop.FindPropertyRelative("_objectTile"));
+                EditorGUILayout.PropertyField(prop.FindPropertyRelative("_overlayTile"));
+                EditorGUILayout.PropertyField(prop.FindPropertyRelative("_effect"));
+
+                EditorGUI.indentLevel = 0;
+            }
+        }
 
         public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height) {
             CellData cell = (CellData)this.serializedObject.targetObject;
@@ -167,9 +176,9 @@ public class CellData : ScriptableObject {
             Texture2D tex = new Texture2D(width, height);
 
             Texture2D[] textures = new Texture2D[] {
-                this.func(cell.groundTile),
-                this.func(cell.objectTile),
-                this.func(cell.overlayTile),
+                this.func(cell._floorOverlayTile),
+                this.func(cell._objectTile),
+                this.func(cell._objectOverlayTile),
             };
             Vector2Int texSize = Vector2Int.zero;
             Color[] rootCols = null;

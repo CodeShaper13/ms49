@@ -8,9 +8,9 @@ public class CellBehaviorSink : CellBehaviorOccupiable, IRenderTileOverride {
 
     private bool isFilled;
 
-    public void replaceTiles(ref TileBase floorOverlay, ref TileBase tile, ref TileBase tileOverlay) {
+    public void replaceTiles(ref TileRenderData renderData) {
         if(this.isFilled) {
-            tile = this.tileSinkFilled;
+            renderData.objectTile = this.tileSinkFilled;
         }
     }
 

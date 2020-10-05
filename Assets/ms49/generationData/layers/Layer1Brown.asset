@@ -23,16 +23,16 @@ MonoBehaviour:
   caveSmoothPases: 2
   oreSpawnSettings:
   - _cell: {fileID: 11400000, guid: a59a1921820c7174d956a088eb133e3c, type: 2}
-    veinCount: 120
+    veinCount: 5
     veinSize: {x: 3, y: 5}
   - _cell: {fileID: 11400000, guid: 21c8e8396c7ff6b4a8c81fae3f42d70f, type: 2}
-    veinCount: 60
+    veinCount: 2
     veinSize: {x: 1, y: 1}
   - _cell: {fileID: 11400000, guid: c32d330b7cfb2c3439a92de60bb06e73, type: 2}
-    veinCount: 40
+    veinCount: 1
     veinSize: {x: 1, y: 1}
   - _cell: {fileID: 11400000, guid: da332e11efa0ff241ae10bfd0edad4a5, type: 2}
-    veinCount: 50
+    veinCount: 2
     veinSize: {x: 1, y: 1}
   lakeType: 0
   lakeChance: 0

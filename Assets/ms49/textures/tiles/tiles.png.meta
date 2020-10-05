@@ -437,6 +437,9 @@ TextureImporter:
   - first:
       213: -8305803365058092108
     second: tiles_tableStandalone
+  - first:
+      213: -7986134054606587919
+    second: tiles_machineShadow
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1869,12 +1872,12 @@ TextureImporter:
       name: tiles_unloader_right
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 0
-        width: 16
+        width: 24
         height: 32
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.33333334, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1890,7 +1893,7 @@ TextureImporter:
       name: tiles_unloader_down
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 0
         width: 16
         height: 32
@@ -2499,12 +2502,12 @@ TextureImporter:
       name: tiles_unloaderOpen_right
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 32
-        width: 16
+        width: 24
         height: 32
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.33333334, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2541,12 +2544,12 @@ TextureImporter:
       name: tiles_unloaderOpen_left
       rect:
         serializedVersion: 2
-        x: 48
+        x: 56
         y: 32
-        width: 16
+        width: 24
         height: 32
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.6666667, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2562,12 +2565,12 @@ TextureImporter:
       name: tiles_unloader_left
       rect:
         serializedVersion: 2
-        x: 48
+        x: 56
         y: 0
-        width: 16
+        width: 24
         height: 32
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.6666667, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2575,6 +2578,27 @@ TextureImporter:
       bones: []
       spriteID: 4b3e77378dbdbbc80800000000000000
       internalID: -8305803365058092108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_machineShadow
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f73682c36d8b2190800000000000000
+      internalID: -7986134054606587919
       vertices: []
       indices: 
       edges: []

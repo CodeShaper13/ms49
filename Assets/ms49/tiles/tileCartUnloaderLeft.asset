@@ -21,7 +21,7 @@ MonoBehaviour:
     m_NeighborPositions:
     - {x: 0, y: -1, z: 0}
     m_Sprites:
-    - {fileID: 4165499279645493789, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+    - {fileID: 5532331755474975849, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
     m_GameObject: {fileID: 0}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5

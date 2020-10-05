@@ -11,14 +11,12 @@ public class PopupLoadGame : PopupWindow {
     protected override void onOpen() {
         base.onOpen();
 
-        List<string> cachedSaves = Main.instance.getAllSaves(true);
+        List<SaveFile> cachedSaves = Main.instance.getAllSaves(true);
 
-        foreach(string save in cachedSaves) {
+        foreach(SaveFile save in cachedSaves) {
             GameObject g = GameObject.Instantiate(this.saveTilePrefab, this.worldTileWrapperObj);
             g.GetComponent<LoadSaveButton>().init(save);
         }
-
-        //this.worldTileWrapperObj.sizeDelta = new Vector2(this.worldTileWrapperObj.sizeDelta.x, (cachedSaves.Count * 130) + 10);
     }
 
     protected override void onClose() {

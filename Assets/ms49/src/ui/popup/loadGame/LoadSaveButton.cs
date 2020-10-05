@@ -8,30 +8,41 @@ public class LoadSaveButton : MonoBehaviour {
     [SerializeField]
     private Text saveNameText = null;
 
-    private string savePath;
-    private PopupWindow popup;
+    private SaveFile saveFile;
 
-    private void Awake() {
-        this.popup = this.GetComponentInParent<PopupWindow>();
-    }
+    public void init(SaveFile saveFile) {
+        this.saveFile = saveFile;
 
-    public void init(string savePath) {
-        this.savePath = savePath;
-
-        string s = Path.GetFileNameWithoutExtension(this.savePath);
-        string date = Directory.GetLastWriteTime(this.savePath).ToShortDateString();
-
-        this.saveNameText.text = s + " " + date;
+        this.saveNameText.text =
+            this.saveFile.saveName +
+            " " +
+            this.saveFile.lastPlayTime.ToShortDateString();
     }
 
     public void callback_load() {
-        this.popup.close();
+        this.GetComponentInParent<PopupWindow>().close();
 
         NbtFile nbtFile = new NbtFile();
-        nbtFile.LoadFromFile(savePath);
+        nbtFile.LoadFromFile(this.saveFile.path);
 
         Main.instance.createWorld(
-            Path.GetFileNameWithoutExtension(savePath),
+            Path.GetFileNameWithoutExtension(this.saveFile.path),
             nbtFile.RootTag);
+    }
+
+    public void callback_rename() {
+        PopupRename popup = Main.instance.findPopup<PopupRename>();
+        if(popup != null) {
+            popup.open();
+            popup.setTargetSave(this.saveFile);
+        }
+    }
+
+    public void callback_delete() {
+        PopupDeleteSave popup = Main.instance.findPopup<PopupDeleteSave>();
+        if(popup != null) {
+            popup.open();
+            popup.setTargetSave(this.saveFile);
+        }
     }
 }

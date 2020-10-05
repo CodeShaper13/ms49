@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
 
 public class Options : MonoBehaviour {
 
@@ -19,7 +18,14 @@ public class Options : MonoBehaviour {
             "Fullscreen",
             "isFullscreen",
             () => { return Screen.fullScreen; },
-            (bool value) => { Screen.fullScreen = value; }));
+            (bool value) => { Screen.fullScreen = value; }
+        ));
+        this.allOptions.Add(new OptionToggle(
+            "Vertical Sync",
+            "vSync",
+            () => { return QualitySettings.vSyncCount == 1; },
+            (bool value) => { QualitySettings.vSyncCount = value ? 1 : 0; }
+        ));
 
         this.allOptions.Add(new OptionSlider(
             "game volume",
@@ -28,7 +34,8 @@ public class Options : MonoBehaviour {
             1f,
             false,
             () => { return AudioListener.volume; },
-            (float value) => { AudioListener.volume = value; }));
+            (float value) => { AudioListener.volume = value; }
+        ));
 
 
         // Read all of the options from the Player prefs.

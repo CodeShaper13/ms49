@@ -33,6 +33,14 @@ public class PopupOreValues : PopupWorldReference {
         this.bars.Clear();
     }
 
+    protected override void onUpdate() {
+        base.onUpdate();
+
+        foreach(ValueBar bar in this.bars) {
+            bar.setSliderValue(this.world.economy.getItemValue(bar.item));
+        }
+    }
+
     private void createBars() {
         this.bars = new List<ValueBar>();
 

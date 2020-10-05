@@ -4,48 +4,40 @@ using UnityEngine.UI;
 public class BuildableUiRenderer : MonoBehaviour {
 
     [SerializeField]
-    private Image uiGroundImage = null;
+    private Image _imgFloorOverlay = null;
     [SerializeField]
-    private Image uiDetailImage = null;
+    private Image _imgObject = null;
     [SerializeField]
-    private Image uiOverlayImage = null;
+    private Image _imgObjectOverlay = null;
 
     private void Awake() {
-        // Hide all of the Images.
-        this.uiGroundImage.enabled = false;
-        this.uiDetailImage.enabled = false;
-        this.uiOverlayImage.enabled = false;
+        this._imgFloorOverlay.enabled = false;
+        this._imgObject.enabled = false;
+        this._imgObjectOverlay.enabled = false;
     }
 
     public void setBuildable(BuildableBase buildable) {
-        Sprite groundSprite = null;
+        Sprite floorOverlaySprite = null;
         Sprite objectSprite = null;
-        Sprite overlaySprite = null;
-        buildable.getPreviewSprites(ref groundSprite, ref objectSprite, ref overlaySprite);
+        Sprite objectOverlaySprite = null;
 
-        this.funcPreview(groundSprite, this.uiGroundImage);
-        this.funcPreview(objectSprite, this.uiDetailImage);
-        this.funcPreview(overlaySprite, this.uiOverlayImage);
+        buildable.getPreviewSprites(ref floorOverlaySprite, ref objectSprite, ref objectOverlaySprite);
+
+        this.func(floorOverlaySprite, this._imgFloorOverlay);
+        this.func(objectSprite, this._imgObject);
+        this.func(objectOverlaySprite, this._imgObjectOverlay);
     }
 
-    private void funcPreview(Sprite sprite, Image image) {
+    private void func(Sprite sprite, Image img) {
         if(sprite == null) {
-            image.enabled = false;
+            img.enabled = false;
         }
         else {
-            image.enabled = true;
-            image.sprite = sprite;
+            img.enabled = true;
+            img.sprite = sprite;
 
-            if(sprite.rect.height == 16) {
-                // Normal 16x16
-                image.transform.localScale = Vector3.one;
-                image.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-
-            } else {
-                // Tall sprite
-                image.transform.localScale = new Vector3(1, 2, 1);
-                image.rectTransform.pivot = new Vector2(0.5f, 0f);
-            }
+            img.rectTransform.sizeDelta = sprite.rect.size;
+            img.rectTransform.pivot = sprite.pivot / sprite.rect.size;
         }
     }
 }

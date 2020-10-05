@@ -1,17 +1,21 @@
 ﻿using fNbt;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class EntityItem : EntityBase {
 
-    private SpriteRenderer sr;
+    [SerializeField]
+    private SpriteRenderer sr = null;
+    [SerializeField]
+    private Vector2 spriteRndShift = new Vector2(0.1f, 0.1f);
 
     public Item item { get; private set; }
 
     public override void initialize(World world, int id, int depth) {
         base.initialize(world, id, depth);
 
-        this.sr = this.GetComponent<SpriteRenderer>();
+        this.sr.transform.localPosition = new Vector2(
+            Random.Range(-this.spriteRndShift.x, this.spriteRndShift.x),
+            Random.Range(-this.spriteRndShift.y, this.spriteRndShift.y));
     }
 
     public override void onUpdate() {

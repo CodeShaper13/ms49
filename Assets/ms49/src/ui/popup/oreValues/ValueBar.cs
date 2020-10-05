@@ -12,7 +12,7 @@ public class ValueBar : MonoBehaviour {
     [SerializeField]
     private Image _image = null;
 
-    private Item item;
+    public Item item { get; private set; }
 
     public void setItem(Item item) {
         this.item = item;
@@ -20,4 +20,9 @@ public class ValueBar : MonoBehaviour {
         this._image.color = this.item.graphColor;
         this._textName.text = this.item.itemName;
     }    
+
+    public void setSliderValue(int value) {
+        this._textValue.text = "$" + value;
+        this._slider.value = value;
+    }
 }

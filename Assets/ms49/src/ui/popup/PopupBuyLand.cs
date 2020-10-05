@@ -50,7 +50,7 @@ public class PopupBuyLand : PopupWorldReference {
                 outlineLabel.setPlot(p);
                 outlineLabel.setClickCallback(() => {
                     if(this.popup != null) {
-                        this.popup.open(false);
+                        this.popup.openAdditive();
                         this.popup.setPlot(outlineLabel.plot);
                     }
                 });

@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Main : MonoBehaviour {
 
+    public const string SAVE_DIR = "saves/";
+    public const string SAVE_EXTENSION = ".nbt";
+
     public static Main instance;
 
     public static bool DEBUG = false;
@@ -68,9 +71,9 @@ public class Main : MonoBehaviour {
         if(this._debugLoadSettings.instantLoad) {
             // Load world instantly.
             string name = this._debugLoadSettings.name;
-            if(File.Exists("saves/" + name + ".nbt")) {
+            if(File.Exists(SAVE_DIR + name + SAVE_EXTENSION)) {
                 NbtFile nbtFile = new NbtFile();
-                nbtFile.LoadFromFile("saves/" + name + ".nbt");
+                nbtFile.LoadFromFile(SAVE_DIR + name + SAVE_EXTENSION);
 
                 this.createWorld(name, nbtFile.RootTag);
             }
@@ -107,17 +110,19 @@ public class Main : MonoBehaviour {
         return popup;
     }
 
-    public List<string> getAllSaves(bool sortByLastPlayed = false) {
-        List<string> saves = new List<string>();
+    public List<SaveFile> getAllSaves(bool sortByLastPlayed = false) {
+        List<SaveFile> saves = new List<SaveFile>();
 
-        if(!Directory.Exists("saves/")) {
-            Directory.CreateDirectory("saves/");
+        if(!Directory.Exists(SAVE_DIR)) {
+            Directory.CreateDirectory(SAVE_DIR);
         }
 
-        saves.AddRange(Directory.GetFiles("saves/", "*.nbt"));
+        foreach(string s in Directory.GetFiles(SAVE_DIR, "*" + SAVE_EXTENSION)) {
+            saves.Add(new SaveFile(s));
+        }
 
         if(sortByLastPlayed) {
-            saves.Sort((i2, i1) => DateTime.Compare(File.GetLastWriteTime(i1), File.GetLastWriteTime(i2)));
+            saves.Sort((save2, save1) => DateTime.Compare(save1.lastPlayTime, save2.lastPlayTime));
         }
 
         return saves;

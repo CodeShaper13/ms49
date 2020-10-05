@@ -17,5 +17,5 @@ MonoBehaviour:
   _description: 
   _cell: {fileID: 11400000, guid: e3e8f6107ba5aa24ebaf4aec41816580, type: 2}
   _fogOption: 0
-  _displayRotation: 0
+  _displayRotation: 1
   overrideRotationMsg: 

@@ -54,5 +54,6 @@ MonoBehaviour:
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
   _tintObjectTile: 0
-  _behaviorPrefab: {fileID: 0}
+  _behaviorPrefab: {fileID: 5894667547836345613, guid: bfa92d91c0703c04196c4b82386d8a32,
+    type: 3}
   moveType: 2

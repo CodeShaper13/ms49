@@ -12,10 +12,6 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
 
     private float pullTimer;
 
-    public override void onCreate(World world, CellState state, Position pos) {
-        base.onCreate(world, state, pos);
-    }
-
     public override void onDestroy() {
         base.onDestroy();
 

@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Text.RegularExpressions;
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 public class PopupNewGame : PopupWindow {
 
     [SerializeField]
-    private string regexWorldName = @"[^a-zA-Z0-9_!]";
+    public string defaultSaveName = "newworld";
     [SerializeField]
-    private InputField fieldSaveName = null;
+    private InputFieldSaveName fieldSaveName = null;
     [SerializeField]
     private InputField fieldSeed = null;
     [SerializeField]
@@ -19,26 +16,22 @@ public class PopupNewGame : PopupWindow {
     private Text creativeBtnText = null;
     [SerializeField]
     private Button buttonCreate = null;
-    [SerializeField]
-    private Image invalidNameIcon = null;
 
     private int mapSize; // 0 = 32x32, 1 = 64x64, 2 = 128x128
     private bool creativeEnabled = false;
-    private List<string> cachedSaveFileNames;
+
+    private void OnValidate() {
+        // Force to be lowercase.
+        this.defaultSaveName = this.defaultSaveName.ToLower();
+    }
 
     protected override void onOpen() {
         base.onOpen();
-
-        this.cachedSaveFileNames = Main.instance.getAllSaves();
-
-
-        // Update invalid save name icon
-        this.invalidNameIcon.enabled = false;
         
         // Reset fields
         this.mapSize = 1;
         this.creativeEnabled = false;
-        this.fieldSaveName.text = "new world";
+        this.fieldSaveName.text = this.defaultSaveName;
 
         // Update button labels
         this.updateMapSizeBtnText();
@@ -47,6 +40,12 @@ public class PopupNewGame : PopupWindow {
 
     protected override void onClose() {
         base.onClose();
+    }
+
+    protected override void onUpdate() {
+        base.onUpdate();
+
+        this.buttonCreate.interactable = this.fieldSaveName.isValidName;
     }
 
     public void callback_createWorld() {
@@ -75,22 +74,6 @@ public class PopupNewGame : PopupWindow {
         this.creativeEnabled = !this.creativeEnabled;
 
         this.updateCreativeBtnText();
-    }
-
-    public void callback_characterChange() {
-        // Remove invalid characters
-        this.fieldSaveName.text = Regex.Replace(this.fieldSaveName.text, this.regexWorldName, "");
-
-        // Update the create button interactability
-        bool isValidName = !string.IsNullOrEmpty(this.fieldSaveName.text);
-        foreach(string saveName in this.cachedSaveFileNames) {
-            if(Path.GetFileNameWithoutExtension(saveName) == this.fieldSaveName.text) {
-                isValidName = false;
-                break;
-            }
-        }
-        this.buttonCreate.interactable = isValidName;
-        this.invalidNameIcon.enabled = !isValidName;
     }
 
     private void updateMapSizeBtnText() {

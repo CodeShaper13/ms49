@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MinecartLoader
   m_EditorClassIdentifier: 
   _isSolid: 0
-  _floorOverlayTile: {fileID: 0}
+  _floorOverlayTile: {fileID: 11400000, guid: 72df693eb1a915249bc1aef558934f23, type: 2}
   _objectTile: {fileID: 11400000, guid: cffc7c8cc06bf7545b0302a4c3687e5c, type: 2}
   _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 1
@@ -26,8 +26,8 @@ MonoBehaviour:
   right:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 11400000, guid: 11be0abb1f2813848ba4589edb90c172, type: 2}
-    _overlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: 11be0abb1f2813848ba4589edb90c172, type: 2}
     _effect: 0
   down:
     _enableOverride: 0
@@ -38,8 +38,8 @@ MonoBehaviour:
   left:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 11400000, guid: 15fe0d854a869934e9190b8ce0451d20, type: 2}
-    _overlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: 15fe0d854a869934e9190b8ce0451d20, type: 2}
     _effect: 0
   _movementCost: -1
   _canBuildOver: 0

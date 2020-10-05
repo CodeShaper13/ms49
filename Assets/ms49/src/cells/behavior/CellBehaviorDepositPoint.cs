@@ -23,7 +23,7 @@ public class CellBehaviorDepositPoint : CellBehaviorContainer, IHasData, IContai
 
     public override void deposit(Item item) {
         if(this._isMaster) {
-            this.world.money.value += item.moneyValue;
+            this.world.economy.sellItem(item);
         }
         else {
             base.deposit(item);

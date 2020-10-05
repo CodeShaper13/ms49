@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PopupWindow : MonoBehaviour {
@@ -55,7 +56,11 @@ public class PopupWindow : MonoBehaviour {
         this.open(true);
     }
 
-    public void open(bool closeAllOpen) {
+    public void openAdditive() {
+        this.open(false);
+    }
+
+    private void open(bool closeAllOpen) {
         if(closeAllOpen) {
             for(int i = openPopups.Count - 1; i >= 0; i--) {
                 openPopups[i].close();

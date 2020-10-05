@@ -2,6 +2,8 @@
 
 public abstract class VariableBase<T> : ScriptableObject, ISerializationCallbackReceiver {
 
+    [SerializeField, TextArea(1, 3)]
+    private string docString = "";
     [SerializeField]
     private T initialValue = default;
 

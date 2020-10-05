@@ -176,6 +176,12 @@ TextureImporter:
   - first:
       213: -4425399643733064080
     second: uiElements_plotOutline
+  - first:
+      213: 947533771531976089
+    second: uiElements_trashCan
+  - first:
+      213: 6988789448378611300
+    second: uiElements_pencil
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1466,7 +1472,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
@@ -1474,6 +1480,48 @@ TextureImporter:
       bones: []
       spriteID: 07686268872d592c0800000000000000
       internalID: -4425399643733064080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_trashCan
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 185
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99d79d8e1f0562d00800000000000000
+      internalID: 947533771531976089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_pencil
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 185
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 466fa90a9fa2df060800000000000000
+      internalID: 6988789448378611300
       vertices: []
       indices: 
       edges: []

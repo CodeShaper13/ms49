@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CellItemElevator
   m_EditorClassIdentifier: 
   _isSolid: 0
-  _floorOverlayTile: {fileID: 0}
+  _floorOverlayTile: {fileID: 11400000, guid: 72df693eb1a915249bc1aef558934f23, type: 2}
   _objectTile: {fileID: 11400000, guid: cffc7c8cc06bf7545b0302a4c3687e5c, type: 2}
   _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 1

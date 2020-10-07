@@ -20,7 +20,7 @@ public class DebugShortcuts : MonoBehaviour {
                 }
 
                 if(Input.GetKey(KeyCode.Delete)) {
-                    world.setCell(pos, Main.instance.tileRegistry.getAir());
+                    world.setCell(pos, null);
                     world.liftFog(pos);
                 }
 

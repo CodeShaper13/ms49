@@ -13,8 +13,8 @@ public class EntityFire : EntityBase {
 
     private float timeRemaining;
 
-    public override void initialize(World world, int id, int depth) {
-        base.initialize(world, id, depth);
+    public override void initialize(World world, int id) {
+        base.initialize(world, id);
 
         this.timeRemaining = Random.Range(this.burnTimeRange.x, this.burnTimeRange.y);
 

@@ -10,8 +10,8 @@ public class EntityItem : EntityBase {
 
     public Item item { get; private set; }
 
-    public override void initialize(World world, int id, int depth) {
-        base.initialize(world, id, depth);
+    public override void initialize(World world, int id) {
+        base.initialize(world, id);
 
         this.sr.transform.localPosition = new Vector2(
             Random.Range(-this.spriteRndShift.x, this.spriteRndShift.x),

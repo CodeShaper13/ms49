@@ -27,7 +27,7 @@ public class DemoHighlighter : CellHighlightBase {
                     this.money.value -= cost;
                 }
 
-                this.world.setCell(pos, Main.instance.tileRegistry.getAir());
+                this.world.setCell(pos, null);
                 this.world.tryCollapse(pos);
                 this.world.particles.spawn(pos.center, pos.depth, particlePrefab);
             }

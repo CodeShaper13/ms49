@@ -201,7 +201,11 @@ public class World : MonoBehaviour {
             return;
         }
 
-        this.storage.setCell(pos, data, rotation == null ? Rotation.UP : rotation, updateNeighbors);
+        this.storage.setCell(
+            pos,
+            data == null ? Main.instance.tileRegistry.getAir() : data,
+            rotation == null ? Rotation.UP : rotation,
+            updateNeighbors);
     }
 
     public void placeFog(Position pos) {

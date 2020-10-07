@@ -17,7 +17,7 @@ public class PopupMine : PopupWorldReference {
 
             if(cell is CellDataMineable && this.world.plotManager.isOwned(pos)) {
                 if(CameraController.instance.inCreativeMode) {
-                    this.world.setCell(pos, Main.instance.tileRegistry.getAir(), true);
+                    this.world.setCell(pos, null, true);
                     this.world.liftFog(pos);
                     this.world.tryCollapse(pos);
 

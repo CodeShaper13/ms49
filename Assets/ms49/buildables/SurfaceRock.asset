@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Rocks
   _cost: 100
-  _description: Decoration
-  _cell: {fileID: 11400000, guid: d5b2b0bd2ba17514dbb5461c54fd46ef, type: 2}
+  _description: Dirty and old, but oddly attractive
+  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
   _fogOption: 0
+  _overrideRotationMsg: '[r] to change size'
   _displayRotation: 0
-  overrideRotationMsg: change type with r
+  _cell: {fileID: 11400000, guid: d5b2b0bd2ba17514dbb5461c54fd46ef, type: 2}

@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Sign
   _cost: 75
-  _description: Decoration
-  _cell: {fileID: 11400000, guid: 88a23c851a7a44344a88c9135b648139, type: 2}
+  _description: Click on to leave messages to yourself
+  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: '[r] to change design'
   _displayRotation: 0
+  _cell: {fileID: 11400000, guid: 88a23c851a7a44344a88c9135b648139, type: 2}

@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Stool
   _cost: 50
-  _description: Workers can sit here to eat.  Requires an adjacent table.
-  _cell: {fileID: 11400000, guid: 42cc7342651e6b4429546c5145a0edba, type: 2}
+  _description: Workers can sit here to eat.  Be sure to build an adjacent table.
+  _tab: {fileID: 0}
+  _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
+  _cell: {fileID: 11400000, guid: 42cc7342651e6b4429546c5145a0edba, type: 2}

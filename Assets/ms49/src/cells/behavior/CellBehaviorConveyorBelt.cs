@@ -23,7 +23,7 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
         }
     }
 
-    public void onLeverFlip(CellBehaviorLever lever) {
+    public void onLeverFlip(CellBehavior lever) {
         this.state.rotation = this.state.rotation.opposite();
         this.dirty();
     }

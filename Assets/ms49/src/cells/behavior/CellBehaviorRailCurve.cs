@@ -5,7 +5,7 @@ public class CellBehaviorRailCurve : CellBehavior, IHasData, ILeverReciever {
 
     private bool isFlipped;
 
-    public void onLeverFlip(CellBehaviorLever lever) {
+    public void onLeverFlip(CellBehavior lever) {
         Rotation r = this.rotation;
 
         for(int i = 0; i < 3; i++) {

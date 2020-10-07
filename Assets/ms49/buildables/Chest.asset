@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Chest
   _cost: 75
-  _description: Decoration
-  _cell: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}
+  _description: A decorative box
+  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
+  _overrideRotationMsg: 
   _displayRotation: 0
-  overrideRotationMsg: 
+  _cell: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}
+  _fogOption: 0

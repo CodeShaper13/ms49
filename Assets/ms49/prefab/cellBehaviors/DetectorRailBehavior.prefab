@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8184032802236328885}
   - component: {fileID: 8184032802236328886}
   m_Layer: 0
-  m_Name: BehaviorDetectorRail
+  m_Name: DetectorRailBehavior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
-  trippedTileX: {fileID: 11400000, guid: ed7ce08df3bfff24c80647f8df0b2f41, type: 2}
-  trippedTileY: {fileID: 11400000, guid: 88a06deecb8e2214cad0e1301cc9c853, type: 2}
+  _trippedTileX: {fileID: 11400000, guid: ed7ce08df3bfff24c80647f8df0b2f41, type: 2}
+  _trippedTileY: {fileID: 11400000, guid: 88a06deecb8e2214cad0e1301cc9c853, type: 2}

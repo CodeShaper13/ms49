@@ -34,5 +34,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4347a87fa4186b146a6a97fe78699907, type: 2}
   - {fileID: 11400000, guid: 147aca1a2cc06644185d17b242ed92a7, type: 2}
   - {fileID: 11400000, guid: e8ed24ed658fef647815e97fc84df27d, type: 2}
+  - {fileID: 11400000, guid: 0f51cfbb90cf8fd4996104122a5b39b5, type: 2}
   _unlockedWorkerTypes: []
   _hireCandaditeCount: 5

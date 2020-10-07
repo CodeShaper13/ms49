@@ -182,6 +182,39 @@ TextureImporter:
   - first:
       213: 6988789448378611300
     second: uiElements_pencil
+  - first:
+      213: 8776617253460901132
+    second: uiElements_buildTabMinecart
+  - first:
+      213: 932935099407464707
+    second: uiElements_buildTabGear
+  - first:
+      213: 3199632152258623917
+    second: uiElements_buildTabFlower
+  - first:
+      213: -73051452287208497
+    second: uiElements_buildTabDots
+  - first:
+      213: 3396790534223441229
+    second: uiElements_buildTabFlag
+  - first:
+      213: 8004897363928373470
+    second: uiElements_buildTabHouse
+  - first:
+      213: -3897189838051390490
+    second: uiElements_insetGray
+  - first:
+      213: 8853603813772836789
+    second: uiElements_buildTabFlower_selected
+  - first:
+      213: -2066319840443539787
+    second: uiElements_buildTabGear_selected
+  - first:
+      213: 8051588982336062256
+    second: uiElements_buildTabMinecart_selected
+  - first:
+      213: -9222080851456819140
+    second: uiElements_buildTabDots_selected
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -312,10 +345,10 @@ TextureImporter:
       name: uiElements_frameRounded
       rect:
         serializedVersion: 2
-        x: 207
-        y: 207
-        width: 48
-        height: 48
+        x: 209
+        y: 209
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 6, y: 6, z: 6, w: 6}
@@ -670,7 +703,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 241
-        y: 192
+        y: 193
         width: 14
         height: 14
       alignment: 0
@@ -1493,7 +1526,7 @@ TextureImporter:
         width: 11
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1514,7 +1547,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1522,6 +1555,153 @@ TextureImporter:
       bones: []
       spriteID: 466fa90a9fa2df060800000000000000
       internalID: 6988789448378611300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_buildTabMinecart
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0df91a34eeccc970800000000000000
+      internalID: 8776617253460901132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_buildTabGear
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 309fcaea78372fc00800000000000000
+      internalID: 932935099407464707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_buildTabFlower
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da93b477d70676c20800000000000000
+      internalID: 3199632152258623917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_buildTabDots
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc3381857187cfef0800000000000000
+      internalID: -73051452287208497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_buildTabFlag
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4d2cc07ef2d32f20800000000000000
+      internalID: 3396790534223441229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_buildTabHouse
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed85960adbb171f60800000000000000
+      internalID: 8004897363928373470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_insetGray
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 193
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 6, y: 6, z: 6, w: 6}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eb4fa09d766ae9c0800000000000000
+      internalID: -3897189838051390490
       vertices: []
       indices: 
       edges: []

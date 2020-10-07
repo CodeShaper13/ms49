@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Minecart
   _cost: 500
-  _description: 
-  _unlockedAt: {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
+  _description: Moves expensive ores and cheap rocks along rails
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: '[r] to change direction'
+  _displayRotation: 0
   railSprite: {fileID: -9198056691032318685, guid: 83e6f32abdc9b244cbe11ac906944047,
     type: 3}
   minecartSprite: {fileID: -5444995628053660433, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,

@@ -44,8 +44,8 @@ public class EntityWorker : EntityBase, IClickable {
         }
     }
 
-    public override void initialize(World world, int id, int depth) {
-        base.initialize(world, id, depth);
+    public override void initialize(World world, int id) {
+        base.initialize(world, id);
 
         this.rotation = Rotation.DOWN;
 

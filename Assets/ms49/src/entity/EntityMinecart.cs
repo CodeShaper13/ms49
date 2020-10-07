@@ -2,7 +2,6 @@
 using System;
 using fNbt;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class EntityMinecart : EntityBase, IClickable {
 
     [SerializeField]
@@ -12,7 +11,9 @@ public class EntityMinecart : EntityBase, IClickable {
     [SerializeField, Min(0), Tooltip("How fast the mine cart moves in meters per second.")]
     private float movementSpeed = 1f;
     [SerializeField]
-    private SpriteRenderer fillRenderer = null;
+    private SpriteRenderer _cartRenderer = null;
+    [SerializeField]
+    private SpriteRenderer _fillRenderer = null;
     [SerializeField]
     private GameObject explodeParticlePrefab = null;
 
@@ -23,10 +24,9 @@ public class EntityMinecart : EntityBase, IClickable {
 
     public CellBehaviorMinecartLoader foundLoader { get; set; }
 
-    public override void initialize(World world, int id, int depth) {
-        base.initialize(world, id, depth);
+    public override void initialize(World world, int id) {
+        base.initialize(world, id);
 
-        this.sr = this.GetComponent<SpriteRenderer>();
         this.inventory = new Inventory("Minecart", this.maxCapacity);
         this.facing = Rotation.RIGHT;
     }
@@ -51,7 +51,7 @@ public class EntityMinecart : EntityBase, IClickable {
 
                 // Trip detector rail if above.
                 if(state.behavior is CellBehaviorDetectorRail) {
-                    ((CellBehaviorDetectorRail)state.behavior).setTripped();
+                    ((CellBehaviorDetectorRail)state.behavior).setTripped(this);
                 }
 
                 // Check if there is a MinecartLoader adjacent
@@ -135,11 +135,11 @@ public class EntityMinecart : EntityBase, IClickable {
 
             // Set fill sprite
             if(this.inventory.isEmpty()) {
-                this.fillRenderer.sprite = null;
+                this._fillRenderer.sprite = null;
             } else {
-                this.fillRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
-                this.fillRenderer.flipX = this.facing == Rotation.LEFT;
-                this.fillRenderer.color = this.world.mapGenData.getLayerFromDepth(this.depth).getGroundTint(this.position.x, this.position.y);
+                this._fillRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
+                this._fillRenderer.flipX = this.facing == Rotation.LEFT;
+                this._fillRenderer.color = this.world.mapGenData.getLayerFromDepth(this.depth).getGroundTint(this.position.x, this.position.y);
             }
         }
     }

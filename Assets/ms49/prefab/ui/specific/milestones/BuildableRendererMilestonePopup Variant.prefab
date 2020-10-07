@@ -1,5 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!222 &6175149372147036142
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4168973649031812808}
+  m_CullTransparentMesh: 0
 --- !u!114 &3805109772671418624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,14 +23,6 @@ MonoBehaviour:
   _text: help
   delay: 0.5
   pullFromTextComponent: 0
---- !u!222 &6175149372147036142
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4168973649031812808}
-  m_CullTransparentMesh: 0
 --- !u!114 &5957495392854468996
 MonoBehaviour:
   m_ObjectHideFlags: 0

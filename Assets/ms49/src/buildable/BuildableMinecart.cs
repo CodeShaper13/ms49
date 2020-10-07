@@ -14,10 +14,6 @@ public class BuildableMinecart : BuildableBase {
         return true;
     }
 
-    public override string getRotationMsg() {
-        return "change direction with r";
-    }
-
     public override void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
         groundSprite = this.railSprite;
         objectSprite = this.minecartSprite;

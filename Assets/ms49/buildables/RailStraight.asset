@@ -15,5 +15,8 @@ MonoBehaviour:
   structureName: Straight Rails
   _cost: 75
   _description: 
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _cell: {fileID: 11400000, guid: 79f1095c1a4eda945b14dbc4248bc22d, type: 2}
+  _fogOption: 0
   _displayRotation: 1
+  overrideRotationMsg: 

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Tree
   _cost: 0
-  _description: 
-  _cell: {fileID: 11400000, guid: e0d7c53bfaab1834ab324e0397dc80f0, type: 2}
+  _description: Leafy and green
+  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
   _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
-  overrideRotationMsg: 
+  _cell: {fileID: 11400000, guid: e0d7c53bfaab1834ab324e0397dc80f0, type: 2}

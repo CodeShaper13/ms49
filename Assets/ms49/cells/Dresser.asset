@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
-  m_Name: Desk
+  m_Name: Dresser
   m_EditorClassIdentifier: 
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
@@ -50,4 +50,5 @@ MonoBehaviour:
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
   _tintObjectTile: 0
-  _behaviorPrefab: {fileID: 0}
+  _behaviorPrefab: {fileID: 5431453962337602209, guid: 9ada1e0ed34ad8d4b9507739d4d82124,
+    type: 3}

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Rock
   _cost: 50
-  _description: 
-  _cell: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
+  _description: Sometimes you mine a bit too much
+  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
   _fogOption: 1
+  _overrideRotationMsg: 
   _displayRotation: 0
-  overrideRotationMsg: 
+  _cell: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   previewSprite: {fileID: -6925154376186504650, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}

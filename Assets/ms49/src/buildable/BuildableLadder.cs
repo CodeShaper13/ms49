@@ -24,10 +24,6 @@ public class BuildableLadder : BuildableBase {
         return true;
     }
 
-    public override string getRotationMsg() {
-        return "change direction with r";
-    }
-
     public override bool isValidLocation(World world, Position pos, Rotation rotation) {
         int otherDepth = pos.depth + (this.pointingDown(rotation) ? 1 : -1);
 

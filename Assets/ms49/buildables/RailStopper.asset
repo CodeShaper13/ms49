@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Stopper Rail
   _cost: 75
-  _description: 
-  _cell: {fileID: 11400000, guid: 068b01132a2e67b4b867dbf81bef5ebe, type: 2}
+  _description: Prevents crashes by stopping minecarts before the rails run out
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
+  _cell: {fileID: 11400000, guid: 068b01132a2e67b4b867dbf81bef5ebe, type: 2}

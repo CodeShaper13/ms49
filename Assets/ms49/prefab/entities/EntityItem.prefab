@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9710674039a0ff541bc03fb54874b359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 5627530323807704033}
   sr: {fileID: 5706385541111905164}
   spriteRndShift: {x: 0.0625, y: 0.0625}
 --- !u!1 &5627530323807704033

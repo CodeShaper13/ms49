@@ -73,7 +73,7 @@ public class TaskMineRock : TaskBase<EntityWorker> {
                 this.owner.hunger.decrease(this.hungerCost);
 
                 // Remove the stone.
-                this.owner.world.setCell(this.stonePos, Main.instance.tileRegistry.getAir());
+                this.owner.world.setCell(this.stonePos, null);
                 this.owner.world.targetedSquares.setTargeted(this.stonePos, false);
                 this.owner.world.liftFog(this.stonePos);
                 this.owner.world.tryCollapse(this.stonePos);

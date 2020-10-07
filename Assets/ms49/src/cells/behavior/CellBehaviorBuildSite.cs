@@ -17,6 +17,39 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         this.entires = new List<Entry>();
     }
 
+    public override void onDestroy() {
+        base.onDestroy();
+
+        // TODO it makes an error, but works
+
+        if(this.isPrimary) {
+            print("isPrimary");
+            // Remove any "child" parts
+            foreach(Entry e in this.entires) {
+                if(e.position != this.pos) {
+                    this.world.setCell(e.position, null);
+                }
+            }
+        } else {
+            print("isSecondary");
+            foreach(CellBehaviorBuildSite site in this.world.getAllBehaviors<CellBehaviorBuildSite>()) {
+                if(site.isPrimary) {
+                    // If the site is a primary and it contain this site (the one being destory and the child, remove it as well.
+                    for(int i = 0; i < site.entires.Count; i++) {
+                        Entry otherSiteEntries = site.entires[i];
+
+                        if(otherSiteEntries.position == this.pos) {
+                            print("should remove " + site.pos);
+                            site.entires.RemoveAt(i);
+                            this.world.setCell(site.pos, null);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public void readFromNbt(NbtCompound tag) {
         NbtList tagList = tag.getList("entries");
         foreach(NbtCompound compound in tagList) {

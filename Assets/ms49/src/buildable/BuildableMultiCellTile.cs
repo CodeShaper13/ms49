@@ -133,7 +133,7 @@ public class BuildableMultiCellTile : BuildableTile {
 
 #if UNITY_EDITOR
     [CustomEditor(typeof(BuildableMultiCellTile), true)]
-    public class SDataEditor : Editor {
+    public class BuildableMultiCellEditor : BuildableBase.BuildableBaseEditor {
 
         private const int margin = 5;
 
@@ -162,7 +162,9 @@ public class BuildableMultiCellTile : BuildableTile {
             }
         }
 
-        private void OnEnable() {
+        protected override void OnEnable() {
+            base.OnEnable();
+
             this.gridSize = this.serializedObject.FindProperty("gridSize");
             this.cells = this.serializedObject.FindProperty("cells");
             this.tileArray = this.serializedObject.FindProperty("tiles");
@@ -171,9 +173,9 @@ public class BuildableMultiCellTile : BuildableTile {
         }
 
         public override void OnInspectorGUI() {
-            serializedObject.Update(); // Always do this at the beginning of InspectorGUI.
+            base.OnInspectorGUI();
 
-            this.DrawDefaultInspector();
+            this.serializedObject.Update(); // Always do this at the beginning of InspectorGUI.
 
             EditorGUILayout.Space(20);
 

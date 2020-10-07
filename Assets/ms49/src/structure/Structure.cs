@@ -72,7 +72,7 @@ public class Structure : StructureBase {
                 TileEntry entry = this.getEntry(x, y);
                 Position pos1 = pos.add(x, y);
                 if(entry == null) {
-                    world.setCell(pos1, Main.instance.tileRegistry.getAir());
+                    world.setCell(pos1, null);
                 } else {
                     if(entry.buildable != null) {
                         entry.buildable.placeIntoWorld(world, null, pos1, Rotation.fromEnum(entry.rotation));

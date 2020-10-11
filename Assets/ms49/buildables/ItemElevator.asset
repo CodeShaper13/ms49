@@ -16,7 +16,8 @@ MonoBehaviour:
   _cost: 1000
   _description: Moves Items up (or down) to another item elevator above or below
   _tab: {fileID: 11400000, guid: 1f363a23936a6e348bcb6bfc47d8923e, type: 2}
-  _overrideRotationMsg: '[r] to change direction'
-  _cell: {fileID: 11400000, guid: ee76cd20b09240a40a8a50162aed6e16, type: 2}
   _fogOption: 0
+  _overrideRotationMsg: '[r] to change direction'
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: ed40e64ee472be845b68a5910e25961f, type: 2}
+  _cell: {fileID: 11400000, guid: ee76cd20b09240a40a8a50162aed6e16, type: 2}

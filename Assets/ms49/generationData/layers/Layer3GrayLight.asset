@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b51648ae0c3c540976756f71841a64, type: 3}
   m_Name: Layer3GrayLight
   m_EditorClassIdentifier: 
-  tintColor: {r: 0.5028706, g: 0.5189166, b: 0.5372549, a: 1}
+  tintColor: {r: 0.48627454, g: 0.43529415, b: 0.43921572, a: 1}
   tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
   _hasFog: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   caveSmoothPases: 2
   oreSpawnSettings:
   - _cell: {fileID: 11400000, guid: c2748d19876cb3c488d8600108a00812, type: 2}
-    veinCount: 150
+    veinCount: 8
     veinSize: {x: 3, y: 6}
   - _cell: {fileID: 11400000, guid: 21c8e8396c7ff6b4a8c81fae3f42d70f, type: 2}
     veinCount: 30

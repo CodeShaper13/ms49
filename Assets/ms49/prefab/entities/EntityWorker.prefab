@@ -901,7 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priority: 0
-  decreaseRate: 0.1
+  decreaseRate: 0.25
   stat: {fileID: 1754342318740270011}
   onlyExecuteWhenAwake: 1
 --- !u!114 &1195488916946094333
@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priority: 1
-  energyRechargeSpeed: 1
+  energyRechargeSpeed: 2.5
   _seekBedAt: 30
   valueToStop: 100
 --- !u!114 &8444140127029798164
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 5655587187025894631}
-  milestone: {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
+  milestone: {fileID: 11400000, guid: e1ccd1a61383761449887546a28a6e18, type: 2}
   invertResult: 0
   enableWithCreative: 1
 --- !u!114 &7202599549512654649

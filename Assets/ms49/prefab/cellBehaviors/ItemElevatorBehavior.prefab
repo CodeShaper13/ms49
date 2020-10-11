@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3812910173892479836}
   - component: {fileID: 495396812181007580}
+  - component: {fileID: -8208336418992181565}
   m_Layer: 0
   m_Name: ItemElevatorBehavior
   m_TagString: Untagged
@@ -44,6 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
-  inventorySize: 10
-  containerName: Item Elevator
+  _inventory: {fileID: -8208336418992181565}
   itemTransferSpeed: 1
+--- !u!114 &-8208336418992181565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453884968179226128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c608837e850a1144e85da04053771c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryName: Ore Elevator
+  _size: 4

@@ -8,6 +8,7 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
     private ParticleSystem dustPs = null;
 
     public bool isPrimary { get; set; }
+    public float constructionTime { get; private set; }
 
     private List<Entry> entires;
 
@@ -17,36 +18,38 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         this.entires = new List<Entry>();
     }
 
+    // Used for onDestroy()
+    private static bool simpleRemove = false;
+
     public override void onDestroy() {
         base.onDestroy();
 
-        // TODO it makes an error, but works
+        if(!simpleRemove) {
+            simpleRemove = true;
 
-        if(this.isPrimary) {
-            print("isPrimary");
-            // Remove any "child" parts
-            foreach(Entry e in this.entires) {
-                if(e.position != this.pos) {
-                    this.world.setCell(e.position, null);
+            if(this.isPrimary) {
+                // Remove any "child" parts
+                foreach(Entry e in this.entires) {
+                    if(e.position != this.pos) {
+                        this.world.setCell(e.position, null);
+                    }
                 }
-            }
-        } else {
-            print("isSecondary");
-            foreach(CellBehaviorBuildSite site in this.world.getAllBehaviors<CellBehaviorBuildSite>()) {
-                if(site.isPrimary) {
-                    // If the site is a primary and it contain this site (the one being destory and the child, remove it as well.
-                    for(int i = 0; i < site.entires.Count; i++) {
-                        Entry otherSiteEntries = site.entires[i];
-
-                        if(otherSiteEntries.position == this.pos) {
-                            print("should remove " + site.pos);
-                            site.entires.RemoveAt(i);
-                            this.world.setCell(site.pos, null);
-                            return;
+            } else {
+                foreach(CellBehaviorBuildSite site in this.world.getAllBehaviors<CellBehaviorBuildSite>()) {
+                    if(site.isPrimary) {
+                        // If the site is a primary and it contain this site (the one being destory and the child, remove it as well.
+                        foreach(Entry otherSiteEntry in site.entires) {
+                            if(otherSiteEntry.position == this.pos) {
+                                simpleRemove = false;
+                                this.world.setCell(site.pos, null);
+                                return;
+                            }
                         }
                     }
                 }
             }
+
+            simpleRemove = false;
         }
     }
 
@@ -57,6 +60,7 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         }
 
         this.isPrimary = tag.getBool("isPrimary");
+        this.constructionTime = tag.getFloat("constructionTime");
     }
 
     public void writeToNbt(NbtCompound tag) {
@@ -67,18 +71,35 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         tag.setTag("entries", entriesTagList);
 
         tag.setTag("isPrimary", this.isPrimary);
+        tag.setTag("constructionTime", this.constructionTime);
     }
 
+    /// <summary>
+    /// Plays the building dust could particle effect.
+    /// </summary>
     public void startPs() {
         this.dustPs.Play();
     }
 
-    public void addCell(CellData cell, Position pos) {
+    public void stopPs() {
+        this.dustPs.Stop();
+    }
+
+    public void setPrimary(CellData cell, float constructionTime) {
+        this.isPrimary = true;
+        this.constructionTime = constructionTime;
+        this.entires.Add(new Entry(cell, this.pos));
+    }
+
+    /// <summary>
+    /// Adds a child build site to this site.
+    /// </summary>
+    public void addChildBuildSite(CellData cell, Position pos) {
         this.entires.Add(new Entry(cell, pos));
     }
 
     /// <summary>
-    /// Places the save Cell into the world.
+    /// Places the BuildSite's cell and all of it's child sites into the world.
     /// </summary>
     public void placeIntoWorld() {
         foreach(Entry e in this.entires) {

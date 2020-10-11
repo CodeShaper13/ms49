@@ -366,9 +366,11 @@ public class World : MonoBehaviour {
         */
 
         int maxUnlockedIndex = 0;
-        foreach(var milestone in this.milestones.milestones) {
-            if(milestone.isUnlocked && milestone.unlocksLayer) {
-                maxUnlockedIndex++;
+        foreach(MilestoneData milestone in this.milestones.milestones) {
+            if(milestone != null) {
+                if(milestone.isUnlocked && milestone.unlocksLayer) {
+                    maxUnlockedIndex++;
+                }
             }
         }
 

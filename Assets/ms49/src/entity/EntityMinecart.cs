@@ -6,8 +6,6 @@ public class EntityMinecart : EntityBase, IClickable {
 
     [SerializeField]
     private MinecartSprites sprites = null;
-    [SerializeField, Min(1)]
-    private int maxCapacity = 4;
     [SerializeField, Min(0), Tooltip("How fast the mine cart moves in meters per second.")]
     private float movementSpeed = 1f;
     [SerializeField]
@@ -16,32 +14,30 @@ public class EntityMinecart : EntityBase, IClickable {
     private SpriteRenderer _fillRenderer = null;
     [SerializeField]
     private GameObject explodeParticlePrefab = null;
+    [SerializeField]
+    private Inventory _inventory = null;
 
-    private SpriteRenderer sr;
+    private IMinecartInteractor cartInteractor;
 
-    public Inventory inventory { get; private set; }
+    public Inventory inventory => this._inventory;
     public Rotation facing { get; set; }
-
-    public CellBehaviorMinecartLoader foundLoader { get; set; }
 
     public override void initialize(World world, int id) {
         base.initialize(world, id);
-
-        this.inventory = new Inventory("Minecart", this.maxCapacity);
         this.facing = Rotation.RIGHT;
     }
 
     public override void onUpdate() {
         base.onUpdate();
 
-        if(this.foundLoader != null) {
-            Vector2 target = this.foundLoader.center + this.foundLoader.rotation.vectorF;
+        if(this.cartInteractor != null) {
+            Vector2 target = this.cartInteractor.getCartStopPoint();
 
             if(this.worldPos == target) {
-                // In front of loader.
-                this.foundLoader.minecart = this;
+                // In front of interactor.
+                this.cartInteractor.minecart = this;
             } else {
-                // Not in front of the loader yet, mvoe towards it
+                // Not in front of the interactor, move towards it.
                 this.worldPos = (Vector3)Vector2.MoveTowards(this.worldPos, target, this.movementSpeed * Time.deltaTime);
             }
         } else {
@@ -54,28 +50,20 @@ public class EntityMinecart : EntityBase, IClickable {
                     ((CellBehaviorDetectorRail)state.behavior).setTripped(this);
                 }
 
-                // Check if there is a MinecartLoader adjacent
-                foreach(Rotation r in Rotation.ALL) {
-                    CellState adjacentState = this.world.getCellState(this.position + r);
-                    if(adjacentState != null && adjacentState.behavior is CellBehaviorMinecartLoader) {
-                        CellBehaviorMinecartLoader cartInteracter = (CellBehaviorMinecartLoader)adjacentState.behavior;
-
-                        // If the loader/unload isn't facing the track, ignore it
-                        if(adjacentState.rotation.opposite() == r) {
-
-                            if(cartInteracter.isUnloader && !cartInteracter.isFull && !this.inventory.isEmpty()) {
-                                // Stop and give the unloader items.
-                                this.foundLoader = cartInteracter;
-                            }
-                            else if(!cartInteracter.isUnloader && !cartInteracter.isEmpty && !this.inventory.isFull()) {
-                                // Stop and take items from the loader.
-                                this.foundLoader = cartInteracter;
-                            }
+                // Check if there is an instance of IMinecartInteractor below or next to the rails.
+                if(!this.checkForInteractor(null)) {
+                    foreach(Rotation r in Rotation.ALL) {
+                        bool foundInteractor = this.checkForInteractor(r);
+                        if(foundInteractor) {
+                            break;
                         }
                     }
-                }                
+                }  
 
                 Vector2 cellCenter = this.position.vec2 + new Vector2(0.5f, 0.5f);
+
+                // Save the position at the start of the frame
+                Vector3 startingPos = this.worldPos;
 
                 switch(((CellDataRail)state.data).moveType) {
                     case CellDataRail.EnumRailMoveType.STRAIGHT:
@@ -118,6 +106,15 @@ public class EntityMinecart : EntityBase, IClickable {
 
                         break;
                 }
+
+                // Check if the Minecart has hit another one.
+                ContactFilter2D filter = new ContactFilter2D();
+                filter.layerMask = LayerMask.GetMask("MinecartPhysics");
+                int overlappingCarts = this.GetComponent<BoxCollider2D>().OverlapCollider(filter, new Collider2D[1]);
+                if(overlappingCarts > 0) {
+                    // It has moved and is now touching another cart, put it back to where it started.
+                    this.worldPos = startingPos;
+                }
             }
             else {
                 // Not on a rail, explode.
@@ -130,8 +127,8 @@ public class EntityMinecart : EntityBase, IClickable {
         if(!Pause.isPaused()) {
 
             // Set main sprite
-            this.sr.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
-            this.sr.flipX = this.facing == Rotation.LEFT;
+            this._cartRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
+            this._cartRenderer.flipX = this.facing == Rotation.LEFT;
 
             // Set fill sprite
             if(this.inventory.isEmpty()) {
@@ -159,13 +156,43 @@ public class EntityMinecart : EntityBase, IClickable {
     }
 
     /// <summary>
-    /// Causes the Minecart to explode, removing it from the world and playing a particle effect.
+    /// Causes the Minecart to explode, removing it from the world
+    /// and playing a particle effect.
     /// </summary>
     public void explode() {
         this.world.particles.spawn(this.position, this.explodeParticlePrefab);
         this.world.entities.remove(this);
     }
 
+    public void release() {
+        this.cartInteractor = null;
+    }
+
+    /// <summary>
+    /// Checks if there is a CellBehavior implementing
+    /// IMinecartInteracter in the direction that is passed.  If
+    /// there is one, true is returned.
+    /// 
+    /// If null is passed for rotation, the cell the cart is on is
+    /// checked.
+    /// <returns></returns>
+    private bool checkForInteractor(Rotation rotation) {
+        CellState adjacentState = this.world.getCellState(rotation == null ? this.position : this.position + rotation);
+        if(adjacentState != null && adjacentState.behavior is IMinecartInteractor) {
+            IMinecartInteractor cartInteracter = (IMinecartInteractor)adjacentState.behavior;
+
+            if(cartInteracter.shouldCartInteract(this)) {
+                this.cartInteractor = cartInteracter;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Moves the minecart in the passed direction.  Move speed and delta time is factored in here.
+    /// </summary>
     private void move(Vector2 dir) {
         this.transform.position += (Vector3)(dir * this.movementSpeed * Time.deltaTime);
     }

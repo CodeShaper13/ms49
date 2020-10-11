@@ -32,8 +32,8 @@ public class TaskMakeFood : TaskBase<EntityWorker> {
         }
     }
 
-    public override void resetTask() {
-        base.resetTask();
+    public override void onTaskStop() {
+        base.onTaskStop();
 
         if(this.stove != null) {
             this.stove.setOccupant(null);

@@ -5,9 +5,11 @@ using UnityEngine;
 public class TaskMineRock : TaskBase<EntityWorker> {
 
     [SerializeField]
-    private float mineSpeed = 1f;
+    private float _mineSpeed = 1f;
     [SerializeField]
-    private float hungerCost = 5f;
+    private float _hungerCost = 5f;
+    [SerializeField]
+    private float _energyCost = 2f;
     [SerializeField]
     private GameObject stoneCrackParticlePrefab = null;
     [SerializeField]
@@ -54,7 +56,7 @@ public class TaskMineRock : TaskBase<EntityWorker> {
 
             this.timeMining += Time.deltaTime;
 
-            if(this.timeMining >= mineSpeed) {
+            if(this.timeMining >= _mineSpeed) {
                 // Pickup the dropped item from the stone.
                 CellData data = this.owner.world.getCellState(this.stonePos).data;
                 if(data is CellDataMineable) {
@@ -70,7 +72,8 @@ public class TaskMineRock : TaskBase<EntityWorker> {
                 }
 
                 // Reduce hunger
-                this.owner.hunger.decrease(this.hungerCost);
+                this.owner.hunger.decrease(this._hungerCost);
+                this.owner.energy.decrease(this._energyCost);
 
                 // Remove the stone.
                 this.owner.world.setCell(this.stonePos, null);
@@ -84,8 +87,8 @@ public class TaskMineRock : TaskBase<EntityWorker> {
         }
     }
 
-    public override void resetTask() {
-        base.resetTask();
+    public override void onTaskStop() {
+        base.onTaskStop();
 
         this.timeMining = 0;
         if(this.crackParticle != null) {
@@ -93,7 +96,7 @@ public class TaskMineRock : TaskBase<EntityWorker> {
             this.crackParticle = null;
         }
 
-        this.moveHelper.stop();
+        //this.moveHelper.stop();
     }
 
     /// <summary>

@@ -47,7 +47,7 @@ public class TaskFindFood : TaskBase<EntityWorker> {
         return false;
     }
 
-    public override void resetTask() {
+    public override void onTaskStop() {
         if(this.table != null) {
             this.table.setOccupant(null);
 
@@ -63,6 +63,6 @@ public class TaskFindFood : TaskBase<EntityWorker> {
             this.owner.animator.stopClip();
         }
 
-        base.resetTask();
+        base.onTaskStop();
     }
 }

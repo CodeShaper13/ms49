@@ -15,5 +15,9 @@ MonoBehaviour:
   structureName: Vent Duct
   _cost: 0
   _description: 
-  _cell: {fileID: 11400000, guid: 66dbcffd6eec3e349948a99ecf0835e7, type: 2}
+  _tab: {fileID: 0}
+  _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _cell: {fileID: 11400000, guid: 66dbcffd6eec3e349948a99ecf0835e7, type: 2}

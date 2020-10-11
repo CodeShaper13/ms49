@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 634853167352450544}
   - component: {fileID: 2082563981474294264}
+  - component: {fileID: 6058473361243868267}
   m_Layer: 0
   m_Name: MinecartUnloaderBehavior
   m_TagString: Untagged
@@ -44,7 +45,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
-  inventorySize: 10
-  containerName: Minecart Unloader
+  _inventory: {fileID: 6058473361243868267}
   _itemTransferSpeed: 1
   _isUnloader: 1
+--- !u!114 &6058473361243868267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8029040897521436097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c608837e850a1144e85da04053771c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryName: Minecart Unloader
+  _size: 8

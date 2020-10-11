@@ -69,7 +69,9 @@ public class MilestoneManager : MonoBehaviour, ISaveableState {
         for(int i = 0; i < this._milestoneData.Length; i++) {
             if(i >= milestoneLockFlags.Length) {
                 // No data about this milestone, assume it's locked
-                this._milestoneData[i].isUnlocked = false;
+                if(this._milestoneData[i] != null) { // Sometimes the array fields are left blank in the inspector
+                    this._milestoneData[i].isUnlocked = false;
+                }
             }
             else {
                 this._milestoneData[i].isUnlocked = milestoneLockFlags[i] == 1;

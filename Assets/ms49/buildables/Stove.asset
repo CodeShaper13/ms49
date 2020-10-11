@@ -15,5 +15,9 @@ MonoBehaviour:
   structureName: Stove
   _cost: 250
   _description: 
-  _cell: {fileID: 11400000, guid: d6745c8dacf45804fa647a0f79a480cc, type: 2}
+  _tab: {fileID: 0}
+  _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _cell: {fileID: 11400000, guid: d6745c8dacf45804fa647a0f79a480cc, type: 2}

@@ -20,12 +20,15 @@ public abstract class BuildableBase : ScriptableObject {
     private string _overrideRotationMsg = null;
     [SerializeField, HideInInspector, Tooltip("The rotation to display the tile with in the preview")]
     private EnumRotation _displayRotation = EnumRotation.UP;
+    [SerializeField, Tooltip("If blank, this Buildable is constructed instantly.")]
+    private FloatVariable _buildTime = null;
 
     public int cost => this._cost;
     public string description => this._description;
     public Tab tab => this._tab;
     public EnumFogOption fogOption => this._fogOption;
     public EnumRotation displayRotation => this._displayRotation;
+    public float buildTime => this._buildTime == null ? 0 : this._buildTime.value;
 
     private void OnValidate() {
         if(this._displayRotation == EnumRotation.NONE) {
@@ -111,6 +114,7 @@ public abstract class BuildableBase : ScriptableObject {
 
 #if UNITY_EDITOR
     [CustomEditor(typeof(BuildableBase), true)]
+    [CanEditMultipleObjects]
     public class BuildableBaseEditor : Editor {
 
         private SerializedProperty displayRotation;

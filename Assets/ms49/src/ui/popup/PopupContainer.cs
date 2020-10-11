@@ -9,6 +9,8 @@ public class PopupContainer : PopupWindow {
     [SerializeField]
     private Text emptyText = null;
     [SerializeField]
+    private Text _itemCountText = null;
+    [SerializeField]
     private RectTransform itemAreaTransform = null;
     [SerializeField]
     private GameObject inventoryItemEntryPrefab = null;
@@ -63,6 +65,9 @@ public class PopupContainer : PopupWindow {
                     entry.gameObject.SetActive(false);
                 }
             }
+
+            this._itemCountText.text =
+                this.inventory.items.Count + "/" + this.inventory.maxCapacity + " items";
         }
     }
 

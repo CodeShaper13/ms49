@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
+  m_Name: RailUnloadPoint
+  m_EditorClassIdentifier: 
+  _isSolid: 0
+  _floorOverlayTile: {fileID: 11400000, guid: 8424ce375aa8be245b3e6ad70f1de408, type: 2}
+  _objectTile: {fileID: 0}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 1
+  up:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 8424ce375aa8be245b3e6ad70f1de408,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  right:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 2996cc400cbc7c543aa1865ab96911f5,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  down:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 8424ce375aa8be245b3e6ad70f1de408,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  left:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 2996cc400cbc7c543aa1865ab96911f5,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  _movementCost: 50
+  _canBuildOver: 0
+  _isDestroyable: 1
+  _zMoveDirections: 0
+  _flammable: 1
+  _temperatureOutput: 0
+  _supportsCeiling: 0
+  _includeInFogFloodLift: 0
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 6649548075395324675, guid: dfc9b3462de16154185bf8d9c86c78cc,
+    type: 3}
+  moveType: 0

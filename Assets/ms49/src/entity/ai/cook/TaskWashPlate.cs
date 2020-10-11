@@ -37,8 +37,8 @@ public class TaskWashPlate : TaskBase<EntityWorker> {
         }
     }
 
-    public override void resetTask() {
-        base.resetTask();
+    public override void onTaskStop() {
+        base.onTaskStop();
 
         this.washTimer = 0f;
         if(this.sink != null) {

@@ -50,11 +50,9 @@ public class CameraController : MonoBehaviour {
         this.inCreativeMode = settings.creativeEnabled;
 
         // Center the camera on the Truck.
-        foreach(CellBehaviorDepositPoint behavior in this.world.getAllBehaviors<CellBehaviorDepositPoint>()) {
-            if(behavior.isMaster) {
-                this.setCameraPos(behavior.center);
-                break;
-            }
+        foreach(CellBehaviorMasterDepositPoint behavior in this.world.getAllBehaviors<CellBehaviorMasterDepositPoint>()) {
+            this.setCameraPos(behavior.center);
+            break;
         }
     }
 
@@ -175,7 +173,7 @@ public class CameraController : MonoBehaviour {
     }
 
     public void readFromNbt(NbtCompound tag) {
-        this.changeLayer(tag.getInt("layer"));
+        this.changeLayer(tag.getInt("layer"), false);
         this.setZoom(tag.getInt("zoomLevel", this.minZoom));
         this.setCameraPos(tag.getVector2("cameraPos"));
         this.inCreativeMode = tag.getBool("inCreativeMode");

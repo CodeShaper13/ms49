@@ -95,19 +95,19 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
         }
 
         // Find the number of candadites that should be shown.
-        int targetCandaditeCount = this.startingCandidateCount;
+        int candaditeCount = this.startingCandidateCount;
         foreach(MilestoneData milestone in this.world.milestones.milestones) {
             if(milestone == null) {
                 continue;
             }
 
             if(CameraController.instance.inCreativeMode || milestone.isUnlocked) {
-                targetCandaditeCount = Mathf.Max(targetCandaditeCount, milestone.hireCandaditeCount);
+                candaditeCount += milestone.hireCandaditeIncrease;
             }
         }
 
         // Add new candidates
-        int stop = targetCandaditeCount - this.candidates.Count;
+        int stop = candaditeCount - this.candidates.Count;
         for(int i = 0; i < stop; i++) {
             WorkerType type = this.getNewCandatiteType();
 

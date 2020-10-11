@@ -5,14 +5,14 @@ public class TaskDepositStone : TaskBase<EntityWorker> {
     [SerializeField]
     private MinerMetaData minerData = null;
 
-    private CellBehaviorDepositPoint depositPoint;
+    private AbstractDepositPoint depositPoint;
 
     public override bool shouldExecute() {
         if(this.minerData.heldItem != null) {
-            this.gotoClosestBehavior<CellBehaviorDepositPoint>(
+            this.gotoClosestBehavior(
                 ref this.depositPoint,
                 true,
-                b => b.isMaster || !b.isFull);
+                b => b.isOpen());
             if(this.depositPoint != null) {
                 return true;
             }
@@ -31,15 +31,15 @@ public class TaskDepositStone : TaskBase<EntityWorker> {
 
     public override void preform() {
         if(!this.moveHelper.hasPath()) {
-            if(!this.depositPoint.isFull) {
+            if(this.depositPoint.isOpen()) {
                 this.depositPoint.deposit(this.minerData.heldItem);
                 this.minerData.heldItem = null;
             }
         }
     }
 
-    public override void resetTask() {
-        base.resetTask();
+    public override void onTaskStop() {
+        base.onTaskStop();
 
         this.depositPoint = null;
     }

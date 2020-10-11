@@ -49,7 +49,7 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
     /// Called when the task has stopped running.  This should reset the
     /// task, so it can be run again later on.
     /// </summary>
-    public virtual void resetTask() { }
+    public virtual void onTaskStop() { }
 
     public virtual bool allowLowerPriority() {
         return false;
@@ -92,5 +92,13 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
             }
         }
         return null;
+    }
+
+    public void startPreformCoroutine() {
+        this.StartCoroutine("preform");
+    }
+
+    public void stopCoroutine() {
+        this.StopCoroutine("preform");
     }
 }

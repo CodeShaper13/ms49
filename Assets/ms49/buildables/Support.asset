@@ -15,5 +15,9 @@ MonoBehaviour:
   structureName: Support
   _cost: 25
   _description: Supports tunnels and rooms to prevent cave ins
-  _cell: {fileID: 11400000, guid: 315a3d62d5f65e0409aec7720c86ce33, type: 2}
+  _tab: {fileID: 0}
+  _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _cell: {fileID: 11400000, guid: 315a3d62d5f65e0409aec7720c86ce33, type: 2}

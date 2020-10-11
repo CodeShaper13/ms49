@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2445739090162371684}
   - component: {fileID: 2445739090162371686}
   - component: {fileID: 9065923818222504184}
-  m_Layer: 0
+  - component: {fileID: 2889943158701000962}
+  m_Layer: 8
   m_Name: EntityMinecart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,12 +57,12 @@ MonoBehaviour:
       type: 3}
     frontFull: {fileID: -4942957438270607783, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
       type: 3}
-  maxCapacity: 8
   movementSpeed: 2
   _cartRenderer: {fileID: 5470119505551755509}
   _fillRenderer: {fileID: 7697917525930786154}
   explodeParticlePrefab: {fileID: 4334713544733170696, guid: 7be00c2bd70c34c4c8b78dc5d6d9679d,
     type: 3}
+  _inventory: {fileID: 2889943158701000962}
 --- !u!61 &9065923818222504184
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -88,6 +89,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2889943158701000962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445739090162371687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c608837e850a1144e85da04053771c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryName: Minecart
+  _size: 12
 --- !u!1 &3427533614531670906
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 744942395632048394}
   - component: {fileID: 7697917525930786154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpriteRenderer_Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3427533614531670906}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6624219531447900122}
@@ -180,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6624219531447900122}
   - component: {fileID: 5470119505551755509}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpriteRenderer_Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -55,7 +55,7 @@ public class BuildableTile : BuildableBase {
             return;
         }
 
-        bool instantBuild = CameraController.instance.inCreativeMode || highlight == null;
+        bool instantBuild = this.buildTime == 0 || CameraController.instance.inCreativeMode || highlight == null;
 
         if(instantBuild) {
             world.setCell(pos, this.cell, rotation);
@@ -63,8 +63,7 @@ public class BuildableTile : BuildableBase {
         else {
             world.setCell(pos, highlight.buildSiteCell, rotation);
             CellBehaviorBuildSite site = world.getBehavior<CellBehaviorBuildSite>(pos);
-            site.addCell(this.cell, pos);
-            site.isPrimary = true;
+            site.setPrimary(this.cell, this.buildTime);
         }
 
         this.applyFogOpperation(world, pos);

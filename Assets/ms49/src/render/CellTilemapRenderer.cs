@@ -99,6 +99,13 @@ public class CellTilemapRenderer : MonoBehaviour {
 
         TileRenderData dt = data.getRenderData(state.rotation);
 
+
+        // If the Cell's behavior implements IRenderTileOverride, let it adject the tile, even if the tile is rotatable.
+        if(state.hasBehavior() && state.behavior is IRenderTileOverride) {
+            ((IRenderTileOverride)state.behavior).replaceTiles(ref dt);
+        }
+
+
         // Draw floor overlay:
         if(this.floorOverlayTilemap != null) {
             this.floorOverlayTilemap.SetTile(pos, dt.floorOverlayTile);
@@ -108,11 +115,6 @@ public class CellTilemapRenderer : MonoBehaviour {
         // Draw Object Tile:
         if(this.objectMap != null) {
             this.objectMap.GetTileFlags(pos);
-
-            // If the Cell's behavior implements IRenderTileOverride, let it adject the tile, even if the tile is rotatable.
-            if(state.hasBehavior() && state.behavior is IRenderTileOverride) {
-                ((IRenderTileOverride)state.behavior).replaceTiles(ref dt);
-            }
 
             // Set the tile on the map.
             this.objectMap.SetTile(pos, dt.objectTile);

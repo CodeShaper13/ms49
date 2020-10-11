@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4417719939516446293}
   - component: {fileID: 4417719939516446292}
+  - component: {fileID: 7476553289340835241}
   m_Layer: 0
   m_Name: DepositPointBehavior
   m_TagString: Untagged
@@ -44,6 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
-  inventorySize: 10
-  containerName: Deposit Point
-  _isMaster: 0
+  _inventory: {fileID: 7476553289340835241}
+--- !u!114 &7476553289340835241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4417719939516446295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c608837e850a1144e85da04053771c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryName: Deposit Point
+  _size: 12

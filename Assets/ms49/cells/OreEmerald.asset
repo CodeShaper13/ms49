@@ -49,6 +49,6 @@ MonoBehaviour:
   _temperatureOutput: 0
   _supportsCeiling: 1
   _includeInFogFloodLift: 0
-  _tintObjectTile: 0
+  _tintObjectTile: 1
   _behaviorPrefab: {fileID: 0}
   droppedItem: {fileID: 11400000, guid: a6e29e7ae836ec44593de5c51ed847b4, type: 2}

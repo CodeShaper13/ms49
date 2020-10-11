@@ -19,6 +19,7 @@ MonoBehaviour:
   _fogOption: 1
   _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
   _cell: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   previewSprite: {fileID: -6925154376186504650, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}

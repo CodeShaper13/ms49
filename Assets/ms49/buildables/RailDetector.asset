@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RailDetector
   m_EditorClassIdentifier: 
   structureName: Detector Rail
-  _cost: 150
+  _cost: 100
   _description: Much like a lever, but takes wheels instead of hands
   _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
-  _displayRotation: 0
+  _displayRotation: 1
+  _buildTime: {fileID: 11400000, guid: 11183769021aedc448bc1bcf0318ea7d, type: 2}
   _cell: {fileID: 11400000, guid: 49ae411b5304048419a5291f4e160983, type: 2}

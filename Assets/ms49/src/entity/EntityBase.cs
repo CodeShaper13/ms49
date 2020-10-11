@@ -7,7 +7,7 @@ public abstract class EntityBase : MonoBehaviour {
     [SerializeField]
     private GameObject[] renderers = new GameObject[0];
 
-    private bool areRenderersVisible = false;
+    private bool areRenderersVisible = true;
 
     public World world { get; private set; }
     public int depth { get; set; }
@@ -16,7 +16,9 @@ public abstract class EntityBase : MonoBehaviour {
 
     private void Awake() { } // Stop child classes from overriding.
 
-    private void Start() { } // Stop child classes from overriding.
+    private void Start() { // Stop child classes from overriding.
+        this.toggleRendererVisability(false);
+    }
 
     public virtual void initialize(World world, int id) {
         this.world = world;
@@ -43,7 +45,7 @@ public abstract class EntityBase : MonoBehaviour {
     public virtual void onDestroy() { }
 
     public void toggleRendererVisability(bool visible) {
-        if(this.areRenderersVisible == visible) {
+        if(visible == this.areRenderersVisible) {
             return; // Nothing changes
         } else {
             // Enable/disable colliders
@@ -62,6 +64,8 @@ public abstract class EntityBase : MonoBehaviour {
             } else {
                 this.onRenderingDisable();
             }
+
+            this.areRenderersVisible = visible;
         }
     }
 

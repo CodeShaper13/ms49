@@ -2,7 +2,6 @@
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using static BinaryTilemapRenderer;
-using System;
 
 public class FogRenderer : MonoBehaviour {
 
@@ -12,6 +11,8 @@ public class FogRenderer : MonoBehaviour {
     private TilemapRenderer tilemapRenderer = null;
     [SerializeField]
     private TileBase tile = null;
+    [SerializeField]
+    private KeyCode fogToggleKey = KeyCode.F5;
 
     public int mapSize { get; set; }
 
@@ -19,6 +20,12 @@ public class FogRenderer : MonoBehaviour {
 
     private void Awake() {
         this.dirtiedTiles = new List<DirtyTile>();
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(this.fogToggleKey)) {
+            this.tilemapRenderer.enabled = !this.tilemapRenderer.enabled;
+        }
     }
 
     private void LateUpdate() {

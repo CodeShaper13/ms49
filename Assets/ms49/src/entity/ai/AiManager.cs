@@ -33,8 +33,7 @@ public class AiManager : MonoBehaviour {
     public void stopAllTasks() {
         foreach(TaskListEntry entry in this.tasks) {
             if(entry.isRunning()) {
-                entry.task.resetTask();
-                entry.setRunning(false);
+                entry.stopRunning();
             }
         }
     }
@@ -43,41 +42,36 @@ public class AiManager : MonoBehaviour {
     /// This should be called every frame to update all of the AI tasks.
     /// </summary>
     public void updateAi() {
-        bool terminateRest = false;
-
         for(int i = 0; i < this.tasks.Count; i++) {
             TaskListEntry entry = this.tasks[i];
             ITask task = entry.task;
 
-            if(terminateRest) {
-                if(entry.isRunning()) {
-                    //this.character.StopCoroutine("preform");
-                    entry.task.resetTask();
-                    entry.setRunning(false);
-                }
-                continue;
-            }
-
             if(entry.isRunning()) {
                 // Task is running
-                if(!task.continueExecuting()) {
-                    // End task.
-                    entry.setRunning(false);
-                    //this.character.StopCoroutine("preform");
-                    task.resetTask();
+                if(task.continueExecuting()) {
+                    if(!task.allowLowerPriority()) {
+                        break;
+                    }
+                } else {
+                    // For whatever reason the task no longer wants to run, stop it
+                    entry.stopRunning();
                 }
             } else {
                 // Task is not running
                 if(task.shouldExecute()) {
-                    entry.setRunning(true);
-                    task.startExecute();
-                    //this.character.StartCoroutine(task.preform()); // mut be called ater others have been shut down
-                }
-            }
+                    // If the task being looked at doesn't allow
+                    // lower priority, stop all others.
+                    if(!task.allowLowerPriority()) {
+                        for(int j = i + 1; j < this.tasks.Count; j++) {
+                            this.tasks[j].stopRunning();
+                        }
+                    }
 
-            if(entry.isRunning()) {
-                if(!task.allowLowerPriority()) {
-                    terminateRest = true;
+                    entry.startRunning();
+
+                    if(!task.allowLowerPriority()) {
+                        break;
+                    }
                 }
             }
         }
@@ -109,22 +103,30 @@ public class AiManager : MonoBehaviour {
 
         public readonly int priority;
         public readonly ITask task;
-        public float timeRunning { get; private set; }
 
         private bool _isRunning;
 
         public TaskListEntry(int i, ITask task) {
             this.priority = i;
             this.task = task;
-            this.setRunning(false);
         }
 
-        public void setRunning(bool running) {
-            if(running != this._isRunning) {
-                this.timeRunning = 0;
-            }
+        public void startRunning() {
+            if(!this._isRunning) {
+                this.task.startExecute();
+                //this.task.startPreformCoroutine();
 
-            this._isRunning = running;
+                this._isRunning = true;
+            }
+        }
+
+        public void stopRunning() {
+            if(this._isRunning) {
+                //this.task.stopCoroutine();
+                this.task.onTaskStop();
+
+                this._isRunning = false;
+            }
         }
 
         public bool isRunning() {

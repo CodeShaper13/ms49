@@ -15,5 +15,9 @@ MonoBehaviour:
   structureName: Sink
   _cost: 250
   _description: Cooks need a place to wash dishes, like a sink
-  _cell: {fileID: 11400000, guid: 41717420aab41a145972cb2cd2bfb33c, type: 2}
+  _tab: {fileID: 0}
+  _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _cell: {fileID: 11400000, guid: 41717420aab41a145972cb2cd2bfb33c, type: 2}

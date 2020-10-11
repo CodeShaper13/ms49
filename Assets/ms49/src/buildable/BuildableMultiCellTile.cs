@@ -63,7 +63,7 @@ public class BuildableMultiCellTile : BuildableTile {
     }
 
     public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
-        bool instantBuild = CameraController.instance.inCreativeMode || highlight == null;
+        bool instantBuild = this.buildTime == 0 || CameraController.instance.inCreativeMode || highlight == null;
 
         CellBehaviorBuildSite site = null;
 
@@ -71,8 +71,7 @@ public class BuildableMultiCellTile : BuildableTile {
             world.setCell(pos, highlight.buildSiteCell, rotation);
             world.liftFog(pos);
             site = world.getBehavior<CellBehaviorBuildSite>(pos);
-            site.addCell(this.getCellAt(0, 0), pos);
-            site.isPrimary = true;
+            site.setPrimary(this.getCellAt(0, 0), this.buildTime);
         }
 
         for(int x = 0; x < this.getHighlightWidth(); x++) {
@@ -84,7 +83,7 @@ public class BuildableMultiCellTile : BuildableTile {
                     if(instantBuild) {
                         world.setCell(pos1, data, rotation);
                     } else {
-                        site.addCell(data, pos.add(x, y));
+                        site.addChildBuildSite(data, pos.add(x, y));
 
                         // Skip over the middle cell, it's already been placed.
                         if(x == 0 && y == 0) {

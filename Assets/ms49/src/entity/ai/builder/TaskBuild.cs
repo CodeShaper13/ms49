@@ -2,9 +2,6 @@
 
 public class TaskBuild : TaskBase<EntityWorker> {
 
-    [SerializeField]
-    private float buildSpeed = 4f;
-
     private float timeBuilding;
     private bool isHammering;
     private CellBehaviorBuildSite buildSite;
@@ -25,30 +22,33 @@ public class TaskBuild : TaskBase<EntityWorker> {
             }
         } else {
             this.timeBuilding += Time.deltaTime;
-            if(this.timeBuilding >= buildSpeed) {
+            if(this.timeBuilding >= this.buildSite.constructionTime) {
                 this.buildSite.placeIntoWorld();
             }
         }
     }
 
     public override bool shouldExecute() {
-        foreach(CellBehaviorBuildSite site in this.owner.world.getAllBehaviors<CellBehaviorBuildSite>()) {
-            if(site.isPrimary && !site.isOccupied()) {
-                if(this.moveHelper.setDestination(site.pos, true) != null) {
-                    this.buildSite = site;
-                    this.buildSite.setOccupant(this.owner); // Claim it so no one takes it.
-                    return true;
-                }
-            }
+        if(this.gotoClosestBehavior<CellBehaviorBuildSite>(
+            ref this.buildSite,
+            true,
+            (behavior) => behavior.isPrimary && !behavior.isOccupied()) != null) {
+
+            this.buildSite.setOccupant(this.owner); // Claim it so no one takes it.
+            return true;
         }
 
         return false;
     }
 
-    public override void resetTask() {
-        base.resetTask();
+    public override void onTaskStop() {
+        base.onTaskStop();
 
         this.timeBuilding = 0;
         this.isHammering = false;
+
+        if(this.buildSite != null) {
+            this.buildSite.stopPs();
+        }
     }
 }

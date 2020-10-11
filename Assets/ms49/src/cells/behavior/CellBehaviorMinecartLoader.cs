@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using fNbt;
 
-public class CellBehaviorMinecartLoader : CellBehaviorContainer {
+public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartInteractor {
 
     [SerializeField]
     private float _itemTransferSpeed = 1f;
@@ -70,7 +70,24 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer {
     }
 
     private void releaseCart() {
-        this.minecart.foundLoader = null;
+        this.minecart.release();
         this.minecart = null;
+    }
+
+    public bool shouldCartInteract(EntityMinecart cart) {
+        if(cart.position != this.pos + this.rotation) {
+            return false; // Minecart not in front of Loader.
+        }
+
+        if(this.isUnloader) {
+            return !this.isFull && !cart.inventory.isEmpty();
+        }
+        else {
+            return !this.isEmpty && !cart.inventory.isFull();
+        }
+    }
+
+    public Vector3 getCartStopPoint() {
+        return this.center + this.rotation.vectorF;
     }
 }

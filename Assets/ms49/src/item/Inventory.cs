@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Inventory {
+public class Inventory : MonoBehaviour {
 
-    protected int maxCapacity;
+    [SerializeField]
+    private string _inventoryName = "";
+    [SerializeField, Min(1)]
+    private int _size = 1;
 
+    public string inventoryName => this._inventoryName;
+    public int maxCapacity => this._size;
     public Stack<Item> items { get; protected set; }
-    public string inventoryName { get; protected set; }
 
-    public Inventory(string inventoryName, int size) {
-        this.inventoryName = inventoryName;
-        this.maxCapacity = size;
+    private void Awake() {
         this.items = new Stack<Item>(this.maxCapacity);
     }
 

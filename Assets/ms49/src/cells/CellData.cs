@@ -110,6 +110,7 @@ public class CellData : ScriptableObject {
 
 #if UNITY_EDITOR
     [CustomEditor(typeof(CellData), true)]
+    [CanEditMultipleObjects]
     public class CellDataEditor : Editor {
 
         private SerializedProperty up;

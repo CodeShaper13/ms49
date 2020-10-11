@@ -22,6 +22,7 @@ MonoBehaviour:
   _fogOption: 0
   _overrideRotationMsg: '[r] to change color'
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
   _cell: {fileID: 11400000, guid: 2412c06fbb8ac3142a4be37cc30c782d, type: 2}
   gridSize: {x: 1, y: 2}
   tiles:

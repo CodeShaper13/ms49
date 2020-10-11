@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
+  m_Name: RailLoadPoint
+  m_EditorClassIdentifier: 
+  structureName: Minecart Load Point
+  _cost: 150
+  _description: Minecarts stop here until they are filled by Workers
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: 
+  _displayRotation: 1
+  _buildTime: {fileID: 11400000, guid: 11183769021aedc448bc1bcf0318ea7d, type: 2}
+  _cell: {fileID: 11400000, guid: 7c672f2b0990d7e4dbee975af6a0073b, type: 2}

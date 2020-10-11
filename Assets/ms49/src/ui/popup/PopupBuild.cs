@@ -30,6 +30,10 @@ public class PopupBuild : PopupWorldReference {
     private Scrollbar scrollbar = null;
     [SerializeField]
     private Tab _miscellaneousTab = null;
+    [SerializeField]
+    private Text _builderRequiredMsg = null;
+    [SerializeField]
+    private WorkerType _workerTypeBuilder = null;
 
     private TabContents selectedTab;
     private BuildableBase selectedBuildable;
@@ -68,39 +72,49 @@ public class PopupBuild : PopupWorldReference {
     protected override void onOpen() {
         base.onOpen();
 
-        // Hide the table buttons if they would be empty
-        foreach(TabContents tc in this.tabs) {
-            bool atLeastOneUnlocked = false;
+        if(this.isBuilderHired()) {
+            this._buildableBtnArea.gameObject.SetActive(true);
+            this._tabBtnArea.gameObject.SetActive(true);
+            this._builderRequiredMsg.gameObject.SetActive(false);
 
-            if(CameraController.instance.inCreativeMode) {
-                atLeastOneUnlocked = true;
-            } else {
-                foreach(BuildableListEntry btn in tc.btns) {
-                    if(btn.milestone.isUnlocked) {
-                        atLeastOneUnlocked = true;
-                        break;
+            // Hide the tab buttons if they would be empty
+            foreach(TabContents tc in this.tabs) {
+                bool atLeastOneUnlocked = false;
+
+                if(CameraController.instance.inCreativeMode) {
+                    atLeastOneUnlocked = true;
+                } else {
+                    foreach(BuildableListEntry btn in tc.btns) {
+                        if(btn.milestone.isUnlocked) {
+                            atLeastOneUnlocked = true;
+                            break;
+                        }
                     }
                 }
+
+                tc.tabIconButton.gameObject.SetActive(atLeastOneUnlocked);
             }
 
-            tc.tabIconButton.gameObject.SetActive(atLeastOneUnlocked);
+            this.setSelectedBuildable(null);
+
+            this.scrollbar.value = 0f;
+
+            // Show only the Buildables that are on the open tab.
+            foreach(TabContents tc in this.tabs) {
+                tc.setButtonsVisible(false);
+            }
+
+            // If the selected tab is no longer visible, set the miscellaneous tab to be selected
+            if(this.selectedTab == null || !this.selectedTab.tabIconButton.gameObject.activeSelf) {
+                this.selectedTab = this.tabs[0]; // Miscellaneous tab.
+            }
+
+            this.setSelectedTab(this.selectedTab);
+        } else {
+            this._buildableBtnArea.gameObject.SetActive(false);
+            this._tabBtnArea.gameObject.SetActive(false);
+            this._builderRequiredMsg.gameObject.SetActive(true);
         }
-
-        this.setSelectedBuildable(null);
-
-        this.scrollbar.value = 0f;
-
-        // Show only the Buildables that are on the open tab.
-        foreach(TabContents tc in this.tabs) {
-            tc.setButtonsVisible(false);
-        }
-
-        // If the selected tab is no longer visible, set the miscellaneous tab to be selected
-        if(this.selectedTab == null || !this.selectedTab.tabIconButton.gameObject.activeSelf) {
-            this.selectedTab = this.tabs[0]; // Miscellaneous tab.
-        }
-
-        this.setSelectedTab(this.selectedTab);
     }
 
     protected override void onUpdate() {
@@ -229,15 +243,23 @@ public class PopupBuild : PopupWorldReference {
         }
     }
 
+    private bool isBuilderHired() {
+        foreach(EntityBase e in this.world.entities.list) {
+            if(e is EntityWorker && ((EntityWorker)e).type == this._workerTypeBuilder) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(PopupBuild))]
     public class PopupBuildEditor : Editor {
 
-        private PopupBuild popup;
         private ReorderableList list;
 
         public void OnEnable() {
-            this.popup = (PopupBuild)this.target;
             this.list = new ReorderableList(this.serializedObject, this.serializedObject.FindProperty("_unlockedByDefault"), true, true, true, true);
 
             list.drawElementCallback = DrawListItems; // Delegate to draw the elements on the list

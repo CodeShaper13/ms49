@@ -47,8 +47,8 @@ public class TaskEmote : TaskBase<EntityWorker> {
         return true;
     }
 
-    public override void resetTask() {
-        base.resetTask();
+    public override void onTaskStop() {
+        base.onTaskStop();
 
         this.emoteBubbleImg.gameObject.SetActive(false);
 

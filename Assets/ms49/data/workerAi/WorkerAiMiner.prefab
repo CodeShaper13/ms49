@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1815746817121461770}
+  - component: {fileID: 411649451540704695}
   - component: {fileID: 8551415232831920579}
   - component: {fileID: 265612714731564641}
   - component: {fileID: 5157850129834234781}
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &411649451540704695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927264833654761311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d09016602aef54b89ae5468528eba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priority: 4
+  minerData: {fileID: 5157850129834234781}
 --- !u!114 &8551415232831920579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,8 +61,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priority: 5
-  mineSpeed: 1
-  hungerCost: 5
+  _mineSpeed: 1
+  _hungerCost: 5
+  _energyCost: 2
   stoneCrackParticlePrefab: {fileID: 2262927186149076756, guid: e6f129cce7191294f9632c4797086ac9,
     type: 3}
   mineParticlePrefab: {fileID: 2761322515295637297, guid: 7f9313b9baae5014681a09bacf4711a8,
@@ -65,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97203c35b6b588c4592cc5056ff3a0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priority: 6
+  _priority: 7
   minerData: {fileID: 5157850129834234781}
 --- !u!114 &5157850129834234781
 MonoBehaviour:

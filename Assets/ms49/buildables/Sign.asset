@@ -19,4 +19,5 @@ MonoBehaviour:
   _fogOption: 0
   _overrideRotationMsg: '[r] to change design'
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
   _cell: {fileID: 11400000, guid: 88a23c851a7a44344a88c9135b648139, type: 2}

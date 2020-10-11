@@ -15,5 +15,9 @@ MonoBehaviour:
   structureName: Refrigerator
   _cost: 250
   _description: 
-  _cell: {fileID: 11400000, guid: 90fca26ecf243f443bbcfe4a59f9999a, type: 2}
+  _tab: {fileID: 0}
+  _fogOption: 0
+  _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _cell: {fileID: 11400000, guid: 90fca26ecf243f443bbcfe4a59f9999a, type: 2}

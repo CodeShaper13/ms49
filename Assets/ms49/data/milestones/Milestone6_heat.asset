@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fc1acf14bf19a43845fadd9e1a4b1d, type: 3}
+  m_Name: Milestone6_heat
+  m_EditorClassIdentifier: 
+  _milestoneName: large mine
+  _requirements:
+  - _method: {fileID: 11400000, guid: 9539fda1430df6744a87cf6d585d7e47, type: 2}
+    _targetAmount: 500
+  _unlocksLayer: 1
+  _unlockedBuildables:
+  - {fileID: 11400000, guid: c717ff1433ae9804b973e948e46e045d, type: 2}
+  - {fileID: 11400000, guid: 78e97245eafd4354aa9ae607fc00893b, type: 2}
+  _unlockedWorkerTypes: []
+  _candaditeCountIncrease: 1

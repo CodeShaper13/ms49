@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEditorInternal;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [CreateAssetMenu(fileName = "Milestone", menuName = "MS49/Milestone/Milestone", order = 1)]
 public class MilestoneData : ScriptableObject, ISerializationCallbackReceiver {
@@ -9,20 +15,20 @@ public class MilestoneData : ScriptableObject, ISerializationCallbackReceiver {
     private MilestoneRequirerment[] _requirements = null;
     [SerializeField, Tooltip("If true, a layer is unlocked when completing this milestone")]
     private bool _unlocksLayer = false;
-    [SerializeField]
-    private BuildableBase[] _unlockedBuildables = null;
+    [SerializeField, HideInInspector]
+    private List<BuildableBase> _unlockedBuildables = new List<BuildableBase>();
     [SerializeField]
     private WorkerType[] _unlockedWorkerTypes = null;
-    [SerializeField]
-    private int _hireCandaditeCount = 0;
+    [SerializeField, Min(0)]
+    private int _candaditeCountIncrease = 0;
 
-    public string milestoneName { get { return this._milestoneName; } }
-    public MilestoneRequirerment[] requirements { get { return this._requirements; } }
-    public bool unlocksLayer { get { return this._unlocksLayer; } }
+    public string milestoneName => this._milestoneName;
+    public MilestoneRequirerment[] requirements => this._requirements;
+    public bool unlocksLayer => this._unlocksLayer;
     public bool isUnlocked { get; set; }
-    public BuildableBase[] unlockedBuildables { get { return this._unlockedBuildables; } }
+    public List<BuildableBase> unlockedBuildables => this._unlockedBuildables;
     public WorkerType[] unlockedWorkerTypes => this._unlockedWorkerTypes;
-    public int hireCandaditeCount => this._hireCandaditeCount;
+    public int hireCandaditeIncrease => this._candaditeCountIncrease;
 
     public void OnAfterDeserialize() {
         this.isUnlocked = false;
@@ -51,4 +57,43 @@ public class MilestoneData : ScriptableObject, ISerializationCallbackReceiver {
 
         return true;
     }
+
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(MilestoneData))]
+    public class PopupBuildEditor : Editor {
+
+        private ReorderableList list;
+
+        public void OnEnable() {
+            this.list = new ReorderableList(
+                this.serializedObject,
+                this.serializedObject.FindProperty("_unlockedBuildables"));
+
+            this.list.drawElementCallback = (rect, index, isActive, isFocused) => {
+                EditorGUI.ObjectField(
+                    new Rect(
+                        rect.x,
+                        rect.y,
+                        300,
+                        EditorGUIUtility.singleLineHeight),
+                    list.serializedProperty.GetArrayElementAtIndex(index));
+            };
+
+            this.list.drawHeaderCallback = (rect) => {
+                EditorGUI.LabelField(rect, "Unlocked Buildables");
+            };
+        }
+
+        public override void OnInspectorGUI() {
+            base.OnInspectorGUI();
+
+            this.serializedObject.Update();
+            this.list.DoLayoutList();
+            this.serializedObject.ApplyModifiedProperties();
+
+            EditorUtility.SetDirty(this.target);
+        }
+    }
+#endif
 }

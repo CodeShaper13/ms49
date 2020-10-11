@@ -1773,7 +1773,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 2
-  m_Mode: 1
+  m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1 &5130393142738284855
@@ -1946,10 +1946,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _milestoneData:
   - {fileID: 11400000, guid: e1ccd1a61383761449887546a28a6e18, type: 2}
+  - {fileID: 11400000, guid: 97e82573a82ae60459e2f80af0e53841, type: 2}
+  - {fileID: 11400000, guid: 1bf5e84c4e5a7ae4cbd7010cd5d929ef, type: 2}
   - {fileID: 11400000, guid: ed745f22b2bfddb44aa274e154769a13, type: 2}
   - {fileID: 11400000, guid: af75b05f39c41c84ca7c0db99328072b, type: 2}
   - {fileID: 11400000, guid: a0f22d443a9e4d94a805c1fa2e95d27b, type: 2}
-  - {fileID: 11400000, guid: a2b86eabd82453b4ca683125a170182c, type: 2}
   world: {fileID: 7469874513568837900}
 --- !u!114 &3947060044384115066
 MonoBehaviour:
@@ -2179,6 +2180,7 @@ MonoBehaviour:
   tilemap: {fileID: 7469874514394444113}
   tilemapRenderer: {fileID: 7469874514394444114}
   tile: {fileID: 11400000, guid: 17afb29d76caf8b4380326ff6f26a74b, type: 2}
+  fogToggleKey: 286
 --- !u!1 &7469874514158545428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,7 +2393,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 1
+  m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1 &7469874514496113293
@@ -2508,7 +2510,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 2
-  m_Mode: 1
+  m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1 &7469874514570082073

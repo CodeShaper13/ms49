@@ -40,10 +40,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9162732814748994402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4485f08256172a44990578e054816164, type: 3}
+  m_Script: {fileID: 11500000, guid: 92a5c0d7eed59c141ab1ee5f9bc57f22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
   inventorySize: 0
   containerName: Master Deposit Point
-  _isMaster: 1

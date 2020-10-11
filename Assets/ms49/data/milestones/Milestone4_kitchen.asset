@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fc1acf14bf19a43845fadd9e1a4b1d, type: 3}
+  m_Name: Milestone4_kitchen
+  m_EditorClassIdentifier: 
+  _milestoneName: small mine
+  _requirements:
+  - _method: {fileID: 11400000, guid: 9539fda1430df6744a87cf6d585d7e47, type: 2}
+    _targetAmount: 250
+  _unlocksLayer: 0
+  _unlockedBuildables:
+  - {fileID: 11400000, guid: 880b7315fcfd029489266c9f8e9c1f02, type: 2}
+  - {fileID: 11400000, guid: c9ebaa171e7c6aa4788b614f09d45c65, type: 2}
+  - {fileID: 11400000, guid: bfed229c672d73249bd99da218450826, type: 2}
+  - {fileID: 11400000, guid: b0898c46014ee8c409b50eb29d339a63, type: 2}
+  - {fileID: 11400000, guid: 6489902349ef4aa4e8d6b82331e23aed, type: 2}
+  _unlockedWorkerTypes:
+  - {fileID: 11400000, guid: 176a67013b39e214c8be9c16e761c6d1, type: 2}
+  _candaditeCountIncrease: 1

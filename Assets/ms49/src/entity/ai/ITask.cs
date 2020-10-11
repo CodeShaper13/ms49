@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public interface ITask {
+﻿public interface ITask {
 
     int priority { get; }
 
@@ -32,7 +29,11 @@ public interface ITask {
     /// 
     /// This is also called from the constructor.
     /// </summary>
-    void resetTask();
+    void onTaskStop();
 
     bool allowLowerPriority();
+
+    void startPreformCoroutine();
+
+    void stopCoroutine();
 }

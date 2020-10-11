@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RailCrossing
   m_EditorClassIdentifier: 
   structureName: Crossing Rails
-  _cost: 150
+  _cost: 50
   _description: Somehow, there are never crashes
   _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: 11183769021aedc448bc1bcf0318ea7d, type: 2}
   _cell: {fileID: 11400000, guid: 91e7e2e1f6b833942ac49bd4bfe5c78b, type: 2}

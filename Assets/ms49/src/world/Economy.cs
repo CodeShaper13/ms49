@@ -32,14 +32,20 @@ public class Economy : MonoBehaviour, ISaveableState {
     /// Returns the value of the passed item adjusted based on the economy.
     /// </summary>
     public int getItemValue(Item item) {
-        return Mathf.RoundToInt(item.moneyValue * this.itemValueMultiplyers[this.reg.getIdOfElement(item)]);
+        if(item.includeInEconemy) {
+            return Mathf.RoundToInt(item.moneyValue * this.itemValueMultiplyers[this.reg.getIdOfElement(item)]);
+        } else {
+            return item.moneyValue;
+        }
     }
 
     /// <summary>
     /// Sells the passed item for it's current value.
     /// </summary>
     public void sellItem(Item item) {
-        this.world.money.value += this.getItemValue(item);
+        if(item != null) {
+            this.world.money.value += this.getItemValue(item);
+        }
     }
 
     public void readFromNbt(NbtCompound tag) {

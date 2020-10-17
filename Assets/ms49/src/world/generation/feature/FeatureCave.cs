@@ -18,7 +18,7 @@ public class FeatureCave :FeatureBase {
 
     private int[,] map;
 
-    public override void generate(System.Random rnd, LayerDataBase layerData, MapAccessor accessor) {
+    public override void generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
         if(!layerData.generateCaves) {
             return;
         }
@@ -42,7 +42,7 @@ public class FeatureCave :FeatureBase {
             }
         }
 
-        if(layerData.lakeType != LakeType.NONE) {
+        if(layerData.lakeType != EnumLakeType.NONE) {
             this.createLakes(rnd, layerData, accessor, roomRegions);
         }
 
@@ -67,11 +67,11 @@ public class FeatureCave :FeatureBase {
         }
     }
 
-    private void createLakes(System.Random rnd, LayerDataBase layerData, MapAccessor accessor, List<List<Vector2Int>> roomRegions) {
+    private void createLakes(System.Random rnd, LayerData layerData, MapAccessor accessor, List<List<Vector2Int>> roomRegions) {
         foreach(List<Vector2Int> room in roomRegions) {
             if(rnd.Next(0, 101) < layerData.lakeChance) {
                 foreach(Vector2Int tile in room) {
-                    map[tile.x, tile.y] = (layerData.lakeType == LakeType.WATER) ? 2 : 3;
+                    map[tile.x, tile.y] = (layerData.lakeType == EnumLakeType.WATER) ? 2 : 3;
                 }
             }
         }

@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Emerald
   moneyValue: 350
   _includeInEconemy: 1
-  _graphColor: {r: 0.22352943, g: 0.48235297, b: 0.26666668, a: 1}
+  _graphColor: {r: 0.4431373, g: 0.6666667, b: 0.20392159, a: 1}
+  _darkGraphColor: {r: 0.23529413, g: 0.34901962, b: 0.3372549, a: 1}

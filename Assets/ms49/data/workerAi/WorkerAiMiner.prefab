@@ -62,8 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _priority: 5
   _mineSpeed: 1
-  _hungerCost: 5
-  _energyCost: 2
+  _hungerCost: 2
   stoneCrackParticlePrefab: {fileID: 2262927186149076756, guid: e6f129cce7191294f9632c4797086ac9,
     type: 3}
   mineParticlePrefab: {fileID: 2761322515295637297, guid: 7f9313b9baae5014681a09bacf4711a8,

@@ -13,27 +13,26 @@ public class PopupMine : PopupWorldReference {
             Position pos = CameraController.instance.getMousePos();
 
             CellData cell = this.world.getCellState(pos).data;
-            bool isTargeted = this.world.targetedSquares.isTargeted(pos);
 
-            if(cell is CellDataMineable && this.world.plotManager.isOwned(pos)) {
+            bool valid = cell is CellDataMineable || (cell == Air.get && this.world.isCoveredByFog(pos));
+            if(valid) {
                 if(CameraController.instance.inCreativeMode) {
+                    // Instantly remove.
                     this.world.setCell(pos, null, true);
                     this.world.liftFog(pos);
                     this.world.tryCollapse(pos);
-
-                    if(isTargeted) {
-                        this.world.targetedSquares.setTargeted(pos, false);
-                    }
-
+                    this.world.targetedSquares.setTargeted(pos, false);
                     this.playSfx();
                 }
                 else {
-                    if(!isTargeted) {
-                        this.world.targetedSquares.setTargeted(pos, true);
-                        this.playSfx();
-                    }
-                    else if(isTargeted) {
-                        this.world.targetedSquares.setTargeted(pos, false);
+                    if(this.world.plotManager.isOwned(pos)) {
+                        // Mark to be removed.
+                        if(this.world.targetedSquares.isTargeted(pos)) {
+                            this.world.targetedSquares.setTargeted(pos, false);
+                        } else {
+                            this.world.targetedSquares.setTargeted(pos, true);
+                        }
+
                         this.playSfx();
                     }
                 }

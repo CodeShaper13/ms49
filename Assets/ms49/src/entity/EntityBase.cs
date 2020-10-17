@@ -18,6 +18,8 @@ public abstract class EntityBase : MonoBehaviour {
 
     private void Start() { // Stop child classes from overriding.
         this.toggleRendererVisability(false);
+
+        this.name += "(" + guid.ToString() + ")";
     }
 
     public virtual void initialize(World world, int id) {
@@ -43,6 +45,15 @@ public abstract class EntityBase : MonoBehaviour {
     public virtual void onUpdate() { }
 
     public virtual void onDestroy() { }
+
+    /// <summary>
+    /// If true if returned, this Entity can be destroyed with the
+    /// demo popup.  The Entity must also have a collider so it can
+    /// be found.
+    /// </summary>
+    public virtual bool isDestroyable() {
+        return false;
+    }
 
     public void toggleRendererVisability(bool visible) {
         if(visible == this.areRenderersVisible) {

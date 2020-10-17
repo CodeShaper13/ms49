@@ -6,25 +6,20 @@ public class Storage {
 
     private World world;
     private Layer[] layers;
+    private byte[] aboveGroundMap;
     public HashSet<CellBehavior> cachedBehaviors { get; private set; }
 
     public int layerCount { get; private set; }
     public Transform behaviorHolder { get; private set; }
+    public Position workerSpawnPoint { get; set; }
 
     public Storage(World world) {
         this.world = world;
-        this.layerCount = this.world.mapGenData.layerCount;
+        this.layerCount = this.world.mapGenerator.layerCount;
         this.layers = new Layer[layerCount];
+        this.aboveGroundMap = new byte[this.world.mapSize * this.world.mapSize];
         this.cachedBehaviors = new HashSet<CellBehavior>();
         this.behaviorHolder = this.world.createHolder("BEHAVIOR_HOLDER");
-    }
-
-    public bool isLayerGenerated(int depth) {
-        return this.isValidLayer(depth) && this.layers[depth] != null;
-    }
-
-    public bool isValidLayer(int depth) {
-        return depth >= 0 && depth < this.layerCount;
     }
 
     public void setCell(Position pos, CellData tile, Rotation rotation, bool updateNeighbors = false) {
@@ -33,6 +28,14 @@ public class Storage {
 
     public CellState getCellState(Position pos) {
         return this.getLayer(pos.depth).getCellState(pos.x, pos.y);
+    }
+
+    public bool isOutside(int x, int y) {
+        return this.aboveGroundMap[this.world.mapSize * x + y] == 1;
+    }
+
+    public void setOutside(int x, int y, bool aboveGround) {
+        this.aboveGroundMap[this.world.mapSize * x + y] = aboveGround ? (byte)1 : (byte)0;
     }
 
     public float getTemperature(Position pos) {
@@ -44,9 +47,8 @@ public class Storage {
         }
     }
 
-
     public Layer getLayer(int depth) {
-        if(this.isValidLayer(depth)) {
+        if(depth >= 0 && depth < this.layerCount) {
             return this.layers[depth];
         }
         return null;
@@ -57,6 +59,10 @@ public class Storage {
     }
 
     public void writeToNbt(NbtCompound tag) {
+        tag.setTag("aboveGroundMap", this.aboveGroundMap);
+
+        tag.setTag("workerSpawnPoint", this.workerSpawnPoint);
+
         // Write Layers:
         NbtList listLayers = new NbtList(NbtTagType.Compound);
         for(int i = 0; i < this.layers.Length; i++) {
@@ -71,6 +77,10 @@ public class Storage {
     }
 
     public void readFromNbt(NbtCompound tag) {
+        this.aboveGroundMap = tag.getByteArray("aboveGroundMap");
+
+        this.workerSpawnPoint = tag.getPosition("workerSpawnPoint");
+
         // Read Layers:
         NbtList layers = tag.getList("layers");
         for(int i = 0; i < layers.Count; i++) {

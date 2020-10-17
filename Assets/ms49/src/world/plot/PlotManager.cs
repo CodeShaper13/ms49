@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using fNbt;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 public class PlotManager : MonoBehaviour, ISaveableState {
 
-    [SerializeField, Min(1)]
+    [SerializeField, Min(1), Tooltip("The size of a Plot in Cells")]
     private int _plotDiameter = 32;
-    //[SerializeField]
-    //private int[] _enumToPlotCountMapping = new int[] { 1, 3, 5 };
+    [SerializeField, Tooltip("The number of Plots making up the map.")]
+    private int _plotCount = 3;
     [SerializeField]
     private int[] _plotPrices = new int[] { 10000 };
     [SerializeField]
@@ -16,17 +17,14 @@ public class PlotManager : MonoBehaviour, ISaveableState {
     private TileBase _tile = null;
 
     public Plot[] plots { get; private set; }
-    public int mapSize { get; private set; }
+    public int mapSize => this._plotDiameter * this._plotCount;
+    public int plotCount => this._plotCount;
     public int plotDiameter => this._plotDiameter;
     public string tagName => "plots";
 
-    private int plotCount = 3;
-
     private void Awake() {
-        // Scale the tilemap to be the same size as a Plot.
+        // Scale the Tilemap to be the same size as a Plot.
         this._tilemap.transform.localScale = Vector3.one * this._plotDiameter;
-
-        this.mapSize = this.plotDiameter * this.plotCount;
 
         // Create all of the Plots.
         this.plots = new Plot[this.plotCount * this.plotCount];
@@ -50,15 +48,22 @@ public class PlotManager : MonoBehaviour, ISaveableState {
         }
     }
 
-    public void initializeFirstTime() {
-        // Unlock the starting plot
-        this.getPlotFromPlotCoords((int)(this.plotCount / 2), 0).isOwned = true;
+    public void initializeFirstTime(int seed) {
+        Random.InitState(seed);
 
+        // Give the plots random prices.
+        List<int> list = null;
         foreach(Plot plot in this.plots) {
+            if(list == null || list.Count == 0) {
+                list = new List<int>(this._plotPrices);
+            }
+
             if(this._plotPrices == null || this._plotPrices.Length == 0) {
                 plot.cost = 0;
             } else {
-                plot.cost = this._plotPrices[Random.Range(0, this._plotPrices.Length - 1)];
+                int index = Random.Range(0, list.Count - 1);
+                plot.cost = list[index];
+                list.RemoveAt(index);
             }
         } 
     }
@@ -106,8 +111,6 @@ public class PlotManager : MonoBehaviour, ISaveableState {
     }
 
     public void writeToNbt(NbtCompound tag) {
-        tag.setTag("mapSize", this.mapSize);
-
         // Write Plot costs:
         int[] costArray = new int[this.plots.Length];
         for(int i = 0; i < this.plots.Length; i++) {
@@ -124,8 +127,6 @@ public class PlotManager : MonoBehaviour, ISaveableState {
     }
 
     public void readFromNbt(NbtCompound tag) {
-        this.mapSize = tag.getInt("mapSize");
-
         // Read Plot costs:
         int[] costArray = tag.getIntArray("costs");
         for(int i = 0; i < Mathf.Min(this.plots.Length, costArray.Length); i++) {

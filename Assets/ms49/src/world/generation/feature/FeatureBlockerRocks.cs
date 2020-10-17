@@ -11,7 +11,7 @@ public class FeatureBlockerRocks : FeatureBase {
     //[SerializeField, Min(0)]
     //private int oblongScale;
 
-    public override void generate(System.Random rnd, LayerDataBase layerData, MapAccessor accessor) {
+    public override void generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
         if(!layerData.generateBlockerRocks) {
             return;
         }

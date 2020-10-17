@@ -31,7 +31,12 @@ public abstract class CellHighlightBase : MonoBehaviour {
             // Move the highlight
             this.transform.position = this.world.cellToWorld(pos.x, pos.y) + (Vector3)this.cellOffset;
 
-            bool valid = this.onUpdate(pos);
+            bool valid;
+            if(world.isOutOfBounds(pos)) {
+                valid = false;
+            } else {
+                valid = this.onUpdate(pos);
+            }
 
             if(valid) {
                 this.setValid();

@@ -1,33 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName = "Layer", menuName = "MS49/Layer Generation/Surface", order = 1)]
-public class LayerDataSurface : LayerDataBase {
-
-    [Space]
+[CreateAssetMenu(fileName = "Layer", menuName = "MS49/Generation/Layer Data Surface", order = 11)]
+public class LayerDataSurface : LayerData {
 
     [SerializeField]
     private TileBase grassTile = null;
 
-    public override Color getGroundTint(int x, int y) {
-        return isOutside(x, y) ? Color.white : base.getGroundTint(x, y);
+    public override Color getGroundTint(World world, int x, int y) {
+        return world.isOutside(new Position(x, y, 0)) ? Color.white : base.getGroundTint(world, x, y);
     }
 
-    public override TileBase getGroundTile(int x, int y) {
-        if(isOutside(x, y)) {
+    public override TileBase getGroundTile(World world, int x, int y) {
+        if(world.isOutside(new Position(x, y, 0))) {
             return this.grassTile;
         } else {
-            return base.getGroundTile(x, y);
+            return base.getGroundTile(world, x, y);
         }
     }
 
-    public override CellData getFillCell(int x, int y) {
-        return isOutside(x, y) ? null : this.tile;
-    }
-
-    public static bool isOutside(int x, int y) {
-        float noise = Mathf.PerlinNoise(x * 0.1f, 1);
-        int endY = Mathf.RoundToInt((noise * 10) + 2); // surfaceSize;
-        return y < endY;
+    public override CellData getFillCell(World world, int x, int y) {
+        return world.isOutside(new Position(x, y, 0)) ? null : this.tile;
     }
 }

@@ -10,7 +10,11 @@ public class ValueBar : MonoBehaviour {
     [SerializeField]
     private Slider _slider = null;
     [SerializeField]
+    private Slider _bonusSlider = null;
+    [SerializeField]
     private Image _image = null;
+    [SerializeField]
+    private Image _bonusFillImg = null;
 
     public Item item { get; private set; }
 
@@ -18,11 +22,24 @@ public class ValueBar : MonoBehaviour {
         this.item = item;
 
         this._image.color = this.item.graphColor;
+        this._bonusFillImg.color = new Color(
+            this.item.graphColor.r,
+            this.item.graphColor.g,
+            this.item.graphColor.b,
+            0.6f);
+
         this._textName.text = this.item.itemName;
+
+        this._slider.value = item.moneyValue;
     }    
 
-    public void setSliderValue(int value) {
+    public void updatePrice(int value) {
         this._textValue.text = "$" + value;
-        this._slider.value = value;
+        this._bonusSlider.value = value;
+    }
+
+    public void setMaxValue(int max) {
+        this._slider.maxValue = max;
+        this._bonusSlider.maxValue = max;
     }
 }

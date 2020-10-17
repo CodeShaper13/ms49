@@ -21,6 +21,6 @@ public class NewWorldSettings {
     }
 
     public int getSeed() {
-        return this._seed.GetHashCode();
+        return string.IsNullOrWhiteSpace(this._seed) ? DateTime.Now.GetHashCode() : this._seed.GetHashCode();
     }
 }

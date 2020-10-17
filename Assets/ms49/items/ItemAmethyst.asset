@@ -17,3 +17,4 @@ MonoBehaviour:
   moneyValue: 200
   _includeInEconemy: 1
   _graphColor: {r: 0.5568628, g: 0.2784314, b: 0.54901963, a: 1}
+  _darkGraphColor: {r: 0.22352943, g: 0.19215688, b: 0.29411766, a: 1}

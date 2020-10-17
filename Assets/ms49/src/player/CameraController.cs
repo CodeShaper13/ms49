@@ -135,10 +135,19 @@ public class CameraController : MonoBehaviour {
     /// Returns the mouse pos in cell units
     /// </summary>
     public Position getMousePos() {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2Int coords = this.world.worldToCell(mouseWorldPos);
+        Vector2Int coords = this.world.worldToCell(
+            this.getMousePosInWorldUnits());
 
         return new Position(coords.x, coords.y, this.currentLayer);
+    }
+
+    public Vector2 getMousePosInWorldUnits() {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+    public RaycastHit2D getMouseOver() {
+        return Physics2D.Raycast(
+            this.getMousePosInWorldUnits(),
+            Vector2.zero);
     }
 
     public Vector2 getCameraPos() {
@@ -196,10 +205,7 @@ public class CameraController : MonoBehaviour {
                 }
             }
 
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-
-            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+            RaycastHit2D hit = this.getMouseOver();
             if(hit.collider != null) {
                 IClickable clickable = hit.collider.GetComponent<IClickable>();
                 if(clickable != null) {

@@ -22,6 +22,8 @@ public abstract class BuildableBase : ScriptableObject {
     private EnumRotation _displayRotation = EnumRotation.UP;
     [SerializeField, Tooltip("If blank, this Buildable is constructed instantly.")]
     private FloatVariable _buildTime = null;
+    [SerializeField, Tooltip("If set, this sprite will be using in the build popup.")]
+    private Sprite _customPreview = null;
 
     public int cost => this._cost;
     public string description => this._description;
@@ -29,6 +31,7 @@ public abstract class BuildableBase : ScriptableObject {
     public EnumFogOption fogOption => this._fogOption;
     public EnumRotation displayRotation => this._displayRotation;
     public float buildTime => this._buildTime == null ? 0 : this._buildTime.value;
+    public Sprite customPreviewSprite => this._customPreview;
 
     private void OnValidate() {
         if(this._displayRotation == EnumRotation.NONE) {
@@ -82,10 +85,15 @@ public abstract class BuildableBase : ScriptableObject {
         return 1;
     }
 
-    public abstract void getPreviewSprites(
-        ref Sprite groundSprite,
-        ref Sprite objectSprite,
-        ref Sprite overlaySprite);
+    public void getSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
+        if(this._customPreview != null) {
+            objectSprite = this._customPreview;
+        } else {
+            this.applyPreviewSprites(ref groundSprite, ref objectSprite, ref overlaySprite);
+        }
+    }
+
+    protected virtual void applyPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) { }
 
     /// <summary>
     /// Places the structure into the world.  highlight is null if a Structure is placing this Buildable.

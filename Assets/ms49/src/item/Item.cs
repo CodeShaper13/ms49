@@ -15,18 +15,23 @@ public class Item : ScriptableObject {
     private bool _includeInEconemy = false;
     [SerializeField, HideInInspector]
     private Color _graphColor = new Color(1, 0, 1, 1);
+    [SerializeField, HideInInspector]
+    private Color _darkGraphColor = new Color(1, 0, 1, 1);
 
     public bool includeInEconemy => this._includeInEconemy;
     public Color graphColor => this._graphColor;
+    public Color darkGraphColor => this._darkGraphColor;
 
 #if UNITY_EDITOR
     [CustomEditor(typeof(Item), true)]
     public class ItemEditor : Editor {
 
         private SerializedProperty graphColorProp;
+        private SerializedProperty darkGraphColorProp;
 
         private void OnEnable() {
             this.graphColorProp = this.serializedObject.FindProperty("_graphColor");
+            this.darkGraphColorProp = this.serializedObject.FindProperty("_darkGraphColor");
         }
 
         public override void OnInspectorGUI() {
@@ -38,6 +43,7 @@ public class Item : ScriptableObject {
 
             if(item.includeInEconemy) {
                 EditorGUILayout.PropertyField(this.graphColorProp);
+                EditorGUILayout.PropertyField(this.darkGraphColorProp);
             }
 
             this.serializedObject.ApplyModifiedProperties();
@@ -46,7 +52,7 @@ public class Item : ScriptableObject {
         public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height) {
             Item item = (Item)this.serializedObject.targetObject;
 
-            if(item == null) {
+            if(item.sprite == null) {
                 return null;
             }
 

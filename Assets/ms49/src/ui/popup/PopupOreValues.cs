@@ -7,6 +7,8 @@ public class PopupOreValues : PopupWorldReference {
     private GameObject _valueBarPrefab = null;
     [SerializeField]
     private RectTransform _barParent = null;
+    [SerializeField]
+    private int _minBarHeight = 500;
 
     private List<ValueBar> bars;
 
@@ -36,52 +38,32 @@ public class PopupOreValues : PopupWorldReference {
     protected override void onUpdate() {
         base.onUpdate();
 
+        int highestPrice = 0;
+
         foreach(ValueBar bar in this.bars) {
-            bar.setSliderValue(this.world.economy.getItemValue(bar.item));
+            int value = this.world.economy.getItemValue(bar.item);
+            bar.updatePrice(value);
+
+            if(value > highestPrice) {
+                highestPrice = value;
+            }
+        }
+
+        highestPrice = Mathf.Max(highestPrice, this._minBarHeight);
+
+        foreach(ValueBar bar in this.bars) {
+            bar.setMaxValue(highestPrice);
         }
     }
 
     private void createBars() {
         this.bars = new List<ValueBar>();
 
-        for(int id = 0; id < Main.instance.itemRegistry.getRegistrySize(); id++) {
-            Item item = Main.instance.itemRegistry.getElement(id);
-
-            if(item == null) {
-                continue;
-            }
-
-            if(!item.includeInEconemy) {
-                continue;
-            }
-
-            // Check if the ore is generated in an unlocked layer
-
-            MapGenerationData genData = this.world.mapGenData;
-            for(int depth = 0; depth < genData.layerCount; depth++) {
-                if(this.world.isDepthUnlocked(depth)) {
-                    OreSettings[] oreSettings = genData.getLayerFromDepth(depth).oreSpawnSettings;
-
-                    if(oreSettings != null) {
-                        foreach(OreSettings setting in oreSettings) {
-                            if(setting.cell != null && setting.cell is CellDataMineable) {
-                                Item droppedItem = ((CellDataMineable)setting.cell).droppedItem;
-
-                                if(item == droppedItem) {
-                                    // Add a bar, this ore has been unlocked
-                                    ValueBar bar = GameObject.Instantiate(this._valueBarPrefab, this._barParent).GetComponent<ValueBar>();
-                                    bar.setItem(item);
-                                    this.bars.Add(bar);
-
-                                    goto label1;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            label1: ;
-        }
+        foreach(Item item in this.world.economy.getUnlockedItems()) {
+            // Add a bar, this ore has been unlocked
+            ValueBar bar = GameObject.Instantiate(this._valueBarPrefab, this._barParent).GetComponent<ValueBar>();
+            bar.setItem(item);
+            this.bars.Add(bar);
+        }        
     }
 }

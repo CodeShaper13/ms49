@@ -885,9 +885,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priority: 0
-  decreaseRate: 0.4
   stat: {fileID: 2018471305184656415}
   onlyExecuteWhenAwake: 1
+  randomDecrease: 0
+  decreaseRate: 0.4
+  range: {x: 1, y: 2}
 --- !u!114 &3079299653075490646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,9 +903,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priority: 0
-  decreaseRate: 0.25
   stat: {fileID: 1754342318740270011}
   onlyExecuteWhenAwake: 1
+  randomDecrease: 1
+  decreaseRate: 0.25
+  range: {x: 0.15, y: 0.35}
 --- !u!114 &1195488916946094333
 MonoBehaviour:
   m_ObjectHideFlags: 0

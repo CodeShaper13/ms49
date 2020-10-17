@@ -215,6 +215,9 @@ TextureImporter:
   - first:
       213: -9222080851456819140
     second: uiElements_buildTabDots_selected
+  - first:
+      213: 8853603813772836789
+    second: uiElements_buildTabCreative
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1702,6 +1705,27 @@ TextureImporter:
       bones: []
       spriteID: 6eb4fa09d766ae9c0800000000000000
       internalID: -3897189838051390490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_buildTabCreative
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bf39fd92c15eda70800000000000000
+      internalID: 8853603813772836789
       vertices: []
       indices: 
       edges: []

@@ -7,5 +7,5 @@ public abstract class FeatureBase : MonoBehaviour {
 
     public int priority => this._priority;
 
-    public abstract void generate(System.Random rnd, LayerDataBase layerData, MapAccessor accessor);
+    public abstract void generate(System.Random rnd, LayerData layerData, MapAccessor accessor);
 }

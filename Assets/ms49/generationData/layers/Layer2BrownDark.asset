@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b51648ae0c3c540976756f71841a64, type: 3}
+  m_Script: {fileID: 11500000, guid: 48f1459268959d748a9df871013b8bb9, type: 3}
   m_Name: Layer2BrownDark
   m_EditorClassIdentifier: 
   tintColor: {r: 0.47450984, g: 0.27450982, b: 0.29411766, a: 1}
@@ -22,11 +22,14 @@ MonoBehaviour:
   caveFillPercent: 50
   caveSmoothPases: 2
   oreSpawnSettings:
-  - _cell: {fileID: 11400000, guid: 21c8e8396c7ff6b4a8c81fae3f42d70f, type: 2}
-    veinCount: 3
-    veinSize: {x: 1, y: 1}
+  - _cell: {fileID: 11400000, guid: c707b817574329a449f83660c2961e31, type: 2}
+    veinCount: 8
+    veinSize: {x: 3, y: 6}
+  - _cell: {fileID: 11400000, guid: a59a1921820c7174d956a088eb133e3c, type: 2}
+    veinCount: 16
+    veinSize: {x: 2, y: 3}
   - _cell: {fileID: 11400000, guid: ba43be8abde0aca4ebb7a5af35cfbfd2, type: 2}
     veinCount: 16
     veinSize: {x: 2, y: 3}
   lakeType: 1
-  lakeChance: 30
+  lakeChance: 20

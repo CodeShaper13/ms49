@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f1459268959d748a9df871013b8bb9, type: 3}
+  m_Name: Layer5
+  m_EditorClassIdentifier: 
+  tintColor: {r: 1, g: 1, b: 1, a: 1}
+  tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
+  floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
+  _hasFog: 1
+  _defaultTemperature: 0.5
+  _generateBlockerRocks: 1
+  generateCaves: 1
+  caveFillPercent: 50
+  caveSmoothPases: 2
+  oreSpawnSettings:
+  - _cell: {fileID: 11400000, guid: b3a0c4c11c71bef46ae7f0c59256b274, type: 2}
+    veinCount: 0
+    veinSize: {x: 0, y: 0}
+  - _cell: {fileID: 11400000, guid: 409d1ddf943b9a3479be33bec427faa2, type: 2}
+    veinCount: 8
+    veinSize: {x: 1, y: 2}
+  lakeType: 2
+  lakeChance: 60

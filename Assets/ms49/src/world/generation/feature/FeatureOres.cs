@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FeatureOres : FeatureBase {
-
-    private int _chunkCount = 6;
 
     private Vector2Int[] dirs = new Vector2Int[] {
         Vector2Int.up,
@@ -12,35 +9,11 @@ public class FeatureOres : FeatureBase {
         Vector2Int.right,
     };
 
+    public override void generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
+        int chunkCount = accessor.size / 16;
 
-    List<Vector2> samples;
-
-    /*
-    private void OnDrawGizmos() {
-        //if(samples == null) {
-            int SIZE = 96;
-
-            samples = QuasiRandom.poisson_disk_sampling(10, 30, SIZE);
-        print(samples.Count);
-        //}
-
-        Gizmos.color = Color.red;
-        foreach(Vector2 v in samples) {
-            Gizmos.DrawSphere(v, 1f);
-        }
-
-        for(int chunkPosX = 0; chunkPosX < this._chunkCount; chunkPosX++) {
-            for(int chunkPosY = 0; chunkPosY < this._chunkCount; chunkPosY++) {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawWireCube(new Vector3(chunkPosX * 16 + 8, chunkPosY * 16 + 8), Vector3.one * 16);
-            }
-        }
-    }
-    */
-
-    public override void generate(System.Random rnd, LayerDataBase layerData, MapAccessor accessor) {
-        for(int chunkPosX = 0; chunkPosX < this._chunkCount; chunkPosX++) {
-            for(int chunkPosY = 0; chunkPosY < this._chunkCount; chunkPosY++) {
+        for(int chunkPosX = 0; chunkPosX < chunkCount; chunkPosX++) {
+            for(int chunkPosY = 0; chunkPosY < chunkCount; chunkPosY++) {
 
                 foreach(OreSettings setting in layerData.oreSpawnSettings) {
                     if(setting != null && setting.cell != null) {

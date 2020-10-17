@@ -21,7 +21,7 @@ public class BuildableUiRenderer : MonoBehaviour {
         Sprite objectSprite = null;
         Sprite objectOverlaySprite = null;
 
-        buildable.getPreviewSprites(ref floorOverlaySprite, ref objectSprite, ref objectOverlaySprite);
+        buildable.getSprites(ref floorOverlaySprite, ref objectSprite, ref objectOverlaySprite);
 
         this.func(floorOverlaySprite, this._imgFloorOverlay);
         this.func(objectSprite, this._imgObject);

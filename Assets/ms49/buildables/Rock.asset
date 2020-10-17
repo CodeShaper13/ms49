@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0024db460ae81af4e96aafaeea6ae137, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Rock
   m_EditorClassIdentifier: 
   structureName: Rock
@@ -20,6 +20,6 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
-  _cell: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
-  previewSprite: {fileID: -6925154376186504650, guid: e8fad20e546ee954eb1317d1e7454d3e,
+  _customPreview: {fileID: -6925154376186504650, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}
+  _cell: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}

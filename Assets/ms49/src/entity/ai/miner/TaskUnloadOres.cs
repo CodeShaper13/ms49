@@ -19,15 +19,35 @@ public class TaskUnloadOres : TaskBase<EntityWorker> {
 
     public override bool continueExecuting() {
         if(this.isDeliveringItem) {
-            return
+            bool flag =
                 this.minerData.heldItem != null &&
-                this.depositPoint != null;
+                this.depositPoint != null &&// Deposit Point hasn't be destroyed
+                this.depositPoint.isOpen();
+
+            if(!flag) {
+                print("stopping execution 1:");
+                print(this.minerData.heldItem != null);
+                print(this.depositPoint != null); // Deposit Point hasn't be destroyed
+                print(this.depositPoint.isOpen());
+            }
+
+            return flag;
         } else {
-            return
-                this.minerData.heldItem == null &&
-                this.unloadPoint != null &&
-                this.unloadPoint.minecart != null &&
-                !this.unloadPoint.minecart.inventory.isEmpty();
+            bool flag =
+                this.minerData.heldItem == null && // Miner isn't holding anything
+                this.unloadPoint != null && // Unload Point hasn't been destroyed
+                this.unloadPoint.minecart != null && // Unload Point still has a cart
+                !this.unloadPoint.minecart.inventory.isEmpty(); // The cart isn't empty.
+
+            if(!flag) {
+                print("stop ecexution 2:");
+                print(this.minerData.heldItem == null); // Miner isn't holding anything
+                print(this.unloadPoint != null); // Unload Point hasn't been destroyed
+                print(this.unloadPoint.minecart != null); // Unload Point still has a cart
+                print(!this.unloadPoint.minecart.inventory.isEmpty());
+            }
+
+            return flag;
         }
     }
 
@@ -67,6 +87,8 @@ public class TaskUnloadOres : TaskBase<EntityWorker> {
             this.unloadPoint.setOccupant(null);
         }
 
+        print(this.owner.name + " is stopping the unloading");
+
         this.unloadPoint = null;
         this.depositPoint = null;
     }
@@ -78,8 +100,8 @@ public class TaskUnloadOres : TaskBase<EntityWorker> {
                 (behavior) => {
                     return
                         behavior.minecart != null &&
-                        !behavior.isOccupied() &&
-                        !behavior.minecart.inventory.isEmpty();
+                        !behavior.minecart.inventory.isEmpty() &&
+                        (behavior == this.unloadPoint || !behavior.isOccupied());
                 }) != null) {
             this.isDeliveringItem = false;
             this.unloadPoint.setOccupant(this.owner);

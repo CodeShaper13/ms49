@@ -13,19 +13,31 @@ public class FogRenderer : MonoBehaviour {
     private TileBase tile = null;
     [SerializeField]
     private KeyCode fogToggleKey = KeyCode.F5;
+    [SerializeField, Range(0, 1)]
+    private float creativeFogAlpha = 0.5f;
 
     public int mapSize { get; set; }
 
     private List<DirtyTile> dirtiedTiles;
+    private Color normalTilemapColor;
 
     private void Awake() {
         this.dirtiedTiles = new List<DirtyTile>();
+        this.normalTilemapColor = this.tilemap.color;
     }
 
     private void Update() {
         if(Input.GetKeyDown(this.fogToggleKey)) {
             this.tilemapRenderer.enabled = !this.tilemapRenderer.enabled;
         }
+
+        this.tilemap.color = CameraController.instance.inCreativeMode ?
+            new Color(
+                this.normalTilemapColor.r,
+                this.normalTilemapColor.g,
+                this.normalTilemapColor.b,
+                this.creativeFogAlpha) :
+                this.normalTilemapColor;
     }
 
     private void LateUpdate() {

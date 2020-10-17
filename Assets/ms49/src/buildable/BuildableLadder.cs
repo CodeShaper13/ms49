@@ -8,7 +8,7 @@ public class BuildableLadder : BuildableBase {
     [SerializeField]
     private CellData ladderBottom = null;
 
-    public override void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
+    protected override void applyPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
         Rotation r = Rotation.UP;
 
         PopupBuild popup = GameObject.FindObjectOfType<PopupBuild>();

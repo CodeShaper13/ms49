@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
+using fNbt;
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
 
 [Serializable]

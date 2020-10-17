@@ -20,7 +20,7 @@ public class BuildableTile : BuildableBase {
         }
     }
 
-    public override void getPreviewSprites(ref Sprite floorOverlaySprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
+    protected override void applyPreviewSprites(ref Sprite floorOverlaySprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
         if(this._cell == null) {
             Debug.LogWarning("Can not display preview for BuildableTile " + this.name + ", it has no cell set");
             return;
@@ -34,15 +34,11 @@ public class BuildableTile : BuildableBase {
     }
 
     public override bool isValidLocation(World world, Position pos, Rotation rotation) {
-        if(world.isOutOfBounds(pos)) {
-            return false;
-        }
-
         if(!world.getCellState(pos).data.canBuildOver) {
             return false;
         }
 
-        if(!world.plotManager.isOwned(pos)) {
+        if(!CameraController.instance.inCreativeMode && !world.plotManager.isOwned(pos)) {
             return false;
         }
 

@@ -22,7 +22,7 @@ public class TaskDepositStone : TaskBase<EntityWorker> {
     }
 
     public override bool continueExecuting() {
-        if(this.minerData.heldItem != null && this.depositPoint != null) {
+        if(this.minerData.heldItem != null && this.depositPoint != null && this.depositPoint.isOpen()) {
             return true;
         }
 

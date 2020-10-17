@@ -9,7 +9,7 @@ using UnityEngine;
 public class World : MonoBehaviour {
 
     // References to Scriptable Objects
-    public MapGenerationData mapGenData = null;
+    public WorldType mapGenData = null;
     public IntVariable money = null;
 
     // References to other Components:
@@ -35,7 +35,7 @@ public class World : MonoBehaviour {
     public int mapSize => this.plotManager.mapSize;
     public int stoneExcavated { get; set; }
     public NavigationManager navManager { get; private set; }
-    private MapGenerator mapGenerator;
+    public MapGenerator mapGenerator { get; private set; }
 
     /// <summary>
     /// Initializes the World and reads it from NBT.
@@ -71,32 +71,49 @@ public class World : MonoBehaviour {
         this.saveName = saveName;
         this.seed = settings.getSeed();
 
+
         this.preInitialization();
 
+
         // Create land plots
-        this.plotManager.initializeFirstTime();
+        this.plotManager.initializeFirstTime(this.seed);
+
 
         // Generate the map.
-        for(int i = 0; i < this.storage.layerCount; i++) {
-            this.mapGenerator.generateLayer(this, i);
+        for(int depth = 0; depth < this.storage.layerCount; depth++) {
+            this.mapGenerator.generateLayer(this, depth);
         }
-        this.mapGenerator.generateStartingStructures(this);
+
+
+        // Unlock the plot that contains the Dumptruck and set the
+        // Worker spawn point.
+        List<CellBehaviorMasterDepositPoint> masters = this.getAllBehaviors<CellBehaviorMasterDepositPoint>();
+        if(masters.Count > 0) {
+            CellBehaviorMasterDepositPoint m = masters[0];
+            this.plotManager.getPlot(m.pos.x, m.pos.y).isOwned = true;
+            this.storage.workerSpawnPoint = m.pos.add(-1, -1);
+        } else {
+            Debug.LogWarning("No MasterDepositPoint could be found when generating a new map, there must always be at least one!");
+        }
+
 
         // Set starting money.
-        this.money.value = this.mapGenData.startingMoney;
+        this.money.value = this.mapGenerator.startingMoney;
+
 
         // Setup the new Player.
         CameraController.instance.initNewPlayer(settings);
 
+
         // Spawn the starting Workers.
         WorkerFactory factory = Main.instance.workerFactory;
-        foreach(WorkerType workerType in this.mapGenData.startingWorkers) {
+        foreach(WorkerType workerType in this.mapGenerator.startingWorkers) {
             if(workerType != null) {
                 int xShift = UnityEngine.Random.Range(-1, 2);
                 int yShift = UnityEngine.Random.Range(0, 2);
                 EntityWorker worker = factory.spawnWorker(
                     this,
-                    this.mapGenData.workerSpawnPoint.add(xShift, -yShift),
+                    this.storage.workerSpawnPoint.add(xShift, -yShift),
                     factory.generateWorkerInfo(), workerType);
 
                 // Modify the starting Worker's pay so new players can't be hosed.
@@ -104,9 +121,11 @@ public class World : MonoBehaviour {
             }
         }
 
+
         this.postInitialization();
 
-        CameraController.instance.changeLayer(this.mapGenData.playerStartLayer);
+
+        CameraController.instance.changeLayer(this.mapGenerator.playerStartLayer);
     }
 
     private void preInitialization() {
@@ -220,9 +239,21 @@ public class World : MonoBehaviour {
         }
     }
 
+    public bool isCoveredByFog(Position pos) {
+        if(this.isOutOfBounds(pos)) {
+            return true;
+        }
+
+        return this.storage.getLayer(pos.depth).fog.isFogPresent(pos.x, pos.y);
+    }
+
     public void liftFog(Position pos, bool floodLiftFog = true) {
         if(this.isOutOfBounds(pos)) {
             return;
+        }
+
+        if(!this.isCoveredByFog(pos)) {
+            return; // There is no fog here already, don't do anything
         }
 
         Layer layer = this.storage.getLayer(pos.depth);
@@ -252,10 +283,23 @@ public class World : MonoBehaviour {
                 this.StartCoroutine(this.floodLiftFog(changedCells));                
             } else {
                 layer.fog.setFog(pos.x, pos.y, false);
+                this.targetedSquares.setTargeted(pos, false);
             }
 
             this.worldRenderer.dirtyFogmap(pos, false);
         }
+    }
+
+    public bool isOutside(Position pos) {
+        if(this.isOutOfBounds(pos)) {
+            return false;
+        }
+
+        if(pos.depth != 0) {
+            return false;
+        }
+
+        return this.storage.isOutside(pos.x, pos.y);
     }
 
     public void tryCollapse(Position pos) {

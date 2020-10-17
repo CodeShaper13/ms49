@@ -12,14 +12,27 @@ public class DebugText : MonoBehaviour {
 
     private void OnGUI() {
         this.textY = 0;
+        this.indent = string.Empty;
 
         if(Main.DEBUG) {
             World world = GameObject.FindObjectOfType<World>();
             if(world != null) {
+                this.addLine("- - - - - DEBUG: - - - - -");
+
+                this.addLine("World Info:");
+                this.indent = "  ";
+                this.addLine("Seed: " + world.seed);
+                this.addLine("Save Name: " + world.saveName);
+                this.addLine("Time: " + world.time.time);
+                this.indent = "";
+
                 Position pos = CameraController.instance.getMousePos();
                 if(!world.isOutOfBounds(pos)) {
+                    this.addLine("");
+                    this.addLine("Selected Cell:");
+                    this.indent = "  ";
+
                     CellState state = world.getCellState(pos);
-                    this.addLine("- - - - - DEBUG: - - - - -");
                     this.addLine("Tile: " + state.data.name);
                     this.addLine("Pos: " + pos.ToString());
                     this.addLine("Rotation: " + state.rotation.name);
@@ -30,8 +43,9 @@ public class DebugText : MonoBehaviour {
                     CellBehavior behavior = world.getBehavior(pos);
                     if(behavior != null) {
                         this.addLine("Behavior:");
-                        this.indent = "  ";
+                        this.indent = "    ";
                         this.addLine(behavior.getDebugText());
+                        this.indent = "  ";
                     }
                 }
             }

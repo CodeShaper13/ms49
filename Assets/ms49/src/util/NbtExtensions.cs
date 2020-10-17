@@ -311,6 +311,26 @@ public static class NbtExtension {
         return tag.TryGet(key, out result);
     }
 
+    public static Position getPosition(this NbtCompound tag, string name, Position? defaultValue = null) {
+        if(defaultValue == null) {
+            defaultValue = new Position(0, 0, 0);
+        }
+
+        NbtCompound compound = tag.getCompound(name);
+        return new Position(
+            compound.getInt("x", ((Position)defaultValue).x),
+            compound.getInt("y", ((Position)defaultValue).y),
+            compound.getInt("depth", ((Position)defaultValue).x));
+    }
+
+    public static void setTag(this NbtCompound tag, string name, Position pos) {
+        NbtCompound compound = new NbtCompound(name);
+        compound.setTag("x", pos.x);
+        compound.setTag("y", pos.y);
+        compound.setTag("depth", pos.depth);
+        tag.Add(compound);
+    }
+
     /*
     /// <summary>
     /// Writes the passed Vector3 as a compound with passed name.

@@ -247,7 +247,7 @@ TextureImporter:
     second: tiles_unknown
   - first:
       213: 8867357604404364081
-    second: tiles_itemGold
+    second: tiles_itemGoldOre
   - first:
       213: -4352730477567032214
     second: tiles_itemCoal
@@ -440,6 +440,93 @@ TextureImporter:
   - first:
       213: -7986134054606587919
     second: tiles_machineShadow
+  - first:
+      213: -1656563747235035063
+    second: tiles_pipeBlueCurve1
+  - first:
+      213: -6959196687471451608
+    second: tiles_pipeBlueY
+  - first:
+      213: -8672295044416735018
+    second: tiles_pipeBlueX
+  - first:
+      213: 2664919574022166531
+    second: tiles_pipeGreenCurve
+  - first:
+      213: 4894293944757072678
+    second: tiles_pipeGreenY
+  - first:
+      213: -7537728127023367017
+    second: tiles_pipeGreenX
+  - first:
+      213: 3841478949471339740
+    second: tiles_pipeBlueCurve2
+  - first:
+      213: -2331468818310051910
+    second: tiles_pipeGreenCurve2
+  - first:
+      213: -7829014173379714686
+    second: tiles_pipeBlueCurve3
+  - first:
+      213: -4398118056257393346
+    second: tiles_pipeBlueCurve4
+  - first:
+      213: -8784054672525020626
+    second: tiles_pipeGreenCurve3
+  - first:
+      213: -3778929495279536526
+    second: tiles_pipeGreenCurve4
+  - first:
+      213: 1842850403139085200
+    second: tiles_pipeBrownX
+  - first:
+      213: 1512237473817002270
+    second: tiles_pipeBrownCurve1
+  - first:
+      213: 5639535537619044385
+    second: tiles_pipeBrownCurve4
+  - first:
+      213: -8553008988213887698
+    second: tiles_pipeBrownCurve3
+  - first:
+      213: 7420306766575028572
+    second: tiles_pipeBrownCurve2
+  - first:
+      213: -7847537291072819841
+    second: tiles_pipeBrownY
+  - first:
+      213: 1350793827111531042
+    second: tiles_115
+  - first:
+      213: -3061831378975216743
+    second: tiles_itemIronOre
+  - first:
+      213: -3693592864188940375
+    second: tiles_oreIron
+  - first:
+      213: 667617918077419189
+    second: tiles_itemIronRefined
+  - first:
+      213: 7348706756570709089
+    second: tiles_itemGoldRefined
+  - first:
+      213: 2699241387616122753
+    second: tiles_oreCopper
+  - first:
+      213: 6636026030207045053
+    second: tiles_itemCopperRefined
+  - first:
+      213: -1146004401591003187
+    second: tiles_itemCopperOre
+  - first:
+      213: 6836191339627448921
+    second: tiles_oreSkull
+  - first:
+      213: -1396394433024457344
+    second: tiles_itemSkull
+  - first:
+      213: 3362829996786808830
+    second: tiles_oreBrick
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -575,7 +662,7 @@ TextureImporter:
         width: 16
         height: 48
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -822,8 +909,8 @@ TextureImporter:
       name: tiles_oreEmerald
       rect:
         serializedVersion: 2
-        x: 208
-        y: 128
+        x: 112
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -843,8 +930,8 @@ TextureImporter:
       name: tiles_switchOff
       rect:
         serializedVersion: 2
-        x: 224
-        y: 160
+        x: 48
+        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -864,8 +951,8 @@ TextureImporter:
       name: tiles_switchOn
       rect:
         serializedVersion: 2
-        x: 240
-        y: 160
+        x: 64
+        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -886,7 +973,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 128
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -906,8 +993,8 @@ TextureImporter:
       name: tiles_oreAmethyst
       rect:
         serializedVersion: 2
-        x: 176
-        y: 128
+        x: 96
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -927,8 +1014,8 @@ TextureImporter:
       name: tiles_oreCoal
       rect:
         serializedVersion: 2
-        x: 160
-        y: 128
+        x: 80
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -948,8 +1035,8 @@ TextureImporter:
       name: tiles_oreRuby
       rect:
         serializedVersion: 2
-        x: 240
-        y: 128
+        x: 144
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -969,8 +1056,8 @@ TextureImporter:
       name: tiles_oreSaphire
       rect:
         serializedVersion: 2
-        x: 224
-        y: 128
+        x: 128
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -1008,11 +1095,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_itemGold
+      name: tiles_itemGoldOre
       rect:
         serializedVersion: 2
         x: 192
-        y: 112
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1032,8 +1119,8 @@ TextureImporter:
       name: tiles_itemCoal
       rect:
         serializedVersion: 2
-        x: 160
-        y: 112
+        x: 80
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1053,8 +1140,8 @@ TextureImporter:
       name: tiles_itemAmethyst
       rect:
         serializedVersion: 2
-        x: 176
-        y: 112
+        x: 96
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1074,8 +1161,8 @@ TextureImporter:
       name: tiles_itemEmerald
       rect:
         serializedVersion: 2
-        x: 208
-        y: 112
+        x: 112
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1095,8 +1182,8 @@ TextureImporter:
       name: tiles_itemSaphire
       rect:
         serializedVersion: 2
-        x: 224
-        y: 112
+        x: 128
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1116,8 +1203,8 @@ TextureImporter:
       name: tiles_itemRuby
       rect:
         serializedVersion: 2
-        x: 240
-        y: 112
+        x: 144
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1137,8 +1224,8 @@ TextureImporter:
       name: tiles_itemDirt
       rect:
         serializedVersion: 2
-        x: 144
-        y: 112
+        x: 64
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1179,8 +1266,8 @@ TextureImporter:
       name: tiles_itemUnknown
       rect:
         serializedVersion: 2
-        x: 128
-        y: 112
+        x: 0
+        y: 480
         width: 16
         height: 16
       alignment: 7
@@ -1389,8 +1476,8 @@ TextureImporter:
       name: tiles_oreBone
       rect:
         serializedVersion: 2
-        x: 112
-        y: 128
+        x: 48
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -1410,12 +1497,12 @@ TextureImporter:
       name: tiles_itemBone
       rect:
         serializedVersion: 2
-        x: 112
-        y: 112
+        x: 48
+        y: 480
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1746,12 +1833,12 @@ TextureImporter:
       name: tiles_itemPot
       rect:
         serializedVersion: 2
-        x: 96
-        y: 112
+        x: 32
+        y: 480
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1767,8 +1854,8 @@ TextureImporter:
       name: tiles_orePot
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
+        x: 32
+        y: 496
         width: 16
         height: 16
       alignment: 0
@@ -1788,12 +1875,12 @@ TextureImporter:
       name: tiles_itemBrick
       rect:
         serializedVersion: 2
-        x: 80
-        y: 112
+        x: 16
+        y: 480
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1830,7 +1917,7 @@ TextureImporter:
       name: tiles_rubble
       rect:
         serializedVersion: 2
-        x: 160
+        x: 112
         y: 144
         width: 16
         height: 16
@@ -2296,8 +2383,8 @@ TextureImporter:
         y: 144
         width: 16
         height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2317,8 +2404,8 @@ TextureImporter:
         y: 144
         width: 16
         height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2338,8 +2425,8 @@ TextureImporter:
         y: 144
         width: 16
         height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2591,7 +2678,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2599,6 +2686,615 @@ TextureImporter:
       bones: []
       spriteID: 1f73682c36d8b2190800000000000000
       internalID: -7986134054606587919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBlueCurve1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 948044a7c04b209e0800000000000000
+      internalID: -1656563747235035063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBlueY
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8226031fb77fb6f90800000000000000
+      internalID: -6959196687471451608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBlueX
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d8f82ada91d5a780800000000000000
+      internalID: -8672295044416735018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeGreenCurve
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3089394bb32bbf420800000000000000
+      internalID: 2664919574022166531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeGreenY
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 623379369660ce340800000000000000
+      internalID: 4894293944757072678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeGreenX
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79c3d4f743c946790800000000000000
+      internalID: -7537728127023367017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBlueCurve2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd4416360ccaf4530800000000000000
+      internalID: 3841478949471339740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeGreenCurve2
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab7cabf5675f4afd0800000000000000
+      internalID: -2331468818310051910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBlueCurve3
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2812436d611c95390800000000000000
+      internalID: -7829014173379714686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBlueCurve4
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3deb881eeeb6f2c0800000000000000
+      internalID: -4398118056257393346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeGreenCurve3
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e223984b0d4c81680800000000000000
+      internalID: -8784054672525020626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeGreenCurve4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 276fd9a45ab8e8bc0800000000000000
+      internalID: -3778929495279536526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBrownX
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0936a458dae139910800000000000000
+      internalID: 1842850403139085200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBrownCurve1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1185e268fb8cf410800000000000000
+      internalID: 1512237473817002270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBrownCurve4
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12889f121b7a34e40800000000000000
+      internalID: 5639535537619044385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBrownCurve3
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2db9c814ab9d4980800000000000000
+      internalID: -8553008988213887698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBrownCurve2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c59c12290b93af660800000000000000
+      internalID: 7420306766575028572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_pipeBrownY
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7d29fb6962f71390800000000000000
+      internalID: -7847537291072819841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_115
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 152
+        width: 2
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 222f5c534dbfeb210800000000000000
+      internalID: 1350793827111531042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemIronOre
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 480
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99ba90645903285d0800000000000000
+      internalID: -3061831378975216743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_oreIron
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9afb9190cd8bdbcc0800000000000000
+      internalID: -3693592864188940375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemIronRefined
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 464
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5beb0b495fad34900800000000000000
+      internalID: 667617918077419189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemGoldRefined
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 464
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16cf8e72cd9dbf560800000000000000
+      internalID: 7348706756570709089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_oreCopper
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18734e7adb1a57520800000000000000
+      internalID: 2699241387616122753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemCopperRefined
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 464
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd8cbae386e71c50800000000000000
+      internalID: 6636026030207045053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemCopperOre
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 480
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc7522c81139810f0800000000000000
+      internalID: -1146004401591003187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_oreSkull
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a881fbdc70fde50800000000000000
+      internalID: 6836191339627448921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_itemSkull
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 480
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0858e3d59a20f9ce0800000000000000
+      internalID: -1396394433024457344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_oreBrick
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef77186a01c2bae20800000000000000
+      internalID: 3362829996786808830
       vertices: []
       indices: 
       edges: []

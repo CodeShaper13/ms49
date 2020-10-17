@@ -72,7 +72,7 @@ public class PopupBuild : PopupWorldReference {
     protected override void onOpen() {
         base.onOpen();
 
-        if(this.isBuilderHired()) {
+        if(CameraController.instance.inCreativeMode || this.isBuilderHired()) {
             this._buildableBtnArea.gameObject.SetActive(true);
             this._tabBtnArea.gameObject.SetActive(true);
             this._builderRequiredMsg.gameObject.SetActive(false);
@@ -83,7 +83,7 @@ public class PopupBuild : PopupWorldReference {
 
                 if(CameraController.instance.inCreativeMode) {
                     atLeastOneUnlocked = true;
-                } else {
+                } else if(!tc.tab.onlyInCreative) {
                     foreach(BuildableListEntry btn in tc.btns) {
                         if(btn.milestone.isUnlocked) {
                             atLeastOneUnlocked = true;

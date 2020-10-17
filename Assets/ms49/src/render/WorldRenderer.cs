@@ -24,9 +24,9 @@ public class WorldRenderer : MonoBehaviour {
 
         this.cellRenderer.initializedRenderer(
             size,
-            (x, y) => { return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTint(x, y); },
+            (x, y) => { return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTint(world, x, y); },
             (x, y) => { return this.targetLayer.getCellState(x, y); },
-            (x, y) => { return this.world.mapGenData.getLayerFromDepth(this.targetLayer.depth).getGroundTile(x, y); }
+            (x, y) => { return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTile(world, x, y); }
             );
 
         this.fogRenderer.mapSize = size;

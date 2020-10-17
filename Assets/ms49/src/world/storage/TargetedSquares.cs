@@ -23,13 +23,13 @@ public class TargetedSquares : MonoBehaviour, ISaveableState {
         if(targeted) {
             if(!this.list.Contains(pos)) {
                 this.list.Add(pos);
+                this.worldRenderer.dirtyExcavationTarget(pos, targeted);
             }
         }
         else {
             this.list.Remove(pos);
+            this.worldRenderer.dirtyExcavationTarget(pos, targeted);
         }
-
-        this.worldRenderer.dirtyExcavationTarget(pos, targeted);
     }
 
     public void writeToNbt(NbtCompound tag) {

@@ -1656,7 +1656,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plotDiameter: 32
-  _plotPrices: 10270000983a0000204e0000a8610000
+  _plotCount: 3
+  _plotPrices: c4090000c4090000c4090000c4090000b80b0000ac0d0000a00f000094110000
   _tilemap: {fileID: 3850996261499357825}
   _tile: {fileID: 11400000, guid: 0c8b721c0324efb41b87b2bfaa87d530, type: 2}
 --- !u!1 &4987471522517223575
@@ -2015,7 +2016,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b286f8823f66ed046924d2c4cc817faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  world: {fileID: 7469874513568837900}
+  _world: {fileID: 7469874513568837900}
+  _flatMarketTime: {x: 0, y: 0}
+  _curveLengthRange: {x: 60, y: 120}
+  _curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.108635
+      outSlope: 4.108635
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.20492922
+      value: 0.8419794
+      inSlope: 2.0849822
+      outSlope: 2.0849822
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24267696
+      outWeight: 0.5721257
+    - serializedVersion: 3
+      time: 0.35
+      value: 1
+      inSlope: -0.0005398347
+      outSlope: -0.0005398347
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9
+      value: 1
+      inSlope: 0.012887069
+      outSlope: -1.5760839
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.053520747
+      outWeight: 0.31852028
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -9.999998
+      outSlope: -9.999998
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _curvePriceMultiplyer: 0.5
 --- !u!1 &7469874513889343365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2236,7 @@ MonoBehaviour:
   tilemapRenderer: {fileID: 7469874514394444114}
   tile: {fileID: 11400000, guid: 17afb29d76caf8b4380326ff6f26a74b, type: 2}
   fogToggleKey: 286
+  creativeFogAlpha: 0.8
 --- !u!1 &7469874514158545428
 GameObject:
   m_ObjectHideFlags: 0

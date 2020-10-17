@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class TaskMineRock : TaskBase<EntityWorker> {
 
-    [SerializeField]
+    [SerializeField, Min(0.1f)]
     private float _mineSpeed = 1f;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float _hungerCost = 5f;
-    [SerializeField]
-    private float _energyCost = 2f;
     [SerializeField]
     private GameObject stoneCrackParticlePrefab = null;
     [SerializeField]
@@ -66,14 +64,13 @@ public class TaskMineRock : TaskBase<EntityWorker> {
                 // Play particle (and color it)
                 Particle particle = this.owner.world.particles.spawn(this.stonePos.center, this.owner.depth, this.mineParticlePrefab);
                 if(particle != null) {
-                    LayerDataBase layerData = this.owner.world.mapGenData.getLayerFromDepth(this.owner.depth);
+                    LayerData layerData = this.owner.world.mapGenerator.getLayerFromDepth(this.owner.depth);
                     ParticleSystem.MainModule main = particle.ps.main;
-                    main.startColor = layerData.getGroundTint(this.stonePos.x, this.stonePos.y);
+                    main.startColor = layerData.getGroundTint(this.owner.world, this.stonePos.x, this.stonePos.y);
                 }
 
                 // Reduce hunger
                 this.owner.hunger.decrease(this._hungerCost);
-                this.owner.energy.decrease(this._energyCost);
 
                 // Remove the stone.
                 this.owner.world.setCell(this.stonePos, null);

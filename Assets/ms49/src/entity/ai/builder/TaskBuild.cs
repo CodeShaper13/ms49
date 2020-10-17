@@ -2,6 +2,9 @@
 
 public class TaskBuild : TaskBase<EntityWorker> {
 
+    [SerializeField, Min(0)]
+    private float _hungerCost = 2f;
+
     private float timeBuilding;
     private bool isHammering;
     private CellBehaviorBuildSite buildSite;
@@ -24,6 +27,8 @@ public class TaskBuild : TaskBase<EntityWorker> {
             this.timeBuilding += Time.deltaTime;
             if(this.timeBuilding >= this.buildSite.constructionTime) {
                 this.buildSite.placeIntoWorld();
+
+                this.owner.hunger.decrease(this._hungerCost);
             }
         }
     }

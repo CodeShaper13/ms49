@@ -23,11 +23,11 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
     }
 
     // Cached
-    private TooltipDisplayer tooltip;
+    private TooltipDisplayer tooltipDisplayer;
 
     private void Start() {
-        this.tooltip = GameObject.FindObjectOfType<TooltipDisplayer>();
-        if(this.tooltip == null) {
+        this.tooltipDisplayer = GameObject.FindObjectOfType<TooltipDisplayer>();
+        if(this.tooltipDisplayer == null) {
             Debug.LogWarning("Could not find TooltipDisplayer Component.  Tooltip will not be visible.");
         }
 
@@ -44,16 +44,16 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        if(this.tooltip != null) {
-            this.tooltip.setText(string.Empty);
+        if(this.tooltipDisplayer != null) {
+            this.tooltipDisplayer.setText(string.Empty);
             this.StopCoroutine("func");
         }
     }
 
     private IEnumerator func() {
         yield return new WaitForSecondsRealtime(this.delay);
-        if(this.tooltip != null) {
-            this.tooltip.setText(this.text);
+        if(this.tooltipDisplayer != null) {
+            this.tooltipDisplayer.setText(this.text);
         }
     }
 }

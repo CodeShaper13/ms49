@@ -31,7 +31,7 @@ public class Layer {
         this.temperatures = new float[this.size * this.size];
         this.heatSources = new float[this.size * this.size];
 
-        LayerDataBase layerData = this.world.mapGenData.getLayerFromDepth(this.depth);
+        LayerData layerData = this.world.mapGenerator.getLayerFromDepth(this.depth);
         if(layerData != null) { // Null if a layer is added through an external editor or the layer count is reduced
 
             // Set heat sourcess

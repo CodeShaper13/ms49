@@ -52,7 +52,7 @@ public class BuildAreaHighlighter : CellHighlightBase {
                 Sprite groundSprite = null;
                 Sprite objectSprite = null;
                 Sprite overlaySprite = null;
-                this.buildable.getPreviewSprites(ref groundSprite, ref objectSprite, ref overlaySprite);
+                this.buildable.getSprites(ref groundSprite, ref objectSprite, ref overlaySprite);
 
                 this.tileSr.sprite = objectSprite;
                 //this.tileSrOverlay.sprite = overlaySprite;

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
-  _objectTile: {fileID: 11400000, guid: f221f5df653a13c478a0697a57c788f1, type: 2}
+  _objectTile: {fileID: 0}
   _objectOverlayTile: {fileID: 0}
-  _rotationalOverride: 1
+  _rotationalOverride: 0
   up:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
@@ -50,5 +50,4 @@ MonoBehaviour:
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
   _tintObjectTile: 0
-  _behaviorPrefab: {fileID: 7125200192574475384, guid: 34e60103122be8241b82996c02c2890d,
-    type: 3}
+  _behaviorPrefab: {fileID: 0}

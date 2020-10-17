@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: TabTransportation
   m_EditorClassIdentifier: 
   _icon: {fileID: 8776617253460901132, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
-  _iconSelected: {fileID: 8051588982336062256, guid: b4bb1fbd6622a3f4cb1b419b6bff2984,
-    type: 3}
-  _tabName: ???
+  _tabName: Rails

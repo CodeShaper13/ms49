@@ -38,7 +38,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
                 // Create a new Worker
                 Main.instance.workerFactory.spawnWorker(
                     this.world,
-                    this.world.mapGenData.workerSpawnPoint,
+                    this.world.storage.workerSpawnPoint,
                     trainee.info,
                     trainee.type);
 

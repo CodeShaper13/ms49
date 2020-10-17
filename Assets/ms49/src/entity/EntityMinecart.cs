@@ -136,7 +136,6 @@ public class EntityMinecart : EntityBase, IClickable {
             } else {
                 this._fillRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
                 this._fillRenderer.flipX = this.facing == Rotation.LEFT;
-                this._fillRenderer.color = this.world.mapGenData.getLayerFromDepth(this.depth).getGroundTint(this.position.x, this.position.y);
             }
         }
     }
@@ -153,6 +152,10 @@ public class EntityMinecart : EntityBase, IClickable {
 
         this.inventory.readFromNbt(tag.getCompound("inventory"));
         this.facing = Rotation.ALL[Mathf.Clamp(tag.getInt("rotation"), 0, 3)]; // Clamp for safety
+    }
+
+    public override bool isDestroyable() {
+        return true;
     }
 
     /// <summary>

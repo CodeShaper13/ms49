@@ -14,7 +14,7 @@ public class BuildableMinecart : BuildableBase {
         return true;
     }
 
-    public override void getPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
+    protected override void applyPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
         groundSprite = this.railSprite;
         objectSprite = this.minecartSprite;
         overlaySprite = this.fillSprite;

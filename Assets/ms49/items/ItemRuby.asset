@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Ruby
   moneyValue: 500
   _includeInEconemy: 1
-  _graphColor: {r: 1, g: 1, b: 1, a: 1}
+  _graphColor: {r: 0.90196085, g: 0.28235295, b: 0.18039216, a: 1}
+  _darkGraphColor: {r: 0.6627451, g: 0.23137257, b: 0.23137257, a: 1}

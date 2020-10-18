@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TaskDestroy : TaskBase<EntityWorker> {
+public class TaskFeedSelf : TaskBase<EntityWorker> {
 
     public override bool continueExecuting() {
         throw new System.NotImplementedException();

@@ -84,7 +84,6 @@ public class PopupWindow : MonoBehaviour {
         openPopups.Remove(this);
         this.gameObject.SetActive(false);
 
-
         // Unpause the game if none of the open windows require the game to be paused.
         bool unPause = true;
         foreach(PopupWindow popup in openPopups) {

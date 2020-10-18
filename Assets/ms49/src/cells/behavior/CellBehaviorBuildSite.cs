@@ -85,17 +85,17 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         this.dustPs.Stop();
     }
 
-    public void setPrimary(CellData cell, float constructionTime) {
+    public void setPrimary(CellData cell, float constructionTime, bool addFog) {
         this.isPrimary = true;
         this.constructionTime = constructionTime;
-        this.entires.Add(new Entry(cell, this.pos));
+        this.entires.Add(new Entry(cell, this.pos, addFog));
     }
 
     /// <summary>
     /// Adds a child build site to this site.
     /// </summary>
-    public void addChildBuildSite(CellData cell, Position pos) {
-        this.entires.Add(new Entry(cell, pos));
+    public void addChildBuildSite(CellData cell, Position pos, bool addFog) {
+        this.entires.Add(new Entry(cell, pos, addFog));
     }
 
     /// <summary>
@@ -104,6 +104,9 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
     public void placeIntoWorld() {
         foreach(Entry e in this.entires) {
             this.world.setCell(e.position, e.cell, this.rotation);
+            if(e.addFogOnComplete) {
+                this.world.placeFog(e.position);
+            }
         }
     }
 
@@ -111,21 +114,25 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
 
         public readonly CellData cell;
         public readonly Position position;
+        public readonly bool addFogOnComplete;
 
         public Entry(NbtCompound tag) {
             this.cell = Main.instance.tileRegistry.getElement(tag.getInt("cellId"));
             this.position = new Position(tag.getVector3Int("offset"));
+            this.addFogOnComplete = tag.getBool("addFog");
         }
 
-        public Entry(CellData cell, Position offset) {
+        public Entry(CellData cell, Position offset, bool addFog) {
             this.cell = cell;
             this.position = offset;
+            this.addFogOnComplete = addFog;
         }
 
         public NbtCompound writeToNbt() {
             NbtCompound tag = new NbtCompound();
             tag.setTag("cellId", Main.instance.tileRegistry.getIdOfElement(this.cell));
             tag.setTag("offset", this.position.vec3Int);
+            tag.setTag("addFog", this.addFogOnComplete);
             return tag;
         }
     }

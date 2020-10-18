@@ -72,6 +72,8 @@ public class PopupBuild : PopupWorldReference {
     protected override void onOpen() {
         base.onOpen();
 
+        this.setSelectedBuildable(null);
+
         if(CameraController.instance.inCreativeMode || this.isBuilderHired()) {
             this._buildableBtnArea.gameObject.SetActive(true);
             this._tabBtnArea.gameObject.SetActive(true);
@@ -94,8 +96,6 @@ public class PopupBuild : PopupWorldReference {
 
                 tc.tabIconButton.gameObject.SetActive(atLeastOneUnlocked);
             }
-
-            this.setSelectedBuildable(null);
 
             this.scrollbar.value = 0f;
 
@@ -155,13 +155,12 @@ public class PopupBuild : PopupWorldReference {
         this.selectedBuildable = buildable;
         if(this.selectedBuildable != null) {
             if(this.selectedBuildable.isRotatable()) {
-                this.rot = Rotation.UP;
-                foreach(Rotation r in Rotation.ALL) {
-                    if(this.selectedBuildable.isRotationValid(r)) {
-                        this.rot = r;
-                        break;
-                    }
+                if(this.selectedBuildable.displayRotation == EnumRotation.NONE) {
+                    this.rot = Rotation.RIGHT;
+                } else {
+                    this.rot = Rotation.fromEnum(this.selectedBuildable.displayRotation);
                 }
+
             } else {
                 this.rot = null;
             }

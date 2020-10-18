@@ -4,6 +4,8 @@ public class TaskBuild : TaskBase<EntityWorker> {
 
     [SerializeField, Min(0)]
     private float _hungerCost = 2f;
+    [SerializeField, Min(0)]
+    private float _energyCost = 1f;
 
     private float timeBuilding;
     private bool isHammering;
@@ -29,6 +31,7 @@ public class TaskBuild : TaskBase<EntityWorker> {
                 this.buildSite.placeIntoWorld();
 
                 this.owner.hunger.decrease(this._hungerCost);
+                this.owner.energy.decrease(this._energyCost);
             }
         }
     }

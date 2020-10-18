@@ -527,6 +527,9 @@ TextureImporter:
   - first:
       213: 3362829996786808830
     second: tiles_oreBrick
+  - first:
+      213: -7654079778348290507
+    second: tiles_ladderTopShadow
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -3295,6 +3298,27 @@ TextureImporter:
       bones: []
       spriteID: ef77186a01c2bae20800000000000000
       internalID: 3362829996786808830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_ladderTopShadow
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53eac01aefe37c590800000000000000
+      internalID: -7654079778348290507
       vertices: []
       indices: 
       edges: []

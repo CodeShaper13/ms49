@@ -5,10 +5,17 @@ using UnityEngine;
 public class OreSettings {
 
     [SerializeField]
-    private CellData _cell = null;
-    public int veinCount = 1;
-    [MinMaxSlider(1, 12)]
-    public Vector2Int veinSize = new Vector2Int(1, 1);
+    private int _veinsPerChunk = 1;
+    [SerializeField]
+    private OreVeinData _veinData = null;
 
-    public CellData cell { get { return this._cell; } }
+    public CellData cell => this._veinData == null
+        ? null 
+        : this._veinData.cell;
+
+    public Vector2Int size => this._veinData == null
+        ? Vector2Int.one
+        : this._veinData.size;
+
+    public int veinsPerChunk => this._veinsPerChunk;
 }

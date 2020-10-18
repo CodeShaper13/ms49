@@ -20,9 +20,15 @@ MonoBehaviour:
   _overrideRotationMsg: '[r] to change direction'
   _displayRotation: 0
   _buildTime: {fileID: 0}
+  _customPreview: {fileID: 0}
   railSprite: {fileID: -9198056691032318685, guid: 83e6f32abdc9b244cbe11ac906944047,
     type: 3}
-  minecartSprite: {fileID: -5444995628053660433, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
-    type: 3}
-  fillSprite: {fileID: -1631286982127175646, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
-    type: 3}
+  _minecartSprites:
+    sideEmpty: {fileID: -5444995628053660433, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
+      type: 3}
+    sideFull: {fileID: -1631286982127175646, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
+      type: 3}
+    frontEmpty: {fileID: 84008059606723830, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
+      type: 3}
+    frontFull: {fileID: -4942957438270607783, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
+      type: 3}

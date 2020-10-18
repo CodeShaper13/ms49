@@ -9,7 +9,7 @@ public class WorldRenderer : MonoBehaviour {
     [SerializeField]
     private FogRenderer fogRenderer = null;
     [SerializeField]
-    private BinaryTilemapRenderer targetedRenderer = null;
+    private TargetedSquareTilemapRenderer _targetedRenderer = null;
 
     private Layer targetLayer;
     private World world;
@@ -30,7 +30,6 @@ public class WorldRenderer : MonoBehaviour {
             );
 
         this.fogRenderer.mapSize = size;
-        this.targetedRenderer.mapSize = size;
     }
 
     public void shutdown() {
@@ -39,7 +38,7 @@ public class WorldRenderer : MonoBehaviour {
 
         this.cellRenderer.clear();
         this.fogRenderer.clear();
-        this.targetedRenderer.clear();
+        this._targetedRenderer.clear();
     }
 
     private void Update() {
@@ -71,13 +70,13 @@ public class WorldRenderer : MonoBehaviour {
         }
     }
 
-    public void dirtyExcavationTarget(Position pos, bool highlighted) {
+    public void dirtyExcavationTarget(Position pos, TargetedSquare ts) {
         if(!this.initialized) {
             return;
         }
 
         if(this.targetLayer != null && pos.depth == this.targetLayer.depth) {
-            this.targetedRenderer.setTile(pos.x, pos.y, highlighted);
+            this._targetedRenderer.setTile(pos.x, pos.y, ts);
         }
     }
 
@@ -108,9 +107,9 @@ public class WorldRenderer : MonoBehaviour {
 
         this.fogRenderer.redraw(layer);
 
-        this.targetedRenderer.clear();
-        foreach(Position p in this.world.targetedSquares.list) {
-            this.dirtyExcavationTarget(p, true);
+        this._targetedRenderer.clear();
+        foreach(TargetedSquare ts in this.world.targetedSquares.list) {
+            this.dirtyExcavationTarget(ts.pos, ts);
         }
     }
 }

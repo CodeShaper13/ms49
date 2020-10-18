@@ -13,7 +13,9 @@ public class Economy : MonoBehaviour, ISaveableState {
     [SerializeField]
     private AnimationCurve _curve = null;
     [SerializeField]
-    public float _curvePriceMultiplyer = 0.5f; // TODO protect
+    private float _curvePriceMultiplyer = 0.5f;
+    [SerializeField, Tooltip("The required Milestone for the economy to function.")]
+    private MilestoneData requiredMilestone = null;
 
     private MinedItemRegistry reg;
     private float flatTimer;
@@ -31,6 +33,8 @@ public class Economy : MonoBehaviour, ISaveableState {
         if(Pause.isPaused()) {
             return;
         }
+
+        return; // TODO
 
         if(this.risingItem == null) {
             this.flatTimer -= Time.deltaTime;

@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Executes if the Cook has a full plate and there is a Worker who
+/// is waiting at a table without a plate.
+/// 
+/// Causes the Cook to deliver the plate to the Worker.
+/// </summary>
 public class TaskServeFood : TaskBase<EntityWorker> {
 
     [SerializeField]

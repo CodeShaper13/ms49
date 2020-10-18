@@ -15,7 +15,7 @@ MonoBehaviour:
   _milestoneName: 
   _requirements:
   - _method: {fileID: 11400000, guid: 9539fda1430df6744a87cf6d585d7e47, type: 2}
-    _targetAmount: 50
+    _targetAmount: 75
   _unlocksLayer: 0
   _unlockedBuildables:
   - {fileID: 11400000, guid: 28552ad5f88474e41aed230d2f113a39, type: 2}

@@ -3,10 +3,13 @@
 [RequireComponent(typeof(EntityWorker))]
 public class MoveHelper : MonoBehaviour {
 
-    [SerializeField]
-    [Tooltip("The Worker's speed in units per second.")]
+    [SerializeField, Min(0)]
+    [Tooltip("How many units the Entity moves per second.")]
     private float speed = 1f;
-
+    [SerializeField, Min(0)]
+    [Tooltip("How long it takes to climb a ladder in seconds.")]
+    private float _ladderClimbSpeed = 0.1f;
+    
     private EntityWorker worker;
     private float layerChangeProgress;
 
@@ -51,7 +54,7 @@ public class MoveHelper : MonoBehaviour {
 
                     this.layerChangeProgress += Time.deltaTime;
 
-                    if(this.layerChangeProgress > 1f) { // 1 is seconds to climb
+                    if(this.layerChangeProgress > this._ladderClimbSpeed) {
                         this.layerChangeProgress = 0;
                         this.worker.depth = currentWaypoint.depth;
                     }

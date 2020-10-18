@@ -25,6 +25,10 @@ public class LayerData : ScriptableObject {
     public float caveFillPercent;
     [Min(0)]
     public int caveSmoothPases = 5;
+    [SerializeField]
+    private int _f1 = 4;
+    [SerializeField]
+    private int _f2 = 4;
 
     [Space]
 
@@ -40,6 +44,8 @@ public class LayerData : ScriptableObject {
     public bool hasFog => this._hasFog;
     public float defaultTemperature => this._defaultTemperature;
     public bool generateBlockerRocks => this._generateBlockerRocks;
+    public int f1 => this._f1;
+    public int f2 => this._f2;
 
     /// <summary>
     /// Returns the Color to tint floor and wall Cells.

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LadderTop
   m_EditorClassIdentifier: 
   _isSolid: 0
-  _floorOverlayTile: {fileID: 0}
+  _floorOverlayTile: {fileID: 11400000, guid: 50842262ba0975b4aa275654a9bcf4fe, type: 2}
   _objectTile: {fileID: 11400000, guid: c47629fd02b1fe84bb659def1cdc2bcc, type: 2}
   _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 0
@@ -41,10 +41,10 @@ MonoBehaviour:
     _objectTile: {fileID: 0}
     _overlayTile: {fileID: 0}
     _effect: 0
-  _movementCost: 50
+  _movementCost: 0
   _canBuildOver: 0
   _isDestroyable: 1
-  _zMoveDirections: 0
+  _zMoveDirections: 2
   _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 0

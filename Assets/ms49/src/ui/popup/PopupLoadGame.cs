@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class PopupLoadGame : PopupWindow {
 
@@ -25,5 +26,9 @@ public class PopupLoadGame : PopupWindow {
         foreach(Transform t in this.worldTileWrapperObj) {
             GameObject.Destroy(t.gameObject);
         }
+    }
+
+    public void callback_openSaveFolder() {
+        EditorUtility.RevealInFinder(Main.SAVE_DIR);
     }
 }

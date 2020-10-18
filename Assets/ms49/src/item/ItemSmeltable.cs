@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "MS49/Item Smeltable", order = 2)]
+[CreateAssetMenu(fileName = "Item", menuName = "MS49/Item/Item Smeltable", order = 2)]
 public class ItemSmeltable : Item {
 
     [SerializeField]

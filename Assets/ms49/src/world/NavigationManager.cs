@@ -72,10 +72,12 @@ public class NavigationManager {
                     if(!this.openSet.Contains(neighbor)) {
                         this.openSet.Add(neighbor);
 
-                        //Debug.DrawLine(currentNode.worldPosition, neighbor.worldPosition, Color.white, 3);
-                        //Vector3 v = neighbor.worldPosition;
-                        //Debug.DrawLine(v + (Vector3.up + Vector3.right) * 0.1f, v + (Vector3.down + Vector3.left) * 0.1f, Color.black, 3f);
-                        //Debug.DrawLine(v + (Vector3.down + Vector3.right) * 0.1f, v + (Vector3.up + Vector3.left) * 0.1f, Color.black, 3f);
+                        /*
+                        Debug.DrawLine(currentNode.worldPosition, neighbor.worldPosition, Color.white, 3);
+                        Vector3 v = neighbor.worldPosition;
+                        Debug.DrawLine(v + (Vector3.up + Vector3.right) * 0.1f, v + (Vector3.down + Vector3.left) * 0.1f, Color.black, 3f);
+                        Debug.DrawLine(v + (Vector3.down + Vector3.right) * 0.1f, v + (Vector3.up + Vector3.left) * 0.1f, Color.black, 3f);
+                        */
                     } else {
                         this.openSet.UpdateItem(neighbor);
                     }

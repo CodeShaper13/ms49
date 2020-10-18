@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f1459268959d748a9df871013b8bb9, type: 3}
   m_Name: Layer5
   m_EditorClassIdentifier: 
-  tintColor: {r: 1, g: 1, b: 1, a: 1}
+  tintColor: {r: 0.36900002, g: 0.3385575, b: 0.33246902, a: 1}
   tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
   _hasFog: 1
   _defaultTemperature: 0.5
   _generateBlockerRocks: 1
   generateCaves: 1
-  caveFillPercent: 50
+  caveFillPercent: 64
   caveSmoothPases: 2
+  _f1: 5
+  _f2: 4
   oreSpawnSettings:
-  - _cell: {fileID: 11400000, guid: b3a0c4c11c71bef46ae7f0c59256b274, type: 2}
-    veinCount: 0
-    veinSize: {x: 0, y: 0}
-  - _cell: {fileID: 11400000, guid: 409d1ddf943b9a3479be33bec427faa2, type: 2}
-    veinCount: 8
-    veinSize: {x: 1, y: 2}
+  - _veinsPerChunk: 6
+    _veinData: {fileID: 11400000, guid: f49172a8dfac092419bd80fb976dcc5d, type: 2}
+  - _veinsPerChunk: 8
+    _veinData: {fileID: 11400000, guid: 568a9ed5e5733734086d6e6359c67a27, type: 2}
   lakeType: 2
-  lakeChance: 60
+  lakeChance: 100

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildAreaHighlighter : CellHighlightBase {
 
@@ -20,12 +19,18 @@ public class BuildAreaHighlighter : CellHighlightBase {
         bool isValid = this.buildable.isValidLocation(this.world, pos, this.popup.rot);
 
         if(isValid) {
-            if(this.buildable is BuildableTile) {
+            if(this.buildable is ISpritePreview) {
+                this.cellRenderer.gameObject.SetActive(false);
+                this.tileSr.gameObject.SetActive(true);
+
+                this.tileSr.sprite = ((ISpritePreview)this.buildable).getPreviewSprite(this.world, pos);
+
+            } else if(this.buildable is BuildableTile) {
                 this.cellRenderer.gameObject.SetActive(true);
                 this.tileSr.gameObject.SetActive(false);
 
                 this.cellRenderer.initializedRenderer(
-                    Math.Max(this.buildable.getHighlightWidth(), this.buildable.getHighlightHeight()),
+                    Mathf.Max(this.buildable.getHighlightWidth(), this.buildable.getHighlightHeight()),
                     null,
                     (x, y) => {
                         CellData data;
@@ -45,21 +50,15 @@ public class BuildAreaHighlighter : CellHighlightBase {
 
                 this.cellRenderer.totalRedraw = true;
             }
-            else {
-                this.cellRenderer.gameObject.SetActive(false);
-                this.tileSr.gameObject.SetActive(true);
-
-                Sprite groundSprite = null;
-                Sprite objectSprite = null;
-                Sprite overlaySprite = null;
-                this.buildable.getSprites(ref groundSprite, ref objectSprite, ref overlaySprite);
-
-                this.tileSr.sprite = objectSprite;
-                //this.tileSrOverlay.sprite = overlaySprite;
-            }
         } else {
             this.cellRenderer.gameObject.SetActive(false);
             this.tileSr.gameObject.SetActive(false);
+        }
+
+        if(isValid && this.world.money.value >= this.buildable.cost) {
+            this.setValidColor();
+        } else {
+            this.setInvalidColor();
         }
 
         return isValid;

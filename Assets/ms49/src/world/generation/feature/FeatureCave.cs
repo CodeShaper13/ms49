@@ -8,10 +8,6 @@ public class FeatureCave :FeatureBase {
     [SerializeField]
     public CellData lavaTile = null;
     [SerializeField]
-    public float f1 = 4;
-    [SerializeField]
-    public float f2 = 4;
-    [SerializeField]
     private float roomMinSize = 1f;
     [SerializeField]
     private float roomMaxSize = 100f;
@@ -27,7 +23,7 @@ public class FeatureCave :FeatureBase {
         this.randomlyFillMap(rnd, layerData.caveFillPercent, accessor.size);
 
         for(int i = 0; i < layerData.caveSmoothPases; i++) {
-            this.smoothMap(accessor.size);
+            this.smoothMap(layerData, accessor.size);
         }
 
         List<List<Vector2Int>> roomRegions = this.GetRegions(0, accessor.size);
@@ -141,15 +137,15 @@ public class FeatureCave :FeatureBase {
         }
     }
 
-    private void smoothMap(int mapSize) {
+    private void smoothMap(LayerData layer, int mapSize) {
         for(int x = 0; x < mapSize; x++) {
             for(int y = 0; y < mapSize; y++) {
                 int neighbourWallTiles = this.getSurroundingWallCount(mapSize, x, y);
 
-                if(neighbourWallTiles > this.f1) {
+                if(neighbourWallTiles > layer.f1) {
                     this.map[x, y] = 1; // Stone
                 }
-                else if(neighbourWallTiles < this.f2) {
+                else if(neighbourWallTiles < layer.f2) {
                     this.map[x, y] = 0; // Air
                 }
 

@@ -41,10 +41,10 @@ MonoBehaviour:
     _objectTile: {fileID: 0}
     _overlayTile: {fileID: 0}
     _effect: 0
-  _movementCost: 50
+  _movementCost: 0
   _canBuildOver: 0
   _isDestroyable: 1
-  _zMoveDirections: 0
+  _zMoveDirections: 1
   _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 0

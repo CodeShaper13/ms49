@@ -17,7 +17,7 @@ public class FeatureOres : FeatureBase {
 
                 foreach(OreSettings setting in layerData.oreSpawnSettings) {
                     if(setting != null && setting.cell != null) {
-                        for(int i = 0; i < setting.veinCount; i++) {
+                        for(int i = 0; i < setting.veinsPerChunk; i++) {
                             this.makeVein(rnd, setting.cell, setting, accessor, chunkPosX, chunkPosY);
                         }
                     }
@@ -30,7 +30,7 @@ public class FeatureOres : FeatureBase {
         int chunkX = rnd.Next(0, 16); // Don't start on edge cells.
         int chunkY = rnd.Next(0, 16);
 
-        int size = rnd.Next(setting.veinSize.x, setting.veinSize.y + 1);
+        int size = rnd.Next(setting.size.x, setting.size.y + 1);
 
         Rotation lastDir = null;
         for(int i = 0; i < size; i++) {

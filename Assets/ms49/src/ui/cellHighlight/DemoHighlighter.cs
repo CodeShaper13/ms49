@@ -21,16 +21,21 @@ public class DemoHighlighter : CellHighlightBase {
                 EntityBase e = hit.transform.GetComponent<EntityBase>();
                 if(e.isDestroyable()) {
                     this.destroyableEntity = e;
+
+                    this.setValidColor();
                     return true;
                 }
             }
 
             // Check if the mouse is over a Destroyable cell.
             if(this.world.getCellState(pos).data.isDestroyable && this.world.plotManager.isOwned(pos)) {
+                this.setValidColor();
                 return true;
             }
         }
-        return false;
+
+        this.setInvalidColor();
+        return true;
     }
 
     protected override void onClick(Position pos, bool isValid) {

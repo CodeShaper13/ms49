@@ -5,8 +5,16 @@ public class PopupDeleteSave : PopupWindow {
 
     [SerializeField]
     private Text textSaveName = null;
+    [SerializeField]
+    private PopupLoadGame _loadGamePopup = null;
 
     private SaveFile save;
+
+    protected override void onClose() {
+        base.onClose();
+
+        this._loadGamePopup.openAdditive();
+    }
 
     public void setTargetSave(SaveFile save) {
         this.save = save;
@@ -16,6 +24,7 @@ public class PopupDeleteSave : PopupWindow {
 
     public void callback() {
         this.save.delete();
-        this.close();
+
+        this._loadGamePopup.open();
     }
 }

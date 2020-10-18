@@ -59,9 +59,9 @@ public class BuildableTile : BuildableBase {
         else {
             world.setCell(pos, highlight.buildSiteCell, rotation);
             CellBehaviorBuildSite site = world.getBehavior<CellBehaviorBuildSite>(pos);
-            site.setPrimary(this.cell, this.buildTime);
+            site.setPrimary(this.cell, this.buildTime, this.fogOption == EnumFogOption.PLACE);
         }
 
-        this.applyFogOpperation(world, pos);
+        //this.applyFogOpperation(world, pos);
     }
 }

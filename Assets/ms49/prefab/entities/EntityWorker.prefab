@@ -905,9 +905,9 @@ MonoBehaviour:
   _priority: 0
   stat: {fileID: 1754342318740270011}
   onlyExecuteWhenAwake: 1
-  randomDecrease: 1
+  randomDecrease: 0
   decreaseRate: 0.25
-  range: {x: 0.15, y: 0.35}
+  range: {x: 0.15, y: 0.5}
 --- !u!114 &1195488916946094333
 MonoBehaviour:
   m_ObjectHideFlags: 0

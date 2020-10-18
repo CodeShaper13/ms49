@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48f1459268959d748a9df871013b8bb9, type: 3}
-  m_Name: Layer2BrownDark
+  m_Name: Layer2
   m_EditorClassIdentifier: 
-  tintColor: {r: 0.47450984, g: 0.27450982, b: 0.29411766, a: 1}
+  tintColor: {r: 0.6835336, g: 0.68228, b: 0.74, a: 1}
   tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
   _hasFog: 1
@@ -21,15 +21,16 @@ MonoBehaviour:
   generateCaves: 1
   caveFillPercent: 50
   caveSmoothPases: 2
+  _f1: 4
+  _f2: 2
   oreSpawnSettings:
-  - _cell: {fileID: 11400000, guid: c707b817574329a449f83660c2961e31, type: 2}
-    veinCount: 8
-    veinSize: {x: 3, y: 6}
-  - _cell: {fileID: 11400000, guid: a59a1921820c7174d956a088eb133e3c, type: 2}
-    veinCount: 16
-    veinSize: {x: 2, y: 3}
-  - _cell: {fileID: 11400000, guid: ba43be8abde0aca4ebb7a5af35cfbfd2, type: 2}
-    veinCount: 16
-    veinSize: {x: 2, y: 3}
+  - _veinsPerChunk: 5
+    _veinData: {fileID: 11400000, guid: 2009d878373785d448498ad11435618f, type: 2}
+  - _veinsPerChunk: 8
+    _veinData: {fileID: 11400000, guid: 4c50c295cabcce84ba52c8cef3a6b9c6, type: 2}
+  - _veinsPerChunk: 8
+    _veinData: {fileID: 11400000, guid: 619a2ad012781e946a85b3c842e63aad, type: 2}
+  - _veinsPerChunk: 1
+    _veinData: {fileID: 11400000, guid: 403c5d9708f7d5f468569cb58ff74866, type: 2}
   lakeType: 1
   lakeChance: 20

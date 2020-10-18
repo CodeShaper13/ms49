@@ -6,6 +6,8 @@ public class CandidateButton : MonoBehaviour {
     [SerializeField]
     private Text textName = null;
     [SerializeField]
+    private Text _textType = null;
+    [SerializeField]
     private Text textPay = null;
     [SerializeField]
     private Text textPersonality = null;
@@ -34,6 +36,7 @@ public class CandidateButton : MonoBehaviour {
             WorkerInfo info = this.candidate.info;
 
             this.textName.text = info.fullName;
+            this._textType.text = c.type.typeName;
             this.textPay.text = "$" + info.pay + " / Day";
             this.textPersonality.text = Main.instance.personalities.getDescription(info.personality);
 

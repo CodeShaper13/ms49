@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Support
   m_EditorClassIdentifier: 
   structureName: Support
-  _cost: 25
-  _description: Supports tunnels and rooms to prevent cave ins
-  _tab: {fileID: 0}
+  _cost: 100
+  _description: Supports tunnels and rooms so you can keep digging
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: 315a3d62d5f65e0409aec7720c86ce33, type: 2}

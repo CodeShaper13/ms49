@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BuildTime_Fast
   m_EditorClassIdentifier: 
   docString: 
-  initialValue: 1
+  initialValue: 2

@@ -43,9 +43,9 @@ MonoBehaviour:
     _effect: 0
   _movementCost: -1
   _canBuildOver: 0
-  _isDestroyable: 1
+  _isDestroyable: 0
   _zMoveDirections: 0
-  _flammable: 1
+  _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 1
   _includeInFogFloodLift: 0

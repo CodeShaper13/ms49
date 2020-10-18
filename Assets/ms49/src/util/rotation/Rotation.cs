@@ -36,6 +36,9 @@ public class Rotation {
     public readonly EnumAxis axis;
     public readonly EnumRotation enumRot;
 
+    /// <summary>
+    /// Converts an EnumRotation to a Rotation.  If the enum is None, null is returned.
+    /// </summary>
     public static Rotation fromEnum(EnumRotation rotation) {
         if(rotation == EnumRotation.NONE) {
             return null;

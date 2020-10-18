@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class TaskMineRock : TaskBase<EntityWorker> {
     private float _mineSpeed = 1f;
     [SerializeField, Min(0)]
     private float _hungerCost = 5f;
+    [SerializeField, Min(0)]
+    private float _energyCost = 2f;
     [SerializeField]
     private GameObject stoneCrackParticlePrefab = null;
     [SerializeField]
@@ -69,12 +72,13 @@ public class TaskMineRock : TaskBase<EntityWorker> {
                     main.startColor = layerData.getGroundTint(this.owner.world, this.stonePos.x, this.stonePos.y);
                 }
 
-                // Reduce hunger
+                // Reduce hunger and energy
                 this.owner.hunger.decrease(this._hungerCost);
+                this.owner.energy.decrease(this._energyCost);
 
                 // Remove the stone.
                 this.owner.world.setCell(this.stonePos, null);
-                this.owner.world.targetedSquares.setTargeted(this.stonePos, false);
+                this.owner.world.targetedSquares.stopTargeting(this.stonePos);
                 this.owner.world.liftFog(this.stonePos);
                 this.owner.world.tryCollapse(this.stonePos);
 
@@ -101,14 +105,31 @@ public class TaskMineRock : TaskBase<EntityWorker> {
     /// no stone is found, false is returned.
     /// </summary>
     private bool findClosestStone(Vector2 searchOrgin) {
-        HashSet<Position> targetedPosList = this.owner.world.targetedSquares.list;
+        HashSet<TargetedSquare> targetedPosList = this.owner.world.targetedSquares.list;
 
-        foreach(Position targetedPos in targetedPosList.OrderBy(x => x.distance(this.owner.position)).ToList()) {
+        bool foundSquare = this.method((ts) => { return ts.isPriority; });
+
+        if(foundSquare) {
+            return true;
+        } else {
+            return this.method((ts) => { return !ts.isPriority; });
+        }
+    }
+
+    private bool method(Func<TargetedSquare, bool> func) {
+        HashSet<TargetedSquare> targetedPosList = this.owner.world.targetedSquares.list;
+
+        foreach(TargetedSquare ts in targetedPosList.OrderBy(x => x.pos.distance(this.owner.position)).ToList()) {
+            if(!func(ts)) {
+                continue;
+            }
+
             // Quick check to make sure the targeted stone is not totally surrounded, as it often is
             bool fullySurrounded = true;
             foreach(Rotation r in Rotation.ALL) {
-                Position neighborPos = targetedPos + r;
-                if(this.owner.world.getCellState(targetedPos + r).data.isWalkable) {
+                Position neighborPos = ts.pos + r;
+
+                if(!this.owner.world.isOutOfBounds(neighborPos) && this.owner.world.getCellState(neighborPos).data.isWalkable) {
                     fullySurrounded = false;
                     break;
                 }
@@ -117,9 +138,9 @@ public class TaskMineRock : TaskBase<EntityWorker> {
                 continue;
             }
 
-            Position? dest = this.moveHelper.setDestination(targetedPos, true);
+            Position? dest = this.moveHelper.setDestination(ts.pos, true);
             if(dest != null) {
-                this.stonePos = targetedPos;
+                this.stonePos = ts.pos;
                 return true; // Found square with a path.
             }
         }

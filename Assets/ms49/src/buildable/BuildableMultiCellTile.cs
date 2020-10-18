@@ -71,7 +71,7 @@ public class BuildableMultiCellTile : BuildableTile {
             world.setCell(pos, highlight.buildSiteCell, rotation);
             world.liftFog(pos);
             site = world.getBehavior<CellBehaviorBuildSite>(pos);
-            site.setPrimary(this.getCellAt(0, 0), this.buildTime);
+            site.setPrimary(this.getCellAt(0, 0), this.buildTime, this.fogOption == EnumFogOption.PLACE);
         }
 
         for(int x = 0; x < this.getHighlightWidth(); x++) {
@@ -83,7 +83,7 @@ public class BuildableMultiCellTile : BuildableTile {
                     if(instantBuild) {
                         world.setCell(pos1, data, rotation);
                     } else {
-                        site.addChildBuildSite(data, pos.add(x, y));
+                        site.addChildBuildSite(data, pos.add(x, y), this.fogOption == EnumFogOption.PLACE);
 
                         // Skip over the middle cell, it's already been placed.
                         if(x == 0 && y == 0) {

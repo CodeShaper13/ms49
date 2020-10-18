@@ -6,10 +6,15 @@ public class PopupMine : PopupWorldReference {
     [SerializeField]
     private AudioSource audioCellToggle = null;
 
+    private bool markAsPriority = false;
+
     protected override void onUpdate() {
         base.onUpdate();
 
-        if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
+        bool leftBtn = Input.GetMouseButtonDown(0);
+        bool rightBtn = Input.GetMouseButtonDown(1);
+
+        if((rightBtn || leftBtn) && !EventSystem.current.IsPointerOverGameObject()) {
             Position pos = CameraController.instance.getMousePos();
 
             CellData cell = this.world.getCellState(pos).data;
@@ -21,16 +26,25 @@ public class PopupMine : PopupWorldReference {
                     this.world.setCell(pos, null, true);
                     this.world.liftFog(pos);
                     this.world.tryCollapse(pos);
-                    this.world.targetedSquares.setTargeted(pos, false);
+                    this.world.targetedSquares.stopTargeting(pos);
                     this.playSfx();
                 }
                 else {
                     if(this.world.plotManager.isOwned(pos)) {
-                        // Mark to be removed.
                         if(this.world.targetedSquares.isTargeted(pos)) {
-                            this.world.targetedSquares.setTargeted(pos, false);
+                            if(!rightBtn) {
+                                this.world.targetedSquares.stopTargeting(pos);
+                            } else {
+                                if(this.world.targetedSquares.isPriority(pos)) {
+                                    this.world.targetedSquares.stopTargeting(pos);
+                                } else {
+                                    this.world.targetedSquares.stopTargeting(pos);
+                                    this.world.targetedSquares.startTargeting(pos, true);
+                                }
+                            }
                         } else {
-                            this.world.targetedSquares.setTargeted(pos, true);
+                            // Make sure this won't leave too big of an open spot // TODO
+                            this.world.targetedSquares.startTargeting(pos, rightBtn);
                         }
 
                         this.playSfx();

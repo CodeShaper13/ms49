@@ -12,7 +12,7 @@ public class ExpandAnimation : MonoBehaviour {
     private Vector3 originalScale;
 
     private void OnEnable() {
-        this.originalScale = this.transform.localScale;
+        this.originalScale = Vector3.one; // this.transform.localScale;
         this.transform.localScale = Vector3.zero;
         this.timeOpen = 0f;
     }

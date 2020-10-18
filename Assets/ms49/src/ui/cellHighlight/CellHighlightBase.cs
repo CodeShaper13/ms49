@@ -38,13 +38,7 @@ public abstract class CellHighlightBase : MonoBehaviour {
                 valid = this.onUpdate(pos);
             }
 
-            if(valid) {
-                this.setValid();
-            } else {
-                this.setInvalid();
-            }
-
-            if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
+            if(valid && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
                 this.onClick(pos, valid);
             }
         }
@@ -65,14 +59,14 @@ public abstract class CellHighlightBase : MonoBehaviour {
     /// <summary>
     /// Called to change the highlight to a valid visual.
     /// </summary>
-    public virtual void setValid() {
+    public virtual void setValidColor() {
         this.sr.color = this.validColor;
     }
 
     /// <summary>
     /// Called to change the highlight to a invalid visual.
     /// </summary>
-    public virtual void setInvalid() {
+    public virtual void setInvalidColor() {
         this.sr.color = this.invalidColor;
     }
 

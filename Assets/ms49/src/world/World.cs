@@ -197,6 +197,7 @@ public class World : MonoBehaviour {
 
     public CellState getCellState(Position pos) {
         if(this.isOutOfBounds(pos)) {
+            Debug.Log("Something requested a CellState that is out of bounds.  It is recomended to use World#isOutOfBounds() first.");
             return null;
         }
 
@@ -283,7 +284,7 @@ public class World : MonoBehaviour {
                 this.StartCoroutine(this.floodLiftFog(changedCells));                
             } else {
                 layer.fog.setFog(pos.x, pos.y, false);
-                this.targetedSquares.setTargeted(pos, false);
+                this.targetedSquares.stopTargeting(pos);
             }
 
             this.worldRenderer.dirtyFogmap(pos, false);

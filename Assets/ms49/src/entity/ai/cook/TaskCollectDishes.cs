@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 /// <summary>
 /// Executes if the owner has no plate in hand and there is
-/// a table with a dirt plate.
+/// a table with a dirty plate.
 /// 
 /// This will make the owner travel to a table with a dirty
 /// plate and pick it up.

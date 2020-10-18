@@ -2071,6 +2071,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _curvePriceMultiplyer: 0.5
+  requiredMilestone: {fileID: 0}
 --- !u!1 &7469874513889343365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,7 +2298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7469874514271752624}
-  - component: {fileID: 7469874514271752591}
+  - component: {fileID: 3865902745022389021}
   m_Layer: 0
   m_Name: TargetedRenderer
   m_TagString: Untagged
@@ -2320,7 +2321,7 @@ Transform:
   m_Father: {fileID: 7469874515189447460}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7469874514271752591
+--- !u!114 &3865902745022389021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2329,12 +2330,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7469874514271752625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac9c6567cce0bf439e75075266de155, type: 3}
+  m_Script: {fileID: 11500000, guid: a5e15c62d5cd4a2419ab4eef62f349ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 7469874514570082070}
-  tile: {fileID: 11400000, guid: b9bb204cf08dc7b41acbdb9050fc1b76, type: 2}
-  mapSize: 0
+  _tilemap: {fileID: 7469874514570082070}
+  _tileNormalPriority: {fileID: 11400000, guid: b9bb204cf08dc7b41acbdb9050fc1b76,
+    type: 2}
+  _tileHighPriority: {fileID: 11400000, guid: f296f1cb4f4e6ff4097cdfe98e5176ff, type: 2}
 --- !u!1 &7469874514394444116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2851,7 +2853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellRenderer: {fileID: 7469874514158545426}
   fogRenderer: {fileID: 2104249311531333759}
-  targetedRenderer: {fileID: 7469874514271752591}
+  _targetedRenderer: {fileID: 3865902745022389021}
 --- !u!1 &7864809325708799625
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@
     using UnityEditor;
 #endif
 
-[CreateAssetMenu(fileName = "Item", menuName = "MS49/Item", order = 1)]
+[CreateAssetMenu(fileName = "Item", menuName = "MS49/Item/Item", order = 1)]
 public class Item : ScriptableObject {
 
     public Sprite sprite;

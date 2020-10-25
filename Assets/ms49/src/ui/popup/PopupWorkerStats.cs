@@ -5,13 +5,19 @@ using UnityEngine.UI;
 public class PopupWorkerStats : PopupWindow {
 
     [SerializeField]
-    private Text nameText = null;
+    private Text _headerText = null;
     [SerializeField]
     private Text infoText = null;
     [SerializeField]
-    private Text statsText = null;
-    [SerializeField]
     private FaceUiPreview preview = null;
+    [SerializeField]
+    private Slider _sliderEnergy = null;
+    [SerializeField]
+    private Slider _sliderHunger = null;
+    [SerializeField]
+    private Slider _sliderTemperature = null;
+    [SerializeField]
+    private Slider _sliderHappiness = null;
 
     private EntityWorker worker;
     private string infoTextTemplate;
@@ -27,34 +33,26 @@ public class PopupWorkerStats : PopupWindow {
 
         WorkerInfo info = this.worker.info;
 
-        this.nameText.text = (info.firstName + " " + info.lastName).ToLower();
+        this._headerText.text = info.lastName.ToLower();
 
         this.infoText.text = string.Format(this.infoTextTemplate,
-            this.worker.type.typeName,
-            info.pay,
-            Main.instance.personalities.getDescription(info.personality));
+            this.worker.info.fullName, // Name
+            this.worker.type.typeName, // Job
+            info.pay, // Pay
+            info.personality.displayName); // Personality
+
+        this.preview.setTarget(this.worker);
     }
 
     protected override void onUpdate() {
         base.onUpdate();
 
         if(this.worker != null) {
-            this.preview.setTarget(this.worker);
-
-            StringBuilder sb = new StringBuilder();
-            this.worker.writeWorkerInfo(sb);
-            this.statsText.text = sb.ToString();
+            this.func(this._sliderEnergy, this.worker.energy);
+            this.func(this._sliderHunger, this.worker.hunger);
+            this.func(this._sliderTemperature, this.worker.temperature);
+            this.func(this._sliderHappiness, this.worker.happiness);
         }
-    }
-
-    /// <summary>
-    /// Centers the Camera on the Worker and closes the UI.
-    /// </summary>
-    public void callback_find() {
-        if(this.worker != null) {
-            CameraController.instance.setCameraPos(this.worker.worldPos);
-        }
-        this.close();
     }
 
     public void callback_fire() {
@@ -62,5 +60,15 @@ public class PopupWorkerStats : PopupWindow {
             this.worker.world.entities.remove(this.worker);
         }
         this.close();
+    }
+
+    private void func(Slider slider, UnlockableStat stat) {
+        slider.transform.parent.gameObject.SetActive(stat.isStatEnabled());
+
+        if(stat.isStatEnabled()) {
+            slider.minValue = stat.minValue;
+            slider.maxValue = stat.maxValue;
+            slider.value = stat.value;
+        }
     }
 }

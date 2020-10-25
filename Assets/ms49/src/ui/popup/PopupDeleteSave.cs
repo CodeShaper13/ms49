@@ -25,6 +25,6 @@ public class PopupDeleteSave : PopupWindow {
     public void callback() {
         this.save.delete();
 
-        this._loadGamePopup.open();
+        this.close();
     }
 }

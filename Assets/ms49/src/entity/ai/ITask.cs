@@ -9,19 +9,19 @@
     bool shouldExecute();
 
     /// <summary>
+    /// Called every frame to determine if the AI should execute.
+    /// </summary>
+    bool continueExecuting();
+
+    /// <summary>
     /// Called when the task first starts executing.
     /// </summary>
-    void startExecute();
+    void onTaskStart();
 
     /// <summary>
     /// Called every frame that the task is running to continue "running" it.
     /// </summary>
     void preform();
-
-    /// <summary>
-    /// Called every frame to determine if the AI should execute.
-    /// </summary>
-    bool continueExecuting();
 
     /// <summary>
     /// Called when the task has stopped running.  This should reset the
@@ -31,9 +31,10 @@
     /// </summary>
     void onTaskStop();
 
+    /// <summary>
+    /// True should be returned if the tasks can be stopped by one with a lower priority.
+    /// </summary>
+    bool canBeInterupted();
+
     bool allowLowerPriority();
-
-    void startPreformCoroutine();
-
-    void stopCoroutine();
 }

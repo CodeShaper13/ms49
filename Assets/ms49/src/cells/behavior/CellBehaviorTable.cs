@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using fNbt;
+using System.Collections.Generic;
 
 public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
 
@@ -36,6 +37,13 @@ public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
         this.updateChairFlag();
     }
 
+    public override void getDebugText(List<string> s) {
+        base.getDebugText(s);
+
+        s.Add("PlateState: " + this.plateState);
+        s.Add("Chair Position: " + this.chairPos);
+    }
+
     public void readFromNbt(NbtCompound tag) {
         this.plateState = (EnumPlateState)tag.getInt("plateState");
     }
@@ -52,18 +60,29 @@ public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
     }
 
     private void updateChairFlag() {
+        if(this.chair != null) {
+            // Don't do anything, there is still a chair.
+            return;
+        }
+
         foreach(Rotation r in Rotation.ALL) {
             Position p = this.pos + r;
-            CellState state = this.world.getCellState(p);
-            if(state != null && state.data == this.chairCell && p != this.chairPos) {
-                this.chair = state;
-                this.chairPos = p;
-                return;
+            if(!this.world.isOutOfBounds(p)) {
+                CellState state = this.world.getCellState(p);
+                if(state.data == this.chairCell) {
+                    // An adjacent chair was found
+                    this.chair = state;
+                    this.chairPos = p;
+                    break;
+                }
             }
         }
 
-        this.chair = null;
-        this.setOccupant(null);
+        if(this.chair == null) {
+            // Chair is gone, kick the worker out
+
+            this.setOccupant(null);
+        }
     }
 
     private Sprite getPlateSprite() {

@@ -1,15 +1,19 @@
 ﻿using System;
 using UnityEngine;
-using fNbt;
 
 #if UNITY_EDITOR
-using UnityEditor;
+    using UnityEditor;
 #endif
 
 [Serializable]
 public struct Position {
 
     public const float LAYER_DISTANCE_COST = 25;
+
+    public static Position up => new Position(0, 1, 0);
+    public static Position down => new Position(0, -1, 0);
+    public static Position right => new Position(1, 0, 0);
+    public static Position left => new Position(-1, 0, 0);
 
     public int x;
     public int y;

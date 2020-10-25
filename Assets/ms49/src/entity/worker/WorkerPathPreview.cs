@@ -7,7 +7,7 @@ public class WorkerPathPreview : MonoBehaviour {
     [SerializeField]
     private LineRenderer lr = null;
     [SerializeField]
-    private MoveHelper moveHelper = null;
+    private PathfindingAgent moveHelper = null;
     [SerializeField]
     private float zValue = -1;
 

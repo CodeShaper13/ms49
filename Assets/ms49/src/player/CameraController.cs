@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
     private Camera mainCam;
     private PixelPerfectCamera ppc;
     private Vector3 mousePosLastFrame;
-    private Transform cameraSnapDestination;
+    private EntityBase followingTarget;
 
     public int currentLayer { get; private set; } = -1;
     public bool inCreativeMode { get; set; }
@@ -62,11 +62,12 @@ public class CameraController : MonoBehaviour {
 
     private void Update() {
         if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
-            if(this.cameraSnapDestination != null) {
+            if(this.followingTarget != null) {
                 this.setCameraPos(Vector2.MoveTowards(
                     this.getCameraPos(),
-                    this.cameraSnapDestination.position,
+                    this.followingTarget.transform.position,
                     this.cameraSnapSpeed * Time.deltaTime));
+                this.changeLayer(this.followingTarget.depth, false);
             }
 
             this.moveCamera();
@@ -80,14 +81,14 @@ public class CameraController : MonoBehaviour {
             if(Input.GetKeyDown(this.keys.layerHigherKey)) {
                 this.changeLayer(this.currentLayer - 1);
 
-                this.cameraSnapDestination = null;
+                this.followingTarget = null;
             }
 
             // Go deeper (down a layer).
             if(Input.GetKeyDown(this.keys.layerLowerKey)) {
                 this.changeLayer(this.currentLayer + 1);
 
-                this.cameraSnapDestination = null;
+                this.followingTarget = null;
             }
 
             // Toggle creative.
@@ -144,10 +145,22 @@ public class CameraController : MonoBehaviour {
     public Vector2 getMousePosInWorldUnits() {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
-    public RaycastHit2D getMouseOver() {
-        return Physics2D.Raycast(
+
+    /// <summary>
+    /// Returns the Entity under the mouse.  Null is retutned if
+    /// there is no entity.
+    /// Only Entitys with colliders will be detected.
+    /// </summary>
+    public EntityBase getMouseOver() {
+        RaycastHit2D hit = Physics2D.Raycast(
             this.getMousePosInWorldUnits(),
             Vector2.zero);
+
+        if(hit.collider != null) {
+            return hit.collider.GetComponent<EntityBase>();
+        }
+
+        return null;
     }
 
     public Vector2 getCameraPos() {
@@ -158,8 +171,8 @@ public class CameraController : MonoBehaviour {
         this.mainCam.transform.position = pos;
     }
 
-    public void followTarget(Transform trans) {
-        this.cameraSnapDestination = trans;
+    public void followTarget(EntityBase entity) {
+        this.followingTarget = entity;
     }
 
     public void setZoom(int newZoom) {
@@ -189,33 +202,19 @@ public class CameraController : MonoBehaviour {
     }
 
     private void detectClicks() {
-        bool leftMouse = Input.GetMouseButtonDown(0);
-        bool rightMouse = Input.GetMouseButtonDown(1);
-        bool middleMouse = Input.GetMouseButtonDown(2);
-
         // Detect clicking
-        if((leftMouse || rightMouse || middleMouse) && !EventSystem.current.IsPointerOverGameObject()) {
-            if(rightMouse) {
-                Position pos = this.getMousePos();
-                if(this.world.plotManager.isOwned(pos)) {
-                    CellBehavior meta = world.getCellState(pos).behavior;
-                    if(meta != null) {
-                        meta.onRightClick();
-                    }
+        if(Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) {
+            Position pos = this.getMousePos();
+            if(this.world.plotManager.isOwned(pos)) {
+                CellBehavior meta = world.getCellState(pos).behavior;
+                if(meta != null) {
+                    meta.onRightClick();
                 }
             }
 
-            RaycastHit2D hit = this.getMouseOver();
-            if(hit.collider != null) {
-                IClickable clickable = hit.collider.GetComponent<IClickable>();
-                if(clickable != null) {
-                    if(leftMouse) {
-                        clickable.onLeftClick();
-                    }
-                    if(rightMouse) {
-                        clickable.onRightClick();
-                    }
-                }
+            EntityBase e = this.getMouseOver();
+            if(e != null) {
+                e.onRightClick();
             }
         }
     }
@@ -226,7 +225,7 @@ public class CameraController : MonoBehaviour {
             Vector3 movement = this.mousePosLastFrame - Input.mousePosition;
             this.mainCam.transform.position += movement * this.mousePanSpeed * Time.deltaTime;
 
-            this.cameraSnapDestination = null;
+            this.followingTarget = null;
         }
 
         Vector2 v = this.getCameraPos();
@@ -246,7 +245,7 @@ public class CameraController : MonoBehaviour {
         }
 
         if(this.getCameraPos() != v) {
-            this.cameraSnapDestination = null;
+            this.followingTarget = null;
         }
     }
 

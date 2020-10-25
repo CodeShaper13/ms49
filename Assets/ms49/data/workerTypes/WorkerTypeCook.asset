@@ -17,3 +17,4 @@ MonoBehaviour:
   _spriteSheetName: spritesheetCook
   _aiPrefab: {fileID: 9067229749441998773, guid: 07612a39ce80df64087a2fc693cc5256,
     type: 3}
+  _hireFrameColor: {r: 0.6039216, g: 0.5882353, b: 0.5647059, a: 1}

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
 
@@ -10,18 +6,18 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
     private int _priority = 0;
 
     protected T owner;
-    protected MoveHelper moveHelper;
+    protected PathfindingAgent agent;
 
     public int priority => this._priority;
 
     private void Start() {
         this.owner = this.GetComponentInParent<T>();
-        this.moveHelper = this.GetComponentInParent<MoveHelper>();
+        this.agent = this.GetComponentInParent<PathfindingAgent>();
 
-        this.onStart();
+        this.initializeReferences();
     }
 
-    protected virtual void onStart() { }
+    protected virtual void initializeReferences() { }
 
     /// <summary>
     /// Called every frame the task is not running.
@@ -32,8 +28,7 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
     /// <summary>
     /// Called when the task first starts executing.
     /// </summary>
-    public virtual void startExecute() {
-    }
+    public virtual void onTaskStart() { }
 
     /// <summary>
     /// Called every frame that the task is running to continue "running" it.
@@ -56,28 +51,10 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
     }
 
     /// <summary>
-    /// Attempts to set the Worker on a path to a CellBehavior of the
-    /// specified type that matches the passed predicate (if not null).
-    /// 
-    /// Matching CellBehavior is found with a valid path, the
-    /// Worker's new destination is returned and the behavior ref
-    /// is set to the found behavior.
+    /// True should be returned if the tasks can be stopped by one with a lower priority.
     /// </summary>
-    protected Position? gotoClosestBehavior<T1>(ref T1 behavior, bool stopAdjacent, Predicate<T1> predicate = null) where T1 : CellBehavior {
-        // Sort all behaviors by distance.
-        List<T1> behaviors = this.owner.world.getAllBehaviors<T1>(predicate);
-        behaviors = behaviors.OrderBy(
-            x => x.pos.distance(this.owner.position)).ToList();
-
-        foreach(T1 b in behaviors) {
-            Position? dest = this.moveHelper.setDestination(b.pos, stopAdjacent);
-            if(dest != null) {
-                behavior = b;
-                return dest;
-            }
-        }
-
-        return null;
+    public virtual bool canBeInterupted() {
+        return true;
     }
 
     /// <summary>
@@ -92,13 +69,5 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
             }
         }
         return null;
-    }
-
-    public void startPreformCoroutine() {
-        this.StartCoroutine("preform");
-    }
-
-    public void stopCoroutine() {
-        this.StopCoroutine("preform");
     }
 }

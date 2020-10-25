@@ -34,3 +34,8 @@ MonoBehaviour:
       y: 0
       depth: 0
     structure: {fileID: 11400000, guid: 08ee3d16e815b3a4ba25db91909c8a72, type: 2}
+  - pos:
+      x: 16
+      y: 16
+      depth: 1
+    structure: {fileID: 11400000, guid: 3a82f48e6ee4c1142a07ea972fe53b43, type: 2}

@@ -117,7 +117,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
             }
 
             this.candidates.Add(new Candidate(
-                Main.instance.workerFactory.generateWorkerInfo(),
+                Main.instance.workerFactory.generateWorkerInfo(type),
                 type,
                 this.world.time.time + Random.Range(
                     this.candidateAvailabilityTimeRange.x * 60,

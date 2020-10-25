@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class CellBehaviorChair : CellBehaviorOccupiable {
+public class CellBehaviorChair : CellBehavior {
 
 }

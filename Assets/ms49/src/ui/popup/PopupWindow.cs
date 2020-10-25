@@ -11,7 +11,7 @@ public class PopupWindow : MonoBehaviour {
 
     [SerializeField]
     private bool _pauseGameWhenOpen = false;
-    [SerializeField]
+    [SerializeField, Tooltip("If checked, normal camera movement, panning, zooming, ect., is blocked")]
     private bool _blockInput = false;
     [SerializeField]
     private bool _closeableWithEscape = true;
@@ -29,7 +29,6 @@ public class PopupWindow : MonoBehaviour {
     public static bool blockingInput() {
         foreach(PopupWindow popup in openPopups) {
             if(popup.blockInput) {
-                print(popup.name + " is blocking input");
                 return true;
             }
         }

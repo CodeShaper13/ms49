@@ -14,40 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
-  _objectTile: {fileID: 11400000, guid: f8e6abd36a605634fa0908403c59ed1e, type: 2}
+  _objectTile: {fileID: 0}
   _objectOverlayTile: {fileID: 0}
-  _rotationalOverride: 0
+  _rotationalOverride: 1
   up:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
     _objectTile: {fileID: 0}
-    _overlayTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: f8e6abd36a605634fa0908403c59ed1e, type: 2}
     _effect: 0
   right:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
     _objectTile: {fileID: 0}
-    _overlayTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: ae3bdc487bc412e44874815aca7af44a, type: 2}
     _effect: 0
   down:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
     _objectTile: {fileID: 0}
-    _overlayTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: f8e6abd36a605634fa0908403c59ed1e, type: 2}
     _effect: 0
   left:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
     _objectTile: {fileID: 0}
-    _overlayTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: ae3bdc487bc412e44874815aca7af44a, type: 2}
     _effect: 0
-  _movementCost: -1
+  _movementCost: 0
   _canBuildOver: 0
   _isDestroyable: 0
   _zMoveDirections: 0
   _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 1
-  _includeInFogFloodLift: 0
+  _includeInFogFloodLift: 1
   _tintObjectTile: 0
   _behaviorPrefab: {fileID: 0}

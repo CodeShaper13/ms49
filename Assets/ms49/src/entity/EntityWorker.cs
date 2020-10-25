@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using fNbt;
 using System.Text;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
-public class EntityWorker : EntityBase, IClickable {
+public class EntityWorker : EntityBase {
 
     [SerializeField]
-    protected GameObject statBarParent = null;
+    private Text _nameText = null;
     [SerializeField]
     private GameObject sleepingParticlePrefab = null;
 
@@ -13,43 +15,33 @@ public class EntityWorker : EntityBase, IClickable {
     public UnlockableStat hunger;
     public UnlockableStat energy;
     public UnlockableStat temperature;
+    public UnlockableStat happiness;
     public AiManager aiManager;
     public DirectionalSpriteSwapper hatSpriteSwapper;
+    public EmoteBubble emote;
 
-    public Vector2 posLastFrame { get; private set; }
     public WorkerType type { get; private set; }
     public bool isDead { get; private set; }
     public bool isSleeping { get; private set; }
-    public Rotation rotation { get; set; }
 
-    public MoveHelper moveHelper { get; private set; }
+    public PathfindingAgent moveHelper { get; private set; }
     public WorkerInfo info { get; set; }
     public WorkerAnimator animator { get; private set; }
 
     private Particle sleepParticle;
 
     private void OnMouseEnter() {
-        this.statBarParent.gameObject.SetActive(true);
+        this._nameText.gameObject.SetActive(true);
     }
 
     private void OnMouseExit() {
-        this.statBarParent.gameObject.SetActive(false);
-    }
-
-    private void OnDrawGizmos() {
-        // Draw a line pointing the direction the Worker is facing.
-        if(this.rotation != null) {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(this.transform.position, this.transform.position + ((Vector3)this.rotation.vectorF) * 4);
-        }
+        this._nameText.gameObject.SetActive(false);
     }
 
     public override void initialize(World world, int id) {
         base.initialize(world, id);
 
-        this.rotation = Rotation.DOWN;
-
-        this.moveHelper = this.GetComponent<MoveHelper>();
+        this.moveHelper = this.GetComponent<PathfindingAgent>();
         this.animator = this.GetComponentInChildren<WorkerAnimator>();
 
         this.OnMouseExit(); // Hide Canvas
@@ -58,7 +50,8 @@ public class EntityWorker : EntityBase, IClickable {
     public override void onUpdate() {
         base.onUpdate();
 
-        Vector2 frameStatePos = this.worldPos;
+        // Terrible, make this better
+        this._nameText.text = this.info.lastName;
 
         if(this.isDead) {
             this.animator.playClip("Dead");
@@ -67,12 +60,6 @@ public class EntityWorker : EntityBase, IClickable {
             this.aiManager.updateAi();
             this.moveHelper.update();
 
-            if(this.posLastFrame != frameStatePos) {
-                // Miner has moved since last frame.
-            }
-
-            this.posLastFrame = frameStatePos;
-
             // Kill the Worker if there heath or energy is too low.
             if(this.hunger.value <= this.hunger.minValue || this.energy.value <= this.energy.minValue || this.temperature.value >= this.temperature.maxValue) {
                 this.kill();
@@ -80,7 +67,9 @@ public class EntityWorker : EntityBase, IClickable {
         }
     }
 
-    private void LateUpdate() {
+    public override void onLateUpdate() {
+        base.onLateUpdate();
+
         this.animator.rotation = this.rotation;
     }
 
@@ -107,6 +96,8 @@ public class EntityWorker : EntityBase, IClickable {
         this.aiManager.stopAllTasks();
 
         this.onDeath();
+
+        //this.world.entities.remove(this);
     }
 
     public void setSleeping(bool sleeping) {
@@ -127,19 +118,29 @@ public class EntityWorker : EntityBase, IClickable {
     public virtual void writeWorkerInfo(StringBuilder sb) {
         sb.AppendLine("Energy: " + (int)this.energy.value);
         sb.AppendLine("Hunger: " + (int)this.hunger.value);
+    }
 
-        if(Main.DEBUG) {
-            sb.Append(this.aiManager.generateDebugText());
-        }
-    } 
+    public override void getDebugText(List<string> s) {
+        base.getDebugText(s);
+
+        s.Add("Type: " + this.type.typeName);
+        s.Add("Name: " + this.info.fullName);
+        s.Add("Dead: " + this.isDead);
+        s.Add("Sleeping: " + this.isSleeping);
+        s.Add("Hunger: " + this.hunger.value);
+        s.Add("Energy: " + this.energy.value);
+        s.Add("Temperature: " + this.temperature.value);
+
+        this.aiManager.generateDebugText(s);
+    }
 
     public override void writeToNbt(NbtCompound tag) {
         base.writeToNbt(tag);
 
-        tag.setTag("facing", this.rotation.id);
         tag.setTag("energy", this.energy.value);
         tag.setTag("hunger", this.hunger.value);
         tag.setTag("temperature", this.temperature.value);
+        tag.setTag("happiness", this.happiness.value);
         tag.setTag("isDead", this.isDead);
         tag.setTag("workerInfo", this.info.writeToNbt());
         tag.setTag("workerType", Main.instance.workerTypeRegistry.getIdOfElement(this.type));
@@ -153,10 +154,10 @@ public class EntityWorker : EntityBase, IClickable {
     public override void readFromNbt(NbtCompound tag) {
         base.readFromNbt(tag);
 
-        this.rotation = Rotation.ALL[Mathf.Clamp(tag.getInt("facing"), 0, 3)];
         this.energy.value = tag.getFloat("energy");
         this.hunger.value = tag.getFloat("hunger");
         this.temperature.value = tag.getFloat("temperature");
+        this.happiness.value = tag.getFloat("happiness");
         this.isDead = tag.getBool("isDead");
         this.info = new WorkerInfo(tag.getCompound("workerInfo"));
         this.setType(Main.instance.workerTypeRegistry.getElement(tag.getInt("workerType")));
@@ -172,19 +173,11 @@ public class EntityWorker : EntityBase, IClickable {
     /// </summary>
     public virtual void onDeath() { }
 
-    /// <summary>
-    /// Called when the Worker is right clicked.
-    /// </summary>
-    public virtual void onRightClick() {
+    public override void onRightClick() {
         PopupWorkerStats popup = Main.instance.findPopup<PopupWorkerStats>();
         if(popup != null) {
             popup.open();
             popup.setWorker(this);
         }
     }
-
-    /// <summary>
-    /// Called when the Worker is left clicked.
-    /// </summary>
-    public virtual void onLeftClick() { }
 }

@@ -25,7 +25,7 @@ public class BuildableMinecart : BuildableBase, ISpritePreview {
     public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
         EntityMinecart minecart = (EntityMinecart)world.entities.spawn(pos, 2); // Minecart id.
         Rotation trackRot = world.getCellState(pos).rotation;
-        minecart.facing = rotation.axis == EnumAxis.Y ? trackRot : trackRot.opposite();
+        minecart.rotation = rotation.axis == EnumAxis.Y ? trackRot : trackRot.opposite();
     }
 
     public Sprite getPreviewSprite(World world, Position pos) {

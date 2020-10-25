@@ -38,12 +38,23 @@ public class EntityList : MonoBehaviour, ISaveableState {
             e.toggleRendererVisability(
                 e.depth == this.worldRenderer.getDepthRendering());
         }
+
+        if(!Pause.isPaused()) {
+            // Update the Entities.
+            for(int i = this.list.Count - 1; i >= 0; i--) {
+                this.list[i].onLateUpdate();
+            }
+        }
     }
 
     public EntityBase spawn(NbtCompound tag) {
         int entityId = tag.getInt("id");
 
         EntityBase entity = this.instantiateObj(entityId);
+
+        if(entity == null) {
+            return null; // Error logged in EntityList#instantiateObj()
+        }
 
         entity.initialize(this.world, entityId);
 
@@ -60,6 +71,10 @@ public class EntityList : MonoBehaviour, ISaveableState {
 
     public EntityBase spawn(Vector2 postion, int depth, int entityId) {
         EntityBase entity = this.instantiateObj(entityId);
+
+        if(entity == null) {
+            return null; // Error logged in EntityList#instantiateObj()
+        }
 
         entity.transform.position = postion;
         entity.depth = depth;

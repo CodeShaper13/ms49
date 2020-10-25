@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: RailCurve
   m_EditorClassIdentifier: 
   structureName: Curved Rails
-  _cost: 25
+  _cost: 15
   _description: You can't go straight forever
   _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: 11183769021aedc448bc1bcf0318ea7d, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: 1f89aca96b2205444b6cf59dfcf70eda, type: 2}

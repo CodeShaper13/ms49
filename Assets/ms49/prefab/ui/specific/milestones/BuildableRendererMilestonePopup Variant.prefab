@@ -21,7 +21,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: help
-  delay: 0.5
+  delay: 0.25
   pullFromTextComponent: 0
 --- !u!114 &5957495392854468996
 MonoBehaviour:

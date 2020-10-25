@@ -1,15 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 
 public class AiManager : MonoBehaviour {
 
     private List<TaskListEntry> tasks;
-
-    [SerializeField, Header("Read only, used for finding the current task")]
-    [TextArea(1, 100)]
-    private string currentTask;
 
     private void Awake() {
         this.tasks = new List<TaskListEntry>();
@@ -21,10 +16,6 @@ public class AiManager : MonoBehaviour {
         }
 
         this.tasks = this.tasks.OrderBy(e => e.priority).ToList();
-    }
-
-    private void LateUpdate() {
-        this.currentTask = this.generateDebugText();
     }
 
     /// <summary>
@@ -42,14 +33,31 @@ public class AiManager : MonoBehaviour {
     /// This should be called every frame to update all of the AI tasks.
     /// </summary>
     public void updateAi() {
-        for(int i = 0; i < this.tasks.Count; i++) {
+
+        int startIndex = 0;
+        for(int k = 0; k < this.tasks.Count; k++) {
+            TaskListEntry entry = this.tasks[k];
+            ITask task = entry.task;
+
+            if(entry.isRunning() && !task.canBeInterupted()) {
+                startIndex = k;
+                break;
+            }
+        }
+
+        for(int i = startIndex; i < this.tasks.Count; i++) {
             TaskListEntry entry = this.tasks[i];
             ITask task = entry.task;
 
             if(entry.isRunning()) {
                 // Task is running
+
+                // Check is the task should continue executing
                 if(task.continueExecuting()) {
+                    // Tasks should continue.
+
                     if(!task.allowLowerPriority()) {
+                        // Don't let tasks with a lower priority run 
                         break;
                     }
                 } else {
@@ -83,20 +91,18 @@ public class AiManager : MonoBehaviour {
         }
     }
 
-    public string generateDebugText() {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("Running Task(s):");
+    public void generateDebugText(List<string> strings) {
+        strings.Add("Running AI Task(s):");
         int lineCount = 0;
         foreach(TaskListEntry e in this.tasks) {
             if(e.isRunning()) {
                 lineCount++;
-                sb.AppendLine("    " + e.task.ToString());
+                strings.Add("    " + e.task.ToString());
             }
         }
         if(lineCount == 0) {
-            sb.AppendLine("   NO TASKS");
+            strings.Add("   NO TASKS");
         }
-        return sb.ToString();
     }
 
     private class TaskListEntry {
@@ -113,7 +119,7 @@ public class AiManager : MonoBehaviour {
 
         public void startRunning() {
             if(!this._isRunning) {
-                this.task.startExecute();
+                this.task.onTaskStart();
                 //this.task.startPreformCoroutine();
 
                 this._isRunning = true;

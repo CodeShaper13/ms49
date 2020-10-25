@@ -6,8 +6,6 @@ public class PopupMine : PopupWorldReference {
     [SerializeField]
     private AudioSource audioCellToggle = null;
 
-    private bool markAsPriority = false;
-
     protected override void onUpdate() {
         base.onUpdate();
 

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
+  m_Name: Cobweb
+  m_EditorClassIdentifier: 
+  structureName: Cobweb
+  _cost: 0
+  _description: 
+  _tab: {fileID: 11400000, guid: 65af463dae1096f4ab16253980a96dee, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: 
+  _displayRotation: 0
+  _buildTime: {fileID: 0}
+  _customPreview: {fileID: 0}
+  _cell: {fileID: 11400000, guid: 7abecddcb02a6a4479b5256ef7a56853, type: 2}

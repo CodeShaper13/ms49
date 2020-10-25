@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
-    [SerializeField]
+    [SerializeField, TextArea(1, 5)]
     private string _text;
     [SerializeField]
     private float delay = 0.5f;
@@ -46,6 +46,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
     public void OnPointerExit(PointerEventData eventData) {
         if(this.tooltipDisplayer != null) {
             this.tooltipDisplayer.setText(string.Empty);
+
             this.StopCoroutine("func");
         }
     }

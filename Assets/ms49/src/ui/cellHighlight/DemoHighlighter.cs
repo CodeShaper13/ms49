@@ -16,15 +16,12 @@ public class DemoHighlighter : CellHighlightBase {
 
         if(!this.world.isOutOfBounds(pos)) {
             // Check if the mouse is over an Entity that is destroyable.
-            RaycastHit2D hit = CameraController.instance.getMouseOver();
-            if(hit.collider != null) {
-                EntityBase e = hit.transform.GetComponent<EntityBase>();
-                if(e.isDestroyable()) {
-                    this.destroyableEntity = e;
+            EntityBase e = CameraController.instance.getMouseOver();
+            if(e != null && e.isDestroyable()) {
+                this.destroyableEntity = e;
 
-                    this.setValidColor();
-                    return true;
-                }
+                this.setValidColor();
+                return true;
             }
 
             // Check if the mouse is over a Destroyable cell.

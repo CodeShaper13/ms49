@@ -2,8 +2,6 @@ UI Textures: https://opengameart.org/content/simple-pixel-gui-programmer-art
 
 Cave Textures: https://wilfryed.itch.io/
 
-Cave Textures: https://opengameart.org/content/16x16-cave-tileset
-
 Smoke particles
 https://opengameart.org/content/smoke-fire-animated-particle-16x16
 
@@ -12,3 +10,6 @@ https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059#re
 
 fire
 http://pixelartmaker.com/art/e247ee9441a294e
+
+bat texture
+https://opengameart.org/content/pixel-art-bat-sprites

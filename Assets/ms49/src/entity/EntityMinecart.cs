@@ -2,7 +2,7 @@
 using System;
 using fNbt;
 
-public class EntityMinecart : EntityBase, IClickable {
+public class EntityMinecart : EntityBase {
 
     [SerializeField]
     private MinecartSprites sprites = null;
@@ -20,12 +20,6 @@ public class EntityMinecart : EntityBase, IClickable {
     private IMinecartInteractor cartInteractor;
 
     public Inventory inventory => this._inventory;
-    public Rotation facing { get; set; }
-
-    public override void initialize(World world, int id) {
-        base.initialize(world, id);
-        this.facing = Rotation.RIGHT;
-    }
 
     public override void onUpdate() {
         base.onUpdate();
@@ -67,39 +61,39 @@ public class EntityMinecart : EntityBase, IClickable {
 
                 switch(((CellDataRail)state.data).moveType) {
                     case CellDataRail.EnumRailMoveType.STRAIGHT:
-                        this.move(this.facing.vector);
+                        this.move(this.rotation.vector);
                         break;
                     case CellDataRail.EnumRailMoveType.CROSSING:
-                        this.move(this.facing.vector);
+                        this.move(this.rotation.vector);
                         break;
                     case CellDataRail.EnumRailMoveType.CURVE:
                         Rotation startRot = state.rotation;
                         Rotation endRot = state.rotation.clockwise();
 
                         // If the Minecart is moving "backwards" along curve, switch the values.
-                        if(this.facing.axis != state.rotation.axis) {
+                        if(this.rotation.axis != state.rotation.axis) {
                             Rotation temp1 = startRot;
                             startRot = endRot;
                             endRot = temp1;
                         }
 
                         // Move the cart.
-                        this.move(this.facing.vector);
+                        this.move(this.rotation.vector);
 
                         float dis = Vector2.Distance(this.worldPos, cellCenter + startRot.vectorF * 0.5f);
                         if(dis > 0.5f) {
-                            this.facing = endRot;
+                            this.rotation = endRot;
                             this.worldPos = cellCenter;
-                            this.move(this.facing.vectorF * (dis - 0.5f));
+                            this.move(this.rotation.vectorF * (dis - 0.5f));
                         }
                         break;
                     case CellDataRail.EnumRailMoveType.STOPPER:
-                        this.move(this.facing.vector);
+                        this.move(this.rotation.vector);
 
                         float d = Vector2.Distance(this.worldPos, cellCenter + state.rotation.opposite().vectorF * 0.5f);
-                        if(this.facing == state.rotation && d > 0.25f) {
-                            this.facing = this.facing.opposite();
-                            this.move(this.facing.vectorF * (d - 0.5f));
+                        if(this.rotation == state.rotation && d > 0.25f) {
+                            this.rotation = this.rotation.opposite();
+                            this.move(this.rotation.vectorF * (d - 0.5f));
                         }
 
                         // TODO does the cart ever overshoot?
@@ -127,15 +121,15 @@ public class EntityMinecart : EntityBase, IClickable {
         if(!Pause.isPaused()) {
 
             // Set main sprite
-            this._cartRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
-            this._cartRenderer.flipX = this.facing == Rotation.LEFT;
+            this._cartRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
+            this._cartRenderer.flipX = this.rotation == Rotation.LEFT;
 
             // Set fill sprite
             if(this.inventory.isEmpty()) {
                 this._fillRenderer.sprite = null;
             } else {
-                this._fillRenderer.sprite = this.facing.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
-                this._fillRenderer.flipX = this.facing == Rotation.LEFT;
+                this._fillRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
+                this._fillRenderer.flipX = this.rotation == Rotation.LEFT;
             }
         }
     }
@@ -144,14 +138,12 @@ public class EntityMinecart : EntityBase, IClickable {
         base.writeToNbt(tag);
 
         tag.setTag("inventory", this.inventory.writeToNbt());
-        tag.setTag("rotation", this.facing.id);
     }
 
     public override void readFromNbt(NbtCompound tag) {
         base.readFromNbt(tag);
 
         this.inventory.readFromNbt(tag.getCompound("inventory"));
-        this.facing = Rotation.ALL[Mathf.Clamp(tag.getInt("rotation"), 0, 3)]; // Clamp for safety
     }
 
     public override bool isDestroyable() {
@@ -200,15 +192,13 @@ public class EntityMinecart : EntityBase, IClickable {
         this.transform.position += (Vector3)(dir * this.movementSpeed * Time.deltaTime);
     }
 
-    public void onRightClick() {
+    public override void onRightClick() {
         PopupContainer popup = Main.instance.findPopup<PopupContainer>();
         if(popup != null) {
             popup.open();
             popup.setInventory(this.inventory);
         }
     }
-
-    public void onLeftClick() { }
 
     [Serializable]
     public class MinecartSprites {

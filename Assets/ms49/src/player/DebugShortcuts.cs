@@ -14,7 +14,11 @@ public class DebugShortcuts : MonoBehaviour {
                 if(Input.GetKey(KeyCode.LeftControl)) {
                     foreach(EntityBase e in this.world.entities.list) {
                         if(e is EntityWorker) {
-                            ((EntityWorker)e).moveHelper.setDestination(pos);
+                            PathfindingAgent agent = ((EntityWorker)e).moveHelper;
+                            NavPath path = agent.calculatePath(pos);
+                            if(path != null) {
+                                agent.setPath(path);
+                            }
                         }
                     }
                 }

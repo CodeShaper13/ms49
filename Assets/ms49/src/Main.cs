@@ -24,9 +24,7 @@ public class Main : MonoBehaviour {
     [SerializeField]
     private MinedItemRegistry _itemRegistry = null;
     [SerializeField]
-    private Names _names = null;
-    [SerializeField]
-    private Personalities _personalities = null;
+    private PersonalityRegistry _personalityRegistry = null;
     [SerializeField]
     private WorkerTypeRegistry _workerTypes = null;
     [SerializeField]
@@ -46,8 +44,7 @@ public class Main : MonoBehaviour {
     public TileRegistry tileRegistry => this._tileRegistry;
     public EntityRegistry entityRegistry => this._entityRegistry;
     public MinedItemRegistry itemRegistry => this._itemRegistry;
-    public Names names => this._names;
-    public Personalities personalities => this._personalities;
+    public PersonalityRegistry personalityRegistry => this._personalityRegistry;
     public Options options => this._options;
     public WorkerFactory workerFactory => this._workerFactory;
     public WorkerTypeRegistry workerTypeRegistry => this._workerTypes;

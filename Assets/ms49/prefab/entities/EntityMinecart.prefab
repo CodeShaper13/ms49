@@ -57,7 +57,7 @@ MonoBehaviour:
       type: 3}
     frontFull: {fileID: -4942957438270607783, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
       type: 3}
-  movementSpeed: 2
+  movementSpeed: 4
   _cartRenderer: {fileID: 5470119505551755509}
   _fillRenderer: {fileID: 7697917525930786154}
   explodeParticlePrefab: {fileID: 4334713544733170696, guid: 7be00c2bd70c34c4c8b78dc5d6d9679d,

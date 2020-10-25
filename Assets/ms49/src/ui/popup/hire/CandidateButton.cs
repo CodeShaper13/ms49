@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class CandidateButton : MonoBehaviour {
 
     [SerializeField]
+    private Image _imgFrame = null;
+    [SerializeField]
     private Text textName = null;
     [SerializeField]
     private Text _textType = null;
@@ -37,8 +39,9 @@ public class CandidateButton : MonoBehaviour {
 
             this.textName.text = info.fullName;
             this._textType.text = c.type.typeName;
+            this._imgFrame.color = c.type.hireFrameColor;
             this.textPay.text = "$" + info.pay + " / Day";
-            this.textPersonality.text = Main.instance.personalities.getDescription(info.personality);
+            this.textPersonality.text = info.personality.displayName;
 
             this.workerPreview.setTarget(
                 info,

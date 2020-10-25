@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: RailUnloadPoint
   m_EditorClassIdentifier: 
   structureName: Minecart Unload Point
-  _cost: 150
+  _cost: 120
   _description: Filled Minecarts stop here and will be unloaded by Workers
   _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 1
   _buildTime: {fileID: 11400000, guid: 11183769021aedc448bc1bcf0318ea7d, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: 8f1acef97ee8f4e41a1c0c2b53c24f32, type: 2}

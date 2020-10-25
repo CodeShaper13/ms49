@@ -24,6 +24,7 @@ public class World : MonoBehaviour {
     public PlotManager plotManager = null;
     public Payroll payroll = null;
     public Economy economy = null;
+    public StatisticManager statManager = null;
 
     // References to Cells
     public CellData rubbleCell;
@@ -114,10 +115,8 @@ public class World : MonoBehaviour {
                 EntityWorker worker = factory.spawnWorker(
                     this,
                     this.storage.workerSpawnPoint.add(xShift, -yShift),
-                    factory.generateWorkerInfo(), workerType);
-
-                // Modify the starting Worker's pay so new players can't be hosed.
-                worker.info.pay = factory.payRange.x + UnityEngine.Random.Range(0, 6);
+                    factory.generateWorkerInfo(workerType, Main.instance.personalityRegistry.getDefaultPersonality()),
+                    workerType);
             }
         }
 

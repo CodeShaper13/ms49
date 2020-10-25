@@ -391,7 +391,7 @@ TextureImporter:
     second: tiles_itemBrick
   - first:
       213: 5076840621122836206
-    second: tiles_support
+    second: tiles_supportFront
   - first:
       213: 8736261515240804949
     second: tiles_rubble
@@ -530,6 +530,54 @@ TextureImporter:
   - first:
       213: -7654079778348290507
     second: tiles_ladderTopShadow
+  - first:
+      213: 8984585068276349725
+    second: tiles_bridgeStraightX
+  - first:
+      213: -6166603320939981754
+    second: tiles_bridgeCurveRight
+  - first:
+      213: -335546819104697968
+    second: tiles_bridgeTUp
+  - first:
+      213: 4639667851638375257
+    second: tiles_bridgeStraightY
+  - first:
+      213: 5027566769659864733
+    second: tiles_BridgeTDown
+  - first:
+      213: 9216660323122252470
+    second: tiles_bridgeX
+  - first:
+      213: -2348927809873174427
+    second: tiles_bridgeCurveLeft
+  - first:
+      213: 1823359141856673694
+    second: tiles_bridgeTRight
+  - first:
+      213: 507991609458048091
+    second: tiles_bridgeTLeft
+  - first:
+      213: -3241807953627189516
+    second: tiles_bridgeAlone
+  - first:
+      213: 2374555461510720412
+    second: tiles_bridgeEndRight
+  - first:
+      213: 3433671182191017847
+    second: tiles_bridgeEndLeft
+  - first:
+      213: -873322832810516204
+    second: tiles_bridgeEndDown
+  - first:
+      213: -1086328592429712742
+    second: tiles_bridgeEndUp
+  - first:
+      213: 8858308364851201084
+    second: tiles_supportSide
+  - first:
+      213: 6816786335220469432
+    second: tiles_cobweb
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1896,11 +1944,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_support
+      name: tiles_supportFront
       rect:
         serializedVersion: 2
-        x: 64
-        y: 80
+        x: 80
+        y: 112
         width: 16
         height: 32
       alignment: 9
@@ -3311,7 +3359,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3319,6 +3367,342 @@ TextureImporter:
       bones: []
       spriteID: 53eac01aefe37c590800000000000000
       internalID: -7654079778348290507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeStraightX
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1bf3e86488afac70800000000000000
+      internalID: 8984585068276349725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeCurveRight
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644d0a0a3f2db6aa0800000000000000
+      internalID: -6166603320939981754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeTUp
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09190c122f5e75bf0800000000000000
+      internalID: -335546819104697968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeStraightY
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95384bc3459636040800000000000000
+      internalID: 4639667851638375257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_BridgeTDown
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d96622ef65185c540800000000000000
+      internalID: 5027566769659864733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeX
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ba832f5bb728ef70800000000000000
+      internalID: 9216660323122252470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeCurveLeft
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56029712a9ee66fd0800000000000000
+      internalID: -2348927809873174427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeTRight
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9ff35c9a7fdd4910800000000000000
+      internalID: 1823359141856673694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeTLeft
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5c30a66dafbc0700800000000000000
+      internalID: 507991609458048091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeAlone
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fee30e87d8c203d0800000000000000
+      internalID: -3241807953627189516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeEndRight
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 304
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9b6fce7c9d14f020800000000000000
+      internalID: 2374555461510720412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeEndLeft
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 304
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77fbdf17fb9d6af20800000000000000
+      internalID: 3433671182191017847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeEndDown
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 304
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4116718b28551e3f0800000000000000
+      internalID: -873322832810516204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_bridgeEndUp
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 304
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9a70ea96e59ce0f0800000000000000
+      internalID: -1086328592429712742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_supportSide
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 112
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c34c3d546880fea70800000000000000
+      internalID: 8858308364851201084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_cobweb
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be8d841e071a9e50800000000000000
+      internalID: 6816786335220469432
       vertices: []
       indices: 
       edges: []

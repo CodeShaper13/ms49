@@ -33,7 +33,7 @@ public class PopupWorkerList : PopupWorldReference {
         // Remove buttons for Workers that no longer exist.
         for(int i = this.workerButtons.Count - 1; i >= 0; i--) {
             WorkerListButton btn = this.workerButtons[i];
-            if(btn.worker == null || btn.worker.isDead) {
+            if(btn.worker == null) { // || btn.worker.isDead) {
                 // Worker is either gone or dead
                 this.workerButtons.RemoveAt(i);
                 GameObject.Destroy(btn.gameObject);

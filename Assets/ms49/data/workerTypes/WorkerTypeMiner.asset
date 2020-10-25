@@ -17,3 +17,4 @@ MonoBehaviour:
   _spriteSheetName: spritesheetMiner
   _aiPrefab: {fileID: 6927264833654761311, guid: 5e3894e8db4157f40b1a73d47a36c9ca,
     type: 3}
+  _hireFrameColor: {r: 0.37462857, g: 0.447, b: 0.41294286, a: 1}

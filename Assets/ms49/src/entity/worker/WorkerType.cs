@@ -6,17 +6,20 @@ public class WorkerType : ScriptableObject, ISerializationCallbackReceiver {
     private const string PATH = "characterTextures/";
 
     [SerializeField]
-    public string _typeName = null;
+    private string _typeName = null;
     [SerializeField, Tooltip("Optional")]
-    public DirectionalSprites _hat = null;
+    private DirectionalSprites _hat = null;
     [SerializeField, Tooltip("Optional")]
     private string _spriteSheetName = null;
     [SerializeField, Tooltip("Optional")]
     private GameObject _aiPrefab = null;
+    [SerializeField]
+    private Color _hireFrameColor = Color.white;
 
     public string typeName => this._typeName;
     public DirectionalSprites hat => this._hat;
     public GameObject aiPrefab => this._aiPrefab;
+    public Color hireFrameColor => this._hireFrameColor;
 
     private Sprite[] replacementSprites;
 

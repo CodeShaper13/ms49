@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CellBehavior : MonoBehaviour {
 
@@ -52,7 +53,7 @@ public class CellBehavior : MonoBehaviour {
         this.world.worldRenderer.dirtyTile(this.pos.x, this.pos.y);
     }
 
-    public virtual string getDebugText() {
-        return "Type: " + this.GetType().ToString();
+    public virtual void getDebugText(List<string> s) {
+        s.Add("Type: " + this.GetType().ToString());
     }
 }

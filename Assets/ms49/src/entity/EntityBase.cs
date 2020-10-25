@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using fNbt;
 using System;
+using System.Text;
+using System.Collections.Generic;
 
 public abstract class EntityBase : MonoBehaviour {
 
@@ -13,6 +15,7 @@ public abstract class EntityBase : MonoBehaviour {
     public int depth { get; set; }
     public int id { get; private set; }
     public Guid guid { get; private set; }
+    public Rotation rotation { get; set; }
 
     private void Awake() { } // Stop child classes from overriding.
 
@@ -26,6 +29,7 @@ public abstract class EntityBase : MonoBehaviour {
         this.world = world;
         this.id = id;
         this.depth = depth;
+        this.rotation = Rotation.DOWN;
     }
 
     /// <summary>
@@ -44,7 +48,13 @@ public abstract class EntityBase : MonoBehaviour {
     /// </summary>
     public virtual void onUpdate() { }
 
+    public virtual void onLateUpdate() { }
+
     public virtual void onDestroy() { }
+
+    public virtual void onRightClick() { }
+
+    public virtual void getDebugText(List<string> strings) { }
 
     /// <summary>
     /// If true if returned, this Entity can be destroyed with the
@@ -112,12 +122,14 @@ public abstract class EntityBase : MonoBehaviour {
         tag.setTag("id", this.id);
         tag.setTag("position", this.worldPos);
         tag.setTag("depth", this.depth);
+        tag.setTag("facing", this.rotation.id);
         tag.setTag("guid", this.guid);
     }
 
     public virtual void readFromNbt(NbtCompound tag) {
         this.transform.position = tag.getVector2("position");
         this.depth = tag.getInt("depth");
+        this.rotation = Rotation.ALL[Mathf.Clamp(tag.getInt("facing"), 0, 3)];
         this.guid = tag.getGuid("guid");
     }
 }

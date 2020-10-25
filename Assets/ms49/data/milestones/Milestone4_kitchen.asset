@@ -15,7 +15,7 @@ MonoBehaviour:
   _milestoneName: small mine
   _requirements:
   - _method: {fileID: 11400000, guid: 9539fda1430df6744a87cf6d585d7e47, type: 2}
-    _targetAmount: 250
+    _targetAmount: 200
   _unlocksLayer: 0
   _unlockedBuildables:
   - {fileID: 11400000, guid: 880b7315fcfd029489266c9f8e9c1f02, type: 2}

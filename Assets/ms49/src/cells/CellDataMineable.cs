@@ -4,4 +4,8 @@
 public class CellDataMineable : CellData {
 
     public Item droppedItem;
+    [SerializeField]
+    private bool _showParticles = true;
+
+    public bool showParticles => this._showParticles;
 }

@@ -29,6 +29,6 @@ public class WorkerListButton : MonoBehaviour {
     }
 
     public void callback_mapPin() {
-        CameraController.instance.followTarget(this.worker.transform);
+        CameraController.instance.followTarget(this.worker);
     }
 }

@@ -17,3 +17,4 @@ MonoBehaviour:
   _spriteSheetName: spritesheetBuilder
   _aiPrefab: {fileID: 122510778850964854, guid: 1c5d995418a3c3a48a73eca9d8e81c8d,
     type: 3}
+  _hireFrameColor: {r: 0.448275, g: 0.59219795, b: 0.695, a: 1}

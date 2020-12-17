@@ -21,14 +21,6 @@ public class LayerData : ScriptableObject {
     [Space]
 
     public bool generateCaves = false;
-    [Range(0, 100)]
-    public float caveFillPercent;
-    [Min(0)]
-    public int caveSmoothPases = 5;
-    [SerializeField]
-    private int _f1 = 4;
-    [SerializeField]
-    private int _f2 = 4;
 
     [Space]
 
@@ -41,11 +33,14 @@ public class LayerData : ScriptableObject {
     [Tooltip("The percent of caves that become lakes.  Lakes only spawn on layers with generateCaves set to true.")]
     public int lakeChance = 10;
 
+    [Space]
+
+    public StructureBase[] _structures = null;
+
     public bool hasFog => this._hasFog;
     public float defaultTemperature => this._defaultTemperature;
     public bool generateBlockerRocks => this._generateBlockerRocks;
-    public int f1 => this._f1;
-    public int f2 => this._f2;
+    public StructureBase[] structures => this._structures;
 
     /// <summary>
     /// Returns the Color to tint floor and wall Cells.

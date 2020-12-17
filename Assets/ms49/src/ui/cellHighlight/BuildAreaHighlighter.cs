@@ -32,6 +32,7 @@ public class BuildAreaHighlighter : CellHighlightBase {
                 this.cellRenderer.initializedRenderer(
                     Mathf.Max(this.buildable.getHighlightWidth(), this.buildable.getHighlightHeight()),
                     null,
+                    null,
                     (x, y) => {
                         CellData data;
                         if(this.buildable is BuildableMultiCellTile) {

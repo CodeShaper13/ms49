@@ -19,6 +19,7 @@ public class EntityWorker : EntityBase {
     public AiManager aiManager;
     public DirectionalSpriteSwapper hatSpriteSwapper;
     public EmoteBubble emote;
+    public EmoteBubble overrideEmoteBubble;
 
     public WorkerType type { get; private set; }
     public bool isDead { get; private set; }
@@ -52,6 +53,7 @@ public class EntityWorker : EntityBase {
 
         // Terrible, make this better
         this._nameText.text = this.info.lastName;
+        this.moveHelper.speedMultiplyer = this.info.personality.moveSpeedMultiplyer;
 
         if(this.isDead) {
             this.animator.playClip("Dead");
@@ -63,6 +65,11 @@ public class EntityWorker : EntityBase {
             // Kill the Worker if there heath or energy is too low.
             if(this.hunger.value <= this.hunger.minValue || this.energy.value <= this.energy.minValue || this.temperature.value >= this.temperature.maxValue) {
                 this.kill();
+            }
+
+            if(this.happiness.value <= this.happiness.minValue) {
+                // Work is leaving.
+                this.world.entities.remove(this);
             }
         }
     }
@@ -130,6 +137,11 @@ public class EntityWorker : EntityBase {
         s.Add("Hunger: " + this.hunger.value);
         s.Add("Energy: " + this.energy.value);
         s.Add("Temperature: " + this.temperature.value);
+
+        CookMetaData meta = this.GetComponentInChildren<CookMetaData>();
+        if(meta != null) {
+            s.Add("Plate: " + meta.plateState);
+        }
 
         this.aiManager.generateDebugText(s);
     }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using fNbt;
 
-public abstract class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
+public abstract class AbstractBehaviorContainer : CellBehavior, IHasData, IContainer {
 
     [SerializeField]
     private Inventory _inventory = null;
@@ -26,6 +26,29 @@ public abstract class CellBehaviorContainer : CellBehavior, IHasData, IContainer
         }
     }
 
+    public override string getTooltipText() {
+        return "[rmb] open container";
+    }
+
+    public override void onDestroy() {
+        base.onDestroy();
+
+        for(int i = 0; i < this.inventory.getItemCount(); i++) {
+            Item item = this.inventory.getItem(i);
+            if(item != null) {
+                float f = 0.4f;
+                Vector2 v = new Vector2(
+                    this.pos.x + 0.5f + Random.Range(-f, f),
+                    this.pos.y + 0.1f + Random.Range(-f, f));
+                EntityItem e = (EntityItem) this.world.entities.spawn(
+                    v,
+                    this.pos.depth,
+                    3);
+                e.setItem(item);
+            }
+        }
+    }
+
     public virtual void writeToNbt(NbtCompound tag) {
         if(this.inventory != null) {
             tag.setTag("inventory", this.inventory.writeToNbt());
@@ -38,8 +61,8 @@ public abstract class CellBehaviorContainer : CellBehavior, IHasData, IContainer
         }
     }
 
-    public virtual void deposit(Item item) {
-        this.inventory.addItem(item);
+    public virtual bool deposit(Item item) {
+        return this.inventory.addItem(item);
     }
 
     public virtual Item pullItem() {

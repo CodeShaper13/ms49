@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: RailStopper
   m_EditorClassIdentifier: 
-  structureName: Stopper Rail
-  _cost: 15
+  structureName: 
+  _cost: 20
   _description: Prevents minecart from going off the track by changing their direction
   _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _fogOption: 0

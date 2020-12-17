@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
   m_Name: OreIron
   m_EditorClassIdentifier: 
+  _cellName: iron ore
   _isSolid: 1
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: c112bfa7ad6e7734988bbe6382915c0a, type: 2}
@@ -52,3 +53,4 @@ MonoBehaviour:
   _tintObjectTile: 1
   _behaviorPrefab: {fileID: 0}
   droppedItem: {fileID: 11400000, guid: c293ebef3559748408deccde69be7ec3, type: 2}
+  _showParticles: 1

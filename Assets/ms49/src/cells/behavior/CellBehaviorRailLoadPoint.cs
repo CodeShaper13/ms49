@@ -23,13 +23,15 @@ public class CellBehaviorRailLoadPoint : AbstractDepositPoint, IMinecartInteract
         }
     }
 
-    public override void deposit(Item item) {
-        this.minecart.inventory.addItem(item);
+    public override bool deposit(Item item) {
+        bool addedItem = this.minecart.inventory.addItem(item);
 
         if(this.minecart.inventory.isFull()) {
             this.minecart.release();
             this.minecart = null;
         }
+
+        return addedItem;
     }
 
     public bool shouldCartInteract(EntityMinecart cart) {

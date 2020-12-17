@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: Lava
   m_EditorClassIdentifier: 
+  _cellName: lava
   _isSolid: 0
   _floorOverlayTile: {fileID: 11400000, guid: cbf0f1482d50c6844bef8404f9e667f5, type: 2}
   _objectTile: {fileID: 0}

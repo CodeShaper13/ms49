@@ -14,6 +14,10 @@ public class CellBehaviorSign : CellBehavior, IHasData {
         }
     }
 
+    public override string getTooltipText() {
+        return "[rbm] edit sign";
+    }
+
     public void writeToNbt(NbtCompound nbt) {
         nbt.setTag("message", this.message);
     }

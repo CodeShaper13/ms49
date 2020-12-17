@@ -63,7 +63,7 @@ public class BuildableMultiCellTile : BuildableTile {
     }
 
     public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
-        bool instantBuild = this.buildTime == 0 || CameraController.instance.inCreativeMode || highlight == null;
+        bool instantBuild = this.shouldBuildInstantly(highlight);
 
         CellBehaviorBuildSite site = null;
 
@@ -97,6 +97,9 @@ public class BuildableMultiCellTile : BuildableTile {
                 }
             }
         }
+
+        // Increase stat
+        world.statManager.getCellBuiltStat(this.getCellAt(0, 0))?.increase(1);
     }
 
     public override bool isValidLocation(World world, Position pos, Rotation rotation) {

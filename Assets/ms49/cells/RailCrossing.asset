@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
   m_Name: RailCrossing
   m_EditorClassIdentifier: 
+  _cellName: crossing rail
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: ad63941777d61234e83b650bfa340b7e, type: 2}

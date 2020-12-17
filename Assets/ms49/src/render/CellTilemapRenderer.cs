@@ -19,6 +19,7 @@ public class CellTilemapRenderer : MonoBehaviour {
 
     private int mapSize;
     private Func<int, int, Color> floorTintGetterFunc;
+    private Func<int, int, Color> hardnessColorModGetterFunc;
     private Func<int, int, CellState> cellStateGetterFunc;
     private Func<int, int, TileBase> floorGetterFunc;
 
@@ -26,9 +27,10 @@ public class CellTilemapRenderer : MonoBehaviour {
         this.dirtiedCells = new List<Vector2Int>();
     }
 
-    public void initializedRenderer(int mapSize, Func<int, int, Color> floorTintGetterFunc, Func<int, int, CellState> cellStateGetterFunc, Func<int, int, TileBase> floorGetterFunc) {
+    public void initializedRenderer(int mapSize, Func<int, int, Color> floorTintGetterFunc, Func<int, int, Color> hardnessColorModGetterFunc, Func<int, int, CellState> cellStateGetterFunc, Func<int, int, TileBase> floorGetterFunc) {
         this.mapSize = mapSize;
         this.floorTintGetterFunc = floorTintGetterFunc;
+        this.hardnessColorModGetterFunc = hardnessColorModGetterFunc;
         this.cellStateGetterFunc = cellStateGetterFunc;
         this.floorGetterFunc = floorGetterFunc;
     }
@@ -81,20 +83,22 @@ public class CellTilemapRenderer : MonoBehaviour {
 
         CellData data = state.data;
         Vector3Int pos = new Vector3Int(x, y, 0);
-        Color groundTint = this.floorTintGetterFunc != null ? this.floorTintGetterFunc(x, y) : Color.white;
 
         // Draw the floor:
         if(this.floorTilemap != null) {
-            TileBase t;
+            Color floorTint = this.floorTintGetterFunc != null ? this.floorTintGetterFunc(x, y) : Color.white;
+
+            TileBase tile;
             if(data.isSolid) {
                 // Floor not visible
-                t = null;
+                tile = null;
             } else {
                 // Floor is visible, draw dirt/grass
-                t = this.floorGetterFunc != null ? this.floorGetterFunc(x, y) : null;
+                tile = this.floorGetterFunc != null ? this.floorGetterFunc(x, y) : null;
             }
-            this.floorTilemap.SetTile(pos, t);
-            this.floorTilemap.SetColor(pos, groundTint);
+
+            this.floorTilemap.SetTile(pos, tile);
+            this.floorTilemap.SetColor(pos, floorTint);
         }
 
         TileRenderData dt = data.getRenderData(state.rotation);
@@ -123,8 +127,9 @@ public class CellTilemapRenderer : MonoBehaviour {
             this.objectMap.SetTransformMatrix(pos, dt.getMatrix());
 
             // Color
-            if(data.tintObjectTile) {
-                this.colorSquare(this.objectMap, pos, groundTint);
+            if(data.recieveHardnessColorMod) {
+                Color hardnessColorMod = this.hardnessColorModGetterFunc != null ? this.hardnessColorModGetterFunc(x, y) : Color.white;
+                this.colorSquare(this.objectMap, pos, hardnessColorMod);
             }
         }
 

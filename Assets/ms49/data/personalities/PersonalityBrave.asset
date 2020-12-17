@@ -15,5 +15,51 @@ MonoBehaviour:
   _displayName: Brave
   _notAllowedTypes: []
   _payModifier: 1
-  _moveSpeedMultiplyer: 1
-  _workSpeedMultiplyer: 1
+  _moveSpeedMultiplyer:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 1
+  _workSpeedMultiplyer:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 1
+  _sleepStartOffset:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 0
+  _sleepStopOffset:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 0
+  _energyLoseMultiplyer:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 1
+  _energyGainMultiplyer:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 1
+  _eatStartOffset:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 0
+  _eatStopOffset:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 0
+  _hungerLoseMultiplyer:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 1
+  _require2Meals:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 0
+  _isCareless:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 0
+  _combatDamageMultiplyer:
+    _enabled: 0
+    _value: 0
+    _defaultValue: 1

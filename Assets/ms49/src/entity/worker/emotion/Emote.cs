@@ -1,15 +1,12 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿public class Emote {
 
-public class Emote {
-
-    public Sprite sprite { get; private set; }
+    public string iconName { get; private set; }
     public float timeVisible { get; private set; }
     public bool isPriority { get; private set; }
     public string tooltip { get; private set; }
 
-    public Emote(Sprite sprite, float timeVisible) {
-        this.sprite = sprite;
+    public Emote(string iconName, float timeVisible) {
+        this.iconName = iconName;
         this.timeVisible = timeVisible;
     }
 

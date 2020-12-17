@@ -19,10 +19,6 @@ MonoBehaviour:
   _defaultTemperature: 0
   _generateBlockerRocks: 1
   generateCaves: 1
-  caveFillPercent: 50
-  caveSmoothPases: 2
-  _f1: 4
-  _f2: 2
   oreSpawnSettings:
   - _veinsPerChunk: 10
     _veinData: {fileID: 11400000, guid: 4c50c295cabcce84ba52c8cef3a6b9c6, type: 2}
@@ -34,4 +30,8 @@ MonoBehaviour:
     _veinData: {fileID: 11400000, guid: b4c5ddc756508ef4da837a2f4eb42d24, type: 2}
   lakeType: 0
   lakeChance: 0
+  _structures:
+  - {fileID: 11400000, guid: 2f6f6ad10fa9bbc49a73eec17d8d6143, type: 2}
+  - {fileID: 11400000, guid: 991715c7d7a5c1b4fb796ce65ac77150, type: 2}
+  - {fileID: 11400000, guid: 2fac468cf7145a54ea72facbeba17f17, type: 2}
   grassTile: {fileID: 11400000, guid: 342b332ff476f7c48b3631130fa0c4bd, type: 2}

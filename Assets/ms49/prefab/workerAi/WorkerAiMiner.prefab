@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1815746817121461770}
   - component: {fileID: 411649451540704695}
+  - component: {fileID: 1162940724998149513}
   - component: {fileID: 8551415232831920579}
   - component: {fileID: 265612714731564641}
   - component: {fileID: 5157850129834234781}
@@ -48,6 +49,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _priority: 10
   minerData: {fileID: 5157850129834234781}
+--- !u!114 &1162940724998149513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927264833654761311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63924e6702e3e1b46b94435db8fb74b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priority: 12
+  _minerData: {fileID: 5157850129834234781}
+  _ignoredItemOn:
+  - {fileID: 11400000, guid: 56e3c1273d440e6419126c90040306a0, type: 2}
 --- !u!114 &8551415232831920579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,8 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _priority: 20
   minerData: {fileID: 5157850129834234781}
-  _emoteQuestionSprite: {fileID: -4673832123459535832, guid: 29264fe37434ba04bbc4702292a31093,
-    type: 3}
 --- !u!114 &5157850129834234781
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,8 +9,9 @@ public class CellBehaviorMasterDepositPoint : AbstractDepositPoint {
         // Don't list the parent class open a Container Popup.
     }
 
-    public override void deposit(Item item) {
+    public override bool deposit(Item item) {
         this.world.economy.sellItem(item);
+        return true;
     }
 
     public override bool isOpen() {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: MinecartUnloader
   m_EditorClassIdentifier: 
-  structureName: Minecart Unloader
+  structureName: 
   _cost: 300
   _description: Automatically unloads Minecart's contents onto conveyor belts
   _tab: {fileID: 11400000, guid: 1f363a23936a6e348bcb6bfc47d8923e, type: 2}
@@ -20,4 +20,5 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 1
   _buildTime: {fileID: 11400000, guid: ed40e64ee472be845b68a5910e25961f, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: e3e8f6107ba5aa24ebaf4aec41816580, type: 2}

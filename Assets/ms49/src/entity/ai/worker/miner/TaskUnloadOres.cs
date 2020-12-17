@@ -58,6 +58,14 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
         }
     }
 
+    public override void preform() {
+        base.preform();
+
+        if(this.owner.moveHelper.path != this.navPath) {
+            this.owner.moveHelper.setPath(this.navPath);
+        }
+    }
+
     public override void onTaskStop() {
         base.onTaskStop();
 
@@ -82,9 +90,6 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
         if(this.unloadPoint != null) {
             this.isDeliveringItem = false;
             this.unloadPoint.setOccupant(this.owner);
-
-            // Manualy set it
-            this.agent.setPath(this.navPath);
 
             return true;
         }

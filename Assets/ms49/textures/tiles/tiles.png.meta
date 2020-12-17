@@ -578,6 +578,21 @@ TextureImporter:
   - first:
       213: 6816786335220469432
     second: tiles_cobweb
+  - first:
+      213: -6374461600610287948
+    second: tiles_barrel
+  - first:
+      213: -184456615454221099
+    second: tiles_mossyBricks1
+  - first:
+      213: -7176127292328518774
+    second: tiles_mossyBricks2
+  - first:
+      213: 7274476031216544053
+    second: tiles_mossyBricks3
+  - first:
+      213: -4431914283038756037
+    second: tiles_mossyBricks4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1968,8 +1983,8 @@ TextureImporter:
       name: tiles_rubble
       rect:
         serializedVersion: 2
-        x: 112
-        y: 144
+        x: 144
+        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -3695,7 +3710,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3703,6 +3718,111 @@ TextureImporter:
       bones: []
       spriteID: 8be8d841e071a9e50800000000000000
       internalID: 6816786335220469432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_barrel
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4be714592fc5987a0800000000000000
+      internalID: -6374461600610287948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_mossyBricks1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc516f7fada07df0800000000000000
+      internalID: -184456615454221099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_mossyBricks2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 144
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8bd5c59f36496c90800000000000000
+      internalID: -7176127292328518774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_mossyBricks3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 144
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53961c7986124f460800000000000000
+      internalID: 7274476031216544053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_mossyBricks4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 144
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b33be7cd07dae72c0800000000000000
+      internalID: -4431914283038756037
       vertices: []
       indices: 
       edges: []

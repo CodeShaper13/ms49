@@ -10,6 +10,8 @@ public class WorldRenderer : MonoBehaviour {
     private FogRenderer fogRenderer = null;
     [SerializeField]
     private TargetedSquareTilemapRenderer _targetedRenderer = null;
+    [SerializeField]
+    private Color[] _hardnessColors = new Color[0];
 
     private Layer targetLayer;
     private World world;
@@ -24,9 +26,21 @@ public class WorldRenderer : MonoBehaviour {
 
         this.cellRenderer.initializedRenderer(
             size,
-            (x, y) => { return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTint(world, x, y); },
-            (x, y) => { return this.targetLayer.getCellState(x, y); },
-            (x, y) => { return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTile(world, x, y); }
+            (x, y) => {
+                return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTint(world, x, y);
+            },
+            (x, y) => {
+                LayerData layerData = this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth);
+                int hardness = this.targetLayer.getHardness(x, y);
+                hardness = Mathf.Clamp(hardness, 0, this._hardnessColors.Length - 1);
+                return this._hardnessColors[hardness] * layerData.getGroundTint(world, x, y);
+            },
+            (x, y) => {
+                return this.targetLayer.getCellState(x, y);
+            },
+            (x, y) => {
+                return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTile(world, x, y);
+            }
             );
 
         this.fogRenderer.mapSize = size;

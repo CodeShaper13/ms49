@@ -14,38 +14,40 @@ public class PopupMine : PopupWorldReference {
 
         if((rightBtn || leftBtn) && !EventSystem.current.IsPointerOverGameObject()) {
             Position pos = CameraController.instance.getMousePos();
+            if(!this.world.isOutOfBounds(pos)) {
 
-            CellData cell = this.world.getCellState(pos).data;
+                CellData cell = this.world.getCellState(pos).data;
 
-            bool valid = cell is CellDataMineable || (cell == Air.get && this.world.isCoveredByFog(pos));
-            if(valid) {
-                if(CameraController.instance.inCreativeMode) {
-                    // Instantly remove.
-                    this.world.setCell(pos, null, true);
-                    this.world.liftFog(pos);
-                    this.world.tryCollapse(pos);
-                    this.world.targetedSquares.stopTargeting(pos);
-                    this.playSfx();
-                }
-                else {
-                    if(this.world.plotManager.isOwned(pos)) {
-                        if(this.world.targetedSquares.isTargeted(pos)) {
-                            if(!rightBtn) {
-                                this.world.targetedSquares.stopTargeting(pos);
-                            } else {
-                                if(this.world.targetedSquares.isPriority(pos)) {
+                bool valid = cell is CellDataMineable || (cell == Air.get && this.world.isCoveredByFog(pos));
+                if(valid) {
+                    if(CameraController.instance.inCreativeMode) {
+                        // Instantly remove.
+                        this.world.setCell(pos, null, true);
+                        this.world.liftFog(pos);
+                        this.world.tryCollapse(pos);
+                        this.world.targetedSquares.stopTargeting(pos);
+                        this.playSfx();
+                    }
+                    else {
+                        if(this.world.plotManager.isOwned(pos)) {
+                            if(this.world.targetedSquares.isTargeted(pos)) {
+                                if(!rightBtn) {
                                     this.world.targetedSquares.stopTargeting(pos);
                                 } else {
-                                    this.world.targetedSquares.stopTargeting(pos);
-                                    this.world.targetedSquares.startTargeting(pos, true);
+                                    if(this.world.targetedSquares.isPriority(pos)) {
+                                        this.world.targetedSquares.stopTargeting(pos);
+                                    } else {
+                                        this.world.targetedSquares.stopTargeting(pos);
+                                        this.world.targetedSquares.startTargeting(pos, true);
+                                    }
                                 }
+                            } else {
+                                // Make sure this won't leave too big of an open spot // TODO
+                                this.world.targetedSquares.startTargeting(pos, rightBtn);
                             }
-                        } else {
-                            // Make sure this won't leave too big of an open spot // TODO
-                            this.world.targetedSquares.startTargeting(pos, rightBtn);
-                        }
 
-                        this.playSfx();
+                            this.playSfx();
+                        }
                     }
                 }
             }

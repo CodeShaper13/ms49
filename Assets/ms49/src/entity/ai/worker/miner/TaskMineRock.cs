@@ -6,7 +6,7 @@ using UnityEngine;
 public class TaskMineRock : TaskMovement<EntityWorker> {
 
     [SerializeField, Min(0.1f)]
-    private float _mineSpeed = 1f;
+    private float[] _mineSpeeds = new float[] { 1f, 1.5f, 2f, };
     [SerializeField, Min(0)]
     private float _hungerCost = 5f;
     [SerializeField, Min(0)]
@@ -28,12 +28,14 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
 
             HashSet<TargetedSquare> targetedPosList = this.owner.world.targetedSquares.list;
 
-            bool foundSquare = this.method((ts) => { return ts.isPriority; });
+            bool isCareless = this.owner.info.personality.isCareless;
+
+            bool foundSquare = this.method((ts) => ts.isPriority || isCareless);
 
             if(foundSquare) {
                 return true;
             } else {
-                return this.method((ts) => { return !ts.isPriority; });
+                return this.method((ts) => !ts.isPriority || isCareless);
             }
         }
 
@@ -66,12 +68,16 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
 
     public override void onDestinationArive() {
         this.crackParticle = this.owner.world.particles.spawn(this.stonePos.center, this.owner.depth, this.stoneCrackParticlePrefab);
+        ParticleSystem.MainModule main = this.crackParticle.ps.main;
+        float hardness = this._mineSpeeds[this.owner.world.getHardness(this.stonePos)];
+        main.simulationSpeed = 1f / hardness;
     }
 
     public override void onAtDestination() {
-        this.timeMining += Time.deltaTime;
+        this.timeMining += (Time.deltaTime * this.owner.info.personality.workSpeedMultiplyer);
 
-        if(this.timeMining >= _mineSpeed) {
+        int hardness = this.owner.world.getHardness(this.stonePos);
+        if(this.timeMining >= this._mineSpeeds[hardness]) {
             // Pickup the dropped item from the stone.
             CellData data = this.owner.world.getCellState(this.stonePos).data;
             if(data is CellDataMineable) {
@@ -88,9 +94,15 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
                         main.startColor = layerData.getGroundTint(this.owner.world, this.stonePos.x, this.stonePos.y);
                     }
                 }
+
+                // Add to mined stat.
+                StatisticInt stat = this.owner.world.statManager.getCellMinedStat(data);
+                if(stat != null) {
+                    stat.increase(1);
+                }
             }            
 
-            // Reduce hunger and energy
+            // Reduce hunger and energy.
             this.owner.hunger.decrease(this._hungerCost);
             this.owner.energy.decrease(this._energyCost);
 
@@ -100,7 +112,7 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
             this.owner.world.liftFog(this.stonePos);
             this.owner.world.tryCollapse(this.stonePos);
 
-            // Add to statistic
+            // Add to global mined count
             this.owner.world.stoneExcavated++;
         }
     }
@@ -118,7 +130,7 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
             foreach(Rotation r in Rotation.ALL) {
                 Position neighborPos = ts.pos + r;
 
-                if(!this.owner.world.isOutOfBounds(neighborPos) && this.owner.world.getCellState(neighborPos).data.isWalkable) {
+                if(!this.owner.world.isOutOfBounds(neighborPos) && (this.owner.world.getCellState(neighborPos).data.isWalkable && !this.owner.world.isCoveredByFog(neighborPos))) {
                     fullySurrounded = false;
                     break;
                 }

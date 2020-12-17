@@ -21,7 +21,13 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
         this.isOn = !this.isOn;
         this.dirty();
 
+        this.world.statManager.leversFlipped.increase(1);
+
         CellBehaviorLever.alertNeighborsOfFlip(this);
+    }
+
+    public override string getTooltipText() {
+        return "[rmb] " + (this.isOn ? "Turn On" : "Turn Off");
     }
 
     public void readFromNbt(NbtCompound tag) {

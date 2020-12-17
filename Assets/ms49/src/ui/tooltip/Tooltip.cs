@@ -13,6 +13,8 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
     [Tooltip("If true, the text field will be set to the value of the attached Text component, or a Text Component of a child")]
     public bool pullFromTextComponent;
 
+    private TooltipDisplayer tooltipDisplayer;
+
     public string text {
         get {
             return this._text;
@@ -21,9 +23,6 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
             this._text = value;
         }
     }
-
-    // Cached
-    private TooltipDisplayer tooltipDisplayer;
 
     private void Start() {
         this.tooltipDisplayer = GameObject.FindObjectOfType<TooltipDisplayer>();
@@ -40,21 +39,14 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        this.StartCoroutine("func");
-    }
-
-    public void OnPointerExit(PointerEventData eventData) {
-        if(this.tooltipDisplayer != null) {
-            this.tooltipDisplayer.setText(string.Empty);
-
-            this.StopCoroutine("func");
+        if(this.tooltipDisplayer != null && !string.IsNullOrWhiteSpace(this.text)) {
+            this.tooltipDisplayer.setText(this.text, this.delay, this.gameObject);
         }
     }
 
-    private IEnumerator func() {
-        yield return new WaitForSecondsRealtime(this.delay);
-        if(this.tooltipDisplayer != null) {
-            this.tooltipDisplayer.setText(this.text);
+    public void OnPointerExit(PointerEventData eventData) {
+        if(this.tooltipDisplayer != null && !string.IsNullOrWhiteSpace(this.text)) {
+            this.tooltipDisplayer.hide();
         }
     }
 }

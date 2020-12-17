@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: Sign
   m_EditorClassIdentifier: 
+  _cellName: sign
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: b3a1c384fa9ab9a44828689f09ea32b7, type: 2}

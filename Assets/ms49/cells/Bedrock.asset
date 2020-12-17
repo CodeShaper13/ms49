@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
+  m_Name: Bedrock
+  m_EditorClassIdentifier: 
+  _cellName: bedrock
+  _isSolid: 1
+  _floorOverlayTile: {fileID: 0}
+  _objectTile: {fileID: 11400000, guid: 0b7539d7e64b2884298d0f51ba188283, type: 2}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 0
+  up:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  right:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  down:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  left:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  _movementCost: -1
+  _canBuildOver: 0
+  _isDestroyable: 0
+  _zMoveDirections: 0
+  _flammable: 0
+  _temperatureOutput: 0
+  _supportsCeiling: 0
+  _includeInFogFloodLift: 0
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 0}

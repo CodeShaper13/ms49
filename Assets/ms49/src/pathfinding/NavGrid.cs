@@ -4,27 +4,13 @@ using System;
 
 public class NavGrid {
 
-    public Node[,] nodes {
-        get {
-            return this._nodes;
-        }
-        set {
-            _nodes = value;
-            this.mapSize = new Vector2Int(_nodes.GetLength(0), _nodes.GetLength(1)); // TODO do these need to be switched?
-        }
-    }
+    public Node[,] nodes;
 
-    public Vector2Int mapSize {
-        get;
-        private set;
-    }
-
-    public int nodeCount { get { return this.mapSize.x * this.mapSize.y; } }
-
-    private Node[,] _nodes;
+    private int mapSize;
 
     public NavGrid(int size) {
         this.nodes = new Node[size, size];
+        this.mapSize = size;
     }
 
     /// <summary>
@@ -64,7 +50,7 @@ public class NavGrid {
     }
 
     public bool inMap(int x, int y) {
-        return x >= 0 && x < this.mapSize.x && y >= 0 && y < this.mapSize.y;
+        return x >= 0 && x < this.mapSize && y >= 0 && y < this.mapSize;
     }
 
     public void debugDraw() {

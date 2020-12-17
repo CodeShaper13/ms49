@@ -14,7 +14,7 @@ public class TaskCollectDishes : TaskMovement<EntityWorker> {
     private CellBehaviorTable table;
 
     public override bool shouldExecute() {
-        if(this.cookData.plateState == CellBehaviorTable.EnumPlateState.NONE) {
+        if(this.cookData.plateState == CellBehaviorTable.EnumPlateState.NONE || this.cookData.plateState == CellBehaviorTable.EnumPlateState.CLEAN) {
             this.table = this.calculateAndSetPathToClosest<CellBehaviorTable>(
                 true,
                 behavior => behavior.plateState == CellBehaviorTable.EnumPlateState.DIRTY);

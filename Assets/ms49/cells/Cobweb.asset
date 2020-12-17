@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
   m_Name: Cobweb
   m_EditorClassIdentifier: 
+  _cellName: cobweb
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: 3748108b47965344e80b7ea7e596e8f8, type: 2}

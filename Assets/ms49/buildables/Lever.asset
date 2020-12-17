@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Lever
   m_EditorClassIdentifier: 
-  structureName: Lever
+  structureName: 
   _cost: 115
   _description: Changes the direction of adjacent Conveyor Belts and curve rails
   _tab: {fileID: 11400000, guid: 1f363a23936a6e348bcb6bfc47d8923e, type: 2}
@@ -20,4 +20,5 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: cbcd3884b1aba77438d1f95a3c60ea81, type: 2}

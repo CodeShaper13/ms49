@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2445739090162371686}
   - component: {fileID: 9065923818222504184}
   - component: {fileID: 2889943158701000962}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: EntityMinecart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 744942395632048394}
   - component: {fileID: 7697917525930786154}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpriteRenderer_Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6624219531447900122}
   - component: {fileID: 5470119505551755509}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpriteRenderer_Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

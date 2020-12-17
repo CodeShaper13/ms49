@@ -1,86 +1,141 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class FeatureCave :FeatureBase {
+public class FeatureCave : FeatureBase {
 
     [SerializeField]
     public CellData waterTile = null;
     [SerializeField]
     public CellData lavaTile = null;
-    [SerializeField]
-    private float roomMinSize = 1f;
-    [SerializeField]
-    private float roomMaxSize = 100f;
 
-    private int[,] map;
+    [Header("Cave Generation")]
+    [SerializeField, Range(0, 100)]
+    private int _randomFillPercent = 64;
+    [SerializeField, Range(0, 10)]
+    private int _smoothPasses = 3;
+    [SerializeField, Range(0, 10)]
+    private int _i = 5;
+    [SerializeField, Range(0, 10)]
+    private int _j = 4;
+
+    [Header("Cave Prune Settings")]
+    [SerializeField, Range(0, 100)]
+    private float _roomFailChance = 10f;
+    [SerializeField]
+    private bool _pruneRooms = false;
+    [SerializeField]
+    private int _roomMinSize = 1;
+    [SerializeField]
+    private int _roomMaxSize = 100;
+
+    [Header("Lake Settings")]
+    [SerializeField, Range(0, 100)]
+    private int _lakeFailPercent = 50;
+    [SerializeField, Range(0, 100)]
+    private int _lakeFillPercent = 80;
+    [SerializeField]
+    private int _lakeSmoothPasses = 3;
 
     public override void generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
-        if(!layerData.generateCaves) {
-            return;
-        }
+        if(layerData.generateCaves) {
+            int[,] map = this.makeCaves(rnd, layerData.lakeType, accessor.size);
 
-        this.map = new int[accessor.size, accessor.size];
-        this.randomlyFillMap(rnd, layerData.caveFillPercent, accessor.size);
+            // Set tiles.
+            for(int x = 0; x < accessor.size; x++) {
+                for(int y = 0; y < accessor.size; y++) {
+                    int id = map[x, y];
+                    CellData cell = null;
 
-        for(int i = 0; i < layerData.caveSmoothPases; i++) {
-            this.smoothMap(layerData, accessor.size);
-        }
+                    if(id == 0) {
+                        cell = Main.instance.tileRegistry.getAir();
+                    }
+                    else if(id == 2) {
+                        cell = layerData.lakeType == EnumLakeType.WATER ? this.waterTile : this.lavaTile;
+                    }
 
-        List<List<Vector2Int>> roomRegions = this.GetRegions(0, accessor.size);
-
-        // Remove rooms that are too big or small
-        foreach(List<Vector2Int> room in roomRegions) {
-            if(room.Count <= this.roomMinSize || room.Count >= this.roomMaxSize) {
-                foreach(Vector2Int tile in room) {
-                    this.map[tile.x, tile.y] = 1;
-                }
-                continue;
-            }
-        }
-
-        if(layerData.lakeType != EnumLakeType.NONE) {
-            this.createLakes(rnd, layerData, accessor, roomRegions);
-        }
-
-        // Set tiles.
-        for(int x = 0; x < accessor.size; x++) {
-            for(int y  = 0; y < accessor.size; y++) {
-                int id = this.map[x, y];
-                CellData cell = null;
-
-                if(id == 0) {
-                    cell = Main.instance.tileRegistry.getAir();
-                } else if(id == 2) {
-                    cell = this.waterTile;
-                } else if(id == 3) {
-                    cell = this.lavaTile;
-                }
-
-                if(cell != null) {
-                    accessor.setCell(x, y, cell);
+                    if(cell != null) {
+                        accessor.setCell(x, y, cell);
+                    }
                 }
             }
         }
     }
 
-    private void createLakes(System.Random rnd, LayerData layerData, MapAccessor accessor, List<List<Vector2Int>> roomRegions) {
-        foreach(List<Vector2Int> room in roomRegions) {
-            if(rnd.Next(0, 101) < layerData.lakeChance) {
-                foreach(Vector2Int tile in room) {
-                    map[tile.x, tile.y] = (layerData.lakeType == EnumLakeType.WATER) ? 2 : 3;
+    public int[,] makeCaves(System.Random rnd, EnumLakeType lakeType, int size) {
+        int[,] map = new int[size, size];
+        this.RandomFillMap(rnd, map, size, this._randomFillPercent);
+
+        for(int i = 0; i < this._smoothPasses; i++) {
+            this.smoothMap(map, size);
+        }
+
+        List<List<Vector2Int>> roomRegions = this.GetRegions(map, 0, size);
+
+        // Remove rooms that are too big or small.
+        if(this._pruneRooms) {
+            for(int i = roomRegions.Count - 1; i >= 0; i--) {
+                List<Vector2Int> room = roomRegions[i];
+
+                int roomSize = room.Count;
+                if(rnd.Next(0, 100) < this._roomFailChance || (roomSize <= this._roomMinSize || roomSize >= this._roomMaxSize)) {
+                    // Fill the room with dirt, we don't want it
+                    foreach(Vector2Int tile in room) {
+                        map[tile.x, tile.y] = 1;
+                    }
+                    roomRegions.RemoveAt(i);
                 }
             }
         }
+
+        // Fill rooms with water
+        if(lakeType != EnumLakeType.NONE) {
+            int[,] m = new int[size, size];
+            foreach(List<Vector2Int> room in roomRegions) {
+                if(rnd.Next(0, 100) < this._lakeFailPercent) {
+                    continue; // Failed
+                }
+
+                // Fill array with -1
+                for(int x = 0; x < size; x++) {
+                    for(int y = 0; y < size; y++) {
+                        m[x, y] = -1;
+                    }
+                }
+
+                foreach(Vector2Int v in room) {
+                    m[v.x, v.y] = 10; // Overwriten soon
+                }
+
+                this.RandomFillMap(rnd, m, size, this._lakeFillPercent);
+
+                for(int i = 0; i < this._lakeSmoothPasses; i++) {
+                    this.smoothMap(m, size);
+                }
+
+                // Apply the water to the map
+                for(int x = 0; x < size; x++) {
+                    for(int y = 0; y < size; y++) {
+                        if(m[x, y] != -1) {
+                            int i = m[x, y];
+
+                            map[x, y] = (i == 1 ? 2 : 0);
+                        }
+                    }
+                }
+            }
+        }
+
+        return map;
     }
 
-    private List<List<Vector2Int>> GetRegions(int tileType, int mapSize) {
+    private List<List<Vector2Int>> GetRegions(int[,] tiles, int tileType, int mapSize) {
         List<List<Vector2Int>> regions = new List<List<Vector2Int>>();
         bool[,] inRoom = new bool[mapSize, mapSize];
 
         for(int x = 0; x < mapSize; x++) {
             for(int y = 0; y < mapSize; y++) {
-                if(!inRoom[x, y] && map[x, y] == tileType) {
-                    List<Vector2Int> newRegion = this.GetRegionTiles(x, y, mapSize);
+                if(!inRoom[x, y] && tiles[x, y] == tileType) {
+                    List<Vector2Int> newRegion = this.GetRegionTiles(tiles, x, y, mapSize);
                     regions.Add(newRegion);
 
                     foreach(Vector2Int tile in newRegion) {
@@ -93,10 +148,10 @@ public class FeatureCave :FeatureBase {
         return regions;
     }
 
-    private List<Vector2Int> GetRegionTiles(int startX, int startY, int mapSize) {
-        List<Vector2Int> tiles = new List<Vector2Int>();
+    private List<Vector2Int> GetRegionTiles(int[,] tiles, int startX, int startY, int mapSize) {
+        List<Vector2Int> roomTiles = new List<Vector2Int>();
         int[,] mapFlags = new int[mapSize, mapSize];
-        int tileType = map[startX, startY];
+        int tileType = tiles[startX, startY];
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
         queue.Enqueue(new Vector2Int(startX, startY));
@@ -104,12 +159,12 @@ public class FeatureCave :FeatureBase {
 
         while(queue.Count > 0) {
             Vector2Int tile = queue.Dequeue();
-            tiles.Add(tile);
+            roomTiles.Add(tile);
 
             for(int x = tile.x - 1; x <= tile.x + 1; x++) {
                 for(int y = tile.y - 1; y <= tile.y + 1; y++) {
-                    if(this.IsInMapRange(x, y, mapSize) && (y == tile.y || x == tile.x)) {
-                        if(mapFlags[x, y] == 0 && map[x, y] == tileType) {
+                    if(this.withinBounds(tiles, x, y) && (y == tile.y || x == tile.x)) {
+                        if(mapFlags[x, y] == 0 && tiles[x, y] == tileType) {
                             mapFlags[x, y] = 1;
                             queue.Enqueue(new Vector2Int(x, y));
                         }
@@ -118,50 +173,65 @@ public class FeatureCave :FeatureBase {
             }
         }
 
-        return tiles;
+        return roomTiles;
     }
 
-    private bool IsInMapRange(int x, int y, int mapSize) {
-        return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
+    private bool withinBounds(int[,] tiles, int x, int y) {
+        return x >= 0 && x < tiles.GetLength(0) && y >= 0 && y < tiles.GetLength(1);
     }
 
-    private void randomlyFillMap(System.Random rnd, float rndFillPercent, int size) {
-        for(int x = 0; x < size; x++) {
-            for(int y = 0; y < size; y++) {
-                if(x == 0 || x == size - 1 || y == 0 || y == size - 1) {
-                    this.map[x, y] = 1; // Edges always filled.
-                } else {
-                    this.map[x, y] = (rnd.Next(0, 100) < rndFillPercent) ? 1 : 0;
-                }
-            }
-        }
-    }
-
-    private void smoothMap(LayerData layer, int mapSize) {
+    /// <summary>
+    /// Randomly sets non -1 cells to 0 or 1.
+    /// </summary>
+	private void RandomFillMap(System.Random rnd, int[,] tiles, int mapSize, int rndFillPercent) {
         for(int x = 0; x < mapSize; x++) {
             for(int y = 0; y < mapSize; y++) {
-                int neighbourWallTiles = this.getSurroundingWallCount(mapSize, x, y);
+                if(tiles[x, y] != -1) {
 
-                if(neighbourWallTiles > layer.f1) {
-                    this.map[x, y] = 1; // Stone
+                    if(x == 0 || x == mapSize - 1 || y == 0 || y == mapSize - 1) {
+                        tiles[x, y] = 1;
+                    }
+                    else {
+                        tiles[x, y] = (rnd.Next(0, 100) < rndFillPercent) ? 1 : 0;
+                    }
                 }
-                else if(neighbourWallTiles < layer.f2) {
-                    this.map[x, y] = 0; // Air
-                }
-
             }
         }
     }
 
-    private int getSurroundingWallCount(int mapSize, int x, int y) {
+    private void smoothMap(int[,] tiles, int mapSize) {
+        for(int x = 0; x < mapSize; x++) {
+            for(int y = 0; y < mapSize; y++) {
+                if(tiles[x, y] != -1) {
+                    int neighbourWallTiles = this.getSurroundingWallCount(tiles, mapSize, x, y);
+
+                    if(neighbourWallTiles > this._i) {
+                        tiles[x, y] = 1; // Stone
+                    }
+                    else if(neighbourWallTiles < this._j) {
+                        tiles[x, y] = 0; // Air
+                    }
+                }
+            }
+        }
+    }
+
+    private int getSurroundingWallCount(int[,] tiles, int mapSize, int x, int y) {
         int wallCount = 0;
+
         for(int neighbourX = x - 1; neighbourX <= x + 1; neighbourX++) {
             for(int neighbourY = y - 1; neighbourY <= y + 1; neighbourY++) {
-                if(neighbourX >= 0 && neighbourX < mapSize && neighbourY >= 0 && neighbourY < mapSize) {
-                    if(neighbourX != x || neighbourY != y) {
-                        wallCount += map[neighbourX, neighbourY];
+
+                if(this.withinBounds(tiles, neighbourX, neighbourY)) {
+                    if(neighbourX == x && neighbourY == y) {
+                        continue; // don't count the middle.
                     }
-                } else {
+
+                    if(tiles[neighbourX, neighbourY] == 1) {
+                        wallCount++;
+                    }
+                }
+                else {
                     wallCount++;
                 }
             }

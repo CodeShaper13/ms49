@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
   m_Name: RailStopper
   m_EditorClassIdentifier: 
+  _cellName: stopper rail
   _isSolid: 0
   _floorOverlayTile: {fileID: 11400000, guid: ddf91ec90072353419b2229ee9cc6e0a, type: 2}
   _objectTile: {fileID: 11400000, guid: a6b74ad7d8dd42348a70bc2da8fdcfa9, type: 2}
@@ -45,7 +46,7 @@ MonoBehaviour:
     _objectTile: {fileID: 11400000, guid: 2b8b860a76b118d41a748a2c07c2285d, type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
-  _movementCost: 50
+  _movementCost: -1
   _canBuildOver: 0
   _isDestroyable: 1
   _zMoveDirections: 0

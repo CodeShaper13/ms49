@@ -15,12 +15,14 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
     public override void onDestroy() {
         base.onDestroy();
 
+        /*
         for(int i = this.world.entities.count - 1; i >= 0; i--) {
             EntityBase entity = this.world.entities.list[i];
             if(entity is EntityItem && entity.position == this.pos) {
                 this.destroyItem(entity);
             }
         }
+        */
     }
 
     public void onLeverFlip(CellBehavior lever) {
@@ -89,6 +91,8 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
                         if(!container.isFull) {
                             container.deposit(((EntityItem)entity).item);
                             this.world.entities.remove(entity);
+                        } else {
+                            this.destroyItem(entity);
                         }
                     } else if(!(behavior is CellBehaviorConveyorBelt)) {
                         this.destroyItem(entity);

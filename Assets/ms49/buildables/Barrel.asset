@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
+  m_Name: Barrel
+  m_EditorClassIdentifier: 
+  structureName: 
+  _cost: 75
+  _description: A decorative barrel
+  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: 
+  _displayRotation: 0
+  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
+  _cell: {fileID: 11400000, guid: 793d29281a8489d43a5a7f6738aaea50, type: 2}

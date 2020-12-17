@@ -1,4 +1,4 @@
-﻿public abstract class AbstractDepositPoint : CellBehaviorContainer {
+﻿public abstract class AbstractDepositPoint : AbstractBehaviorContainer {
 
     /// <summary>
     /// Check if the deposit point is "open" and accepting items.  If

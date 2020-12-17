@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: Fridge
   m_EditorClassIdentifier: 
+  _cellName: fridge
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: 8cac46ab875a5b34cab0c40e1f6cbf68, type: 2}

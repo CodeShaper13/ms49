@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
   m_Name: RailStraight
   m_EditorClassIdentifier: 
+  _cellName: straight rail
   _isSolid: 0
   _floorOverlayTile: {fileID: 11400000, guid: 2fa34351e45c3b346856c34313239655, type: 2}
   _objectTile: {fileID: 0}

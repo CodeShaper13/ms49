@@ -10,8 +10,6 @@ public class TaskMakeFood : TaskMovement<EntityWorker> {
     private float cookSpeed = 4f;
     [SerializeField]
     private CookMetaData cookData = null;
-    [SerializeField]
-    private Sprite _emoteStoveSprite = null;
 
     private CellBehaviorStove stove;
     private float cookTimer;
@@ -37,7 +35,7 @@ public class TaskMakeFood : TaskMovement<EntityWorker> {
                     return true;
                 } else {
                     // Someone needs food, but there is no stove
-                    this.owner.emote.startEmote(new Emote(this._emoteStoveSprite, 0.1f).setTooltip("Needs a stove to cook food"));
+                    this.owner.emote.startEmote(new Emote("exclamation", 0.1f).setTooltip("Needs a stove to cook food"));
 
                 }
             }
@@ -56,9 +54,8 @@ public class TaskMakeFood : TaskMovement<EntityWorker> {
         base.onAtDestination();
 
         // Cook food...
-        this.cookTimer += Time.deltaTime;
-        if(this.cookTimer >= this.
-            cookSpeed) {
+        this.cookTimer += Time.deltaTime * this.owner.info.personality.workSpeedMultiplyer;
+        if(this.cookTimer >= this.cookSpeed) {
             this.stove.setOccupant(null);
 
             this.cookData.plateState = CellBehaviorTable.EnumPlateState.FULL;

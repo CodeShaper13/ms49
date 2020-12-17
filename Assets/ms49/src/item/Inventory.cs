@@ -1,4 +1,5 @@
 ﻿using fNbt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,20 +11,31 @@ public class Inventory : MonoBehaviour {
     [SerializeField, Min(1)]
     private int _size = 1;
 
+    private Item[] items;
+
     public string inventoryName => this._inventoryName;
     public int maxCapacity => this._size;
-    public Stack<Item> items { get; protected set; }
 
     private void Awake() {
-        this.items = new Stack<Item>(this.maxCapacity);
+        this.items = new Item[this.maxCapacity];
     }
 
     public virtual bool isFull() {
-        return this.items.Count >= this.maxCapacity;
+        return this.getItemCount() >= this.maxCapacity;
     }
 
     public virtual bool isEmpty() {
-        return this.items.Count == 0;
+        return this.getItemCount() == 0;
+    }
+
+    public int getItemCount() {
+        int count = 0;
+        for(int i = 0; i < this.items.Length; i++) {
+            if(this.items[i] != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /// <summary>
@@ -37,7 +49,7 @@ public class Inventory : MonoBehaviour {
         }
 
         if(!this.isFull()) {
-            this.items.Push(item);
+            this.items[this.getItemCount()] = item;
             return true;
         }
         return false;
@@ -51,7 +63,10 @@ public class Inventory : MonoBehaviour {
         if(this.isEmpty()) {
             return null;
         } else {
-            return this.items.Pop();
+            int index = this.getItemCount() - 1;
+            Item item = this.items[index];
+            this.items[index] = null;
+            return item;
         }
     }
 
@@ -59,10 +74,10 @@ public class Inventory : MonoBehaviour {
         NbtCompound tag = new NbtCompound();
 
         MinedItemRegistry reg = Main.instance.itemRegistry;
-        int count = this.items.Count;
+        int count = this.items.Length;
         int[] ids = new int[count];
         for(int i = 0; i < count; i++) {
-            ids[i] = reg.getIdOfElement(items.ElementAt(i));
+            ids[i] = reg.getIdOfElement(items[i]);
         }
         tag.setTag("itemIds", ids);
 
@@ -75,8 +90,12 @@ public class Inventory : MonoBehaviour {
         for(int i = 0; i < ids.Length; i++) {
             Item item = reg.getElement(ids[i]);
             if(item != null) {
-                this.items.Push(item);
+                this.items[i] = item;
             }
         }
+    }
+
+    public Item getItem(int i) {
+        return this.items[i];
     }
 }

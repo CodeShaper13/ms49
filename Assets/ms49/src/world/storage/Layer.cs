@@ -8,6 +8,7 @@ public class Layer {
     private CellState[] tiles;
     public float[] temperatures;
     private float[] heatSources;
+    private int[] hardness;
     private World world;
     private WorldRenderer worldRenderer;
     private float cachedLayerHeat = 0;
@@ -23,13 +24,17 @@ public class Layer {
 
         this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
 
-        this.tiles = new CellState[this.size * this.size];
+        int cellCount = this.size * this.size;
+
+        this.tiles = new CellState[cellCount];
         for(int i = 0; i < this.tiles.Length; i++) {
             this.tiles[i] = new CellState(Main.instance.tileRegistry.getAir(), null, Rotation.UP);
         }
 
-        this.temperatures = new float[this.size * this.size];
-        this.heatSources = new float[this.size * this.size];
+
+        this.temperatures = new float[cellCount];
+        this.heatSources = new float[cellCount];
+        this.hardness = new int[cellCount];
 
         LayerData layerData = this.world.mapGenerator.getLayerFromDepth(this.depth);
         if(layerData != null) { // Null if a layer is added through an external editor or the layer count is reduced
@@ -150,6 +155,14 @@ public class Layer {
         return this.heatSources[this.size * x + y];
     }
 
+    public void setHardness(int x, int y, int hardness) {
+        this.hardness[this.size * x + y] = hardness;
+    }
+
+    public int getHardness(int x, int y) {
+        return this.hardness[this.size * x + y];
+    }
+
     public bool hasFog() {
         return this.fog != null;
     }
@@ -199,6 +212,9 @@ public class Layer {
             tempArray[i] = (int)(this.temperatures[i] * 1_000_000f);
         }
         tag.setTag("temperature", tempArray);
+
+        // Write hardness:
+        tag.setTag("hardness", this.hardness);
     }
 
     public void readFromNbt(NbtCompound tag) {
@@ -234,6 +250,9 @@ public class Layer {
         for(int i = 0; i < Mathf.Min(this.temperatures.Length, tempArray.Length); i++) {
             this.temperatures[i] = tempArray[i] / 1_000_000f;
         }
+
+        // Read hardness:
+        this.hardness = tag.getIntArray("hardness");
     }
 
     private bool inBounds(int x, int y) {

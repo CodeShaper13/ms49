@@ -8,6 +8,14 @@ public class BuildableTile : BuildableBase {
 
     public virtual CellData cell => this._cell;
 
+    public override string getName() {
+        if(!string.IsNullOrEmpty(base.getName())) {
+            return base.getName();
+        } else {
+            return this.cell != null ? this.cell.displayName : "no cell set!";
+        }
+    }
+
     public override bool isRotatable() {
         return this.cell != null && this.cell.rotationalOverride;
     }
@@ -51,10 +59,10 @@ public class BuildableTile : BuildableBase {
             return;
         }
 
-        bool instantBuild = this.buildTime == 0 || CameraController.instance.inCreativeMode || highlight == null;
-
-        if(instantBuild) {
+        // Place build site/cell
+        if(this.shouldBuildInstantly(highlight)) {
             world.setCell(pos, this.cell, rotation);
+            this.applyFogOpperation(world, pos);
         }
         else {
             world.setCell(pos, highlight.buildSiteCell, rotation);
@@ -62,6 +70,11 @@ public class BuildableTile : BuildableBase {
             site.setPrimary(this.cell, this.buildTime, this.fogOption == EnumFogOption.PLACE);
         }
 
-        //this.applyFogOpperation(world, pos);
+        // Increase stat.
+        world.statManager.getCellBuiltStat(this.cell)?.increase(1);
+    }
+
+    protected bool shouldBuildInstantly(BuildAreaHighlighter highlight) {
+        return this.buildTime == 0 || CameraController.instance.inCreativeMode || highlight == null;
     }
 }

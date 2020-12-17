@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class OptionToggle : OptionBase<bool> {
 
-    public OptionToggle(string name, string saveKey, Func<bool> get, Action<bool> set) :
-        base(name, saveKey, get, set) {
+    public OptionToggle(string name, string saveKey, string tooltip, Func<bool> get, Action<bool> set) :
+        base(name, saveKey, tooltip, get, set) {
     }
     
     public override void setupControlObj(GameObject obj) {
         base.setupControlObj(obj);
 
-        Toggle toggle = obj.GetComponent<Toggle>();
+        Toggle toggle = obj.GetComponentInChildren<Toggle>();
         toggle.isOn = this.value;
         toggle.onValueChanged.AddListener((bool value) => {
             this.value = value;

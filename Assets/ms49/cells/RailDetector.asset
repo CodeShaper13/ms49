@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
   m_Name: RailDetector
   m_EditorClassIdentifier: 
+  _cellName: detector rail
   _isSolid: 0
   _floorOverlayTile: {fileID: 11400000, guid: f078a2698d5b1404786675531e06bef3, type: 2}
   _objectTile: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: MinecartLoader
   m_EditorClassIdentifier: 
-  structureName: Minecart Loader
+  structureName: 
   _cost: 300
   _description: Automatically loads Minecarts.  Feed item into the Loader with conveyor
     belts
@@ -21,4 +21,5 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 1
   _buildTime: {fileID: 11400000, guid: ed40e64ee472be845b68a5910e25961f, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: 8bec58bdc35919c4eb8d603edfb7d1ae, type: 2}

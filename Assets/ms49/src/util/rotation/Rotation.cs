@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class Rotation {
 
     public static Rotation UP = new Rotation(
@@ -35,6 +36,8 @@ public class Rotation {
     public readonly Vector2 vectorF;
     public readonly EnumAxis axis;
     public readonly EnumRotation enumRot;
+    public readonly int xDir;
+    public readonly int yDir;
 
     /// <summary>
     /// Converts an EnumRotation to a Rotation.  If the enum is None, null is returned.
@@ -78,6 +81,9 @@ public class Rotation {
         this.vectorF = this.vector;
         this.axis = axis;
         this.enumRot = enumRot;
+
+        this.xDir = dir.x;
+        this.yDir = dir.y;
     }
 
     public override string ToString() {

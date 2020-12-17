@@ -15,41 +15,78 @@ public class PopupContainer : PopupWindow {
     [SerializeField]
     private GameObject inventoryItemEntryPrefab = null;
 
-    private List<InventoryItemEntry> inventoryEntries;
+    private List<InventorySlot> slots;
     private Inventory inventory;
 
     protected override void initialize() {
         base.initialize();
 
-        this.inventoryEntries = new List<InventoryItemEntry>();
+        this.slots = new List<InventorySlot>();
 
+        /*
         MinedItemRegistry registry = Main.instance.itemRegistry;
         for(int id = 0; id < registry.getRegistrySize(); id++) {
             Item item = registry.getElement(id);
             if(item != null) {
                 GameObject obj = GameObject.Instantiate(this.inventoryItemEntryPrefab, this.itemAreaTransform);
-                InventoryItemEntry entry = obj.GetComponent<InventoryItemEntry>();
+                InventorySlot entry = obj.GetComponent<InventorySlot>();
 
                 entry.setItem(item);
 
-                this.inventoryEntries.Add(entry);
+                this.slots.Add(entry);
             }
         }
+        */
     }
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
+    public void setInventory(Inventory newInventory) {
+        // Destroy the old slot objects
+        foreach(InventorySlot slot in this.slots) {
+            GameObject.Destroy(slot.gameObject);
+        }
+        this.slots.Clear();
+        this.headerText.text = "nul";
 
-        this.headerText.text = string.IsNullOrEmpty(this.inventory.inventoryName) ? "inventory" : this.inventory.inventoryName.ToLower();
+
+        if(newInventory != null) {
+            this.inventory = newInventory;
+
+            // Create slots.
+            this.slots = new List<InventorySlot>();
+            for(int i = 0; i < this.inventory.maxCapacity; i++) {
+                GameObject obj = GameObject.Instantiate(this.inventoryItemEntryPrefab, this.itemAreaTransform);
+                InventorySlot entry = obj.GetComponent<InventorySlot>();
+                this.slots.Add(entry);
+            }
+
+            // Set head to state the inventory's name.
+            this.headerText.text = string.IsNullOrEmpty(this.inventory.inventoryName) ? "inventory" : this.inventory.inventoryName.ToLower();
+        }
     }
 
     protected override void onUpdate() {
         base.onUpdate();
 
         if(this.inventory != null) {
+            for(int i = 0; i < this.inventory.maxCapacity; i++) {
+                InventorySlot slot = this.slots[i];
+                Item item = this.inventory.getItem(i);
+
+                if(item == null) {
+                    slot.gameObject.SetActive(false);
+                } else {
+                    slot.gameObject.SetActive(true);
+                    slot.setItem(item);
+                }
+                //if(slot.item != this.inventory.getItem(i)) {
+                //    slot.setItem(this.inventory.getItem(i));
+                //}
+            }
+
+            /*
             this.emptyText.enabled = this.inventory.isEmpty();
 
-            foreach(InventoryItemEntry entry in this.inventoryEntries) {
+            foreach(InventorySlot entry in this.slots) {
                 if(!this.inventory.isEmpty()) {
                     int count = 0;
 
@@ -65,15 +102,16 @@ public class PopupContainer : PopupWindow {
                     entry.gameObject.SetActive(false);
                 }
             }
+            */
 
             this._itemCountText.text =
-                this.inventory.items.Count + "/" + this.inventory.maxCapacity + " items";
+                this.inventory.getItemCount() + "/" + this.inventory.maxCapacity + " items";
         }
     }
 
     protected override void onClose() {
         base.onClose();
 
-        this.inventory = null;
+        this.setInventory(null);
     }
 }

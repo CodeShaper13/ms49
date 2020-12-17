@@ -6,19 +6,13 @@ public class TaskSleep : TaskMovement<EntityWorker> {
     private float energyRechargeSpeed = 1;
     [SerializeField]
     private float _seekBedAt = 30;
-    [SerializeField]
-    private float valueToStop = 99;
-    [SerializeField]
-    private Sprite _emoteSleepSprite = null;
-    [SerializeField]
-    private Sprite _emoteExclamationSprite = null;
 
     private CellBehaviorBed bed;
 
-    public float seekBedAt => this._seekBedAt;
+    public int stopSleepingAt => (int)this.owner.energy.maxValue + this.owner.info.personality.sleepStopOffset;
 
     public override bool shouldExecute() {
-        if(this.owner.energy.value <= this.seekBedAt) {
+        if(this.owner.energy.value <= this._seekBedAt + this.owner.info.personality.sleepStartOffset) {
             // Find a bed.
             this.bed = this.calculateAndSetPathToClosest<CellBehaviorBed>(
                 false,
@@ -28,7 +22,7 @@ public class TaskSleep : TaskMovement<EntityWorker> {
                 this.bed.setOccupant(this.owner); // Reserve it, so no one takes it.
                 return true;
             } else {
-                this.owner.emote.startEmote(new Emote(this._emoteExclamationSprite, 0.1f).setTooltip("Can't find a bed"));
+                this.owner.emote.startEmote(new Emote("exclamation", 0.1f).setTooltip("Can't find a bed"));
             }
         }
 
@@ -36,13 +30,13 @@ public class TaskSleep : TaskMovement<EntityWorker> {
     }
 
     public override bool continueExecuting() {
-        return this.bed != null && this.owner.energy.value < this.valueToStop;
+        return this.bed != null && this.owner.energy.value < this.stopSleepingAt;
     }
 
     public override void onTaskStart() {
         base.onTaskStart();
 
-        this.owner.emote.startEmote(new Emote(this._emoteSleepSprite, -1).setPriority());
+        this.owner.emote.startEmote(new Emote("bed", -1).setPriority());
     }
 
     public override void onDestinationArive() {
@@ -60,7 +54,7 @@ public class TaskSleep : TaskMovement<EntityWorker> {
 
         this.owner.animator.playClip("Sleeping");
 
-        this.owner.energy.value = (this.owner.energy.value + (this.energyRechargeSpeed * Time.deltaTime));
+        this.owner.energy.increase(this.energyRechargeSpeed * Time.deltaTime * this.owner.info.personality.energyGainMultiplyer);
     }
 
     public override void onTaskStop() {

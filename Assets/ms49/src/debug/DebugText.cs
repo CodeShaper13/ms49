@@ -53,6 +53,7 @@ public class DebugText : MonoBehaviour {
                     this.addLine("Temperature: " + layer.getTemperature(pos.x, pos.y));
                     this.addLine("Unmodified temperature: " + layer.getUnmodifiedTemperature(pos.x, pos.y));
                     this.addLine("Heat Source: " + layer.getHeatSource(pos.x, pos.y));
+                    this.addLine("Hardness: " + layer.getHardness(pos.x, pos.y));
 
                     // Cell's Behavior:
                     CellBehavior behavior = world.getBehavior(pos);

@@ -10,5 +10,6 @@ public class CellDataRail : CellData {
         CROSSING = 1,
         CURVE = 2,
         STOPPER = 3,
+        MERGER = 4,
     }
 }

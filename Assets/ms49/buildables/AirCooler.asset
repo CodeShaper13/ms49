@@ -16,10 +16,12 @@ MonoBehaviour:
   _cost: 0
   _description: 
   _tab: {fileID: 0}
+  _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0
+  _buildTime: {fileID: 0}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 0}
-  _fogOption: 0
   gridSize: {x: 1, y: 1}
   tiles: []
   cells:

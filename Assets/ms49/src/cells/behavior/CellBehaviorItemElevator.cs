@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using fNbt;
 
-public class CellBehaviorItemElevator : CellBehaviorContainer {
+public class CellBehaviorItemElevator : AbstractBehaviorContainer {
 
     [SerializeField, Min(0)]
     private float itemTransferSpeed = 1f;

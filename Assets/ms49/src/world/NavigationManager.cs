@@ -42,9 +42,12 @@ public class NavigationManager {
         Node startNode = this.getNode(start);
         Node endNode = this.getNode(end);
 
-        this.openSet = new Heap<Node>(this.mapSize * this.mapSize * this.world.storage.layerCount); //.Clear(); // Get the heap ready to reuse
+        //this.openSet = new Heap<Node>(this.mapSize * this.mapSize * this.world.storage.layerCount); //.Clear(); // Get the heap ready to reuse
+        this.openSet.Clear();
         HashSet<Node> closedSet = new HashSet<Node>();
         this.openSet.Add(startNode);
+
+        Node[] cachedNeighborArray = new Node[7];
 
         while(this.openSet.count > 0) {
             Node currentNode = this.openSet.RemoveFirst();
@@ -54,7 +57,12 @@ public class NavigationManager {
                 return this.retracePath(startNode, endNode, stopAdjacentToFinish);
             }
 
-            foreach(Node neighbor in this.getAdjacentNodes(currentNode)) {
+            this.getAdjacentNodes(currentNode, cachedNeighborArray);
+            foreach(Node neighbor in cachedNeighborArray) {
+                if(neighbor == null) {
+                    break; // Reached the "end" of the array
+                }
+
                 if(closedSet.Contains(neighbor)) {
                     continue; // already visited this node.
                 }
@@ -71,13 +79,6 @@ public class NavigationManager {
 
                     if(!this.openSet.Contains(neighbor)) {
                         this.openSet.Add(neighbor);
-
-                        /*
-                        Debug.DrawLine(currentNode.worldPosition, neighbor.worldPosition, Color.white, 3);
-                        Vector3 v = neighbor.worldPosition;
-                        Debug.DrawLine(v + (Vector3.up + Vector3.right) * 0.1f, v + (Vector3.down + Vector3.left) * 0.1f, Color.black, 3f);
-                        Debug.DrawLine(v + (Vector3.down + Vector3.right) * 0.1f, v + (Vector3.up + Vector3.left) * 0.1f, Color.black, 3f);
-                        */
                     } else {
                         this.openSet.UpdateItem(neighbor);
                     }
@@ -91,27 +92,33 @@ public class NavigationManager {
     /// <summary>
     /// Returns a List of all connecting nodes.
     /// </summary>
-    private List<Node> getAdjacentNodes(Node node) {
-        List<Node> neighbours = new List<Node>();
+    private void getAdjacentNodes(Node node, Node[] cachedNeighborArray) {
+        int counter = 0;
 
-        foreach(Rotation r in Rotation.ALL) {
-            int checkX = node.x + r.vector.x;
-            int checkY = node.y + r.vector.y;
+        for(int i = 0; i < 4; i++) {
+            Rotation r = Rotation.ALL[i];
+            int checkX = node.x + r.xDir;
+            int checkY = node.y + r.yDir;
 
             if(this.grids[node.depth].inMap(checkX, checkY)) {
-                neighbours.Add(this.grids[node.depth].nodes[checkX, checkY]);
+                cachedNeighborArray[counter] = this.grids[node.depth].nodes[checkX, checkY];
+                counter++;
             }
         }
 
         if(node.connectsUp()) {
-            neighbours.Add(this.grids[node.depth - 1].nodes[node.x, node.y]);
+            cachedNeighborArray[counter] = this.grids[node.depth - 1].nodes[node.x, node.y];
+            counter++;
         }
 
         if(node.connectsDown()) {
-            neighbours.Add(this.grids[node.depth + 1].nodes[node.x, node.y]);
+            cachedNeighborArray[counter] = this.grids[node.depth + 1].nodes[node.x, node.y];
+            counter++;
         }
 
-        return neighbours;
+        for(int i = counter; i < cachedNeighborArray.Length; i++) {
+            cachedNeighborArray[i] = null;
+        }
     }
 
     private PathPoint[] retracePath(Node startNode, Node endNode, bool stopAdjacentToFinish) {
@@ -144,20 +151,10 @@ public class NavigationManager {
     }
 
     private int getDistance(Node nodeA, Node nodeB) {
-        /*
-        int dstX = Mathf.Abs(nodeA.x - nodeB.x);
-        int dstY = Mathf.Abs(nodeA.y - nodeB.y);
 
-        if(dstX > dstY) {
-            return 14 * dstY + 10 * (dstX - dstY);
-        } else {
-            return 14 * dstX + 10 * (dstY - dstX);
-        }
-        */
-
-        int distX = Mathf.Abs(nodeA.x - nodeB.x);
-        int distZ = Mathf.Abs(nodeA.depth - nodeB.depth);
-        int distY = Mathf.Abs(nodeA.y - nodeB.y);
+        int distX = Math.Abs(nodeA.x - nodeB.x);
+        int distZ = Math.Abs(nodeA.depth - nodeB.depth);
+        int distY = Math.Abs(nodeA.y - nodeB.y);
 
         if(distX > distZ) {
             return 14 * distZ + 10 * (distX - distZ) + 10 * distY;

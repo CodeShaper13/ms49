@@ -8,15 +8,16 @@ public abstract class OptionBase<T> : IOption {
     public GameObject controlObj { get; set; }
     public T value { get; protected set; }
 
-    private Func<T> _fetchValue;
-    private Action<T> _applyOption;
+    private Func<T> fetchValue;
+    private Action<T> applyOption;
+    private string tooltip;
 
-
-    public OptionBase(string name, string saveKey, Func<T> fetchValue, Action<T> applyOption) {
+    public OptionBase(string name, string saveKey, string tooltip, Func<T> fetchValue, Action<T> applyOption) {
         this.name = name;
         this.saveKey = saveKey;
-        this._fetchValue = fetchValue;
-        this._applyOption = applyOption;
+        this.tooltip = tooltip;
+        this.fetchValue = fetchValue;
+        this.applyOption = applyOption;
     }
 
     public void setValue(T value) {
@@ -24,11 +25,20 @@ public abstract class OptionBase<T> : IOption {
     }
 
     public void applyValue() {
-        this._applyOption(this.value);
+        this.applyOption(this.value);
     }
 
     public virtual void setupControlObj(GameObject obj) {
         this.controlObj = obj;
+
+        if(!string.IsNullOrEmpty(this.tooltip)) {
+            Tooltip tooltip = obj.GetComponentInChildren<Tooltip>();
+            if(tooltip != null) {
+                tooltip.text = this.tooltip;
+            } else {
+                Debug.LogWarning("Could not find Tooltip component on UI Option Object \"" + obj.name + "\"");
+            }
+        }
     }
 
     public abstract void write();

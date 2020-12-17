@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: SurfaceRock
   m_EditorClassIdentifier: 
+  _cellName: rocks
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: 268a9391e125f3b409f4e99d2c3c2c14, type: 2}

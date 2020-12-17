@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
   m_Name: Bed
   m_EditorClassIdentifier: 
-  structureName: Bed
+  structureName: 
   _cost: 300
   _description: 'Provide Workers with a place to sleep so they can replenish their
     energy

@@ -6,10 +6,12 @@ public class PathfindingAgent : MonoBehaviour {
 
     [SerializeField, Min(0)]
     [Tooltip("How many units the Entity moves per second.")]
-    private float speed = 1f;
+    public float walkSpeed = 1f;
     [SerializeField, Min(0)]
     [Tooltip("How long it takes to climb a ladder in seconds.")]
-    private float _ladderClimbSpeed = 0.1f;
+    public float ladderClimbSpeed = 0.1f;
+    [SerializeField]
+    public float speedMultiplyer = 1f;
     
     private EntityBase entity;
     private float layerChangeProgress;
@@ -55,7 +57,7 @@ public class PathfindingAgent : MonoBehaviour {
 
                     this.layerChangeProgress += Time.deltaTime;
 
-                    if(this.layerChangeProgress > this._ladderClimbSpeed) {
+                    if(this.layerChangeProgress > this.ladderClimbSpeed) {
                         this.layerChangeProgress = 0;
                         this.entity.depth = currentWaypoint.depth;
                     }
@@ -68,7 +70,7 @@ public class PathfindingAgent : MonoBehaviour {
             this.transform.position = Vector2.MoveTowards(
                 transform.position,
                 currentWaypoint.worldPos,
-                this.speed * Time.deltaTime);
+                this.walkSpeed * this.speedMultiplyer * Time.deltaTime);
 
             // Update the direction the Worker is looking.
             Vector2 direction = this.transform.position - posBeforeMove;
@@ -193,6 +195,11 @@ public class PathfindingAgent : MonoBehaviour {
                     new PathPoint[] { new PathPoint(this.entity.position) }, // Go to their own spot
                     Rotation.directionToRotation(destination.vec2Int - this.entity.getCellPos()));
             }
+        }
+
+        // Return if either the start of the end is out of the world
+        if(this.entity.world.isOutOfBounds(this.entity.position) || this.entity.world.isOutOfBounds(destination)) {
+            return null;
         }
 
         // Try and find a path.

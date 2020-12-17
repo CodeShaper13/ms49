@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a67154a341ba2341856699c70a1afb8, type: 3}
+  m_Name: Dungeon
+  m_EditorClassIdentifier: 
+  _chest: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}
+  _wall: {fileID: 11400000, guid: 937327f0c79364b4d852c6a334f7e4d3, type: 2}
+  _chestLootTable: {fileID: 11400000, guid: 4f7ef254978c5ba4aa35c51f21c3a883, type: 2}
+  _dungeonsPerLayer: 50
+  _size: {x: 5, y: 5}

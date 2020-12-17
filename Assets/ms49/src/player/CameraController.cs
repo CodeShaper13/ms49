@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour {
     private PixelPerfectCamera ppc;
     private Vector3 mousePosLastFrame;
     private EntityBase followingTarget;
+    private TooltipDisplayer tooltipDisplayer;
 
     public int currentLayer { get; private set; } = -1;
     public bool inCreativeMode { get; set; }
@@ -46,6 +47,10 @@ public class CameraController : MonoBehaviour {
         this.world = GameObject.FindObjectOfType<World>();
     }
 
+    private void Start() {
+        this.tooltipDisplayer = GameObject.FindObjectOfType<TooltipDisplayer>();
+    }
+
     public void initNewPlayer(NewWorldSettings settings) {
         this.inCreativeMode = settings.creativeEnabled;
 
@@ -62,6 +67,7 @@ public class CameraController : MonoBehaviour {
 
     private void Update() {
         if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
+            // Move the camera towards the target (if set).
             if(this.followingTarget != null) {
                 this.setCameraPos(Vector2.MoveTowards(
                     this.getCameraPos(),
@@ -70,11 +76,43 @@ public class CameraController : MonoBehaviour {
                 this.changeLayer(this.followingTarget.depth, false);
             }
 
+            // Let the Player control the camera.
             this.moveCamera();
 
             if(!EventSystem.current.IsPointerOverGameObject()) {
-                this.detectClicks();
                 this.handleZoom();
+
+                bool clearTooltip = true;
+
+                Position pos = this.getMousePos();
+                if(!this.world.isOutOfBounds(pos) && (this.world.plotManager.isOwned(pos) || this.inCreativeMode)) {
+                    CellBehavior behavior = world.getCellState(pos).behavior;
+
+                    bool rmb = Input.GetMouseButtonDown(1);
+
+                    if(behavior != null) {
+                        if(rmb) {
+                            behavior.onRightClick();
+                        }
+
+                        string s = behavior.getTooltipText();
+                        if(s != null) {
+                            this.tooltipDisplayer.setText(s, 0.5f, behavior.gameObject);
+                            clearTooltip = false;
+                        }
+                    }
+
+                    EntityBase e = this.getMouseOver();
+                    if(e != null) {
+                        if(rmb) {
+                            e.onRightClick();
+                        }
+                    }
+                }
+
+                if(clearTooltip) {
+                    this.tooltipDisplayer.hide();
+                }
             }
 
             // Go higher (up a layer).
@@ -199,24 +237,6 @@ public class CameraController : MonoBehaviour {
         this.setZoom(tag.getInt("zoomLevel", this.minZoom));
         this.setCameraPos(tag.getVector2("cameraPos"));
         this.inCreativeMode = tag.getBool("inCreativeMode");
-    }
-
-    private void detectClicks() {
-        // Detect clicking
-        if(Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) {
-            Position pos = this.getMousePos();
-            if(this.world.plotManager.isOwned(pos)) {
-                CellBehavior meta = world.getCellState(pos).behavior;
-                if(meta != null) {
-                    meta.onRightClick();
-                }
-            }
-
-            EntityBase e = this.getMouseOver();
-            if(e != null) {
-                e.onRightClick();
-            }
-        }
     }
 
     private void moveCamera() {

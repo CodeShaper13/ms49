@@ -15,27 +15,17 @@ MonoBehaviour:
   _mapName: Cliffline
   startingStructures:
   - pos:
-      x: 0
-      y: 0
-      depth: 0
-    structure: {fileID: 11400000, guid: 2f6f6ad10fa9bbc49a73eec17d8d6143, type: 2}
-  - pos:
       x: 2
       y: 2
       depth: 0
-    structure: {fileID: 11400000, guid: 9e96e71bde25e714597dc14780f11e47, type: 2}
+    structure: {fileID: 0}
   - pos:
       x: 0
       y: 10
       depth: 0
-    structure: {fileID: 11400000, guid: 5dd9f0f7defd0bc479c8234ee7c33968, type: 2}
+    structure: {fileID: 0}
   - pos:
       x: 1
       y: 0
       depth: 0
-    structure: {fileID: 11400000, guid: 08ee3d16e815b3a4ba25db91909c8a72, type: 2}
-  - pos:
-      x: 16
-      y: 16
-      depth: 1
-    structure: {fileID: 11400000, guid: 3a82f48e6ee4c1142a07ea972fe53b43, type: 2}
+    structure: {fileID: 0}

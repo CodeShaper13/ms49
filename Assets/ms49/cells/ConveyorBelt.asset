@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: ConveyorBelt
   m_EditorClassIdentifier: 
+  _cellName: conveyor belt
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: 28e60888f5db744438de0592c86266b4, type: 2}

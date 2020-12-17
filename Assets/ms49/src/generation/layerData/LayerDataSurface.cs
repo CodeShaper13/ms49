@@ -4,6 +4,8 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "Layer", menuName = "MS49/Generation/Layer Data Surface", order = 11)]
 public class LayerDataSurface : LayerData {
 
+    [Space]
+
     [SerializeField]
     private TileBase grassTile = null;
 

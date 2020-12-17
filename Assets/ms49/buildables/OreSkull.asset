@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: OreSkull
   m_EditorClassIdentifier: 
-  structureName: Rare Skull
+  structureName: 
   _cost: 0
   _description: A rare artifact worth lots of money
   _tab: {fileID: 11400000, guid: 65af463dae1096f4ab16253980a96dee, type: 2}
-  _fogOption: 0
+  _fogOption: 1
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 0}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: b990e98b487e99143a1494253eec05c1, type: 2}

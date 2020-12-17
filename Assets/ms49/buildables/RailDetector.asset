@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: RailDetector
   m_EditorClassIdentifier: 
-  structureName: Detector Rail
+  structureName: 
   _cost: 60
   _description: Much like a lever, but takes wheels instead of hands
   _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}

@@ -295,11 +295,18 @@ public class World : MonoBehaviour {
             return false;
         }
 
-        if(pos.depth != 0) {
-            return false;
+        return this.storage.isOutside(pos.x, pos.y);
+    }
+
+    /// <summary>
+    /// Returns the hardness of the rock at the passed position.  0
+    /// is returned if the pos is out of the World.
+    public int getHardness(Position pos) {
+        if(this.isOutOfBounds(pos)) {
+            return 0;
         }
 
-        return this.storage.isOutside(pos.x, pos.y);
+        return this.storage.getLayer(pos.depth).getHardness(pos.x, pos.y);
     }
 
     public void tryCollapse(Position pos) {
@@ -396,6 +403,8 @@ public class World : MonoBehaviour {
     /// Checks if the passed Layer is unlocked.
     /// </summary>
     public bool isDepthUnlocked(int depth) {
+        return true;
+
         if(depth == 0) {
             return true;
         }

@@ -12,35 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cb23a05eb4f224b965c71bce58ce68, type: 3}
   m_Name: OreCoal
   m_EditorClassIdentifier: 
+  _cellName: coal ore
   _isSolid: 1
   _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 11400000, guid: c112bfa7ad6e7734988bbe6382915c0a, type: 2}
   _objectOverlayTile: {fileID: 11400000, guid: cd10622f4884d0648a635e52461bd29b, type: 2}
   _rotationalOverride: 0
   up:
-    _disabledOverride: 0
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   right:
-    _disabledOverride: 0
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   down:
-    _disabledOverride: 0
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   left:
-    _disabledOverride: 0
-    floorOverlay: {fileID: 0}
-    tile: {fileID: 0}
-    overlayTile: {fileID: 0}
-    effect: 0
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
   _movementCost: -1
   _canBuildOver: 0
   _isDestroyable: 0
@@ -52,3 +53,4 @@ MonoBehaviour:
   _tintObjectTile: 1
   _behaviorPrefab: {fileID: 0}
   droppedItem: {fileID: 11400000, guid: 8184cd3100097ab4c95e194abe0c81dd, type: 2}
+  _showParticles: 1

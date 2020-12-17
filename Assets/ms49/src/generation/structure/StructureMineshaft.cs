@@ -11,42 +11,80 @@ public class StructureMineshaft : StructureBase {
     [SerializeField]
     private CellData _web = null;
     [SerializeField]
-    private int _entityBatId = 4;
-    [SerializeField]
+    private LootTable _chestLootTable = null;
+
+    [Space]
+
+    [SerializeField, MinMaxSlider(0, 10)]
+    private Vector2Int _mineshaftsPerLayer = new Vector2Int(3, 4);
+    [SerializeField, Tooltip("The number of pieces extending from the center in small mineshafts")]
+    private int _smallShaftSize = 2;
+    [SerializeField, Tooltip("The number of pieces extending from the center in large mineshafts")]
+    private int _largeShaftSize = 4;
+    [SerializeField, Min(0)]
     private int minHallwayLength = 4;
-    [SerializeField]
+    [SerializeField, Min(1)]
     private int maxHallwayLength = 6;
     [SerializeField, Range(0, 1)]
     private float _childHallwayChance = 0.75f;
-    [SerializeField]
+    [SerializeField, Range(0, 1)]
     private float _roomChance = 0.25f;
+    [SerializeField, MinMaxSlider(0, 16)]
+    private Vector2Int _plotCenterOffset = new Vector2Int(0, 1);
+
+    [Space]
+
     [SerializeField]
-    private float _supportChance = 0.25f;
-    [SerializeField]
-    private float _webChance = 0.1f;
-    [SerializeField]
-    private float _chestChance = 0.6f;
-    [SerializeField]
+    private int _entityBatId = 4;
+    [SerializeField, Range(0, 1)]
     private float _batsPerSquares = 0.1f;
 
-    public override void placeIntoWorld(World world, Position pos) {
-        List<Position> airPositions = new List<Position>();
+    [Space]
 
-        this.makeRoom(airPositions, world, pos, null);
+    [SerializeField, Range(0, 1)]
+    private float _supportChance = 0.25f;
+    [SerializeField, Range(0, 1)]
+    private float _webChance = 0.1f;
+    [SerializeField, Range(0, 1)]
+    private float _chestChance = 0.6f;
 
-        // Spawn bats
+    public override void generate(World world, int depth) {
+        List<Plot> list = new List<Plot>(world.plotManager.plots);
 
-        int batCount = Mathf.RoundToInt(airPositions.Count * this._batsPerSquares);
-        
-        for(int i = 0; i < batCount; i++) {
-            Position batPos = airPositions[Random.Range(0, airPositions.Count)];
-            airPositions.Remove(batPos);
+        // Small shaft.
+        Position smallShaftPos = new Position(world.mapSize / 2, 20, depth);
+        this.makeShaft(
+            world,
+            smallShaftPos,
+            this._smallShaftSize);
+        list.RemoveAll(plot => plot.contains(smallShaftPos));
 
-            world.entities.spawn(batPos, this._entityBatId);
+        // Large shaft.
+        int j = Random.Range(this._mineshaftsPerLayer.x, this._mineshaftsPerLayer.y);
+        for(int i = 0; i < j; i++) {
+            int index = Random.Range(0, list.Count);
+            Plot plot = list[index];
+
+            int x = ((int)plot.rect.center.x) + Random.Range(this._plotCenterOffset.x, this._plotCenterOffset.y);
+            int y = ((int)plot.rect.center.y) + Random.Range(this._plotCenterOffset.x, this._plotCenterOffset.y);
+            this.makeShaft(
+                world,
+                new Position(x, y, depth),
+                this._largeShaftSize);
+
+            list.RemoveAt(index);
         }
     }
 
-    public void makeRoom(List<Position> airPositions, World world, Position pos, Rotation entryHallwayDir) {
+    private void makeShaft(World world, Position start, int childCounter) {
+        List<Position> airPositions = new List<Position>();
+
+        this.makeRoom(airPositions, world, start, null, childCounter);
+
+        this.spawnBats(airPositions, world);
+    }
+
+    private void makeRoom(List<Position> airPositions, World world, Position pos, Rotation entryHallwayDir, int childCounter) {
         // Move the position to the center of the room
         if(entryHallwayDir != null) {
             pos += entryHallwayDir;
@@ -56,15 +94,17 @@ public class StructureMineshaft : StructureBase {
         for(int x = -1; x <= 1; x++) {
             for(int y = -1; y <= 1; y++) {
                 Position p1 = pos.add(x, y);
-                this.safeSetCell(world, p1, null);
-                airPositions.Add(p1);
+                if(this.safeSetCell(world, p1, null)) {
+                    airPositions.Add(p1);
+                }
             }
         }
 
         // Place a chest
         if(Random.value < this._chestChance) {
-            this.safeSetCell(world, pos, this._chest);
-            airPositions.Remove(pos);
+            if(this.safeSetContainer(world, pos, this._chest, Rotation.UP, this._chestLootTable)) {
+                airPositions.Remove(pos);
+            }
         }
 
         // Make the hallways
@@ -86,13 +126,13 @@ public class StructureMineshaft : StructureBase {
 
             if(Random.value < hallwayChance) {
                 Position start = pos + r + r; // Make a pos on the outside of the room
-                this.makeHallway(airPositions, world, start, r, entryHallwayDir == null); // Only make children if this is the starting room
+                this.makeHallway(airPositions, world, start, r, childCounter - 1); // Only make children if this is the starting room
             }
         }
     }
 
-    public void makeHallway(List<Position> airPositions, World world, Position start, Rotation direction, bool generateChildren) {
-        int hallwayLength = Random.Range(this.minHallwayLength, this.maxHallwayLength + 1);
+    private void makeHallway(List<Position> airPositions, World world, Position start, Rotation direction, int childCounter) {
+        int hallwayLength = Random.Range(this.minHallwayLength, this.maxHallwayLength + 1) + childCounter;
 
         Position p = start;
 
@@ -111,27 +151,42 @@ public class StructureMineshaft : StructureBase {
                 }
             }
 
-            this.safeSetCell(world, p, cell, r);
-
-            if(cell == null) {
-                airPositions.Add(p);
+            if(this.safeSetCell(world, p, cell, r)) {
+                if(cell == null) {
+                    airPositions.Add(p);
+                }
             }
 
             p += direction;
         }
 
+        bool flag = childCounter > 2;
+
+        childCounter -= 1;
+
         if(Random.value < this._roomChance) {
-            this.makeRoom(airPositions, world, p, direction);
+            this.makeRoom(airPositions, world, p, direction, childCounter);
         } else {
-            if(generateChildren) {
-                if(func()) {
-                    this.makeHallway(airPositions, world, p, direction.clockwise(), false);
+            if(childCounter > 0) {
+                if(flag || func()) {
+                    this.makeHallway(airPositions, world, p, direction.clockwise(), childCounter);
                 }
 
-                if(func()) {
-                    this.makeHallway(airPositions, world, p, direction.counterClockwise(), false);
+                if(flag || func()) {
+                    this.makeHallway(airPositions, world, p, direction.counterClockwise(), childCounter);
                 }
             }
+        }
+    }
+
+    private void spawnBats(List<Position> airPositions, World world) {
+        int batCount = Mathf.RoundToInt(airPositions.Count * this._batsPerSquares);
+
+        for(int i = 0; i < batCount; i++) {
+            Position batPos = airPositions[Random.Range(0, airPositions.Count)];
+            airPositions.Remove(batPos);
+
+            world.entities.spawn(batPos, this._entityBatId);
         }
     }
 

@@ -24,6 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7014072569d3b345adf2429498e5997, type: 2}
   - {fileID: 11400000, guid: 4e5e278ad109ded4c9b5b950c2bc4bdd, type: 2}
   - {fileID: 11400000, guid: bcea14085c77c21489e75e10ff95a487, type: 2}
-  - {fileID: 11400000, guid: 5c0ed959ac70ee646a9aa49a68d584f5, type: 2}
+  - {fileID: 11400000, guid: 73766d0789575a449a72ddda71e80b68, type: 2}
+  - {fileID: 11400000, guid: 5c0f1bf9fd6174a42935442e6b57f6fa, type: 2}
   _unlockedWorkerTypes: []
   _candaditeCountIncrease: 0

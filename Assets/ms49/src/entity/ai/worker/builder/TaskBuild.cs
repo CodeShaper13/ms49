@@ -40,7 +40,7 @@ public class TaskBuild : TaskMovement<EntityWorker> {
     public override void onAtDestination() {
         base.onAtDestination();
 
-        this.timeBuilding += Time.deltaTime;
+        this.timeBuilding += (Time.deltaTime * this.owner.info.personality.workSpeedMultiplyer);
         if(this.timeBuilding >= this.buildSite.constructionTime) {
             this.buildSite.placeIntoWorld();
 

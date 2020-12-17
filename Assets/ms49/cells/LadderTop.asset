@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: LadderTop
   m_EditorClassIdentifier: 
+  _cellName: ladder
   _isSolid: 0
   _floorOverlayTile: {fileID: 11400000, guid: 50842262ba0975b4aa275654a9bcf4fe, type: 2}
   _objectTile: {fileID: 11400000, guid: c47629fd02b1fe84bb659def1cdc2bcc, type: 2}
@@ -50,4 +51,5 @@ MonoBehaviour:
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
   _tintObjectTile: 0
-  _behaviorPrefab: {fileID: 0}
+  _behaviorPrefab: {fileID: 6303318743310356734, guid: 7011b0353a54f6a488070cf4193c9892,
+    type: 3}

@@ -10,8 +10,6 @@ public class TaskServeFood : TaskMovement<EntityWorker> {
 
     [SerializeField]
     private CookMetaData cookData = null;
-    [SerializeField]
-    private Sprite _emoteQuestionSprite = null;
 
     private CellBehaviorTable table;
 
@@ -24,7 +22,7 @@ public class TaskServeFood : TaskMovement<EntityWorker> {
             if(this.table != null) {
                 return true;
             } else {
-                this.owner.emote.startEmote(new Emote(this._emoteQuestionSprite, 0.1f).setTooltip("Can't find a way to the table"));
+                this.owner.emote.startEmote(new Emote("exclamation", 0.1f).setTooltip("Can't find a way to the table"));
             }
         }
 

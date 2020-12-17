@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: RailLoadPoint
   m_EditorClassIdentifier: 
-  structureName: Minecart Load Point
-  _cost: 120
+  structureName: 
+  _cost: 150
   _description: Minecarts stop here until they are filled by Workers
   _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _fogOption: 0

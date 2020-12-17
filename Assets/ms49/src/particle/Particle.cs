@@ -7,6 +7,10 @@ public class Particle : MonoBehaviour {
 
     public World world { get; private set; }
     public int depth { get; private set; }
+    /// <summary>
+    /// A reference to the ParticleSystem component.  This could be
+    /// null if the Particle does not have this type of component.
+    /// </summary>
     public ParticleSystem ps { get; private set; }
 
     private float timeAlive;

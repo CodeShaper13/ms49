@@ -90,8 +90,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panSpeed: 10
   mousePanSpeed: 3
-  minZoom: 1
-  maxZoom: 5
+  minZoom: 2
+  maxZoom: 16
   cameraSnapSpeed: 40
   keys:
     layerLowerKey: 120
@@ -1972,7 +1972,7 @@ MonoBehaviour:
   startingUnlockedTypes:
   - {fileID: 11400000, guid: bf714f9bf23f89642bdf10ac8c2c5270, type: 2}
   _workerTrainTime: 7
-  _hireCost: 1000
+  _hireCost: 250
   candidateAvailabilityTimeRange: {x: 2, y: 5}
 --- !u!114 &7908058585188843572
 MonoBehaviour:
@@ -2003,8 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fec351587fcfa48a2c681c7c29ed40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _payRate: 60
-  _money: {fileID: 11400000, guid: f4c82f2a7bfb2eb4787544a0dc3b0dd4, type: 2}
+  _payRate: 120
   _world: {fileID: 7469874513568837900}
 --- !u!114 &5092417834790642313
 MonoBehaviour:
@@ -2868,6 +2867,10 @@ MonoBehaviour:
   cellRenderer: {fileID: 7469874514158545426}
   fogRenderer: {fileID: 2104249311531333759}
   _targetedRenderer: {fileID: 3865902745022389021}
+  _hardnessColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.75, g: 0.75, b: 0.75, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &7864809325708799625
 GameObject:
   m_ObjectHideFlags: 0

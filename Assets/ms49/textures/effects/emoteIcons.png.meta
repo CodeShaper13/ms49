@@ -19,7 +19,7 @@ TextureImporter:
     second: emoteIcons_food
   - first:
       213: -3987092525936795707
-    second: emoteIcons_5
+    second: emoteIcons_hi
   - first:
       213: -1333079262546587962
     second: emoteIcons_pickaxe
@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: emoteIcons_5
+      name: emoteIcons_hi
       rect:
         serializedVersion: 2
         x: 82
@@ -265,27 +265,6 @@ TextureImporter:
       bones: []
       spriteID: 6ce88724973ff7de0800000000000000
       internalID: -1333079262546587962
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: emoteIcons_needBed
-      rect:
-        serializedVersion: 2
-        x: 114
-        y: 33
-        width: 12
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 690959ba8b63072d0800000000000000
-      internalID: -3283063961572503402
       vertices: []
       indices: 
       edges: []

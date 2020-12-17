@@ -23,6 +23,9 @@ public class CellBehaviorDetectorRail : CellBehavior, IHasData, IRenderTileOverr
         //    this.dirty();
         //    this.isTripped = false;
         //}
+        if(this.tripper != null && this.tripper.position != this.pos) {
+            this.tripper = null;
+        }
     }
 
     public void replaceTiles(ref TileRenderData renderData) {

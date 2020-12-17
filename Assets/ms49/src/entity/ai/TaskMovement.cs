@@ -59,6 +59,17 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
     /// </summary>
     public virtual void onAtDestination() { }
 
+    protected bool calculateAndSetPath(Position destination, bool stopAdjacent = false, Rotation endingRot = null) {
+        NavPath path = this.agent.calculatePath(destination, stopAdjacent, endingRot);
+
+        if(path != null) {
+            this.navPath = path;
+            return true;
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// Attempts to calculate a path to a CellBehavior of the
     /// specified type that matches the passed predicate (if not null).
@@ -80,7 +91,6 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
 
         return null;
     }
-
 
     /// <summary>
     /// Attempts to calculate a path to a CellBehavior of the

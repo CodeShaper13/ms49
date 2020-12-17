@@ -8,6 +8,8 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "Cell", menuName = "MS49/Cell/Cell", order = 1)]
 public class CellData : ScriptableObject {
 
+    [SerializeField]
+    private string _cellName = "???";
     [SerializeField, Tooltip("If true, the floor is not drawn below and an edge will surround this tile.")]
     private bool _isSolid = false;
     [SerializeField]
@@ -58,6 +60,7 @@ public class CellData : ScriptableObject {
     [SerializeField, Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
     private GameObject _behaviorPrefab = null;
 
+    public string displayName => this._cellName;
     public bool isSolid => this._isSolid;
     public bool rotationalOverride => this._rotationalOverride;
     public int movementCost => this._movementCost;
@@ -69,7 +72,7 @@ public class CellData : ScriptableObject {
     public float temperatureOutput => this._temperatureOutput;
     public bool supportsCeiling => this._supportsCeiling;
     public bool includeInFogFloodLift => this._includeInFogFloodLift;
-    public bool tintObjectTile => this._tintObjectTile;
+    public bool recieveHardnessColorMod => this._tintObjectTile;
     public GameObject behaviorPrefab => this._behaviorPrefab;
 
     public TileRenderData getRenderData(Rotation rotation) {

@@ -12,22 +12,26 @@ public class UiStatisticEntry : MonoBehaviour {
     [SerializeField]
     private Color _darkColor = Color.gray;
 
-    private IStatistic stat;
-
-    public void setStat(IStatistic stat, bool useBrightColor) {
-        this.stat = stat;
-
-        Color c = useBrightColor ? this._brightColor : this._darkColor;
-        this._textName.color = c;
-        this._textValue.color = c;
-
-        this.updateLabels();
-    }
+    public IStatistic stat { get; private set; }
+    public EnumStatisticCategory category { get; private set; }
 
     private void OnEnable() {
         if(this.stat != null) {
             this.updateLabels();
         }
+    }
+
+    public void setStat(RegisteredStat stat) {
+        this.stat = stat.stat;
+        this.category = stat.category;
+
+        this.updateLabels();
+    }
+
+    public void setColor(bool useBrightColor) {
+        Color c = useBrightColor ? this._brightColor : this._darkColor;
+        this._textName.color = c;
+        this._textValue.color = c;
     }
 
     private void updateLabels() {

@@ -7,6 +7,8 @@ public class EmoteBubble : MonoBehaviour {
     private Image _emoteIconImg = null;
     [SerializeField]
     private Tooltip _tooltip = null;
+    [SerializeField]
+    private EmoteIcon[] icons = null;
 
     private float timer;
     private Emote currentEmote;
@@ -36,10 +38,18 @@ public class EmoteBubble : MonoBehaviour {
 
         this.timer = emote.timeVisible;
 
-        if(emote.sprite == null ) {
-            Debug.LogWarning("It is not recomended to pass null for an emote sprite");
+        Sprite sprite = null;
+        foreach(EmoteIcon icon in this.icons) {
+            if(icon != null && emote.iconName == icon.emoteName) {
+                sprite = icon.icon;
+            }
         }
-        this._emoteIconImg.sprite = emote.sprite;
+
+        if(sprite == null ) {
+            Debug.LogWarning("Could not found emote icon with name " + emote.iconName);
+        }
+
+        this._emoteIconImg.sprite = sprite;
 
         if(!string.IsNullOrEmpty(emote.tooltip)) {
             this._tooltip.text = emote.tooltip;

@@ -50,7 +50,7 @@ public class EntityFire : EntityBase {
         Rotation r = Rotation.ALL[Random.Range(0, 3)];
         Position newFirePos = thisPos + r;
 
-        if(world.getCellState(newFirePos).data.isFlammable) {
+        if(!world.isOutOfBounds(newFirePos) && world.getCellState(newFirePos).data.isFlammable) {
             bool spaceFree = true;
             foreach(EntityBase e in world.entities.list) {
                 if(e is EntityFire && e.position == newFirePos) {

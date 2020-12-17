@@ -54,7 +54,9 @@ public class TaskAttackWorkers : TaskBase<EntityBat> {
 
         if(Vector2.Distance(this.target.worldPos, this.owner.worldPos) < 1f && this.attackTimer <= 0) {
             // Attack
-            print("Attack");
+
+            // TODO
+
             this.attackTimer = this._attackRate;
         }
     }

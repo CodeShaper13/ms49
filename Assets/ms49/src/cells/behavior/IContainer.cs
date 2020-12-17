@@ -8,7 +8,7 @@ public interface IContainer {
 
     bool isEmpty { get; }
 
-    void deposit(Item item);
+    bool deposit(Item item);
 
     Item pullItem();
 }

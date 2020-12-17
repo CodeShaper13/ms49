@@ -9,11 +9,6 @@ public class TaskEmote : TaskBase<EntityWorker> {
     [SerializeField, MinMaxSlider(0, 120), Tooltip("How long the Worker must be still to show an emote")]
     private Vector2 _idleTimeSpanToEmote = new Vector2(10, 30);
 
-    [Space]
-
-    [SerializeField]
-    private EmoteIcons icons = null;
-
     private bool continueRunning;
 
     public override bool continueExecuting() {
@@ -56,7 +51,7 @@ public class TaskEmote : TaskBase<EntityWorker> {
         this.StartCoroutine("showEmote");
     }
 
-    private Sprite pickEmote() {
+    private string pickEmote() {
         /*
         if(this.owner.hunger.get() < this.taskFindFood.startFoodHuntAt + 5) {
             return this.icons.hungry;
@@ -71,7 +66,7 @@ public class TaskEmote : TaskBase<EntityWorker> {
             if(e is EntityWorker) {
                 EntityWorker worker = (EntityWorker)e;
                 if(worker.depth == this.owner.depth && Vector2.Distance(worker.worldPos, this.owner.worldPos) < 3) {
-                    return this.icons.friendly;
+                    return "happy";
                 }
             }
         }
@@ -80,14 +75,14 @@ public class TaskEmote : TaskBase<EntityWorker> {
         switch(UnityEngine.Random.Range(0, 5)) {
             case 0:
             case 1:
-                return this.icons.happy;
+                return "happy";
             case 2:
             case 3:
-                return this.icons.sad;
+                return "sad";
             case 4:
-                return this.icons.angry;
+                return "angry";
             default:
-                return this.icons.happy;
+                return "happy";
         }
     }
 

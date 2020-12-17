@@ -16,7 +16,7 @@ TextureImporter:
     second: uiElements_inset
   - first:
       213: -2108299982607114889
-    second: uiElements_sliderHandle
+    second: uiElements_scrollbarHandle
   - first:
       213: 6466969789957811477
     second: uiElements_btnGreen
@@ -37,7 +37,7 @@ TextureImporter:
     second: uiElements_btnGrayPressed
   - first:
       213: -5195431151083448045
-    second: uiElements_btnCheck
+    second: uiElements_btnCheckOn
   - first:
       213: 8100260949239071800
     second: uiElements_btnX
@@ -46,7 +46,7 @@ TextureImporter:
     second: uiElements_btnXPressed
   - first:
       213: 7943694008301736930
-    second: uiElements_btnCheckDisabled
+    second: uiElements_btnCheckOff
   - first:
       213: -4454433873294632708
     second: uiElements_btnMinus
@@ -133,7 +133,7 @@ TextureImporter:
     second: uiElements_iconTropheySelected
   - first:
       213: -1334234135534263961
-    second: uiElements_screwPlus
+    second: uiElements_sliderHandle
   - first:
       213: 5237169821855460988
     second: uiElements_screwMinus
@@ -233,6 +233,18 @@ TextureImporter:
   - first:
       213: -9085703086787801938
     second: uiElements_statBarGreen
+  - first:
+      213: 4016240830092330437
+    second: uiElements_inventorySlot
+  - first:
+      213: -328180054031941185
+    second: uiElements_tooltipBackground
+  - first:
+      213: -6962959117331838862
+    second: uiElements_autoSaveIcon
+  - first:
+      213: -2858267842042812506
+    second: uiElements_sliderFill
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -402,7 +414,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_sliderHandle
+      name: uiElements_scrollbarHandle
       rect:
         serializedVersion: 2
         x: 191
@@ -549,7 +561,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_btnCheck
+      name: uiElements_btnCheckOn
       rect:
         serializedVersion: 2
         x: 1
@@ -558,7 +570,7 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 3}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -612,16 +624,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_btnCheckDisabled
+      name: uiElements_btnCheckOff
       rect:
         serializedVersion: 2
-        x: 55
+        x: 19
         y: 167
         width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1200,16 +1212,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_screwPlus
+      name: uiElements_sliderHandle
       rect:
         serializedVersion: 2
-        x: 218
-        y: 1
-        width: 12
-        height: 12
+        x: 241
+        y: 49
+        width: 4
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 4, z: 1, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1287,9 +1299,9 @@ TextureImporter:
       name: uiElements_divider
       rect:
         serializedVersion: 2
-        x: 238
+        x: 241
         y: 185
-        width: 16
+        width: 14
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1817,7 +1829,7 @@ TextureImporter:
         width: 2
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1825,6 +1837,90 @@ TextureImporter:
       bones: []
       spriteID: eacc7514e2919e180800000000000000
       internalID: -9085703086787801938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_inventorySlot
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 177
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c5c21a81cd8cb730800000000000000
+      internalID: 4016240830092330437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_tooltipBackground
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 177
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb1ce09caf1127bf0800000000000000
+      internalID: -328180054031941185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_autoSaveIcon
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 81
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2784ed9f2999e5f90800000000000000
+      internalID: -6962959117331838862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_sliderFill
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 51
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a7ad1a9a846558d0800000000000000
+      internalID: -2858267842042812506
       vertices: []
       indices: 
       edges: []

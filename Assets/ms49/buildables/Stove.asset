@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Stove
   m_EditorClassIdentifier: 
-  structureName: Stove
+  structureName: 
   _cost: 250
   _description: 
   _tab: {fileID: 0}
@@ -20,4 +20,5 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: d6745c8dacf45804fa647a0f79a480cc, type: 2}

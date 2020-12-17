@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  structureName: Chest
+  structureName: 
   _cost: 75
   _description: A decorative box
-  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
+  _tab: {fileID: 11400000, guid: 65af463dae1096f4ab16253980a96dee, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}

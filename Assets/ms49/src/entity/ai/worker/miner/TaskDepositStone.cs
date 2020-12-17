@@ -4,8 +4,6 @@ public class TaskDepositStone : TaskMovement<EntityWorker> {
 
     [SerializeField]
     private MinerMetaData minerData = null;
-    [SerializeField]
-    private Sprite _emoteQuestionSprite = null;
 
     private AbstractDepositPoint depositPoint;
 
@@ -18,7 +16,7 @@ public class TaskDepositStone : TaskMovement<EntityWorker> {
             if(this.navPath != null) {
                 return this.navPath != null;
             } else {
-                this.owner.emote.startEmote(new Emote(this._emoteQuestionSprite, 0.1f).setTooltip("Can't find a deposit point"));
+                this.owner.emote.startEmote(new Emote("question", 0.1f).setTooltip("Can't find a deposit point"));
             }
         }
 
@@ -40,6 +38,14 @@ public class TaskDepositStone : TaskMovement<EntityWorker> {
     }
 
     public override void onDestinationArive() {
+        if(this.depositPoint is CellBehaviorMasterDepositPoint) {
+            if(Random.value < this.owner.info.personality.stealPercent) {
+                // Take the item
+                this.minerData.heldItem = null;
+                return;
+            }
+        }
+
         this.depositPoint.deposit(this.minerData.heldItem);
         this.minerData.heldItem = null;
     }

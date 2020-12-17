@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Stool
   m_EditorClassIdentifier: 
-  structureName: Stool
+  structureName: 
   _cost: 50
   _description: Workers can sit here to eat.  Be sure to build an adjacent table.
   _tab: {fileID: 0}
@@ -20,4 +20,5 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: 42cc7342651e6b4429546c5145a0edba, type: 2}

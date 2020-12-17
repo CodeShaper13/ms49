@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CellBehavior : MonoBehaviour {
+public abstract class CellBehavior : MonoBehaviour {
 
     [SerializeField]
     private bool _cache = true;
@@ -51,6 +51,10 @@ public class CellBehavior : MonoBehaviour {
     /// </summary>
     public void dirty() {
         this.world.worldRenderer.dirtyTile(this.pos.x, this.pos.y);
+    }
+
+    public virtual string getTooltipText() {
+        return null;
     }
 
     public virtual void getDebugText(List<string> s) {

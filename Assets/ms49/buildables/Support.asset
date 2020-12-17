@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Support
   m_EditorClassIdentifier: 
-  structureName: Support
+  structureName: 
   _cost: 100
-  _description: Supports tunnels and rooms so you can keep digging
-  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
+  _description: Doesn't do much other than look go
+  _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0

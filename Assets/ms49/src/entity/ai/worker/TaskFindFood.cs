@@ -8,20 +8,15 @@
 public class TaskFindFood : TaskMovement<EntityWorker> {
 
     [SerializeField]
-    private float stopEattingValue = 99;
-    [SerializeField]
-    private float eatSpeed = 20;
+    private float _eatSpeed = 5;
     [SerializeField]
     private float _startFoodHuntAt = 20;
-    [SerializeField]
-    private Sprite _emoteHungrySprite = null;
-    [SerializeField]
-    private Sprite _emoteExclamtionSprite = null;
-
-    public float startFoodHuntAt => this._startFoodHuntAt;
 
     private CellBehaviorTable table;
     private CookMetaData cookMeta;
+
+    public float startFoodHuntAt => this._startFoodHuntAt + this.owner.info.personality.eatStartOffset;
+    public int stopAtValue => (int)this.owner.hunger.maxValue + this.owner.info.personality.eatStopOffset;
 
     protected override void initializeReferences() {
         base.initializeReferences();
@@ -30,7 +25,7 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
     }
 
     public override bool shouldExecute() {
-        if(this.owner.hunger.value <= startFoodHuntAt) {
+        if(this.owner.hunger.value <= this.startFoodHuntAt) {
             // Find a table.
 
             if(this.isCook() && this.cookMeta.plateState != CellBehaviorTable.EnumPlateState.FULL) {
@@ -49,7 +44,7 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
 
                     return true;
                 } else {
-                    this.owner.emote.startEmote(new Emote(this._emoteExclamtionSprite, 0.1f).setTooltip("Can't find a table"));
+                    this.owner.emote.startEmote(new Emote("exclamation", 0.1f).setTooltip("Can't find a table"));
                 }
             }
         }
@@ -60,11 +55,11 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
     public override void onTaskStart() {
         base.onTaskStart();
 
-        this.owner.emote.startEmote(new Emote(this._emoteHungrySprite, -1).setPriority().setTooltip("Hungry"));
+        this.owner.emote.startEmote(new Emote("food", -1).setPriority().setTooltip("Hungry"));
     }
 
     public override bool continueExecuting() {
-        return this.table != null && this.table.chair != null && this.owner.hunger.value < stopEattingValue;
+        return this.table != null && this.table.chair != null && this.owner.hunger.value < this.stopAtValue;
     }
 
     public override void onDestinationArive() {
@@ -83,8 +78,13 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
         if(this.table.plateState == CellBehaviorTable.EnumPlateState.FULL) {
             this.owner.emote.cancelEmote();
 
-            this.owner.hunger.increase(this.eatSpeed * Time.deltaTime);
-            if(this.owner.hunger.value >= this.stopEattingValue) {
+            float amount = this._eatSpeed * Time.deltaTime;
+            if(this.owner.info.personality.require2Meals) {
+                amount /= 2;
+            }
+
+            this.owner.hunger.increase(amount);
+            if(this.owner.hunger.value >= this.stopAtValue) {
                 this.table.plateState = CellBehaviorTable.EnumPlateState.DIRTY; // TODO make the plate dirty
             }
 

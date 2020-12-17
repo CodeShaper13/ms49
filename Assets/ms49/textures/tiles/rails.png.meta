@@ -61,16 +61,16 @@ TextureImporter:
     second: rails_18
   - first:
       213: -4335508213134284471
-    second: rails_19
+    second: rails_mergerUp
   - first:
       213: -4359673933246608065
-    second: rails_20
+    second: rails_mergerDown
   - first:
       213: -347982023156566512
-    second: rails_21
+    second: rails_mergerLeft
   - first:
       213: 2670065183018469332
-    second: rails_22
+    second: rails_mergerRight
   - first:
       213: -5034984911456320633
     second: rails_unloaderLeft
@@ -507,94 +507,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rails_15
+      name: rails_mergerUp
       rect:
         serializedVersion: 2
-        x: 0
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39181a009cc708310800000000000000
-      internalID: 1405260286480449939
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rails_16
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65493227ecc86dbc0800000000000000
-      internalID: -3758662020688014250
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rails_17
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8df84df2b003f67f0800000000000000
-      internalID: -617221799321235496
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rails_18
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 95
-        width: 16
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1383f81f5a3fef9f0800000000000000
-      internalID: -432640620133140431
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rails_19
-      rect:
-        serializedVersion: 2
-        x: 32
+        x: 48
         y: 96
         width: 16
         height: 16
@@ -612,10 +528,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rails_20
+      name: rails_mergerDown
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 112
         width: 16
         height: 16
@@ -633,10 +549,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rails_21
+      name: rails_mergerLeft
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 112
         width: 16
         height: 16
@@ -654,10 +570,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rails_22
+      name: rails_mergerRight
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 96
         width: 16
         height: 16

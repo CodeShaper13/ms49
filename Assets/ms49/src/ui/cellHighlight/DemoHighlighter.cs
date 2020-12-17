@@ -25,7 +25,7 @@ public class DemoHighlighter : CellHighlightBase {
             }
 
             // Check if the mouse is over a Destroyable cell.
-            if(this.world.getCellState(pos).data.isDestroyable && this.world.plotManager.isOwned(pos)) {
+            if(this.world.getCellState(pos).data.isDestroyable && (this.world.plotManager.isOwned(pos) || CameraController.instance.inCreativeMode)) {
                 this.setValidColor();
                 return true;
             }
@@ -39,7 +39,7 @@ public class DemoHighlighter : CellHighlightBase {
         if(isValid) {
             int cost = this.popup.getDemoCost();
             bool inCreative = CameraController.instance.inCreativeMode;
-            if((inCreative || this.money.value >= this.popup.getDemoCost()) && this.world.plotManager.isOwned(pos)) {
+            if((inCreative || (this.money.value >= this.popup.getDemoCost()) && this.world.plotManager.isOwned(pos))) {
                 if(!inCreative) {
                     this.money.value -= cost;
                 }
@@ -49,7 +49,18 @@ public class DemoHighlighter : CellHighlightBase {
                     particlePos = this.destroyableEntity.worldPos;
                     this.world.entities.remove(this.destroyableEntity);
                 } else {
+                    // Add to the destroyed stat.
+                    CellData cell = this.world.getCellState(pos).data;
+                    StatisticInt stat = this.world.statManager.getCellDestroyedStat(cell);
+                    if(stat != null) {
+                        stat.increase(1);
+                    } else {
+                        print("error");
+                    }
+
                     particlePos = pos.center;
+
+                    // Remove the Cell.
                     this.world.setCell(pos, null);
                     this.world.tryCollapse(pos);
                 }

@@ -8,8 +8,8 @@ public class StructureSurface : StructureBase {
     [SerializeField]
     private PrimitiveRndObject[] rndObjects = null;
 
-    public override void placeIntoWorld(World world, Position ignoreXY) {
-        LayerData layerData = world.mapGenerator.getLayerFromDepth(ignoreXY.depth);
+    public override void generate(World world, int depth) {
+        LayerData layerData = world.mapGenerator.getLayerFromDepth(depth);
 
         // Generate the inside/outside map
         for(int x = 0; x < world.mapSize; x++) {
@@ -28,14 +28,14 @@ public class StructureSurface : StructureBase {
 
         for(int x = 0; x < world.mapSize; x++) {
             for(int y = 0; y < world.mapSize; y++) {
-                Position pos = new Position(x, y, ignoreXY.depth);
+                Position pos = new Position(x, y, depth);
 
                 if(world.isOutside(pos)) {
                     // Outside Tile.
 
                     CellData cell = null;
                     Rotation rotation = Rotation.UP;
-                    if(world.isOutside(new Position(x, y + 1, ignoreXY.depth))) {
+                    if(world.isOutside(new Position(x, y + 1, depth))) {
                         foreach(PrimitiveRndObject pro in this.rndObjects) {
                             pro.getRnd(ref cell, ref rotation);
                         }
@@ -49,8 +49,8 @@ public class StructureSurface : StructureBase {
                 } else {
                     // Inside Tile
 
-                    // Remove ores exposed to the surface
-                    if(world.isOutside(new Position(x, y - 1, ignoreXY.depth))) {
+                    // Remove ores exposed to the surface, but not the bedrock
+                    if(x != 0 && x != world.mapSize -1 && world.isOutside(new Position(x, y - 1, depth))) {
                         world.setCell(pos, layerData.getFillCell(world, x, y));
                     }
                 }

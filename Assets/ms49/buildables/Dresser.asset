@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Dresser
   m_EditorClassIdentifier: 
-  structureName: Dresser
+  structureName: 
   _cost: 0
   _description: Where are you going to put your clothes, on the floor?
   _tab: {fileID: 0}
@@ -20,4 +20,5 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: f4ca4e4467e17b34c852ff123958f1d8, type: 2}

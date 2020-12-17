@@ -14,8 +14,8 @@ public class OptionSlider : OptionBase<float> {
         get; private set;
     }
 
-    public OptionSlider(string name, string saveKey, float minValue, float maxValue, bool wholeNumbersOnly, Func<float> get, Action<float> set) :
-        base(name, saveKey, get, set) {
+    public OptionSlider(string name, string saveKey, string tooltip, float minValue, float maxValue, bool wholeNumbersOnly, Func<float> get, Action<float> set) :
+        base(name, saveKey, tooltip, get, set) {
 
         this.minValue = minValue;
         this.maxValue = maxValue;
@@ -25,7 +25,7 @@ public class OptionSlider : OptionBase<float> {
     public override void setupControlObj(GameObject obj) {
         base.setupControlObj(obj);
 
-        Slider slider = obj.GetComponent<Slider>();
+        Slider slider = obj.GetComponentInChildren<Slider>();
         slider.minValue = this.minValue;
         slider.maxValue = this.maxValue;
         slider.wholeNumbers = this.wholeNumbersOnly;

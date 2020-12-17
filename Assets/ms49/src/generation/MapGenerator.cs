@@ -5,9 +5,9 @@ using System.Linq;
 public class MapGenerator : MonoBehaviour {
 
     [SerializeField]
-    private WorldType _worldType = null;
-    [SerializeField]
     private LayerData[] _layers = new LayerData[0];
+    [SerializeField]
+    private NoiseSettings _noiseSettings = new NoiseSettings();
 
     [Space, Header("Player Starting Settings")]
 
@@ -44,6 +44,7 @@ public class MapGenerator : MonoBehaviour {
         MapAccessor accessor = new MapAccessor(world.mapSize, depth);
         LayerData layerData = this.getLayerFromDepth(depth);
 
+
         // Fill the map with the Layer's fill cell.
         for(int x = 0; x < accessor.size; x++) {
             for(int y = 0; y < accessor.size; y++) {
@@ -51,12 +52,15 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
+
         // Generate all of the features.
         foreach(FeatureBase feature in this.features) {
             feature.generate(new System.Random(layerSeed), layerData, accessor);
         }        
 
+
         Layer layer = new Layer(world, depth);
+
 
         // Apply the accessor to the Layer.
         for(int x = 0; x < accessor.size; x++) {
@@ -71,18 +75,31 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
+
+        // Generate the hardness map and apply it.
+        float[,] noise = NoisemapGenerator.computeNoiseMap(
+            this._noiseSettings,
+            world.seed,
+            world.mapSize,
+            depth);
+        for(int x = 0; x < world.mapSize; x++) {
+            for(int y = 0; y < world.mapSize; y++) {
+                float n = noise[x, y];
+                int hardness = n < 0.333f ? 0 : (n < 0.666f ? 1 : 2);
+                layer.setHardness(x, y, hardness);
+            }
+        }
+
+
         world.storage.setLayer(layer, depth);
 
+
         // Generate all of the structures that belong on this Layer
-        Random.InitState(world.seed);
-        PlotManager pm = world.plotManager;
-        int structureX = Random.Range(5, pm.plotDiameter - 5) + ((pm.plotCount / 2) * pm.plotDiameter);
-
-        foreach(GeneratedStructure structure in this._worldType.structures) {
-            if(structure.pos.depth == depth) {
-                Random.InitState(world.seed);
-
-                structure.structure.placeIntoWorld(world, new Position(structureX + structure.pos.x, structure.pos.y, depth));
+        Random.InitState(layerSeed);
+        
+        foreach(StructureBase structure in layerData.structures) {
+            if(structure != null) {
+                structure.generate(world, depth);
             }
         }
     }

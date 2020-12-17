@@ -54,7 +54,7 @@ MonoBehaviour:
   _textName: {fileID: 8298530866643342030}
   _textValue: {fileID: 8298530867974209852}
   _brightColor: {r: 1, g: 1, b: 1, a: 1}
-  _darkColor: {r: 0.851, g: 0.851, b: 0.851, a: 1}
+  _darkColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
 --- !u!114 &7389668358901982063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +96,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_Alignment
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560266250123540027, guid: d814bf9ac7d0bf9438709be779dc6d60,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3934290825355097686, guid: d814bf9ac7d0bf9438709be779dc6d60,
         type: 3}
@@ -243,6 +248,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: statistics earned
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560266250123540027, guid: d814bf9ac7d0bf9438709be779dc6d60,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3934290825355097686, guid: d814bf9ac7d0bf9438709be779dc6d60,
         type: 3}

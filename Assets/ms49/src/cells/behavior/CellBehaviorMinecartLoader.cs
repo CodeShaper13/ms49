@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using fNbt;
 
-public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartInteractor {
+public class CellBehaviorMinecartLoader : AbstractBehaviorContainer, IMinecartInteractor {
 
     [SerializeField]
     private float _itemTransferSpeed = 1f;

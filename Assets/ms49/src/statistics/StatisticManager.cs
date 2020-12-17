@@ -4,9 +4,18 @@ using fNbt;
 
 public class StatisticManager : MonoBehaviour, ISaveableState {
 
-    public List<IStatistic> statistics {
+    private const string DOT_TIMES_BUILT = ".timesBuilt";
+    private const string DOT_TIMES_MINED = ".timesMined";
+    private const string DOT_TIMES_DESTROYED = ".timesDestroyed";
+
+    public List<RegisteredStat> registeredStats {
         get; private set;
     }
+
+    // fog lifted
+    public StatisticInt leversFlipped;
+    public StatisticInt minecartsPlaced;
+    public StatisticInt minecartsDestroyed;
 
     public StatisticInt workersHired;
     public StatisticInt workersFired;
@@ -14,19 +23,42 @@ public class StatisticManager : MonoBehaviour, ISaveableState {
     public string tagName => "statistics";
 
     private void Awake() {
-        this.statistics = new List<IStatistic>();
+        this.registeredStats = new List<RegisteredStat>();
 
-        this.workersHired = this.registerStat(new StatisticInt("Workers Hired", "workersHired"));
-        this.workersFired = this.registerStat(new StatisticInt("Workers Fired", "workersFired"));
+        // General Stats:
+        this.leversFlipped = this.registerStat(new StatisticInt("Levers Flipped", "leversFlipped"), EnumStatisticCategory.GENERAL);
+        this.minecartsPlaced = this.registerStat(new StatisticInt("Minecarts Placed", "minecartsPlaced"), EnumStatisticCategory.GENERAL);
+        this.minecartsDestroyed = this.registerStat(new StatisticInt("Minecarts Destroyed", "minecartsDestroyed"), EnumStatisticCategory.GENERAL);
+
+        // Worker Stats:
+        this.workersHired = this.registerStat(new StatisticInt("Workers Hired", "workersHired"), EnumStatisticCategory.WORKERS);
+        this.workersFired = this.registerStat(new StatisticInt("Workers Fired", "workersFired"), EnumStatisticCategory.WORKERS);
+
+        // Tile Stats:
+        TileRegistry reg = Main.instance.tileRegistry;
+        for(int i = 0; i < reg.getRegistrySize(); i++) {
+            CellData cell = reg.getElement(i);
+            if(cell != null) {
+                this.registerStat(new StatisticInt(cell.displayName + " built", cell.name + DOT_TIMES_BUILT), EnumStatisticCategory.TILES);
+
+                if(cell is CellDataMineable) {
+                    this.registerStat(new StatisticInt(cell.displayName + " mined", cell.name + DOT_TIMES_MINED), EnumStatisticCategory.TILES);
+                }
+
+                if(cell.isDestroyable) {
+                    this.registerStat(new StatisticInt(cell.displayName + " destroyed", cell.name + DOT_TIMES_DESTROYED), EnumStatisticCategory.TILES);
+                }
+            }
+        }
     }
 
     public void writeToNbt(NbtCompound tag) {
-        foreach(IStatistic stat in this.statistics) {
-            if(stat != null) {
+        foreach(RegisteredStat regStat in this.registeredStats) {
+            if(regStat != null) {
                 NbtCompound compound = new NbtCompound();
-                stat.writeToNbt(compound);
+                regStat.stat.writeToNbt(compound);
 
-                tag.setTag(stat.saveName, compound);
+                tag.setTag(regStat.stat.saveName, compound);
             }
         }
     }
@@ -37,9 +69,9 @@ public class StatisticManager : MonoBehaviour, ISaveableState {
 
             // Find the matching stat
             IStatistic stat = null;
-            foreach(IStatistic s in this.statistics) {
-                if(s != null && s.saveName == compoundName) {
-                    stat = s;
+            foreach(RegisteredStat regStat in this.registeredStats) {
+                if(regStat != null && regStat.stat.saveName == compoundName) {
+                    stat = regStat.stat;
                 }
             }
 
@@ -49,8 +81,59 @@ public class StatisticManager : MonoBehaviour, ISaveableState {
         }
     }
 
-    private T registerStat<T>(T stat) where T : IStatistic {
-        this.statistics.Add(stat);
+    public StatisticInt getCellBuiltStat(CellData cell) {
+        if(cell != null) {
+            return this.getStatFromIdentifer<StatisticInt>("stat." + cell.name + DOT_TIMES_BUILT);
+        }
+
+        return null;
+    }
+
+    public StatisticInt getCellMinedStat(CellData cell) {
+        if(cell != null) {
+            return this.getStatFromIdentifer<StatisticInt>("stat." + cell.name + DOT_TIMES_MINED);
+        }
+
+        return null;
+    }
+
+    public StatisticInt getCellDestroyedStat(CellData cell) {
+        if(cell != null) {
+            return this.getStatFromIdentifer<StatisticInt>("stat." + cell.name + DOT_TIMES_DESTROYED);
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the stat with the passed identifier.  Null is
+    /// returned if there is no matching stat or the stat is of the
+    /// wrong type.
+    /// </summary>
+    private T getStatFromIdentifer<T>(string id) {
+        foreach(RegisteredStat regStat in this.registeredStats) {
+            if(regStat.stat.saveName == id) {
+                if(regStat.stat is T) {
+                    return (T)regStat.stat;
+                } else {
+                    Debug.LogWarning("Stat with id \"" + id + "\" is of the wrong type");
+                    break;
+                }
+            }
+        }
+
+        return default;
+    }
+
+    private T registerStat<T>(T stat, EnumStatisticCategory category = EnumStatisticCategory.GENERAL) where T : IStatistic {
+        foreach(RegisteredStat s in this.registeredStats) {
+            if(s.stat.saveName == stat.saveName) {
+                Debug.LogWarning("Can not register stat with already used saveId of " + s.stat.saveName);
+                return default;
+            }
+        }
+
+        this.registeredStats.Add(new RegisteredStat(stat, category));
 
         return stat;
     }

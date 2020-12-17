@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: TreeStump
   m_EditorClassIdentifier: 
-  structureName: tree stump
+  structureName: 
   _cost: 100
   _description: The gravestone of trees
   _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
@@ -20,4 +20,5 @@ MonoBehaviour:
   _overrideRotationMsg: 
   _displayRotation: 0
   _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: 1968e26fe6404f147a70c7857f1c5865, type: 2}

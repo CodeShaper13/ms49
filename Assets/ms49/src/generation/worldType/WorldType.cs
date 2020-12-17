@@ -5,9 +5,6 @@ public class WorldType : ScriptableObject {
 
     [SerializeField]
     private string _mapName = "";
-    [SerializeField]
-    private GeneratedStructure[] startingStructures = new GeneratedStructure[0];
 
     public string mapName => this._mapName;
-    public GeneratedStructure[] structures => this.startingStructures;
 }

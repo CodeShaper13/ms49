@@ -15,12 +15,17 @@ MonoBehaviour:
   _support: {fileID: 11400000, guid: 315a3d62d5f65e0409aec7720c86ce33, type: 2}
   _chest: {fileID: 11400000, guid: d1fe8dc85ae9fcf45b78fc94b3b7f56c, type: 2}
   _web: {fileID: 11400000, guid: 7abecddcb02a6a4479b5256ef7a56853, type: 2}
-  _entityBatId: 4
+  _chestLootTable: {fileID: 11400000, guid: 6b5234839a07a574f98ee312cfbc2127, type: 2}
+  _mineshaftsPerLayer: {x: 2, y: 2}
+  _smallShaftSize: 2
+  _largeShaftSize: 3
   minHallwayLength: 3
   maxHallwayLength: 5
   _childHallwayChance: 0.6
   _roomChance: 0.15
-  _supportChance: 0.25
-  _webChance: 0.1
-  _chestChance: 0.6
+  _plotCenterOffset: {x: 0, y: 6}
+  _entityBatId: 4
   _batsPerSquares: 0.1
+  _supportChance: 0.25
+  _webChance: 0.15
+  _chestChance: 0.6

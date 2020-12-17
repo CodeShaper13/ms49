@@ -4,9 +4,7 @@ using UnityEngine;
 public class Payroll : MonoBehaviour, ISaveableState {
 
     [SerializeField, Tooltip("How often in seconds Workers are paid")]
-    private int _payRate = 60 * 24;
-    [SerializeField]
-    private IntVariable _money = null;
+    private int _payRate = 60;
     [SerializeField]
     private World _world = null;
 
@@ -19,11 +17,22 @@ public class Payroll : MonoBehaviour, ISaveableState {
         if(!Pause.isPaused()) {
             if(this._world.time.time > this.lastPayTime + _payRate) {
                 // Pay Workers.
-                foreach(EntityBase e in this._world.entities.list) {
-                    if(e is EntityWorker) {
-                        EntityWorker worker = (EntityWorker)e;
-                        if(!worker.isDead) {
-                            this._money.value -= worker.info.pay;
+
+                if(!CameraController.instance.inCreativeMode) {
+                    IntVariable money = this._world.money;
+
+                    foreach(EntityBase e in this._world.entities.list) {
+                        if(e is EntityWorker) {
+                            EntityWorker worker = (EntityWorker)e;
+                            if(!worker.isDead) {
+                                if(money.value < worker.info.pay) {
+                                    money.value = 0;
+                                    // Play unhappy effect.
+                                    worker.emote.startEmote(new Emote("angry", 2f).setTooltip("Didn't get paid"));
+                                } else {
+                                    money.value -= worker.info.pay;
+                                }
+                            }
                         }
                     }
                 }

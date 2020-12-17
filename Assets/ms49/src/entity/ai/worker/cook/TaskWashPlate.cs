@@ -12,8 +12,6 @@ public class TaskWashPlate : TaskMovement<EntityWorker> {
     private float plateWashSpeed = 4f;
     [SerializeField]
     private CookMetaData cookData = null;
-    [SerializeField]
-    private Sprite _emoteSinkSprite = null;
 
     private float washTimer;
     private CellBehaviorSink sink;
@@ -31,7 +29,7 @@ public class TaskWashPlate : TaskMovement<EntityWorker> {
                 return true;
             } else {
                 // Can't find sink, but one is needed.
-                this.owner.emote.startEmote(new Emote(this._emoteSinkSprite, 0.1f).setTooltip("Needs a sink to wash dishes"));
+                this.owner.emote.startEmote(new Emote("exclamation", 0.1f).setTooltip("Needs a sink to wash dishes"));
             }
         }
 

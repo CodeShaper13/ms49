@@ -80,12 +80,11 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
         if(this.timeMining >= this._mineSpeeds[hardness]) {
             // Pickup the dropped item from the stone.
             CellData data = this.owner.world.GetCellState(this.stonePos).data;
-            if(data is CellDataMineable) {
-                CellDataMineable dataMineable = (CellDataMineable)data;
+            if(data is CellDataMineable mineable) {
 
-                this.minerData.heldItem = dataMineable.DroppedItem;
+                this.minerData.heldItem = mineable.DroppedItem;
 
-                if(dataMineable.ShowParticles) {
+                if(mineable.ShowParticles) {
                     // Play particle (and color it)
                     Particle particle = this.owner.world.particles.Spawn(this.stonePos.Center, this.owner.depth, this.mineParticlePrefab);
                     if(particle != null) {
@@ -107,10 +106,17 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
             this.owner.energy.decrease(this._energyCost);
 
             // Remove the stone.
-            this.owner.world.SetCell(this.stonePos, null);
-            this.owner.world.targetedSquares.stopTargeting(this.stonePos);
-            this.owner.world.LiftFog(this.stonePos);
-            this.owner.world.tryCollapse(this.stonePos);
+            CellState state = this.owner.world.GetCellState(this.stonePos);
+            if(state.meta == 0) {
+                // Remove.
+                this.owner.world.SetCell(this.stonePos, null);
+                this.owner.world.targetedSquares.stopTargeting(this.stonePos);
+                this.owner.world.LiftFog(this.stonePos);
+                this.owner.world.tryCollapse(this.stonePos);
+            } else {
+                // Reduce meta
+                state.meta -= 1;
+            }
         }
     }
 

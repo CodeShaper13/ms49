@@ -8,7 +8,7 @@ public class WorkerFactory : MonoBehaviour {
     [SerializeField]
     private Names _names = null;
     [SerializeField]
-    private int _workerEntityId = 1;
+    private GameObject _workerPrefab = null;
     [SerializeField]
     private Color[] _skinTones = null;
     [SerializeField]
@@ -42,7 +42,7 @@ public class WorkerFactory : MonoBehaviour {
     public EntityWorker spawnWorker(World world, Position pos, WorkerInfo info, WorkerType type) {
         EntityBase e = world.entities.Spawn(
             pos,
-            this._workerEntityId);
+            Main.instance.EntityRegistry.GetIdOfElement(this._workerPrefab));
 
         if(e is EntityWorker) {
             EntityWorker worker = (EntityWorker)e;

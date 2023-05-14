@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
+  m_Name: ResearchTable
+  m_EditorClassIdentifier: 
+  structureName: Research Table
+  _cost: 250
+  _description: 
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: 
+  _displayRotation: 0
+  _buildTime: 0
+  _customPreview: {fileID: 0}
+  _cell: {fileID: 11400000, guid: 1c4dbdbc9b745614ebef1e3461ebb168, type: 2}
+  _buildableSize: {x: 3, y: 1}
+  _gridRows:
+  - _row:
+    - e
+  - _row:
+    - t
+    - ' '
+  - _row:
+    - e
+    - '?'
+    - ' '
+  _gridMappings:
+  - character: 116
+    cell: {fileID: 11400000, guid: 1c4dbdbc9b745614ebef1e3461ebb168, type: 2}
+  - character: 101
+    cell: {fileID: 11400000, guid: a6dc80a68db9e6545bf00395ab4c837c, type: 2}

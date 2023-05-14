@@ -9,11 +9,11 @@ public class StructureSurface : StructureBase {
     private PrimitiveRndObject[] rndObjects = null;
 
     public override void generate(World world, int depth) {
-        LayerData layerData = world.mapGenerator.getLayerFromDepth(depth);
+        LayerData layerData = world.MapGenerator.getLayerFromDepth(depth);
 
         // Generate the inside/outside map
-        for(int x = 0; x < world.mapSize; x++) {
-            for(int y = 0; y < world.mapSize; y++) {
+        for(int x = 0; x < world.MapSize; x++) {
+            for(int y = 0; y < world.MapSize; y++) {
                 Random.State state = Random.state;
                 Random.InitState(world.seed);
 
@@ -22,36 +22,36 @@ public class StructureSurface : StructureBase {
 
                 Random.state = state;
 
-                world.storage.setOutside(x, y, y < endY);
+                world.storage.SetOutside(x, y, y < endY);
             }
         }
 
-        for(int x = 0; x < world.mapSize; x++) {
-            for(int y = 0; y < world.mapSize; y++) {
+        for(int x = 0; x < world.MapSize; x++) {
+            for(int y = 0; y < world.MapSize; y++) {
                 Position pos = new Position(x, y, depth);
 
-                if(world.isOutside(pos)) {
+                if(world.IsOutside(pos)) {
                     // Outside Tile.
 
                     CellData cell = null;
                     Rotation rotation = Rotation.UP;
-                    if(world.isOutside(new Position(x, y + 1, depth))) {
+                    if(world.IsOutside(new Position(x, y + 1, depth))) {
                         foreach(PrimitiveRndObject pro in this.rndObjects) {
                             pro.getRnd(ref cell, ref rotation);
                         }
 
                     }
 
-                    world.setCell(pos, cell, rotation);
+                    world.SetCell(pos, cell, rotation);
 
                     // Remove fog from outside
-                    world.liftFog(pos, false);
+                    world.LiftFog(pos, false);
                 } else {
                     // Inside Tile
 
                     // Remove ores exposed to the surface, but not the bedrock
-                    if(x != 0 && x != world.mapSize -1 && world.isOutside(new Position(x, y - 1, depth))) {
-                        world.setCell(pos, layerData.getFillCell(world, x, y));
+                    if(x != 0 && x != world.MapSize -1 && world.IsOutside(new Position(x, y - 1, depth))) {
+                        world.SetCell(pos, layerData.getFillCell(world, x, y));
                     }
                 }
             }

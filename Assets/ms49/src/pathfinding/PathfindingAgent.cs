@@ -178,7 +178,7 @@ public class PathfindingAgent : MonoBehaviour {
                 World w = this.entity.world;
                 foreach(Rotation r in Rotation.ALL) {
                     Position p = destination + r;
-                    if(!w.isOutOfBounds(p) && w.getCellState(p).data.isWalkable) {
+                    if(!w.IsOutOfBounds(p) && w.GetCellState(p).data.IsWalkable) {
                         destination = p;
                         stopAdjacentToFinish = false;
                         // TODO looking rot?
@@ -189,16 +189,16 @@ public class PathfindingAgent : MonoBehaviour {
                     new PathPoint[] { new PathPoint(destination) },
                     endingRotation);
             }
-        } else if(Vector2Int.Distance(this.entity.position.vec2Int, destination.vec2Int) == 1) { // Next to destination
+        } else if(Vector2Int.Distance(this.entity.position.AsVec2Int, destination.AsVec2Int) == 1) { // Next to destination
             if(stopAdjacentToFinish) {
                 return new NavPath(
                     new PathPoint[] { new PathPoint(this.entity.position) }, // Go to their own spot
-                    Rotation.directionToRotation(destination.vec2Int - this.entity.getCellPos()));
+                    Rotation.directionToRotation(destination.AsVec2Int - this.entity.getCellPos()));
             }
         }
 
         // Return if either the start of the end is out of the world
-        if(this.entity.world.isOutOfBounds(this.entity.position) || this.entity.world.isOutOfBounds(destination)) {
+        if(this.entity.world.IsOutOfBounds(this.entity.position) || this.entity.world.IsOutOfBounds(destination)) {
             return null;
         }
 
@@ -219,7 +219,7 @@ public class PathfindingAgent : MonoBehaviour {
             endRot = endingRotation;
         } else {
             endRot = stopAdjacentToFinish ?
-                Rotation.directionToRotation(destination.vec2Int - pathPoints[pathPoints.Length - 1].cellPos) :
+                Rotation.directionToRotation(destination.AsVec2Int - pathPoints[pathPoints.Length - 1].cellPos) :
                 null;
         }
 

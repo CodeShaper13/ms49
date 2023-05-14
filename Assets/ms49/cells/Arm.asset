@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
+  m_Name: Arm
+  m_EditorClassIdentifier: 
+  _cellName: Arm
+  _isSolid: 0
+  _floorOverlayTile: {fileID: 11400000, guid: 0900d1aa8ff48f244815121eb41c4529, type: 2}
+  _objectTile: {fileID: 0}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 1
+  up:
+    _enableOverride: 0
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  right:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 11400000, guid: 2e961004279dec6449fa9c85ba93ce67, type: 2}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  down:
+    _enableOverride: 0
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  left:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 0}
+    _objectTile: {fileID: 11400000, guid: 9fde368cb90ff53499930014a069fd86, type: 2}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  _movementCost: -1
+  _canBuildOver: 0
+  _isDestroyable: 1
+  _zMoveDirections: 0
+  _flammable: 0
+  _temperatureOutput: 0
+  _supportsCeiling: 0
+  _includeInFogFloodLift: 0
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 1092784935086707689, guid: d2f6c6d8a27c4fe48a6e6fd4646e25f3,
+    type: 3}

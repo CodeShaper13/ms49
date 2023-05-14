@@ -4,27 +4,27 @@ using System;
 
 public class NavGrid {
 
-    public Node[,] nodes;
+    public PathfindingNode[,] nodes;
 
     private int mapSize;
 
     public NavGrid(int size) {
-        this.nodes = new Node[size, size];
+        this.nodes = new PathfindingNode[size, size];
         this.mapSize = size;
     }
 
     /// <summary>
     /// Returns the node at the passed position.
     /// </summary>
-    public Node getNode(Vector2 pos) {
+    public PathfindingNode getNode(Vector2 pos) {
         return nodes[(int)pos.x, (int)pos.y];
     }
 
     /// <summary>
     /// Returns a List of all adjacent nodes.
     /// </summary>
-    public List<Node> getAdjacentNodes(Node node) {
-        List<Node> neighbours = new List<Node>();
+    public List<PathfindingNode> getAdjacentNodes(PathfindingNode node) {
+        List<PathfindingNode> neighbours = new List<PathfindingNode>();
         
         for(int x = -1; x <= 1; x++) {
             for(int y = -1; y <= 1; y++) {
@@ -58,7 +58,7 @@ public class NavGrid {
 
         Grid g = GameObject.FindObjectOfType<Grid>();
 
-        foreach(Node n in this.nodes) {
+        foreach(PathfindingNode n in this.nodes) {
             if(n.isWalkable) {
                 Gizmos.DrawSphere(n.worldPosition, 0.25f);
             }

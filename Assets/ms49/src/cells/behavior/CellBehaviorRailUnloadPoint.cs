@@ -21,11 +21,11 @@ public class CellBehaviorRailUnloadPoint : CellBehaviorOccupiable, IMinecartInte
         }
     }
 
-    public Vector3 getCartStopPoint() {
+    public Vector3 GetCartStopPoint() {
         return this.center;
     }
 
-    public bool shouldCartInteract(EntityMinecart cart) {
+    public bool ShouldCartInteract(EntityMinecart cart) {
         return
             this.minecart == null &&
             cart.position == this.pos &&

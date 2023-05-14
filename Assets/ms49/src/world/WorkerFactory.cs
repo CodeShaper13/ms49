@@ -40,7 +40,7 @@ public class WorkerFactory : MonoBehaviour {
     }
 
     public EntityWorker spawnWorker(World world, Position pos, WorkerInfo info, WorkerType type) {
-        EntityBase e = world.entities.spawn(
+        EntityBase e = world.entities.Spawn(
             pos,
             this._workerEntityId);
 
@@ -81,8 +81,8 @@ public class WorkerFactory : MonoBehaviour {
     private Personality getRndPersonality(WorkerType type) {
         List<Personality> list = new List<Personality>();
 
-        for(int i = 0; i < Main.instance.personalityRegistry.getRegistrySize(); i++) {
-            Personality p = Main.instance.personalityRegistry.getElement(i);
+        for(int i = 0; i < Main.instance.PersonalityRegistry.RegistrySize; i++) {
+            Personality p = Main.instance.PersonalityRegistry.GetElement(i);
 
             if(p != null && p.canHave(type)) {
                 list.Add(p);

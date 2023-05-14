@@ -30,6 +30,4 @@ MonoBehaviour:
     _veinData: {fileID: 11400000, guid: 403c5d9708f7d5f468569cb58ff74866, type: 2}
   lakeType: 1
   lakeChance: 20
-  _structures:
-  - {fileID: 11400000, guid: 2fac468cf7145a54ea72facbeba17f17, type: 2}
-  - {fileID: 11400000, guid: 3a82f48e6ee4c1142a07ea972fe53b43, type: 2}
+  _structures: []

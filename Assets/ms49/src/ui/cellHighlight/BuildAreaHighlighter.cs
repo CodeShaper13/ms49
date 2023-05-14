@@ -16,35 +16,38 @@ public class BuildAreaHighlighter : CellHighlightBase {
     private BuildableBase buildable;
 
     protected override bool onUpdate(Position pos) {
-        bool isValid = this.buildable.isValidLocation(this.world, pos, this.popup.rot);
+        bool isValid = this.buildable.IsValidLocation(this.world, pos, this.popup.rot);
 
         if(isValid) {
             if(this.buildable is ISpritePreview) {
                 this.cellRenderer.gameObject.SetActive(false);
                 this.tileSr.gameObject.SetActive(true);
 
-                this.tileSr.sprite = ((ISpritePreview)this.buildable).getPreviewSprite(this.world, pos);
+                this.tileSr.sprite = ((ISpritePreview)this.buildable).GetPreviewSprite(this.world, pos);
 
             } else if(this.buildable is BuildableTile) {
                 this.cellRenderer.gameObject.SetActive(true);
                 this.tileSr.gameObject.SetActive(false);
 
                 this.cellRenderer.initializedRenderer(
-                    Mathf.Max(this.buildable.getHighlightWidth(), this.buildable.getHighlightHeight()),
+                    Mathf.Max(this.buildable.GetBuildableWidth(), this.buildable.GetBuildableHeight()),
                     null,
                     null,
                     (x, y) => {
-                        CellData data;
-                        if(this.buildable is BuildableMultiCellTile) {
-                            data = ((BuildableMultiCellTile)this.buildable).getCellAt(x, y);
-                        } else {
-                            data = ((BuildableTile)this.buildable).cell;
+                        CellData data = null;
+                        if(this.buildable is BuildableTile buildableTile) {
+                            data = buildableTile.GetCellAt(x, y);
                         }
+                        //if(this.buildable is BuildableMultiCellTile) {
+                        //    data = this.buildable.GetCellAt(x, y);
+                        //} else {
+                        //    data = ((BuildableTile)this.buildable).cell;
+                        //}
 
                         if(data == null) {
                             return null;
                         } else {
-                            return new CellState(data, null, this.buildable.isRotatable() ? this.popup.rot : Rotation.UP);
+                            return new CellState(data, null, this.buildable.IsRotatable() ? this.popup.rot : Rotation.UP);
                         }
                     },
                     null);
@@ -73,7 +76,7 @@ public class BuildAreaHighlighter : CellHighlightBase {
                 this.world.money.value -= this.buildable.cost;
             }
 
-            this.buildable.placeIntoWorld(world, this, pos, this.popup.rot);
+            this.buildable.PlaceIntoWorld(world, this, pos, this.popup.rot);
         }
     }
 
@@ -92,7 +95,7 @@ public class BuildAreaHighlighter : CellHighlightBase {
     public void setBuildable(BuildableBase buildable) {
         this.buildable = buildable;
         this.sr.transform.localScale = new Vector3(
-            this.buildable.getHighlightWidth(),
-            this.buildable.getHighlightHeight());
+            this.buildable.GetBuildableWidth(),
+            this.buildable.GetBuildableHeight());
     }
 }

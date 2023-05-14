@@ -64,7 +64,7 @@ public abstract class TaskBase<T> : MonoBehaviour, ITask where T : EntityBase {
     protected Position? getFreeSpot(Position pos) {
         foreach(Rotation r in Rotation.ALL) {
             Position pos1 = pos + r;
-            if(this.owner.world.getCellState(pos1).data.isWalkable) {
+            if(this.owner.world.GetCellState(pos1).data.IsWalkable) {
                 return pos1;
             }
         }

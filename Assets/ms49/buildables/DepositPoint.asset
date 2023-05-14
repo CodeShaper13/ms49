@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: 
   _cost: 1000
   _description: A place for Workers to drop off what they've mined
-  _tab: {fileID: 11400000, guid: 1f363a23936a6e348bcb6bfc47d8923e, type: 2}
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0

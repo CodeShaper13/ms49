@@ -12,7 +12,7 @@ public class PopupLoadGame : PopupWindow {
     protected override void onOpen() {
         base.onOpen();
 
-        List<SaveFile> cachedSaves = Main.instance.getAllSaves(true);
+        List<SaveFile> cachedSaves = Main.instance.GetAllSaves(true);
 
         foreach(SaveFile save in cachedSaves) {
             GameObject g = GameObject.Instantiate(this.saveTilePrefab, this.worldTileWrapperObj);

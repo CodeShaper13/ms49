@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Bed
   m_EditorClassIdentifier: 
   structureName: 
@@ -18,20 +18,20 @@ MonoBehaviour:
     energy
 
     Requires a nearby dresser'
-  _tab: {fileID: 0}
+  _tab: {fileID: 11400000, guid: 1f363a23936a6e348bcb6bfc47d8923e, type: 2}
   _fogOption: 0
   _overrideRotationMsg: '[r] to change color'
   _displayRotation: 0
-  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _buildTime: 0
   _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: b861f0e3c815d004f8a19d4623b68b8e, type: 2}
-  gridSize: {x: 1, y: 2}
-  tiles:
-  - character: 116
-    tile: {fileID: 11400000, guid: 2412c06fbb8ac3142a4be37cc30c782d, type: 2}
-  - character: 98
-    tile: {fileID: 11400000, guid: b861f0e3c815d004f8a19d4623b68b8e, type: 2}
-  cells:
-  - row:
+  _buildableSize: {x: 1, y: 2}
+  _gridRows:
+  - _row:
     - t
     - b
+  _gridMappings:
+  - character: 116
+    cell: {fileID: 11400000, guid: 2412c06fbb8ac3142a4be37cc30c782d, type: 2}
+  - character: 98
+    cell: {fileID: 11400000, guid: b861f0e3c815d004f8a19d4623b68b8e, type: 2}

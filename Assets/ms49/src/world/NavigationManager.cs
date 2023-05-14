@@ -8,7 +8,7 @@ public class NavigationManager {
     private World world;
     private int mapSize;
 
-    private Heap<Node> openSet;
+    private Heap<PathfindingNode> openSet;
 
     public NavigationManager(World world, int mapSize) {
         this.world = world;
@@ -20,13 +20,13 @@ public class NavigationManager {
             this.grids[i] = new NavGrid(mapSize);
         }
 
-        this.openSet = new Heap<Node>(mapSize * mapSize * layerCount);
+        this.openSet = new Heap<PathfindingNode>(mapSize * mapSize * layerCount);
     }
 
     public void update() {
         // Update Layers
         for(int i = 0; i < this.world.storage.layerCount; i++) {
-            this.rebakeNavGridIfDirty(this.grids[i], this.world.storage.getLayer(i));
+            this.rebakeNavGridIfDirty(this.grids[i], this.world.storage.GetLayer(i));
         }
     }
 
@@ -34,23 +34,23 @@ public class NavigationManager {
         this.grids[CameraController.instance.currentLayer].debugDraw();
     }
 
-    public Node getNode(Position pos) { // TODO add safety checks
-        return this.grids[pos.depth].getNode(pos.vec2);
+    public PathfindingNode getNode(Position pos) { // TODO add safety checks
+        return this.grids[pos.depth].getNode(pos.AsVec2);
     }
 
     public PathPoint[] findPath(Position start, Position end, bool stopAdjacentToFinish) {
-        Node startNode = this.getNode(start);
-        Node endNode = this.getNode(end);
+        PathfindingNode startNode = this.getNode(start);
+        PathfindingNode endNode = this.getNode(end);
 
         //this.openSet = new Heap<Node>(this.mapSize * this.mapSize * this.world.storage.layerCount); //.Clear(); // Get the heap ready to reuse
         this.openSet.Clear();
-        HashSet<Node> closedSet = new HashSet<Node>();
+        HashSet<PathfindingNode> closedSet = new HashSet<PathfindingNode>();
         this.openSet.Add(startNode);
 
-        Node[] cachedNeighborArray = new Node[7];
+        PathfindingNode[] cachedNeighborArray = new PathfindingNode[7];
 
         while(this.openSet.count > 0) {
-            Node currentNode = this.openSet.RemoveFirst();
+            PathfindingNode currentNode = this.openSet.RemoveFirst();
             closedSet.Add(currentNode);
 
             if(currentNode == endNode) {
@@ -58,7 +58,7 @@ public class NavigationManager {
             }
 
             this.getAdjacentNodes(currentNode, cachedNeighborArray);
-            foreach(Node neighbor in cachedNeighborArray) {
+            foreach(PathfindingNode neighbor in cachedNeighborArray) {
                 if(neighbor == null) {
                     break; // Reached the "end" of the array
                 }
@@ -92,7 +92,7 @@ public class NavigationManager {
     /// <summary>
     /// Returns a List of all connecting nodes.
     /// </summary>
-    private void getAdjacentNodes(Node node, Node[] cachedNeighborArray) {
+    private void getAdjacentNodes(PathfindingNode node, PathfindingNode[] cachedNeighborArray) {
         int counter = 0;
 
         for(int i = 0; i < 4; i++) {
@@ -121,13 +121,13 @@ public class NavigationManager {
         }
     }
 
-    private PathPoint[] retracePath(Node startNode, Node endNode, bool stopAdjacentToFinish) {
+    private PathPoint[] retracePath(PathfindingNode startNode, PathfindingNode endNode, bool stopAdjacentToFinish) {
         if(startNode == endNode) {
             return null;
         }        
 
-        List<Node> path = new List<Node>();
-        Node currentNode = stopAdjacentToFinish ? endNode.parent : endNode;
+        List<PathfindingNode> path = new List<PathfindingNode>();
+        PathfindingNode currentNode = stopAdjacentToFinish ? endNode.parent : endNode;
 
         while(currentNode != startNode) {
             path.Add(currentNode);
@@ -150,7 +150,7 @@ public class NavigationManager {
         return waypoints;
     }
 
-    private int getDistance(Node nodeA, Node nodeB) {
+    private int getDistance(PathfindingNode nodeA, PathfindingNode nodeB) {
 
         int distX = Math.Abs(nodeA.x - nodeB.x);
         int distZ = Math.Abs(nodeA.depth - nodeB.depth);
@@ -168,18 +168,18 @@ public class NavigationManager {
 
             // Regenerate the NavGrid.
             int size = layer.size;
-            Node[,] nodes = grid.nodes;
+            PathfindingNode[,] nodes = grid.nodes;
             for(int x = 0; x < size; x++) {
                 for(int y = 0; y < size; y++) {
                     Vector2 worldPoint = new Vector2(x + 0.5f, y + 0.5f);
                     CellData data = layer.getCellState(x, y).data;
-                    nodes[x, y] = new Node(
+                    nodes[x, y] = new PathfindingNode(
                         worldPoint,
                         x,
                         y,
                         layer.depth,
-                        data.zMoveDirections,
-                        data.movementCost);
+                        data.ZMoveDirections,
+                        data.MovementCost);
                 }
             }
             grid.nodes = nodes;

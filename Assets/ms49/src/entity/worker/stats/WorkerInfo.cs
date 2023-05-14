@@ -29,9 +29,12 @@ public class WorkerInfo {
         this.gender = (EnumGender)tag.getInt("gender");
         this.skinTone = tag.getInt("skinTone");
         this.hairStyle = tag.getInt("hairStyle");
-        this.personality = Main.instance.personalityRegistry.getElement(tag.getInt(
+        this.personality = Main.instance.PersonalityRegistry.GetElement(tag.getInt(
             "personality",
-            Main.instance.personalityRegistry.defaultPersonalityId));
+            -1));
+        if(this.personality == null) {
+            this.personality = Main.instance.PersonalityRegistry.GetDefaultPersonality();
+        }
         this.payShift = tag.getInt("payShift");
     }
 
@@ -43,7 +46,7 @@ public class WorkerInfo {
         tag.setTag("gender", (int)this.gender);
         tag.setTag("skinTone", this.skinTone);
         tag.setTag("hairStyle", this.hairStyle);
-        tag.setTag("personality", Main.instance.personalityRegistry.getIdOfElement(this.personality));
+        tag.setTag("personality", Main.instance.PersonalityRegistry.GetIdOfElement(this.personality));
         tag.setTag("payShift", this.payShift);
 
         return tag;

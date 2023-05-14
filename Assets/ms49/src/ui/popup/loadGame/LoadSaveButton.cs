@@ -25,7 +25,7 @@ public class LoadSaveButton : MonoBehaviour {
         NbtFile nbtFile = new NbtFile();
         nbtFile.LoadFromFile(this.saveFile.path);
 
-        Main.instance.createWorld(
+        Main.instance.StartWorld(
             Path.GetFileNameWithoutExtension(this.saveFile.path),
             nbtFile.RootTag);
     }

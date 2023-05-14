@@ -7,8 +7,12 @@ public class EntityBat : EntityMonster {
     [SerializeField]
     private PathfindingAgent agent = null;
 
-    public override void onUpdate() {
-        base.onUpdate();
+    public override void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
+
+        base.Update();
 
         this.aiManager.updateAi();
         this.agent.update();

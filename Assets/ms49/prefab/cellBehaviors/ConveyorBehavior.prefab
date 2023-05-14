@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cache: 1
   conveyorSpeed: 1
+  itemPullSpeed: 1
   itemDestoryParticle: {fileID: 4334713544733170696, guid: 7be00c2bd70c34c4c8b78dc5d6d9679d,
     type: 3}
 --- !u!1 &2781604633546625781

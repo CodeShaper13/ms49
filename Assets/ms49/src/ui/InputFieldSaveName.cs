@@ -25,7 +25,7 @@ public class InputFieldSaveName : MonoBehaviour {
 
         // Update the create button interactability
         bool validName = !string.IsNullOrEmpty(this.inputSaveName.text);
-        foreach(SaveFile save in Main.instance.getAllSaves()) {
+        foreach(SaveFile save in Main.instance.GetAllSaves()) {
             if(save.saveName == this.inputSaveName.text) {
                 validName = false;
                 break;

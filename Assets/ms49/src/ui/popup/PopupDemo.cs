@@ -11,9 +11,7 @@ public class PopupDemo : PopupWindow {
     [SerializeField]
     private DemoHighlighter demoHighlighter = null;
 
-    protected override void initialize() {
-        base.initialize();
-
+    private void Start() {
         this.text.text = this.text.text.Replace("%", this.demoCost.ToString());
     }
 

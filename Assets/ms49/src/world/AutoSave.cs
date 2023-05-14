@@ -28,7 +28,7 @@ public class AutoSave : MonoBehaviour {
             this.timer += Time.deltaTime;
 
             if(this.timer > this._autoSaveInterval) {
-                this.world.saveGame();
+                this.world.SaveGame();
                 this._saveIcon.enabled = true;
 
                 this.timer = 0f;

@@ -34,7 +34,7 @@ public class TemperatureMapRenderer : MonoBehaviour {
     }
 
     private void Update() {
-        Layer layer = this.popup.world.storage.getLayer(CameraController.instance.currentLayer);
+        Layer layer = this.popup.world.storage.GetLayer(CameraController.instance.currentLayer);
 
         if(!this.isInitialized) {
             this.initalSetup(layer);
@@ -43,7 +43,7 @@ public class TemperatureMapRenderer : MonoBehaviour {
 
         for(int x = 0; x < layer.size; x++) {
             for(int y = 0; y < layer.size; y++) {
-                float temp = layer.getTemperature(x, y);
+                float temp = layer.GetTemperature(x, y);
 
                 if(this.oldTemps[layer.size * x + y] != temp) {
                     this.oldTemps[layer.size * x + y] = temp;

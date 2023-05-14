@@ -46,7 +46,7 @@ public class TaskDepositStone : TaskMovement<EntityWorker> {
             }
         }
 
-        this.depositPoint.deposit(this.minerData.heldItem);
+        this.depositPoint.Deposit(this.minerData.heldItem);
         this.minerData.heldItem = null;
     }
 }

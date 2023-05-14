@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using fNbt;
-using System.Collections.Generic;
+using System.Text;
 
 public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
 
@@ -37,18 +37,18 @@ public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
         this.updateChairFlag();
     }
 
-    public override void getDebugText(List<string> s) {
-        base.getDebugText(s);
+    public override void getDebugText(StringBuilder sb, string indent) {
+        base.getDebugText(sb, indent);
 
-        s.Add("PlateState: " + this.plateState);
-        s.Add("Chair Position: " + this.chairPos);
+        sb.AppendLine(indent + "PlateState: " + this.plateState);
+        sb.AppendLine(indent + "Chair Position: " + this.chairPos);
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         this.plateState = (EnumPlateState)tag.getInt("plateState");
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         tag.setTag("plateState", (int)this.plateState);
     }
 
@@ -56,7 +56,7 @@ public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
     /// Returns true if the table's chair is occupied and hte occupant is in the chair.
     /// </summary>
     public bool isOccupantSitting() {
-        return this.chair != null && this.isOccupied() && this.getOccupant().position.distance(this.chairPos) <= 0f;
+        return this.chair != null && this.isOccupied() && this.getOccupant().position.Distance(this.chairPos) <= 0f;
     }
 
     private void updateChairFlag() {
@@ -67,8 +67,8 @@ public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
 
         foreach(Rotation r in Rotation.ALL) {
             Position p = this.pos + r;
-            if(!this.world.isOutOfBounds(p)) {
-                CellState state = this.world.getCellState(p);
+            if(!this.world.IsOutOfBounds(p)) {
+                CellState state = this.world.GetCellState(p);
                 if(state.data == this.chairCell) {
                     // An adjacent chair was found
                     this.chair = state;

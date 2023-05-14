@@ -4,11 +4,18 @@
 /// </summary>
 public interface IContainer {
 
-    bool isFull { get; }
+    bool IsFull { get; }
 
-    bool isEmpty { get; }
+    bool IsEmpty { get; }
 
-    bool deposit(Item item);
+    /// <summary>
+    /// An implementation should attempt to add the passed item,
+    /// returning true if it could be added.
+    /// </summary>
+    bool Deposit(Item item);
 
-    Item pullItem();
+    /// <summary>
+    /// Pulls the first item out of the container.
+    /// </summary>
+    Item PullItem();
 }

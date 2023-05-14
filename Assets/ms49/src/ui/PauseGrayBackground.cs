@@ -7,6 +7,6 @@ public class PauseGrayBackground : MonoBehaviour {
     private Image _img = null;
 
     private void OnEnable() {
-        this._img.enabled = Main.instance.isPlaying();
+        this._img.enabled = Main.instance.IsPlayingGame();
     }
 }

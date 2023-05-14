@@ -9,7 +9,7 @@ public class TargetedSquares : MonoBehaviour, ISaveableState {
 
     public HashSet<TargetedSquare> list { get; private set; }
 
-    public string tagName => "targetedSquares";
+    public string saveableTagName => "targetedSquares";
 
     private void Awake() {
         this.list = new HashSet<TargetedSquare>();
@@ -52,7 +52,7 @@ public class TargetedSquares : MonoBehaviour, ISaveableState {
         }
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         NbtList targetedTilesList = new NbtList(NbtTagType.Compound);
         foreach(TargetedSquare square in this.list) {
             NbtCompound compound = new NbtCompound();
@@ -65,7 +65,7 @@ public class TargetedSquares : MonoBehaviour, ISaveableState {
         tag.setTag("targetedTiles", targetedTilesList);
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         NbtList listTargetedTags = tag.getList("targetedTiles");
         foreach(NbtCompound targetedTag in listTargetedTags) {
             if(!targetedTag.Contains("x") || !targetedTag.Contains("y")) {

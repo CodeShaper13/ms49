@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Text;
 using UnityEngine;
 
 public abstract class CellBehavior : MonoBehaviour {
@@ -13,12 +13,12 @@ public abstract class CellBehavior : MonoBehaviour {
 
     public bool cache => this._cache;
     public CellData data => this.state.data;
-    public Rotation rotation => this.state.rotation;
+    public Rotation rotation => this.state.Rotation;
     /// <summary> The center of the Behavior's cell in world units. </summary>
-    public Vector2 center => this.pos.vec2 + new Vector2(0.5f, 0.5f);
+    public Vector2 center => this.pos.AsVec2 + new Vector2(0.5f, 0.5f);
 
     private void Update() {
-        if(!Pause.isPaused()) {
+        if(!Pause.IsPaused) {
             this.onUpdate();
         }
     }
@@ -57,7 +57,7 @@ public abstract class CellBehavior : MonoBehaviour {
         return null;
     }
 
-    public virtual void getDebugText(List<string> s) {
-        s.Add("Type: " + this.GetType().ToString());
+    public virtual void getDebugText(StringBuilder sb, string indent) {
+        sb.AppendLine(indent + "Type: " + this.GetType().ToString());
     }
 }

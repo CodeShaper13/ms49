@@ -34,13 +34,13 @@ public class CellData : ScriptableObject {
     [Space]
 
     [SerializeField, Tooltip("-1 = not walkable, 0 = walkable, greater than 1 is walkable with a penalty"), Min(-1)]
-    private int _movementCost = 0;
-    [SerializeField, Tooltip("If ture, this Cell we be treated as empty space and Cell will be able to be built in this Cell's place.")]
+    private int _movementCost = -1;
+    [SerializeField, Tooltip("If ture, this Cell we be treated as empty space and Cells will be able to be built in this Cell's place.")]
     private bool _canBuildOver = false;
     [SerializeField, Tooltip("If true, this Cell will be able to be destroyed and converted to air.")]
     private bool _isDestroyable = false;
     [SerializeField]
-    private EnumZMoveDirection _zMoveDirections = EnumZMoveDirection.NEITHER;
+    private EnumZMoveDirection _zMoveDirections = EnumZMoveDirection.Neither;
     [SerializeField, Tooltip("If true, the Cell will burn")]
     private bool _flammable = false;
     [SerializeField]
@@ -60,24 +60,24 @@ public class CellData : ScriptableObject {
     [SerializeField, Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
     private GameObject _behaviorPrefab = null;
 
-    public string displayName => this._cellName;
-    public bool isSolid => this._isSolid;
-    public bool rotationalOverride => this._rotationalOverride;
-    public int movementCost => this._movementCost;
-    public bool isWalkable => this.movementCost >= 0;
-    public bool canBuildOver => this._canBuildOver;
-    public bool isDestroyable => this._isDestroyable;
-    public EnumZMoveDirection zMoveDirections => this._zMoveDirections;
-    public bool isFlammable => this._flammable;
-    public float temperatureOutput => this._temperatureOutput;
-    public bool supportsCeiling => this._supportsCeiling;
-    public bool includeInFogFloodLift => this._includeInFogFloodLift;
-    public bool recieveHardnessColorMod => this._tintObjectTile;
-    public GameObject behaviorPrefab => this._behaviorPrefab;
+    public string DisplayName => this._cellName;
+    public bool IsSolid => this._isSolid;
+    public bool RotationalOverride => this._rotationalOverride;
+    public int MovementCost => this._movementCost;
+    public bool IsWalkable => this.MovementCost >= 0;
+    public bool CanBuildOver => this._canBuildOver;
+    public bool IsDestroyable => this._isDestroyable;
+    public EnumZMoveDirection ZMoveDirections => this._zMoveDirections;
+    public bool IsFlammable => this._flammable;
+    public float TemperatureOutput => this._temperatureOutput;
+    public bool SupportsCeiling => this._supportsCeiling;
+    public bool IncludeInFogFloodLift => this._includeInFogFloodLift;
+    public bool RecieveHardnessColorMod => this._tintObjectTile;
+    public GameObject BehaviorPrefab => this._behaviorPrefab;
 
-    public TileRenderData getRenderData(Rotation rotation) {
-        if(this.rotationalOverride) {
-            RotationOverride rotOverride = this.overrideFromRotation(rotation);
+    public TileRenderData GetRenderData(Rotation rotation) {
+        if(this.RotationalOverride) {
+            RotationOverride rotOverride = this.GetOverrideFromRotation(rotation);
 
             if(rotOverride.isOverrideEnabled) {
                 // If the rotational override is missing data, pull from the defaults.
@@ -89,14 +89,14 @@ public class CellData : ScriptableObject {
             }
         }
 
-        return new TileRenderData(this._floorOverlayTile, this._objectTile, this._objectOverlayTile, RotationEffect.NOTHING);
+        return new TileRenderData(this._floorOverlayTile, this._objectTile, this._objectOverlayTile, RotationEffect.Nothing);
     }
 
-    public bool isRotationOverrideEnabled(Rotation rotation) {
-        return this.overrideFromRotation(rotation).isOverrideEnabled;
+    public bool HasRotationOverrideEnabled(Rotation rotation) {
+        return this.GetOverrideFromRotation(rotation).isOverrideEnabled;
     }
 
-    private RotationOverride overrideFromRotation(Rotation rotation) {
+    private RotationOverride GetOverrideFromRotation(Rotation rotation) {
         if(rotation == Rotation.UP) {
             return this.up;
         }
@@ -106,7 +106,7 @@ public class CellData : ScriptableObject {
         else if(rotation == Rotation.DOWN) {
             return this.down;
         }
-        else {
+        else { // Left
             return this.left;
         }
     }
@@ -135,7 +135,7 @@ public class CellData : ScriptableObject {
 
             CellData script = (CellData)this.target;
 
-            if(script.rotationalOverride) {
+            if(script.RotationalOverride) {
                 // Show rotation properties
 
                 EditorGUILayout.Space(16);

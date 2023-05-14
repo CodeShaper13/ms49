@@ -5,7 +5,7 @@
 /// </summary>
 public interface IHasData {
 
-    void writeToNbt(NbtCompound tag);
+    void WriteToNbt(NbtCompound tag);
 
-    void readFromNbt(NbtCompound tag);
+    void ReadFromNbt(NbtCompound tag);
 }

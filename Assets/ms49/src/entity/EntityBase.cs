@@ -43,18 +43,15 @@ public abstract class EntityBase : MonoBehaviour {
 
     public virtual void onRenderingDisable() { }
 
-    /// <summary>
-    /// Called every frame the game is not paused.
-    /// </summary>
-    public virtual void onUpdate() { }
+    public virtual void Update() { }
 
-    public virtual void onLateUpdate() { }
+    public virtual void LateUpdate() { }
 
     public virtual void onDestroy() { }
 
     public virtual void onRightClick() { }
 
-    public virtual void getDebugText(List<string> strings) { }
+    public virtual void getDebugText(StringBuilder sb, string indent) { }
 
     /// <summary>
     /// If true if returned, this Entity can be destroyed with the
@@ -94,7 +91,7 @@ public abstract class EntityBase : MonoBehaviour {
     /// Gets the Entity's position in cell units.
     /// </summary>
     public Vector2Int getCellPos() {
-        return this.world.worldToCell(this.transform.position);
+        return this.world.WorldToCell(this.transform.position);
     }
 
     /// <summary>

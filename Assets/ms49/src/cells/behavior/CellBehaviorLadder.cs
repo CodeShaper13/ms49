@@ -9,6 +9,6 @@
     }
 
     private bool goesUp() {
-        return this.data.zMoveDirections == EnumZMoveDirection.UP;
+        return this.data.ZMoveDirections == EnumZMoveDirection.Up;
     }
 }

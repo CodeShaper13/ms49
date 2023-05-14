@@ -11,10 +11,10 @@ public class Payroll : MonoBehaviour, ISaveableState {
     public double lastPayTime { get; private set; }
     public int payRate => this._payRate;
 
-    public string tagName => "payroll";
+    public string saveableTagName => "payroll";
 
     private void Update() {
-        if(!Pause.isPaused()) {
+        if(!Pause.IsPaused) {
             if(this._world.time.time > this.lastPayTime + _payRate) {
                 // Pay Workers.
 
@@ -42,11 +42,11 @@ public class Payroll : MonoBehaviour, ISaveableState {
         }
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         this.lastPayTime = tag.getDouble("lastPayTime");
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         tag.setTag("lastPayTime", this.lastPayTime);
     }
 }

@@ -15,24 +15,24 @@ MonoBehaviour:
   _cellName: pipe
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
-  _objectTile: {fileID: 0}
+  _objectTile: {fileID: 11400000, guid: 736acd3167c67d64c90e85287def9e5e, type: 2}
   _objectOverlayTile: {fileID: 0}
-  _rotationalOverride: 1
+  _rotationalOverride: 0
   up:
-    _enableOverride: 1
+    _enableOverride: 0
     _floorOverlayTile: {fileID: 0}
     _objectTile: {fileID: 11400000, guid: 736acd3167c67d64c90e85287def9e5e, type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
   right:
-    _enableOverride: 1
+    _enableOverride: 0
     _floorOverlayTile: {fileID: 0}
     _objectTile: {fileID: -5053321179136240307, guid: a452e3496c67b974cbc9482bbd89e6c8,
       type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
   down:
-    _enableOverride: 1
+    _enableOverride: 0
     _floorOverlayTile: {fileID: 0}
     _objectTile: {fileID: 11400000, guid: 7b9e36f822e9ab84e9d405796fac8cbb, type: 2}
     _overlayTile: {fileID: 0}

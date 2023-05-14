@@ -18,8 +18,12 @@ public class EntityItem : EntityBase {
             Random.Range(-this.spriteRndShift.y, this.spriteRndShift.y));
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
+    public override void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
+
+        base.Update();
 
         if(this.item == null) {
             Debug.LogWarning("EntityItem has no item field set!");
@@ -29,13 +33,13 @@ public class EntityItem : EntityBase {
     public override void writeToNbt(NbtCompound tag) {
         base.writeToNbt(tag);
 
-        tag.setTag("itemId", Main.instance.itemRegistry.getIdOfElement(this.item));
+        tag.setTag("itemId", Main.instance.ItemRegistry.GetIdOfElement(this.item));
     }
 
     public override void readFromNbt(NbtCompound tag) {
         base.readFromNbt(tag);
 
-        this.setItem(Main.instance.itemRegistry.getElement(tag.getInt("itemId")));
+        this.setItem(Main.instance.ItemRegistry.GetElement(tag.getInt("itemId")));
     }
 
     public void setItem(Item item) {

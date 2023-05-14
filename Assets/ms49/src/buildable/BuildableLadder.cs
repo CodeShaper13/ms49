@@ -17,32 +17,32 @@ public class BuildableLadder : BuildableBase {
         }
 
         CellData cell = this.pointingDown(r) ? this.ladderTop : this.ladderBottom;
-        objectSprite = TileSpriteGetter.retrieveSprite(cell.getRenderData(Rotation.UP).objectTile);
+        objectSprite = TileSpriteGetter.retrieveSprite(cell.GetRenderData(Rotation.UP).objectTile);
     }
 
-    public override bool isRotatable() {
+    public override bool IsRotatable() {
         return true;
     }
 
-    public override bool isValidLocation(World world, Position pos, Rotation rotation) {
+    public override bool IsValidLocation(World world, Position pos, Rotation rotation) {
         int otherDepth = pos.depth + (this.pointingDown(rotation) ? 1 : -1);
 
-        if(!CameraController.instance.inCreativeMode && !world.isDepthUnlocked(otherDepth)) {
+        if(!CameraController.instance.inCreativeMode && !world.IsDepthUnlocked(otherDepth)) {
             return false;
         }
 
-        return this.okToBuild(world, pos, true) && this.okToBuild(world, pos.setDepth(otherDepth), false);
+        return this.okToBuild(world, pos, true) && this.okToBuild(world, pos.SetDepth(otherDepth), false);
     }
 
-    public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
+    public override void PlaceIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
         if(this.pointingDown(rotation)) {
             // Top, them bottom below
 
             this.func(world, pos, this.ladderTop);
-            this.func(world, pos.setDepth(pos.depth + 1), this.ladderBottom);
+            this.func(world, pos.SetDepth(pos.depth + 1), this.ladderBottom);
         } else {
             this.func(world, pos, this.ladderBottom);
-            this.func(world, pos.setDepth(pos.depth - 1), this.ladderTop);
+            this.func(world, pos.SetDepth(pos.depth - 1), this.ladderTop);
         }
     }
 
@@ -51,16 +51,16 @@ public class BuildableLadder : BuildableBase {
     }
 
     private bool okToBuild(World world, Position pos, bool mustBeClear) {
-        if(world.isOutOfBounds(pos)) { // Handles if the layer is too high or low
+        if(world.IsOutOfBounds(pos)) { // Handles if the layer is too high or low
             return false;
         }
 
-        CellData data = world.getCellState(pos).data;
-        return (data.canBuildOver || (mustBeClear ? false : data is CellDataMineable)) && world.plotManager.isOwned(pos);
+        CellData data = world.GetCellState(pos).data;
+        return (data.CanBuildOver || (mustBeClear ? false : data is CellDataMineable)) && world.plotManager.isOwned(pos);
     }
 
     private void func(World world, Position pos, CellData cell) {
-        world.setCell(pos, cell);
-        world.liftFog(pos);
+        world.SetCell(pos, cell);
+        world.LiftFog(pos);
     }
 }

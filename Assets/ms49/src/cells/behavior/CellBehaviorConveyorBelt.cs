@@ -25,8 +25,8 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
         */
     }
 
-    public void onLeverFlip(CellBehavior lever) {
-        this.state.rotation = this.state.rotation.opposite();
+    public void OnLeverFlip(CellBehavior lever) {
+        this.state.Rotation = this.state.Rotation.opposite();
         this.dirty();
     }
 
@@ -37,17 +37,16 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
 
         // Attempt to pull Items from a container.
         if(this.pullTimer <= 0) {
-            CellBehavior behavior = this.world.getBehavior(this.pos + this.rotation.opposite());
-            if(behavior is IContainer) {
-                IContainer container = (IContainer)behavior;
-                if(!container.isEmpty) {
+            CellBehavior behavior = this.world.GetCellBehavior(this.pos + this.rotation.opposite(), true);
+            if(behavior is IContainer container) {
+                if(!container.IsEmpty) {
                     // Spawn Item
                     Vector2 entityPos = this.center + (this.rotation.opposite().vectorF * 0.49f);
-                    EntityItem e = (EntityItem)this.world.entities.spawn(
+                    EntityItem e = (EntityItem)this.world.entities.Spawn(
                         entityPos,
                         this.pos.depth,
                         3); // 3 is EntityItem ID
-                    e.setItem(container.pullItem());
+                    e.setItem(container.PullItem());
 
                     this.pullTimer = this.itemPullSpeed;
                 }
@@ -55,7 +54,7 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
         }
 
         // Move Items along the conveyor belt.
-        for(int i = this.world.entities.count - 1; i >= 0; i--) {
+        for(int i = this.world.entities.EntityCount - 1; i >= 0; i--) {
             EntityBase entity = this.world.entities.list[i];
 
             if(entity is EntityItem && entity.position == this.pos) {
@@ -84,13 +83,12 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
                 if(entity.position != entityStartPos) {
                     // Entity has moved to a new Cell.
 
-                    CellBehavior behavior = this.world.getBehavior(entity.position);
+                    CellBehavior behavior = this.world.GetCellBehavior(entity.position, true);
 
-                    if(behavior is IContainer) {
-                        IContainer container = (IContainer)behavior;
-                        if(!container.isFull) {
-                            container.deposit(((EntityItem)entity).item);
-                            this.world.entities.remove(entity);
+                    if(behavior is IContainer container) {
+                        if(!container.IsFull) {
+                            container.Deposit(((EntityItem)entity).item);
+                            this.world.entities.Remove(entity);
                         } else {
                             this.destroyItem(entity);
                         }
@@ -102,19 +100,19 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
         }        
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         this.pullTimer = tag.getFloat("conveyorPullTimer");
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         tag.setTag("conveyorPullTimer", this.pullTimer);
     }
 
     private void destroyItem(EntityBase entity) {
         if(this.itemDestoryParticle != null) {
-            this.world.particles.spawn(entity.worldPos, entity.depth, this.itemDestoryParticle);
+            this.world.particles.Spawn(entity.worldPos, entity.depth, this.itemDestoryParticle);
         }
 
-        this.world.entities.remove(entity);
+        this.world.entities.Remove(entity);
     }
 }

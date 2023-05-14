@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c21fabd92168fc499d603b8f4da0130, type: 3}
+  m_Name: RailStop
+  m_EditorClassIdentifier: 
+  _cellName: Minecart Stop
+  _isSolid: 0
+  _floorOverlayTile: {fileID: 11400000, guid: efa1d34850eb84e4f8a26582b1a8b879, type: 2}
+  _objectTile: {fileID: 0}
+  _objectOverlayTile: {fileID: 0}
+  _rotationalOverride: 1
+  up:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 18a6518d72d772b48918c23e2e2f0b07,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  right:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: efa1d34850eb84e4f8a26582b1a8b879,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  down:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: 18a6518d72d772b48918c23e2e2f0b07,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  left:
+    _enableOverride: 1
+    _floorOverlayTile: {fileID: 11400000, guid: efa1d34850eb84e4f8a26582b1a8b879,
+      type: 2}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 0}
+    _effect: 0
+  _movementCost: 50
+  _canBuildOver: 0
+  _isDestroyable: 1
+  _zMoveDirections: 0
+  _flammable: 1
+  _temperatureOutput: 0
+  _supportsCeiling: 0
+  _includeInFogFloodLift: 0
+  _tintObjectTile: 0
+  _behaviorPrefab: {fileID: 5766544284360391623, guid: 9720d169bb922064ba3a99d3f944a832,
+    type: 3}
+  moveType: 0

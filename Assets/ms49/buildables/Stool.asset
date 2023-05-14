@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: 
   _cost: 50
   _description: Workers can sit here to eat.  Be sure to build an adjacent table.
-  _tab: {fileID: 0}
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0

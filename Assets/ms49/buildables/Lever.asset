@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: 
   _cost: 115
   _description: Changes the direction of adjacent Conveyor Belts and curve rails
-  _tab: {fileID: 11400000, guid: 1f363a23936a6e348bcb6bfc47d8923e, type: 2}
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0

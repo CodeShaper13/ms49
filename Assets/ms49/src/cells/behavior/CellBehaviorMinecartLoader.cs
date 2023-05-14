@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using fNbt;
 
-public class CellBehaviorMinecartLoader : AbstractBehaviorContainer, IMinecartInteractor {
+public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartInteractor {
 
     [SerializeField]
     private float _itemTransferSpeed = 1f;
@@ -29,7 +29,7 @@ public class CellBehaviorMinecartLoader : AbstractBehaviorContainer, IMinecartIn
                 }
 
                 if(this.transferTimer <= 0) {
-                    this.deposit(this.minecart.inventory.pullItem());
+                    this.Deposit(this.minecart.inventory.pullItem());
                     this.transferTimer = this._itemTransferSpeed;
                 }
 
@@ -42,7 +42,7 @@ public class CellBehaviorMinecartLoader : AbstractBehaviorContainer, IMinecartIn
                 }
 
                 if(this.transferTimer <= 0) {
-                    this.minecart.inventory.addItem(this.pullItem());
+                    this.minecart.inventory.addItem(this.PullItem());
                     this.transferTimer = this._itemTransferSpeed;
                 }
             }
@@ -57,14 +57,14 @@ public class CellBehaviorMinecartLoader : AbstractBehaviorContainer, IMinecartIn
         }
     }
 
-    public override void readFromNbt(NbtCompound tag) {
-        base.readFromNbt(tag);
+    public override void ReadFromNbt(NbtCompound tag) {
+        base.ReadFromNbt(tag);
 
         this.transferTimer = tag.getFloat("transferTimer");
     }
 
-    public override void writeToNbt(NbtCompound tag) {
-        base.writeToNbt(tag);
+    public override void WriteToNbt(NbtCompound tag) {
+        base.WriteToNbt(tag);
 
         tag.setTag("transferTimer", this.transferTimer);
     }
@@ -74,20 +74,20 @@ public class CellBehaviorMinecartLoader : AbstractBehaviorContainer, IMinecartIn
         this.minecart = null;
     }
 
-    public bool shouldCartInteract(EntityMinecart cart) {
+    public bool ShouldCartInteract(EntityMinecart cart) {
         if(cart.position != this.pos + this.rotation) {
             return false; // Minecart not in front of Loader.
         }
 
         if(this.isUnloader) {
-            return !this.isFull && !cart.inventory.isEmpty();
+            return !this.IsFull && !cart.inventory.isEmpty();
         }
         else {
-            return !this.isEmpty && !cart.inventory.isFull();
+            return !this.IsEmpty && !cart.inventory.isFull();
         }
     }
 
-    public Vector3 getCartStopPoint() {
+    public Vector3 GetCartStopPoint() {
         return this.center + this.rotation.vectorF;
     }
 }

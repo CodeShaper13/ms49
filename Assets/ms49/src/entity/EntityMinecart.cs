@@ -20,18 +20,23 @@ public class EntityMinecart : EntityBase {
     private IMinecartInteractor cartInteractor;
 
     public Inventory inventory => this._inventory;
+    public MinecartSprites minecartSprites => this.sprites;
 
-    public override void onUpdate() {
-        base.onUpdate();
+    public override void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
+
+        base.Update();
 
         // Explode the cart if it has left the map.
-        if(this.world.isOutOfBounds(this.position)) {
+        if(this.world.IsOutOfBounds(this.position)) {
             this.explode();
             return;
         }
 
         if(this.cartInteractor != null) {
-            Vector2 target = this.cartInteractor.getCartStopPoint();
+            Vector2 target = this.cartInteractor.GetCartStopPoint();
 
             if(this.worldPos == target) {
                 // In front of interactor.
@@ -43,7 +48,7 @@ public class EntityMinecart : EntityBase {
         } else {
             // Move the Minecart:
 
-            CellState state = this.world.getCellState(this.position);
+            CellState state = this.world.GetCellState(this.position);
             if(state.data is CellDataRail) {
 
                 // Trip detector rail if above.
@@ -61,11 +66,11 @@ public class EntityMinecart : EntityBase {
                     }
                 }  
 
-                Vector2 cellCenter = this.position.center;
+                Vector2 cellCenter = this.position.Center;
 
                 // the reason the explode isn't working is because the cart changes direction while on the cell
 
-                switch(((CellDataRail)state.data).moveType) {
+                switch(((CellDataRail)state.data).MoveType) {
                     case CellDataRail.EnumRailMoveType.STRAIGHT:
                         this.move(this.rotation.vector);                       
                         break;
@@ -75,15 +80,15 @@ public class EntityMinecart : EntityBase {
                         break;
 
                     case CellDataRail.EnumRailMoveType.CURVE:
-                        this.handleCurveRail(state.rotation, state.rotation.clockwise(), cellCenter);
+                        this.handleCurveRail(state.Rotation, state.Rotation.clockwise(), cellCenter);
 
                         break;
 
                     case CellDataRail.EnumRailMoveType.STOPPER:
                         this.move(this.rotation.vector);
 
-                        float d = Vector2.Distance(this.worldPos, cellCenter + state.rotation.opposite().vectorF * 0.5f);
-                        if(this.rotation == state.rotation && d > 0.25f) {
+                        float d = Vector2.Distance(this.worldPos, cellCenter + state.Rotation.opposite().vectorF * 0.5f);
+                        if(this.rotation == state.Rotation && d > 0.25f) {
                             this.rotation = this.rotation.opposite();
                             this.move(this.rotation.vectorF * (d - 0.5f));
                         }
@@ -93,8 +98,8 @@ public class EntityMinecart : EntityBase {
                     case CellDataRail.EnumRailMoveType.MERGER:
                         // TODO explode if coming in from the wrong angle (state.rotation.opposite())
 
-                        Rotation endRot = this.rotation.axis != state.rotation.axis ? this.rotation : state.rotation.clockwise();
-                        this.handleCurveRail(state.rotation, endRot, cellCenter);
+                        Rotation endRot = this.rotation.axis != state.Rotation.axis ? this.rotation : state.Rotation.clockwise();
+                        this.handleCurveRail(state.Rotation, endRot, cellCenter);
 
                         break;
                 }
@@ -126,8 +131,10 @@ public class EntityMinecart : EntityBase {
         }
     }
 
-    private void LateUpdate() {
-        if(!Pause.isPaused()) {
+    public override void LateUpdate() {
+        base.LateUpdate();
+
+        if(!Pause.IsPaused) {
 
             // Set main sprite
             this._cartRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
@@ -164,8 +171,8 @@ public class EntityMinecart : EntityBase {
     /// and playing a particle effect.
     /// </summary>
     public void explode() {
-        this.world.particles.spawn(this.position, this.explodeParticlePrefab);
-        this.world.entities.remove(this);
+        this.world.particles.Spawn(this.position, this.explodeParticlePrefab);
+        this.world.entities.Remove(this);
     }
 
     public void release() {
@@ -183,15 +190,15 @@ public class EntityMinecart : EntityBase {
     private bool checkForInteractor(Rotation rotation) {
         Position p = rotation == null ? this.position : this.position + rotation;
 
-        if(this.world.isOutOfBounds(p)) {
+        if(this.world.IsOutOfBounds(p)) {
             return false;
         }
 
-        CellState adjacentState = this.world.getCellState(p);
+        CellState adjacentState = this.world.GetCellState(p);
         if(adjacentState != null && adjacentState.behavior is IMinecartInteractor) {
             IMinecartInteractor cartInteracter = (IMinecartInteractor)adjacentState.behavior;
 
-            if(cartInteracter.shouldCartInteract(this)) {
+            if(cartInteracter.ShouldCartInteract(this)) {
                 this.cartInteractor = cartInteracter;
                 return true;
             }
@@ -204,18 +211,18 @@ public class EntityMinecart : EntityBase {
     /// Moves the minecart in the passed direction.  Move speed and delta time is factored in here.
     /// </summary>
     private void move(Vector2 dir) {
-        Vector2 destEdgePoint = this.position.center + (this.rotation.vectorF * 0.5f);
+        Vector2 destEdgePoint = this.position.Center + (this.rotation.vectorF * 0.5f);
         float dist = Vector2.Distance(this.worldPos, destEdgePoint);
 
         if(dist <= 0.5f) {
             // the cart is now moving away from the center of a cell and towards another
             Position pos = this.position + this.rotation;
-            if(!this.world.isOutOfBounds(pos)) {
+            if(!this.world.IsOutOfBounds(pos)) {
                 // check if the cell is occupied by another cart
                 foreach(EntityBase e in this.world.entities.list) {
                     if(e is EntityMinecart && e != this && e.position == pos) {
                         // The destinaiton cell is already occuiped.
-                        this.worldPos = this.position.center;
+                        this.worldPos = this.position.Center;
                         return;
                     }
                 }
@@ -236,7 +243,7 @@ public class EntityMinecart : EntityBase {
         PopupContainer popup = Main.instance.findPopup<PopupContainer>();
         if(popup != null) {
             popup.open();
-            popup.setInventory(this.inventory);
+            popup.SetInventory(this.inventory);
         }
     }
 

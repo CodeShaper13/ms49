@@ -11,8 +11,8 @@ public class PopupBuyLand : PopupWorldReference {
 
     private List<PlotOutline> labels;
 
-    protected override void initialize() {
-        base.initialize();
+    protected override void Start() {
+        base.Start();
 
         this.labels = new List<PlotOutline>();
     }

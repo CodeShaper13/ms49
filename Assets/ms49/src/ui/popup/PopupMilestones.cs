@@ -25,7 +25,7 @@ public class PopupMilestones : PopupWorldReference {
     protected override void onOpen() {
         base.onOpen();
 
-        this.currentMilestone = this.world.milestones.getCurrent();
+        this.currentMilestone = null; //this.world.milestones.getCurrent();
 
         if(this.currentMilestone != null) {
             // Create progress bars for each of the requirements
@@ -50,8 +50,8 @@ public class PopupMilestones : PopupWorldReference {
                     this._prefabBuildablePreviw,
                     this.unlockedArea);
 
-                obj.GetComponent<BuildableUiRenderer>().setBuildable(buildable);
-                obj.GetComponent<Tooltip>().text = buildable.getName();
+                obj.GetComponent<BuildableUiRenderer>().SetBuildable(buildable);
+                obj.GetComponent<Tooltip>().text = buildable.GetBuildableName();
             }
 
 

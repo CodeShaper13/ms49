@@ -14,7 +14,7 @@ public class DemoHighlighter : CellHighlightBase {
     protected override bool onUpdate(Position pos) {
         this.destroyableEntity = null;
 
-        if(!this.world.isOutOfBounds(pos)) {
+        if(!this.world.IsOutOfBounds(pos)) {
             // Check if the mouse is over an Entity that is destroyable.
             EntityBase e = CameraController.instance.getMouseOver();
             if(e != null && e.isDestroyable()) {
@@ -25,7 +25,7 @@ public class DemoHighlighter : CellHighlightBase {
             }
 
             // Check if the mouse is over a Destroyable cell.
-            if(this.world.getCellState(pos).data.isDestroyable && (this.world.plotManager.isOwned(pos) || CameraController.instance.inCreativeMode)) {
+            if(this.world.GetCellState(pos).data.IsDestroyable && (this.world.plotManager.isOwned(pos) || CameraController.instance.inCreativeMode)) {
                 this.setValidColor();
                 return true;
             }
@@ -47,25 +47,23 @@ public class DemoHighlighter : CellHighlightBase {
                 Vector2 particlePos;
                 if(this.destroyableEntity != null) {
                     particlePos = this.destroyableEntity.worldPos;
-                    this.world.entities.remove(this.destroyableEntity);
+                    this.world.entities.Remove(this.destroyableEntity);
                 } else {
                     // Add to the destroyed stat.
-                    CellData cell = this.world.getCellState(pos).data;
+                    CellData cell = this.world.GetCellState(pos).data;
                     StatisticInt stat = this.world.statManager.getCellDestroyedStat(cell);
                     if(stat != null) {
                         stat.increase(1);
-                    } else {
-                        print("error");
                     }
 
-                    particlePos = pos.center;
+                    particlePos = pos.Center;
 
                     // Remove the Cell.
-                    this.world.setCell(pos, null);
+                    this.world.SetCell(pos, null);
                     this.world.tryCollapse(pos);
                 }
 
-                this.world.particles.spawn(particlePos, pos.depth, particlePrefab);
+                this.world.particles.Spawn(particlePos, pos.depth, particlePrefab);
             }
         }
     }

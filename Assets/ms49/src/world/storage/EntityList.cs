@@ -6,58 +6,42 @@ using System;
 public class EntityList : MonoBehaviour, ISaveableState {
 
     [SerializeField]
-    private World world = null;
+    private World _world = null;
+    [SerializeField]
+    private WorldRenderer _worldRenderer = null;
+    [SerializeField]
+    private EntityRegistry _entityRegistry = null;
 
     public List<EntityBase> list { get; private set; }
-    public int count => this.list.Count;
+    /// <summary>
+    /// The number of Entities in the world.
+    /// </summary>
+    public int EntityCount => this.list.Count;
 
-    public string tagName => "entities";
-
-    private WorldRenderer worldRenderer;
+    public string saveableTagName => "entities";
 
     private void Awake() {
         this.list = new List<EntityBase>();
     }
 
-    private void Start() {
-        this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
-    }
-
-    private void Update() {
-        if(!Pause.isPaused()) {
-            // Update the Entities.
-            for(int i = this.list.Count - 1; i >= 0; i--) {
-                this.list[i].onUpdate();
-            }
-        }
-    }
-
     private void LateUpdate() {
-        // Only show Entities that at the depth being rendered.
+        // Only show Entities that are at the depth being rendered.
         foreach(EntityBase e in this.list) {
             e.toggleRendererVisability(
-                e.depth == this.worldRenderer.getDepthRendering());
-        }
-
-        if(!Pause.isPaused()) {
-            // Update the Entities.
-            for(int i = this.list.Count - 1; i >= 0; i--) {
-                this.list[i].onLateUpdate();
-            }
+                e.depth == this._worldRenderer.getDepthRendering());
         }
     }
 
-    public EntityBase spawn(NbtCompound tag) {
+    public EntityBase Spawn(NbtCompound tag) {
         int entityId = tag.getInt("id");
 
         EntityBase entity = this.instantiateObj(entityId);
 
         if(entity == null) {
-            return null; // Error logged in EntityList#instantiateObj()
+            return null;
         }
 
-        entity.initialize(this.world, entityId);
-
+        entity.initialize(this._world, entityId);
         entity.readFromNbt(tag);
 
         this.list.Add(entity);
@@ -65,11 +49,14 @@ public class EntityList : MonoBehaviour, ISaveableState {
         return entity;
     }
 
-    public EntityBase spawn(Position postion, int entityId) {
-        return this.spawn(postion.vec2 + new Vector2(0.5f, 0.5f), postion.depth, entityId);
+    public EntityBase Spawn(Position position, int entityId) {
+        return this.Spawn(
+            position.AsVec2 + new Vector2(0.5f, 0.5f), // Center the Entity in the cell.
+            position.depth,
+            entityId);
     }
 
-    public EntityBase spawn(Vector2 postion, int depth, int entityId) {
+    public EntityBase Spawn(Vector2 postion, int depth, int entityId) {
         EntityBase entity = this.instantiateObj(entityId);
 
         if(entity == null) {
@@ -79,7 +66,7 @@ public class EntityList : MonoBehaviour, ISaveableState {
         entity.transform.position = postion;
         entity.depth = depth;
 
-        entity.initialize(this.world, entityId);
+        entity.initialize(this._world, entityId);
         entity.onEnterWorld();
 
         this.list.Add(entity);
@@ -87,19 +74,14 @@ public class EntityList : MonoBehaviour, ISaveableState {
         return entity;
     }
 
-    private EntityBase instantiateObj(int entityId) {
-        GameObject prefab = Main.instance.entityRegistry.getElement(entityId);
-        if(prefab != null) {
-            EntityBase entity = GameObject.Instantiate(prefab, this.transform).GetComponent<EntityBase>();
-
-            return entity;
-        } else {
-            Debug.LogWarning("Tried to spawn an Entity with an unknown Id ( " + entityId + ")");
-            return null;
+    /// <summary>
+    /// Removes an Entity from the world.
+    /// </summary>
+    public void Remove(EntityBase entity) {
+        if(entity == null) {
+            return;
         }
-    }
 
-    public void remove(EntityBase entity) {
         this.list.Remove(entity);
         entity.onDestroy();
         GameObject.Destroy(entity.gameObject);
@@ -109,7 +91,7 @@ public class EntityList : MonoBehaviour, ISaveableState {
     /// Returns the Entity with the passed GUID, or null if there are
     /// no Entities with the passed GUID.
     /// </summary>
-    public EntityBase getEntityFromGuid(Guid guid) {
+    public EntityBase GetEntityFromGuid(Guid guid) {
         foreach(EntityBase e in this.list) {
             if(e.guid == guid) {
                 return e;
@@ -119,7 +101,7 @@ public class EntityList : MonoBehaviour, ISaveableState {
         return null;
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         NbtList list = new NbtList(NbtTagType.Compound);
         foreach(EntityBase e in this.list) {
             NbtCompound compound = new NbtCompound();
@@ -129,10 +111,27 @@ public class EntityList : MonoBehaviour, ISaveableState {
         tag.setTag("entities", list);
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         NbtList entityTags = tag.getList("entities");
         foreach(NbtCompound tagEntity in entityTags) {
-            EntityBase entity = this.spawn(tagEntity);
+            EntityBase entity = this.Spawn(tagEntity);
+        }
+    }
+
+    /// <summary>
+    /// Instantiates an Entity from a prefab.  If the prefab is missing
+    /// a component of type EntityBase, an error is logged.
+    /// </summary>
+    private EntityBase instantiateObj(int entityId) {
+        GameObject prefab = this._entityRegistry[entityId];
+        if(prefab != null) {
+            EntityBase entity = GameObject.Instantiate(prefab, this.transform).GetComponent<EntityBase>();
+
+            return entity;
+        }
+        else {
+            Debug.LogWarning("Tried to spawn an Entity with an unknown Id ( " + entityId + ")");
+            return null;
         }
     }
 }

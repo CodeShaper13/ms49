@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using fNbt;
 
-public class CellBehaviorItemElevator : AbstractBehaviorContainer {
+public class CellBehaviorItemElevator : CellBehaviorContainer {
 
     [SerializeField, Min(0)]
     private float itemTransferSpeed = 1f;
 
     private float transferTimer;
+
+    public bool IsGoingUp => this.rotation.axis == EnumAxis.Y;
 
     public override void onCreate(World world, CellState state, Position pos) {
         base.onCreate(world, state, pos);
@@ -17,30 +19,26 @@ public class CellBehaviorItemElevator : AbstractBehaviorContainer {
 
         this.transferTimer -= Time.deltaTime;
 
-        if(this.transferTimer <= 0 && !this.isEmpty) {
-            int depthChange = this.isGoingUp() ? -1 : 1;
-            CellBehaviorItemElevator behavior = this.world.getBehavior<CellBehaviorItemElevator>(this.pos.add(0, 0, depthChange));
-            if(behavior != null && !behavior.isFull) {
-                behavior.deposit(this.pullItem());
+        if(this.transferTimer <= 0 && !this.IsEmpty) {
+            int depthChange = this.IsGoingUp ? -1 : 1;
+            CellBehaviorItemElevator behavior = this.world.GetCellBehavior<CellBehaviorItemElevator>(this.pos.Add(0, 0, depthChange), true);
+            if(behavior != null && !behavior.IsFull) {
+                behavior.Deposit(this.PullItem());
                 this.transferTimer = this.itemTransferSpeed;
             }
         }
     }
 
-    public override void readFromNbt(NbtCompound tag) {
-        base.readFromNbt(tag);
+    public override void ReadFromNbt(NbtCompound tag) {
+        base.ReadFromNbt(tag);
 
         this.transferTimer = tag.getFloat("transferTimer");
     }
 
-    public override void writeToNbt(NbtCompound tag) {
-        base.writeToNbt(tag);
+    public override void WriteToNbt(NbtCompound tag) {
+        base.WriteToNbt(tag);
 
         tag.setTag("transferTimer", this.transferTimer);
-    }
-
-    public bool isGoingUp() {
-        return this.rotation.axis == EnumAxis.Y;
     }
 
     private enum EnumDirection {

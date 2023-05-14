@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: Minecart
   _cost: 250
   _description: Moves items along tracks between Load and Unload Points
-  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: '[r] to change direction'
   _displayRotation: 0
@@ -23,12 +23,5 @@ MonoBehaviour:
   _customPreview: {fileID: 0}
   railSprite: {fileID: -9198056691032318685, guid: 83e6f32abdc9b244cbe11ac906944047,
     type: 3}
-  _minecartSprites:
-    sideEmpty: {fileID: -5444995628053660433, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
-      type: 3}
-    sideFull: {fileID: -1631286982127175646, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
-      type: 3}
-    frontEmpty: {fileID: 84008059606723830, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
-      type: 3}
-    frontFull: {fileID: -4942957438270607783, guid: 2b8c7c4ed77c79348bb84aa41edc0feb,
-      type: 3}
+  _minecartPrefab: {fileID: 2445739090162371687, guid: c7baed6b015ac6b47838b0f2a25d1e7d,
+    type: 3}

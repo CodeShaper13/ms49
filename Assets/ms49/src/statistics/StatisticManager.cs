@@ -20,7 +20,7 @@ public class StatisticManager : MonoBehaviour, ISaveableState {
     public StatisticInt workersHired;
     public StatisticInt workersFired;
 
-    public string tagName => "statistics";
+    public string saveableTagName => "statistics";
 
     private void Awake() {
         this.registeredStats = new List<RegisteredStat>();
@@ -35,24 +35,24 @@ public class StatisticManager : MonoBehaviour, ISaveableState {
         this.workersFired = this.registerStat(new StatisticInt("Workers Fired", "workersFired"), EnumStatisticCategory.WORKERS);
 
         // Tile Stats:
-        TileRegistry reg = Main.instance.tileRegistry;
-        for(int i = 0; i < reg.getRegistrySize(); i++) {
-            CellData cell = reg.getElement(i);
+        CellDataRegistry reg = Main.instance.CellRegistry;
+        for(int i = 0; i < reg.RegistrySize; i++) {
+            CellData cell = reg[i];
             if(cell != null) {
-                this.registerStat(new StatisticInt(cell.displayName + " built", cell.name + DOT_TIMES_BUILT), EnumStatisticCategory.TILES);
+                this.registerStat(new StatisticInt(cell.DisplayName + " built", cell.name + DOT_TIMES_BUILT), EnumStatisticCategory.TILES);
 
                 if(cell is CellDataMineable) {
-                    this.registerStat(new StatisticInt(cell.displayName + " mined", cell.name + DOT_TIMES_MINED), EnumStatisticCategory.TILES);
+                    this.registerStat(new StatisticInt(cell.DisplayName + " mined", cell.name + DOT_TIMES_MINED), EnumStatisticCategory.TILES);
                 }
 
-                if(cell.isDestroyable) {
-                    this.registerStat(new StatisticInt(cell.displayName + " destroyed", cell.name + DOT_TIMES_DESTROYED), EnumStatisticCategory.TILES);
+                if(cell.IsDestroyable) {
+                    this.registerStat(new StatisticInt(cell.DisplayName + " destroyed", cell.name + DOT_TIMES_DESTROYED), EnumStatisticCategory.TILES);
                 }
             }
         }
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         foreach(RegisteredStat regStat in this.registeredStats) {
             if(regStat != null) {
                 NbtCompound compound = new NbtCompound();
@@ -63,7 +63,7 @@ public class StatisticManager : MonoBehaviour, ISaveableState {
         }
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         foreach(NbtCompound compound in tag) {
             string compoundName = compound.Name;
 

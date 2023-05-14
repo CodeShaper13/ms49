@@ -5,7 +5,7 @@ public class CellBehaviorRailCurve : CellBehavior, IHasData, ILeverReciever {
 
     private bool isFlipped;
 
-    public void onLeverFlip(CellBehavior lever) {
+    public void OnLeverFlip(CellBehavior lever) {
         Rotation r = this.rotation;
 
         for(int i = 0; i < 3; i++) {
@@ -13,23 +13,23 @@ public class CellBehaviorRailCurve : CellBehavior, IHasData, ILeverReciever {
 
             // Make sure both sides of the curve point towards a rail
             if(this.isValidRail(r) && this.isValidRail(r.clockwise())) {
-                this.state.rotation = r;
+                this.state.Rotation = r;
                 this.dirty();
                 break;
             }
         }
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         this.isFlipped = tag.getBool("isSwitchCurved");
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         tag.setTag("isSwitchCurved", this.isFlipped);
     }
 
     private bool isValidRail(Rotation r) {
-        CellState state = this.world.getCellState(this.pos + r);
+        CellState state = this.world.GetCellState(this.pos + r);
         if(state.data is CellDataRail) {
             return true; 
 

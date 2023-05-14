@@ -1,7 +1,4 @@
 ﻿using fNbt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
@@ -13,15 +10,15 @@ public class Inventory : MonoBehaviour {
 
     private Item[] items;
 
-    public string inventoryName => this._inventoryName;
-    public int maxCapacity => this._size;
+    public string InventoryName => this._inventoryName;
+    public int Size => this._size;
 
     private void Awake() {
-        this.items = new Item[this.maxCapacity];
+        this.items = new Item[this.Size];
     }
 
     public virtual bool isFull() {
-        return this.getItemCount() >= this.maxCapacity;
+        return this.getItemCount() >= this.Size;
     }
 
     public virtual bool isEmpty() {
@@ -73,11 +70,12 @@ public class Inventory : MonoBehaviour {
     public virtual NbtCompound writeToNbt() {
         NbtCompound tag = new NbtCompound();
 
-        MinedItemRegistry reg = Main.instance.itemRegistry;
+        ItemRegistry reg = Main.instance.ItemRegistry;
         int count = this.items.Length;
         int[] ids = new int[count];
         for(int i = 0; i < count; i++) {
-            ids[i] = reg.getIdOfElement(items[i]);
+            Item item = this.items[i];
+            ids[i] = item == null ? -1 : reg.GetIdOfElement(item);
         }
         tag.setTag("itemIds", ids);
 
@@ -85,17 +83,16 @@ public class Inventory : MonoBehaviour {
     }
 
     public virtual void readFromNbt(NbtCompound tag) {
-        MinedItemRegistry reg = Main.instance.itemRegistry;
+        ItemRegistry registry = Main.instance.ItemRegistry;
         int[] ids = tag.getIntArray("itemIds");
         for(int i = 0; i < ids.Length; i++) {
-            Item item = reg.getElement(ids[i]);
-            if(item != null) {
-                this.items[i] = item;
-            }
+            int id = ids[i];
+            this.items[i] = id == -1 ? null : registry[ids[i]];
         }
     }
 
-    public Item getItem(int i) {
-        return this.items[i];
+    public Item this[int index] {
+        get => this.items[index];
+        set => this.items[index] = value;
     }
 }

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4bc21567f434b598a3c96ba4946372, type: 3}
+  m_Name: AssetReferenceDB
+  m_EditorClassIdentifier: 
+  m_assets:
+  - m_assetDatabaseId: ac254de15f4153b45b8d95d6aee8b2ee
+    m_importFrom: Assets/AssetGraph/AssetBundles/Cache
+    m_exportTo: 
+    m_variantName: 
+    m_data: []
+    m_scene:
+      m_Handle: 0
+  - m_assetDatabaseId: 3b34b013f3787bc49bed5b42863dbd0c
+    m_importFrom: Assets/AssetGraph
+    m_exportTo: 
+    m_variantName: 
+    m_data: []
+    m_scene:
+      m_Handle: 0
+  - m_assetDatabaseId: cbea548740d1efd4e944ad290d463a57
+    m_importFrom: Assets/AssetGraph/AssetBundles/Cache/TemporalSettingFiles
+    m_exportTo: 
+    m_variantName: 
+    m_data: []
+    m_scene:
+      m_Handle: 0
+  - m_assetDatabaseId: f7b3565b50718da4aa6b9a2c4ece774d
+    m_importFrom: Assets/AssetGraph/AssetBundles
+    m_exportTo: 
+    m_variantName: 
+    m_data: []
+    m_scene:
+      m_Handle: 0
+  - m_assetDatabaseId: 4210d4d1c514bd64798361d7a668a8d4
+    m_importFrom: Assets/AssetGraph/AssetBundles/Cache/TemporalSettingFiles/AssetReferenceDB.asset
+    m_exportTo: 
+    m_variantName: 
+    m_data: []
+    m_scene:
+      m_Handle: 0
+  - m_assetDatabaseId: 886d630d499a6a74e808c57f6932d1ac
+    m_importFrom: Assets/ms49/data/New AssetGraph.asset
+    m_exportTo: 
+    m_variantName: 
+    m_data: []
+    m_scene:
+      m_Handle: 0
+  m_version: 2

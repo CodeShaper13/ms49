@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: Pipe
   m_EditorClassIdentifier: 
-  structureName: 
-  _cost: 0
+  structureName: Pipe
+  _cost: 50
   _description: 
-  _tab: {fileID: 11400000, guid: 65af463dae1096f4ab16253980a96dee, type: 2}
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
-  _overrideRotationMsg: '[r] to change color'
-  _displayRotation: 0
-  _buildTime: {fileID: 0}
+  _overrideRotationMsg: 
+  _displayRotation: 1
+  _buildTime: {fileID: 11400000, guid: 11183769021aedc448bc1bcf0318ea7d, type: 2}
   _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: 2dd05ec59684b524a9637ea3bc098598, type: 2}

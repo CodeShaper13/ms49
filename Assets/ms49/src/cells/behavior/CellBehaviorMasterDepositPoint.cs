@@ -2,14 +2,14 @@
 
 public class CellBehaviorMasterDepositPoint : AbstractDepositPoint {
 
-    public override bool isFull => false;
-    public override bool isEmpty => true;
+    public override bool IsFull => false;
+    public override bool IsEmpty => true;
 
     public override void onRightClick() {
         // Don't list the parent class open a Container Popup.
     }
 
-    public override bool deposit(Item item) {
+    public override bool Deposit(Item item) {
         this.world.economy.sellItem(item);
         return true;
     }

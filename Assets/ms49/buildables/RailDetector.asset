@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: 
   _cost: 60
   _description: Much like a lever, but takes wheels instead of hands
-  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 1

@@ -32,7 +32,7 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
                 return false;
             }
 
-            foreach(CellBehaviorTable table in this.owner.world.getAllBehaviors<CellBehaviorTable>(behavior => behavior.hasChair && !behavior.isOccupied())) {
+            foreach(CellBehaviorTable table in this.owner.world.GetAllBehaviors<CellBehaviorTable>(behavior => behavior.hasChair && !behavior.isOccupied())) {
                 NavPath path = this.agent.calculatePath(table.chairPos);
 
                 if(path != null) {

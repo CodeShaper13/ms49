@@ -70,19 +70,19 @@ public class PrebuiltArea : ScriptableObject {
         for(int x = 0; x < this.width; x++) {
             for(int y = 0; y < this.height; y++) {
                 TileEntry entry = this.getEntry(x, y);
-                Position pos1 = pos.add(x, y);
+                Position pos1 = pos.Add(x, y);
                 if(entry == null) {
-                    world.setCell(pos1, null);
+                    world.SetCell(pos1, null);
                 } else {
                     if(entry.buildable != null) {
-                        entry.buildable.placeIntoWorld(world, null, pos1, Rotation.fromEnum(entry.rotation));
+                        entry.buildable.PlaceIntoWorld(world, null, pos1, Rotation.fromEnum(entry.rotation));
                     } else if(entry.cell != null) {
-                        world.setCell(pos1, entry.cell);
+                        world.SetCell(pos1, entry.cell);
                     }
                 }
 
                 if(this.liftFog) {
-                    world.liftFog(pos1);
+                    world.LiftFog(pos1);
                 }
             }
         }
@@ -94,11 +94,11 @@ public class PrebuiltArea : ScriptableObject {
     public virtual bool isSpaceClear(World world, Position pos) {
         for(int w = 0; w < this.width; w++) {
             for(int h = 0; h < this.height; h++) {
-                Position pos1 = pos.add(pos.x + w, pos.y + h);
-                if(world.isOutOfBounds(pos1)) {
+                Position pos1 = pos.Add(pos.x + w, pos.y + h);
+                if(world.IsOutOfBounds(pos1)) {
                     return false;
                 }
-                if(!world.getCellState(pos1).data.canBuildOver) {
+                if(!world.GetCellState(pos1).data.CanBuildOver) {
                     return false;
                 }
             }

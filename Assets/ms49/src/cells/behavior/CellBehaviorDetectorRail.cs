@@ -37,12 +37,12 @@ public class CellBehaviorDetectorRail : CellBehavior, IHasData, IRenderTileOverr
         }
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         this.isTripped = tag.getBool("isTripped");
         //this.tripTimer = tag.getFloat("tripTimer");
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         tag.setTag("isTripped", this.isTripped);
         //tag.setTag("tripTimer", this.tripTimer);
     }

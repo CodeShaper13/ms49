@@ -1,6 +1,6 @@
 ﻿public class PopupConfirmQuit : PopupWindow {
 
     public void callback_exit() {
-        Main.instance.shutdownWorld();
+        Main.instance.ShutdownWorld();
     }
 }

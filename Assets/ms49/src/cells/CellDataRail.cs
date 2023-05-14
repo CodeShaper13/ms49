@@ -3,7 +3,10 @@
 [CreateAssetMenu(fileName = "Cell Rail", menuName = "MS49/Cell/Cell Rail", order = 1)]
 public class CellDataRail : CellData {
 
-    public EnumRailMoveType moveType;
+    [SerializeField]
+    private EnumRailMoveType moveType = EnumRailMoveType.STRAIGHT;
+
+    public EnumRailMoveType MoveType => this.moveType;
 
     public enum EnumRailMoveType {
         STRAIGHT = 0,

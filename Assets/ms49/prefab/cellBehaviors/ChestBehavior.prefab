@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2603535390444545969}
-  - component: {fileID: 5512652578941683287}
+  - component: {fileID: 5049815505614777299}
   - component: {fileID: 1842448821282040476}
   m_Layer: 0
   m_Name: ChestBehavior
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5512652578941683287
+--- !u!114 &5049815505614777299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4883737561210922928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2dfe19d8d36be4aaf3b936c7cb84ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 9acb510c63fef52429a2e08f1ab34fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cache: 1
@@ -58,5 +58,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c608837e850a1144e85da04053771c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryName: Chest
+  _inventoryName: Wooden Chest
   _size: 4

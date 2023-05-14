@@ -10,6 +10,6 @@ public class RequirementMethodTileExcavation : RequirementMethodBase {
     //private CellData cell = null;
 
     public override int getProgress(World world) {
-        return world.stoneExcavated;
+        return 0; //world.stoneExcavated;
     }
 }

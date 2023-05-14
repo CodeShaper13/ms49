@@ -1,11 +1,9 @@
-﻿using System;
+﻿using NaughtyAttributes;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PopupWindow : MonoBehaviour {
-
-    /// <summary> The currently open popup window.  May be null. </summary>
-    //public static PopupWindow openPopup;
 
     public static List<PopupWindow> openPopups = new List<PopupWindow>();
 
@@ -16,23 +14,27 @@ public class PopupWindow : MonoBehaviour {
     [SerializeField]
     private bool _closeableWithEscape = true;
 
-    private bool isPopupOpen;
-
-    public bool pauseGameWhenOpen { get { return this._pauseGameWhenOpen; } }
-    public bool blockInput { get { return this._blockInput; } }
-    public bool closeableWithEscape { get { return this._closeableWithEscape; } }
-    public bool isOpen => PopupWindow.openPopups.Contains(this);
+    public bool PauseGameWhenOpen => this._pauseGameWhenOpen;
+    public bool BlockInput => this._blockInput;
+    public bool CloseableWithEscape => this._closeableWithEscape;
+    public bool IsOpen => PopupWindow.openPopups.Contains(this);
 
     /// <summary>
     /// Returns true if at least one of the open Popups is blocking input
     /// </summary>
     public static bool blockingInput() {
         foreach(PopupWindow popup in openPopups) {
-            if(popup.blockInput) {
+            if(popup.BlockInput) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static void closeAll() {
+        for(int i = openPopups.Count - 1; i >= 0; i--) {
+            openPopups[i].close();
+        }
     }
 
     /// <summary>
@@ -40,11 +42,12 @@ public class PopupWindow : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     public static int getPopupsOpen() {
-        return openPopups.Count;
+        return PopupWindow.openPopups.Count;
     }
 
     private void Awake() {
-        this.initialize();
+        // Disable the imediate children in case the user forgot.
+        //this.setChildState(false);
     }
 
     private void Update() {
@@ -70,8 +73,8 @@ public class PopupWindow : MonoBehaviour {
         openPopups.Add(this);
 
         // Pause the game if the popup requires it.
-        if(this.pauseGameWhenOpen) {
-            Pause.pause();
+        if(this.PauseGameWhenOpen) {
+            Pause.PauseGame();
         }
 
         this.onOpen();
@@ -86,22 +89,50 @@ public class PopupWindow : MonoBehaviour {
         // Unpause the game if none of the open windows require the game to be paused.
         bool unPause = true;
         foreach(PopupWindow popup in openPopups) {
-            if(popup.pauseGameWhenOpen) {
+            if(popup.PauseGameWhenOpen) {
                 unPause = false;
                 break;
             }
         }
 
         if(unPause) {
-            Pause.unPause();
+            Pause.UnpauseGame();
         }
     }
-
-    protected virtual void initialize() { }
 
     protected virtual void onUpdate() { }
 
     protected virtual void onOpen() { }
 
     protected virtual void onClose() { }
+
+    private void setChildState(bool active) {
+        foreach(Transform child in this.transform) {
+            print("a");
+            child.gameObject.SetActive(active);
+        }
+    }
+
+#if UNITY_EDITOR
+    [Button("Open")]
+    private void Editor_Open() {
+        if(Application.isPlaying) {
+            this.open();
+        }
+        else {
+            print("!");
+            this.setChildState(true);
+        }
+    }
+
+    [Button("Close")]
+    private void Editor_Close() {
+        if(Application.isPlaying) {
+            this.close();
+        }
+        else {
+            this.setChildState(false);
+        }
+    }
+#endif
 }

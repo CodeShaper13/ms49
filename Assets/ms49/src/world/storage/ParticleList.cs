@@ -1,46 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using NaughtyAttributes;
 
 public class ParticleList : MonoBehaviour {
 
     [SerializeField]
     private World world = null;
 
-    public List<Particle> list { get; private set; }
-    private WorldRenderer worldRenderer;
+    private List<Particle> allParticles;
 
     private void Awake() {
-        this.list = new List<Particle>();
-    }
-
-    private void Start() {
-        this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
-    }
-
-    private void Update() {
-        if(!Pause.isPaused()) {
-            for(int i = this.list.Count - 1; i >= 0; i--) {
-                this.list[i].onUpdate();
-            }
-        }
+        this.allParticles = new List<Particle>();
     }
 
     private void LateUpdate() {
-        foreach(Particle particle in this.list) {
-            if(particle.depth == this.worldRenderer.getDepthRendering()) {
-                particle.gameObject.SetActive(true);
-            }
-            else {
-                particle.gameObject.SetActive(false);
-            }
+        int depthBeingRendered = this.world.worldRenderer.getDepthRendering();
+        foreach(Particle particle in this.allParticles) {
+            particle.gameObject.SetActive(particle.depth == depthBeingRendered);
         }
     }
 
-    public Particle spawn(Position pos, GameObject particlePrefab) {
-        return this.spawn(pos.vec2, pos.depth, particlePrefab);
+    public Particle Spawn(Position pos, GameObject particlePrefab) {
+        return this.Spawn(pos.AsVec2, pos.depth, particlePrefab);
     }
 
-    public Particle spawn(Vector2 pos, int depth, GameObject particlePrefab) {
+    public Particle Spawn(Vector2 pos, int depth, GameObject particlePrefab) {
         GameObject obj = GameObject.Instantiate(particlePrefab, this.transform);
         Particle particle = obj.GetComponent<Particle>();
         if(particle == null) {
@@ -54,15 +38,24 @@ public class ParticleList : MonoBehaviour {
         }
         else {
             particle.transform.position = pos;
-            particle.initialize(this.world, depth);
-            this.list.Add(particle);
+            particle.Initialize(this.world, depth);
+            this.allParticles.Add(particle);
             return particle;
         }
     }
 
-    public void remove(Particle particle) {
-        this.list.Remove(particle);
-        particle.onEnd();
+    public void Remove(Particle particle) {
+        this.allParticles.Remove(particle);
+        particle.OnEnd();
         GameObject.Destroy(particle.gameObject);
+    }
+
+    [Button]
+    private void RemoveAllParticles() {
+        if(this.allParticles == null) {
+            for(int i = this.allParticles.Count - 1; i >= 0; i--) {
+                this.Remove(this.allParticles[i]);
+            }
+        }
     }
 }

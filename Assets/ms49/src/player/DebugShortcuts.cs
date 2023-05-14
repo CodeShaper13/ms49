@@ -24,12 +24,12 @@ public class DebugShortcuts : MonoBehaviour {
                 }
 
                 if(Input.GetKey(KeyCode.Delete)) {
-                    world.setCell(pos, null);
-                    world.liftFog(pos);
+                    world.SetCell(pos, null);
+                    world.LiftFog(pos);
                 }
 
                 if(Input.GetKey(KeyCode.F)) {
-                    world.entities.spawn(pos, 10);
+                    world.entities.Spawn(pos, 10);
                 }
             }
         }

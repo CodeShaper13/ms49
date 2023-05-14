@@ -41,7 +41,7 @@ public class MapGenerator : MonoBehaviour {
     public void generateLayer(World world, int depth) {
         int layerSeed = world.seed * (depth + 1);
 
-        MapAccessor accessor = new MapAccessor(world.mapSize, depth);
+        MapAccessor accessor = new MapAccessor(world.MapSize, depth);
         LayerData layerData = this.getLayerFromDepth(depth);
 
 
@@ -70,7 +70,7 @@ public class MapGenerator : MonoBehaviour {
                     x,
                     y,
                     accessor.getCell(x, y),
-                    r == null ? Rotation.UP : r,
+                    r == null ? Rotation.UP.id : r.id,
                     false);
             }
         }
@@ -80,18 +80,18 @@ public class MapGenerator : MonoBehaviour {
         float[,] noise = NoisemapGenerator.computeNoiseMap(
             this._noiseSettings,
             world.seed,
-            world.mapSize,
+            world.MapSize,
             depth);
-        for(int x = 0; x < world.mapSize; x++) {
-            for(int y = 0; y < world.mapSize; y++) {
+        for(int x = 0; x < world.MapSize; x++) {
+            for(int y = 0; y < world.MapSize; y++) {
                 float n = noise[x, y];
                 int hardness = n < 0.333f ? 0 : (n < 0.666f ? 1 : 2);
-                layer.setHardness(x, y, hardness);
+                layer.SetHardness(x, y, hardness);
             }
         }
 
 
-        world.storage.setLayer(layer, depth);
+        world.storage.SetLayer(layer, depth);
 
 
         // Generate all of the structures that belong on this Layer

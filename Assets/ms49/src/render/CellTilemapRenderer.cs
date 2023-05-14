@@ -89,7 +89,7 @@ public class CellTilemapRenderer : MonoBehaviour {
             Color floorTint = this.floorTintGetterFunc != null ? this.floorTintGetterFunc(x, y) : Color.white;
 
             TileBase tile;
-            if(data.isSolid) {
+            if(data.IsSolid) {
                 // Floor not visible
                 tile = null;
             } else {
@@ -101,11 +101,11 @@ public class CellTilemapRenderer : MonoBehaviour {
             this.floorTilemap.SetColor(pos, floorTint);
         }
 
-        TileRenderData dt = data.getRenderData(state.rotation);
+        TileRenderData dt = data.GetRenderData(state.Rotation);
 
 
         // If the Cell's behavior implements IRenderTileOverride, let it adject the tile, even if the tile is rotatable.
-        if(state.hasBehavior() && state.behavior is IRenderTileOverride) {
+        if(state.HasBehavior && state.behavior is IRenderTileOverride) {
             ((IRenderTileOverride)state.behavior).replaceTiles(ref dt);
         }
 
@@ -127,7 +127,7 @@ public class CellTilemapRenderer : MonoBehaviour {
             this.objectMap.SetTransformMatrix(pos, dt.getMatrix());
 
             // Color
-            if(data.recieveHardnessColorMod) {
+            if(data.RecieveHardnessColorMod) {
                 Color hardnessColorMod = this.hardnessColorModGetterFunc != null ? this.hardnessColorModGetterFunc(x, y) : Color.white;
                 this.colorSquare(this.objectMap, pos, hardnessColorMod);
             }

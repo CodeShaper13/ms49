@@ -15,11 +15,11 @@ public interface IMinecartInteractor {
     /// Called every frame a Minecart is over or next to this
     /// behavior.
     /// </summary>
-    bool shouldCartInteract(EntityMinecart cart);
+    bool ShouldCartInteract(EntityMinecart cart);
 
     /// <summary>
     /// Returns where is World units the cart should stop along the
     /// track.
     /// </summary>
-    Vector3 getCartStopPoint();
+    Vector3 GetCartStopPoint();
 }

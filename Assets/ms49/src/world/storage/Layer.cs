@@ -9,34 +9,32 @@ public class Layer {
     public float[] temperatures;
     private float[] heatSources;
     private int[] hardness;
-    private World world;
-    private WorldRenderer worldRenderer;
+    private readonly World world;
     private float cachedLayerHeat = 0;
 
-    public int depth { get; private set; }
-    public Fog fog { get; private set; }
-    public int size;
+    public readonly int depth;
+    public readonly Fog fog;
+    public readonly int size;
+
+    public int Area => this.size * this.size;
+    public bool HasFog => this.fog != null;
 
     public Layer(World world, int depth) {
         this.world = world;
         this.depth = depth;
-        this.size = this.world.mapSize;
+        this.size = this.world.MapSize;
 
-        this.worldRenderer = GameObject.FindObjectOfType<WorldRenderer>();
-
-        int cellCount = this.size * this.size;
-
-        this.tiles = new CellState[cellCount];
+        this.tiles = new CellState[this.Area];
+        CellData air = Main.instance.CellRegistry.GetAir();
         for(int i = 0; i < this.tiles.Length; i++) {
-            this.tiles[i] = new CellState(Main.instance.tileRegistry.getAir(), null, Rotation.UP);
+            this.tiles[i] = new CellState(air, null, Rotation.UP);
         }
 
+        this.temperatures = new float[this.Area];
+        this.heatSources = new float[this.Area];
+        this.hardness = new int[this.Area];
 
-        this.temperatures = new float[cellCount];
-        this.heatSources = new float[cellCount];
-        this.hardness = new int[cellCount];
-
-        LayerData layerData = this.world.mapGenerator.getLayerFromDepth(this.depth);
+        LayerData layerData = this.world.MapGenerator.getLayerFromDepth(this.depth);
         if(layerData != null) { // Null if a layer is added through an external editor or the layer count is reduced
 
             // Set heat sourcess
@@ -55,7 +53,7 @@ public class Layer {
         }
     }
 
-    public void setCell(int x, int y, CellData data, Rotation rotation, bool alertNeighbors = true, bool callBehaviorCreateCallback = true) {
+    public void setCell(int x, int y, CellData data, int meta, bool alertNeighbors = true, bool callBehaviorCreateCallback = true) {
         CellState oldState = this.getCellState(x, y);
 
         // Cleanup the old meta object if it exists.
@@ -68,12 +66,12 @@ public class Layer {
         }
 
         CellBehavior behavior;
-        if(data.behaviorPrefab != null) {
-            behavior = GameObject.Instantiate(data.behaviorPrefab, this.world.storage.behaviorHolder).GetComponent<CellBehavior>();
+        if(data.BehaviorPrefab != null) {
+            behavior = GameObject.Instantiate(data.BehaviorPrefab, this.world.storage.behaviorHolder).GetComponent<CellBehavior>();
             if(behavior == null) {
-                Debug.LogWarning("Cell " + data.name + "had a meta object assigned but it did not have a CellMeta componenet on it's root.");
+                Debug.LogWarning("Cell " + data.name + "had a behavior object assigned but it did not have a CellBehavior componenet on it's root.");
             } else {
-                behavior.transform.position = this.world.cellToWorld(x, y);
+                behavior.transform.position = this.world.CellToWorld(x, y);
                 if(behavior.cache) {
                     this.world.storage.cachedBehaviors.Add(behavior);
                 }
@@ -82,20 +80,20 @@ public class Layer {
             behavior = null;
         }
 
-        CellState state = new CellState(data, behavior, rotation);
-        this.tiles[this.world.mapSize * x + y] = state;
+        CellState state = new CellState(data, behavior, meta);
+        this.tiles[this.world.MapSize * x + y] = state;
 
         if(callBehaviorCreateCallback && behavior != null) {
             behavior.onCreate(this.world, state, new Position(x, y, this.depth));
         }
 
         // Update heat source map.
-        this.setTemperature(x, y, data.temperatureOutput);
-        this.heatSources[this.size * x + y] = data.temperatureOutput;
+        this.SetTemperature(x, y, data.TemperatureOutput);
+        this.heatSources[this.size * x + y] = data.TemperatureOutput;
 
         // Alert neighbors of the change.
         if(alertNeighbors) {
-            int mapSize = this.world.mapSize;
+            int mapSize = this.world.MapSize;
             foreach(Rotation r in Rotation.ALL) {
                 int x1 = x + r.vector.x;
                 int y1 = y + r.vector.y;
@@ -110,15 +108,15 @@ public class Layer {
 
         this.navGridDirty = true;
 
-        this.worldRenderer.dirtyTile(x, y);
+        this.world.worldRenderer.dirtyTile(x, y);
     }
 
     public CellState getCellState(int x, int y) {
         return this.tiles[this.size * x + y];
     }
 
-    public void setTemperature(int x, int y, float temperature) {
-        if(!this.inBounds(x, y)) {
+    public void SetTemperature(int x, int y, float temperature) {
+        if(!this.InBounds(x, y)) {
             return;
         }
 
@@ -128,8 +126,8 @@ public class Layer {
     /// <summary>
     /// Returns the temperature before it is modified by the Layer's base temperature.  If the position is out of range, 0 is returned.
     /// </summary>
-    public float getUnmodifiedTemperature(int x, int y) {
-        if(!this.inBounds(x, y)) {
+    public float GetUnmodifiedTemperature(int x, int y) {
+        if(!this.InBounds(x, y)) {
             return 0;
         }
 
@@ -139,49 +137,46 @@ public class Layer {
     /// <summary>
     /// Returns the temperature with the Layer's base temperature modification.  If the position is out of range, 0 is returned.
     /// </summary>
-    public float getTemperature(int x, int y) {
-        if(!this.inBounds(x, y)) {
+    public float GetTemperature(int x, int y) {
+        if(!this.InBounds(x, y)) {
             return 0;
         }
 
-        return this.getUnmodifiedTemperature(x, y) + this.cachedLayerHeat;
+        return this.GetUnmodifiedTemperature(x, y) + this.cachedLayerHeat;
     }
 
-    public float getHeatSource(int x, int y) {
-        if(!this.inBounds(x, y)) {
+    public float GetHeatSource(int x, int y) {
+        if(!this.InBounds(x, y)) {
             return 0;
         }
 
         return this.heatSources[this.size * x + y];
     }
 
-    public void setHardness(int x, int y, int hardness) {
+    public void SetHardness(int x, int y, int hardness) {
         this.hardness[this.size * x + y] = hardness;
     }
 
-    public int getHardness(int x, int y) {
+    public int GetHardness(int x, int y) {
         return this.hardness[this.size * x + y];
     }
 
-    public bool hasFog() {
-        return this.fog != null;
-    }
-
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         // Write tiles:
-        int[] idArray = new int[this.tiles.Length];
-        int[] rotationArray = new int[this.tiles.Length];
+        int len = this.tiles.Length;
+        int[] idArray = new int[len];
+        int[] metaArray = new int[len];
+        int[] parents = new int[len * 2]; // TODO this is a mostly empty (filled of default values) array.  Optimize this.
         for(int i = 0; i < this.tiles.Length; i++) {
             CellState state = this.tiles[i];
-            idArray[i] = Main.instance.tileRegistry.getIdOfElement(state.data);
-            if(state.rotation == null) {
-                Debug.Log(state.data.name);
-            }
-            rotationArray[i] = state.rotation.id;
+            idArray[i] = Main.instance.CellRegistry.GetIdOfElement(state.data);
+            metaArray[i] = state.meta;
+            parents[i * 2] = state.parent.x;
+            parents[(i * 2) + 1] = state.parent.y;
         }
         tag.setTag("tiles", idArray);
-        tag.setTag("rotations", rotationArray);
-
+        tag.setTag("meta", metaArray);
+        tag.setTag("parents", parents);
 
         // Write tile meta:
         NbtList listTileMeta = new NbtList(NbtTagType.Compound);
@@ -192,7 +187,7 @@ public class Layer {
                     NbtCompound behaviorTag = new NbtCompound();
                     behaviorTag.setTag("xPos", x);
                     behaviorTag.setTag("yPos", y);
-                    ((IHasData)meta).writeToNbt(behaviorTag);
+                    ((IHasData)meta).WriteToNbt(behaviorTag);
                     listTileMeta.Add(behaviorTag);
                 }
             }
@@ -200,7 +195,7 @@ public class Layer {
         tag.setTag("meta", listTileMeta);
 
         // Write fog:
-        if(this.hasFog()) {
+        if(this.HasFog) {
             NbtCompound fogTag = new NbtCompound();
             this.fog.writeToNbt(fogTag);
             tag.setTag("fog", fogTag);
@@ -217,23 +212,30 @@ public class Layer {
         tag.setTag("hardness", this.hardness);
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         // Read tiles:
-        CellData[] tileArray = new CellData[this.size * this.size];
-
         int[] tileIds = tag.getIntArray("tiles");
-        int[] rotations = tag.getIntArray("rotations");
+        int[] metas = tag.getIntArray("meta");
+        int[] parents = tag.getIntArray("parents");
 
         int index = 0;
         for(int x  = 0; x < this.size; x++) {
             for(int y = 0; y < this.size; y++) {
                 int i = this.size * x + y;
-                CellData d = Main.instance.tileRegistry.getElement(tileIds[i]);
+                CellData d = Main.instance.CellRegistry[tileIds[i]];
+                if(d == null) {
+                    Debug.LogWarningFormat("Unknown Cell with id \"{0}\" at ({1},{2}).", tileIds[i], x, y);
+                }
+
+                Vector2Int parentPos = new Vector2Int(
+                    parents[i * 2],
+                    parents[(i * 2) + 1]);
+
                 this.setCell(
                     x,
                     y,
-                    d == null ? Main.instance.tileRegistry.getAir() : d,
-                    Rotation.ALL[rotations[i]],
+                    d == null ? Main.instance.CellRegistry.GetAir() : d,
+                    metas[i],
                     false,
                     false);
                 index++;
@@ -241,7 +243,7 @@ public class Layer {
         }
 
         // Read fog:
-        if(this.hasFog()) {
+        if(this.HasFog) {
             this.fog.readFromNbt(tag.getCompound("fog"));
         }
 
@@ -255,7 +257,7 @@ public class Layer {
         this.hardness = tag.getIntArray("hardness");
     }
 
-    private bool inBounds(int x, int y) {
+    private bool InBounds(int x, int y) {
         return x >= 0 && x < this.size && y >= 0 && y < this.size;
     }
 }

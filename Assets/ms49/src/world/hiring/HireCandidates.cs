@@ -25,7 +25,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
     public int hireCost => this._hireCost;
     public int candaditeCount => this.candidates.Count;
 
-    public string tagName => "hireCandidates";
+    public string saveableTagName => "hireCandidates";
 
     private void Awake() {
         this.candidates = new List<Candidate>();
@@ -96,6 +96,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
 
         // Find the number of candadites that should be shown.
         int candaditeCount = this.startingCandidateCount;
+        /*
         foreach(MilestoneData milestone in this.world.milestones.milestones) {
             if(milestone == null) {
                 continue;
@@ -105,6 +106,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
                 candaditeCount += milestone.hireCandaditeIncrease;
             }
         }
+        */
 
         // Add new candidates
         int stop = candaditeCount - this.candidates.Count;
@@ -125,7 +127,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
         }
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         NbtList list = new NbtList(NbtTagType.Compound);
         foreach(Candidate c in this.candidates) {
             if(c != null) {
@@ -140,7 +142,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
         }
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         NbtList list = tag.getList("candidates");
         for(int i = 0; i < list.Count; i ++) {
             this.candidates.Add(new Candidate(list.Get<NbtCompound>(i)));
@@ -158,14 +160,14 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
     /// </summary>
     /// <returns></returns>
     private WorkerType getNewCandatiteType() {
-        WorkerTypeRegistry reg = Main.instance.workerTypeRegistry;
+        WorkerTypeRegistry reg = Main.instance.WorkerTypeRegistry;
         bool inCreative = CameraController.instance.inCreativeMode;
 
         // Get totals of all of the currently shown worker types.
-        int[] counts = new int[reg.getRegistrySize()];
+        int[] counts = new int[reg.RegistrySize];
         foreach(Candidate c in this.candidates) {
             if(c != null) {
-                int index = reg.getIdOfElement(c.type);
+                int index = reg.GetIdOfElement(c.type);
                 counts[index]++;
             }
         }
@@ -174,11 +176,13 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
         // contain duplicates, but that's fine.
         List<WorkerType> allUnlockedTypes = new List<WorkerType>();
         allUnlockedTypes.AddRange(this.startingUnlockedTypes);
+        /*
         foreach(MilestoneData milestone in this.world.milestones.milestones) {
             if(milestone.isUnlocked) {
                 allUnlockedTypes.AddRange(milestone.unlockedWorkerTypes);
             }
         }
+        */
 
         // Break early if nothing is unlocked.
         if(allUnlockedTypes.Count == 0) {
@@ -186,8 +190,8 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
         }
 
         // If there are none of a certain type, add them
-        for(int i = 0; i < reg.getRegistrySize(); i++) {
-            WorkerType t = reg.getElement(i);
+        for(int i = 0; i < reg.RegistrySize; i++) {
+            WorkerType t = reg[i];
             if(t != null && counts[i] == 0 && (allUnlockedTypes.Contains(t) || inCreative)) {
                 return t; // There is none of this time currently hired.
             }
@@ -197,7 +201,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
         // the least common (if there are multiple, pick a random).
         int lowestCount = int.MaxValue;
         for(int i = 0; i < counts.Length; i++) {
-            if(reg.getElement(i) != null) {
+            if(reg[i] != null) {
                 if(counts[i] < lowestCount) {
                     lowestCount = counts[i];
                 }
@@ -206,8 +210,8 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
 
         // Get a list of the Types that are the least shown.
         List<WorkerType> possibilites = new List<WorkerType>();
-        for(int i = 0; i < reg.getRegistrySize(); i++) {
-            WorkerType type = reg.getElement(i);
+        for(int i = 0; i < reg.RegistrySize; i++) {
+            WorkerType type = reg[i];
             if(type != null && counts[i] <= lowestCount && (allUnlockedTypes.Contains(type) || inCreative)) {
                 possibilites.Add(type);
             }

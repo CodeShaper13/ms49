@@ -20,7 +20,7 @@ public class PlotManager : MonoBehaviour, ISaveableState {
     public int mapSize => this._plotDiameter * this._plotCount;
     public int plotCount => this._plotCount;
     public int plotDiameter => this._plotDiameter;
-    public string tagName => "plots";
+    public string saveableTagName => "plots";
 
     private void Awake() {
         // Scale the Tilemap to be the same size as a Plot.
@@ -110,7 +110,7 @@ public class PlotManager : MonoBehaviour, ISaveableState {
         return null;
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         // Write Plot costs:
         int[] costArray = new int[this.plots.Length];
         for(int i = 0; i < this.plots.Length; i++) {
@@ -126,7 +126,7 @@ public class PlotManager : MonoBehaviour, ISaveableState {
         tag.setTag("isOwned", isOwnedArray);
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         // Read Plot costs:
         int[] costArray = tag.getIntArray("costs");
         for(int i = 0; i < Mathf.Min(this.plots.Length, costArray.Length); i++) {

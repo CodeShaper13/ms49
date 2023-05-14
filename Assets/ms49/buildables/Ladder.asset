@@ -15,7 +15,7 @@ MonoBehaviour:
   structureName: Ladder
   _cost: 500
   _description: Lets Workers move between floors
-  _tab: {fileID: 0}
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
   _fogOption: 0
   _overrideRotationMsg: '[r] to change direction'
   _displayRotation: 0

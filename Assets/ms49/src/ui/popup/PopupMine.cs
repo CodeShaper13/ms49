@@ -14,16 +14,16 @@ public class PopupMine : PopupWorldReference {
 
         if((rightBtn || leftBtn) && !EventSystem.current.IsPointerOverGameObject()) {
             Position pos = CameraController.instance.getMousePos();
-            if(!this.world.isOutOfBounds(pos)) {
+            if(!this.world.IsOutOfBounds(pos)) {
 
-                CellData cell = this.world.getCellState(pos).data;
+                CellData cell = this.world.GetCellState(pos).data;
 
-                bool valid = cell is CellDataMineable || (cell == Air.get && this.world.isCoveredByFog(pos));
+                bool valid = cell is CellDataMineable || (cell == Main.instance.CellRegistry.GetAir() && this.world.IsCoveredByFog(pos));
                 if(valid) {
                     if(CameraController.instance.inCreativeMode) {
                         // Instantly remove.
-                        this.world.setCell(pos, null, true);
-                        this.world.liftFog(pos);
+                        this.world.SetCell(pos, null, true);
+                        this.world.LiftFog(pos);
                         this.world.tryCollapse(pos);
                         this.world.targetedSquares.stopTargeting(pos);
                         this.playSfx();

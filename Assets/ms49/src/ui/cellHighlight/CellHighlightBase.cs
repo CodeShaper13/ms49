@@ -16,7 +16,7 @@ public abstract class CellHighlightBase : MonoBehaviour {
         private set; get;
     }
 
-    protected virtual void Awake() {
+    protected virtual void Start() {
         this.world = GameObject.FindObjectOfType<World>();
     }
 
@@ -29,10 +29,10 @@ public abstract class CellHighlightBase : MonoBehaviour {
             Position pos = cc.getMousePos();
 
             // Move the highlight
-            this.transform.position = this.world.cellToWorld(pos.x, pos.y) + (Vector3)this.cellOffset;
+            this.transform.position = this.world.CellToWorld(pos.x, pos.y) + (Vector3)this.cellOffset;
 
             bool valid;
-            if(world.isOutOfBounds(pos)) {
+            if(world.IsOutOfBounds(pos)) {
                 valid = false;
             } else {
                 valid = this.onUpdate(pos);

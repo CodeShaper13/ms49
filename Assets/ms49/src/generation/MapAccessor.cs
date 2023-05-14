@@ -19,7 +19,7 @@
         if(!this.inBounds(x, y)) {
             return;
         }
-        this.cells[this.getFlattenedIndice(x, y)] = tile == null ? Main.instance.tileRegistry.getAir() : tile;
+        this.cells[this.getFlattenedIndice(x, y)] = tile == null ? Main.instance.CellRegistry.GetAir() : tile;
     }
 
     public CellData getCell(int x, int y) {

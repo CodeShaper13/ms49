@@ -1,6 +1,7 @@
 ﻿public enum EnumZMoveDirection {
-    NEITHER = 0,
-    UP = 1,
-    DOWN = 2,
-    BOTH = 3,
+
+    Neither = 0,
+    Up = 1,
+    Down = 2,
+    Both = 3,
 }

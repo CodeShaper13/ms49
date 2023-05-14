@@ -22,9 +22,7 @@ public class PopupWorkerStats : PopupWindow {
     private EntityWorker worker;
     private string infoTextTemplate;
 
-    protected override void initialize() {
-        base.initialize();
-
+    private void Start() {
         this.infoTextTemplate = this.infoText.text;
     }
 
@@ -57,7 +55,7 @@ public class PopupWorkerStats : PopupWindow {
 
     public void callback_fire() {
         if(this.worker != null) {
-            this.worker.world.entities.remove(this.worker);
+            this.worker.world.entities.Remove(this.worker);
         }
         this.close();
     }

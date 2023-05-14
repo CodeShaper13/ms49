@@ -21,8 +21,8 @@ public class StructureDungeon : StructureBase {
     public override void generate(World world, int depth) {
         for(int i = 0; i < this._dungeonsPerLayer; i++) {
             const int edgeBuffer = 5;
-            int xPos = Random.Range(edgeBuffer, world.mapSize + edgeBuffer);
-            int yPos = Random.Range(edgeBuffer, world.mapSize + edgeBuffer);
+            int xPos = Random.Range(edgeBuffer, world.MapSize + edgeBuffer);
+            int yPos = Random.Range(edgeBuffer, world.MapSize + edgeBuffer);
 
             int xSize = this.func();
             int ySize = this.func();
@@ -34,9 +34,9 @@ public class StructureDungeon : StructureBase {
                     int yEnd = ySize - 1;
                     if(x == 0 || y == 0 || x == xEnd || y == yEnd) {
                         Position pos = new Position(x + xPos, y + yPos, depth);
-                        if(!world.isOutOfBounds(pos)) {
-                            CellData data = world.getCellState(pos).data;
-                            if(data.canBuildOver || data.isDestroyable) {
+                        if(!world.IsOutOfBounds(pos)) {
+                            CellData data = world.GetCellState(pos).data;
+                            if(data.CanBuildOver || data.IsDestroyable) {
                                 edgeAirCount ++;
                             }
                         }
@@ -49,19 +49,19 @@ public class StructureDungeon : StructureBase {
                 for(int x = 0; x < xSize; x++) {
                     for(int y = 0; y < ySize; y++) {
                         Position pos = new Position(x + xPos, y + yPos, depth);
-                        if(!world.isOutOfBounds(pos)) {
-                            CellData oldCell = world.getCellState(pos).data;
+                        if(!world.IsOutOfBounds(pos)) {
+                            CellData oldCell = world.GetCellState(pos).data;
                             int xEnd = xSize - 1;
                             int yEnd = ySize - 1;
                             bool edge = x == 0 || y == 0 || x == xEnd || y == yEnd;
 
                             if(edge) {
                                 if(oldCell is CellDataMineable || (x == 0 && y == 0) || (x == 0 && y == yEnd) || (x == xEnd && y == 0) || (x == xEnd && y == yEnd)) {
-                                    world.setCell(pos, this._wall, Rotation.ALL[Random.Range(0, 3)]);
+                                    world.SetCell(pos, this._wall, Rotation.ALL[Random.Range(0, 3)]);
                                 }
                             } else {
                                 if(oldCell is CellDataMineable || Random.value < 0.5f) {
-                                    world.setCell(pos, null);
+                                    world.SetCell(pos, null);
                                 }
                             }                         
                         }

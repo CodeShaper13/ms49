@@ -20,6 +20,10 @@ public class CameraController : MonoBehaviour {
     [SerializeField]
     private InputKeys keys = null;
 
+    [Space]
+
+    public bool inCreativeMode;
+
     private World world;
     private int currentZoom;
     private Camera mainCam;
@@ -29,7 +33,6 @@ public class CameraController : MonoBehaviour {
     private TooltipDisplayer tooltipDisplayer;
 
     public int currentLayer { get; private set; } = -1;
-    public bool inCreativeMode { get; set; }
 
     private void Awake() {
         CameraController.instance = this;
@@ -49,13 +52,9 @@ public class CameraController : MonoBehaviour {
 
     private void Start() {
         this.tooltipDisplayer = GameObject.FindObjectOfType<TooltipDisplayer>();
-    }
-
-    public void initNewPlayer(NewWorldSettings settings) {
-        this.inCreativeMode = settings.creativeEnabled;
 
         // Center the camera on the Truck.
-        foreach(CellBehaviorMasterDepositPoint behavior in this.world.getAllBehaviors<CellBehaviorMasterDepositPoint>()) {
+        foreach(CellBehaviorMasterDepositPoint behavior in this.world.GetAllBehaviors<CellBehaviorMasterDepositPoint>()) {
             this.setCameraPos(behavior.center);
             break;
         }
@@ -66,7 +65,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void Update() {
-        if(!Pause.isPaused() && !PopupWindow.blockingInput()) {
+        if(!Pause.IsPaused && !PopupWindow.blockingInput()) {
             // Move the camera towards the target (if set).
             if(this.followingTarget != null) {
                 this.setCameraPos(Vector2.MoveTowards(
@@ -85,8 +84,8 @@ public class CameraController : MonoBehaviour {
                 bool clearTooltip = true;
 
                 Position pos = this.getMousePos();
-                if(!this.world.isOutOfBounds(pos) && (this.world.plotManager.isOwned(pos) || this.inCreativeMode)) {
-                    CellBehavior behavior = world.getCellState(pos).behavior;
+                if(!this.world.IsOutOfBounds(pos) && (this.world.plotManager.isOwned(pos) || this.inCreativeMode)) {
+                    CellBehavior behavior = world.GetCellState(pos).behavior;
 
                     bool rmb = Input.GetMouseButtonDown(1);
 
@@ -140,7 +139,7 @@ public class CameraController : MonoBehaviour {
 
     private void LateUpdate() {
         // Clamp the Camera so the world doesn't go out of view.
-        int size = this.world.mapSize;
+        int size = this.world.MapSize;
         Vector3 camPos = this.mainCam.transform.position;
         this.setCameraPos(new Vector2(
             Mathf.Clamp(camPos.x, 0, size),
@@ -161,20 +160,20 @@ public class CameraController : MonoBehaviour {
             return; // Target depth too deep.
         }
 
-        if(checkMilestones && !this.inCreativeMode && !this.world.isDepthUnlocked(depth)) {
+        if(checkMilestones && !this.inCreativeMode && !this.world.IsDepthUnlocked(depth)) {
             return;
         }
 
         this.currentLayer = depth;
 
-        GameObject.FindObjectOfType<WorldRenderer>().setLayer(this.world.storage.getLayer(depth));
+        this.world.worldRenderer.setLayer(this.world.storage.GetLayer(depth));
     }
 
     /// <summary>
     /// Returns the mouse pos in cell units
     /// </summary>
     public Position getMousePos() {
-        Vector2Int coords = this.world.worldToCell(
+        Vector2Int coords = this.world.WorldToCell(
             this.getMousePosInWorldUnits());
 
         return new Position(coords.x, coords.y, this.currentLayer);
@@ -185,9 +184,9 @@ public class CameraController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns the Entity under the mouse.  Null is retutned if
-    /// there is no entity.
-    /// Only Entitys with colliders will be detected.
+    /// Returns the Entity under the mouse.  Null is returned if
+    /// there is no Entity.
+    /// Only Entities with colliders will be detected.
     /// </summary>
     public EntityBase getMouseOver() {
         RaycastHit2D hit = Physics2D.Raycast(
@@ -241,7 +240,7 @@ public class CameraController : MonoBehaviour {
 
     private void moveCamera() {
         // Pan with Midlde Mouse Button and Mouse
-        if(Input.GetMouseButton(2)) {
+        if(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButton(2)) {
             Vector3 movement = this.mousePosLastFrame - Input.mousePosition;
             this.mainCam.transform.position += movement * this.mousePanSpeed * Time.deltaTime;
 

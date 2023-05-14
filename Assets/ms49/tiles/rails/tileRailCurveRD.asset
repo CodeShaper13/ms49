@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: tileRailCurveRD
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -4852406221743890667, guid: 83e6f32abdc9b244cbe11ac906944047,
+  m_Sprite: {fileID: 7372308142451282855, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:

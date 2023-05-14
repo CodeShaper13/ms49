@@ -30,11 +30,11 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
         return "[rmb] " + (this.isOn ? "Turn On" : "Turn Off");
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         this.isOn = tag.getBool("isLeverOn");
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         tag.setTag("isLeverOn", this.isOn);
     }
 
@@ -44,10 +44,9 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
     public static void alertNeighborsOfFlip(CellBehavior leverBehavior) {
         foreach(Rotation r in Rotation.ALL) {
             Position p1 = leverBehavior.pos + r;
-            CellBehavior behavior =
-                leverBehavior.world.getBehavior<CellBehavior>(p1);
-            if(behavior is ILeverReciever) {
-                ((ILeverReciever)behavior).onLeverFlip(leverBehavior);
+            CellBehavior behavior = leverBehavior.world.GetCellBehavior<CellBehavior>(p1, true);
+            if(behavior is ILeverReciever leverReciever) {
+                leverReciever.OnLeverFlip(leverBehavior);
             }
         }
     }

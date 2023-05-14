@@ -55,9 +55,9 @@ public class FogRenderer : MonoBehaviour {
     /// Sets the Renderer's tile getter function and clears the map for a total redraw.
     /// </summary>
     public void redraw(Layer layer) {
-        this.tilemapRenderer.enabled = layer.hasFog();
+        this.tilemapRenderer.enabled = layer.HasFog;
 
-        if(layer.hasFog()) {
+        if(layer.HasFog) {
             for(int x = -1; x < mapSize + 1; x++) {
                 for(int y = -1; y < mapSize + 1; y++) {
                     bool fogPresent;

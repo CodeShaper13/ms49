@@ -20,8 +20,8 @@ public class PopupHireWorkers : PopupWorldReference {
     private List<CandidateButton> candidateButtons;
     private bool refreshedCandidates;
 
-    protected override void initialize() {
-        base.initialize();
+    protected override void Start() {
+        base.Start();
 
         this.candidateButtons = new List<CandidateButton>();
     }

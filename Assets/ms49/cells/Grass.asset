@@ -15,8 +15,8 @@ MonoBehaviour:
   _cellName: grass
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
-  _objectTile: {fileID: 11400000, guid: 342b332ff476f7c48b3631130fa0c4bd, type: 2}
-  _objectOverlayTile: {fileID: 0}
+  _objectTile: {fileID: 0}
+  _objectOverlayTile: {fileID: 11400000, guid: 1489974ae86363f47a7cfb9c9f3c78e8, type: 2}
   _rotationalOverride: 0
   up:
     _enableOverride: 1

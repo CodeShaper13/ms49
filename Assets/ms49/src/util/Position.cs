@@ -19,9 +19,12 @@ public struct Position {
     public int y;
     public int depth;
 
-    public Vector2 center => new Vector2(x + 0.5f, y + 0.5f);
+    /// <summary>
+    /// The center of the Cell this Position is representing.
+    /// </summary>
+    public Vector2 Center => new Vector2(x + 0.5f, y + 0.5f);
 
-    public Position(Vector3Int v) : this(v.x, v.y, v.z) { }
+    public Position(Vector3Int vec3) : this(vec3.x, vec3.y, vec3.z) { }
 
     public Position(int x, int y, int depth) {
         this.x = x;
@@ -51,56 +54,56 @@ public struct Position {
         }
     }
 
-    public Vector3Int vec3Int {
+    public Vector3Int AsVec3Int {
         get { return new Vector3Int(this.x, this.y, this.depth); }
     }
 
-    public Vector3 vec3 {
+    public Vector3 AsVec3 {
         get { return new Vector3(this.x, this.y, this.depth); }
     }
 
-    public Vector2Int vec2Int {
+    public Vector2Int AsVec2Int {
         get { return new Vector2Int(this.x, this.y); }
     }
 
-    public Vector2 vec2 {
+    public Vector2 AsVec2 {
         get { return new Vector2(this.x, this.y); }
     }
 
-    public Position setX(int x) {
+    public Position SetX(int x) {
         return new Position(x, this.y, this.depth);
     }
 
-    public Position setY(int y) {
+    public Position SetY(int y) {
         return new Position(this.x, y, this.depth);
     }
 
-    public Position setDepth(int depth) {
+    public Position SetDepth(int depth) {
         return new Position(this.x, this.y, depth);
     }
 
     /// <summary>
     /// Adds the passed values to the position.
     /// </summary>
-    public Position add(int x, int y, int depth = 0) {
+    public Position Add(int x, int y, int depth = 0) {
         return new Position(this.x + x, this.y + y, this.depth + depth);
     }
 
     /// <summary>
     /// subtracts the passed value from the position.
     /// </summary>
-    public Position sub(int x, int y, int depth = 0) {
+    public Position Substract(int x, int y, int depth = 0) {
         return new Position(this.x + x, this.y + y, this.depth + depth);
     }
 
-    public float distance(Position other) {
-        float xyDis = this.distanceXY(other);
+    public float Distance(Position other) {
+        float xyDis = this.DistanceXY(other);
         float zDis = Mathf.Abs(this.depth - other.depth);
         return xyDis + (zDis * LAYER_DISTANCE_COST);
     }
 
-    public float distanceXY(Position other) {
-        return Vector2.Distance(this.vec2, other.vec2);
+    public float DistanceXY(Position other) {
+        return Vector2.Distance(this.AsVec2, other.AsVec2);
     }
 
     public static Position operator +(Position b, Position b1) {
@@ -119,6 +122,14 @@ public struct Position {
     public static Position operator -(Position b, Rotation r) {
         Vector2Int v = r.vector;
         return new Position(b.x - v.x, b.y - v.y, b.depth);
+    }
+
+    public static Position operator +(Position b, Vector2Int vec2) {
+        return new Position(b.x + vec2.x, b.y + vec2.y, b.depth);
+    }
+
+    public static Position operator -(Position b, Vector2Int vec2) {
+        return new Position(b.x - vec2.x, b.y - vec2.y, b.depth);
     }
 
     public static Position operator *(Position b, int i) {

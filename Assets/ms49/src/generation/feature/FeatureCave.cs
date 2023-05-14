@@ -47,7 +47,7 @@ public class FeatureCave : FeatureBase {
                     CellData cell = null;
 
                     if(id == 0) {
-                        cell = Main.instance.tileRegistry.getAir();
+                        cell = Main.instance.CellRegistry.GetAir();
                     }
                     else if(id == 2) {
                         cell = layerData.lakeType == EnumLakeType.WATER ? this.waterTile : this.lavaTile;

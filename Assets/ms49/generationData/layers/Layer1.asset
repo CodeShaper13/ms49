@@ -33,5 +33,4 @@ MonoBehaviour:
   _structures:
   - {fileID: 11400000, guid: 2f6f6ad10fa9bbc49a73eec17d8d6143, type: 2}
   - {fileID: 11400000, guid: 991715c7d7a5c1b4fb796ce65ac77150, type: 2}
-  - {fileID: 11400000, guid: 2fac468cf7145a54ea72facbeba17f17, type: 2}
-  grassTile: {fileID: 11400000, guid: 342b332ff476f7c48b3631130fa0c4bd, type: 2}
+  grassTile: {fileID: 11400000, guid: f4dff4c3822cc87479543eeae0fae003, type: 2}

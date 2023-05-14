@@ -9,10 +9,10 @@ public class MinerMetaData : MonoBehaviour, IAiMeta {
     }
 
     public void readFromNbt(NbtCompound tag) {
-        this.heldItem = Main.instance.itemRegistry.getElement(tag.getInt("heldItemId", -1)); // -1 results in null being returned
+        this.heldItem = Main.instance.ItemRegistry[tag.getInt("heldItemId", -1)]; // -1 results in null being returned
     }
 
     public void writeToNbt(NbtCompound tag) {
-        tag.setTag("heldItemId", Main.instance.itemRegistry.getIdOfElement(this.heldItem)); // Null results in -1 being returned.
+        tag.setTag("heldItemId", Main.instance.ItemRegistry.GetIdOfElement(this.heldItem)); // Null results in -1 being returned.
     }
 }

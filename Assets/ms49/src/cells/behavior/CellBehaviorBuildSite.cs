@@ -41,17 +41,17 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
                 // Remove any "child" parts
                 foreach(Entry e in this.entires) {
                     if(e.position != this.pos) {
-                        this.world.setCell(e.position, null);
+                        this.world.SetCell(e.position, null);
                     }
                 }
             } else {
-                foreach(CellBehaviorBuildSite site in this.world.getAllBehaviors<CellBehaviorBuildSite>()) {
+                foreach(CellBehaviorBuildSite site in this.world.GetAllBehaviors<CellBehaviorBuildSite>()) {
                     if(site.isPrimary) {
                         // If the site is a primary and it contain this site (the one being destory and the child, remove it as well.
                         foreach(Entry otherSiteEntry in site.entires) {
                             if(otherSiteEntry.position == this.pos) {
                                 simpleRemove = false;
-                                this.world.setCell(site.pos, null);
+                                this.world.SetCell(site.pos, null);
                                 return;
                             }
                         }
@@ -63,7 +63,7 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         }
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         NbtList tagList = tag.getList("entries");
         foreach(NbtCompound compound in tagList) {
             this.entires.Add(new Entry(compound));
@@ -73,7 +73,7 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         this.constructionTime = tag.getFloat("constructionTime");
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         NbtList entriesTagList = new NbtList(NbtTagType.Compound);
         foreach(Entry e in this.entires) {
             entriesTagList.Add(e.writeToNbt());
@@ -113,9 +113,9 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
     /// </summary>
     public void placeIntoWorld() {
         foreach(Entry e in this.entires) {
-            this.world.setCell(e.position, e.cell, this.rotation);
+            this.world.SetCell(e.position, e.cell, this.rotation);
             if(e.addFogOnComplete) {
-                this.world.placeFog(e.position);
+                this.world.PlaceFog(e.position);
             }
         }
     }
@@ -127,7 +127,7 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         public readonly bool addFogOnComplete;
 
         public Entry(NbtCompound tag) {
-            this.cell = Main.instance.tileRegistry.getElement(tag.getInt("cellId"));
+            this.cell = Main.instance.CellRegistry[tag.getInt("cellId")];
             this.position = new Position(tag.getVector3Int("offset"));
             this.addFogOnComplete = tag.getBool("addFog");
         }
@@ -140,8 +140,8 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
 
         public NbtCompound writeToNbt() {
             NbtCompound tag = new NbtCompound();
-            tag.setTag("cellId", Main.instance.tileRegistry.getIdOfElement(this.cell));
-            tag.setTag("offset", this.position.vec3Int);
+            tag.setTag("cellId", Main.instance.CellRegistry.GetIdOfElement(this.cell));
+            tag.setTag("offset", this.position.AsVec3Int);
             tag.setTag("addFog", this.addFogOnComplete);
             return tag;
         }

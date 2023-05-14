@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public class AiManager : MonoBehaviour {
@@ -91,17 +92,17 @@ public class AiManager : MonoBehaviour {
         }
     }
 
-    public void generateDebugText(List<string> strings) {
-        strings.Add("Running AI Task(s):");
+    public void generateDebugText(StringBuilder sb, string indent) {
+        sb.AppendLine("Running AI Task(s):");
         int lineCount = 0;
         foreach(TaskListEntry e in this.tasks) {
             if(e.isRunning()) {
                 lineCount++;
-                strings.Add("    " + e.task.ToString());
+                sb.AppendLine(indent + e.task.ToString());
             }
         }
         if(lineCount == 0) {
-            strings.Add("   NO TASKS");
+            sb.AppendLine(indent + "NO TASKS");
         }
     }
 

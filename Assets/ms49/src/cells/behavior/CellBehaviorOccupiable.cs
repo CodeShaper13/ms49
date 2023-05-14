@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Text;
 
 public abstract class CellBehaviorOccupiable : CellBehavior {
 
@@ -16,9 +16,9 @@ public abstract class CellBehaviorOccupiable : CellBehavior {
         this.occupant = worker;
     }
 
-    public override void getDebugText(List<string> s) {
-        base.getDebugText(s);
+    public override void getDebugText(StringBuilder sb, string indent) {
+        base.getDebugText(sb, indent);
 
-        s.Add("Occupent: " + (this.isOccupied() ? this.occupant.name : "NONE"));
+        sb.Append(indent + "Occupent: " + (this.isOccupied() ? this.occupant.name : "NONE"));
     }
 }

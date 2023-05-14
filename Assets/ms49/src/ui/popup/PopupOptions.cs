@@ -11,17 +11,14 @@ public class PopupOptions : PopupWindow {
     private GameObject sliderPrefab = null;
     [SerializeField]
     private GameObject togglePrefab = null;
+    [SerializeField]
+    private Options _options = null;
 
-    private Options options;
     private List<GameObject> optionControls;
 
-    protected override void initialize() {
-        base.initialize();
-
-        this.options = Main.instance.options;
-
+    private void Start() {
         // Create Ui Control elements for every option.
-        foreach(IOption option in this.options.allOptions) {
+        foreach(IOption option in this._options.allOptions) {
             GameObject prefab = this.getPrefab(option);
 
             if(prefab != null) {
@@ -46,6 +43,6 @@ public class PopupOptions : PopupWindow {
     }
 
     public void callback_saveOptions() {
-        this.options.saveOptions();
+        this._options.saveOptions();
     }
 }

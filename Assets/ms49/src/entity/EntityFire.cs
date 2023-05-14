@@ -21,14 +21,18 @@ public class EntityFire : EntityBase {
         this.StartCoroutine(EntityFire.fireSpread(this.world, this.position, this.fireSpreadRange));
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
+    public override void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
+
+        base.Update();
 
         this.timeRemaining -= Time.deltaTime;
         if(this.timeRemaining <= 0) {
-            this.world.setCell(this.position, this.ashCell);
+            this.world.SetCell(this.position, this.ashCell);
             this.world.tryCollapse(this.position);
-            this.world.entities.remove(this);
+            this.world.entities.Remove(this);
         }
     }
 
@@ -50,7 +54,7 @@ public class EntityFire : EntityBase {
         Rotation r = Rotation.ALL[Random.Range(0, 3)];
         Position newFirePos = thisPos + r;
 
-        if(!world.isOutOfBounds(newFirePos) && world.getCellState(newFirePos).data.isFlammable) {
+        if(!world.IsOutOfBounds(newFirePos) && world.GetCellState(newFirePos).data.IsFlammable) {
             bool spaceFree = true;
             foreach(EntityBase e in world.entities.list) {
                 if(e is EntityFire && e.position == newFirePos) {
@@ -60,7 +64,7 @@ public class EntityFire : EntityBase {
             }
 
             if(spaceFree) {
-                world.entities.spawn(newFirePos, 10);
+                world.entities.Spawn(newFirePos, 10);
             }
         }
     }

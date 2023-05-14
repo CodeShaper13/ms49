@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
+  m_Name: Pumpjack
+  m_EditorClassIdentifier: 
+  structureName: Pumpjack
+  _cost: 400
+  _description: 
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: 
+  _displayRotation: 0
+  _buildTime: 0
+  _customPreview: {fileID: 0}
+  _cell: {fileID: 11400000, guid: b85954f51fb47f04f8a7a3e0d5408d4a, type: 2}
+  _buildableSize: {x: 3, y: 2}
+  _gridRows:
+  - _row:
+    - e
+    - e
+  - _row:
+    - e
+    - p
+    - ' '
+    - '?'
+  - _row:
+    - e
+    - e
+    - '?'
+    - '?'
+    - ' '
+    - '?'
+  _gridMappings:
+  - character: 112
+    cell: {fileID: 11400000, guid: b85954f51fb47f04f8a7a3e0d5408d4a, type: 2}
+  - character: 101
+    cell: {fileID: 11400000, guid: 1dbf78cf9e5aa014cbf5cf290816b390, type: 2}

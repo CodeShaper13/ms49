@@ -10,11 +10,11 @@ public class LayerDataSurface : LayerData {
     private TileBase grassTile = null;
 
     public override Color getGroundTint(World world, int x, int y) {
-        return world.isOutside(new Position(x, y, 0)) ? Color.white : base.getGroundTint(world, x, y);
+        return world.IsOutside(new Position(x, y, 0)) ? Color.white : base.getGroundTint(world, x, y);
     }
 
     public override TileBase getGroundTile(World world, int x, int y) {
-        if(world.isOutside(new Position(x, y, 0))) {
+        if(world.IsOutside(new Position(x, y, 0))) {
             return this.grassTile;
         } else {
             return base.getGroundTile(world, x, y);
@@ -22,6 +22,6 @@ public class LayerDataSurface : LayerData {
     }
 
     public override CellData getFillCell(World world, int x, int y) {
-        return world.isOutside(new Position(x, y, 0)) ? null : this.tile;
+        return world.IsOutside(new Position(x, y, 0)) ? null : this.tile;
     }
 }

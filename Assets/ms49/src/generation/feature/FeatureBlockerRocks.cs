@@ -50,7 +50,7 @@ public class FeatureBlockerRocks : FeatureBase {
                         continue;
                     }
 
-                    if(accessor.getCell(cellX, cellY) != Main.instance.tileRegistry.getAir()) {
+                    if(accessor.getCell(cellX, cellY) != Main.instance.CellRegistry.GetAir()) {
                         accessor.setCell(cellX, cellY, this.blockerRockCell);
                     }
                 }

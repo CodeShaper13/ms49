@@ -3,9 +3,11 @@
 [CreateAssetMenu(fileName = "Cell", menuName = "MS49/Cell/Cell Mineable", order = 1)]
 public class CellDataMineable : CellData {
 
-    public Item droppedItem;
+    [SerializeField]
+    private Item droppedItem = null;
     [SerializeField]
     private bool _showParticles = true;
 
-    public bool showParticles => this._showParticles;
+    public bool ShowParticles => this._showParticles;
+    public Item DroppedItem => this.droppedItem;
 }

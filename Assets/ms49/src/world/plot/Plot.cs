@@ -26,6 +26,6 @@ public class Plot {
     /// Returns true if the plot contains the passed point.
     /// </summary>
     public bool contains(Position pos) {
-        return this.rect.Contains(pos.vec2Int);
+        return this.rect.Contains(pos.AsVec2Int);
     }
 }

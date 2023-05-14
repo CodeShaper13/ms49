@@ -15,22 +15,26 @@ public class Particle : MonoBehaviour {
 
     private float timeAlive;
 
-    public virtual void initialize(World world, int depth) {
+    public virtual void Initialize(World world, int depth) {
         this.world = world;
         this.depth = depth;
 
         this.ps = this.GetComponentInChildren<ParticleSystem>();
-        if(ps != null && this.lifespan != -1) {
-            this.lifespan = ps.main.duration;
+        if(this.ps != null && this.lifespan != -1) {
+            this.lifespan = this.ps.main.duration;
         }
     }
 
-    public virtual void onUpdate() {
+    public virtual void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
+
         if(this.lifespan != -1) {
             this.timeAlive += Time.deltaTime;
 
             if(this.timeAlive > this.lifespan) {
-                this.world.particles.remove(this);
+                this.world.particles.Remove(this);
             }
         }
     }
@@ -43,7 +47,5 @@ public class Particle : MonoBehaviour {
     /// Called when the Particle is removed from the world when it's life runs out.
     /// It is NOT called when the application shuts down.
     /// </summary>
-    public virtual void onEnd() {
-
-    }
+    public virtual void OnEnd() { }
 }

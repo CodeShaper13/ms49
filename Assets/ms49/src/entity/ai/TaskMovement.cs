@@ -29,7 +29,7 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
     public override void preform() {
         if(this.navPath != null) {
             Position endPos = this.navPath.endPoint.position;
-            if(this.owner.depth == endPos.depth && Vector2.Distance(this.owner.worldPos, endPos.center) == 0) {
+            if(this.owner.depth == endPos.depth && Vector2.Distance(this.owner.worldPos, endPos.Center) == 0) {
                 // At the end of the path
                 if(!this.onReachCallbackCalled) {
                     this.onReachCallbackCalled = true;
@@ -101,9 +101,9 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
     /// </summary>
     protected NavPath calculatePathToClosest<T1>(ref T1 behavior, bool stopAdjacent, Predicate<T1> predicate = null, Rotation endingRot = null, Position? offset = null) where T1 : CellBehavior {
         // Sort all behaviors by distance.
-        List<T1> behaviors = this.owner.world.getAllBehaviors<T1>(predicate);
+        List<T1> behaviors = this.owner.world.GetAllBehaviors<T1>(predicate);
         behaviors = behaviors.OrderBy(
-            x => x.pos.distance(this.owner.position)).ToList();
+            x => x.pos.Distance(this.owner.position)).ToList();
 
         foreach(T1 b in behaviors) {
             Position pos = b.pos;

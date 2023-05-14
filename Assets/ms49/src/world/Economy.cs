@@ -17,14 +17,14 @@ public class Economy : MonoBehaviour, ISaveableState {
     [SerializeField, Tooltip("The required Milestone for the economy to function.")]
     private MilestoneData requiredMilestone = null;
 
-    private MinedItemRegistry reg;
+    private ItemRegistry reg;
     private float flatTimer;
     private RisingItem risingItem;
 
-    public string tagName => "economy";
+    public string saveableTagName => "economy";
 
     private void Awake() {
-        this.reg = Main.instance.itemRegistry;
+        this.reg = Main.instance.ItemRegistry;
 
         this.func();
     }
@@ -62,7 +62,7 @@ public class Economy : MonoBehaviour, ISaveableState {
     /// Returns the value of the passed item adjusted based on the economy.
     /// </summary>
     public int getItemValue(Item item) {
-        if(item.includeInEconemy) {
+        if(item.IncludeInEconemy) {
 
             float modifier = 1;
 
@@ -99,15 +99,15 @@ public class Economy : MonoBehaviour, ISaveableState {
     }
 
     public bool isItemUnlocked(Item item) {
-        MapGenerator generator = this._world.mapGenerator;
+        MapGenerator generator = this._world.MapGenerator;
         for(int depth = 0; depth < generator.layerCount; depth++) {
-            if(this._world.isDepthUnlocked(depth)) {
+            if(this._world.IsDepthUnlocked(depth)) {
                 OreSettings[] oreSettings = generator.getLayerFromDepth(depth).oreSpawnSettings;
 
                 if(oreSettings != null) {
                     foreach(OreSettings setting in oreSettings) {
-                        if(setting.cell != null && setting.cell is CellDataMineable) {
-                            Item droppedItem = ((CellDataMineable)setting.cell).droppedItem;
+                        if(setting.cell != null && setting.cell is CellDataMineable mineable) {
+                            Item droppedItem = mineable.DroppedItem;
 
                             if(item == droppedItem) {
                                 return true;
@@ -126,15 +126,15 @@ public class Economy : MonoBehaviour, ISaveableState {
     /// </summary>
     public List<Item> getAllItems() {
         List<Item> list = new List<Item>();
-        for(int id = 0; id < this.reg.getRegistrySize(); id++) {
-            Item item = this.reg.getElement(id);
+        for(int id = 0; id < this.reg.RegistrySize; id++) {
+            Item item = this.reg.GetElement(id);
 
             if(item == null) {
                 continue;
             }
 
-            if(item.includeInEconemy) {
-                list.Add(this.reg.getElement(id));
+            if(item.IncludeInEconemy) {
+                list.Add(this.reg.GetElement(id));
             }
         }
 
@@ -149,14 +149,14 @@ public class Economy : MonoBehaviour, ISaveableState {
     public List<Item> getUnlockedItems() {
         List<Item> items = new List<Item>();
 
-        for(int id = 0; id < this.reg.getRegistrySize(); id++) {
-            Item item = this.reg.getElement(id);
+        for(int id = 0; id < this.reg.RegistrySize; id++) {
+            Item item = this.reg.GetElement(id);
 
             if(item == null) {
                 continue;
             }
 
-            if(!item.includeInEconemy) {
+            if(!item.IncludeInEconemy) {
                 continue;
             }
 
@@ -168,18 +168,18 @@ public class Economy : MonoBehaviour, ISaveableState {
         return items;
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         if(tag.hasKey("risingItemId")) {
             this.risingItem = new RisingItem(
-                this.reg.getElement(tag.getInt("risingItemId")),
+                this.reg.GetElement(tag.getInt("risingItemId")),
                 tag.getFloat("risingCurveLength"));
             this.risingItem.timer = tag.getFloat("risingTimer");
         }
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         if(this.risingItem != null) {
-            tag.setTag("risingItemId", this.reg.getIdOfElement(this.risingItem.item));
+            tag.setTag("risingItemId", this.reg.GetIdOfElement(this.risingItem.item));
             tag.setTag("risingCurveLength", this.risingItem.curveLength);
             tag.setTag("risingTimer", this.risingItem.timer);
         }

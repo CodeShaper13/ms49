@@ -18,7 +18,7 @@ public class GameTime : MonoBehaviour, ISaveableState {
     public double time => this._time;
     public float timeScale => this._timeMultipliers[this.multiplyerIndex];
 
-    public string tagName => "time";
+    public string saveableTagName => "time";
 
     private void OnValidate() {
         if(this._timeMultipliers == null || this._timeMultipliers.Length == 0) {
@@ -57,12 +57,12 @@ public class GameTime : MonoBehaviour, ISaveableState {
         this.func(1);
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         tag.setTag("time", this.time);
         tag.setTag("multiplyerIndex", this.multiplyerIndex);
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         this._time = tag.getDouble("time");
         this.multiplyerIndex = Mathf.Clamp(tag.getInt("multiplyerIndex"), 0, this._timeMultipliers.Length - 1);
     }

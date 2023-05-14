@@ -21,7 +21,7 @@ public class ActionButtonHighlight : MonoBehaviour {
 
     private void Update() {
         if(this._popup != null) {
-            this.btnImage.sprite = this._popup.isOpen ? this.highlightSprite : this.normalSprite;
+            this.btnImage.sprite = this._popup.IsOpen ? this.highlightSprite : this.normalSprite;
         }
     }
 }

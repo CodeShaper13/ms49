@@ -1,14 +1,26 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildableUiRenderer : MonoBehaviour {
 
-    [SerializeField]
+    [SerializeField, Required]
     private Image _imgFloorOverlay = null;
-    [SerializeField]
+    [SerializeField, Required]
     private Image _imgObject = null;
-    [SerializeField]
+    [SerializeField, Required]
     private Image _imgObjectOverlay = null;
+
+    [Space]
+
+    [SerializeField]
+    private BuildableBase _buildable = null;
+
+    public BuildableBase Buildable => this._buildable;
+
+    private void OnValidate() {
+        this.SetBuildable(this.Buildable);
+    }
 
     private void Awake() {
         this._imgFloorOverlay.enabled = false;
@@ -16,24 +28,26 @@ public class BuildableUiRenderer : MonoBehaviour {
         this._imgObjectOverlay.enabled = false;
     }
 
-    public void setBuildable(BuildableBase buildable) {
+    public void SetBuildable(BuildableBase buildable) {
+        this._buildable = buildable;
+
         Sprite floorOverlaySprite = null;
         Sprite objectSprite = null;
         Sprite objectOverlaySprite = null;
 
-        buildable.getSprites(ref floorOverlaySprite, ref objectSprite, ref objectOverlaySprite);
+        if(buildable != null) {
+            buildable.getSprites(ref floorOverlaySprite, ref objectSprite, ref objectOverlaySprite);
+        }
 
-        this.func(floorOverlaySprite, this._imgFloorOverlay);
-        this.func(objectSprite, this._imgObject);
-        this.func(objectOverlaySprite, this._imgObjectOverlay);
+        this.ApplyImgToSprite(floorOverlaySprite, this._imgFloorOverlay);
+        this.ApplyImgToSprite(objectSprite, this._imgObject);
+        this.ApplyImgToSprite(objectOverlaySprite, this._imgObjectOverlay);
     }
 
-    private void func(Sprite sprite, Image img) {
-        if(sprite == null) {
-            img.enabled = false;
-        }
-        else {
-            img.enabled = true;
+    private void ApplyImgToSprite(Sprite sprite, Image img) {
+        img.enabled = sprite != null;
+
+        if(sprite != null) {
             img.sprite = sprite;
 
             img.rectTransform.sizeDelta = sprite.rect.size;

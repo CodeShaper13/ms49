@@ -1,0 +1,1887 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9097249446775697110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: bigChest
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 664, y: -1448}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -9097249446775697110}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -7488392626880356734}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -9097249446775697110}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Iron Chest
+  _description: 
+  _image: {fileID: -7299515829439458809, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: babfb203314faf947b14ba67bca57430, type: 2}
+  _unlockedFields: []
+--- !u!114 &-8570982635757197565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: Climate Control
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1144, y: -8}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -8570982635757197565}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 7780351021596504500}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -8570982635757197565}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Climate Control
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: c717ff1433ae9804b973e948e46e045d, type: 2}
+  - {fileID: 11400000, guid: 78e97245eafd4354aa9ae607fc00893b, type: 2}
+  - {fileID: 11400000, guid: 08cd29f66b76438458727769c7cc7149, type: 2}
+  _unlockedFields: []
+--- !u!114 &-7758607185226292731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: oilDrilling
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 904, y: -440}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -7758607185226292731}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 1935320460018790448}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -7758607185226292731}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 8656539720683981814}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Oil Drilling
+  _description: 
+  _image: {fileID: 2719504437413414466, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: 0c2e5f48aaa48784781d7245dd160c93, type: 2}
+  - {fileID: 11400000, guid: bfb88b514e76f9147bc7ff8f9fd913b0, type: 2}
+  _unlockedFields: []
+--- !u!114 &-7488392626880356734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: logistics
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 424, y: -1064}
+  ports:
+    keys:
+    - _children
+    - _parent
+    values:
+    - _fieldName: _children
+      _node: {fileID: -7488392626880356734}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 6668696766678880587}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: -9097249446775697110}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _parent
+      _node: {fileID: -7488392626880356734}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 805782175410302174}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Item Logistics
+  _description: 
+  _image: {fileID: -3254853038742249471, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: 0737886ad47f30e4a88ad68a5e659ebb, type: 2}
+  - {fileID: 11400000, guid: 4347a87fa4186b146a6a97fe78699907, type: 2}
+  - {fileID: 11400000, guid: a47c702b248684f4d8693a541e660bc0, type: 2}
+  - {fileID: 11400000, guid: 5c0ed959ac70ee646a9aa49a68d584f5, type: 2}
+  - {fileID: 0}
+  _unlockedFields: []
+--- !u!114 &-7202288653150286862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: drillSpeedBonus2
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1384, y: -440}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -7202288653150286862}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 8656539720683981814}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -7202288653150286862}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 7479793730928239108}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Drilling Speed 2
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: 2a64335a400da8f488fd1ee6a126fc58, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1.5
+    stringValue: 
+--- !u!114 &-6182596541586529471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers5
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1160, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -6182596541586529471}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -3000107025799000425}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -6182596541586529471}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 7980115978795346466}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 5
+    floatValue: 0
+    stringValue: 
+--- !u!114 &-6097914867492336192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers2
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 440, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -6097914867492336192}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 7450564015992703734}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -6097914867492336192}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 4403878339334861532}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 2
+    floatValue: 0
+    stringValue: 
+--- !u!114 &-4763758608953623777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: gemMining
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -248, y: -104}
+  ports:
+    keys:
+    - _children
+    - _parent
+    values:
+    - _fieldName: _children
+      _node: {fileID: -4763758608953623777}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 6590426303307161032}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: 7450564015992703734}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: 805782175410302174}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: 7576764814723577340}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _parent
+      _node: {fileID: -4763758608953623777}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Gem Mining
+  _description: Allows Gems to be mined and further technology unlocked
+  _image: {fileID: 0}
+  _costs:
+  - item: {fileID: 11400000, guid: 8184cd3100097ab4c95e194abe0c81dd, type: 2}
+    cost: 1
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: 998f73102e60f0141939331dd03b8311, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 0
+    stringValue: 
+--- !u!114 &-4082761956535392064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: minecartSpeedBonus2
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 680, y: 680}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -4082761956535392064}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -2244849004935369461}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -4082761956535392064}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 8298838750552151444}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Cart Speed 150%
+  _description: Increases Minecraft Speed to 150%
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: dee7b08ae1bc09645aa7027ff37869ff, type: 2}
+    boolValue: 0
+    intValue: 1
+    floatValue: 1.5
+    stringValue: 
+--- !u!114 &-3233746664134611209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: bridges
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 664, y: -632}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -3233746664134611209}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -1479504339416457696}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -3233746664134611209}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Bridges
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 0}
+  _unlockedFields: []
+--- !u!114 &-3000107025799000425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers4
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 920, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -3000107025799000425}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 4403878339334861532}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -3000107025799000425}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: -6182596541586529471}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 4
+    floatValue: 0
+    stringValue: 
+--- !u!114 &-2244849004935369461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: minecartSpeedBonus1
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 440, y: 680}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -2244849004935369461}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 6590426303307161032}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -2244849004935369461}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: -4082761956535392064}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Cart Speed 125%
+  _description: Increases Minecraft Speed to 125%
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: dee7b08ae1bc09645aa7027ff37869ff, type: 2}
+    boolValue: 0
+    intValue: 1
+    floatValue: 1.25
+    stringValue: 
+--- !u!114 &-1479504339416457696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: deeper2
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 424, y: -552}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: -1479504339416457696}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 805782175410302174}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: -1479504339416457696}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 1935320460018790448}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: -3233746664134611209}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Deeper 2
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: b3fcb63ad6e523a42b53c963c3428c32, type: 2}
+    boolValue: 0
+    intValue: 2
+    floatValue: 0
+    stringValue: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2864a015da7708c43851d734a9e9c286, type: 3}
+  m_Name: ResearchTree
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -4763758608953623777}
+  - {fileID: -7488392626880356734}
+  - {fileID: 6590426303307161032}
+  - {fileID: 6668696766678880587}
+  - {fileID: 5261886136935182030}
+  - {fileID: 7450564015992703734}
+  - {fileID: -6097914867492336192}
+  - {fileID: 4403878339334861532}
+  - {fileID: -3000107025799000425}
+  - {fileID: -6182596541586529471}
+  - {fileID: 7980115978795346466}
+  - {fileID: -2244849004935369461}
+  - {fileID: -4082761956535392064}
+  - {fileID: 8298838750552151444}
+  - {fileID: 805782175410302174}
+  - {fileID: 7576764814723577340}
+  - {fileID: 1257347905271944939}
+  - {fileID: 1541607020073572505}
+  - {fileID: 1935320460018790448}
+  - {fileID: 7780351021596504500}
+  - {fileID: -8570982635757197565}
+  - {fileID: -7758607185226292731}
+  - {fileID: 3291187129131921244}
+  - {fileID: 740772874821753389}
+  - {fileID: 3255694739993697057}
+  - {fileID: 8656539720683981814}
+  - {fileID: -7202288653150286862}
+  - {fileID: 7479793730928239108}
+  - {fileID: -3233746664134611209}
+  - {fileID: 5981720264705423027}
+  - {fileID: 6285122586106557380}
+  - {fileID: 5470163564591266514}
+  - {fileID: -1479504339416457696}
+  - {fileID: -9097249446775697110}
+--- !u!114 &740772874821753389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: Smelting Speed 2
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1144, y: -1064}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 740772874821753389}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 3291187129131921244}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 740772874821753389}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 3255694739993697057}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Smelting Speed 2
+  _description: 
+  _image: {fileID: 0}
+  _costs:
+  - item: {fileID: 11400000, guid: fe5d081ac4ac15f439beff590ab1d34d, type: 2}
+    cost: 200
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: 6974b01c194de794fa6025ec59203386, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1.5
+    stringValue: 
+--- !u!114 &805782175410302174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: deeper1
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 184, y: -936}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 805782175410302174}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -4763758608953623777}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 805782175410302174}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: -7488392626880356734}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: -1479504339416457696}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Deeper 1
+  _description: 'Layer 2 Access
+
+'
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: f4c136e59af69934b900c21ff49b1825, type: 2}
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: b3fcb63ad6e523a42b53c963c3428c32, type: 2}
+    boolValue: 0
+    intValue: 1
+    floatValue: 0
+    stringValue: 
+--- !u!114 &1257347905271944939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: decoration2
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 424, y: -1800}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 1257347905271944939}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 7576764814723577340}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 1257347905271944939}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 1541607020073572505}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Decoration 2
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields: []
+--- !u!114 &1541607020073572505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: decoration3
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 664, y: -1800}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 1541607020073572505}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 1257347905271944939}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 1541607020073572505}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Decoration 3
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields: []
+--- !u!114 &1935320460018790448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: deeper3
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 664, y: -248}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 1935320460018790448}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -1479504339416457696}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 1935320460018790448}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 7780351021596504500}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: -7758607185226292731}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Deeper 3
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: b3fcb63ad6e523a42b53c963c3428c32, type: 2}
+    boolValue: 0
+    intValue: 3
+    floatValue: 0
+    stringValue: 
+--- !u!114 &3255694739993697057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: Smelting Speed 3
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1384, y: -1064}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 3255694739993697057}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 740772874821753389}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 3255694739993697057}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Smelting Speed 3
+  _description: 
+  _image: {fileID: 0}
+  _costs:
+  - item: {fileID: 11400000, guid: fe5d081ac4ac15f439beff590ab1d34d, type: 2}
+    cost: 500
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: 6974b01c194de794fa6025ec59203386, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 2
+    stringValue: 
+--- !u!114 &3291187129131921244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: Smelting Speed 1
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 904, y: -1064}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 3291187129131921244}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 6668696766678880587}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 3291187129131921244}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 740772874821753389}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Smelting Speed 1
+  _description: 
+  _image: {fileID: 0}
+  _costs:
+  - item: {fileID: 11400000, guid: fe5d081ac4ac15f439beff590ab1d34d, type: 2}
+    cost: 100
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: 6974b01c194de794fa6025ec59203386, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1.25
+    stringValue: 
+--- !u!114 &4403878339334861532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers3
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 680, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 4403878339334861532}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -6097914867492336192}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 4403878339334861532}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: -3000107025799000425}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 3
+    floatValue: 0
+    stringValue: 
+--- !u!114 &5261886136935182030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: railsAdvanced
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 440, y: 248}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 5261886136935182030}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 6590426303307161032}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 5261886136935182030}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Rails Advanced
+  _description: 
+  _image: {fileID: 1104520424889008021, guid: 83e6f32abdc9b244cbe11ac906944047, type: 3}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: 3d935c3a12ef5ed4d9a528178db64099, type: 2}
+  - {fileID: 11400000, guid: 73766d0789575a449a72ddda71e80b68, type: 2}
+  - {fileID: 11400000, guid: 0f51cfbb90cf8fd4996104122a5b39b5, type: 2}
+  _unlockedFields: []
+--- !u!114 &5470163564591266514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: DEFAULT
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -584, y: -104}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 5470163564591266514}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 5470163564591266514}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: DEFAULT
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: 3bfbe412b74fa0f44b9f31b8d99e1b0a, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: f3f08316718d48f4898647ce80efce91, type: 2}
+  - {fileID: 11400000, guid: 75e0028712451eb4f9b89b1dfbad6178, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: bfed229c672d73249bd99da218450826, type: 2}
+  - {fileID: 11400000, guid: 6489902349ef4aa4e8d6b82331e23aed, type: 2}
+  - {fileID: 11400000, guid: 880b7315fcfd029489266c9f8e9c1f02, type: 2}
+  - {fileID: 11400000, guid: c9ebaa171e7c6aa4788b614f09d45c65, type: 2}
+  - {fileID: 11400000, guid: b0898c46014ee8c409b50eb29d339a63, type: 2}
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1
+    stringValue: 
+  - variable: {fileID: 11400000, guid: 998f73102e60f0141939331dd03b8311, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 0
+    stringValue: 
+  - variable: {fileID: 11400000, guid: 2a64335a400da8f488fd1ee6a126fc58, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1
+    stringValue: 
+  - variable: {fileID: 11400000, guid: b3fcb63ad6e523a42b53c963c3428c32, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 0
+    stringValue: 
+  - variable: {fileID: 11400000, guid: dee7b08ae1bc09645aa7027ff37869ff, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1
+    stringValue: 
+  - variable: {fileID: 11400000, guid: 6974b01c194de794fa6025ec59203386, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1
+    stringValue: 
+--- !u!114 &5981720264705423027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers7
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1640, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 5981720264705423027}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 7980115978795346466}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 5981720264705423027}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 6285122586106557380}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 7
+    floatValue: 0
+    stringValue: 
+--- !u!114 &6285122586106557380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers8
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1880, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 6285122586106557380}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 5981720264705423027}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 6285122586106557380}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 8
+    floatValue: 0
+    stringValue: 
+--- !u!114 &6590426303307161032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: rails
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 200, y: 536}
+  ports:
+    keys:
+    - _children
+    - _parent
+    values:
+    - _fieldName: _children
+      _node: {fileID: 6590426303307161032}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 5261886136935182030}
+        reroutePoints: []
+      - fieldName: _parent
+        node: {fileID: -2244849004935369461}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _parent
+      _node: {fileID: 6590426303307161032}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -4763758608953623777}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Rails
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: 28552ad5f88474e41aed230d2f113a39, type: 2}
+  - {fileID: 11400000, guid: 090145f60c82cce4fa4afb9ae4017cb3, type: 2}
+  - {fileID: 11400000, guid: 29d12b39658fa7e489b0387b4021b28c, type: 2}
+  - {fileID: 11400000, guid: e7014072569d3b345adf2429498e5997, type: 2}
+  - {fileID: 11400000, guid: 147aca1a2cc06644185d17b242ed92a7, type: 2}
+  _unlockedFields: []
+--- !u!114 &6668696766678880587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: Ore Refining
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 664, y: -1064}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 6668696766678880587}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -7488392626880356734}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 6668696766678880587}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 3291187129131921244}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Ore Refining
+  _description: 
+  _image: {fileID: 7348706756570709089, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: 135a70f9408873447a7e4ad2c36375b7, type: 2}
+  _unlockedFields: []
+--- !u!114 &7450564015992703734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers1
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 200, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 7450564015992703734}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -4763758608953623777}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 7450564015992703734}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: -6097914867492336192}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 1
+    floatValue: 0
+    stringValue: 
+--- !u!114 &7479793730928239108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: drillSpeedBonus3
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1624, y: -440}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 7479793730928239108}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -7202288653150286862}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 7479793730928239108}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Drilling Speed 3
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: 2a64335a400da8f488fd1ee6a126fc58, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 2
+    stringValue: 
+--- !u!114 &7576764814723577340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: decoration1
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 184, y: -1800}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 7576764814723577340}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -4763758608953623777}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 7576764814723577340}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 1257347905271944939}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Decoration 1
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable:
+  - {fileID: 11400000, guid: 5a5842fed8e68e84fbe22ec9db81ebad, type: 2}
+  - {fileID: 11400000, guid: d14c4193cd9ba8c46aa3a9c639507d1f, type: 2}
+  _unlockedFields: []
+--- !u!114 &7780351021596504500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: deeper4
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 904, y: -8}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 7780351021596504500}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: 1935320460018790448}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 7780351021596504500}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: -8570982635757197565}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Deeper 4
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: b3fcb63ad6e523a42b53c963c3428c32, type: 2}
+    boolValue: 0
+    intValue: 4
+    floatValue: 0
+    stringValue: 
+--- !u!114 &7980115978795346466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: aditionalWorkers6
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1400, y: 1096}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 7980115978795346466}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -6182596541586529471}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 7980115978795346466}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: 5981720264705423027}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Aditional Workers
+  _description: +1 Max Worker
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: f08dfaf1253ca8e40ba5fa2e2b589c4d, type: 2}
+    boolValue: 0
+    intValue: 6
+    floatValue: 0
+    stringValue: 
+--- !u!114 &8298838750552151444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: minecartSpeedBonus3
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 920, y: 680}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 8298838750552151444}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -4082761956535392064}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 8298838750552151444}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Card Speed 200%
+  _description: Increases Minecraft Speed to 200%
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: dee7b08ae1bc09645aa7027ff37869ff, type: 2}
+    boolValue: 0
+    intValue: 2
+    floatValue: 2
+    stringValue: 
+--- !u!114 &8656539720683981814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0efc2dbcff305f46a66ad9875a84730, type: 3}
+  m_Name: drillSpeedBonus1
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1144, y: -440}
+  ports:
+    keys:
+    - _parent
+    - _children
+    values:
+    - _fieldName: _parent
+      _node: {fileID: 8656539720683981814}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _children
+        node: {fileID: -7758607185226292731}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _children
+      _node: {fileID: 8656539720683981814}
+      _typeQualifiedName: NodeTechTree+Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _parent
+        node: {fileID: -7202288653150286862}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _name: Drilling Speed 1
+  _description: 
+  _image: {fileID: 0}
+  _costs: []
+  _unlockedBuildable: []
+  _unlockedFields:
+  - variable: {fileID: 11400000, guid: 2a64335a400da8f488fd1ee6a126fc58, type: 2}
+    boolValue: 0
+    intValue: 0
+    floatValue: 1.25
+    stringValue: 

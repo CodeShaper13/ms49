@@ -53,7 +53,7 @@ public class PopupNewGame : PopupWindow {
 
         this.close();
 
-        Main.instance.createWorld(
+        Main.instance.StartWorld(
             this.fieldSaveName.text,
             new NewWorldSettings(
                 s.Length > 0 ? s : DateTime.Now.ToBinary().ToString(),

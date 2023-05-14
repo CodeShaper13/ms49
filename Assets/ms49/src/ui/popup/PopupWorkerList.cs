@@ -16,8 +16,8 @@ public class PopupWorkerList : PopupWorldReference {
 
     private List<WorkerListButton> workerButtons;
 
-    protected override void initialize() {
-        base.initialize();
+    protected override void Start() {
+        base.Start();
 
         this.workerButtons = new List<WorkerListButton>();
     }

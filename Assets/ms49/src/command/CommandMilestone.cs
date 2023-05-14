@@ -1,6 +1,7 @@
 ﻿public class CommandMilestone : CommandBase {
 
     public override string runCommand(World world, string[] args) {
+        /*
         if(args.Length > 0) {
             string s = args[0];
             if(s == "all") {
@@ -19,7 +20,7 @@
         } else {
             throw new WrongSyntaxException();
         }
-
+        */
         return "unlocking milestone(s)";
     }
 }

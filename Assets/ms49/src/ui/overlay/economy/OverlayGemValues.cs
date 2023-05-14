@@ -17,7 +17,7 @@ public class OverlayGemValues : MonoBehaviour {
 
     private void Start() {
         this.world = GameObject.FindObjectOfType<World>();
-        this.economy = world.economy;
+        this.economy = this.world.economy;
 
         List<Item> items = this.economy.getAllItems();
         this.bars = new OverlayGemValueBar[items.Count];

@@ -12,7 +12,7 @@ public class TaskRegulateTemperature : TaskBase<EntityWorker> {
     }
 
     public override void preform() {
-        float cellTemp = this.owner.world.storage.getTemperature(this.owner.position);
+        float cellTemp = this.owner.world.storage.GetTemperature(this.owner.position);
         if(cellTemp > 0) {
             this.temperatureStat.increase(cellTemp * this.overheatRate * Time.deltaTime);
         } else {

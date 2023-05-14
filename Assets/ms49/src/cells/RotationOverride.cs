@@ -15,7 +15,7 @@ public class RotationOverride {
     [SerializeField]
     private TileBase _overlayTile = null;
     [SerializeField]
-    private RotationEffect _effect = RotationEffect.NOTHING;
+    private RotationEffect _effect = RotationEffect.Nothing;
 
     public TileBase floorOverlay => this._floorOverlayTile;
     public TileBase objectTile => this._objectTile;

@@ -7,7 +7,7 @@ public class PopupPause : PopupWorldReference {
     }
 
     public void callback_saveGame() {
-        this.world.saveGame();
+        this.world.SaveGame();
 
         this.close();
     }

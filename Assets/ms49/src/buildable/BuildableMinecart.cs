@@ -1,38 +1,43 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Buildable", menuName = "MS49/Buildable/Buildable Minecart", order = 1)]
 public class BuildableMinecart : BuildableBase, ISpritePreview {
 
+    [Space]
+
     [SerializeField]
     private Sprite railSprite = null;
-    [SerializeField]
-    private EntityMinecart.MinecartSprites _minecartSprites = null;
+    [SerializeField, Required]
+    private GameObject _minecartPrefab = null;
 
-    public override bool isRotatable() {
+    public override bool IsRotatable() {
         return true;
     }
 
     protected override void applyPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) {
         groundSprite = this.railSprite;
-        objectSprite = this._minecartSprites.sideEmpty;
-        overlaySprite = this._minecartSprites.sideFull;
+
+        EntityMinecart.MinecartSprites sprites = this._minecartPrefab.GetComponent<EntityMinecart>().minecartSprites;
+        objectSprite = sprites.getSprite(Rotation.RIGHT, true);
+        overlaySprite = sprites.getSprite(Rotation.RIGHT, false);
     }
 
-    public override bool isValidLocation(World world, Position pos, Rotation rotation) {
-        return !world.isOutOfBounds(pos) && world.getCellState(pos).data is CellDataRail && world.plotManager.isOwned(pos);
+    public override bool IsValidLocation(World world, Position pos, Rotation rotation) {
+        return !world.IsOutOfBounds(pos) && world.GetCellState(pos).data is CellDataRail && world.plotManager.isOwned(pos);
     }
 
-    public override void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
-        EntityMinecart minecart = (EntityMinecart)world.entities.spawn(pos, 2); // Minecart id.
-        Rotation trackRot = world.getCellState(pos).rotation;
+    public override void PlaceIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {
+        EntityMinecart minecart = (EntityMinecart)world.entities.Spawn(pos, Main.instance.EntityRegistry.GetIdOfElement(this._minecartPrefab));
+        Rotation trackRot = world.GetCellState(pos).Rotation;
         minecart.rotation = rotation.axis == EnumAxis.Y ? trackRot : trackRot.opposite();
 
         // Incrase stat.
         world.statManager.minecartsPlaced.increase(1);
     }
 
-    public Sprite getPreviewSprite(World world, Position pos) {
-        CellState state = world.getCellState(pos);
-        return state.rotation.axis == EnumAxis.X ? this._minecartSprites.sideEmpty : this._minecartSprites.frontEmpty;
+    public Sprite GetPreviewSprite(World world, Position pos) {
+        CellState state = world.GetCellState(pos);
+        return this._minecartPrefab.GetComponent<EntityMinecart>().minecartSprites.getSprite(state.Rotation, true);
     }
 }

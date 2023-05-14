@@ -11,6 +11,10 @@ public class Item : ScriptableObject {
     public string itemName = "nul";
     [Min(0), Tooltip("How much money the ore is worth.")]
     public int moneyValue;
+    [SerializeField, Min(0), Tooltip("How long the fuel lasts in seconds. 0 means this item can't be used as fuel.")]
+    private float _fuelValue = 0;
+    
+    [Header("Econemy")]
     [SerializeField]
     private bool _includeInEconemy = false;
     [SerializeField, HideInInspector]
@@ -18,7 +22,9 @@ public class Item : ScriptableObject {
     [SerializeField, HideInInspector]
     private Color _darkGraphColor = new Color(1, 0, 1, 1);
 
-    public bool includeInEconemy => this._includeInEconemy;
+    public bool IsFuel => this._fuelValue != 0;
+    public float FuelValue => this._fuelValue;
+    public bool IncludeInEconemy => this._includeInEconemy;
     public Color graphColor => this._graphColor;
     public Color darkGraphColor => this._darkGraphColor;
 
@@ -41,7 +47,7 @@ public class Item : ScriptableObject {
 
             Item item = (Item)this.target;
 
-            if(item.includeInEconemy) {
+            if(item.IncludeInEconemy) {
                 EditorGUILayout.PropertyField(this.graphColorProp);
                 EditorGUILayout.PropertyField(this.darkGraphColorProp);
             }

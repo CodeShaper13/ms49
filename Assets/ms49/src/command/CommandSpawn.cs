@@ -11,7 +11,7 @@
             depth = CameraController.instance.currentLayer;
         }
 
-        world.entities.spawn(new Position(x, y, depth), id);
+        world.entities.Spawn(new Position(x, y, depth), id);
 
         return "spawned entity";
     }

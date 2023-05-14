@@ -37,7 +37,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
 
         if(this.isDeliveringItem) {
             // Drop off item at deposit point.
-            this.depositPoint.deposit(this.minerData.heldItem);
+            this.depositPoint.Deposit(this.minerData.heldItem);
             this.minerData.heldItem = null;
 
             this.locateUnloadPoint();

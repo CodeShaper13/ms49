@@ -23,8 +23,8 @@ public class TileRenderData {
             Vector3.zero,
             Quaternion.Euler(0f, 0f, getAngle(this.effect)),
             new Vector3(
-                this.effect == RotationEffect.MIRROR_X ? -1 : 1,
-                this.effect == RotationEffect.MIRROR_Y ? -1 : 1,
+                this.effect == RotationEffect.MirrorX ? -1 : 1,
+                this.effect == RotationEffect.MirrorY ? -1 : 1,
                 1));
     }
 
@@ -33,11 +33,11 @@ public class TileRenderData {
     /// </summary>
     private float getAngle(RotationEffect e) {
         switch(e) {
-            case RotationEffect.ROTATE_90:
+            case RotationEffect.Rotate90:
                 return 90f;
-            case RotationEffect.ROTATE_180:
+            case RotationEffect.Rotate180:
                 return 180f;
-            case RotationEffect.ROTATE_270:
+            case RotationEffect.Rotate270:
                 return 270f;
             default:
                 return 0f;

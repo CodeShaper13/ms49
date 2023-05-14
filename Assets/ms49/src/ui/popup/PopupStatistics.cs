@@ -17,8 +17,8 @@ public class PopupStatistics : PopupWorldReference {
     private EnumStatisticCategory currentCategory;
     private bool hideEmptyStats;
 
-    protected override void initialize() {
-        base.initialize();
+    protected override void Start() {
+        base.Start();
 
         this.statLables = new List<UiStatisticEntry>();
 

@@ -1,21 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditorInternal;
 using UnityEngine.UI;
+using XNode;
 
-#if UNITY_EDITOR
-    using UnityEditor;
-#endif
-
-public class PopupBuild : PopupWorldReference {
-
-    [HideInInspector]
-    public List<BuildableBase> _unlockedByDefault = new List<BuildableBase>();
+public class PopupBuild : PopupWindow {
 
     [Space]
 
-    [SerializeField]
-    private GameObject _tabBtnPrefab = null;
     [SerializeField]
     private GameObject _entryBtnPrefab = null;
     [SerializeField]
@@ -34,38 +25,49 @@ public class PopupBuild : PopupWorldReference {
     private Text _builderRequiredMsg = null;
     [SerializeField]
     private WorkerType _workerTypeBuilder = null;
+    [SerializeField]
+    private NodeGraphTechTree _graphTechTree = null;
 
-    private TabContents selectedTab;
+    [Space]
+
+    [SerializeField, NaughtyAttributes.ReorderableList]
+    private List<BuildableBase> _creativeOnlyBuildables = null;
+
     private BuildableBase selectedBuildable;
-    private List<TabContents> tabs;
     private List<BuildableListEntry> buildableListButton;
+    private BuildTabToggle[] tabs;
+    private BuildTabToggle selectedTab;
 
     public Rotation rot { get; private set; }
 
-    protected override void initialize() {
-        base.initialize();
-
-        this.tabs = new List<TabContents>();
-        this.createTab(this._miscellaneousTab);
-
+    private void Awake() {
+        this.tabs = this.GetComponentsInChildren<BuildTabToggle>();
         this.buildableListButton = new List<BuildableListEntry>();
+    }
 
-        // Add the Buildables that are unlocked by default.
-        foreach(BuildableBase buildable in this._unlockedByDefault) {
+    private void Start() {
+        // Add the Buildables that are creative only.
+        foreach(BuildableBase buildable in this._creativeOnlyBuildables) {
             if(buildable != null) {
-                this.createBuildableListButton(buildable, null);
+                this.CreateBuildableEntry(buildable, null);
             }
         }
 
-        // Add the Buildables that Milestones unlock.
-        foreach(MilestoneData milestone in this.world.milestones.milestones) {
-            if(milestone != null) {
-                foreach(BuildableBase buildable in milestone.unlockedBuildables) {
-                    if(buildable != null) {
-                        this.createBuildableListButton(buildable, milestone);
+        // Add the Buildables from Technologies.
+        foreach(Node node in this._graphTechTree.nodes) {
+            if(node is NodeTechTree nodeTechTree) {
+                foreach(BuildableBase buildable in nodeTechTree.UnlockedBuildables) {
+                    if(buildable == null) {
+                        continue;
                     }
+
+                    this.CreateBuildableEntry(buildable, nodeTechTree);
                 }
             }
+        }
+
+        foreach(BuildableListEntry entry in this.buildableListButton) {
+            entry.gameObject.SetActive(false);
         }
     }
 
@@ -80,48 +82,51 @@ public class PopupBuild : PopupWorldReference {
             this._builderRequiredMsg.gameObject.SetActive(false);
 
             // Hide the tab buttons if they would be empty
-            foreach(TabContents tc in this.tabs) {
+            foreach(BuildTabToggle tab in this.tabs) {
                 bool atLeastOneUnlocked = false;
 
                 if(CameraController.instance.inCreativeMode) {
                     atLeastOneUnlocked = true;
-                } else if(!tc.tab.onlyInCreative) {
-                    foreach(BuildableListEntry btn in tc.btns) {
-                        if(btn.milestone.isUnlocked) {
+                }
+                else if(!tab.TabData.onlyInCreative) {
+                    foreach(BuildableListEntry btn in tab.buildableEntries) {
+                        if(Main.instance.activeWorld.technologyTree.IsTechnologyUnlocked(btn.unlockingTechnology)) {
                             atLeastOneUnlocked = true;
                             break;
                         }
                     }
                 }
 
-                tc.tabIconButton.gameObject.SetActive(atLeastOneUnlocked);
+                tab.gameObject.SetActive(atLeastOneUnlocked);
             }
 
             this.scrollbar.value = 0f;
 
             // Show only the Buildables that are on the open tab.
-            foreach(TabContents tc in this.tabs) {
-                tc.setButtonsVisible(false);
+            foreach(BuildTabToggle tab in this.tabs) {
+                tab.SetButtonsVisible(false, Main.instance.activeWorld.technologyTree);
             }
 
             // If the selected tab is no longer visible, set the miscellaneous tab to be selected
-            if(this.selectedTab == null || !this.selectedTab.tabIconButton.gameObject.activeSelf) {
+            if(this.selectedTab == null || !this.selectedTab.gameObject.activeSelf) {
                 this.selectedTab = this.tabs[0]; // Miscellaneous tab.
             }
 
-            this.setSelectedTab(this.selectedTab);
+            //this.Callback_SetSelectedTab(this.selectedTab);
         } else {
             this._buildableBtnArea.gameObject.SetActive(false);
             this._tabBtnArea.gameObject.SetActive(false);
             this._builderRequiredMsg.gameObject.SetActive(true);
         }
+
+        this.Callback_SetSelectedTab(this.selectedTab == null ? this.tabs[0] : this.selectedTab);
     }
 
     protected override void onUpdate() {
         base.onUpdate();
 
         if(this.selectedBuildable != null) {
-            if(this.selectedBuildable.isRotatable()) {
+            if(this.selectedBuildable.IsRotatable()) {
                 bool rPressed = Input.GetKeyDown(KeyCode.R);
 
                 if(rPressed) {
@@ -137,14 +142,14 @@ public class PopupBuild : PopupWorldReference {
         this.areaHighlighter.hide();
     }
 
-    public void setSelectedTab(TabContents tab) {
+    public void Callback_SetSelectedTab(BuildTabToggle tab) {
         if(this.selectedTab != null) {
-            this.selectedTab.setButtonsVisible(false);
+            this.selectedTab.SetButtonsVisible(false, Main.instance.activeWorld.technologyTree);
         }
 
         this.selectedTab = tab;
 
-        this.selectedTab.setButtonsVisible(true);
+        this.selectedTab.SetButtonsVisible(true, Main.instance.activeWorld.technologyTree);
     }
 
     /// <summary>
@@ -154,7 +159,7 @@ public class PopupBuild : PopupWorldReference {
     public void setSelectedBuildable(BuildableBase buildable) {
         this.selectedBuildable = buildable;
         if(this.selectedBuildable != null) {
-            if(this.selectedBuildable.isRotatable()) {
+            if(this.selectedBuildable.IsRotatable()) {
                 if(this.selectedBuildable.displayRotation == EnumRotation.NONE) {
                     this.rot = Rotation.RIGHT;
                 } else {
@@ -182,44 +187,23 @@ public class PopupBuild : PopupWorldReference {
         this.preview.hide();
     }
 
-    private TabContents createTab(Tab tab) {
-        BuildableTabButton btn = GameObject.Instantiate(
-            this._tabBtnPrefab,
-            this._tabBtnArea).GetComponent<BuildableTabButton>();
-
-        TabContents tc = new TabContents(tab, btn);
-
-        btn.setTab(tc);
-
-        this.tabs.Add(tc);
-
-        return tc;
-    }
-
-    private void createBuildableListButton(BuildableBase buildable, MilestoneData unlockingMilestone) {
+    private void CreateBuildableEntry(BuildableBase buildable, NodeTechTree unlockingTechnology) {
         BuildableListEntry btn = GameObject.Instantiate(
             this._entryBtnPrefab,
             this._buildableBtnArea).GetComponent<BuildableListEntry>();
-        btn.setStructureData(buildable, unlockingMilestone);
+        btn.gameObject.SetActive(true);
+        btn.setStructureData(buildable, unlockingTechnology);
 
         // Add the Button to the list
-        if(buildable.tab == null || buildable.tab == this._miscellaneousTab) {
-            this.tabs[0].addButton(btn); // 0 is the miscellaneous tab
+        if(buildable.Tab == null || buildable.Tab == this._miscellaneousTab) {
+            this.tabs[0].buildableEntries.Add(btn); // 0 is the miscellaneous tab
         }
         else {
-            bool added = false;
-            foreach(TabContents tc in this.tabs) {
-                if(buildable.tab == tc.tab) {
-                    tc.addButton(btn);
-                    added = true;
+            foreach(BuildTabToggle tab in this.tabs) {
+                if(buildable.Tab == tab.TabData) {
+                    tab.buildableEntries.Add(btn);
                     break;
                 }
-            }
-
-            if(!added) {
-                // Create a new tab.
-                TabContents newTab = this.createTab(buildable.tab);
-                newTab.addButton(btn);
             }
         }
 
@@ -232,7 +216,7 @@ public class PopupBuild : PopupWorldReference {
         while(true) {
             this.rot = counterclockwise ? this.rot.counterClockwise() : this.rot.clockwise();
 
-            if(this.selectedBuildable.isRotationValid(this.rot)) {
+            if(this.selectedBuildable.IsRotationValid(this.rot)) {
                 return;
             }
 
@@ -243,47 +227,12 @@ public class PopupBuild : PopupWorldReference {
     }
 
     private bool isBuilderHired() {
-        foreach(EntityBase e in this.world.entities.list) {
-            if(e is EntityWorker && ((EntityWorker)e).type == this._workerTypeBuilder) {
+        foreach(EntityBase e in Main.instance.activeWorld.entities.list) {
+            if(e is EntityWorker entityWorker && entityWorker.type == this._workerTypeBuilder) {
                 return true;
             }
         }
 
         return false;
     }
-
-#if UNITY_EDITOR
-    [CustomEditor(typeof(PopupBuild))]
-    public class PopupBuildEditor : Editor {
-
-        private ReorderableList list;
-
-        public void OnEnable() {
-            this.list = new ReorderableList(this.serializedObject, this.serializedObject.FindProperty("_unlockedByDefault"), true, true, true, true);
-
-            list.drawElementCallback = DrawListItems; // Delegate to draw the elements on the list
-
-            list.drawHeaderCallback = (rect) => {
-                EditorGUI.LabelField(rect, "Starting Buildables");
-            };
-        }
-
-        public override void OnInspectorGUI() {
-            base.OnInspectorGUI();
-
-            this.serializedObject.Update();
-            this.list.DoLayoutList();
-            this.serializedObject.ApplyModifiedProperties();
-
-            EditorUtility.SetDirty(this.target);
-        }
-
-        // Draws the elements on the list
-        private void DrawListItems(Rect rect, int index, bool isActive, bool isFocused) {
-            SerializedProperty element = list.serializedProperty.GetArrayElementAtIndex(index); // The element in the list
-
-            EditorGUI.ObjectField(new Rect(rect.x, rect.y, 300, EditorGUIUtility.singleLineHeight), element);
-        }
-    }
-#endif
 }

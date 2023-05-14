@@ -20,17 +20,17 @@ public abstract class BuildableBase : ScriptableObject {
     private string _overrideRotationMsg = null;
     [SerializeField, HideInInspector, Tooltip("The rotation to display the tile with in the preview")]
     private EnumRotation _displayRotation = EnumRotation.UP;
-    [SerializeField, Tooltip("If blank, this Buildable is constructed instantly.")]
-    private FloatVariable _buildTime = null;
+    [SerializeField, Min(0), Tooltip("If 0, this Buildable is constructed instantly.")]
+    private float _buildTime = 0;
     [SerializeField, Tooltip("If set, this sprite will be using in the build popup.")]
     private Sprite _customPreview = null;
 
     public int cost => this._cost;
     public string description => this._description;
-    public Tab tab => this._tab;
-    public EnumFogOption fogOption => this._fogOption;
+    public Tab Tab => this._tab;
+    public EnumFogOption FogOption => this._fogOption;
     public EnumRotation displayRotation => this._displayRotation;
-    public float buildTime => this._buildTime == null ? 0 : this._buildTime.value;
+    public float BuildTime => this._buildTime;
     public Sprite customPreviewSprite => this._customPreview;
 
     private void OnValidate() {
@@ -39,10 +39,10 @@ public abstract class BuildableBase : ScriptableObject {
             this._displayRotation = EnumRotation.UP;
         }
 
-        if(!this.isRotationValid(Rotation.fromEnum(this._displayRotation))) {
+        if(!this.IsRotationValid(Rotation.fromEnum(this._displayRotation))) {
             Rotation r = Rotation.fromEnum(this.displayRotation);
             for(int i = 0; i < 4; i++) {
-                if(this.isRotationValid(r)) {
+                if(this.IsRotationValid(r)) {
                     Debug.Log(this.displayRotation + " is not a valid rotation");
                     this._displayRotation = r.enumRot;
                     break;
@@ -53,7 +53,10 @@ public abstract class BuildableBase : ScriptableObject {
         }
     }
 
-    public virtual string getName() {
+    /// <summary>
+    /// Returns the name of the Buildable.  This is shown in the GUI.
+    /// </summary>
+    public virtual string GetBuildableName() {
         return this.structureName;
     }
 
@@ -61,11 +64,16 @@ public abstract class BuildableBase : ScriptableObject {
     /// If true is returned, the buildable is considered "rotatable"
     /// and it's state can be changed with r and shift + r.
     /// </summary>
-    public virtual bool isRotatable() {
+    public virtual bool IsRotatable() {
         return false;
     }
 
-    public virtual bool isRotationValid(Rotation rotation) {
+    /// <summary>
+    /// Checks if the Buildable allows it to be placed at hte passed
+    /// rotation.  Some Buildable may only be allowed to be place in
+    /// 2 or 3 directions.
+    /// </summary>
+    public virtual bool IsRotationValid(Rotation rotation) {
         return true;
     }
 
@@ -73,15 +81,15 @@ public abstract class BuildableBase : ScriptableObject {
     /// If this Buildable is rotatable (BuildableBase#isRotatable
     /// returns true) the rotate tip message uses the returned text.
     /// </summary>
-    public virtual string getRotationMsg() {
+    public virtual string GetRotationMsg() {
         return string.IsNullOrWhiteSpace(this._overrideRotationMsg) ? "[r] to rotate" : this._overrideRotationMsg;
     }
 
-    public virtual int getHighlightWidth() {
+    public virtual int GetBuildableWidth() {
         return 1;
     }
 
-    public virtual int getHighlightHeight() {
+    public virtual int GetBuildableHeight() {
         return 1;
     }
 
@@ -96,21 +104,21 @@ public abstract class BuildableBase : ScriptableObject {
     protected virtual void applyPreviewSprites(ref Sprite groundSprite, ref Sprite objectSprite, ref Sprite overlaySprite) { }
 
     /// <summary>
-    /// Places the structure into the world.  highlight is null if a Structure is placing this Buildable.
+    /// Places the Buildable into the world.  Highlight is null if a Structure is placing this Buildable during world generation.
     /// </summary>
-    public abstract void placeIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation);
+    public abstract void PlaceIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation);
 
     /// <summary>
     /// Returns true if the Structure can go at the passed position.
     /// </summary>
-    public abstract bool isValidLocation(World world, Position pos, Rotation rotation);
+    public abstract bool IsValidLocation(World world, Position pos, Rotation rotation);
 
-    protected void applyFogOpperation(World world, Position pos) {
-        if(this.fogOption == EnumFogOption.LIFT) {
-            world.liftFog(pos);
+    protected void ApplyFogOpperation(World world, Position pos) {
+        if(this.FogOption == EnumFogOption.LIFT) {
+            world.LiftFog(pos);
         }
-        else if(this.fogOption == EnumFogOption.PLACE) {
-            world.placeFog(pos);
+        else if(this.FogOption == EnumFogOption.PLACE) {
+            world.PlaceFog(pos);
         }
     }
 
@@ -140,7 +148,7 @@ public abstract class BuildableBase : ScriptableObject {
 
             BuildableBase script = (BuildableBase)this.target;
 
-            if(script.isRotatable()) {
+            if(script.IsRotatable()) {
                 EditorGUILayout.PropertyField(this.displayRotation);
                 EditorGUILayout.PropertyField(this.overrideRotationMsg);
             }

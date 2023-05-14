@@ -4,5 +4,5 @@
 /// </summary>
 public interface ILeverReciever {
 
-    void onLeverFlip(CellBehavior lever);
+    void OnLeverFlip(CellBehavior lever);
 }

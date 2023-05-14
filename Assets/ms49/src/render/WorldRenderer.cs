@@ -1,9 +1,10 @@
-﻿using System;
+﻿using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class WorldRenderer : MonoBehaviour {
 
+    [SerializeField, Required]
+    private World _world = null;
     [SerializeField]
     private CellTilemapRenderer cellRenderer = null;
     [SerializeField]
@@ -14,40 +15,37 @@ public class WorldRenderer : MonoBehaviour {
     private Color[] _hardnessColors = new Color[0];
 
     private Layer targetLayer;
-    private World world;
 
     public int targetDepth => this.targetLayer == null ? -1 : this.targetLayer.depth;
-    public bool initialized => this.world != null;
+    public bool initialized => this._world != null;
 
-    public void startup(World world) {
-        this.world = world;
+    private void Awake() {
+        this.fogRenderer.mapSize = this._world.MapSize;
+    }
 
-        int size = this.world.mapSize;
-
+    private void Start() {
         this.cellRenderer.initializedRenderer(
-            size,
+            this._world.MapSize,
             (x, y) => {
-                return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTint(world, x, y);
+                return this._world.MapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTint(this._world, x, y);
             },
             (x, y) => {
-                LayerData layerData = this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth);
-                int hardness = this.targetLayer.getHardness(x, y);
+                LayerData layerData = this._world.MapGenerator.getLayerFromDepth(this.targetLayer.depth);
+                int hardness = this.targetLayer.GetHardness(x, y);
                 hardness = Mathf.Clamp(hardness, 0, this._hardnessColors.Length - 1);
-                return this._hardnessColors[hardness] * layerData.getGroundTint(world, x, y);
+                return this._hardnessColors[hardness] * layerData.getGroundTint(this._world, x, y);
             },
             (x, y) => {
                 return this.targetLayer.getCellState(x, y);
             },
             (x, y) => {
-                return this.world.mapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTile(world, x, y);
+                return this._world.MapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTile(this._world, x, y);
             }
             );
-
-        this.fogRenderer.mapSize = size;
     }
 
     public void shutdown() {
-        this.world = null;
+        this._world = null;
         this.targetLayer = null;
 
         this.cellRenderer.clear();
@@ -122,7 +120,7 @@ public class WorldRenderer : MonoBehaviour {
         this.fogRenderer.redraw(layer);
 
         this._targetedRenderer.clear();
-        foreach(TargetedSquare ts in this.world.targetedSquares.list) {
+        foreach(TargetedSquare ts in this._world.targetedSquares.list) {
             this.dirtyExcavationTarget(ts.pos, ts);
         }
     }

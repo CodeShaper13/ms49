@@ -52,7 +52,7 @@ public class StructureMineshaft : StructureBase {
         List<Plot> list = new List<Plot>(world.plotManager.plots);
 
         // Small shaft.
-        Position smallShaftPos = new Position(world.mapSize / 2, 20, depth);
+        Position smallShaftPos = new Position(world.MapSize / 2, 20, depth);
         this.makeShaft(
             world,
             smallShaftPos,
@@ -93,7 +93,7 @@ public class StructureMineshaft : StructureBase {
         // Carve out the middle
         for(int x = -1; x <= 1; x++) {
             for(int y = -1; y <= 1; y++) {
-                Position p1 = pos.add(x, y);
+                Position p1 = pos.Add(x, y);
                 if(this.safeSetCell(world, p1, null)) {
                     airPositions.Add(p1);
                 }
@@ -186,7 +186,7 @@ public class StructureMineshaft : StructureBase {
             Position batPos = airPositions[Random.Range(0, airPositions.Count)];
             airPositions.Remove(batPos);
 
-            world.entities.spawn(batPos, this._entityBatId);
+            world.entities.Spawn(batPos, this._entityBatId);
         }
     }
 

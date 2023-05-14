@@ -80,7 +80,7 @@ public class TaskMakeFood : TaskMovement<EntityWorker> {
             return true;
         }
 
-        foreach(CellBehaviorTable table in this.owner.world.getAllBehaviors<CellBehaviorTable>()) {
+        foreach(CellBehaviorTable table in this.owner.world.GetAllBehaviors<CellBehaviorTable>()) {
             if(table.plateState == CellBehaviorTable.EnumPlateState.NONE && table.isOccupantSitting()) {
                 // Someone else needs food.
                 return true;

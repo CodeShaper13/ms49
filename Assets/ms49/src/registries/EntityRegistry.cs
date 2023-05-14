@@ -1,11 +1,4 @@
 ﻿using UnityEngine;
 
-public class EntityRegistry : RegistryBase<GameObject> {
-
-#if UNITY_EDITOR
-    [UnityEditor.CustomEditor(typeof(EntityRegistry))]
-    public class EntityRegistryBase : RegistryBaseEditor {
-
-    }
-#endif
-}
+[CreateAssetMenu(fileName = "Registry", menuName = "MS49/Registry/Entity", order = 1)]
+public class EntityRegistry : Registry<GameObject> { }

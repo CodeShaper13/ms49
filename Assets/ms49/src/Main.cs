@@ -14,73 +14,63 @@ public class Main : MonoBehaviour {
     public static bool DEBUG = false;
 
     [SerializeField]
-    private GameObject _gamePrefab = null;
-    [SerializeField]
     private GameObject _uiOverlay = null;
     [SerializeField]
-    private TileRegistry _tileRegistry = null;
+    private Transform _popupParent = null;
+    [SerializeField]
+    private WorkerFactory _workerFactory = null;
+    [SerializeField]
+    private PopupWindow titleScreenPopup = null;
+
+
+    [Header("Registries")]
+    [SerializeField]
+    private CellDataRegistry _cellRegistry = null;
     [SerializeField]
     private EntityRegistry _entityRegistry = null;
     [SerializeField]
-    private MinedItemRegistry _itemRegistry = null;
+    private ItemRegistry _itemRegistry = null;
     [SerializeField]
     private PersonalityRegistry _personalityRegistry = null;
     [SerializeField]
     private WorkerTypeRegistry _workerTypes = null;
-    [SerializeField]
-    private Transform _popupParent = null;
-    [SerializeField]
-    private Options _options = null;
-    [SerializeField]
-    private WorkerFactory _workerFactory = null;
-    [SerializeField]
-    private DebugLoadSettings _debugLoadSettings = new DebugLoadSettings();
 
-    [Space]
-
+    [Header("Prefabs")]
     [SerializeField]
-    private PopupWindow titleScreenPopup = null;
-
-    public TileRegistry tileRegistry => this._tileRegistry;
-    public EntityRegistry entityRegistry => this._entityRegistry;
-    public MinedItemRegistry itemRegistry => this._itemRegistry;
-    public PersonalityRegistry personalityRegistry => this._personalityRegistry;
-    public Options options => this._options;
-    public WorkerFactory workerFactory => this._workerFactory;
-    public WorkerTypeRegistry workerTypeRegistry => this._workerTypes;
+    private GameObject _worldPrefab = null;
+    [SerializeField]
+    private GameObject _playerPrefab = null;
 
     /// <summary>
     /// A reference to the World.  Null if the Player is not playing a save.
     /// </summary>
-    private GameObject mainGameObj;
+    public World activeWorld { get; private set; }
+    public CameraController player { get; private set; }
+
+    public WorkerFactory workerFactory => this._workerFactory;
+    public CellDataRegistry CellRegistry => this._cellRegistry;
+    public EntityRegistry EntityRegistry => this._entityRegistry;
+    public ItemRegistry ItemRegistry => this._itemRegistry;
+    public PersonalityRegistry PersonalityRegistry => this._personalityRegistry;
+    public WorkerTypeRegistry WorkerTypeRegistry => this._workerTypes;
+    /// <summary>
+    /// Returns true if there is a map loaded.
+    /// </summary>
+    public bool IsPlayingGame() => this.activeWorld != null;
 
     private void Awake() {
         if(Main.instance == null) {
             Main.instance = this;
             GameObject.DontDestroyOnLoad(this.gameObject);
         } else {
+            Debug.LogError("There can only be one Main script at a time!");
             GameObject.Destroy(this.gameObject);
             return;
         }
     }
 
     private void Start() {
-        if(this._debugLoadSettings.instantLoad) {
-            // Load world instantly.
-            string name = this._debugLoadSettings.name;
-            if(File.Exists(SAVE_DIR + name + SAVE_EXTENSION)) {
-                NbtFile nbtFile = new NbtFile();
-                nbtFile.LoadFromFile(SAVE_DIR + name + SAVE_EXTENSION);
-
-                this.createWorld(name, nbtFile.RootTag);
-            }
-            else {
-                this.createWorld(
-                    this._debugLoadSettings.name,
-                    this._debugLoadSettings.settings);
-            }
-        } else {
-            // Normal game startup.
+        if(!this.IsPlayingGame()) {
             this.titleScreenPopup.open();
         }
     }
@@ -90,7 +80,7 @@ public class Main : MonoBehaviour {
             Main.DEBUG = !Main.DEBUG;
         }
 
-        if(!this.isPlaying() && PopupWindow.getPopupsOpen() == 0) {
+        if(!this.IsPlayingGame() && PopupWindow.getPopupsOpen() == 0) {
             this.titleScreenPopup.open();
         }
     }
@@ -107,7 +97,12 @@ public class Main : MonoBehaviour {
         return popup;
     }
 
-    public List<SaveFile> getAllSaves(bool sortByLastPlayed = false) {
+    /// <summary>
+    /// Returns all saved games.
+    /// </summary>
+    /// <param name="sortByLastPlayed"></param>
+    /// <returns></returns>
+    public List<SaveFile> GetAllSaves(bool sortByLastPlayed = false) {
         List<SaveFile> saves = new List<SaveFile>();
 
         if(!Directory.Exists(SAVE_DIR)) {
@@ -125,48 +120,41 @@ public class Main : MonoBehaviour {
         return saves;
     }
 
-    public void createWorld(string saveName, NewWorldSettings settings) {
-        World world = this.instantiateGame();
+    public void StartWorld(string saveName, NewWorldSettings settings) {
+        PopupWindow.closeAll();
+
+        World world = this.InstantiateGameObjects();
         world.initialize(saveName, settings);
     }
 
-    public void createWorld(string saveName, NbtCompound rootTag) {
-        World world = this.instantiateGame();
+    public void StartWorld(string saveName, NbtCompound rootTag) {
+        PopupWindow.closeAll();
+
+        World world = this.InstantiateGameObjects();
         world.initialize(saveName, rootTag);
     }
 
-    public void shutdownWorld() {
+    /// <summary>
+    /// Closes the world and returns to the title screen.  This will
+    /// NOT save the game, it must be done elsewhere.
+    /// </summary>
+    public void ShutdownWorld() {
         // Destroy everything.
-        GameObject.Destroy(this.mainGameObj);
+        GameObject.Destroy(this.activeWorld.gameObject);
+        GameObject.Destroy(this.player.gameObject);
 
         // Close the overlay
         this._uiOverlay.SetActive(false);
 
-        // Open the title screen
         this.titleScreenPopup.open();
     }
 
-    /// <summary>
-    /// Returns true if there is a map loaded.
-    /// </summary>
-    public bool isPlaying() {
-        return this.mainGameObj != null;
-    }
-
-    private World instantiateGame() {
-        GameObject obj = GameObject.Instantiate(this._gamePrefab);
-        this.mainGameObj = obj;
+    private World InstantiateGameObjects() {
+        this.activeWorld = GameObject.Instantiate(this._worldPrefab).GetComponent<World>();
+        this.player = GameObject.Instantiate(this._playerPrefab).GetComponent<CameraController>();
 
         this._uiOverlay.SetActive(true);
 
-        return obj.GetComponentInChildren<World>();
-    }
-
-    [Serializable]
-    private class DebugLoadSettings {
-        public bool instantLoad = false;
-        [Tooltip("If blank, the game is not saved.")]
-        public string name = "temp";
-        public NewWorldSettings settings = null;
+        return this.activeWorld;
     }
 }

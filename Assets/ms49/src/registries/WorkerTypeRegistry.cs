@@ -1,11 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class WorkerTypeRegistry : RegistryBase<WorkerType> {
-
-#if UNITY_EDITOR
-    [UnityEditor.CustomEditor(typeof(WorkerTypeRegistry))]
-    public class WorkerTypeRegistryEditor : RegistryBaseEditor {
-    }
-#endif
-}
+[CreateAssetMenu(fileName = "Registry", menuName = "MS49/Registry/Worker Type", order = 1)]
+public class WorkerTypeRegistry : Registry<WorkerType> { }

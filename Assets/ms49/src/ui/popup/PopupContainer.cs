@@ -1,117 +1,92 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
+using NaughtyAttributes;
 
 public class PopupContainer : PopupWindow {
 
+    [Space]
+
+    [SerializeField, Tooltip("Optional")]
+    private TMP_Text _textContainerName = null;
     [SerializeField]
-    private Text headerText = null;
-    [SerializeField]
-    private Text emptyText = null;
-    [SerializeField]
-    private Text _itemCountText = null;
-    [SerializeField]
-    private RectTransform itemAreaTransform = null;
-    [SerializeField]
-    private GameObject inventoryItemEntryPrefab = null;
+    private bool _generateSlots = true;
+    [SerializeField, ShowIf(nameof(_generateSlots))]
+    private RectTransform _slotParent = null;
+    [SerializeField, ShowIf(nameof(_generateSlots))]
+    private GameObject _prefabInventorySlot = null;
+    [SerializeField, ShowIf(nameof(__notGenerateSlots))]
+    private List<InventorySlot> _slots = null;
 
     private List<InventorySlot> slots;
     private Inventory inventory;
 
-    protected override void initialize() {
-        base.initialize();
-
+    private void Awake() {
         this.slots = new List<InventorySlot>();
-
-        /*
-        MinedItemRegistry registry = Main.instance.itemRegistry;
-        for(int id = 0; id < registry.getRegistrySize(); id++) {
-            Item item = registry.getElement(id);
-            if(item != null) {
-                GameObject obj = GameObject.Instantiate(this.inventoryItemEntryPrefab, this.itemAreaTransform);
-                InventorySlot entry = obj.GetComponent<InventorySlot>();
-
-                entry.setItem(item);
-
-                this.slots.Add(entry);
-            }
-        }
-        */
-    }
-
-    public void setInventory(Inventory newInventory) {
-        // Destroy the old slot objects
-        foreach(InventorySlot slot in this.slots) {
-            GameObject.Destroy(slot.gameObject);
-        }
-        this.slots.Clear();
-        this.headerText.text = "nul";
-
-
-        if(newInventory != null) {
-            this.inventory = newInventory;
-
-            // Create slots.
-            this.slots = new List<InventorySlot>();
-            for(int i = 0; i < this.inventory.maxCapacity; i++) {
-                GameObject obj = GameObject.Instantiate(this.inventoryItemEntryPrefab, this.itemAreaTransform);
-                InventorySlot entry = obj.GetComponent<InventorySlot>();
-                this.slots.Add(entry);
-            }
-
-            // Set head to state the inventory's name.
-            this.headerText.text = string.IsNullOrEmpty(this.inventory.inventoryName) ? "inventory" : this.inventory.inventoryName.ToLower();
-        }
     }
 
     protected override void onUpdate() {
         base.onUpdate();
 
         if(this.inventory != null) {
-            for(int i = 0; i < this.inventory.maxCapacity; i++) {
-                InventorySlot slot = this.slots[i];
-                Item item = this.inventory.getItem(i);
-
-                if(item == null) {
-                    slot.gameObject.SetActive(false);
-                } else {
-                    slot.gameObject.SetActive(true);
-                    slot.setItem(item);
-                }
-                //if(slot.item != this.inventory.getItem(i)) {
-                //    slot.setItem(this.inventory.getItem(i));
-                //}
-            }
-
-            /*
-            this.emptyText.enabled = this.inventory.isEmpty();
-
-            foreach(InventorySlot entry in this.slots) {
-                if(!this.inventory.isEmpty()) {
-                    int count = 0;
-
-                    foreach(Item item in this.inventory.items) {
-                        if(item == entry.item) {
-                            count++;
-                        }
-                    }
-
-                    entry.setCount(count);
-                    entry.gameObject.SetActive(count != 0);
-                } else {
-                    entry.gameObject.SetActive(false);
+            for(int i = 0; i < this.inventory.Size; i++) {
+                if(i < this.slots.Count) {
+                    InventorySlot slot = this.slots[i];
+                    Item item = this.inventory[i];
+                    slot.SetItem(item);
                 }
             }
-            */
+        }
+    }
 
-            this._itemCountText.text =
-                this.inventory.getItemCount() + "/" + this.inventory.maxCapacity + " items";
+    public void SetInventory(Inventory newInventory) {
+        if(this._generateSlots) {
+            // Destroy the old slot objects
+            foreach(InventorySlot slot in this.slots) {
+                if(slot.gameObject == null) {
+                    continue;
+                }
+
+                GameObject.Destroy(slot.gameObject);
+            }
+        }
+
+        this.slots.Clear();
+
+        if(newInventory != null) {
+            this.inventory = newInventory;
+
+            if(this._textContainerName != null) {
+                this._textContainerName.text = string.IsNullOrEmpty(this.inventory.InventoryName) ? "Inventory" : this.inventory.InventoryName;
+            }
+
+            if(this._generateSlots) {
+                // Create slots.
+                for(int i = 0; i < this.inventory.Size; i++) {
+                    InventorySlot slot = GameObject.Instantiate(
+                        this._prefabInventorySlot,
+                        this._slotParent).GetComponent<InventorySlot>();
+                    this.slots.Add(slot);
+                }
+            } else {
+                this.slots.AddRange(this._slots);
+
+                if(this.slots.Count != this.inventory.Size) {
+                    Debug.LogWarning("Inventory Size does not match the number of InventorySlot components on child objects.");
+                }
+            }
+        } else {
+            if(this._textContainerName != null) {
+                this._textContainerName.text = string.Empty;
+            }
         }
     }
 
     protected override void onClose() {
         base.onClose();
 
-        this.setInventory(null);
+        this.SetInventory(null);
     }
+
+    public bool __notGenerateSlots => !this._generateSlots;
 }

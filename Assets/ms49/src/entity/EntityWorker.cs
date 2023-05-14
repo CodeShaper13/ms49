@@ -48,8 +48,12 @@ public class EntityWorker : EntityBase {
         this.OnMouseExit(); // Hide Canvas
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
+    public override void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
+        
+        base.Update();
 
         // Terrible, make this better
         this._nameText.text = this.info.lastName;
@@ -69,13 +73,17 @@ public class EntityWorker : EntityBase {
 
             if(this.happiness.value <= this.happiness.minValue) {
                 // Work is leaving.
-                this.world.entities.remove(this);
+                this.world.entities.Remove(this);
             }
         }
     }
 
-    public override void onLateUpdate() {
-        base.onLateUpdate();
+    public override void LateUpdate() {
+        if(Pause.IsPaused) {
+            return;
+        }
+
+        base.LateUpdate();
 
         this.animator.rotation = this.rotation;
     }
@@ -110,12 +118,12 @@ public class EntityWorker : EntityBase {
     public void setSleeping(bool sleeping) {
         if(sleeping) {
             if(!this.isSleeping) {
-                this.sleepParticle = this.world.particles.spawn(this.worldPos + Vector2.up, this.depth, this.sleepingParticlePrefab);
+                this.sleepParticle = this.world.particles.Spawn(this.worldPos + Vector2.up, this.depth, this.sleepingParticlePrefab);
             }
             this.isSleeping = true;
         } else {
             if(this.sleepParticle != null) {
-                this.world.particles.remove(this.sleepParticle);
+                this.world.particles.Remove(this.sleepParticle);
                 this.sleepParticle = null;
             }
             this.isSleeping = false;
@@ -127,23 +135,23 @@ public class EntityWorker : EntityBase {
         sb.AppendLine("Hunger: " + (int)this.hunger.value);
     }
 
-    public override void getDebugText(List<string> s) {
-        base.getDebugText(s);
+    public override void getDebugText(StringBuilder sb, string indent) {
+        base.getDebugText(sb, indent);
 
-        s.Add("Type: " + this.type.typeName);
-        s.Add("Name: " + this.info.fullName);
-        s.Add("Dead: " + this.isDead);
-        s.Add("Sleeping: " + this.isSleeping);
-        s.Add("Hunger: " + this.hunger.value);
-        s.Add("Energy: " + this.energy.value);
-        s.Add("Temperature: " + this.temperature.value);
+        sb.AppendLine(indent + "Type: " + this.type.typeName);
+        sb.AppendLine(indent + "Name: " + this.info.fullName);
+        sb.AppendLine(indent + "Dead: " + this.isDead);
+        sb.AppendLine(indent + "Sleeping: " + this.isSleeping);
+        sb.AppendLine(indent + "Hunger: " + this.hunger.value);
+        sb.AppendLine(indent + "Energy: " + this.energy.value);
+        sb.AppendLine(indent + "Temperature: " + this.temperature.value);
 
         CookMetaData meta = this.GetComponentInChildren<CookMetaData>();
         if(meta != null) {
-            s.Add("Plate: " + meta.plateState);
+            sb.AppendLine(indent + "Plate: " + meta.plateState);
         }
 
-        this.aiManager.generateDebugText(s);
+        this.aiManager.generateDebugText(sb, indent);
     }
 
     public override void writeToNbt(NbtCompound tag) {
@@ -155,7 +163,7 @@ public class EntityWorker : EntityBase {
         tag.setTag("happiness", this.happiness.value);
         tag.setTag("isDead", this.isDead);
         tag.setTag("workerInfo", this.info.writeToNbt());
-        tag.setTag("workerType", Main.instance.workerTypeRegistry.getIdOfElement(this.type));
+        tag.setTag("workerType", Main.instance.WorkerTypeRegistry.GetIdOfElement(this.type));
 
         // Write Ai Meta objects to NBT
         foreach(IAiMeta meta in this.GetComponentsInChildren<IAiMeta>()) {
@@ -172,7 +180,7 @@ public class EntityWorker : EntityBase {
         this.happiness.value = tag.getFloat("happiness");
         this.isDead = tag.getBool("isDead");
         this.info = new WorkerInfo(tag.getCompound("workerInfo"));
-        this.setType(Main.instance.workerTypeRegistry.getElement(tag.getInt("workerType")));
+        this.setType(Main.instance.WorkerTypeRegistry[tag.getInt("workerType")]);
 
         // Read Ai Meta objects from NBT
         foreach(IAiMeta meta in this.GetComponentsInChildren<IAiMeta>()) {

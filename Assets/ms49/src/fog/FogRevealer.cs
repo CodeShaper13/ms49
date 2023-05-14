@@ -28,6 +28,6 @@ public class FogRevealer : MonoBehaviour {
     }
 
     private void liftFog() {
-        this.entity.world.liftFog(new Position(this.entity));
+        this.entity.world.LiftFog(new Position(this.entity));
     }
 }

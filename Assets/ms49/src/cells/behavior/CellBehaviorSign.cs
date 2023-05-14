@@ -18,11 +18,11 @@ public class CellBehaviorSign : CellBehavior, IHasData {
         return "[rbm] edit sign";
     }
 
-    public void writeToNbt(NbtCompound nbt) {
+    public void WriteToNbt(NbtCompound nbt) {
         nbt.setTag("message", this.message);
     }
 
-    public void readFromNbt(NbtCompound nbt) {
+    public void ReadFromNbt(NbtCompound nbt) {
         this.message = nbt.getString("message");
     }
 }

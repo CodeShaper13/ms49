@@ -10,7 +10,7 @@ public class MilestoneManager : MonoBehaviour, ISaveableState {
 
     public MilestoneData[] milestones { get { return this._milestoneData; } }
 
-    public string tagName => "milestones";
+    public string saveableTagName => "milestones";
 
     private void Update() {
         if(!Pause.isPaused()) {
@@ -56,7 +56,7 @@ public class MilestoneManager : MonoBehaviour, ISaveableState {
         milestone.isUnlocked = true;
     }
 
-    public void writeToNbt(NbtCompound tag) {
+    public void WriteToNbt(NbtCompound tag) {
         int[] lockFlags = new int[this._milestoneData.Length];
         for(int i = 0; i < this._milestoneData.Length; i++) {
             lockFlags[i] = this._milestoneData[i].isUnlocked ? 1 : 0;
@@ -64,7 +64,7 @@ public class MilestoneManager : MonoBehaviour, ISaveableState {
         tag.setTag("milestoneUnlockFlags", lockFlags);
     }
 
-    public void readFromNbt(NbtCompound tag) {
+    public void ReadFromNbt(NbtCompound tag) {
         int[] milestoneLockFlags = tag.getIntArray("milestoneUnlockFlags");
         for(int i = 0; i < this._milestoneData.Length; i++) {
             if(i >= milestoneLockFlags.Length) {

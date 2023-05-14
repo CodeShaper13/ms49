@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
+  m_Name: Furnace
+  m_EditorClassIdentifier: 
+  structureName: Furnace
+  _cost: 500
+  _description: Furnaces refine ores into more valuable ingots
+  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _fogOption: 0
+  _overrideRotationMsg: 
+  _displayRotation: 0
+  _buildTime: 0
+  _customPreview: {fileID: 0}
+  _cell: {fileID: 11400000, guid: 982b7b9ba0ea08f4886965cf277d9350, type: 2}
+  _buildableSize: {x: 2, y: 2}
+  _gridRows:
+  - _row:
+    - e
+    - f
+  - _row:
+    - e
+    - e
+    - ' '
+    - 
+  _gridMappings:
+  - character: 102
+    cell: {fileID: 11400000, guid: 982b7b9ba0ea08f4886965cf277d9350, type: 2}
+  - character: 101
+    cell: {fileID: 11400000, guid: e842eb4fd2ce0a340908c3667a9dd2f6, type: 2}

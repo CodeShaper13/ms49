@@ -46,7 +46,7 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
         if(this.minerData.heldItem != null) {
             return false; // Worker carrying stone.
         }
-        if(!(this.owner.world.getCellState(this.stonePos).data is CellDataMineable)) {
+        if(!(this.owner.world.GetCellState(this.stonePos).data is CellDataMineable)) {
             return false; // Targets cell is no longer a mineable cell (it was mined?).
         }
         if(!this.owner.world.targetedSquares.isTargeted(this.stonePos)) {
@@ -61,35 +61,35 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
 
         this.timeMining = 0;
         if(this.crackParticle != null) {
-            this.owner.world.particles.remove(this.crackParticle);
+            this.owner.world.particles.Remove(this.crackParticle);
             this.crackParticle = null;
         }
     }
 
     public override void onDestinationArive() {
-        this.crackParticle = this.owner.world.particles.spawn(this.stonePos.center, this.owner.depth, this.stoneCrackParticlePrefab);
+        this.crackParticle = this.owner.world.particles.Spawn(this.stonePos.Center, this.owner.depth, this.stoneCrackParticlePrefab);
         ParticleSystem.MainModule main = this.crackParticle.ps.main;
-        float hardness = this._mineSpeeds[this.owner.world.getHardness(this.stonePos)];
+        float hardness = this._mineSpeeds[this.owner.world.GetHardness(this.stonePos)];
         main.simulationSpeed = 1f / hardness;
     }
 
     public override void onAtDestination() {
         this.timeMining += (Time.deltaTime * this.owner.info.personality.workSpeedMultiplyer);
 
-        int hardness = this.owner.world.getHardness(this.stonePos);
+        int hardness = this.owner.world.GetHardness(this.stonePos);
         if(this.timeMining >= this._mineSpeeds[hardness]) {
             // Pickup the dropped item from the stone.
-            CellData data = this.owner.world.getCellState(this.stonePos).data;
+            CellData data = this.owner.world.GetCellState(this.stonePos).data;
             if(data is CellDataMineable) {
                 CellDataMineable dataMineable = (CellDataMineable)data;
 
-                this.minerData.heldItem = dataMineable.droppedItem;
+                this.minerData.heldItem = dataMineable.DroppedItem;
 
-                if(dataMineable.showParticles) {
+                if(dataMineable.ShowParticles) {
                     // Play particle (and color it)
-                    Particle particle = this.owner.world.particles.spawn(this.stonePos.center, this.owner.depth, this.mineParticlePrefab);
+                    Particle particle = this.owner.world.particles.Spawn(this.stonePos.Center, this.owner.depth, this.mineParticlePrefab);
                     if(particle != null) {
-                        LayerData layerData = this.owner.world.mapGenerator.getLayerFromDepth(this.owner.depth);
+                        LayerData layerData = this.owner.world.MapGenerator.getLayerFromDepth(this.owner.depth);
                         ParticleSystem.MainModule main = particle.ps.main;
                         main.startColor = layerData.getGroundTint(this.owner.world, this.stonePos.x, this.stonePos.y);
                     }
@@ -107,20 +107,17 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
             this.owner.energy.decrease(this._energyCost);
 
             // Remove the stone.
-            this.owner.world.setCell(this.stonePos, null);
+            this.owner.world.SetCell(this.stonePos, null);
             this.owner.world.targetedSquares.stopTargeting(this.stonePos);
-            this.owner.world.liftFog(this.stonePos);
+            this.owner.world.LiftFog(this.stonePos);
             this.owner.world.tryCollapse(this.stonePos);
-
-            // Add to global mined count
-            this.owner.world.stoneExcavated++;
         }
     }
 
     private bool method(Func<TargetedSquare, bool> func) {
         HashSet<TargetedSquare> targetedPosList = this.owner.world.targetedSquares.list;
 
-        foreach(TargetedSquare ts in targetedPosList.OrderBy(x => x.pos.distance(this.owner.position)).ToList()) {
+        foreach(TargetedSquare ts in targetedPosList.OrderBy(x => x.pos.Distance(this.owner.position)).ToList()) {
             if(!func(ts)) {
                 continue;
             }
@@ -130,7 +127,7 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
             foreach(Rotation r in Rotation.ALL) {
                 Position neighborPos = ts.pos + r;
 
-                if(!this.owner.world.isOutOfBounds(neighborPos) && (this.owner.world.getCellState(neighborPos).data.isWalkable && !this.owner.world.isCoveredByFog(neighborPos))) {
+                if(!this.owner.world.IsOutOfBounds(neighborPos) && (this.owner.world.GetCellState(neighborPos).data.IsWalkable && !this.owner.world.IsCoveredByFog(neighborPos))) {
                     fullySurrounded = false;
                     break;
                 }

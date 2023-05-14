@@ -36,9 +36,9 @@ public class FeaturePipes : FeatureBase {
                     }
 
                     if(direction) {
-                        pipePos = pipePos.add(0, -1);
+                        pipePos = pipePos.Add(0, -1);
                     } else {
-                        pipePos = pipePos.add(x <= (accessor.size / 2) ? -1 : 1, 0);
+                        pipePos = pipePos.Add(x <= (accessor.size / 2) ? -1 : 1, 0);
                     }
 
                     if(!accessor.inBounds(pipePos.x, pipePos.y)) {

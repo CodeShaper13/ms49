@@ -24,7 +24,7 @@ public class TaskPickupItems : TaskMovement<EntityWorker> {
     public override bool shouldExecute() {
         if(this._minerData.heldItem == null) {
             foreach(EntityBase e in this.owner.world.entities.list) {
-                if(e is EntityItem && this.owner.world.getCellState(e.position).data.isWalkable && !this.isOnBlockedCell(e)) {
+                if(e is EntityItem && this.owner.world.GetCellState(e.position).data.IsWalkable && !this.isOnBlockedCell(e)) {
                     if(this.calculateAndSetPath(e.position)) {
                         this.itemEntity = (EntityItem)e;
                         return true;
@@ -41,7 +41,7 @@ public class TaskPickupItems : TaskMovement<EntityWorker> {
 
         this._minerData.heldItem = this.itemEntity.item;
 
-        this.owner.world.entities.remove(this.itemEntity);
+        this.owner.world.entities.Remove(this.itemEntity);
     }
 
     public override void onTaskStop() {
@@ -51,7 +51,7 @@ public class TaskPickupItems : TaskMovement<EntityWorker> {
     }
 
     private bool isOnBlockedCell(EntityBase entity) {
-        CellData cell = this.owner.world.getCellState(entity.position).data;
+        CellData cell = this.owner.world.GetCellState(entity.position).data;
         foreach(CellData ignoreCell in this._ignoredItemOn) {
             if(ignoreCell == cell) {
                 return true;

@@ -12,8 +12,8 @@ public class PopupOreValues : PopupWorldReference {
 
     private List<ValueBar> bars;
 
-    protected override void initialize() {
-        base.initialize();
+    protected override void Start() {
+        base.Start();
 
         this.bars = new List<ValueBar>();
     }

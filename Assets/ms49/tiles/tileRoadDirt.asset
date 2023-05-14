@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6e4e4fc705376343a3e65b25d94f0e2, type: 3}
-  m_Name: New Terrain Tile
+  m_Name: tileRoadDirt
   m_EditorClassIdentifier: 
   m_Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4894293944757072678, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -7537728127023367017, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: 3841478949471339740, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -2331468818310051910, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: 1842850403139085200, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -3778929495279536526, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -8784054672525020626, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -7829014173379714686, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: 1512237473817002270, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: 5639535537619044385, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -8553008988213887698, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -4398118056257393346, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: 3887745600776699857, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: -7847537291072819841, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+  - {fileID: 7420306766575028572, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}

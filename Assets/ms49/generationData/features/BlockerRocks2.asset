@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c2dfd62beae1b5469f8558316bf540b, type: 3}
-  m_Name: OreVeinCoal
+  m_Script: {fileID: 11500000, guid: 1c19da7143f2af044bc4714649711b14, type: 3}
+  m_Name: BlockerRocks2
   m_EditorClassIdentifier: 
-  _cell: {fileID: 11400000, guid: a59a1921820c7174d956a088eb133e3c, type: 2}
-  _veinSize: {x: 5, y: 12}
+  _priority: 0
+  _cell: {fileID: 11400000, guid: 3e22596b622383c4a9bb4d5f09386626, type: 2}
+  _veinsPerSquare: 0.005
+  _veinSize: {x: 5, y: 8}

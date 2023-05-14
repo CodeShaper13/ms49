@@ -34,11 +34,11 @@ public class Layer {
         this.heatSources = new float[this.Area];
         this.hardness = new int[this.Area];
 
-        LayerData layerData = this.world.MapGenerator.getLayerFromDepth(this.depth);
+        LayerData layerData = this.world.MapGenerator.GetLayerFromDepth(this.depth);
         if(layerData != null) { // Null if a layer is added through an external editor or the layer count is reduced
 
             // Set heat sourcess
-            this.cachedLayerHeat = layerData.defaultTemperature;
+            this.cachedLayerHeat = layerData.DefaultTemperature;
             if(this.cachedLayerHeat != 0) {
                 for(int i = 0; i < this.heatSources.Length; i++) {
                     this.heatSources[i] = this.cachedLayerHeat;
@@ -46,7 +46,7 @@ public class Layer {
             }
 
             // Setup Fog.
-            if(layerData.hasFog) {
+            if(layerData.HasFog) {
                 this.fog = new Fog(this.size);
                 this.fog.setAll(true);
             }

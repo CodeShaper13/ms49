@@ -18,7 +18,7 @@ public class StructureDungeon : StructureBase {
     [SerializeField, MinMaxSlider(1, 10)]
     private Vector2Int _size = new Vector2Int(3, 6);
 
-    public override void generate(World world, int depth) {
+    public override void Generate(World world, int depth) {
         for(int i = 0; i < this._dungeonsPerLayer; i++) {
             const int edgeBuffer = 5;
             int xPos = Random.Range(edgeBuffer, world.MapSize + edgeBuffer);

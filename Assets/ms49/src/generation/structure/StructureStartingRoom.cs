@@ -8,7 +8,7 @@ public class StructureStartingRoom : StructureBase {
     [SerializeField]
     private Prebuilt[] _areas = null;
 
-    public override void generate(World world, int depth) {
+    public override void Generate(World world, int depth) {
 
         PlotManager pm = world.plotManager;
         int structureX = Random.Range(

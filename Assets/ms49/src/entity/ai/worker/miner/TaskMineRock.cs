@@ -89,9 +89,9 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
                     // Play particle (and color it)
                     Particle particle = this.owner.world.particles.Spawn(this.stonePos.Center, this.owner.depth, this.mineParticlePrefab);
                     if(particle != null) {
-                        LayerData layerData = this.owner.world.MapGenerator.getLayerFromDepth(this.owner.depth);
+                        LayerData layerData = this.owner.world.MapGenerator.GetLayerFromDepth(this.owner.depth);
                         ParticleSystem.MainModule main = particle.ps.main;
-                        main.startColor = layerData.getGroundTint(this.owner.world, this.stonePos.x, this.stonePos.y);
+                        main.startColor = layerData.GetGroundTint(this.owner.world, this.stonePos.x, this.stonePos.y);
                     }
                 }
 

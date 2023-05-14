@@ -15,31 +15,31 @@ MonoBehaviour:
   _cellName: tree
   _isSolid: 0
   _floorOverlayTile: {fileID: 0}
-  _objectTile: {fileID: 11400000, guid: 13ef1d3a8a3b7b648adec816ad9f8703, type: 2}
+  _objectTile: {fileID: 11400000, guid: e5bf133531332514f9eb19e88f32a8b9, type: 2}
   _objectOverlayTile: {fileID: 0}
-  _rotationalOverride: 0
+  _rotationalOverride: 1
   up:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 0}
+    _objectTile: {fileID: 11400000, guid: e5bf133531332514f9eb19e88f32a8b9, type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
   right:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 0}
+    _objectTile: {fileID: 11400000, guid: 72b20d9ef30ff074997cdb88f434557e, type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
   down:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 0}
+    _objectTile: {fileID: 11400000, guid: 83572d9f2bff52a4d93b84f68b1e8a4d, type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
   left:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 0}
+    _objectTile: {fileID: 11400000, guid: 0b419bd20f3885943a06eb2963146b95, type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
   _movementCost: -1

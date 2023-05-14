@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Layer4
   m_EditorClassIdentifier: 
   tintColor: {r: 0.56, g: 0.47824815, b: 0.4578102, a: 1}
-  tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
+  _fillCell: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
   _hasFog: 1
   _defaultTemperature: 0
-  _generateBlockerRocks: 1
-  generateCaves: 1
+  _generateCaves: 1
   oreSpawnSettings:
   - _veinsPerChunk: 5
     _veinData: {fileID: 11400000, guid: 1848891413249dc40be5b8d03c082a1f, type: 2}
@@ -26,6 +25,3 @@ MonoBehaviour:
     _veinData: {fileID: 11400000, guid: 2e019eabe9569c84281ce02b74473140, type: 2}
   - _veinsPerChunk: 6
     _veinData: {fileID: 11400000, guid: f49172a8dfac092419bd80fb976dcc5d, type: 2}
-  lakeType: 2
-  lakeChance: 50
-  _structures: []

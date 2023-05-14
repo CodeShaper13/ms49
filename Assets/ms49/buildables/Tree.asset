@@ -17,8 +17,13 @@ MonoBehaviour:
   _description: Leafy and green
   _tab: {fileID: 11400000, guid: e9352f57e16cf1141a7672a7a6153369, type: 2}
   _fogOption: 0
-  _overrideRotationMsg: 
+  _overrideRotationMsg: '[r] Change size'
   _displayRotation: 0
-  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _buildTime: 0
   _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: e0d7c53bfaab1834ab324e0397dc80f0, type: 2}
+  _buildableSize: {x: 1, y: 1}
+  _gridRows:
+  - _row:
+    - 
+  _gridMappings: []

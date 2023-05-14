@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
+using Random = System.Random;
 
-public abstract class FeatureBase : MonoBehaviour {
+public abstract class FeatureBase : MonoBehaviour, IPriority {
 
-    [SerializeField]
+    [SerializeField, Tooltip("Lower priority features are generated before higher priority features.")]
     private int _priority = 0;
 
-    public int priority => this._priority;
+    public int Priority => this._priority;
 
-    public abstract void generate(System.Random rnd, LayerData layerData, MapAccessor accessor);
+    // Makes the enable checkbox show up in the inspector.
+    private void Start() { }
+
+    public abstract void Generate(Random rnd, LayerData layerData, MapAccessor accessor);
 }

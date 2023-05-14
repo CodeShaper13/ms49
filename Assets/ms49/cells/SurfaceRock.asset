@@ -42,7 +42,7 @@ MonoBehaviour:
     _objectTile: {fileID: 11400000, guid: 37feff3992e4dd44fb09d8da15b1ddfb, type: 2}
     _overlayTile: {fileID: 0}
     _effect: 0
-  _movementCost: -1
+  _movementCost: 0
   _canBuildOver: 0
   _isDestroyable: 1
   _zMoveDirections: 0

@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FeatureCave : FeatureBase {
-
-    [SerializeField]
-    public CellData waterTile = null;
-    [SerializeField]
-    public CellData lavaTile = null;
 
     [Header("Cave Generation")]
     [SerializeField, Range(0, 100)]
@@ -28,40 +24,41 @@ public class FeatureCave : FeatureBase {
     [SerializeField]
     private int _roomMaxSize = 100;
 
-    [Header("Lake Settings")]
-    [SerializeField, Range(0, 100)]
-    private int _lakeFailPercent = 50;
-    [SerializeField, Range(0, 100)]
-    private int _lakeFillPercent = 80;
+    [Space]
+
     [SerializeField]
+    private CellData _lakeFillCell = null;
+    [SerializeField, ShowIf(nameof(__flag)), Range(0, 100)]
+    private int _lakeFailPercent = 50;
+    [SerializeField, ShowIf(nameof(__flag)), Range(0, 100)]
+    private int _lakeFillPercent = 80;
+    [SerializeField, ShowIf(nameof(__flag))]
     private int _lakeSmoothPasses = 3;
 
-    public override void generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
-        if(layerData.generateCaves) {
-            int[,] map = this.makeCaves(rnd, layerData.lakeType, accessor.size);
+    public override void Generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
+        int[,] map = this.makeCaves(rnd, accessor.size);
 
-            // Set tiles.
-            for(int x = 0; x < accessor.size; x++) {
-                for(int y = 0; y < accessor.size; y++) {
-                    int id = map[x, y];
-                    CellData cell = null;
+        // Set tiles.
+        for(int x = 0; x < accessor.size; x++) {
+            for(int y = 0; y < accessor.size; y++) {
+                int id = map[x, y];
+                CellData cell = null;
 
-                    if(id == 0) {
-                        cell = Main.instance.CellRegistry.GetAir();
-                    }
-                    else if(id == 2) {
-                        cell = layerData.lakeType == EnumLakeType.WATER ? this.waterTile : this.lavaTile;
-                    }
+                if(id == 0) {
+                    cell = Main.instance.CellRegistry.GetAir();
+                }
+                else if(id == 2) {
+                    cell = this._lakeFillCell;
+                }
 
-                    if(cell != null) {
-                        accessor.setCell(x, y, cell);
-                    }
+                if(cell != null) {
+                    accessor.SetCell(x, y, cell);
                 }
             }
         }
     }
 
-    public int[,] makeCaves(System.Random rnd, EnumLakeType lakeType, int size) {
+    public int[,] makeCaves(System.Random rnd, int size) {
         int[,] map = new int[size, size];
         this.RandomFillMap(rnd, map, size, this._randomFillPercent);
 
@@ -88,7 +85,7 @@ public class FeatureCave : FeatureBase {
         }
 
         // Fill rooms with water
-        if(lakeType != EnumLakeType.NONE) {
+        if(this._lakeFillCell != null) {
             int[,] m = new int[size, size];
             foreach(List<Vector2Int> room in roomRegions) {
                 if(rnd.Next(0, 100) < this._lakeFailPercent) {
@@ -239,4 +236,6 @@ public class FeatureCave : FeatureBase {
 
         return wallCount;
     }
+
+    private bool __flag => this._lakeFillCell != null;
 }

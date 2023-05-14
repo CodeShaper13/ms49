@@ -108,12 +108,12 @@ public class World : MonoBehaviour {
 
 
         // Set starting money.
-        this.money.value = this._mapGenerator.startingMoney;
+        this.money.value = this._mapGenerator.StartingMoney;
 
 
         // Spawn the starting Workers.
         WorkerFactory factory = Main.instance.workerFactory;
-        foreach(WorkerType workerType in this._mapGenerator.startingWorkers) {
+        foreach(WorkerType workerType in this._mapGenerator.StartingWorkers) {
             if(workerType == null) {
                 continue;
             }
@@ -133,7 +133,7 @@ public class World : MonoBehaviour {
         // Setup the new Player.
         CameraController player = Main.instance.player;
         player.inCreativeMode = settings.creativeEnabled;
-        player.changeLayer(this._mapGenerator.playerStartLayer);
+        player.changeLayer(this._mapGenerator.PlayerStartLayer);
     }
 
     private void postInitialization() {

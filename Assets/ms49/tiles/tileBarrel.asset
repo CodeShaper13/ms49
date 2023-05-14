@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: barrel
+  m_Name: tileBarrel
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -6374461600610287948, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}

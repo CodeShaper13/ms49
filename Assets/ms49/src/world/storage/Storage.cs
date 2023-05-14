@@ -20,7 +20,7 @@ public class Storage {
 
     public Storage(World world) {
         this.world = world;
-        this.layerCount = this.world.MapGenerator.layerCount;
+        this.layerCount = this.world.MapGenerator.LayerCount;
         this.layers = new Layer[this.layerCount];
         this.aboveGroundMap = new byte[this.world.MapSize * this.world.MapSize];
         this.cachedBehaviors = new HashSet<CellBehavior>();

@@ -27,19 +27,19 @@ public class WorldRenderer : MonoBehaviour {
         this.cellRenderer.initializedRenderer(
             this._world.MapSize,
             (x, y) => {
-                return this._world.MapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTint(this._world, x, y);
+                return this._world.MapGenerator.GetLayerFromDepth(this.targetLayer.depth).GetGroundTint(this._world, x, y);
             },
             (x, y) => {
-                LayerData layerData = this._world.MapGenerator.getLayerFromDepth(this.targetLayer.depth);
+                LayerData layerData = this._world.MapGenerator.GetLayerFromDepth(this.targetLayer.depth);
                 int hardness = this.targetLayer.GetHardness(x, y);
                 hardness = Mathf.Clamp(hardness, 0, this._hardnessColors.Length - 1);
-                return this._hardnessColors[hardness] * layerData.getGroundTint(this._world, x, y);
+                return this._hardnessColors[hardness] * layerData.GetGroundTint(this._world, x, y);
             },
             (x, y) => {
                 return this.targetLayer.getCellState(x, y);
             },
             (x, y) => {
-                return this._world.MapGenerator.getLayerFromDepth(this.targetLayer.depth).getGroundTile(this._world, x, y);
+                return this._world.MapGenerator.GetLayerFromDepth(this.targetLayer.depth).GetGroundTile(this._world, x, y);
             }
             );
     }

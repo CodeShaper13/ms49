@@ -48,7 +48,7 @@ public class StructureMineshaft : StructureBase {
     [SerializeField, Range(0, 1)]
     private float _chestChance = 0.6f;
 
-    public override void generate(World world, int depth) {
+    public override void Generate(World world, int depth) {
         List<Plot> list = new List<Plot>(world.plotManager.plots);
 
         // Small shaft.

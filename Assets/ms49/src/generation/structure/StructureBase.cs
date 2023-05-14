@@ -6,7 +6,7 @@ public abstract class StructureBase : ScriptableObject {
     /// <summary>
     /// Called to generate the structure after all features have been generated.
     /// </summary>
-    public abstract void generate(World world, int depth);
+    public abstract void Generate(World world, int depth);
 
     /// <summary>
     /// Sets a cell in the world and check to see if it is within

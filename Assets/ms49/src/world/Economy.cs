@@ -100,9 +100,9 @@ public class Economy : MonoBehaviour, ISaveableState {
 
     public bool isItemUnlocked(Item item) {
         MapGenerator generator = this._world.MapGenerator;
-        for(int depth = 0; depth < generator.layerCount; depth++) {
+        for(int depth = 0; depth < generator.LayerCount; depth++) {
             if(this._world.IsDepthUnlocked(depth)) {
-                OreSettings[] oreSettings = generator.getLayerFromDepth(depth).oreSpawnSettings;
+                OreSettings[] oreSettings = generator.GetLayerFromDepth(depth).oreSpawnSettings;
 
                 if(oreSettings != null) {
                     foreach(OreSettings setting in oreSettings) {

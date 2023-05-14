@@ -1,79 +1,73 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using NaughtyAttributes;
 
 public class MapGenerator : MonoBehaviour {
 
     [SerializeField]
     private LayerData[] _layers = new LayerData[0];
     [SerializeField]
+    private Transform[] _layerObjs = null;
+    [SerializeField]
     private NoiseSettings _noiseSettings = new NoiseSettings();
 
-    [Space, Header("Player Starting Settings")]
-
-    [SerializeField, Min(0)]
+    [SerializeField, BoxGroup("Player Starting Settings"), Min(0)]
     private int _startingLayer = 0;
-    [SerializeField]
+    [SerializeField, BoxGroup("Player Starting Settings")]
     private int _startingMoney = 1000;
-    [SerializeField]
+    [SerializeField, BoxGroup("Player Starting Settings")]
     private WorkerType[] _startingWorkers = new WorkerType[0];
 
-    private List<FeatureBase> features;
+    //private List<FeatureBase> features;
 
-    public int layerCount => this._layers == null ? 0 : this._layers.Length;
-    public int playerStartLayer => this._startingLayer;
-    public int startingMoney => this._startingMoney;
-    public WorkerType[] startingWorkers => this._startingWorkers;
+    public int LayerCount => this._layers == null ? 0 : this._layers.Length;
+    public int PlayerStartLayer => this._startingLayer;
+    public int StartingMoney => this._startingMoney;
+    public WorkerType[] StartingWorkers => this._startingWorkers;
 
+    /*
     private void Awake() {
         // Find all of the attached Feature components and sort them by priority.
         this.features = new List<FeatureBase>();
         foreach(FeatureBase task in this.GetComponentsInChildren<FeatureBase>()) {
             this.features.Add(task);
         }
-        this.features = this.features.OrderBy(e => e.priority).ToList();
+        this.features = this.features.OrderBy(e => e.Priority).ToList();
     }
+    */
 
     /// <summary>
     /// Fully generates the Layer at the passed depth and places it
     /// into the World's storage.
     /// </summary>
     public void generateLayer(World world, int depth) {
-        int layerSeed = world.seed * (depth + 1);
+        int layerSeed = world.seed | (depth + 1).GetHashCode(); // TODO is this a good algorithm?
 
         MapAccessor accessor = new MapAccessor(world.MapSize, depth);
-        LayerData layerData = this.getLayerFromDepth(depth);
-
+        LayerData layerData = this.GetLayerFromDepth(depth);
 
         // Fill the map with the Layer's fill cell.
         for(int x = 0; x < accessor.size; x++) {
             for(int y = 0; y < accessor.size; y++) {
-                accessor.setCell(x, y, layerData.getFillCell(world, x, y));
+                accessor.SetCell(x, y, layerData.GetFillCell(world, x, y));
             }
         }
 
 
         // Generate all of the features.
-        foreach(FeatureBase feature in this.features) {
-            feature.generate(new System.Random(layerSeed), layerData, accessor);
-        }        
+        foreach(FeatureBase feature in this.GetGeneratorComponents<FeatureBase>(depth)) {
+            if(feature.enabled) {
+                feature.Generate(
+                    new System.Random(layerSeed),
+                    layerData,
+                    accessor);
+            }
+        }
 
 
         Layer layer = new Layer(world, depth);
-
-
-        // Apply the accessor to the Layer.
-        for(int x = 0; x < accessor.size; x++) {
-            for(int y = 0; y < accessor.size; y++) {
-                Rotation r = accessor.getRot(x, y);
-                layer.setCell(
-                    x,
-                    y,
-                    accessor.getCell(x, y),
-                    r == null ? Rotation.UP.id : r.id,
-                    false);
-            }
-        }
+        accessor.ApplyToLayer(layer);
 
 
         // Generate the hardness map and apply it.
@@ -94,13 +88,11 @@ public class MapGenerator : MonoBehaviour {
         world.storage.SetLayer(layer, depth);
 
 
-        // Generate all of the structures that belong on this Layer
+        // Generate all of the structures that belong on this Layer.
         Random.InitState(layerSeed);
         
-        foreach(StructureBase structure in layerData.structures) {
-            if(structure != null) {
-                structure.generate(world, depth);
-            }
+        foreach(StructurePlacer structure in this.GetGeneratorComponents<StructurePlacer>(depth)) {
+            structure.GenerateStructure(world, depth);
         }
     }
 
@@ -108,11 +100,30 @@ public class MapGenerator : MonoBehaviour {
     /// Returns the LayerData that provides data for the passed depth.
     /// If there is none set or the passed depth is out of bounds, null is returned.
     /// </summary>
-    public LayerData getLayerFromDepth(int depth) {
+    public LayerData GetLayerFromDepth(int depth) {
         if(depth < 0 || depth >= this._layers.Length) {
             return null;
         }
 
         return this._layers[depth];
+    }
+
+    private IOrderedEnumerable<T> GetGeneratorComponents<T>(int depth) where T : Component, IPriority {
+        List<T> components = new List<T>();
+
+        foreach(T component in this.GetComponents<T>()) {
+            components.Add(component);
+        }
+
+        if(depth >= 0 && depth < this._layerObjs.Length) {
+            Transform t = this._layerObjs[depth];
+            if(t != null) {
+                foreach(T component in t.GetComponentsInChildren<T>()) {
+                    components.Add(component);
+                }
+            }
+        }
+
+        return components.OrderBy(e => e.Priority);
     }
 }

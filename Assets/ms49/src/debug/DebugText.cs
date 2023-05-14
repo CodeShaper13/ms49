@@ -38,7 +38,7 @@ public class DebugText : MonoBehaviour {
                     CellState state = world.GetCellState(pos);
                     this.sb.AppendLine("  Tile: " + state.data.name);
                     this.sb.AppendLine("  Pos: " + pos.ToString());
-                    this.sb.AppendLine("  Rotation: " + state.Rotation.name);
+                    this.sb.AppendLine("  Meta: " + state.meta + " (Rotation=" + state.Rotation.name + ")");
                     Layer layer = world.storage.GetLayer(pos.depth);
                     this.sb.AppendLine("  Temperature: " + layer.GetTemperature(pos.x, pos.y));
                     this.sb.AppendLine("  Unmodified temperature: " + layer.GetUnmodifiedTemperature(pos.x, pos.y));

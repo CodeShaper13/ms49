@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "Structure", menuName = "MS49/Structure/Surface", order = 1)]
 public class StructureSurface : StructureBase {
@@ -8,8 +10,8 @@ public class StructureSurface : StructureBase {
     [SerializeField]
     private PrimitiveRndObject[] rndObjects = null;
 
-    public override void generate(World world, int depth) {
-        LayerData layerData = world.MapGenerator.getLayerFromDepth(depth);
+    public override void Generate(World world, int depth) {
+        LayerData layerData = world.MapGenerator.GetLayerFromDepth(depth);
 
         // Generate the inside/outside map
         for(int x = 0; x < world.MapSize; x++) {
@@ -51,10 +53,32 @@ public class StructureSurface : StructureBase {
 
                     // Remove ores exposed to the surface, but not the bedrock
                     if(x != 0 && x != world.MapSize -1 && world.IsOutside(new Position(x, y - 1, depth))) {
-                        world.SetCell(pos, layerData.getFillCell(world, x, y));
+                        world.SetCell(pos, layerData.GetFillCell(world, x, y));
                     }
                 }
             }
          }
+    }
+
+    [Serializable]
+    public class PrimitiveRndObject {
+
+        [SerializeField]
+        private CellData cell = null;
+        [SerializeField]
+        [Range(0, 1)]
+        private float chance = 0.5f;
+        [SerializeField]
+        private bool _randomRotation = false;
+
+        public void getRnd(ref CellData cell, ref Rotation rotation) {
+            if(UnityEngine.Random.Range(0f, 1f) < this.chance) {
+                cell = this.cell;
+
+                if(this._randomRotation) {
+                    rotation = Rotation.ALL[UnityEngine.Random.Range(0, 4)];
+                }
+            }
+        }
     }
 }

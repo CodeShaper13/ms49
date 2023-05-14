@@ -1,15 +1,6 @@
-﻿using UnityEngine;
+﻿public class FeatureOres : FeatureBase {
 
-public class FeatureOres : FeatureBase {
-
-    private Vector2Int[] dirs = new Vector2Int[] {
-        Vector2Int.up,
-        Vector2Int.down,
-        Vector2Int.left,
-        Vector2Int.right,
-    };
-
-    public override void generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
+    public override void Generate(System.Random rnd, LayerData layerData, MapAccessor accessor) {
         int chunkCount = accessor.size / 16;
 
         for(int chunkPosX = 0; chunkPosX < chunkCount; chunkPosX++) {
@@ -37,9 +28,9 @@ public class FeatureOres : FeatureBase {
             int x = (i1 * 16) + chunkX;
             int y = (j1 * 16) + chunkY;
 
-            CellData c = accessor.getCell(x, y);
+            CellData c = accessor.GetCell(x, y);
             if(c is CellDataMineable) {
-                accessor.setCell(x, y, oreCell);
+                accessor.SetCell(x, y, oreCell);
             }
 
             Rotation r = Rotation.ALL[rnd.Next(0, Rotation.ALL.Length)];

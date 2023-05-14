@@ -13,24 +13,9 @@ MonoBehaviour:
   m_Name: Layer1
   m_EditorClassIdentifier: 
   tintColor: {r: 1, g: 1, b: 1, a: 1}
-  tile: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
+  _fillCell: {fileID: 11400000, guid: ed2bbec2d1113954e9d823891b3baada, type: 2}
   floorTile: {fileID: 11400000, guid: 2c1502c47458aef409cbc9402b35a22c, type: 2}
   _hasFog: 1
   _defaultTemperature: 0
-  _generateBlockerRocks: 1
-  generateCaves: 1
-  oreSpawnSettings:
-  - _veinsPerChunk: 10
-    _veinData: {fileID: 11400000, guid: 4c50c295cabcce84ba52c8cef3a6b9c6, type: 2}
-  - _veinsPerChunk: 1
-    _veinData: {fileID: 11400000, guid: 403c5d9708f7d5f468569cb58ff74866, type: 2}
-  - _veinsPerChunk: 2
-    _veinData: {fileID: 11400000, guid: 539e5a6a9da63304b873c1c2893427b2, type: 2}
-  - _veinsPerChunk: 3
-    _veinData: {fileID: 11400000, guid: b4c5ddc756508ef4da837a2f4eb42d24, type: 2}
-  lakeType: 0
-  lakeChance: 0
-  _structures:
-  - {fileID: 11400000, guid: 2f6f6ad10fa9bbc49a73eec17d8d6143, type: 2}
-  - {fileID: 11400000, guid: 991715c7d7a5c1b4fb796ce65ac77150, type: 2}
+  oreSpawnSettings: []
   grassTile: {fileID: 11400000, guid: f4dff4c3822cc87479543eeae0fae003, type: 2}

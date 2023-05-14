@@ -17,7 +17,6 @@ public class DebugCaveGenerator : MonoBehaviour {
     private void Update() {
         this.map = this.feature.makeCaves(
             new System.Random(seed.GetHashCode() * (0 + 1)),
-            this._generateLakes ? EnumLakeType.WATER : EnumLakeType.NONE,
             this.mapSize);
     }
 

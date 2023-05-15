@@ -22,7 +22,14 @@ public struct Position {
     /// <summary>
     /// The center of the Cell this Position is representing.
     /// </summary>
-    public Vector2 Center => new Vector2(x + 0.5f, y + 0.5f);
+    public Vector2 Center => new Vector2(this.x + 0.5f, this.y + 0.5f);
+    public Vector3Int AsVec3Int => new Vector3Int(this.x, this.y, this.depth);
+
+    public Vector3 AsVec3 => new Vector3(this.x, this.y, this.depth);
+
+    public Vector2Int AsVec2Int => new Vector2Int(this.x, this.y);
+
+    public Vector2 AsVec2 => new Vector2(this.x, this.y);
 
     public Position(Vector3Int vec3) : this(vec3.x, vec3.y, vec3.z) { }
 
@@ -54,22 +61,6 @@ public struct Position {
         }
     }
 
-    public Vector3Int AsVec3Int {
-        get { return new Vector3Int(this.x, this.y, this.depth); }
-    }
-
-    public Vector3 AsVec3 {
-        get { return new Vector3(this.x, this.y, this.depth); }
-    }
-
-    public Vector2Int AsVec2Int {
-        get { return new Vector2Int(this.x, this.y); }
-    }
-
-    public Vector2 AsVec2 {
-        get { return new Vector2(this.x, this.y); }
-    }
-
     public Position SetX(int x) {
         return new Position(x, this.y, this.depth);
     }
@@ -92,7 +83,7 @@ public struct Position {
     /// <summary>
     /// subtracts the passed value from the position.
     /// </summary>
-    public Position Substract(int x, int y, int depth = 0) {
+    public Position Subtract(int x, int y, int depth = 0) {
         return new Position(this.x + x, this.y + y, this.depth + depth);
     }
 

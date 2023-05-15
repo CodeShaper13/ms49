@@ -4,47 +4,45 @@
 [DisallowMultipleComponent]
 public class PathfindingAgent : MonoBehaviour {
 
-    [SerializeField, Min(0)]
-    [Tooltip("How many units the Entity moves per second.")]
-    public float walkSpeed = 1f;
-    [SerializeField, Min(0)]
-    [Tooltip("How long it takes to climb a ladder in seconds.")]
+    [Min(0), Tooltip("How many units the Entity moves per second.")]
+    public float moveSpeed = 1f;
+    [Min(0), Tooltip("How long it takes to climb a ladder in seconds.")]
     public float ladderClimbSpeed = 0.1f;
-    [SerializeField]
-    public float speedMultiplyer = 1f;
-    
+    [Min(0), Tooltip("What NavMap this Agent Operates on.")]
+    public int navMapId = 0;
+
     private EntityBase entity;
     private float layerChangeProgress;
 
     public NavPath path { get; private set; }
 
-    private void Awake() {
+    private void Start() {
         this.entity = this.GetComponent<EntityBase>();
     }
 
-    public void update() {
-        if(this.hasPath()) {
-            PathPoint currentWaypoint = this.path.targetPoint;
+    private void Update() {
+        if(this.HasPath()) {
+            Position currentWaypoint = this.path.TargetPoint;
             Vector2 workerPos = this.entity.worldPos;
 
-            bool posMatch = workerPos == currentWaypoint.worldPos;
+            bool posMatch = workerPos == currentWaypoint.Center;
             bool depthMatch = entity.depth == currentWaypoint.depth;
 
             if(posMatch) {
                 if(depthMatch) {
-                    this.path.nextPoint();
-                    if(this.path.targetIndex >= path.pointCount) {
+                    this.path.NextPoint();
+                    if(this.path.targetIndex >= path.PointCount) {
                         // Reached the end of the path.
 
                         if(this.path.endingLookDirection != null) {
                             this.entity.rotation = this.path.endingLookDirection;
                         }
 
-                        this.stop();
+                        this.Stop();
 
                         return;
                     }
-                    currentWaypoint = this.path.targetPoint;
+                    currentWaypoint = this.path.TargetPoint;
                 } else {
                     if(this.layerChangeProgress == 0) {
                         // First frame climbing, start an animation
@@ -69,8 +67,8 @@ public class PathfindingAgent : MonoBehaviour {
             // Move the Worker towards the next point on the X and Y axis.
             this.transform.position = Vector2.MoveTowards(
                 transform.position,
-                currentWaypoint.worldPos,
-                this.walkSpeed * this.speedMultiplyer * Time.deltaTime);
+                currentWaypoint.Center,
+                this.moveSpeed * Time.deltaTime);
 
             // Update the direction the Worker is looking.
             Vector2 direction = this.transform.position - posBeforeMove;
@@ -79,42 +77,42 @@ public class PathfindingAgent : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        if(this.hasPath()) {
-            for(int i = this.path.targetIndex; i < this.path.pointCount; i++) {
+        if(this.HasPath()) {
+            for(int i = this.path.targetIndex; i < this.path.PointCount; i++) {
                 Gizmos.color = Color.yellow;
 
                 if(i == this.path.targetIndex) {
                     Gizmos.DrawLine(
                         this.transform.position,
-                        this.path.getPoint(i).worldPos);
+                        this.path[i].Center);
                 } else {
                     Gizmos.DrawLine(
-                        this.path.getPoint(i - 1).worldPos,
-                        this.path.getPoint(i).worldPos);
+                        this.path[i - 1].Center,
+                        this.path[i].Center);
                 }
             }
 
-            for(int i = 0; i < this.path.pointCount; i++) {
-                Gizmos.DrawSphere(this.path.getPoint(i).worldPos, 0.1f);
+            for(int i = 0; i < this.path.PointCount; i++) {
+                Gizmos.DrawSphere(this.path[i].Center, 0.1f);
             }
         }
     }
 
     /// <summary>
-    /// Stops the Worker.  This will delete the path.
+    /// Stops the Agent.  This will delete the path.
     /// </summary>
-    public void stop() {
+    public void Stop() {
         this.path = null;
     }
 
     /// <summary>
-    /// Returns true if the Worker has a path that they are following.
+    /// Returns true if the Agent has a path that they are following.
     /// </summary>
-    public bool hasPath() {
+    public bool HasPath() {
         return this.path != null;
     }
 
-    public void setPath(NavPath path) {
+    public void SetPath(NavPath path) {
         this.path = path;
     }
 
@@ -171,7 +169,7 @@ public class PathfindingAgent : MonoBehaviour {
     /// <summary>
     /// Attempts to calculate a path to the passed destination.
     /// </summary>
-    public NavPath calculatePath(Position destination, bool stopAdjacentToFinish = false, Rotation endingRotation = null) {
+    public NavPath CalculatePath(Position destination, bool stopAdjacentToFinish = false, Rotation endingRotation = null) {
         if(this.entity.position == destination) {
             if(stopAdjacentToFinish) {
                 //dest = free position adjacent to entity
@@ -186,13 +184,13 @@ public class PathfindingAgent : MonoBehaviour {
                 }
             } else {
                 return new NavPath(
-                    new PathPoint[] { new PathPoint(destination) },
+                    new Position[] { destination },
                     endingRotation);
             }
         } else if(Vector2Int.Distance(this.entity.position.AsVec2Int, destination.AsVec2Int) == 1) { // Next to destination
             if(stopAdjacentToFinish) {
                 return new NavPath(
-                    new PathPoint[] { new PathPoint(this.entity.position) }, // Go to their own spot
+                    new Position[] { this.entity.position }, // Go to their own spot
                     Rotation.directionToRotation(destination.AsVec2Int - this.entity.getCellPos()));
             }
         }
@@ -203,7 +201,8 @@ public class PathfindingAgent : MonoBehaviour {
         }
 
         // Try and find a path.
-        PathPoint[] pathPoints = this.entity.world.navManager.findPath(
+        Position[] pathPoints = Pathfinder.FindPath(
+            this.navMapId,
             this.entity.position,
             destination,
             stopAdjacentToFinish);
@@ -219,7 +218,7 @@ public class PathfindingAgent : MonoBehaviour {
             endRot = endingRotation;
         } else {
             endRot = stopAdjacentToFinish ?
-                Rotation.directionToRotation(destination.AsVec2Int - pathPoints[pathPoints.Length - 1].cellPos) :
+                Rotation.directionToRotation(destination.AsVec2Int - pathPoints[pathPoints.Length - 1].AsVec2Int) :
                 null;
         }
 

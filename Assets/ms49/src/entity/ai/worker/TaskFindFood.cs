@@ -33,7 +33,7 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
             }
 
             foreach(CellBehaviorTable table in this.owner.world.GetAllBehaviors<CellBehaviorTable>(behavior => behavior.hasChair && !behavior.isOccupied())) {
-                NavPath path = this.agent.calculatePath(table.chairPos);
+                NavPath path = this.agent.CalculatePath(table.chairPos);
 
                 if(path != null) {
                     path.endingLookDirection = Rotation.directionToRotation(table.center - table.chair.behavior.center);
@@ -102,12 +102,12 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
             // If there no walkable space, stay on the chair.  Others will still be able to claim it.
             Position? freeSpot = this.getFreeSpot(this.owner.position);
             if(freeSpot != null) {
-                NavPath path = this.agent.calculatePath(
+                NavPath path = this.agent.CalculatePath(
                     (Position)freeSpot,
                     false);
 
                 if(path != null) {
-                    this.agent.setPath(path);
+                    this.agent.SetPath(path);
                 }
             }
 

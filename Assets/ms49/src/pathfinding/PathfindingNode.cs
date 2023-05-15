@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class PathfindingNode : IHeapItem<PathfindingNode> {
+﻿public class PathfindingNode : IHeapItem<PathfindingNode> {
 
     public readonly int x;
     public readonly int y;
@@ -12,12 +10,26 @@ public class PathfindingNode : IHeapItem<PathfindingNode> {
     public int hCost;
     public PathfindingNode parent;
 
-    public Vector2 worldPosition;
+    private int heapIndex;
 
-    int heapIndex;
+    public bool IsWalkable => this.movementPenalty >= 0;
+    public Position Position => new Position(this.x, this.y, this.depth);
+    public int FCost => this.gCost + this.hCost;
+    public bool ConnectsUp =>
+        this.zMoveDir == EnumZMoveDirection.Up ||
+        this.zMoveDir == EnumZMoveDirection.Both;
+    public bool ConnectsDown =>
+        this.zMoveDir == EnumZMoveDirection.Down ||
+        this.zMoveDir == EnumZMoveDirection.Both;
+    // Required from IHeapItem
+    public int HeapIndex {
+        get => this.heapIndex;
+        set {
+            this.heapIndex = value;
+        }
+    }
 
-    public PathfindingNode(Vector2 worldPos, int x, int y, int depth, EnumZMoveDirection zMoveDir, int penalty) {
-        this.worldPosition = worldPos;
+    public PathfindingNode(int x, int y, int depth, EnumZMoveDirection zMoveDir, int penalty) {
         this.x = x;
         this.y = y;
         this.depth = depth;
@@ -25,49 +37,14 @@ public class PathfindingNode : IHeapItem<PathfindingNode> {
         this.movementPenalty = penalty;
     }
 
-    public PathPoint asPathPoint() {
-        return new PathPoint(this.x, this.y, this.depth);
-    }
-
-    public bool connectsUp() {
-        return this.zMoveDir == EnumZMoveDirection.Up ||
-            this.zMoveDir == EnumZMoveDirection.Both;
-    }
-
-    public bool connectsDown() {
-        return this.zMoveDir == EnumZMoveDirection.Down ||
-            this.zMoveDir == EnumZMoveDirection.Both;
-    }
-
-    public bool isWalkable {
-        get {
-            return this.movementPenalty >= 0;
-        }
-    }
-
-    public int fCost {
-        get {
-            return gCost + hCost;
-        }
-    }
-
     public override string ToString() {
-        return "Node(" + this.x + "," + this.y + ")(walkable:" + this.isWalkable.ToString() + ")";
-    }
-
-    public int HeapIndex {
-        get {
-            return heapIndex;
-        }
-        set {
-            heapIndex = value;
-        }
+        return string.Format("Node([{0}, {1}], IsWalkable:{2})", this.x, this.y, this.IsWalkable);
     }
 
     public int CompareTo(PathfindingNode nodeToCompare) {
-        int compare = fCost.CompareTo(nodeToCompare.fCost);
+        int compare = this.FCost.CompareTo(nodeToCompare.FCost);
         if(compare == 0) {
-            compare = hCost.CompareTo(nodeToCompare.hCost);
+            compare = this.hCost.CompareTo(nodeToCompare.hCost);
         }
         return -compare;
     }

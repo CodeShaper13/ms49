@@ -142,7 +142,7 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
                 continue;
             }
 
-            this.navPath = this.agent.calculatePath(ts.pos, true);
+            this.navPath = this.agent.CalculatePath(ts.pos, true);
 
             if(this.navPath != null) {
                 this.stonePos = ts.pos;

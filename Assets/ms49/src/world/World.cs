@@ -37,7 +37,6 @@ public class World : MonoBehaviour {
     public Storage storage { get; private set; }
     public string saveName { get; private set; }
     public int seed { get; private set; }
-    public NavigationManager navManager { get; private set; }
 
     /// <summary>
     /// The size of the map in cells.
@@ -50,6 +49,8 @@ public class World : MonoBehaviour {
     }
 
     private void Start() {
+        Pathfinder.Initialize(this.MapSize * this.MapSize * this.storage.layerCount);
+
         this.StartCoroutine(this.UpdateHeat());
     }
 
@@ -69,8 +70,6 @@ public class World : MonoBehaviour {
                 this._mapGenerator.generateLayer(this, i);
             }
         }
-
-        this.postInitialization();
 
         // Read Player:
         if(CameraController.instance != null) {
@@ -127,29 +126,10 @@ public class World : MonoBehaviour {
                 workerType);
         }
 
-
-        this.postInitialization();
-
         // Setup the new Player.
         CameraController player = Main.instance.player;
         player.inCreativeMode = settings.creativeEnabled;
         player.changeLayer(this._mapGenerator.PlayerStartLayer);
-    }
-
-    private void postInitialization() {
-        this.navManager = new NavigationManager(this, this.MapSize);
-    }
-
-    private void Update() {
-        if(!Pause.IsPaused) {
-            this.navManager.update();
-        }
-    }
-
-    private void OnDrawGizmosSelected() {
-        if(this.navManager != null) {
-            this.navManager.debugDraw();
-        }
     }
 
     public CellState GetCellState(int x, int y, int depth) {

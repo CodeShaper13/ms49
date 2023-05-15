@@ -69,12 +69,12 @@ public class TaskSleep : TaskMovement<EntityWorker> {
             }
 
             if(freeSpot != null) {
-                NavPath path =this.agent.calculatePath(
+                NavPath path =this.agent.CalculatePath(
                     (Position)freeSpot,
                     false);
 
                 if(path != null) {
-                    this.agent.setPath(path);
+                    this.agent.SetPath(path);
                 }
             }
 

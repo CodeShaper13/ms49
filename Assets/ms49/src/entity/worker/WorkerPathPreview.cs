@@ -12,27 +12,29 @@ public class WorkerPathPreview : MonoBehaviour {
     private float zValue = -1;
 
     private void Update() {
-        if(!Pause.isPaused()) {
-            if(this.moveHelper != null && this.moveHelper.hasPath()) {
-                this.lr.enabled = true;
+        if(Pause.IsPaused) {
+            return;
+        }
 
-                NavPath path = this.moveHelper.path;
+        if(this.moveHelper != null && this.moveHelper.HasPath()) {
+            this.lr.enabled = true;
 
-                List<Vector3> points = new List<Vector3>();
-                points.Add(this.transform.position - Vector3.forward);
+            NavPath path = this.moveHelper.path;
 
-                for(int i = path.targetIndex; i < path.pointCount; i++) {
-                    points.Add((Vector3)path.getPoint(i).worldPos + Vector3.forward * this.zValue);
-                }
+            List<Vector3> points = new List<Vector3>();
+            points.Add(this.transform.position - Vector3.forward);
 
-                this.lr.positionCount = points.Count;
-                Vector3[] a = points.ToArray();
-                Array.Reverse(a);
-                this.lr.SetPositions(a);
-
-            } else {
-                this.lr.enabled = false;
+            for(int i = path.targetIndex; i < path.PointCount; i++) {
+                points.Add((Vector3)path[i].Center + Vector3.forward * this.zValue);
             }
+
+            this.lr.positionCount = points.Count;
+            Vector3[] a = points.ToArray();
+            Array.Reverse(a);
+            this.lr.SetPositions(a);
+
+        } else {
+            this.lr.enabled = false;
         }
     }
 }

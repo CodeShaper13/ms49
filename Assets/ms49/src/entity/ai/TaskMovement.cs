@@ -22,13 +22,13 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
         base.onTaskStart();
 
         if(this.navPath != null) {
-            this.agent.setPath(this.navPath);
+            this.agent.SetPath(this.navPath);
         }
     }
 
     public override void preform() {
         if(this.navPath != null) {
-            Position endPos = this.navPath.endPoint.position;
+            Position endPos = this.navPath.EndPoint;
             if(this.owner.depth == endPos.depth && Vector2.Distance(this.owner.worldPos, endPos.Center) == 0) {
                 // At the end of the path
                 if(!this.onReachCallbackCalled) {
@@ -44,7 +44,7 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
     public override void onTaskStop() {
         base.onTaskStop();
 
-        this.agent.stop();
+        this.agent.Stop();
 
         this.navPath = null;
     }
@@ -60,7 +60,7 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
     public virtual void onAtDestination() { }
 
     protected bool calculateAndSetPath(Position destination, bool stopAdjacent = false, Rotation endingRot = null) {
-        NavPath path = this.agent.calculatePath(destination, stopAdjacent, endingRot);
+        NavPath path = this.agent.CalculatePath(destination, stopAdjacent, endingRot);
 
         if(path != null) {
             this.navPath = path;
@@ -112,7 +112,7 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
                 pos += (Position)offset;
             }
 
-            NavPath path = this.agent.calculatePath(pos, stopAdjacent, endingRot);
+            NavPath path = this.agent.CalculatePath(pos, stopAdjacent, endingRot);
 
             if(path != null) {
                 behavior = b;

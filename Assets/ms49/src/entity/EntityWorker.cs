@@ -57,14 +57,13 @@ public class EntityWorker : EntityBase {
 
         // Terrible, make this better
         this._nameText.text = this.info.lastName;
-        this.moveHelper.speedMultiplyer = this.info.personality.moveSpeedMultiplyer;
+//        this.moveHelper.speedMultiplyer = this.info.personality.moveSpeedMultiplyer;
 
         if(this.isDead) {
             this.animator.playClip("Dead");
         }
         else {
             this.aiManager.updateAi();
-            this.moveHelper.update();
 
             // Kill the Worker if there heath or energy is too low.
             if(this.hunger.value <= this.hunger.minValue || this.energy.value <= this.energy.minValue || this.temperature.value >= this.temperature.maxValue) {
@@ -191,7 +190,9 @@ public class EntityWorker : EntityBase {
     /// <summary>
     /// Called when the Worker dies
     /// </summary>
-    public virtual void onDeath() { }
+    public virtual void onDeath() {
+        this.moveHelper.enabled = false;
+    }
 
     public override void onRightClick() {
         PopupWorkerStats popup = Main.instance.findPopup<PopupWorkerStats>();

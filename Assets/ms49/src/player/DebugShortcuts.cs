@@ -15,9 +15,9 @@ public class DebugShortcuts : MonoBehaviour {
                     foreach(EntityBase e in this.world.entities.list) {
                         if(e is EntityWorker) {
                             PathfindingAgent agent = ((EntityWorker)e).moveHelper;
-                            NavPath path = agent.calculatePath(pos);
+                            NavPath path = agent.CalculatePath(pos);
                             if(path != null) {
-                                agent.setPath(path);
+                                agent.SetPath(path);
                             }
                         }
                     }

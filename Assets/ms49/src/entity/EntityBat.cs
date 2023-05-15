@@ -15,6 +15,5 @@ public class EntityBat : EntityMonster {
         base.Update();
 
         this.aiManager.updateAi();
-        this.agent.update();
     }
 }

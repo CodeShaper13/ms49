@@ -54,7 +54,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
                 behavior => behavior.isOpen());
 
             // Manualy set it
-            this.agent.setPath(this.navPath);
+            this.agent.SetPath(this.navPath);
         }
     }
 
@@ -62,7 +62,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
         base.preform();
 
         if(this.owner.moveHelper.path != this.navPath) {
-            this.owner.moveHelper.setPath(this.navPath);
+            this.owner.moveHelper.SetPath(this.navPath);
         }
     }
 

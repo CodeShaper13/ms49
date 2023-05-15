@@ -2895,6 +2895,7 @@ GameObject:
   - component: {fileID: 6607839254858251112}
   - component: {fileID: 4192695426759653339}
   - component: {fileID: 9057749327208457458}
+  - component: {fileID: 5567684277466776731}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -2950,6 +2951,7 @@ MonoBehaviour:
   statManager: {fileID: 4192695426759653339}
   technologyTree: {fileID: 9057749327208457458}
   _mapGenerator: {fileID: 1354505791}
+  _navManager: {fileID: 5567684277466776731}
   rubbleCell: {fileID: 11400000, guid: 545b74eb5c727d0428b06571cbf64d5d, type: 2}
 --- !u!156049354 &8841259361716791528
 Grid:
@@ -3126,6 +3128,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _graph: {fileID: 11400000, guid: aec3e6d3ff42feb4cbeb5cf4b0e378e1, type: 2}
+--- !u!114 &5567684277466776731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841259361716791532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714653bc5d79c8d49bd626b540c05769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _world: {fileID: 8841259361716791533}
 --- !u!1 &8841259361899933284
 GameObject:
   m_ObjectHideFlags: 0

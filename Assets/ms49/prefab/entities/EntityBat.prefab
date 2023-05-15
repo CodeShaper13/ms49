@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eaa409645aca8846aec66a034e688eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1.5
+  moveSpeed: 1.5
   ladderClimbSpeed: 0.1
   speedMultiplyer: 1
 --- !u!61 &688563221544503517

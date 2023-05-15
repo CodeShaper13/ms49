@@ -22,27 +22,27 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartIntera
         if(this.minecart != null) {
             if(this.isUnloader) {
                 // Pull items from the cart
-                if(this.minecart.inventory.isEmpty() || this.inventory.isFull()) {
+                if(this.minecart.inventory.IsEmpty || this.inventory.IsFull) {
                     // Cart is empty, send it off
                     this.releaseCart();
                     return;
                 }
 
                 if(this.transferTimer <= 0) {
-                    this.Deposit(this.minecart.inventory.pullItem());
+                    this.Deposit(this.minecart.inventory.PullItem());
                     this.transferTimer = this._itemTransferSpeed;
                 }
 
             } else {
                 // Add items to the cart.
-                if(this.minecart.inventory.isFull() || this.inventory.isEmpty()) {
+                if(this.minecart.inventory.IsFull || this.inventory.IsEmpty) {
                     // Cart is full, send it off.
                     this.releaseCart();
                     return;
                 }
 
                 if(this.transferTimer <= 0) {
-                    this.minecart.inventory.addItem(this.PullItem());
+                    this.minecart.inventory.AddItem(this.PullItem());
                     this.transferTimer = this._itemTransferSpeed;
                 }
             }
@@ -80,10 +80,10 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartIntera
         }
 
         if(this.isUnloader) {
-            return !this.IsFull && !cart.inventory.isEmpty();
+            return !this.IsFull && !cart.inventory.IsEmpty;
         }
         else {
-            return !this.IsEmpty && !cart.inventory.isFull();
+            return !this.IsEmpty && !cart.inventory.IsFull;
         }
     }
 

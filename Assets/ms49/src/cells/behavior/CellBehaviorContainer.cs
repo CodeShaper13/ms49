@@ -7,8 +7,8 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
     private Inventory _inventory = null;
 
     protected Inventory inventory => this._inventory;
-    public virtual bool IsFull => this.inventory.isFull();
-    public virtual bool IsEmpty => this.inventory.isEmpty();
+    public virtual bool IsFull => this.inventory.IsFull;
+    public virtual bool IsEmpty => this.inventory.IsEmpty;
 
     public override void onCreate(World world, CellState state, Position pos) {
         base.onCreate(world, state, pos);
@@ -33,7 +33,7 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
     public override void onDestroy() {
         base.onDestroy();
 
-        for(int i = 0; i < this.inventory.getItemCount(); i++) {
+        for(int i = 0; i < this.inventory.GetItemCount(); i++) {
             Item item = this.inventory[i];
             if(item != null) {
                 float f = 0.4f;
@@ -51,21 +51,21 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
 
     public virtual void WriteToNbt(NbtCompound tag) {
         if(this.inventory != null) {
-            tag.setTag("inventory", this.inventory.writeToNbt());
+            tag.setTag("inventory", this.inventory.WriteToNbt());
         }
     }
 
     public virtual void ReadFromNbt(NbtCompound tag) {
         if(this.inventory != null) {
-            this.inventory.readFromNbt(tag.getCompound("inventory"));
+            this.inventory.ReadFromNbt(tag.getCompound("inventory"));
         }
     }
 
     public virtual bool Deposit(Item item) {
-        return this.inventory.addItem(item);
+        return this.inventory.AddItem(item);
     }
 
     public virtual Item PullItem() {
-        return this.inventory.pullItem();
+        return this.inventory.PullItem();
     }
 }

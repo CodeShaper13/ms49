@@ -101,7 +101,7 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
     /// </summary>
     protected NavPath calculatePathToClosest<T1>(ref T1 behavior, bool stopAdjacent, Predicate<T1> predicate = null, Rotation endingRot = null, Position? offset = null) where T1 : CellBehavior {
         // Sort all behaviors by distance.
-        List<T1> behaviors = this.owner.world.GetAllBehaviors<T1>(predicate);
+        List<T1> behaviors = this.owner.world.GetAllBehaviors(predicate);
         behaviors = behaviors.OrderBy(
             x => x.pos.Distance(this.owner.position)).ToList();
 

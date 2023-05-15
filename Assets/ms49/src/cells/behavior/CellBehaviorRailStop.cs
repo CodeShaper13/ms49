@@ -59,9 +59,9 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
         } else if(this.mode == CellBehaviorRailStop.neverStop) {
             return false;
         } else if(this.mode == CellBehaviorRailStop.stopIfFull) {
-            return cart.inventory.isFull();
+            return cart.inventory.IsFull;
         } else if(this.mode == CellBehaviorRailStop.stopIfEmpty) {
-            return cart.inventory.isEmpty();
+            return cart.inventory.IsEmpty;
         }
 
         // Should never get here.

@@ -141,7 +141,7 @@ public class EntityMinecart : EntityBase {
             this._cartRenderer.flipX = this.rotation == Rotation.LEFT;
 
             // Set fill sprite
-            if(this.inventory.isEmpty()) {
+            if(this.inventory.IsEmpty) {
                 this._fillRenderer.sprite = null;
             } else {
                 this._fillRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
@@ -153,13 +153,13 @@ public class EntityMinecart : EntityBase {
     public override void writeToNbt(NbtCompound tag) {
         base.writeToNbt(tag);
 
-        tag.setTag("inventory", this.inventory.writeToNbt());
+        tag.setTag("inventory", this.inventory.WriteToNbt());
     }
 
     public override void readFromNbt(NbtCompound tag) {
         base.readFromNbt(tag);
 
-        this.inventory.readFromNbt(tag.getCompound("inventory"));
+        this.inventory.ReadFromNbt(tag.getCompound("inventory"));
     }
 
     public override bool isDestroyable() {

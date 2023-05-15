@@ -6,7 +6,7 @@ public class CellBehaviorMasterDepositPoint : AbstractDepositPoint {
     public override bool IsEmpty => true;
 
     public override void onRightClick() {
-        // Don't list the parent class open a Container Popup.
+        // Don't let the parent class open a Container Popup.
     }
 
     public override bool Deposit(Item item) {

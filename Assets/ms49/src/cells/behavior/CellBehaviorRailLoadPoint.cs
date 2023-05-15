@@ -1,14 +1,13 @@
-﻿using fNbt;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CellBehaviorRailLoadPoint : AbstractDepositPoint, IMinecartInteractor {
 
-    public override bool IsFull => this.minecart == null ? true : this.minecart.inventory.isFull();
-    public override bool IsEmpty => this.minecart == null ? false : this.minecart.inventory.isEmpty();
+    public override bool IsFull => this.minecart == null ? true : this.minecart.inventory.IsFull;
+    public override bool IsEmpty => this.minecart == null ? false : this.minecart.inventory.IsEmpty;
     public EntityMinecart minecart { get; set; }
 
     public override bool isOpen() {
-        return this.minecart != null && !this.minecart.inventory.isFull();
+        return this.minecart != null && !this.minecart.inventory.IsFull;
     }
 
     public override void onRightClick() {
@@ -24,9 +23,9 @@ public class CellBehaviorRailLoadPoint : AbstractDepositPoint, IMinecartInteract
     }
 
     public override bool Deposit(Item item) {
-        bool addedItem = this.minecart.inventory.addItem(item);
+        bool addedItem = this.minecart.inventory.AddItem(item);
 
-        if(this.minecart.inventory.isFull()) {
+        if(this.minecart.inventory.IsFull) {
             this.minecart.release();
             this.minecart = null;
         }
@@ -38,7 +37,7 @@ public class CellBehaviorRailLoadPoint : AbstractDepositPoint, IMinecartInteract
         return
             this.minecart == null && // There is no Minecart already here
             cart.position == this.pos &&
-            !cart.inventory.isFull();
+            !cart.inventory.IsFull;
     }
 
     public Vector3 GetCartStopPoint() {

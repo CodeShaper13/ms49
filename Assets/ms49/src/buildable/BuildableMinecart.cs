@@ -19,8 +19,8 @@ public class BuildableMinecart : BuildableBase, ISpritePreview {
         groundSprite = this.railSprite;
 
         EntityMinecart.MinecartSprites sprites = this._minecartPrefab.GetComponent<EntityMinecart>().minecartSprites;
-        objectSprite = sprites.getSprite(Rotation.RIGHT, true);
-        overlaySprite = sprites.getSprite(Rotation.RIGHT, false);
+        objectSprite = sprites.GetSprite(Rotation.RIGHT, true);
+        overlaySprite = sprites.GetSprite(Rotation.RIGHT, false);
     }
 
     public override bool IsValidLocation(World world, Position pos, Rotation rotation) {
@@ -38,6 +38,6 @@ public class BuildableMinecart : BuildableBase, ISpritePreview {
 
     public Sprite GetPreviewSprite(World world, Position pos) {
         CellState state = world.GetCellState(pos);
-        return this._minecartPrefab.GetComponent<EntityMinecart>().minecartSprites.getSprite(state.Rotation, true);
+        return this._minecartPrefab.GetComponent<EntityMinecart>().minecartSprites.GetSprite(state.Rotation, true);
     }
 }

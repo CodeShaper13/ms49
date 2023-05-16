@@ -1,13 +1,13 @@
-﻿using System.Text;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PopupWorkerStats : PopupWindow {
 
     [SerializeField]
-    private Text _headerText = null;
+    private TMP_Text _textHeader = null;
     [SerializeField]
-    private Text infoText = null;
+    private TMP_Text _textInfo = null;
     [SerializeField]
     private FaceUiPreview preview = null;
     [SerializeField]
@@ -22,8 +22,8 @@ public class PopupWorkerStats : PopupWindow {
     private EntityWorker worker;
     private string infoTextTemplate;
 
-    private void Start() {
-        this.infoTextTemplate = this.infoText.text;
+    private void Awake() {
+        this.infoTextTemplate = this._textInfo.text;
     }
 
     public void setWorker(EntityWorker worker) {
@@ -31,10 +31,10 @@ public class PopupWorkerStats : PopupWindow {
 
         WorkerInfo info = this.worker.info;
 
-        this._headerText.text = info.lastName.ToLower();
+        this._textHeader.text = info.lastName;
 
-        this.infoText.text = string.Format(this.infoTextTemplate,
-            this.worker.info.fullName, // Name
+        this._textInfo.text = string.Format(this.infoTextTemplate,
+            info.fullName, // Name
             this.worker.type.typeName, // Job
             info.pay, // Pay
             info.personality.displayName); // Personality

@@ -44,6 +44,9 @@ public class DebugText : MonoBehaviour {
                     this.sb.AppendLine("  Unmodified temperature: " + layer.GetUnmodifiedTemperature(pos.x, pos.y));
                     this.sb.AppendLine("  Heat Source: " + layer.GetHeatSource(pos.x, pos.y));
                     this.sb.AppendLine("  Hardness: " + layer.GetHardness(pos.x, pos.y));
+                    if(layer.HasFog) {
+                        this.sb.AppendLine("  Fog: " + layer.fog.isFogPresent(pos.x, pos.y));
+                    }
 
                     // Cell's Behavior:
                     CellBehavior behavior = world.GetCellBehavior(pos, false);

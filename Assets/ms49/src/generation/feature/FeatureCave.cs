@@ -39,20 +39,17 @@ public class FeatureCave : FeatureBase {
         int[,] map = this.makeCaves(rnd, accessor.size);
 
         // Set tiles.
+        CellData air = Main.instance.CellRegistry.GetAir();
         for(int x = 0; x < accessor.size; x++) {
             for(int y = 0; y < accessor.size; y++) {
                 int id = map[x, y];
                 CellData cell = null;
 
                 if(id == 0) {
-                    cell = Main.instance.CellRegistry.GetAir();
+                    accessor.SetCell(x, y, air);
                 }
                 else if(id == 2) {
-                    cell = this._lakeFillCell;
-                }
-
-                if(cell != null) {
-                    accessor.SetCell(x, y, cell);
+                    accessor.SetCell(x, y, this._lakeFillCell);
                 }
             }
         }
@@ -66,12 +63,12 @@ public class FeatureCave : FeatureBase {
             this.smoothMap(map, size);
         }
 
-        List<List<Vector2Int>> roomRegions = this.GetRegions(map, 0, size);
+        List<LinkedList<Vector2Int>> roomRegions = this.GetRegions(map, 0, size);
 
         // Remove rooms that are too big or small.
         if(this._pruneRooms) {
             for(int i = roomRegions.Count - 1; i >= 0; i--) {
-                List<Vector2Int> room = roomRegions[i];
+                LinkedList<Vector2Int> room = roomRegions[i];
 
                 int roomSize = room.Count;
                 if(rnd.Next(0, 100) < this._roomFailChance || (roomSize <= this._roomMinSize || roomSize >= this._roomMaxSize)) {
@@ -87,7 +84,7 @@ public class FeatureCave : FeatureBase {
         // Fill rooms with water
         if(this._lakeFillCell != null) {
             int[,] m = new int[size, size];
-            foreach(List<Vector2Int> room in roomRegions) {
+            foreach(LinkedList<Vector2Int> room in roomRegions) {
                 if(rnd.Next(0, 100) < this._lakeFailPercent) {
                     continue; // Failed
                 }
@@ -125,14 +122,14 @@ public class FeatureCave : FeatureBase {
         return map;
     }
 
-    private List<List<Vector2Int>> GetRegions(int[,] tiles, int tileType, int mapSize) {
-        List<List<Vector2Int>> regions = new List<List<Vector2Int>>();
+    private List<LinkedList<Vector2Int>> GetRegions(int[,] tiles, int tileType, int mapSize) {
+        List<LinkedList<Vector2Int>> regions = new List<LinkedList<Vector2Int>>();
         bool[,] inRoom = new bool[mapSize, mapSize];
 
         for(int x = 0; x < mapSize; x++) {
             for(int y = 0; y < mapSize; y++) {
                 if(!inRoom[x, y] && tiles[x, y] == tileType) {
-                    List<Vector2Int> newRegion = this.GetRegionTiles(tiles, x, y, mapSize);
+                    LinkedList<Vector2Int> newRegion = this.GetRegionTiles(tiles, x, y, mapSize);
                     regions.Add(newRegion);
 
                     foreach(Vector2Int tile in newRegion) {
@@ -145,8 +142,8 @@ public class FeatureCave : FeatureBase {
         return regions;
     }
 
-    private List<Vector2Int> GetRegionTiles(int[,] tiles, int startX, int startY, int mapSize) {
-        List<Vector2Int> roomTiles = new List<Vector2Int>();
+    private LinkedList<Vector2Int> GetRegionTiles(int[,] tiles, int startX, int startY, int mapSize) {
+        LinkedList<Vector2Int> roomTiles = new LinkedList<Vector2Int>();
         int[,] mapFlags = new int[mapSize, mapSize];
         int tileType = tiles[startX, startY];
 
@@ -156,11 +153,11 @@ public class FeatureCave : FeatureBase {
 
         while(queue.Count > 0) {
             Vector2Int tile = queue.Dequeue();
-            roomTiles.Add(tile);
+            roomTiles.AddLast(tile);
 
             for(int x = tile.x - 1; x <= tile.x + 1; x++) {
                 for(int y = tile.y - 1; y <= tile.y + 1; y++) {
-                    if(this.withinBounds(tiles, x, y) && (y == tile.y || x == tile.x)) {
+                    if(this.withinBounds(mapSize, x, y) && (y == tile.y || x == tile.x)) {
                         if(mapFlags[x, y] == 0 && tiles[x, y] == tileType) {
                             mapFlags[x, y] = 1;
                             queue.Enqueue(new Vector2Int(x, y));
@@ -173,8 +170,8 @@ public class FeatureCave : FeatureBase {
         return roomTiles;
     }
 
-    private bool withinBounds(int[,] tiles, int x, int y) {
-        return x >= 0 && x < tiles.GetLength(0) && y >= 0 && y < tiles.GetLength(1);
+    private bool withinBounds(int mapSize, int x, int y) {
+        return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
     }
 
     /// <summary>
@@ -219,7 +216,7 @@ public class FeatureCave : FeatureBase {
         for(int neighbourX = x - 1; neighbourX <= x + 1; neighbourX++) {
             for(int neighbourY = y - 1; neighbourY <= y + 1; neighbourY++) {
 
-                if(this.withinBounds(tiles, neighbourX, neighbourY)) {
+                if(this.withinBounds(mapSize, neighbourX, neighbourY)) {
                     if(neighbourX == x && neighbourY == y) {
                         continue; // don't count the middle.
                     }

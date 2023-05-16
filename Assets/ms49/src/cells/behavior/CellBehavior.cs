@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class CellBehavior : MonoBehaviour {
 
-    [SerializeField]
+    [SerializeField, Tooltip("If true, this behavior is added to a speedy lookup list")]
     private bool _cache = true;
 
     protected CellState state;
@@ -17,22 +17,11 @@ public abstract class CellBehavior : MonoBehaviour {
     /// <summary> The center of the Behavior's cell in world units. </summary>
     public Vector2 center => this.pos.AsVec2 + new Vector2(0.5f, 0.5f);
 
-    private void Update() {
-        if(!Pause.IsPaused) {
-            this.onUpdate();
-        }
-    }
-
-    public virtual void onCreate(World world, CellState state, Position pos) {
+    public virtual void OnCreate(World world, CellState state, Position pos) {
         this.world = world;
         this.state = state;
         this.pos = pos;
     }
-
-    /// <summary>
-    /// Called every frame while the game is not paused.
-    /// </summary>
-    public virtual void onUpdate() { }
 
     /// <summary>
     /// Called when the Cell is right clicked.

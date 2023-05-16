@@ -12,8 +12,8 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
 
     private List<Entry> entires;
 
-    public override void onCreate(World world, CellState state, Position pos) {
-        base.onCreate(world, state, pos);
+    public override void OnCreate(World world, CellState state, Position pos) {
+        base.OnCreate(world, state, pos);
 
         this.entires = new List<Entry>();
     }

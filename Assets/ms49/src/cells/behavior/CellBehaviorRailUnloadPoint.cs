@@ -12,10 +12,8 @@ public class CellBehaviorRailUnloadPoint : CellBehaviorOccupiable, IMinecartInte
         }
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
-
-        if(this.minecart != null && this.minecart.inventory.IsEmpty) {
+    private void Update() {
+        if(this.minecart != null && this.minecart.Inventory.IsEmpty) {
             this.minecart.release();
             this.minecart = null;
         }
@@ -29,6 +27,6 @@ public class CellBehaviorRailUnloadPoint : CellBehaviorOccupiable, IMinecartInte
         return
             this.minecart == null &&
             cart.position == this.pos &&
-            !cart.inventory.IsEmpty;
+            !cart.Inventory.IsEmpty;
     }
 }

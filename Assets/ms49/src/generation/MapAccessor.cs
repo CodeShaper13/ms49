@@ -1,9 +1,9 @@
 ﻿public class MapAccessor {
 
-    public CellData[] cells { get; private set; }
-    public int[] metas { get; private set; }
-    public int depth { get; private set; }
-    public int size { get; private set; }
+    public readonly CellData[] cells;
+    public readonly int[] metas;
+    public readonly int depth;
+    public readonly int size;
 
     public MapAccessor(int mapSize, int depth) {
         this.cells = new CellData[mapSize * mapSize];
@@ -13,58 +13,48 @@
     }
 
     /// <summary>
-    /// Sets a Cell.  Pass null to set air.
+    /// Sets a Cell.
     /// </summary>
-    public void SetCell(int x, int y, CellData tile, Rotation rotation = null) {
-        if(!this.IsInBounds(x, y)) {
-            return;
-        }
-        
-        int index = this.GetFlattenedIndice(x, y);
-
-        this.cells[index] = tile == null ? Main.instance.CellRegistry.GetAir() : tile;
-        if(rotation != null) {
-            this.metas[index] = rotation.id;
-        }
+    public void SetCell(int x, int y, CellData tile, Rotation rotation) {
+        this.SetCell(x, y, tile, rotation == null ? 0 : rotation.id);
     }
 
     /// <summary>
-    /// Sets a Cell.  Pass null to set air.
+    /// Sets a Cell.
     /// </summary>
-    public void SetCell(int x, int y, CellData tile, int meta) {
-        if(!this.IsInBounds(x, y)) {
+    public void SetCell(int x, int y, CellData tile, int meta = 0) {
+        if(this.OutOfBounds(x, y)) {
             return;
         }
 
-        int index = this.GetFlattenedIndice(x, y);
-
-        this.cells[index] = tile == null ? Main.instance.CellRegistry.GetAir() : tile;
+        int index = this.size * x + y;
+        this.cells[index] = tile;
         this.metas[index] = meta;
     }
 
     public CellData GetCell(int x, int y) {
-        if(!this.IsInBounds(x, y)) {
+        if(this.OutOfBounds(x, y)) {
             return null;
         }
-        return this.cells[this.GetFlattenedIndice(x, y)];
+        return this.cells[this.size * x + y];
     }
 
     public void SetRotation(int x, int y, Rotation r) {
-        if(!this.IsInBounds(x, y)) {
+        if(this.OutOfBounds(x, y)) {
             return;
         }
-        this.metas[this.GetFlattenedIndice(x, y)] = r.id;
+        this.metas[this.size * x + y] = r.id;
     }
 
-    public bool IsInBounds(int x, int y) {
-        return x >= 0 && y >= 0 && x < this.size && y < this.size;
+    public bool OutOfBounds(int x, int y) {
+        return x < 0 || y < 0 || x >= this.size || y >= this.size;
     }
 
     public void ApplyToLayer(Layer layer) {
         for(int x = 0; x < this.size; x++) {
             for(int y = 0; y < this.size; y++) {
-                int index = this.GetFlattenedIndice(x, y);
-                layer.setCell(
+                int index = this.size * x + y;
+                layer.SetCell(
                     x,
                     y,
                     this.cells[index],
@@ -72,9 +62,5 @@
                     false);
             }
         }
-    }
-
-    private int GetFlattenedIndice(int x, int y) {
-        return this.size * x + y;
     }
 }

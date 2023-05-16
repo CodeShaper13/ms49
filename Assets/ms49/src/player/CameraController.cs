@@ -53,11 +53,8 @@ public class CameraController : MonoBehaviour {
     private void Start() {
         this.tooltipDisplayer = GameObject.FindObjectOfType<TooltipDisplayer>();
 
-        // Center the camera on the Truck.
-        foreach(CellBehaviorMasterDepositPoint behavior in this.world.GetAllBehaviors<CellBehaviorMasterDepositPoint>()) {
-            this.setCameraPos(behavior.center);
-            break;
-        }
+        // Make the camera look at the Player's base.
+        this.setCameraPos(this.world.storage.workerSpawnPoint.AsVec2);
     }
 
     private void OnValidate() {
@@ -104,7 +101,7 @@ public class CameraController : MonoBehaviour {
                     EntityBase e = this.getMouseOver();
                     if(e != null) {
                         if(rmb) {
-                            e.onRightClick();
+                            e.OnRightClick();
                         }
                     }
                 }

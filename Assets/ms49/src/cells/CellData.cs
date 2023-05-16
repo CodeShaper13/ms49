@@ -60,6 +60,11 @@ public class CellData : ScriptableObject {
     [SerializeField, Tooltip("The associate Prefab that will be spawned when this Cell is placed.")]
     private GameObject _behaviorPrefab = null;
 
+    /// <summary>
+    /// More preformant that BehaviorPrefab != null
+    /// </summary>
+    public bool HasBehaviorPrefab { get; private set; }
+
     public string DisplayName => this._cellName;
     public bool IsSolid => this._isSolid;
     public bool RotationalOverride => this._rotationalOverride;
@@ -74,6 +79,17 @@ public class CellData : ScriptableObject {
     public bool IncludeInFogFloodLift => this._includeInFogFloodLift;
     public bool RecieveHardnessColorMod => this._tintObjectTile;
     public GameObject BehaviorPrefab => this._behaviorPrefab;
+
+    protected virtual void OnValidate() {
+        if(this._behaviorPrefab != null && this._behaviorPrefab.GetComponent<CellBehavior>() == null) {
+            Debug.LogError("BehaviorPrefab must have a component of type CellBehavior");
+            this._behaviorPrefab = null;
+        }
+    }
+
+    private void OnEnable() {
+        this.HasBehaviorPrefab = this._behaviorPrefab != null;
+    }
 
     public TileRenderData GetRenderData(Rotation rotation) {
         if(this.RotationalOverride) {

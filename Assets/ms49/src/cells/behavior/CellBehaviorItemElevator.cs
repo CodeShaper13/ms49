@@ -10,12 +10,14 @@ public class CellBehaviorItemElevator : CellBehaviorContainer {
 
     public bool IsGoingUp => this.rotation.axis == EnumAxis.Y;
 
-    public override void onCreate(World world, CellState state, Position pos) {
-        base.onCreate(world, state, pos);
+    public override void OnCreate(World world, CellState state, Position pos) {
+        base.OnCreate(world, state, pos);
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
+    public void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
 
         this.transferTimer -= Time.deltaTime;
 

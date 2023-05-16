@@ -14,35 +14,37 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartIntera
 
     public bool isUnloader => this._isUnloader;
 
-    public override void onUpdate() {
-        base.onUpdate();
+    private void Update() {
+        if(Pause.IsPaused) {
+            return;
+        }
 
         this.transferTimer -= Time.deltaTime;
 
         if(this.minecart != null) {
             if(this.isUnloader) {
                 // Pull items from the cart
-                if(this.minecart.inventory.IsEmpty || this.inventory.IsFull) {
+                if(this.minecart.Inventory.IsEmpty || this.inventory.IsFull) {
                     // Cart is empty, send it off
                     this.releaseCart();
                     return;
                 }
 
                 if(this.transferTimer <= 0) {
-                    this.Deposit(this.minecart.inventory.PullItem());
+                    this.Deposit(this.minecart.Inventory.PullItem());
                     this.transferTimer = this._itemTransferSpeed;
                 }
 
             } else {
                 // Add items to the cart.
-                if(this.minecart.inventory.IsFull || this.inventory.IsEmpty) {
+                if(this.minecart.Inventory.IsFull || this.inventory.IsEmpty) {
                     // Cart is full, send it off.
                     this.releaseCart();
                     return;
                 }
 
                 if(this.transferTimer <= 0) {
-                    this.minecart.inventory.AddItem(this.PullItem());
+                    this.minecart.Inventory.AddItem(this.PullItem());
                     this.transferTimer = this._itemTransferSpeed;
                 }
             }
@@ -80,10 +82,10 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartIntera
         }
 
         if(this.isUnloader) {
-            return !this.IsFull && !cart.inventory.IsEmpty;
+            return !this.IsFull && !cart.Inventory.IsEmpty;
         }
         else {
-            return !this.IsEmpty && !cart.inventory.IsFull;
+            return !this.IsEmpty && !cart.Inventory.IsFull;
         }
     }
 

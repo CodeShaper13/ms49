@@ -28,7 +28,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
                 this.minerData.heldItem == null && // Miner isn't holding anything
                 this.unloadPoint != null && // Unload Point hasn't been destroyed
                 this.unloadPoint.minecart != null && // Unload Point still has a cart
-                !this.unloadPoint.minecart.inventory.IsEmpty; // The cart isn't empty.
+                !this.unloadPoint.minecart.Inventory.IsEmpty; // The cart isn't empty.
         }
     }
 
@@ -44,7 +44,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
         }
         else {
             // Pick up item.
-            this.minerData.heldItem = this.unloadPoint.minecart.inventory.PullItem();
+            this.minerData.heldItem = this.unloadPoint.minecart.Inventory.PullItem();
 
             this.isDeliveringItem = true;
 
@@ -84,7 +84,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
             true,
             behavior =>
                     behavior.minecart != null &&
-                    !behavior.minecart.inventory.IsEmpty &&
+                    !behavior.minecart.Inventory.IsEmpty &&
                     (behavior == this.unloadPoint || !behavior.isOccupied()));
 
         if(this.unloadPoint != null) {

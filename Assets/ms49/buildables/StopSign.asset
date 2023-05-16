@@ -9,21 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a75daf5417990e4480dc7f4d61cc64a, type: 3}
-  m_Name: AirCooler
+  m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
+  m_Name: StopSign
   m_EditorClassIdentifier: 
   structureName: 
-  _cost: 0
+  _cost: 10
   _description: 
-  _tab: {fileID: 11400000, guid: 09ecf1af0a9fecb4c8f9b5276294c7c6, type: 2}
+  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0
-  _buildTime: {fileID: 0}
+  _buildTime: 0
   _customPreview: {fileID: 0}
-  _cell: {fileID: 0}
-  gridSize: {x: 1, y: 1}
-  tiles: []
-  cells:
-  - row:
+  _cell: {fileID: 11400000, guid: 50e7e000455180c40b180035d8c08b08, type: 2}
+  _buildableSize: {x: 1, y: 1}
+  _gridRows:
+  - _row:
     - 
+  _gridMappings: []

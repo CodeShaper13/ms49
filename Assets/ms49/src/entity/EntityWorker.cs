@@ -194,7 +194,7 @@ public class EntityWorker : EntityBase {
         this.moveHelper.enabled = false;
     }
 
-    public override void onRightClick() {
+    public override void OnRightClick() {
         PopupWorkerStats popup = Main.instance.findPopup<PopupWorkerStats>();
         if(popup != null) {
             popup.open();

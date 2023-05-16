@@ -289,7 +289,7 @@ TextureImporter:
     second: uiElements_furnaceProgressBarArrow
   - first:
       213: -1245192830379459061
-    second: uiElements_furnaceProgressBarFill
+    second: uiElements_progressBarFillRed
   - first:
       213: -115894330098230805
     second: uiElements_furnaceProgressBarArrowFill
@@ -311,6 +311,9 @@ TextureImporter:
   - first:
       213: 3529365571120930902
     second: uiElements_tabCreativeSelected
+  - first:
+      213: -73051452287208497
+    second: uiElements_progressBarFillGreen
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -2206,7 +2209,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 193
-        y: 28
+        y: 37
         width: 14
         height: 9
       alignment: 0
@@ -2244,7 +2247,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_furnaceProgressBarFill
+      name: uiElements_progressBarFillRed
       rect:
         serializedVersion: 2
         x: 193
@@ -2407,6 +2410,27 @@ TextureImporter:
       bones: []
       spriteID: 650282d9943daf030800000000000000
       internalID: 3529365571120930902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_progressBarFillGreen
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 27
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc3381857187cfef0800000000000000
+      internalID: -73051452287208497
       vertices: []
       indices: 
       edges: []

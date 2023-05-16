@@ -19,9 +19,7 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
     public EntityMinecart minecart { get; set; }
     public Mode mode { get; set; } = CellBehaviorRailStop.alwaysStop;
 
-    public override void onUpdate() {
-        base.onUpdate();
-
+    private void Update() {
         if(this.minecart != null) {
 
         }
@@ -59,9 +57,9 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
         } else if(this.mode == CellBehaviorRailStop.neverStop) {
             return false;
         } else if(this.mode == CellBehaviorRailStop.stopIfFull) {
-            return cart.inventory.IsFull;
+            return cart.Inventory.IsFull;
         } else if(this.mode == CellBehaviorRailStop.stopIfEmpty) {
-            return cart.inventory.IsEmpty;
+            return cart.Inventory.IsEmpty;
         }
 
         // Should never get here.

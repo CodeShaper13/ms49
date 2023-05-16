@@ -17,21 +17,24 @@ public class EntityMinecart : EntityBase {
     [SerializeField]
     private Inventory _inventory = null;
 
+    /// <summary>
+    /// The CellBehavior that is interacting with this Minecart.
+    /// </summary>
     private IMinecartInteractor cartInteractor;
 
-    public Inventory inventory => this._inventory;
+    public Inventory Inventory => this._inventory;
     public MinecartSprites minecartSprites => this.sprites;
 
     public override void Update() {
+        base.Update();
+
         if(Pause.IsPaused) {
             return;
         }
 
-        base.Update();
-
         // Explode the cart if it has left the map.
         if(this.world.IsOutOfBounds(this.position)) {
-            this.explode();
+            this.world.entities.Remove(this);
             return;
         }
 
@@ -43,23 +46,23 @@ public class EntityMinecart : EntityBase {
                 this.cartInteractor.minecart = this;
             } else {
                 // Not in front of the interactor, move towards it.
-                this.worldPos = (Vector3)Vector2.MoveTowards(this.worldPos, target, this.movementSpeed * Time.deltaTime);
+                this.worldPos = Vector2.MoveTowards(this.worldPos, target, this.movementSpeed * Time.deltaTime);
             }
         } else {
             // Move the Minecart:
 
             CellState state = this.world.GetCellState(this.position);
-            if(state.data is CellDataRail) {
+            if(state.data is CellDataRail rail) {
 
                 // Trip detector rail if above.
-                if(state.behavior is CellBehaviorDetectorRail) {
-                    ((CellBehaviorDetectorRail)state.behavior).setTripped(this);
+                if(state.behavior is CellBehaviorDetectorRail cellBehaviorDetectorRail) {
+                    cellBehaviorDetectorRail.SetTripped(this);
                 }
 
                 // Check if there is an instance of IMinecartInteractor below or next to the rails.
-                if(!this.checkForInteractor(null)) {
+                if(!this.CheckForIMinecartInteractor(null)) {
                     foreach(Rotation r in Rotation.ALL) {
-                        bool foundInteractor = this.checkForInteractor(r);
+                        bool foundInteractor = this.CheckForIMinecartInteractor(r);
                         if(foundInteractor) {
                             break;
                         }
@@ -70,27 +73,27 @@ public class EntityMinecart : EntityBase {
 
                 // the reason the explode isn't working is because the cart changes direction while on the cell
 
-                switch(((CellDataRail)state.data).MoveType) {
+                switch(rail.MoveType) {
                     case CellDataRail.EnumRailMoveType.STRAIGHT:
-                        this.move(this.rotation.vector);                       
+                        this.Move(this.rotation.vector);                       
                         break;
 
                     case CellDataRail.EnumRailMoveType.CROSSING:
-                        this.move(this.rotation.vector);
+                        this.Move(this.rotation.vector);
                         break;
 
                     case CellDataRail.EnumRailMoveType.CURVE:
-                        this.handleCurveRail(state.Rotation, state.Rotation.clockwise(), cellCenter);
+                        this.HandleCurveRail(state.Rotation, state.Rotation.clockwise(), cellCenter);
 
                         break;
 
                     case CellDataRail.EnumRailMoveType.STOPPER:
-                        this.move(this.rotation.vector);
+                        this.Move(this.rotation.vector);
 
                         float d = Vector2.Distance(this.worldPos, cellCenter + state.Rotation.opposite().vectorF * 0.5f);
                         if(this.rotation == state.Rotation && d > 0.25f) {
                             this.rotation = this.rotation.opposite();
-                            this.move(this.rotation.vectorF * (d - 0.5f));
+                            this.Move(this.rotation.vectorF * (d - 0.5f));
                         }
 
                         break;
@@ -99,35 +102,15 @@ public class EntityMinecart : EntityBase {
                         // TODO explode if coming in from the wrong angle (state.rotation.opposite())
 
                         Rotation endRot = this.rotation.axis != state.Rotation.axis ? this.rotation : state.Rotation.clockwise();
-                        this.handleCurveRail(state.Rotation, endRot, cellCenter);
+                        this.HandleCurveRail(state.Rotation, endRot, cellCenter);
 
                         break;
                 }
             }
             else {
-                // Not on a rail, explode.
-                this.explode();
+                // Not on a rail.
+                //this.explode();
             }
-        }
-    }
-
-
-    private void handleCurveRail(Rotation startRot, Rotation endRot, Vector2 cellCenter) {
-        // If the Minecart is moving "backwards" along curve, switch the values.
-        if(this.rotation.axis != startRot.axis) {
-            Rotation temp1 = startRot;
-            startRot = endRot;
-            endRot = temp1;
-        }
-
-        // Move the cart.
-        this.move(this.rotation.vector);
-
-        float distFromCurveStart = Vector2.Distance(this.worldPos, cellCenter + (startRot.vectorF * 0.5f));
-        if(distFromCurveStart > 0.5f) {
-            this.rotation = endRot;
-            this.worldPos = cellCenter;
-            this.move(this.rotation.vectorF * (distFromCurveStart - 0.5f));
         }
     }
 
@@ -141,7 +124,7 @@ public class EntityMinecart : EntityBase {
             this._cartRenderer.flipX = this.rotation == Rotation.LEFT;
 
             // Set fill sprite
-            if(this.inventory.IsEmpty) {
+            if(this.Inventory.IsEmpty) {
                 this._fillRenderer.sprite = null;
             } else {
                 this._fillRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
@@ -153,13 +136,32 @@ public class EntityMinecart : EntityBase {
     public override void writeToNbt(NbtCompound tag) {
         base.writeToNbt(tag);
 
-        tag.setTag("inventory", this.inventory.WriteToNbt());
+        tag.setTag("inventory", this.Inventory.WriteToNbt());
     }
 
     public override void readFromNbt(NbtCompound tag) {
         base.readFromNbt(tag);
 
-        this.inventory.ReadFromNbt(tag.getCompound("inventory"));
+        this.Inventory.ReadFromNbt(tag.getCompound("inventory"));
+    }
+
+    private void HandleCurveRail(Rotation startRot, Rotation endRot, Vector2 cellCenter) {
+        // If the Minecart is moving "backwards" along curve, switch the values.
+        if(this.rotation.axis != startRot.axis) {
+            Rotation temp1 = startRot;
+            startRot = endRot;
+            endRot = temp1;
+        }
+
+        // Move the cart.
+        this.Move(this.rotation.vector);
+
+        float distFromCurveStart = Vector2.Distance(this.worldPos, cellCenter + (startRot.vectorF * 0.5f));
+        if(distFromCurveStart > 0.5f) {
+            this.rotation = endRot;
+            this.worldPos = cellCenter;
+            this.Move(this.rotation.vectorF * (distFromCurveStart - 0.5f));
+        }
     }
 
     public override bool isDestroyable() {
@@ -182,12 +184,13 @@ public class EntityMinecart : EntityBase {
     /// <summary>
     /// Checks if there is a CellBehavior implementing
     /// IMinecartInteracter in the direction that is passed.  If
-    /// there is one, true is returned.
+    /// there is one, true is returned and EntityMinecart#cartInteractor
+    /// set.
     /// 
     /// If null is passed for rotation, the cell the cart is on is
     /// checked.
     /// <returns></returns>
-    private bool checkForInteractor(Rotation rotation) {
+    private bool CheckForIMinecartInteractor(Rotation rotation) {
         Position p = rotation == null ? this.position : this.position + rotation;
 
         if(this.world.IsOutOfBounds(p)) {
@@ -210,7 +213,7 @@ public class EntityMinecart : EntityBase {
     /// <summary>
     /// Moves the minecart in the passed direction.  Move speed and delta time is factored in here.
     /// </summary>
-    private void move(Vector2 dir) {
+    private void Move(Vector2 dir) {
         Vector2 destEdgePoint = this.position.Center + (this.rotation.vectorF * 0.5f);
         float dist = Vector2.Distance(this.worldPos, destEdgePoint);
 
@@ -229,7 +232,7 @@ public class EntityMinecart : EntityBase {
             }
         }
 
-        Vector2 vec = (dir * this.movementSpeed * Mathf.Clamp(Time.deltaTime, 0, 0.1f));
+        Vector2 vec = dir * this.movementSpeed * Mathf.Clamp(Time.deltaTime, 0, 0.1f);
         this.worldPos += vec;
     }
 
@@ -239,11 +242,11 @@ public class EntityMinecart : EntityBase {
         this.world.statManager.minecartsDestroyed.increase(1);
     }
 
-    public override void onRightClick() {
+    public override void OnRightClick() {
         PopupContainer popup = Main.instance.findPopup<PopupContainer>();
         if(popup != null) {
             popup.open();
-            popup.SetInventory(this.inventory);
+            popup.SetInventory(this.Inventory);
         }
     }
 
@@ -255,8 +258,8 @@ public class EntityMinecart : EntityBase {
         public Sprite frontEmpty;
         public Sprite frontFull;
 
-        public Sprite getSprite(Rotation rot, bool empty) {
-            if(rot.axis == EnumAxis.Y) {
+        public Sprite GetSprite(Rotation rotation, bool empty) {
+            if(rotation.axis == EnumAxis.Y) {
                 return empty ? this.frontEmpty : this.frontFull;
             } else {
                 return empty ? this.sideEmpty : this.sideFull;

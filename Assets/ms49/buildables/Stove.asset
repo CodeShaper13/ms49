@@ -15,10 +15,15 @@ MonoBehaviour:
   structureName: 
   _cost: 250
   _description: 
-  _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
+  _tab: {fileID: 11400000, guid: 1f363a23936a6e348bcb6bfc47d8923e, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 0
-  _buildTime: {fileID: 11400000, guid: afbcef00667adb04da4a98363553d096, type: 2}
+  _buildTime: 0
   _customPreview: {fileID: 0}
   _cell: {fileID: 11400000, guid: d6745c8dacf45804fa647a0f79a480cc, type: 2}
+  _buildableSize: {x: 1, y: 1}
+  _gridRows:
+  - _row:
+    - 
+  _gridMappings: []

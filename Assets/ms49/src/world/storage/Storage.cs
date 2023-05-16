@@ -29,7 +29,7 @@ public class Storage {
     }
 
     public CellState getCellState(Position pos) {
-        return this.GetLayer(pos.depth).getCellState(pos.x, pos.y);
+        return this.GetLayer(pos.depth).GetCellState(pos.x, pos.y);
     }
 
     public bool IsOutside(int x, int y) {
@@ -96,9 +96,9 @@ public class Storage {
             // have been loaded.
             for(int x = 0; x < this.world.MapSize; x++) {
                 for(int y = 0; y < this.world.MapSize; y++) {
-                    CellState state = layer.getCellState(x, y);
+                    CellState state = layer.GetCellState(x, y);
                     if(state.behavior != null) {
-                        state.behavior.onCreate(this.world, state, new Position(x, y, layer.depth));
+                        state.behavior.OnCreate(this.world, state, new Position(x, y, layer.depth));
                     }
                 }
             }
@@ -107,7 +107,7 @@ public class Storage {
             // state from NBT.
             NbtList listBehaviorTags = layerCompound.getList("meta");
             foreach(NbtCompound behaviorTag in listBehaviorTags) {
-                CellBehavior meta = layer.getCellState(behaviorTag.getInt("xPos"), behaviorTag.getInt("yPos")).behavior;
+                CellBehavior meta = layer.GetCellState(behaviorTag.getInt("xPos"), behaviorTag.getInt("yPos")).behavior;
                 if(meta != null && meta is IHasData) {
                     ((IHasData)meta).ReadFromNbt(behaviorTag);
                 }

@@ -19,15 +19,13 @@ public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
     public CellState chair { get; private set; }
     public Position chairPos { get; private set; }
 
-    public override void onCreate(World world, CellState state, Position pos) {
-        base.onCreate(world, state, pos);
+    public override void OnCreate(World world, CellState state, Position pos) {
+        base.OnCreate(world, state, pos);
 
         this.updateChairFlag();
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
-
+    private void Update() {
         this.plateSpriteRenderer.sprite = this.getPlateSprite();
     }
 

@@ -17,5 +17,7 @@ MonoBehaviour:
     position: {x: 2, y: 2}
   - area: {fileID: 11400000, guid: 5dd9f0f7defd0bc479c8234ee7c33968, type: 2}
     position: {x: 0, y: 10}
-  - area: {fileID: 11400000, guid: 08ee3d16e815b3a4ba25db91909c8a72, type: 2}
-    position: {x: 1, y: 0}
+  _cellRoad: {fileID: 11400000, guid: cb73137296b3b4e45a9e5eb1ec59af3a, type: 2}
+  _cellGate: {fileID: 11400000, guid: e2a85f720c95c794db892fc4ff285a9b, type: 2}
+  _prefabDumptruck: {fileID: 4471730654685906640, guid: 1ba9a90d006a50c478a78f37ced110db,
+    type: 3}

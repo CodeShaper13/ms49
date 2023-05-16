@@ -106,6 +106,10 @@ public class Rotation {
         return this.func(cellRotation.id);
     }
 
+    public static Position operator *(Rotation rot, int i) {
+        return new Position(rot.vector * i, 0);
+    }
+
     private Rotation func(int dir) {
         int i = this.id + dir;
         if(i < 0) {

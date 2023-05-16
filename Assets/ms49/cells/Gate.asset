@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
-  m_Name: DumptruckBlocker
+  m_Name: Gate
   m_EditorClassIdentifier: 
-  _cellName: dumptruck
+  _cellName: gate
   _isSolid: 0
-  _floorOverlayTile: {fileID: 0}
-  _objectTile: {fileID: 0}
+  _floorOverlayTile: {fileID: 11400000, guid: 3868c6ca5ddbed24ba2db6208d4d0b72, type: 2}
+  _objectTile: {fileID: 11400000, guid: ce9d3f5cd1da10241b6acb93e780657b, type: 2}
   _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 0
   up:

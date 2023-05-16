@@ -15,9 +15,7 @@ public class CellBehaviorDetectorRail : CellBehavior, IHasData, IRenderTileOverr
 
     //private float tripTimer;
 
-    public override void onUpdate() {
-        base.onUpdate();
-
+    private void Update() {
         //this.tripTimer -= Time.deltaTime;
         //if(this.tripTimer <= 0) {
         //    this.dirty();
@@ -47,7 +45,7 @@ public class CellBehaviorDetectorRail : CellBehavior, IHasData, IRenderTileOverr
         //tag.setTag("tripTimer", this.tripTimer);
     }
 
-    public void setTripped(EntityMinecart cart) {
+    public void SetTripped(EntityMinecart cart) {
         if(this.tripper == null || (this.tripper != cart)) {
             this.tripper = cart;
             this.isTripped = !this.isTripped;

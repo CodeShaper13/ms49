@@ -34,6 +34,8 @@ public class World : MonoBehaviour {
 
     public CellData rubbleCell;
 
+    private bool isNewWorld;
+
     public Storage storage { get; private set; }
     public string saveName { get; private set; }
     public int seed { get; private set; }
@@ -57,7 +59,7 @@ public class World : MonoBehaviour {
     /// <summary>
     /// Initializes the World and reads it from NBT.
     /// </summary>
-    public void initialize(string saveName, NbtCompound rootTag) {
+    public void Initialize(string saveName, NbtCompound rootTag) {
         this.saveName = saveName;
 
         this.ReadFromNbt(rootTag);
@@ -80,7 +82,7 @@ public class World : MonoBehaviour {
     /// <summary>
     /// Initialized a new World.
     /// </summary>
-    public void initialize(string saveName, NewWorldSettings settings) {
+    public void Initialize(string saveName, NewWorldSettings settings) {
         this.saveName = saveName;
 
         this.seed = settings.getSeed();
@@ -96,13 +98,19 @@ public class World : MonoBehaviour {
 
         // Unlock the plot that contains the Dumptruck and set the
         // Worker spawn point.
-        List<CellBehaviorMasterDepositPoint> masters = this.GetAllBehaviors<CellBehaviorMasterDepositPoint>();
-        if(masters.Count > 0) {
-            CellBehaviorMasterDepositPoint m = masters[0];
-            this.plotManager.getPlot(m.pos.x, m.pos.y).isOwned = true;
-            this.storage.workerSpawnPoint = m.pos.Add(-1, -1);
-        } else {
-            Debug.LogWarning("No MasterDepositPoint could be found when generating a new map, there must always be at least one!");
+        bool setPoint = false;
+        foreach(EntityBase e in this.entities.list) {
+            if(e is EntityTruck) {
+                this.plotManager.getPlot(e.position.x, e.position.y).isOwned = true;
+                this.storage.workerSpawnPoint = e.position.Add(-1, -1);
+
+                setPoint = true;
+
+                break;
+            }
+        }
+        if(!setPoint) {
+            Debug.LogWarning("No Truck could be found when generating a new map, there must always be at least one!");
         }
 
 
@@ -169,7 +177,7 @@ public class World : MonoBehaviour {
             return;
         }
 
-        this.storage.GetLayer(pos.depth).setCell(
+        this.storage.GetLayer(pos.depth).SetCell(
             pos.x,
             pos.y,
             data == null ? Main.instance.CellRegistry.GetAir() : data,
@@ -479,6 +487,10 @@ public class World : MonoBehaviour {
                 yield return new WaitForSeconds(0.1f);
 
                 Layer layer = this.storage.GetLayer(i);
+
+                if(this.MapGenerator.GetLayerFromDepth(i).DefaultTemperature == 0) {
+                    continue;
+                }
 
                 Array.Copy(layer.temperatures, readBuffer, size * size);
 

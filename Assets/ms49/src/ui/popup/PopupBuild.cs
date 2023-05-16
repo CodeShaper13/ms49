@@ -45,6 +45,8 @@ public class PopupBuild : PopupWindow {
         this.buildableListButton = new List<BuildableListEntry>();
     }
 
+    // TODO Start is called after onOpen, so the tabs are empty, thus hidden.
+
     private void Start() {
         // Add the Buildables that are creative only.
         foreach(BuildableBase buildable in this._creativeOnlyBuildables) {
@@ -83,6 +85,10 @@ public class PopupBuild : PopupWindow {
 
             // Hide the tab buttons if they would be empty
             foreach(BuildTabToggle tab in this.tabs) {
+                if(tab.TabData.onlyInCreative) {
+                    tab.gameObject.SetActive(CameraController.instance.inCreativeMode);
+                }
+                /*
                 bool atLeastOneUnlocked = false;
 
                 if(CameraController.instance.inCreativeMode) {
@@ -98,6 +104,7 @@ public class PopupBuild : PopupWindow {
                 }
 
                 tab.gameObject.SetActive(atLeastOneUnlocked);
+                */
             }
 
             this.scrollbar.value = 0f;
@@ -109,7 +116,7 @@ public class PopupBuild : PopupWindow {
 
             // If the selected tab is no longer visible, set the miscellaneous tab to be selected
             if(this.selectedTab == null || !this.selectedTab.gameObject.activeSelf) {
-                this.selectedTab = this.tabs[0]; // Miscellaneous tab.
+                this.selectedTab = this.tabs[0];
             }
 
             //this.Callback_SetSelectedTab(this.selectedTab);

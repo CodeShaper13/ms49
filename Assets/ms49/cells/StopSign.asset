@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
-  m_Name: Chair
+  m_Name: StopSign
   m_EditorClassIdentifier: 
-  _cellName: Stool
+  _cellName: Stop Sign
   _isSolid: 0
-  _floorOverlayTile: {fileID: 11400000, guid: 17c1cbc8f97848a449a4616ff803af32, type: 2}
-  _objectTile: {fileID: 0}
+  _floorOverlayTile: {fileID: 0}
+  _objectTile: {fileID: 11400000, guid: 30b0bc1dc7e79b84dbf14a3b33875134, type: 2}
   _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 0
   up:
@@ -46,10 +46,10 @@ MonoBehaviour:
   _canBuildOver: 0
   _isDestroyable: 1
   _zMoveDirections: 0
-  _flammable: 1
+  _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 0
   _includeInFogFloodLift: 0
   _tintObjectTile: 0
-  _behaviorPrefab: {fileID: 8157790324566324537, guid: 50bc824dcfa86244e936259b3380e0b5,
+  _behaviorPrefab: {fileID: 3584115285329104384, guid: ec9077ceb3b50274db2b7ca3145d6bbe,
     type: 3}

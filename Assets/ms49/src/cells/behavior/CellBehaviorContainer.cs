@@ -10,8 +10,8 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
     public virtual bool IsFull => this.inventory.IsFull;
     public virtual bool IsEmpty => this.inventory.IsEmpty;
 
-    public override void onCreate(World world, CellState state, Position pos) {
-        base.onCreate(world, state, pos);
+    public override void OnCreate(World world, CellState state, Position pos) {
+        base.OnCreate(world, state, pos);
     }
 
     public override void onRightClick() {

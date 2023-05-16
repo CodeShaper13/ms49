@@ -23,9 +23,7 @@ public class CellBehaviorArm : CellBehavior, IHasData {
         this._animator?.SetFloat(armMoveSpeedHash, this._moveSpeed);
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
-
+    private void Update() {
         if(Pause.IsPaused) {
             return;
         }

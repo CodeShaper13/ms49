@@ -49,7 +49,10 @@ public abstract class EntityBase : MonoBehaviour {
 
     public virtual void onDestroy() { }
 
-    public virtual void onRightClick() { }
+    /// <summary>
+    /// Called when the Entity is right clicked.
+    /// </summary>
+    public virtual void OnRightClick() { }
 
     public virtual void getDebugText(StringBuilder sb, string indent) { }
 

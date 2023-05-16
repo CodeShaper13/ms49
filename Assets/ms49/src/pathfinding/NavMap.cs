@@ -143,7 +143,7 @@ public class NavMap : MonoBehaviour {
         public void Bake(Layer layer) {
             for(int x = 0; x < this.mapSize; x++) {
                 for(int y = 0; y < this.mapSize; y++) {
-                    CellData data = layer.getCellState(x, y).data;
+                    CellData data = layer.GetCellState(x, y).data;
                     this.nodes[x, y] = new PathfindingNode(
                         x,
                         y,

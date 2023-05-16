@@ -1,88 +1,125 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
-using static BinaryTilemapRenderer;
+using NaughtyAttributes;
 
 public class FogRenderer : MonoBehaviour {
 
-    [SerializeField]
-    private Tilemap tilemap = null;
-    [SerializeField]
-    private TilemapRenderer tilemapRenderer = null;
-    [SerializeField]
-    private TileBase tile = null;
+    [SerializeField, Required]
+    private World _world = null;
+    [SerializeField, Required]
+    private Tilemap _tilemap = null;
+    [SerializeField, Required]
+    private TilemapRenderer _tilemapRenderer = null;
+    [SerializeField, Required]
+    private TileBase _fogTile = null;
     [SerializeField]
     private KeyCode fogToggleKey = KeyCode.F5;
     [SerializeField, Range(0, 1)]
     private float creativeFogAlpha = 0.5f;
 
-    public int mapSize { get; set; }
-
-    private List<DirtyTile> dirtiedTiles;
+    private LinkedList<Vector3Int> dirtiedTiles;
     private Color normalTilemapColor;
+    private TileBase[] cachedTileArray;
 
     private void Awake() {
-        this.dirtiedTiles = new List<DirtyTile>();
-        this.normalTilemapColor = this.tilemap.color;
+        this.dirtiedTiles = new LinkedList<Vector3Int>();
+        this.normalTilemapColor = this._tilemap.color;
+        int mapSize = this._world.MapSize;
+        this.cachedTileArray = new TileBase[mapSize * mapSize];
+
+        // Bounds must be set before using TileMap#SetTilesBlock().
+        int len = mapSize + 2;
+        this._tilemap.size = new Vector3Int(len, len, 0);
+        this._tilemap.origin = new Vector3Int(-1, -1, 0);
+        this._tilemap.ResizeBounds();
+
+        this.AddBorderFog();
     }
 
     private void Update() {
         if(Input.GetKeyDown(this.fogToggleKey)) {
-            this.tilemapRenderer.enabled = !this.tilemapRenderer.enabled;
+            this._tilemapRenderer.enabled = !this._tilemapRenderer.enabled;
         }
 
-        this.tilemap.color = CameraController.instance.inCreativeMode ?
+        this._tilemap.color = CameraController.instance.inCreativeMode ?
             new Color(
                 this.normalTilemapColor.r,
                 this.normalTilemapColor.g,
                 this.normalTilemapColor.b,
-                this.creativeFogAlpha) :
-                this.normalTilemapColor;
+                this.creativeFogAlpha) : this.normalTilemapColor;
     }
 
     private void LateUpdate() {
         // Redraw only dirty Cells.
-        foreach(DirtyTile t in this.dirtiedTiles) {
-            this.tilemap.SetTile(
-                new Vector3Int(t.position.x, t.position.y, 0),
-                t.visible ? this.tile : null);
+        foreach(Vector3Int v in this.dirtiedTiles) {
+            this._tilemap.SetTile(
+                new Vector3Int(v.x, v.y, 0),
+                v.z == 1 ? this._fogTile : null);
         }
 
         this.dirtiedTiles.Clear();
     }
 
-    /// <summary>
-    /// Sets the Renderer's tile getter function and clears the map for a total redraw.
-    /// </summary>
-    public void redraw(Layer layer) {
-        this.tilemapRenderer.enabled = layer.HasFog;
+    public void Redraw(Layer layer) {
+
+        this._tilemapRenderer.enabled = layer.HasFog;
 
         if(layer.HasFog) {
-            for(int x = -1; x < mapSize + 1; x++) {
-                for(int y = -1; y < mapSize + 1; y++) {
-                    bool fogPresent;
-                    if(x == -1 || x == mapSize | y == -1 || y == mapSize) {
-                        // This is an edge, fog is always there
-                        fogPresent = true;
-                    } else {
-                        fogPresent = layer.fog.isFogPresent(x, y);
-                    }
-
-                    Vector3Int v = new Vector3Int(x, y, 0);
-
-                    if((this.tilemap.GetTile(v) == null) == fogPresent) {
-                        this.tilemap.SetTile(v, fogPresent ? this.tile : null);
-                    }
+            int size = this._world.MapSize;
+            for(int x = 0; x < size; x++) {
+                for(int y = 0; y < size; y++) {
+                    this.cachedTileArray[size * y + x] = layer.fog.isFogPresent(x, y) ? this._fogTile : null;
                 }
             }
+
+            this._tilemap.SetTilesBlock(
+                new BoundsInt(
+                    0, 0, 0,
+                    size, size, 1),
+                this.cachedTileArray);
         }
     }
 
-    public void clear() {
-        this.tilemap.ClearAllTiles();
+    public void DirtyTile(int x, int y, bool visible) {
+        this.dirtiedTiles.AddLast(new Vector3Int(x, y, visible ? 1 : 0));
     }
 
-    public void dirtyTile(int x, int y, bool visible) {
-        this.dirtiedTiles.Add(new DirtyTile(new Vector2Int(x, y), visible));
+    private void AddBorderFog() {
+        int mapSize = this._world.MapSize;
+        int len = mapSize + 2;
+
+        TileBase[] tiles = new TileBase[len];
+        for(int i = 0; i < len; i++) {
+            tiles[i] = this._fogTile;
+        }
+
+        // Left.
+        this._tilemap.SetTilesBlock(
+            new BoundsInt(
+                -1, -1, 0,
+                1, len, 1),
+            tiles);
+
+        // Right.
+        this._tilemap.SetTilesBlock(
+            new BoundsInt(
+                mapSize, -1, 0,
+                1, len, 1),
+            tiles);
+
+        // Bottom.
+        this._tilemap.SetTilesBlock(
+            new BoundsInt(
+                -1, -1, 0,
+                len, 1, 1),
+            tiles);
+
+        // Top.
+        this._tilemap.SetTilesBlock(
+            new BoundsInt(
+                -1, mapSize, 0,
+                len, 1, 1),
+            tiles);
     }
 }

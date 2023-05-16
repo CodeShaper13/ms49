@@ -8,7 +8,11 @@ public class PopupWorldReference : PopupWindow {
         this.world = GameObject.FindObjectOfType<World>();
     }
 
-    protected virtual void Start() {
+    protected virtual void Start() { }
+
+    protected override void onOpen() {
+        base.onOpen();
+
         this.world = GameObject.FindObjectOfType<World>();
         if(this.world == null) {
             Debug.LogWarning("Popup " + this.name + " could not locate the World!");

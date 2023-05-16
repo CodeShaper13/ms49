@@ -124,14 +124,14 @@ public class Main : MonoBehaviour {
         PopupWindow.closeAll();
 
         World world = this.InstantiateGameObjects();
-        world.initialize(saveName, settings);
+        world.Initialize(saveName, settings);
     }
 
     public void StartWorld(string saveName, NbtCompound rootTag) {
         PopupWindow.closeAll();
 
         World world = this.InstantiateGameObjects();
-        world.initialize(saveName, rootTag);
+        world.Initialize(saveName, rootTag);
     }
 
     /// <summary>

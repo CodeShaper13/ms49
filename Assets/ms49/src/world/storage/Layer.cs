@@ -53,10 +53,10 @@ public class Layer {
         }
     }
 
-    public void setCell(int x, int y, CellData data, int meta, bool alertNeighbors = true, bool callBehaviorCreateCallback = true) {
-        CellState oldState = this.getCellState(x, y);
+    public void SetCell(int x, int y, CellData data, int meta, bool alertNeighbors = true, bool callBehaviorCreateCallback = true) {
+        CellState oldState = this.GetCellState(x, y);
 
-        // Cleanup the old meta object if it exists.
+        // Cleanup the old CellBehavior if it exists.
         if(oldState.behavior != null) {
             oldState.behavior.onDestroy();
             if(oldState.behavior.cache) {
@@ -66,7 +66,7 @@ public class Layer {
         }
 
         CellBehavior behavior;
-        if(data.BehaviorPrefab != null) {
+        if(data.HasBehaviorPrefab) {
             behavior = GameObject.Instantiate(data.BehaviorPrefab, this.world.storage.behaviorHolder).GetComponent<CellBehavior>();
             if(behavior == null) {
                 Debug.LogWarning("Cell " + data.name + "had a behavior object assigned but it did not have a CellBehavior componenet on it's root.");
@@ -84,7 +84,7 @@ public class Layer {
         this.tiles[this.world.MapSize * x + y] = state;
 
         if(callBehaviorCreateCallback && behavior != null) {
-            behavior.onCreate(this.world, state, new Position(x, y, this.depth));
+            behavior.OnCreate(this.world, state, new Position(x, y, this.depth));
         }
 
         // Update heat source map.
@@ -98,7 +98,7 @@ public class Layer {
                 int x1 = x + r.vector.x;
                 int y1 = y + r.vector.y;
                 if(x1 >= 0 && y1 >= 0 && x1 < mapSize && y1 < mapSize) {
-                    CellBehavior b = this.getCellState(x1, y1).behavior;
+                    CellBehavior b = this.GetCellState(x1, y1).behavior;
                     if(b != null) {
                         b.onNeighborChange(state, new Position(x, y, this.depth));
                     }
@@ -111,7 +111,7 @@ public class Layer {
         this.world.worldRenderer.dirtyTile(x, y);
     }
 
-    public CellState getCellState(int x, int y) {
+    public CellState GetCellState(int x, int y) {
         return this.tiles[this.size * x + y];
     }
 
@@ -182,7 +182,7 @@ public class Layer {
         NbtList listTileMeta = new NbtList(NbtTagType.Compound);
         for(int x = 0; x < this.size; x++) {
             for(int y = 0; y < this.size; y++) {
-                CellBehavior meta = this.getCellState(x, y).behavior;
+                CellBehavior meta = this.GetCellState(x, y).behavior;
                 if(meta != null && meta is IHasData) {
                     NbtCompound behaviorTag = new NbtCompound();
                     behaviorTag.setTag("xPos", x);
@@ -231,7 +231,7 @@ public class Layer {
                     parents[i * 2],
                     parents[(i * 2) + 1]);
 
-                this.setCell(
+                this.SetCell(
                     x,
                     y,
                     d == null ? Main.instance.CellRegistry.GetAir() : d,

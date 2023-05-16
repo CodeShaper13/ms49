@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellName: dumptruck
   _isSolid: 0
-  _floorOverlayTile: {fileID: 0}
-  _objectTile: {fileID: 11400000, guid: c696e3062c5dcc14d8b0b6d7ab9c9761, type: 2}
+  _floorOverlayTile: {fileID: 11400000, guid: 3868c6ca5ddbed24ba2db6208d4d0b72, type: 2}
+  _objectTile: {fileID: 0}
   _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 0
   up:

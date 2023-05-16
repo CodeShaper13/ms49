@@ -30,9 +30,7 @@ public class CellBehaviorConveyorBelt : CellBehavior, IHasData, ILeverReciever {
         this.dirty();
     }
 
-    public override void onUpdate() {
-        base.onUpdate();
-
+    private void Update() {
         this.pullTimer -= Time.deltaTime;
 
         // Attempt to pull Items from a container.

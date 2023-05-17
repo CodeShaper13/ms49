@@ -25,7 +25,7 @@ public class DemoHighlighter : CellHighlightBase {
             }
 
             // Check if the mouse is over a Destroyable cell.
-            if(this.world.GetCellState(pos).data.IsDestroyable && (this.world.plotManager.isOwned(pos) || CameraController.instance.inCreativeMode)) {
+            if(this.world.GetCellState(pos).data.IsDestroyable && (this.world.plotManager.IsOwned(pos) || CameraController.instance.inCreativeMode)) {
                 this.setValidColor();
                 return true;
             }
@@ -39,7 +39,7 @@ public class DemoHighlighter : CellHighlightBase {
         if(isValid) {
             int cost = this.popup.getDemoCost();
             bool inCreative = CameraController.instance.inCreativeMode;
-            if((inCreative || (this.money.value >= this.popup.getDemoCost()) && this.world.plotManager.isOwned(pos))) {
+            if((inCreative || (this.money.value >= this.popup.getDemoCost()) && this.world.plotManager.IsOwned(pos))) {
                 if(!inCreative) {
                     this.money.value -= cost;
                 }

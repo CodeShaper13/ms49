@@ -43,7 +43,6 @@ public class FeatureCave : FeatureBase {
         for(int x = 0; x < accessor.size; x++) {
             for(int y = 0; y < accessor.size; y++) {
                 int id = map[x, y];
-                CellData cell = null;
 
                 if(id == 0) {
                     accessor.SetCell(x, y, air);

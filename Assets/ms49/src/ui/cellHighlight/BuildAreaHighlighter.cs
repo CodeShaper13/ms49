@@ -59,7 +59,7 @@ public class BuildAreaHighlighter : CellHighlightBase {
             this.tileSr.gameObject.SetActive(false);
         }
 
-        if(isValid && this.world.money.value >= this.buildable.cost) {
+        if(isValid && this.world.Money.value >= this.buildable.cost) {
             this.setValidColor();
         } else {
             this.setInvalidColor();
@@ -71,9 +71,9 @@ public class BuildAreaHighlighter : CellHighlightBase {
     protected override void onClick(Position pos, bool isValid) {
         bool inCreative = CameraController.instance.inCreativeMode;
 
-        if(isValid && (inCreative || world.money.value >= this.buildable.cost)) {
+        if(isValid && (inCreative || world.Money.value >= this.buildable.cost)) {
             if(!inCreative) {
-                this.world.money.value -= this.buildable.cost;
+                this.world.Money.value -= this.buildable.cost;
             }
 
             this.buildable.PlaceIntoWorld(world, this, pos, this.popup.rot);

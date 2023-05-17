@@ -19,7 +19,7 @@ public class Payroll : MonoBehaviour, ISaveableState {
                 // Pay Workers.
 
                 if(!CameraController.instance.inCreativeMode) {
-                    IntVariable money = this._world.money;
+                    IntVariable money = this._world.Money;
 
                     foreach(EntityBase e in this._world.entities.list) {
                         if(e is EntityWorker) {

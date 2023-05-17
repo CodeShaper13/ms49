@@ -81,7 +81,7 @@ public class CameraController : MonoBehaviour {
                 bool clearTooltip = true;
 
                 Position pos = this.getMousePos();
-                if(!this.world.IsOutOfBounds(pos) && (this.world.plotManager.isOwned(pos) || this.inCreativeMode)) {
+                if(!this.world.IsOutOfBounds(pos) && (this.world.plotManager.IsOwned(pos) || this.inCreativeMode)) {
                     CellBehavior behavior = world.GetCellState(pos).behavior;
 
                     bool rmb = Input.GetMouseButtonDown(1);

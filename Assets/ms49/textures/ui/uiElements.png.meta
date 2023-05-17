@@ -314,6 +314,12 @@ TextureImporter:
   - first:
       213: -73051452287208497
     second: uiElements_progressBarFillGreen
+  - first:
+      213: 4683448551875137145
+    second: uiElements_landSaleSign
+  - first:
+      213: -7529905551840404867
+    second: uiElements_landSaleSignHighlighted
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1578,13 +1584,13 @@ TextureImporter:
       name: uiElements_plotOutline
       rect:
         serializedVersion: 2
-        x: 241
-        y: 65
-        width: 14
-        height: 14
+        x: 163
+        y: 1
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2423,7 +2429,7 @@ TextureImporter:
         width: 14
         height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 3}
       outline: []
       physicsShape: []
@@ -2431,6 +2437,48 @@ TextureImporter:
       bones: []
       spriteID: fc3381857187cfef0800000000000000
       internalID: -73051452287208497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_landSaleSign
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1
+        width: 39
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97ec55ad4a3fef040800000000000000
+      internalID: 4683448551875137145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_landSaleSignHighlighted
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 1
+        width: 39
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a9f46bbc6608790800000000000000
+      internalID: -7529905551840404867
       vertices: []
       indices: 
       edges: []

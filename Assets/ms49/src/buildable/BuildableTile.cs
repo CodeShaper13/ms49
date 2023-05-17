@@ -68,7 +68,7 @@ public class BuildableTile : BuildableBase {
                     return false;
                 }
 
-                if(!CameraController.instance.inCreativeMode && !world.plotManager.isOwned(pos)) {
+                if(!CameraController.instance.inCreativeMode && !world.plotManager.IsOwned(pos)) {
                     return false;
                 }
             }

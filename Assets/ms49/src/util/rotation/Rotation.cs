@@ -29,6 +29,7 @@ public class Rotation {
         EnumRotation.LEFT);
 
     public static Rotation[] ALL = new Rotation[] { UP, RIGHT, DOWN, LEFT };
+    public static Rotation Random => ALL[UnityEngine.Random.Range(0, 4)];
 
     public readonly int id;
     public readonly string name;

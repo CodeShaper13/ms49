@@ -57,7 +57,7 @@ public class StructureMineshaft : StructureBase {
             world,
             smallShaftPos,
             this._smallShaftSize);
-        list.RemoveAll(plot => plot.contains(smallShaftPos));
+        list.RemoveAll(plot => plot.Contains(smallShaftPos.x, smallShaftPos.y));
 
         // Large shaft.
         int j = Random.Range(this._mineshaftsPerLayer.x, this._mineshaftsPerLayer.y);

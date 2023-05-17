@@ -29,7 +29,7 @@ public class PopupMine : PopupWorldReference {
                         this.playSfx();
                     }
                     else {
-                        if(this.world.plotManager.isOwned(pos)) {
+                        if(this.world.plotManager.IsOwned(pos)) {
                             if(this.world.targetedSquares.isTargeted(pos)) {
                                 if(!rightBtn) {
                                     this.world.targetedSquares.stopTargeting(pos);

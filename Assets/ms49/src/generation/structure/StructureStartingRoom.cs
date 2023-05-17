@@ -20,7 +20,7 @@ public class StructureStartingRoom : StructureBase {
         PlotManager pm = world.plotManager;
         int structureX = Random.Range(
             5,
-            pm.plotDiameter - 5) + ((pm.plotCount / 2) * pm.plotDiameter);
+            pm.PlotSize - 5) + ((pm.PlotCount / 2) * pm.PlotSize);
 
         foreach(Prebuilt p in this._areas) {
             Random.InitState(world.seed);

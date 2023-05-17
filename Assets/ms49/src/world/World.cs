@@ -9,9 +9,12 @@ using UnityEngine;
 
 public class World : MonoBehaviour {
 
-    public WorldType mapGenData = null;
-    public IntVariable money = null;
-    public IntVariable maxDepth = null;
+    [SerializeField, Min(16)]
+    private int _mapSize = 96;
+    [SerializeField]
+    private IntVariable _money = null;
+    [SerializeField]
+    private IntVariable _maxDepth = null;
 
     [Space]
 
@@ -34,16 +37,16 @@ public class World : MonoBehaviour {
 
     public CellData rubbleCell;
 
-    private bool isNewWorld;
-
     public Storage storage { get; private set; }
     public string saveName { get; private set; }
     public int seed { get; private set; }
 
+    public IntVariable Money => this._money;
+    public IntVariable MaxDepth => this._maxDepth;
     /// <summary>
     /// The size of the map in cells.
     /// </summary>
-    public int MapSize => this.plotManager.mapSize;
+    public int MapSize => this._mapSize;
     public MapGenerator MapGenerator => this._mapGenerator;
 
     private void Awake() {
@@ -87,9 +90,9 @@ public class World : MonoBehaviour {
 
         this.seed = settings.getSeed();
 
-        // Create land plots
-        this.plotManager.initializeFirstTime(this.seed);
-
+        foreach(IFirstTimeInitializer initializer in this.GetComponentsInChildren<IFirstTimeInitializer>()) {
+            initializer.InitializeFirstTime(this.seed);
+        }
 
         // Generate the map.
         for(int depth = 0; depth < this.storage.layerCount; depth++) {
@@ -101,7 +104,7 @@ public class World : MonoBehaviour {
         bool setPoint = false;
         foreach(EntityBase e in this.entities.list) {
             if(e is EntityTruck) {
-                this.plotManager.getPlot(e.position.x, e.position.y).isOwned = true;
+                this.plotManager.GetPlot(e.position.x, e.position.y).isOwned = true;
                 this.storage.workerSpawnPoint = e.position.Add(-1, -1);
 
                 setPoint = true;
@@ -115,7 +118,7 @@ public class World : MonoBehaviour {
 
 
         // Set starting money.
-        this.money.value = this._mapGenerator.StartingMoney;
+        this._money.value = this._mapGenerator.StartingMoney;
 
 
         // Spawn the starting Workers.
@@ -380,7 +383,7 @@ public class World : MonoBehaviour {
     /// Checks if the passed Layer is unlocked.
     /// </summary>
     public bool IsDepthUnlocked(int depth) {
-        return depth <= this.maxDepth.value;
+        return depth <= this._maxDepth.value;
     }
 
     /// <summary>
@@ -426,8 +429,8 @@ public class World : MonoBehaviour {
         // Write general world info:
         tag.setTag("seed", this.seed);
 
-        if(this.money != null) {
-            tag.setTag("money", this.money.value);
+        if(this._money != null) {
+            tag.setTag("money", this._money.value);
         }
 
         // Write level:
@@ -456,8 +459,8 @@ public class World : MonoBehaviour {
         // Read general world info:
         this.seed = tag.getInt("seed");
 
-        if(this.money != null) {
-            this.money.value = tag.getInt("money");
+        if(this._money != null) {
+            this._money.value = tag.getInt("money");
         }
 
         foreach(ISaveableState saveable in this.GetComponentsInChildren<ISaveableState>()) {

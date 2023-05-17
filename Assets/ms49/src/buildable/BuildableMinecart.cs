@@ -24,7 +24,7 @@ public class BuildableMinecart : BuildableBase, ISpritePreview {
     }
 
     public override bool IsValidLocation(World world, Position pos, Rotation rotation) {
-        return !world.IsOutOfBounds(pos) && world.GetCellState(pos).data is CellDataRail && world.plotManager.isOwned(pos);
+        return !world.IsOutOfBounds(pos) && world.GetCellState(pos).data is CellDataRail && world.plotManager.IsOwned(pos);
     }
 
     public override void PlaceIntoWorld(World world, BuildAreaHighlighter highlight, Position pos, Rotation rotation) {

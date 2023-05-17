@@ -94,7 +94,7 @@ public class Economy : MonoBehaviour, ISaveableState {
     /// </summary>
     public void sellItem(Item item) {
         if(item != null) {
-            this._world.money.value += this.getItemValue(item);
+            this._world.Money.value += this.getItemValue(item);
         }
     }
 

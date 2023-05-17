@@ -27,7 +27,7 @@ public class PopupBuyLand : PopupWorldReference {
             foreach(Rotation r in Rotation.ALL) {
                 int x = pcp.x + r.vector.x;
                 int y = pcp.y + r.vector.y;
-                Plot plot = this.world.plotManager.getPlotFromPlotCoords(x, y);
+                Plot plot = this.world.plotManager.GetPlotFromPlotCoords(x, y);
                 if(plot != null && plot.isOwned) {
                     isAdjacentOwned = true;
                     break;
@@ -45,19 +45,21 @@ public class PopupBuyLand : PopupWorldReference {
         foreach(Plot p in this.world.plotManager.plots) {
             if(p != null) { // TODO is adjacent to owned
                 PlotOutline outlineLabel = GameObject.Instantiate(this.labelPrefab, this.labelHolder).GetComponent<PlotOutline>();
-                outlineLabel.setPlot(p);
-                outlineLabel.setClickCallback(() => {
-                    if(this.popup != null) {
-                        this.popup.openAdditive();
-                        this.popup.setPlot(outlineLabel.plot);
-                    }
-                });
+                outlineLabel.gameObject.SetActive(true);
+                outlineLabel.SetPlot(p);
 
                 this.labels.Add(outlineLabel);
             }
         }
 
         CameraController.instance.setZoom(int.MinValue); // Fully zoomed out
+    }
+
+    public void Callback_BuyLand(PlotOutline outline) {
+        if(this.popup != null) {
+            this.popup.openAdditive();
+            this.popup.setPlot(outline.plot);
+        }
     }
 
     protected override void onClose() {

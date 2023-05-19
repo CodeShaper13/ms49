@@ -54,7 +54,7 @@ public class CellBehaviorFurnace : CellBehaviorContainer {
     public override void onRightClick() {
         base.onRightClick();
 
-        PopupFurnace popup = Main.instance.findPopup<PopupFurnace>();
+        PopupFurnace popup = Main.instance.FindPopup<PopupFurnace>();
         if(popup != null) {
             popup.open();
             popup.SetInventory(this.inventory);

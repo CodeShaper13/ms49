@@ -40,7 +40,7 @@ public class EntityTruck : EntityBase {
     public override void OnRightClick() {
         base.OnRightClick();
 
-        PopupTruck popup = Main.instance.findPopup<PopupTruck>();
+        PopupTruck popup = Main.instance.FindPopup<PopupTruck>();
         if(popup != null) {
             popup.open();
             popup.SetTruck(this);

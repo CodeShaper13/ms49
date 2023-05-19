@@ -195,7 +195,7 @@ public class EntityWorker : EntityBase {
     }
 
     public override void OnRightClick() {
-        PopupWorkerStats popup = Main.instance.findPopup<PopupWorkerStats>();
+        PopupWorkerStats popup = Main.instance.FindPopup<PopupWorkerStats>();
         if(popup != null) {
             popup.open();
             popup.setWorker(this);

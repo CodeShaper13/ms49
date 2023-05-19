@@ -1,48 +1,50 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using System.Collections.Generic;
+using TMPro;
 
 public class PopupOptions : PopupWindow {
 
     [SerializeField]
-    private RectTransform area = null;
-    [SerializeField]
-    private GameObject sliderPrefab = null;
-    [SerializeField]
-    private GameObject togglePrefab = null;
-    [SerializeField]
     private Options _options = null;
+    [SerializeField]
+    private RectTransform _optionControlParent = null;
 
-    private List<GameObject> optionControls;
+    [Space]
+
+    [SerializeField]
+    private GameObject _sliderPrefab = null;
+    [SerializeField]
+    private GameObject _togglePrefab = null;
 
     private void Start() {
         // Create Ui Control elements for every option.
         foreach(IOption option in this._options.allOptions) {
-            GameObject prefab = this.getPrefab(option);
+            GameObject prefab = this.GetPrefab(option);
 
             if(prefab != null) {
-                GameObject obj = GameObject.Instantiate(prefab, this.area);
+                GameObject obj = GameObject.Instantiate(prefab, this._optionControlParent);
+                obj.gameObject.SetActive(true);
 
-                obj.GetComponentInChildren<Text>().text = option.name;
+                obj.GetComponentInChildren<TMP_Text>().text = option.name;
 
                 option.setupControlObj(obj);
             }
         }
     }
 
-    private GameObject getPrefab(IOption option) {
+    protected override void onClose() {
+        base.onClose();
+
+        this._options.saveOptions();
+    }
+
+    private GameObject GetPrefab(IOption option) {
         if(option is OptionSlider) {
-            return this.sliderPrefab;
+            return this._sliderPrefab;
         }
         else if(option is OptionToggle) {
-            return this.togglePrefab;
+            return this._togglePrefab;
         }
 
         return null;
-    }
-
-    public void callback_saveOptions() {
-        this._options.saveOptions();
     }
 }

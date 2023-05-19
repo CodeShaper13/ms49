@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class PopupRename : PopupWindow {
 
     [SerializeField]
-    private InputFieldSaveName inputSaveName = null;
+    private TMP_InputField _inputField = null;
 
     private SaveFile save;
 
@@ -14,12 +15,12 @@ public class PopupRename : PopupWindow {
     public void setTargetSave(SaveFile save) {
         this.save = save;
 
-        this.inputSaveName.text = save.saveName;
+        this._inputField.text = save.saveName;
     }
 
     public void callback_rename() {
-        this.save.rename(inputSaveName.text);
+        this.save.rename(this._inputField.text);
 
-        this.close();
+        this.Close();
     }
 }

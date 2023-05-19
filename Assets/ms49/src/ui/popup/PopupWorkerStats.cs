@@ -57,7 +57,7 @@ public class PopupWorkerStats : PopupWindow {
         if(this.worker != null) {
             this.worker.world.entities.Remove(this.worker);
         }
-        this.close();
+        this.Close();
     }
 
     private void func(Slider slider, UnlockableStat stat) {

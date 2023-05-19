@@ -31,7 +31,7 @@ public class UiManager : MonoBehaviour {
             if(PopupWindow.getPopupsOpen() == 0) {
                 // Open the Pause screen if there is a world loaded.
                 if(Main.instance.IsPlayingGame()) {
-                    PopupPause popup = Main.instance.findPopup<PopupPause>();
+                    PopupPause popup = Main.instance.FindPopup<PopupPause>();
                     if(popup != null) {
                         popup.open();
                     }
@@ -42,7 +42,7 @@ public class UiManager : MonoBehaviour {
                 for(int i = PopupWindow.openPopups.Count - 1; i >= 0; i--) {
                     PopupWindow popup = PopupWindow.openPopups[i];
                     if(popup.CloseableWithEscape) {
-                        popup.close();
+                        popup.Close();
                     }
                 }
             }

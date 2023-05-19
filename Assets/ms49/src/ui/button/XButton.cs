@@ -13,7 +13,7 @@ public class XButton : ButtonBase {
     public override void callback() {
         PopupWindow popup = this.GetComponentInParent<PopupWindow>();
         if(popup != null) {
-            popup.close();
+            popup.Close();
         }
     }
 }

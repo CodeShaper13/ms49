@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 public class PopupBuyLand : PopupWorldReference {
 
+    [SerializeField, Required]
+    private IntVariable _money = null;
     [SerializeField]
     private GameObject labelPrefab = null;
     [SerializeField]
     private Transform labelHolder = null;
-    [SerializeField]
-    private PopupBuyLandConfirm popup = null;
 
     private List<PlotOutline> labels;
 
@@ -56,9 +57,29 @@ public class PopupBuyLand : PopupWorldReference {
     }
 
     public void Callback_BuyLand(PlotOutline outline) {
-        if(this.popup != null) {
-            this.popup.openAdditive();
-            this.popup.setPlot(outline.plot);
+        PopupConfimDialog dialog = Main.instance.FindPopup<PopupConfimDialog>();
+        if(dialog != null) {
+            Plot plot = outline.plot;
+
+            if(this.CanAffordPlot(plot)) {
+                dialog.headerText = "Confirm";
+                dialog.messageText = string.Format("Purchase land for {0}?", outline.plot.cost);
+                dialog.yesBtnText = "Purchase";
+                dialog.noBtnText = "Cancel";
+                dialog.yesCallback = () => {
+                    if(!CameraController.instance.inCreativeMode) {
+                        this._money.value -= outline.plot.cost;
+                    }
+                    outline.plot.isOwned = true;
+                };
+            } else {
+                dialog.headerText = "Too Expensive";
+                dialog.messageText = "You do not have enough money to purchase this land";
+                dialog.yesBtnText = "Ok";
+                dialog.noBtnVisable = false;
+            }
+
+            dialog.openAdditive();
         }
     }
 
@@ -70,5 +91,11 @@ public class PopupBuyLand : PopupWorldReference {
             GameObject.Destroy(label.gameObject);
         }
         this.labels.Clear();
+    }
+
+    private bool CanAffordPlot(Plot plot) {
+        return
+            plot != null &&
+            (CameraController.instance.inCreativeMode || this._money.value >= plot.cost);
     }
 }

@@ -1,32 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using TMPro;
 
+[RequireComponent(typeof(TMP_InputField))]
 public class InputFieldSaveName : MonoBehaviour {
 
     [SerializeField]
-    private string regexWorldName = @"[^a-zA-Z0-9_!]";
+    private StringVariable _regexPattern = null;
     [SerializeField]
     private Image imageInvalidIcon = null;
-    [SerializeField]
-    private InputField inputSaveName = null;
 
-    public bool isValidName {
-        get; private set;
-    }
+    private TMP_InputField inputField;
+
+    public bool isValidName { get; private set; }
     public string text {
-        get { return this.inputSaveName.text; }
-        set { this.inputSaveName.text = value; }
+        get => this.inputField.text;
+        set { this.inputField.text = value; }
     }
 
-    public void callback_characterChange() {
+    private void Awake() {
+        this.inputField = this.GetComponent<TMP_InputField>();
+        this.inputField.onValueChanged.AddListener(this.OnValueChanged);
+    }
+
+    private void OnValueChanged(string text) {
         // Remove invalid characters
-        this.inputSaveName.text = Regex.Replace(this.inputSaveName.text, this.regexWorldName, "");
+        if(this._regexPattern != null) {
+            this.inputField.text = Regex.Replace(this.inputField.text, this._regexPattern.value, string.Empty);
+        }
 
         // Update the create button interactability
-        bool validName = !string.IsNullOrEmpty(this.inputSaveName.text);
+        bool validName = !string.IsNullOrEmpty(this.inputField.text);
         foreach(SaveFile save in Main.instance.GetAllSaves()) {
-            if(save.saveName == this.inputSaveName.text) {
+            if(save.saveName == this.inputField.text) {
                 validName = false;
                 break;
             }
@@ -35,6 +42,8 @@ public class InputFieldSaveName : MonoBehaviour {
         this.isValidName = validName;
 
         // Update the invalid exclamation icon.
-        this.imageInvalidIcon.enabled = !this.isValidName;
+        if(this.imageInvalidIcon != null) {
+            this.imageInvalidIcon.enabled = !this.isValidName;
+        }
     }
 }

@@ -243,7 +243,7 @@ public class EntityMinecart : EntityBase {
     }
 
     public override void OnRightClick() {
-        PopupContainer popup = Main.instance.findPopup<PopupContainer>();
+        PopupContainer popup = Main.instance.FindPopup<PopupContainer>();
         if(popup != null) {
             popup.open();
             popup.SetInventory(this.Inventory);

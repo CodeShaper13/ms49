@@ -33,7 +33,7 @@ public class PopupWindow : MonoBehaviour {
 
     public static void closeAll() {
         for(int i = openPopups.Count - 1; i >= 0; i--) {
-            openPopups[i].close();
+            openPopups[i].Close();
         }
     }
 
@@ -65,7 +65,7 @@ public class PopupWindow : MonoBehaviour {
     private void open(bool closeAllOpen) {
         if(closeAllOpen) {
             for(int i = openPopups.Count - 1; i >= 0; i--) {
-                openPopups[i].close();
+                openPopups[i].Close();
             }
         }
 
@@ -80,7 +80,7 @@ public class PopupWindow : MonoBehaviour {
         this.onOpen();
     }
 
-    public void close() {
+    public void Close() {
         this.onClose();
 
         openPopups.Remove(this);
@@ -128,7 +128,7 @@ public class PopupWindow : MonoBehaviour {
     [Button("Close")]
     private void Editor_Close() {
         if(Application.isPlaying) {
-            this.close();
+            this.Close();
         }
         else {
             this.setChildState(false);

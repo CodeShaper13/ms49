@@ -1416,13 +1416,13 @@ TextureImporter:
       name: uiElements_invalidSaveName
       rect:
         serializedVersion: 2
-        x: 171
+        x: 183
         y: 203
-        width: 18
+        width: 6
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 10, z: 0, w: 3}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1605,13 +1605,13 @@ TextureImporter:
       name: uiElements_trashCan
       rect:
         serializedVersion: 2
-        x: 154
-        y: 185
-        width: 11
-        height: 16
+        x: 161
+        y: 177
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1626,13 +1626,13 @@ TextureImporter:
       name: uiElements_pencil
       rect:
         serializedVersion: 2
-        x: 167
-        y: 185
-        width: 16
-        height: 16
+        x: 177
+        y: 177
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0

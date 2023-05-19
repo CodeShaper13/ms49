@@ -17,7 +17,7 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
     public override void onRightClick() {
         base.onRightClick();
 
-        PopupContainer popup = Main.instance.findPopup<PopupContainer>();
+        PopupContainer popup = Main.instance.FindPopup<PopupContainer>();
         if(popup != null) {
             popup.open();
             popup.SetInventory(this.inventory);

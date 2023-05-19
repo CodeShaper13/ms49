@@ -89,7 +89,7 @@ public class Main : MonoBehaviour {
     /// Finds a Popup window of the passed type.  If it could not be
     /// found, null is returned and a warning is logged.
     /// </summary>
-    public T findPopup<T>() where T : PopupWindow {
+    public T FindPopup<T>() where T : PopupWindow {
         T popup = this._popupParent.GetComponentInChildren<T>(true);
         if(popup == null) {
             Debug.LogWarning("Could not find Popup of type " + typeof(T));

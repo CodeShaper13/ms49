@@ -7,7 +7,7 @@ public class CellBehaviorSign : CellBehavior, IHasData {
     public override void onRightClick() {
         base.onRightClick();
 
-        PopupSign popup = Main.instance.findPopup<PopupSign>();
+        PopupSign popup = Main.instance.FindPopup<PopupSign>();
         if(popup != null) {
             popup.open();
             popup.setMeta(this);

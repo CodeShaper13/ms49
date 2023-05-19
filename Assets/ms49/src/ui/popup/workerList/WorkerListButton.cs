@@ -21,7 +21,7 @@ public class WorkerListButton : MonoBehaviour {
     }
 
     public void callback_click() {
-        PopupWorkerStats popup = Main.instance.findPopup<PopupWorkerStats>();
+        PopupWorkerStats popup = Main.instance.FindPopup<PopupWorkerStats>();
         if(popup != null) {
             popup.openAdditive();
             popup.setWorker(this.worker);

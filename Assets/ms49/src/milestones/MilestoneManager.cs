@@ -46,7 +46,7 @@ public class MilestoneManager : MonoBehaviour, ISaveableState {
         }
 
         if(openPopup) {
-            PopupMilestones popup = Main.instance.findPopup<PopupMilestones>();
+            PopupMilestones popup = Main.instance.FindPopup<PopupMilestones>();
             if(popup != null) {
                 popup.open();
                 popup.playUnlockEffect();

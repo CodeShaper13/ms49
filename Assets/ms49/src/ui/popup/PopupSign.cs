@@ -18,6 +18,6 @@ public class PopupSign : PopupWindow {
             this.behavior.message = this.inputField.text;
         }
 
-        this.close();
+        this.Close();
     }
 }

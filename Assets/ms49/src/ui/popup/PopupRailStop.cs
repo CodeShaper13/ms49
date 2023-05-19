@@ -12,7 +12,7 @@ public class PopupRailStop : PopupWindow {
         base.onUpdate();
 
         if(this.railStop == null) {
-            this.close();
+            this.Close();
         }
     }
 

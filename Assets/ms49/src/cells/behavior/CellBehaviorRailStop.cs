@@ -28,7 +28,7 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
     public override void onRightClick() {
         base.onRightClick();
 
-        PopupRailStop popup = Main.instance.findPopup<PopupRailStop>();
+        PopupRailStop popup = Main.instance.FindPopup<PopupRailStop>();
         if(popup != null) {
             popup.SetRailStop(this);
             popup.open();

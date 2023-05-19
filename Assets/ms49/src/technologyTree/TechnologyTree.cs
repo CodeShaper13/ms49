@@ -124,7 +124,7 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
             }
 
             if(updateUi) {
-                PopupTechnologyTree tree = Main.instance.findPopup<PopupTechnologyTree>();
+                PopupTechnologyTree tree = Main.instance.FindPopup<PopupTechnologyTree>();
 
             }
         } else {

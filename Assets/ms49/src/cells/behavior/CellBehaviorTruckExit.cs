@@ -2,7 +2,7 @@
 
     public bool isEntrance;
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         return "Truck Exit";
     }
 }

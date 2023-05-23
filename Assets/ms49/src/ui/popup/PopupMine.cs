@@ -14,47 +14,50 @@ public class PopupMine : PopupWorldReference {
 
         if((rightBtn || leftBtn) && !EventSystem.current.IsPointerOverGameObject()) {
             Position pos = CameraController.instance.getMousePos();
-            if(!this.world.IsOutOfBounds(pos)) {
-
-                CellData cell = this.world.GetCellState(pos).data;
-
-                bool valid = cell is CellDataMineable || (cell == Main.instance.CellRegistry.GetAir() && this.world.IsCoveredByFog(pos));
-                if(valid) {
-                    if(CameraController.instance.inCreativeMode) {
-                        // Instantly remove.
-                        this.world.SetCell(pos, null, true);
-                        this.world.LiftFog(pos);
-                        this.world.tryCollapse(pos);
-                        this.world.targetedSquares.stopTargeting(pos);
-                        this.playSfx();
-                    }
-                    else {
-                        if(this.world.plotManager.IsOwned(pos)) {
-                            if(this.world.targetedSquares.isTargeted(pos)) {
-                                if(!rightBtn) {
+            if(this.CanMine(pos)) {
+                if(CameraController.instance.inCreativeMode) {
+                    // Instantly remove.
+                    this.world.SetCell(pos, null, true);
+                    this.world.LiftFog(pos);
+                    this.world.tryCollapse(pos);
+                    this.world.targetedSquares.stopTargeting(pos);
+                    this.PlaySfx();
+                }
+                else {
+                    if(this.world.plotManager.IsOwned(pos)) {
+                        if(this.world.targetedSquares.isTargeted(pos)) {
+                            if(!rightBtn) {
+                                this.world.targetedSquares.stopTargeting(pos);
+                            } else {
+                                if(this.world.targetedSquares.isPriority(pos)) {
                                     this.world.targetedSquares.stopTargeting(pos);
                                 } else {
-                                    if(this.world.targetedSquares.isPriority(pos)) {
-                                        this.world.targetedSquares.stopTargeting(pos);
-                                    } else {
-                                        this.world.targetedSquares.stopTargeting(pos);
-                                        this.world.targetedSquares.startTargeting(pos, true);
-                                    }
+                                    this.world.targetedSquares.stopTargeting(pos);
+                                    this.world.targetedSquares.startTargeting(pos, true);
                                 }
-                            } else {
-                                // Make sure this won't leave too big of an open spot // TODO
-                                this.world.targetedSquares.startTargeting(pos, rightBtn);
                             }
-
-                            this.playSfx();
+                        } else {
+                            // Make sure this won't leave too big of an open spot // TODO
+                            this.world.targetedSquares.startTargeting(pos, rightBtn);
                         }
+
+                        this.PlaySfx();
                     }
                 }
             }
         }
     }
 
-    private void playSfx() {
+    private bool CanMine(Position pos) {
+        if(this.world.IsOutOfBounds(pos)) {
+            return false;
+        }
+
+        CellData cell = this.world.GetCellState(pos).data;
+        return cell is CellDataMineable || (cell == Main.instance.CellRegistry.GetAir() && this.world.IsCoveredByFog(pos));
+    }
+
+    private void PlaySfx() {
         if(this.audioCellToggle != null) {
             this.audioCellToggle.Play();
         }

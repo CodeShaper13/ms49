@@ -91,9 +91,9 @@ public class CameraController : MonoBehaviour {
                             behavior.onRightClick();
                         }
 
-                        string s = behavior.getTooltipText();
-                        if(s != null) {
-                            this.tooltipDisplayer.setText(s, 0.5f, behavior.gameObject);
+                        string tooltipText = behavior.GetTooltipText();
+                        if(tooltipText != null) {
+                            this.tooltipDisplayer.Show(behavior);
                             clearTooltip = false;
                         }
                     }
@@ -107,7 +107,7 @@ public class CameraController : MonoBehaviour {
                 }
 
                 if(clearTooltip) {
-                    this.tooltipDisplayer.hide();
+                    this.tooltipDisplayer.Hide(null);
                 }
             }
 

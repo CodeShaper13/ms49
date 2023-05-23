@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class OverlayGemValueBar : MonoBehaviour {
 
     [SerializeField]
-    private Tooltip _toltip = null;
+    private TooltipPrompt _toltip = null;
     [SerializeField]
     private Slider _slider = null;
     [SerializeField]

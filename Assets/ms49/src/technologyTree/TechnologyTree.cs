@@ -37,24 +37,33 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
 
     public void ReadFromNbt(NbtCompound tag) {
         NbtCompound tagUnlockStates = tag.getCompound("unlockState");
-
         foreach(var node in this._graph.nodes) {
             if(node is NodeTechTree techNode) {
                 techNode.IsUnlocked = tagUnlockStates.getBool(techNode.SaveName);
             }
         }
+
+        if(tag.hasKey("targetTechnology")) {
+            // TODO
+            //NodeTechTree node = this.GetNode(tag.getString("targetTechnology"));
+            //ResearchProgress progress = new ResearchProgress(node);
+            //this.targetTechnology = new ResearchProgress(tag.getString("targetTechnology"));
+        }
     }
 
     public void WriteToNbt(NbtCompound tag) {
         NbtCompound tagUnlockStates = new NbtCompound();
-
         foreach(var node in this._graph.nodes) {
             if(node is NodeTechTree techNode) {
                 tagUnlockStates.setTag(techNode.SaveName, techNode.IsUnlocked);
             }
         }
-
         tag.setTag("unlockState", tagUnlockStates);
+
+        if(this.targetTechnology != null) {
+            // TODO
+            //tag.setTag("targetTechnology", this.targetTechnology);
+        }
     }
 
     public void SetTargetResearch(NodeTechTree technology) {
@@ -102,6 +111,23 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
         }
 
         Debug.Log("Passed node is not in the Tech Tree.");
+
+        return false;
+    }
+
+    public bool IsTechnologyAvailable(NodeTechTree node) {
+        if(this.IsTechnologyUnlocked(node)) {
+            return true;
+        }
+
+        Node parentNode = node.GetParent();
+        if(parentNode == null) {
+            return true;
+        }
+
+        if(parentNode is NodeTechTree parentNodeTechTree) {
+            return this.IsTechnologyUnlocked(parentNodeTechTree);
+        }
 
         return false;
     }
@@ -154,6 +180,28 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
             this.itemsContributed = new int[technology.Costs.Length];
         }
 
+        public ResearchProgress(TechnologyTree tree, NbtCompound tag) {
+            this.technology = tree.GetNode(tag.getString("node"));
+            this.itemsContributed = tag.getIntArray("contributions");
+        }
+
+        public NbtCompound WriteToNbt() {
+            NbtCompound tag = new NbtCompound();
+            tag.setTag("node", this.technology.SaveName);
+            tag.setTag("contributions", this.itemsContributed);
+            return tag;
+        }
+
+        public int GetItemsContributed(Item item) {
+            int index = this.GetIndex(item);
+            
+            if(index == -1) {
+                return -1;
+            }
+
+            return this.itemsContributed[index];
+        }
+
         public bool AllCategoriesFilled() {
             for(int i = 0; i < this.technology.Costs.Length; i++) {
                 if(this.itemsContributed[i] < this.technology.Costs[i].cost) {
@@ -164,6 +212,9 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
             return true;
         }
 
+        /// <summary>
+        /// Returns true if the passed item is still needed.
+        /// </summary>
         public bool NeedsItem(Item item) {
             int index = this.GetIndex(item);
 
@@ -176,14 +227,25 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
             return this.itemsContributed[index] < cost.cost;
         }
 
-        public void AddItem(Item item) {
+        /// <summary>
+        /// Adds the passed item to the contributions.
+        /// 
+        /// If the item is not needed, or the item is not in the unlock
+        /// cost list, false is returned.  Otherwise, true is returned.
+        /// </summary>
+        public bool AddItem(Item item) {
             int index = this.GetIndex(item);
 
             if(index == -1) {
-                return;
+                return false;
             }
 
-            this.itemsContributed[index] += 1;
+            if(this.NeedsItem(item)) {
+                this.itemsContributed[index] += 1;
+                return true;
+            } else {
+                return false;
+            }
         }
 
         private int GetIndex(Item item) {

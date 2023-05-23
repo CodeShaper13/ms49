@@ -9,7 +9,7 @@ public class InventorySlot : MonoBehaviour {
     [SerializeField]
     private Image img = null;
     [SerializeField]
-    private Tooltip tooltip = null;
+    private TooltipPrompt tooltip = null;
 
     [Space]
 

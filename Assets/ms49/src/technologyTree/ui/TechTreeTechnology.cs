@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,8 +15,14 @@ public class TechTreeTechnology : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     [Space]
 
-    public Sprite lockedSprite;
-    public Sprite unlockedSprite;
+    [SerializeField, Required]
+    private Image _imgBackground = null;
+    [SerializeField]
+    private Sprite _spriteLocked = null;
+    [SerializeField]
+    private Sprite _spriteAvailable = null;
+    [SerializeField]
+    private Sprite _spriteUnlocked = null;
 
     public Color lineColorLocked;
     public Color lineColorUnlocked;
@@ -26,6 +33,11 @@ public class TechTreeTechnology : MonoBehaviour, IPointerEnterHandler, IPointerE
         if(this.line != null) {
             this.line.color = this.lineColorLocked;
         }
+    }
+
+    // TODO make this not run every frame.
+    private void Update() {
+        this.Refresh(Main.instance.activeWorld.technologyTree);
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -75,17 +87,27 @@ public class TechTreeTechnology : MonoBehaviour, IPointerEnterHandler, IPointerE
         }
     }
 
-    public void Callback_Click() {
+    public void Refresh(TechnologyTree techTree) {
+        if(this.Node != null) {
+            bool isUnlocked = techTree.IsTechnologyUnlocked(this.Node);
 
-    }
+            // Line color.
+            if(this.line != null) {
+                this.line.color = isUnlocked ? this.lineColorUnlocked : this.lineColorLocked;
+            }
 
-    public void SetUnlocked(bool isUnlocked) {
-        if(this.line != null) {
-            this.line.color = isUnlocked ? this.lineColorUnlocked : this.lineColorLocked;
-        }
-
-        if(this.img != null) {
-            this.img.sprite = isUnlocked ? this.unlockedSprite : this.lockedSprite;
+            // Sprite.
+            Sprite sprite;
+            if(isUnlocked) {
+                sprite = this._spriteUnlocked;
+            }
+            else if(techTree.IsTechnologyAvailable(this.Node)) {
+                sprite = this._spriteAvailable;
+            }
+            else {
+                sprite = this._spriteLocked;
+            }
+            this._imgBackground.sprite = sprite;
         }
     }
 
@@ -95,7 +117,7 @@ public class TechTreeTechnology : MonoBehaviour, IPointerEnterHandler, IPointerE
                 this.line.gameObject.SetActive(false);
             } else {
                 this.line.gameObject.SetActive(true);
-                Vector3 end = this.transform.InverseTransformPoint(lineEnd.transform.position + Vector3.up * 180);
+                Vector3 end = this.transform.InverseTransformPoint(lineEnd.transform.position + Vector3.up * 160);
                 this.line.Points = new Vector2[] {
                     Vector2.zero,
                     new Vector2(0, end.y / 2),

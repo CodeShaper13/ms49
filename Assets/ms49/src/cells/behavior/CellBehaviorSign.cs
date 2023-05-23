@@ -14,7 +14,7 @@ public class CellBehaviorSign : CellBehavior, IHasData {
         }
     }
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         return "[rbm] edit sign";
     }
 

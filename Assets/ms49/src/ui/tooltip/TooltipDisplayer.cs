@@ -1,63 +1,72 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TooltipDisplayer : MonoBehaviour {
 
-    [SerializeField]
-    private Text _textElement = null;
-    [SerializeField]
-    private Image _backgroundImg = null;
+    [SerializeField, Required]
+    private RectTransform _tooltipFrame = null;
+    [SerializeField, Required]
+    private TMP_Text _text = null;
+    [SerializeField, Min(0f)]
+    private float _revealDelay = 0.25f;
 
-    private float tooltipShowDelay;
-    private string tooltipText;
+    private ITooltipPrompt prompt;
+    private float timer;
+    private Vector3 mousePos;
 
-    public GameObject tooltipSource { get; private set; }
+    private float Delay => this.prompt != null && this.prompt.OverrideDelay ? this.prompt.Delay : this._revealDelay;
 
-    private void Start() {
-        this.hide();
+    private void Awake() {
+        this.Hide(null);
     }
 
-    private void Update() {
-        // Make the tooltip follow the mouse and correct the background size
-        this.transform.position = Input.mousePosition;
-        this._backgroundImg.rectTransform.sizeDelta =
-            this._textElement.rectTransform.sizeDelta + new Vector2(6, 4);
+    private void LateUpdate() {
+        if(this.prompt != null) {
+            if(this.mousePos != Input.mousePosition) {
+                this.mousePos = Input.mousePosition;
+                this.timer = this.Delay;
+            }
 
-        if(this.tooltipSource != null) {
-
-            if(this.tooltipShowDelay <= 0) {
-                this._textElement.text = this.tooltipText;
-                this.show();
+            if(this.timer > 0) {
+                this.timer -= Time.deltaTime;
             }
             else {
-                this.tooltipShowDelay -= Time.unscaledDeltaTime;
+                if(!this._tooltipFrame.gameObject.activeSelf) {
+                    // First frame the tooltip is visible.
+                    this._tooltipFrame.gameObject.SetActive(true);
+                }
+
+                string promptText = this.prompt.Text;
+                if(promptText != this._text.text) {
+                    this._text.text = promptText;
+                }
+
+                LayoutRebuilder.ForceRebuildLayoutImmediate(this._tooltipFrame);
             }
-
-        } else {
-            this.hide();
-        }
-    }
-
-    public void setText(string text, float delay, GameObject source) {
-        if(source != this.tooltipSource) {
-            // Reset timer, a new object is requesting a tooltip
-            this.hide();
-
-            this.tooltipSource = source;
-            this.tooltipShowDelay = delay;
         }
 
-        this.tooltipText = text;
+        this._tooltipFrame.position =  Input.mousePosition;
     }
 
-    private void show() {
-        this._textElement.enabled = true;
-        this._backgroundImg.enabled = true;
+    public void Show(ITooltipPrompt prompt) {
+        if(prompt == this.prompt) {
+            return;
+        }
+
+        this.prompt = prompt;
+        this.timer = this.Delay;
+        this.mousePos = Input.mousePosition;
     }
 
-    public void hide() {
-        this.tooltipSource = null;
-        this._textElement.enabled = false;
-        this._backgroundImg.enabled = false;
+    public void Hide(ITooltipPrompt prompt) {
+        //if(this.prompt != prompt) {
+            // Somehow a different tooltip is being shown, so don't do anything.
+        //    return;
+        //}
+
+        this.prompt = null;
+        this._tooltipFrame.gameObject.SetActive(false);
     }
 }

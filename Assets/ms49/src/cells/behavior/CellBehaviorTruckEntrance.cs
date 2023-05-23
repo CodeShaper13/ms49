@@ -1,6 +1,6 @@
 ﻿public class CellBehaviorTruckEntrance : CellBehavior {
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         return "Truck Entrance";
     }
 }

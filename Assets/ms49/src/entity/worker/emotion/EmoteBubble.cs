@@ -6,7 +6,7 @@ public class EmoteBubble : MonoBehaviour {
     [SerializeField]
     private Image _emoteIconImg = null;
     [SerializeField]
-    private Tooltip _tooltip = null;
+    private TooltipPrompt _tooltip = null;
     [SerializeField]
     private EmoteIcon[] icons = null;
 

@@ -61,7 +61,7 @@ TextureImporter:
     second: uiElements_btnPlus
   - first:
       213: -8947789587146961203
-    second: uiElements_techTreeNode
+    second: uiElements_techTreeNodeLocked
   - first:
       213: -7807065696570998572
     second: uiElements_btnArrowUp
@@ -265,7 +265,7 @@ TextureImporter:
     second: uiElements_btnArrowDownHighlighted
   - first:
       213: -8516704818339307841
-    second: uiElements_techTreeNodeHighlighted
+    second: uiElements_techTreeNodeAvailable
   - first:
       213: 6505982359599485141
     second: uiElements_radioButton
@@ -320,6 +320,39 @@ TextureImporter:
   - first:
       213: -7529905551840404867
     second: uiElements_landSaleSignHighlighted
+  - first:
+      213: 2678517420608717262
+    second: uiElements_layerIcon
+  - first:
+      213: 6371951953921301077
+    second: uiElements_layerIconBig
+  - first:
+      213: -16723009477346488
+    second: uiElements_layerIconBigHighlighted
+  - first:
+      213: 4370400421480345831
+    second: uiElements_layerIconHighlighted
+  - first:
+      213: -4454433873294632708
+    second: uiElements_calendar
+  - first:
+      213: 4097437501150344530
+    second: uiElements_calendarMoney
+  - first:
+      213: -5315475814338773949
+    second: uiElements_calendarBarFill
+  - first:
+      213: -2837040191852901432
+    second: uiElements_calendarBar
+  - first:
+      213: -9027757046391180033
+    second: uiElements_techTreeNodeAvailableHighlighted
+  - first:
+      213: -1141936168510960744
+    second: uiElements_techTreeNodeHighlighted
+  - first:
+      213: -3551467599054922040
+    second: uiElements_techTreeNodeLockedHighlighted
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -450,9 +483,9 @@ TextureImporter:
       name: uiElements_frameRounded
       rect:
         serializedVersion: 2
-        x: 209
+        x: 225
         y: 209
-        width: 46
+        width: 30
         height: 46
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -471,7 +504,7 @@ TextureImporter:
       name: uiElements_inset
       rect:
         serializedVersion: 2
-        x: 157
+        x: 175
         y: 223
         width: 48
         height: 32
@@ -720,95 +753,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_btnMinus
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 239
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf85eca2efbae22c0800000000000000
-      internalID: -4454433873294632708
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: uiElements_btnMinusPressed
-      rect:
-        serializedVersion: 2
-        x: 91
-        y: 239
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2553e69b2b50dd830800000000000000
-      internalID: 4097437501150344530
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: uiElements_btnPlusPressed
-      rect:
-        serializedVersion: 2
-        x: 91
-        y: 221
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34c3822d8e2ab36b0800000000000000
-      internalID: -5315475814338773949
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: uiElements_btnPlus
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 221
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8cb0a1f0afec0a8d0800000000000000
-      internalID: -2837040191852901432
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: uiElements_techTreeNode
+      name: uiElements_techTreeNodeLocked
       rect:
         serializedVersion: 2
         x: 241
-        y: 129
+        y: 145
         width: 14
         height: 14
       alignment: 0
@@ -954,8 +903,8 @@ TextureImporter:
       name: uiElements_iconInfo
       rect:
         serializedVersion: 2
-        x: 109
-        y: 234
+        x: 72
+        y: 235
         width: 20
         height: 20
       alignment: 0
@@ -975,12 +924,12 @@ TextureImporter:
       name: uiElements_iconMoney
       rect:
         serializedVersion: 2
-        x: 109
-        y: 190
+        x: 72
+        y: 191
         width: 20
         height: 20
-      alignment: 9
-      pivot: {x: 0.5896775, y: -0.46473533}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -996,8 +945,8 @@ TextureImporter:
       name: uiElements_iconWorkers
       rect:
         serializedVersion: 2
-        x: 109
-        y: 212
+        x: 72
+        y: 213
         width: 20
         height: 20
       alignment: 0
@@ -1017,8 +966,8 @@ TextureImporter:
       name: uiElements_iconDemo
       rect:
         serializedVersion: 2
-        x: 109
-        y: 124
+        x: 72
+        y: 125
         width: 20
         height: 20
       alignment: 0
@@ -1038,8 +987,8 @@ TextureImporter:
       name: uiElements_iconDemoSelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 124
+        x: 94
+        y: 125
         width: 20
         height: 20
       alignment: 0
@@ -1059,8 +1008,8 @@ TextureImporter:
       name: uiElements_iconInfoSelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 234
+        x: 94
+        y: 235
         width: 20
         height: 20
       alignment: 0
@@ -1080,8 +1029,8 @@ TextureImporter:
       name: uiElements_iconWorkersSelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 212
+        x: 94
+        y: 213
         width: 20
         height: 20
       alignment: 0
@@ -1101,8 +1050,8 @@ TextureImporter:
       name: uiElements_iconMoneySelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 190
+        x: 94
+        y: 191
         width: 20
         height: 20
       alignment: 0
@@ -1122,8 +1071,8 @@ TextureImporter:
       name: uiElements_iconPickaxe
       rect:
         serializedVersion: 2
-        x: 109
-        y: 168
+        x: 72
+        y: 169
         width: 20
         height: 20
       alignment: 0
@@ -1143,8 +1092,8 @@ TextureImporter:
       name: uiElements_iconPickaxeSelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 168
+        x: 94
+        y: 169
         width: 20
         height: 20
       alignment: 0
@@ -1164,8 +1113,8 @@ TextureImporter:
       name: uiElements_iconBuild
       rect:
         serializedVersion: 2
-        x: 109
-        y: 146
+        x: 72
+        y: 147
         width: 20
         height: 20
       alignment: 0
@@ -1185,8 +1134,8 @@ TextureImporter:
       name: uiElements_iconBuildSelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 146
+        x: 94
+        y: 147
         width: 20
         height: 20
       alignment: 0
@@ -1206,8 +1155,8 @@ TextureImporter:
       name: uiElements_iconTermometer
       rect:
         serializedVersion: 2
-        x: 109
-        y: 102
+        x: 116
+        y: 235
         width: 20
         height: 20
       alignment: 0
@@ -1227,8 +1176,8 @@ TextureImporter:
       name: uiElements_iconTermometerSelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 102
+        x: 138
+        y: 235
         width: 20
         height: 20
       alignment: 0
@@ -1248,8 +1197,8 @@ TextureImporter:
       name: uiElements_iconTrophey
       rect:
         serializedVersion: 2
-        x: 109
-        y: 80
+        x: 116
+        y: 213
         width: 20
         height: 20
       alignment: 0
@@ -1269,8 +1218,8 @@ TextureImporter:
       name: uiElements_iconTropheySelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 80
+        x: 138
+        y: 213
         width: 20
         height: 20
       alignment: 0
@@ -1395,7 +1344,7 @@ TextureImporter:
       name: uiElements_star
       rect:
         serializedVersion: 2
-        x: 236
+        x: 169
         y: 157
         width: 19
         height: 18
@@ -1521,8 +1470,8 @@ TextureImporter:
       name: uiElements_mapPin
       rect:
         serializedVersion: 2
-        x: 157
-        y: 204
+        x: 194
+        y: 177
         width: 12
         height: 17
       alignment: 0
@@ -1542,8 +1491,8 @@ TextureImporter:
       name: uiElements_iconBuyLandSelected
       rect:
         serializedVersion: 2
-        x: 131
-        y: 58
+        x: 138
+        y: 191
         width: 20
         height: 20
       alignment: 0
@@ -1563,8 +1512,8 @@ TextureImporter:
       name: uiElements_iconBuyLand
       rect:
         serializedVersion: 2
-        x: 109
-        y: 58
+        x: 116
+        y: 191
         width: 20
         height: 20
       alignment: 0
@@ -1920,10 +1869,10 @@ TextureImporter:
       name: uiElements_autoSaveIcon
       rect:
         serializedVersion: 2
-        x: 226
-        y: 81
-        width: 28
-        height: 30
+        x: 225
+        y: 80
+        width: 30
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2085,11 +2034,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_techTreeNodeHighlighted
+      name: uiElements_techTreeNodeAvailable
       rect:
         serializedVersion: 2
         x: 209
-        y: 129
+        y: 145
         width: 14
         height: 14
       alignment: 0
@@ -2109,8 +2058,8 @@ TextureImporter:
       name: uiElements_radioButton
       rect:
         serializedVersion: 2
-        x: 73
-        y: 133
+        x: 190
+        y: 137
         width: 18
         height: 18
       alignment: 0
@@ -2130,8 +2079,8 @@ TextureImporter:
       name: uiElements_radioButtonOn
       rect:
         serializedVersion: 2
-        x: 73
-        y: 113
+        x: 190
+        y: 117
         width: 18
         height: 18
       alignment: 0
@@ -2151,8 +2100,8 @@ TextureImporter:
       name: uiElements_radioButtonHighlighted
       rect:
         serializedVersion: 2
-        x: 73
-        y: 153
+        x: 190
+        y: 157
         width: 18
         height: 18
       alignment: 0
@@ -2194,7 +2143,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 225
-        y: 129
+        y: 145
         width: 14
         height: 14
       alignment: 0
@@ -2479,6 +2428,237 @@ TextureImporter:
       bones: []
       spriteID: d7a9f46bbc6608790800000000000000
       internalID: -7529905551840404867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_layerIcon
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 33
+        width: 38
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec1041417610c2520800000000000000
+      internalID: 2678517420608717262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_layerIconBig
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 33
+        width: 46
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55ad553ca88bd6850800000000000000
+      internalID: 6371951953921301077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_layerIconBigHighlighted
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 67
+        width: 46
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84bf680f28694cff0800000000000000
+      internalID: -16723009477346488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_layerIconHighlighted
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 61
+        width: 38
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e0bd882708c6ac30800000000000000
+      internalID: 4370400421480345831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_calendar
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 33
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf85eca2efbae22c0800000000000000
+      internalID: -4454433873294632708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_calendarMoney
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 44
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2553e69b2b50dd830800000000000000
+      internalID: 4097437501150344530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_calendarBarFill
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 38
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34c3822d8e2ab36b0800000000000000
+      internalID: -5315475814338773949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_calendarBar
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 25
+        width: 24
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 2, z: 3, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cb0a1f0afec0a8d0800000000000000
+      internalID: -2837040191852901432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_techTreeNodeAvailableHighlighted
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 161
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4f2532cc6f6b280800000000000000
+      internalID: -9027757046391180033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_techTreeNodeHighlighted
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 161
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89bcbbfda170720f0800000000000000
+      internalID: -1141936168510960744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_techTreeNodeLockedHighlighted
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 161
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ce950ff807a6bec0800000000000000
+      internalID: -3551467599054922040
       vertices: []
       indices: 
       edges: []

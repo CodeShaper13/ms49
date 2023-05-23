@@ -1,33 +1,33 @@
-﻿using UnityEngine.UI;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class TextMoney : MonoBehaviour {
 
     [SerializeField]
-    private Animator anim = null;
+    private Animator _animator = null;
     [SerializeField]
-    private Text text = null;
+    private TMP_Text _text = null;
     [SerializeField]
-    private IntVariable money = null;
+    private IntVariable _money = null;
     [SerializeField]
-    private ColorVariable colorMoneyOk = null;
+    private ColorVariable _colorMoneyPositive = null;
     [SerializeField]
-    private ColorVariable colorMoneyNotEnough = null;
+    private ColorVariable _colorMoneyNegative = null;
 
     private int moneyLastFrame;
 
-    private void Update() {
-        this.text.text = "$" + this.money.value;
-        this.text.color = this.money.value >= 0 ? this.colorMoneyOk : this.colorMoneyNotEnough;
+    private void LateUpdate() {
+        this._text.text = string.Format("${0}", this._money.value);
+        this._text.color = this._money.value >= 0 ? this._colorMoneyPositive : this._colorMoneyNegative;
 
-        if(this.anim != null) {
-            if(this.money.value > this.moneyLastFrame) {
-                this.anim.Play("MoneyIncreaseClip");
-            } else if(this.money.value < this.moneyLastFrame) {
-                this.anim.Play("MoneyDecreaseClip");
+        if(this._animator != null) {
+            if(this._money.value > this.moneyLastFrame) {
+                this._animator.Play("MoneyIncreaseClip");
+            } else if(this._money.value < this.moneyLastFrame) {
+                this._animator.Play("MoneyDecreaseClip");
             }
         }
 
-        this.moneyLastFrame = this.money.value;
+        this.moneyLastFrame = this._money.value;
     }
 }

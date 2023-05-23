@@ -3,11 +3,6 @@ using System.Collections.Generic;
 
 public class Options : MonoBehaviour {
 
-    [SerializeField]
-    private GameObject sliderPrefab;
-    [SerializeField]
-    private GameObject togglePrefab;
-
     public List<IOption> allOptions { get; private set; }
 
     private void Awake() {

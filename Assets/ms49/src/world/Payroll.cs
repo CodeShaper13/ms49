@@ -15,7 +15,7 @@ public class Payroll : MonoBehaviour, ISaveableState {
 
     private void Update() {
         if(!Pause.IsPaused) {
-            if(this._world.time.time > this.lastPayTime + _payRate) {
+            if(this._world.time.Time > this.lastPayTime + _payRate) {
                 // Pay Workers.
 
                 if(!CameraController.instance.inCreativeMode) {
@@ -37,7 +37,7 @@ public class Payroll : MonoBehaviour, ISaveableState {
                     }
                 }
 
-                this.lastPayTime = this._world.time.time;
+                this.lastPayTime = this._world.time.Time;
             }
         }
     }

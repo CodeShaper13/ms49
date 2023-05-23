@@ -1,6 +1,6 @@
 ﻿public class CellBehaviorLadder : CellBehavior {
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         return "[rmb] " + (this.goesUp() ? "go up" : "go down");
     }
 

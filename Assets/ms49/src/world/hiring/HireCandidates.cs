@@ -87,7 +87,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
         for(int i = 0; i < this.candidates.Count; i++) {
             Candidate c = this.candidates[i];
             if(c != null) {
-                if(this.world.time.time > c.endAvailabilityTime) {
+                if(this.world.time.Time > c.endAvailabilityTime) {
                     // Worker is not longer available to be hired
                     this.candidates.RemoveAt(0);
                 }
@@ -121,7 +121,7 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
             this.candidates.Add(new Candidate(
                 Main.instance.workerFactory.generateWorkerInfo(type),
                 type,
-                this.world.time.time + Random.Range(
+                this.world.time.Time + Random.Range(
                     this.candidateAvailabilityTimeRange.x * 60,
                     this.candidateAvailabilityTimeRange.y * 60)));
         }

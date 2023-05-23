@@ -17,17 +17,17 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
     public override void onRightClick() {
         base.onRightClick();
 
-        PopupContainer popup = Main.instance.FindPopup<PopupContainer>();
+        PopupChest popup = Main.instance.FindPopup<PopupChest>();
         if(popup != null) {
             popup.open();
             popup.SetInventory(this.inventory);
         } else {
-            Debug.LogWarning("Could not find PopupContainer");
+            Debug.LogWarning("Could not find PopupChest");
         }
     }
 
-    public override string getTooltipText() {
-        return "[rmb] open container";
+    public override string GetTooltipText() {
+        return "[rmb] Open container";
     }
 
     public override void onDestroy() {

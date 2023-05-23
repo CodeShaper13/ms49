@@ -51,7 +51,7 @@ public class PopupMilestones : PopupWorldReference {
                     this.unlockedArea);
 
                 obj.GetComponent<BuildableUiRenderer>().SetBuildable(buildable);
-                obj.GetComponent<Tooltip>().text = buildable.GetBuildableName();
+                obj.GetComponent<TooltipPrompt>().text = buildable.GetBuildableName();
             }
 
 
@@ -65,7 +65,7 @@ public class PopupMilestones : PopupWorldReference {
                     this.unlockedArea);
 
                 obj.GetComponent<FaceUiPreview>().setTarget(type);
-                obj.GetComponentInChildren<Tooltip>().text = type.typeName;
+                obj.GetComponentInChildren<TooltipPrompt>().text = type.typeName;
             }
         }
     }

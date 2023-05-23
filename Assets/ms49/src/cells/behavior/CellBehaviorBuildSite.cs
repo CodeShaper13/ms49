@@ -18,7 +18,7 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         this.entires = new List<Entry>();
     }
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         foreach(Entry e in this.entires) {
             if(e.position == this.pos) {
                 return e.cell.name; // TODO shows scriptable object name

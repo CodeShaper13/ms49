@@ -383,7 +383,7 @@ public class World : MonoBehaviour {
     /// Checks if the passed Layer is unlocked.
     /// </summary>
     public bool IsDepthUnlocked(int depth) {
-        return depth <= this._maxDepth.value;
+        return depth <= this._maxDepth.value || CameraController.instance.inCreativeMode;
     }
 
     /// <summary>

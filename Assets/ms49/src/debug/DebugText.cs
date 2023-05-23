@@ -27,7 +27,7 @@ public class DebugText : MonoBehaviour {
                 this.sb.AppendLine("World Info:");
                 this.sb.AppendLine("  Seed: " + world.seed);
                 this.sb.AppendLine("  Save Name: " + world.saveName);
-                this.sb.AppendLine("  Time: " + world.time.time.ToString("0.000"));
+                this.sb.AppendLine("  Time: " + world.time.Time.ToString("0.000"));
 
                 this.sb.AppendLine();
 

@@ -32,7 +32,13 @@ public class NodeTechTree : Node {
     [SerializeField, AllowNesting]
     private List<Field> _unlockedFields = null;
 
+    /// <summary>
+    /// The name to use when saving the technology to disk.
+    /// </summary>
     public string SaveName => this.name;
+    /// <summary>
+    /// The pretty display name to use when showing the technology in interfaces.
+    /// </summary>
     public string TechName => this._name;
     public string TechDescription => this._description;
     public Sprite Image => this._image;

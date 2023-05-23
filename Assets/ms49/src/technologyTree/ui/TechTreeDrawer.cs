@@ -21,13 +21,10 @@ public class TechTreeDrawer : MonoBehaviour {
 
     [Space]
 
-    public int nodeSize = 1;
+    public Vector2 nodeSize = new Vector2(144, 220);
     [Tooltip("How close siblings are to each other.")]
     public float siblingDistance = 0.0F;
     public float treeDistance = 0.0F;
-
-    public Vector2 scaler;
-
 
     private List<TechTreeTechnology> nodeGameObjects = new List<TechTreeTechnology>();
 
@@ -82,7 +79,7 @@ public class TechTreeDrawer : MonoBehaviour {
         foreach(var node in allNodes) {
             TechTreeTechnology techTreeNode = GameObject.Instantiate(
                 this.nodePrefab,
-                new Vector2(node.x * this.scaler.x, node.y * this.scaler.y),
+                new Vector2(node.x, node.y * this.nodeSize.y),
                 Quaternion.identity,
                 this.nodeInstanceParent).GetComponent<TechTreeTechnology>();
             techTreeNode.gameObject.SetActive(true);
@@ -130,7 +127,7 @@ public class TechTreeDrawer : MonoBehaviour {
         if(node.IsLeaf()) {
             // if there is a previous sibling in this set, set X to prevous sibling + designated distance
             if(!node.IsLeftMost())
-                node.x = node.GetPreviousSibling().x + nodeSize + siblingDistance;
+                node.x = node.GetPreviousSibling().x + nodeSize.x + siblingDistance;
             else
                 // if this is the first node in a set, set X to 0
                 node.x = 0;
@@ -142,7 +139,7 @@ public class TechTreeDrawer : MonoBehaviour {
                 node.x = node.children[0].x;
             }
             else {
-                node.x = node.GetPreviousSibling().x + nodeSize + siblingDistance;
+                node.x = node.GetPreviousSibling().x + nodeSize.x + siblingDistance;
                 node.Mod = node.x - node.children[0].x;
             }
         }
@@ -155,7 +152,7 @@ public class TechTreeDrawer : MonoBehaviour {
                 node.x = mid;
             }
             else {
-                node.x = node.GetPreviousSibling().x + nodeSize + siblingDistance;
+                node.x = node.GetPreviousSibling().x + nodeSize.x + siblingDistance;
                 node.Mod = node.x - mid;
             }
         }
@@ -168,7 +165,7 @@ public class TechTreeDrawer : MonoBehaviour {
     }
 
     private void CheckForConflicts(Technology node) {
-        var minDistance = treeDistance + nodeSize;
+        var minDistance = treeDistance + nodeSize.x;
         var shiftValue = 0F;
 
         var nodeContour = new Dictionary<int, float>();

@@ -1,13 +1,9 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class PopupTruck : PopupWindow {
 
     [SerializeField]
-    private Image _imgFillProgress;
-    [SerializeField]
-    private TMP_Text _textContents = null;
+    private ProgressBar _progressBar;
 
     private EntityTruck truck;
 
@@ -15,16 +11,8 @@ public class PopupTruck : PopupWindow {
         base.onUpdate();
 
         if(this.truck != null) {
-            int itemCount = this.truck.Inventory.GetItemCount();
-            int capacity = this.truck.Inventory.Size;
-
-            if(this._imgFillProgress != null) {
-                this._imgFillProgress.fillAmount = itemCount / capacity;
-            }
-
-            if(this._textContents != null) {
-                this._textContents.text = string.Format("{0}/{1}", itemCount, capacity);
-            }
+            this._progressBar.maxValue = this.truck.Inventory.Size;
+            this._progressBar.Value = this.truck.Inventory.GetItemCount();
         }
     }
 

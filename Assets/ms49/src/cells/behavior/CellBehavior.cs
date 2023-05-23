@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using UnityEngine;
 
-public abstract class CellBehavior : MonoBehaviour {
+public abstract class CellBehavior : MonoBehaviour, ITooltipPrompt {
 
     [SerializeField, Tooltip("If true, this behavior is added to a speedy lookup list")]
     private bool _cache = true;
@@ -16,6 +16,11 @@ public abstract class CellBehavior : MonoBehaviour {
     public Rotation rotation => this.state.Rotation;
     /// <summary> The center of the Behavior's cell in world units. </summary>
     public Vector2 center => this.pos.AsVec2 + new Vector2(0.5f, 0.5f);
+
+    // ITooltipPrompt implementation.
+    public string Text => this.GetTooltipText();
+    public bool OverrideDelay => false;
+    public float Delay => 0f;
 
     public virtual void OnCreate(World world, CellState state, Position pos) {
         this.world = world;
@@ -42,7 +47,7 @@ public abstract class CellBehavior : MonoBehaviour {
         this.world.worldRenderer.dirtyTile(this.pos.x, this.pos.y);
     }
 
-    public virtual string getTooltipText() {
+    public virtual string GetTooltipText() {
         return null;
     }
 

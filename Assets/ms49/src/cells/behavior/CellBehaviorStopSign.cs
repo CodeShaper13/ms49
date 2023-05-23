@@ -23,7 +23,7 @@ public class CellBehaviorStopSign : CellBehavior {
         return this.world.GetCellState(pos).data == this._road;
     }
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         return this.IsValidStopSign() ? null : "Stop Sign need a Road in front of it!";
     }
 }

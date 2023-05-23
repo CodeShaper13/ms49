@@ -62,7 +62,7 @@ public class CellBehaviorFurnace : CellBehaviorContainer {
         }
     }
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         return "[RMB] Open Furnace";
     }
 

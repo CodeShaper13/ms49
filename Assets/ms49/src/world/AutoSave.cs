@@ -19,8 +19,12 @@ public class AutoSave : MonoBehaviour {
         this._saveIcon.enabled = false;
     }
 
-    private void Start() {
+    private void OnEnable() {
         this.world = GameObject.FindObjectOfType<World>();
+    }
+
+    private void OnDisable() {
+        this.StopAllCoroutines();
     }
 
     private void Update() {
@@ -33,14 +37,14 @@ public class AutoSave : MonoBehaviour {
 
                 this.timer = 0f;
 
-                this.Invoke("invoke_hideIcon", this._iconVisibleTime);
+                this.Invoke(nameof(this.Invoke_HideIcon), this._iconVisibleTime);
             }
         } else {
             this.timer = 0f;
         }
     }
 
-    private void invoke_hideIcon() {
+    private void Invoke_HideIcon() {
         this._saveIcon.enabled = false;
     }
 }

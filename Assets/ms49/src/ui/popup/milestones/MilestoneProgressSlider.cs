@@ -8,7 +8,7 @@ public class MilestoneProgressSlider : MonoBehaviour {
     [SerializeField]
     private Slider slider = null;
     [SerializeField]
-    private Tooltip tooltip = null;
+    private TooltipPrompt tooltip = null;
 
     private string originalText;
     private MilestoneRequirerment requirement;

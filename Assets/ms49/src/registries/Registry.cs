@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Registry<T> : ScriptableObject {
+public class Registry<T> : ScriptableObject, IEnumerable<T> {
 
     [SerializeField]
     private T[] elements;
@@ -44,5 +45,15 @@ public class Registry<T> : ScriptableObject {
             }
         }
         return -1;
+    }
+
+    public IEnumerator<T> GetEnumerator() {
+        for(int i = 0; i < this.elements.Length; i++) {
+            yield return this.elements[i];
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() {
+        return this.elements.GetEnumerator();
     }
 }

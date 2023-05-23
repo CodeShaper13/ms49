@@ -249,7 +249,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Drilling Speed 2
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: 5134392545696983341, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -303,7 +303,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -357,7 +357,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -417,7 +417,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Gem Mining
   _description: Allows Gems to be mined and further technology unlocked
-  _image: {fileID: 0}
+  _image: {fileID: -6765549610841505982, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs:
   - item: {fileID: 11400000, guid: 8184cd3100097ab4c95e194abe0c81dd, type: 2}
     cost: 1
@@ -473,7 +473,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Cart Speed 150%
   _description: Increases Minecraft Speed to 150%
-  _image: {fileID: 0}
+  _image: {fileID: -5444995628053660433, guid: 2b8c7c4ed77c79348bb84aa41edc0feb, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -524,7 +524,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Bridges
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: -3241807953627189516, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs: []
   _unlockedBuildable:
   - {fileID: 0}
@@ -574,7 +574,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -628,7 +628,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Cart Speed 125%
   _description: Increases Minecraft Speed to 125%
-  _image: {fileID: 0}
+  _image: {fileID: -5444995628053660433, guid: 2b8c7c4ed77c79348bb84aa41edc0feb, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -902,7 +902,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Decoration 2
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: -8473965523027447877, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields: []
@@ -948,7 +948,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Decoration 3
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: 6568244172134801747, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields: []
@@ -1163,7 +1163,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -1349,7 +1349,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -1400,7 +1400,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -1457,7 +1457,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Rails
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: -9198056691032318685, guid: 83e6f32abdc9b244cbe11ac906944047, type: 3}
   _costs: []
   _unlockedBuildable:
   - {fileID: 11400000, guid: 28552ad5f88474e41aed230d2f113a39, type: 2}
@@ -1561,7 +1561,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -1612,7 +1612,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Drilling Speed 3
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: 5134392545696983341, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -1666,7 +1666,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Decoration 1
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: -2675153230685471517, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs: []
   _unlockedBuildable:
   - {fileID: 11400000, guid: 5a5842fed8e68e84fbe22ec9db81ebad, type: 2}
@@ -1772,7 +1772,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Aditional Workers
   _description: +1 Max Worker
-  _image: {fileID: 0}
+  _image: {fileID: 7279193232339687401, guid: b4bb1fbd6622a3f4cb1b419b6bff2984, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -1823,7 +1823,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Card Speed 200%
   _description: Increases Minecraft Speed to 200%
-  _image: {fileID: 0}
+  _image: {fileID: -5444995628053660433, guid: 2b8c7c4ed77c79348bb84aa41edc0feb, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:
@@ -1877,7 +1877,7 @@ MonoBehaviour:
       _dynamic: 0
   _name: Drilling Speed 1
   _description: 
-  _image: {fileID: 0}
+  _image: {fileID: 5134392545696983341, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   _costs: []
   _unlockedBuildable: []
   _unlockedFields:

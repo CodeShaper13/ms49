@@ -26,7 +26,7 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
         CellBehaviorLever.alertNeighborsOfFlip(this);
     }
 
-    public override string getTooltipText() {
+    public override string GetTooltipText() {
         return "[rmb] " + (this.isOn ? "Turn On" : "Turn Off");
     }
 

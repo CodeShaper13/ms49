@@ -15,8 +15,8 @@ public class GameTime : MonoBehaviour, ISaveableState {
 
     private int multiplyerIndex;
 
-    public double time => this._time;
-    public float timeScale => this._timeMultipliers[this.multiplyerIndex];
+    public double Time => this._time;
+    public float TimeScale => this._timeMultipliers[this.multiplyerIndex];
 
     public string saveableTagName => "time";
 
@@ -29,28 +29,24 @@ public class GameTime : MonoBehaviour, ISaveableState {
     }
 
     private void Update() {
-        if(!Pause.isPaused()) {
-            this._time += Time.deltaTime;
+        if(!Pause.IsPaused) {
+            this._time += UnityEngine.Time.deltaTime;
         }
     }
 
-    public string getFormattedTimeExact() {
-        DateTime timeState = new DateTime(this._startingYear, 01, 01);
-        timeState = timeState + this.getTimespan();
+    public string GetFormattedTimeExact() {
+        DateTime timeState = this.GetWorldStartDateTime();
+        timeState += this.GetPlayTimeTimespan();
         return timeState.ToString("MM/dd/yyyy H:mm");
     }
 
-    public string getFormattedTime() {
-        if(Main.DEBUG) {
-            return this.time.ToString();
-        } else {
-            TimeSpan timeSpan = this.getTimespan();
+    public string GetFormattedTime() {
+        TimeSpan timeSpan = this.GetPlayTimeTimespan();
 
-            return string.Format(
-                "{0:D2}:{1:D2}",
-                timeSpan.Hours,
-                timeSpan.Minutes);
-        }
+        return string.Format(
+            "{0:D2}:{1:D2}",
+            timeSpan.Hours,
+            timeSpan.Minutes);
     }
 
     public void increaseTimeSpeed() {
@@ -58,7 +54,7 @@ public class GameTime : MonoBehaviour, ISaveableState {
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("time", this.time);
+        tag.setTag("time", this.Time);
         tag.setTag("multiplyerIndex", this.multiplyerIndex);
     }
 
@@ -67,8 +63,25 @@ public class GameTime : MonoBehaviour, ISaveableState {
         this.multiplyerIndex = Mathf.Clamp(tag.getInt("multiplyerIndex"), 0, this._timeMultipliers.Length - 1);
     }
 
-    private TimeSpan getTimespan() {
-        return TimeSpan.FromSeconds(this.time * this._lengthOfDay);
+    /// <summary>
+    /// Returns the timespan from the start of the world, to the current time.
+    /// </summary>
+    public TimeSpan GetPlayTimeTimespan() {
+        return TimeSpan.FromSeconds(this.Time * this._lengthOfDay);
+    }
+
+    /// <summary>
+    /// Returns the DateTime of the start of the world.
+    /// </summary>
+    public DateTime GetWorldStartDateTime() {
+        return new DateTime(this._startingYear, 01, 01);
+    }
+
+    /// <summary>
+    /// Returns the current world date and time.
+    /// </summary>
+    public DateTime GetWorldTime() {
+        return this.GetWorldStartDateTime() + this.GetPlayTimeTimespan();
     }
 
     private void func(int dir) {

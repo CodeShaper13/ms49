@@ -20,6 +20,7 @@ public class LayerData : ScriptableObject {
 
     public OreSettings[] oreSpawnSettings;
 
+    public Color TintColor => this.tintColor;
     public bool HasFog => this._hasFog;
     public float DefaultTemperature => this._defaultTemperature;
 

@@ -32,7 +32,7 @@ public abstract class OptionBase<T> : IOption {
         this.controlObj = obj;
 
         if(!string.IsNullOrEmpty(this.tooltip)) {
-            Tooltip tooltip = obj.GetComponentInChildren<Tooltip>();
+            TooltipPrompt tooltip = obj.GetComponentInChildren<TooltipPrompt>();
             if(tooltip != null) {
                 tooltip.text = this.tooltip;
             } else {

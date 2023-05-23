@@ -72,6 +72,9 @@ public class EntityTruck : EntityBase {
 
             this.path[i] = this.world.GetCellState(pos)?.data;
             this.world.SetCell(pos, this._depositPoint, true);
+            if(this.world.GetCellBehavior(pos, true) is CellBehaviorMasterDepositPoint truckPoint) {
+                truckPoint.truck = this;
+            }
         }
     } 
 

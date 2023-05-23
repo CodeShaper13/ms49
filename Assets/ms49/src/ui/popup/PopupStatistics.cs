@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupStatistics : PopupWorldReference {
+public class PopupStatistics : PopupWindow {
 
     [SerializeField]
     private RectTransform _layoutRect = null;
@@ -13,24 +14,23 @@ public class PopupStatistics : PopupWorldReference {
     [SerializeField]
     private GameObject _statDisplayElementPrefab = null;
 
-    private List<UiStatisticEntry> statLables;
+    [Space]
+    public Color brightColor = Color.white;
+    public Color darkColor = Color.gray;
+
+    private List<StatListEntry> statEntries;
     private EnumStatisticCategory currentCategory;
     private bool hideEmptyStats;
 
-    protected override void Start() {
-        base.Start();
+    private void Awake() {
+        this.statEntries = new List<StatListEntry>();
 
-        this.statLables = new List<UiStatisticEntry>();
-
-        int i = 0;
-        foreach(RegisteredStat stat in this.world.statManager.registeredStats) {
+        foreach(RegisteredStat stat in Main.instance.activeWorld.statManager.registeredStats) {
             if(stat != null) {
-                UiStatisticEntry sut = GameObject.Instantiate(this._statDisplayElementPrefab, this._layoutRect).GetComponent<UiStatisticEntry>();
-                sut.setStat(stat);
-
-                this.statLables.Add(sut);
-
-                i++;
+                GameObject obj = GameObject.Instantiate(
+                    this._statDisplayElementPrefab,
+                    this._layoutRect);
+                this.statEntries.Add(new StatListEntry(obj, stat));
             }
         }
     }
@@ -38,45 +38,86 @@ public class PopupStatistics : PopupWorldReference {
     protected override void onOpen() {
         base.onOpen();
 
-        this.callback_setViewedStatTab(0);
+        foreach(StatListEntry entry in this.statEntries) {
+            entry.Refresh();
+        }
+
+        this.SetVisibleTab(EnumStatisticCategory.GENERAL);
     }
 
-    public void callback_toggleTick() {
+    public void Callback_ToggleHideEmptyStats() {
         this.hideEmptyStats = !this._toggle.isOn;
 
-        this.func();
+        this.RedrawList();
     }
 
-    public void callback_setViewedStatTab(int category) {
-        this.currentCategory = (EnumStatisticCategory)category;
+    public void Callback_SetViewedStatTab(int category) {
+        this.SetVisibleTab((EnumStatisticCategory)category);
+    }
 
-        this.func();
-
+    public void SetVisibleTab(EnumStatisticCategory category) {
+        this.currentCategory = category;
+        this.RedrawList();
         this._scrollbar.value = 1f;
     }
 
-    private void func() {
-        foreach(UiStatisticEntry entry in this.statLables) {
-            entry.gameObject.SetActive(entry.category == this.currentCategory && (!this.hideEmptyStats || !this.isZero(entry.stat)));
+    private void RedrawList() {
+        foreach(StatListEntry entry in this.statEntries) {
+            entry.gameObject.SetActive(entry.category == this.currentCategory && (!this.hideEmptyStats || !this.IsZero(entry.stat)));
         }
 
         // Alternate the label colors.
         int i = 0;
-        foreach(UiStatisticEntry entry in this.statLables) {
+        foreach(StatListEntry entry in this.statEntries) {
             if(entry.gameObject.activeSelf) {
-                entry.setColor(i % 2 == 0);
+                entry.SetColor(i % 2 == 0 ? this.brightColor : this.darkColor);
                 i++;
             }
         }
     }
 
-    private bool isZero(IStatistic stat) {
-        if(stat is StatisticInt) {
-            return ((StatisticInt)stat).get() == 0;
-        } else if(stat is StatisticFloat) {
-            return ((StatisticFloat)stat).get() == 0;
+    /// <summary>
+    /// Checks if the passed stat is 0 and should be hidden (if option is checked).
+    /// </summary>
+    private bool IsZero(IStatistic stat) {
+        if(stat is StatisticInt statInt) {
+            return statInt.get() == 0;
+        } else if(stat is StatisticFloat statFloat) {
+            return statFloat.get() == 0;
         } else {
             return false;
+        }
+    }
+
+    private class StatListEntry {
+
+        private readonly TMP_Text textName;
+        private readonly TMP_Text textValue;
+
+        public readonly GameObject gameObject;
+        public readonly IStatistic stat;
+        public readonly EnumStatisticCategory category;
+
+        public StatListEntry(GameObject gameObj, RegisteredStat registeredStat) {
+            this.gameObject = gameObj;
+            this.stat = registeredStat.stat;
+            this.category = registeredStat.category;
+            
+            this.textName = gameObj.transform.GetChild(0).GetComponent<TMP_Text>();
+            this.textValue = gameObj.transform.GetChild(1).GetComponent<TMP_Text>();
+
+            this.textName.text = this.stat.displayName;
+
+            this.Refresh();
+        }
+
+        public void Refresh() {
+            this.textValue.text = this.stat.displayValue;
+        }
+
+        public void SetColor(Color color) {
+            this.textName.color = color;
+            this.textValue.color = color;
         }
     }
 }

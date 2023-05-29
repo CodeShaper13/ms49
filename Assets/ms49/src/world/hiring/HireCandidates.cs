@@ -134,23 +134,23 @@ public class HireCandidates : MonoBehaviour, ISaveableState {
                 list.Add(c.writeToNbt());
             }
         }
-        tag.setTag("candidates", list);
+        tag.SetTag("candidates", list);
 
         if(this.trainee != null) {
-            tag.setTag("trainee", this.trainee.writeToNbt());
-            tag.setTag("trainingTime", this.traineeTrainingTime);
+            tag.SetTag("trainee", this.trainee.writeToNbt());
+            tag.SetTag("trainingTime", this.traineeTrainingTime);
         }
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        NbtList list = tag.getList("candidates");
+        NbtList list = tag.GetList("candidates");
         for(int i = 0; i < list.Count; i ++) {
             this.candidates.Add(new Candidate(list.Get<NbtCompound>(i)));
         }
 
-        if(tag.hasKey("trainee")) {
+        if(tag.HasKey("trainee")) {
             this.trainee = new Trainee(tag.getCompound("trainee"));
-            this.traineeTrainingTime = tag.getFloat("trainingTime");
+            this.traineeTrainingTime = tag.GetFloat("trainingTime");
         }
     }
 

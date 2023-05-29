@@ -23,7 +23,7 @@ public class PathfindingAgent : MonoBehaviour {
     private void Update() {
         if(this.HasPath()) {
             Position currentWaypoint = this.path.TargetPoint;
-            Vector2 workerPos = this.entity.worldPos;
+            Vector2 workerPos = this.entity.WorldPos;
 
             bool posMatch = workerPos == currentWaypoint.Center;
             bool depthMatch = entity.depth == currentWaypoint.depth;
@@ -170,7 +170,7 @@ public class PathfindingAgent : MonoBehaviour {
     /// Attempts to calculate a path to the passed destination.
     /// </summary>
     public NavPath CalculatePath(Position destination, bool stopAdjacentToFinish = false, Rotation endingRotation = null) {
-        if(this.entity.position == destination) {
+        if(this.entity.Position == destination) {
             if(stopAdjacentToFinish) {
                 //dest = free position adjacent to entity
                 World w = this.entity.world;
@@ -187,23 +187,23 @@ public class PathfindingAgent : MonoBehaviour {
                     new Position[] { destination },
                     endingRotation);
             }
-        } else if(Vector2Int.Distance(this.entity.position.AsVec2Int, destination.AsVec2Int) == 1) { // Next to destination
+        } else if(Vector2Int.Distance(this.entity.Position.AsVec2Int, destination.AsVec2Int) == 1) { // Next to destination
             if(stopAdjacentToFinish) {
                 return new NavPath(
-                    new Position[] { this.entity.position }, // Go to their own spot
-                    Rotation.directionToRotation(destination.AsVec2Int - this.entity.getCellPos()));
+                    new Position[] { this.entity.Position }, // Go to their own spot
+                    Rotation.directionToRotation(destination.AsVec2Int - this.entity.GetCellPos()));
             }
         }
 
         // Return if either the start of the end is out of the world
-        if(this.entity.world.IsOutOfBounds(this.entity.position) || this.entity.world.IsOutOfBounds(destination)) {
+        if(this.entity.world.IsOutOfBounds(this.entity.Position) || this.entity.world.IsOutOfBounds(destination)) {
             return null;
         }
 
         // Try and find a path.
         Position[] pathPoints = Pathfinder.FindPath(
             this.navMapId,
-            this.entity.position,
+            this.entity.Position,
             destination,
             stopAdjacentToFinish);
 

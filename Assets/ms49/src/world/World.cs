@@ -72,7 +72,7 @@ public class World : MonoBehaviour {
         // layers read.  Generate the new ones.
         for(int i = 0; i < this.storage.layerCount; i++) {
             if(this.storage.GetLayer(i) == null) {
-                this._mapGenerator.generateLayer(this, i);
+                this._mapGenerator.GenerateLayer(this, i);
             }
         }
 
@@ -96,7 +96,7 @@ public class World : MonoBehaviour {
 
         // Generate the map.
         for(int depth = 0; depth < this.storage.layerCount; depth++) {
-            this._mapGenerator.generateLayer(this, depth);
+            this._mapGenerator.GenerateLayer(this, depth);
         }
 
         // Unlock the plot that contains the Dumptruck and set the
@@ -104,8 +104,8 @@ public class World : MonoBehaviour {
         bool setPoint = false;
         foreach(EntityBase e in this.entities.list) {
             if(e is EntityTruck) {
-                this.plotManager.GetPlot(e.position.x, e.position.y).isOwned = true;
-                this.storage.workerSpawnPoint = e.position.Add(-1, -1);
+                this.plotManager.GetPlot(e.Position.x, e.Position.y).isOwned = true;
+                this.storage.workerSpawnPoint = e.Position.Add(-1, -1);
 
                 setPoint = true;
 
@@ -427,10 +427,10 @@ public class World : MonoBehaviour {
         NbtCompound tag = new NbtCompound("world");
 
         // Write general world info:
-        tag.setTag("seed", this.seed);
+        tag.SetTag("seed", this.seed);
 
         if(this._money != null) {
-            tag.setTag("money", this._money.value);
+            tag.SetTag("money", this._money.value);
         }
 
         // Write level:
@@ -440,14 +440,14 @@ public class World : MonoBehaviour {
 
         // Write Player:
         if(CameraController.instance != null) {
-            tag.setTag("player", CameraController.instance.writeToNbt());
+            tag.SetTag("player", CameraController.instance.writeToNbt());
         }
 
         // Write all child componenets that implement ISaveableState to NBT
         foreach(ISaveableState saveable in this.GetComponentsInChildren<ISaveableState>()) {
             NbtCompound compound = new NbtCompound();
             saveable.WriteToNbt(compound);
-            tag.setTag(saveable.saveableTagName, compound);
+            tag.SetTag(saveable.saveableTagName, compound);
         }
 
         return tag;
@@ -457,10 +457,10 @@ public class World : MonoBehaviour {
         NbtCompound tag = rootTag.getCompound("world");
 
         // Read general world info:
-        this.seed = tag.getInt("seed");
+        this.seed = tag.GetInt("seed");
 
         if(this._money != null) {
-            this._money.value = tag.getInt("money");
+            this._money.value = tag.GetInt("money");
         }
 
         foreach(ISaveableState saveable in this.GetComponentsInChildren<ISaveableState>()) {
@@ -491,7 +491,7 @@ public class World : MonoBehaviour {
 
                 Layer layer = this.storage.GetLayer(i);
 
-                if(this.MapGenerator.GetLayerFromDepth(i).DefaultTemperature == 0) {
+                if(this.MapGenerator.GetLayerData(i).DefaultTemperature == 0) {
                     continue;
                 }
 

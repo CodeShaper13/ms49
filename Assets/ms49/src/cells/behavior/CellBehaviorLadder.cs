@@ -4,7 +4,7 @@
         return "[rmb] " + (this.goesUp() ? "go up" : "go down");
     }
 
-    public override void onRightClick() {
+    public override void OnRightClick() {
         CameraController.instance.changeLayer(CameraController.instance.currentLayer + (this.goesUp() ? -1 : 1));
     }
 

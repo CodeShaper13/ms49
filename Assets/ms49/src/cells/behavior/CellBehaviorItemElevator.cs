@@ -34,13 +34,13 @@ public class CellBehaviorItemElevator : CellBehaviorContainer {
     public override void ReadFromNbt(NbtCompound tag) {
         base.ReadFromNbt(tag);
 
-        this.transferTimer = tag.getFloat("transferTimer");
+        this.transferTimer = tag.GetFloat("transferTimer");
     }
 
     public override void WriteToNbt(NbtCompound tag) {
         base.WriteToNbt(tag);
 
-        tag.setTag("transferTimer", this.transferTimer);
+        tag.SetTag("transferTimer", this.transferTimer);
     }
 
     private enum EnumDirection {

@@ -6,7 +6,7 @@ public class PopupFurnace : PopupContainer {
     [SerializeField]
     private Image _imgSmeltProgressBar = null;
     [SerializeField]
-    private Image _imgFuelAmountBar = null;
+    private ProgressBar _progressBarFuel = null;
 
     public CellBehaviorFurnace furnace { get; set; }
 
@@ -18,8 +18,8 @@ public class PopupFurnace : PopupContainer {
                 this._imgSmeltProgressBar.fillAmount = this.furnace.NormalizedSmeltProgress;
             }
 
-            if(this._imgFuelAmountBar != null) {
-                this._imgFuelAmountBar.fillAmount = this.furnace.NormalizedSmeltProgress;
+            if(this._progressBarFuel != null) {
+                this._progressBarFuel.Value = this.furnace.NormalizedSmeltProgress;
             }
         }
     }

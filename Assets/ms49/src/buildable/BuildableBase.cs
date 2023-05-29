@@ -35,7 +35,7 @@ public abstract class BuildableBase : ScriptableObject {
 
     private void OnValidate() {
         if(this._displayRotation == EnumRotation.NONE) {
-            Debug.Log("Display Rotation can not be NONE");
+            Debug.LogWarning("Display Rotation can not be NONE");
             this._displayRotation = EnumRotation.UP;
         }
 
@@ -43,7 +43,7 @@ public abstract class BuildableBase : ScriptableObject {
             Rotation r = Rotation.fromEnum(this.displayRotation);
             for(int i = 0; i < 4; i++) {
                 if(this.IsRotationValid(r)) {
-                    Debug.Log(this.displayRotation + " is not a valid rotation");
+                    Debug.Log(this._displayRotation + " is not a valid rotation");
                     this._displayRotation = r.enumRot;
                     break;
                 }

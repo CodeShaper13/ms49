@@ -45,14 +45,11 @@ public class NavMap : MonoBehaviour {
 
     private void OnDrawGizmosSelected() {
         if(CameraController.instance != null) { // Game is in progress
-            Gizmos.color = Color.green;
-
             NavGrid grid = this.grids[CameraController.instance.currentLayer];
 
             foreach(PathfindingNode node in grid.nodes) {
-                if(node.IsWalkable) {
-                    Gizmos.DrawSphere(node.Position.Center, 0.25f);
-                }
+                Gizmos.color = node.IsWalkable ? Color.green : Color.red;
+                Gizmos.DrawSphere(node.Position.Center, 0.25f);
             }
         }
     }

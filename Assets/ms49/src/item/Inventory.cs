@@ -1,7 +1,9 @@
 ﻿using fNbt;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour, IEnumerable<Item> {
 
     [SerializeField]
     private string _inventoryName = "";
@@ -77,18 +79,30 @@ public class Inventory : MonoBehaviour {
             Item item = this.items[i];
             ids[i] = item == null ? -1 : reg.GetIdOfElement(item);
         }
-        tag.setTag("itemIds", ids);
+        tag.SetTag("itemIds", ids);
 
         return tag;
     }
 
     public virtual void ReadFromNbt(NbtCompound tag) {
         ItemRegistry registry = Main.instance.ItemRegistry;
-        int[] ids = tag.getIntArray("itemIds");
+        int[] ids = tag.GetIntArray("itemIds");
         for(int i = 0; i < ids.Length; i++) {
             int id = ids[i];
             this.items[i] = id == -1 ? null : registry[ids[i]];
         }
+    }
+
+    public IEnumerator<Item> GetEnumerator() {
+        foreach(Item item in this.items) {
+            if(item != null) {
+                yield return item;
+            }
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() {
+        return this.GetEnumerator();
     }
 
     public Item this[int index] {

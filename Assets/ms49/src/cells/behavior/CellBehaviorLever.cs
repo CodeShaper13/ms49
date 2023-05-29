@@ -15,8 +15,8 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
         }
     }
 
-    public override void onRightClick() {
-        base.onRightClick();
+    public override void OnRightClick() {
+        base.OnRightClick();
 
         this.isOn = !this.isOn;
         this.dirty();
@@ -31,11 +31,11 @@ public class CellBehaviorLever : CellBehavior, IHasData, IRenderTileOverride {
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.isOn = tag.getBool("isLeverOn");
+        this.isOn = tag.GetBool("isLeverOn");
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("isLeverOn", this.isOn);
+        tag.SetTag("isLeverOn", this.isOn);
     }
 
     /// <summary>

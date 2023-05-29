@@ -88,7 +88,7 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
                     // Play particle (and color it)
                     Particle particle = this.owner.world.particles.Spawn(this.stonePos.Center, this.owner.depth, this.mineParticlePrefab);
                     if(particle != null) {
-                        LayerData layerData = this.owner.world.MapGenerator.GetLayerFromDepth(this.owner.depth);
+                        LayerData layerData = this.owner.world.MapGenerator.GetLayerData(this.owner.depth);
                         ParticleSystem.MainModule main = particle.ps.main;
                         main.startColor = layerData.GetGroundTint(this.owner.world, this.stonePos.x, this.stonePos.y);
                     }
@@ -123,7 +123,7 @@ public class TaskMineRock : TaskMovement<EntityWorker> {
     private bool method(Func<TargetedSquare, bool> func) {
         HashSet<TargetedSquare> targetedPosList = this.owner.world.targetedSquares.list;
 
-        foreach(TargetedSquare ts in targetedPosList.OrderBy(x => x.pos.Distance(this.owner.position)).ToList()) {
+        foreach(TargetedSquare ts in targetedPosList.OrderBy(x => x.pos.Distance(this.owner.Position)).ToList()) {
             if(!func(ts)) {
                 continue;
             }

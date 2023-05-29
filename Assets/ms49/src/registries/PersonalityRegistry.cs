@@ -13,7 +13,7 @@ public class PersonalityRegistry : Registry<Personality> {
             return this._defaultPersonality;
         } else {
             for(int i = 0; i < this.RegistrySize; i++) {
-                Personality personality = this.GetElement(i);
+                Personality personality = this[i];
                 if(personality != null) {
                     return personality;
                 }

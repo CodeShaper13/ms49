@@ -13,8 +13,8 @@ public class CellBehaviorBed : CellBehaviorOccupiable {
         }
     }
 
-    public override void onDestroy() {
-        base.onDestroy();
+    public override void OnBehaviorDestroy() {
+        base.OnBehaviorDestroy();
 
         // Remove the bottom of bed
         CellData air = Main.instance.CellRegistry.GetAir();

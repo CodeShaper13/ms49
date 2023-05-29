@@ -11,7 +11,7 @@ public class WorkerInfo {
     public int payShift { get; private set; }
 
     public int pay => Main.instance.workerFactory.getPayFromModifier(this.personality.payModifier) + this.payShift;
-    public string fullName => this.firstName + " " + this.lastName;
+    public string FullName => string.Format("{0} {1}", this.firstName, this.lastName);
 
     public WorkerInfo(string first, string last, EnumGender gender, int skinTone, int hairColor, int hairStyle, Personality personality, int payShift) {
         this.firstName = first;
@@ -24,30 +24,30 @@ public class WorkerInfo {
     }
 
     public WorkerInfo(NbtCompound tag) {
-        this.firstName = tag.getString("firstName");
-        this.lastName = tag.getString("lastName");
-        this.gender = (EnumGender)tag.getInt("gender");
-        this.skinTone = tag.getInt("skinTone");
-        this.hairStyle = tag.getInt("hairStyle");
-        this.personality = Main.instance.PersonalityRegistry.GetElement(tag.getInt(
+        this.firstName = tag.GetString("firstName");
+        this.lastName = tag.GetString("lastName");
+        this.gender = (EnumGender)tag.GetInt("gender");
+        this.skinTone = tag.GetInt("skinTone");
+        this.hairStyle = tag.GetInt("hairStyle");
+        this.personality = Main.instance.PersonalityRegistry[tag.GetInt(
             "personality",
-            -1));
+            -1)];
         if(this.personality == null) {
             this.personality = Main.instance.PersonalityRegistry.GetDefaultPersonality();
         }
-        this.payShift = tag.getInt("payShift");
+        this.payShift = tag.GetInt("payShift");
     }
 
     public NbtCompound writeToNbt() {
         NbtCompound tag = new NbtCompound();
 
-        tag.setTag("firstName", this.firstName);
-        tag.setTag("lastName", this.lastName);
-        tag.setTag("gender", (int)this.gender);
-        tag.setTag("skinTone", this.skinTone);
-        tag.setTag("hairStyle", this.hairStyle);
-        tag.setTag("personality", Main.instance.PersonalityRegistry.GetIdOfElement(this.personality));
-        tag.setTag("payShift", this.payShift);
+        tag.SetTag("firstName", this.firstName);
+        tag.SetTag("lastName", this.lastName);
+        tag.SetTag("gender", (int)this.gender);
+        tag.SetTag("skinTone", this.skinTone);
+        tag.SetTag("hairStyle", this.hairStyle);
+        tag.SetTag("personality", Main.instance.PersonalityRegistry.GetIdOfElement(this.personality));
+        tag.SetTag("payShift", this.payShift);
 
         return tag;
     }

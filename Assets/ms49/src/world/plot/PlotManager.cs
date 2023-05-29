@@ -290,13 +290,13 @@ public class PlotManager : MonoBehaviour, ISaveableState, IFirstTimeInitializer 
             isOwnedArray[i] = plot.isOwned ? (byte)1 : (byte)0;
         }
 
-        tag.setTag("costs", costArray);
-        tag.setTag("isOwned", isOwnedArray);
+        tag.SetTag("costs", costArray);
+        tag.SetTag("isOwned", isOwnedArray);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        int[] costArray = tag.getIntArray("costs");
-        byte[] isOwnedArray = tag.getByteArray("isOwned");
+        int[] costArray = tag.GetIntArray("costs");
+        byte[] isOwnedArray = tag.GetByteArray("isOwned");
 
         for(int i = 0; i < this.plots.Length; i++) {
             Plot plot = this.plots[i];

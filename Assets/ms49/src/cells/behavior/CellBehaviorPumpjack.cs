@@ -30,11 +30,11 @@ public class CellBehaviorPumpjack : CellBehavior, IHasData {
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.drillProgress = tag.getFloat("drillProgress");
+        this.drillProgress = tag.GetFloat("drillProgress");
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("drillProgress", this.drillProgress);
+        tag.SetTag("drillProgress", this.drillProgress);
     }
 
     /// <summary>

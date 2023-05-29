@@ -7,10 +7,10 @@ public class CookMetaData : MonoBehaviour, IAiMeta {
     public EnumPlateState plateState { get; set; } = EnumPlateState.CLEAN;
 
     public void readFromNbt(NbtCompound tag) {
-        this.plateState = (EnumPlateState)tag.getInt("plateState");
+        this.plateState = (EnumPlateState)tag.GetInt("plateState");
     }
 
     public void writeToNbt(NbtCompound tag) {
-        tag.setTag("plateState", (int)this.plateState);
+        tag.SetTag("plateState", (int)this.plateState);
     }
 }

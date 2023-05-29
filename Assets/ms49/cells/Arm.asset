@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellName: Arm
   _isSolid: 0
-  _floorOverlayTile: {fileID: 11400000, guid: 0900d1aa8ff48f244815121eb41c4529, type: 2}
+  _floorOverlayTile: {fileID: 0}
   _objectTile: {fileID: 0}
   _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 1
@@ -27,8 +27,8 @@ MonoBehaviour:
   right:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 11400000, guid: 2e961004279dec6449fa9c85ba93ce67, type: 2}
-    _overlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: 2e961004279dec6449fa9c85ba93ce67, type: 2}
     _effect: 0
   down:
     _enableOverride: 0
@@ -39,8 +39,8 @@ MonoBehaviour:
   left:
     _enableOverride: 1
     _floorOverlayTile: {fileID: 0}
-    _objectTile: {fileID: 11400000, guid: 9fde368cb90ff53499930014a069fd86, type: 2}
-    _overlayTile: {fileID: 0}
+    _objectTile: {fileID: 0}
+    _overlayTile: {fileID: 11400000, guid: 9fde368cb90ff53499930014a069fd86, type: 2}
     _effect: 0
   _movementCost: -1
   _canBuildOver: 0

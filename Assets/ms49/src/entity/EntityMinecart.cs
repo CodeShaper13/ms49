@@ -32,26 +32,31 @@ public class EntityMinecart : EntityBase {
             return;
         }
 
-        // Explode the cart if it has left the map.
-        if(this.world.IsOutOfBounds(this.position)) {
+        // Remove the cart if it has left the map.
+        if(this.world.IsOutOfBounds(this.Position)) {
             this.world.entities.Remove(this);
             return;
         }
 
         if(this.cartInteractor != null) {
-            Vector2 target = this.cartInteractor.GetCartStopPoint();
-
-            if(this.worldPos == target) {
-                // In front of interactor.
-                this.cartInteractor.minecart = this;
+            if(!this.cartInteractor.ShouldCartInteract(this)) {
+                // The IMinecartInteractor no longer wants to interact with the Minecart.
+                this.ReleaseFromInteractor();
             } else {
-                // Not in front of the interactor, move towards it.
-                this.worldPos = Vector2.MoveTowards(this.worldPos, target, this.movementSpeed * Time.deltaTime);
+                Vector2 target = this.cartInteractor.GetCartStopPoint();
+
+                if(this.WorldPos == target) {
+                    // In front of interactor.
+                    this.cartInteractor.minecart = this;
+                } else {
+                    // Not in front of the interactor, move towards it.
+                    this.WorldPos = Vector2.MoveTowards(this.WorldPos, target, this.movementSpeed * Time.deltaTime);
+                }
             }
         } else {
-            // Move the Minecart:
+            // Move the Minecart.
 
-            CellState state = this.world.GetCellState(this.position);
+            CellState state = this.world.GetCellState(this.Position);
             if(state.data is CellDataRail rail) {
 
                 // Trip detector rail if above.
@@ -69,28 +74,24 @@ public class EntityMinecart : EntityBase {
                     }
                 }  
 
-                Vector2 cellCenter = this.position.Center;
+                Vector2 cellCenter = this.Position.Center;
 
                 // the reason the explode isn't working is because the cart changes direction while on the cell
 
                 switch(rail.MoveType) {
                     case CellDataRail.EnumRailMoveType.STRAIGHT:
-                        this.Move(this.rotation.vector);                       
-                        break;
-
                     case CellDataRail.EnumRailMoveType.CROSSING:
                         this.Move(this.rotation.vector);
                         break;
 
                     case CellDataRail.EnumRailMoveType.CURVE:
                         this.HandleCurveRail(state.Rotation, state.Rotation.clockwise(), cellCenter);
-
                         break;
 
                     case CellDataRail.EnumRailMoveType.STOPPER:
                         this.Move(this.rotation.vector);
 
-                        float d = Vector2.Distance(this.worldPos, cellCenter + state.Rotation.opposite().vectorF * 0.5f);
+                        float d = Vector2.Distance(this.WorldPos, cellCenter + state.Rotation.opposite().vectorF * 0.5f);
                         if(this.rotation == state.Rotation && d > 0.25f) {
                             this.rotation = this.rotation.opposite();
                             this.Move(this.rotation.vectorF * (d - 0.5f));
@@ -117,30 +118,31 @@ public class EntityMinecart : EntityBase {
     public override void LateUpdate() {
         base.LateUpdate();
 
-        if(!Pause.IsPaused) {
+        if(Pause.IsPaused) {
+            return;
+        }
 
-            // Set main sprite
-            this._cartRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
-            this._cartRenderer.flipX = this.rotation == Rotation.LEFT;
+        // Set main sprite.
+        this._cartRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontEmpty : this.sprites.sideEmpty;
+        this._cartRenderer.flipX = this.rotation == Rotation.LEFT;
 
-            // Set fill sprite
-            if(this.Inventory.IsEmpty) {
-                this._fillRenderer.sprite = null;
-            } else {
-                this._fillRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
-                this._fillRenderer.flipX = this.rotation == Rotation.LEFT;
-            }
+        // Set fill sprite.
+        if(this.Inventory.IsEmpty) {
+            this._fillRenderer.sprite = null;
+        } else {
+            this._fillRenderer.sprite = this.rotation.axis == EnumAxis.Y ? this.sprites.frontFull : this.sprites.sideFull;
+            this._fillRenderer.flipX = this.rotation == Rotation.LEFT;
         }
     }
 
-    public override void writeToNbt(NbtCompound tag) {
-        base.writeToNbt(tag);
+    public override void WriteToNbt(NbtCompound tag) {
+        base.WriteToNbt(tag);
 
-        tag.setTag("inventory", this.Inventory.WriteToNbt());
+        tag.SetTag("inventory", this.Inventory.WriteToNbt());
     }
 
-    public override void readFromNbt(NbtCompound tag) {
-        base.readFromNbt(tag);
+    public override void ReadFromNbt(NbtCompound tag) {
+        base.ReadFromNbt(tag);
 
         this.Inventory.ReadFromNbt(tag.getCompound("inventory"));
     }
@@ -156,10 +158,10 @@ public class EntityMinecart : EntityBase {
         // Move the cart.
         this.Move(this.rotation.vector);
 
-        float distFromCurveStart = Vector2.Distance(this.worldPos, cellCenter + (startRot.vectorF * 0.5f));
+        float distFromCurveStart = Vector2.Distance(this.WorldPos, cellCenter + (startRot.vectorF * 0.5f));
         if(distFromCurveStart > 0.5f) {
             this.rotation = endRot;
-            this.worldPos = cellCenter;
+            this.WorldPos = cellCenter;
             this.Move(this.rotation.vectorF * (distFromCurveStart - 0.5f));
         }
     }
@@ -172,12 +174,15 @@ public class EntityMinecart : EntityBase {
     /// Causes the Minecart to explode, removing it from the world
     /// and playing a particle effect.
     /// </summary>
-    public void explode() {
-        this.world.particles.Spawn(this.position, this.explodeParticlePrefab);
+    public void Explode() {
+        this.world.particles.Spawn(this.Position, this.explodeParticlePrefab);
         this.world.entities.Remove(this);
     }
 
-    public void release() {
+    public void ReleaseFromInteractor() {
+        if(this.cartInteractor != null && this.cartInteractor.minecart == this) {
+            this.cartInteractor.minecart = null;
+        }
         this.cartInteractor = null;
     }
 
@@ -191,7 +196,7 @@ public class EntityMinecart : EntityBase {
     /// checked.
     /// <returns></returns>
     private bool CheckForIMinecartInteractor(Rotation rotation) {
-        Position p = rotation == null ? this.position : this.position + rotation;
+        Position p = rotation == null ? this.Position : this.Position + rotation;
 
         if(this.world.IsOutOfBounds(p)) {
             return false;
@@ -214,18 +219,18 @@ public class EntityMinecart : EntityBase {
     /// Moves the minecart in the passed direction.  Move speed and delta time is factored in here.
     /// </summary>
     private void Move(Vector2 dir) {
-        Vector2 destEdgePoint = this.position.Center + (this.rotation.vectorF * 0.5f);
-        float dist = Vector2.Distance(this.worldPos, destEdgePoint);
+        Vector2 destEdgePoint = this.Position.Center + (this.rotation.vectorF * 0.5f);
+        float dist = Vector2.Distance(this.WorldPos, destEdgePoint);
 
         if(dist <= 0.5f) {
             // the cart is now moving away from the center of a cell and towards another
-            Position pos = this.position + this.rotation;
+            Position pos = this.Position + this.rotation;
             if(!this.world.IsOutOfBounds(pos)) {
                 // check if the cell is occupied by another cart
                 foreach(EntityBase e in this.world.entities.list) {
-                    if(e is EntityMinecart && e != this && e.position == pos) {
+                    if(e is EntityMinecart && e != this && e.Position == pos) {
                         // The destinaiton cell is already occuiped.
-                        this.worldPos = this.position.Center;
+                        this.WorldPos = this.Position.Center;
                         return;
                     }
                 }
@@ -233,7 +238,7 @@ public class EntityMinecart : EntityBase {
         }
 
         Vector2 vec = dir * this.movementSpeed * Mathf.Clamp(Time.deltaTime, 0, 0.1f);
-        this.worldPos += vec;
+        this.WorldPos += vec;
     }
 
     public override void onDestroy() {
@@ -243,7 +248,7 @@ public class EntityMinecart : EntityBase {
     }
 
     public override void OnRightClick() {
-        PopupContainer popup = Main.instance.FindPopup<PopupContainer>();
+        PopupChest popup = Main.instance.FindPopup<PopupChest>();
         if(popup != null) {
             popup.open();
             popup.SetInventory(this.Inventory);

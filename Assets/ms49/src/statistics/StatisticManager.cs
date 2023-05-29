@@ -58,7 +58,7 @@ public class StatisticManager : MonoBehaviour, ISaveableState {
                 NbtCompound compound = new NbtCompound();
                 regStat.stat.writeToNbt(compound);
 
-                tag.setTag(regStat.stat.saveName, compound);
+                tag.SetTag(regStat.stat.saveName, compound);
             }
         }
     }

@@ -51,8 +51,8 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartIntera
         }
     }
 
-    public override void onDestroy() {
-        base.onDestroy();
+    public override void OnBehaviorDestroy() {
+        base.OnBehaviorDestroy();
 
         if(this.minecart != null) {
             this.releaseCart();
@@ -62,22 +62,22 @@ public class CellBehaviorMinecartLoader : CellBehaviorContainer, IMinecartIntera
     public override void ReadFromNbt(NbtCompound tag) {
         base.ReadFromNbt(tag);
 
-        this.transferTimer = tag.getFloat("transferTimer");
+        this.transferTimer = tag.GetFloat("transferTimer");
     }
 
     public override void WriteToNbt(NbtCompound tag) {
         base.WriteToNbt(tag);
 
-        tag.setTag("transferTimer", this.transferTimer);
+        tag.SetTag("transferTimer", this.transferTimer);
     }
 
     private void releaseCart() {
-        this.minecart.release();
+        this.minecart.ReleaseFromInteractor();
         this.minecart = null;
     }
 
     public bool ShouldCartInteract(EntityMinecart cart) {
-        if(cart.position != this.pos + this.rotation) {
+        if(cart.Position != this.pos + this.rotation) {
             return false; // Minecart not in front of Loader.
         }
 

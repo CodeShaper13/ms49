@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TooltipPrompt : MonoBehaviour, ITooltipPrompt, IPointerEnterHandler, IPointerExitHandler {
 
-    [SerializeField, Multiline]
+    [SerializeField, TextArea]
     private string _text;
     public bool overrideDelay = false;
     [Min(0), ShowIf(nameof(overrideDelay))]

@@ -22,7 +22,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
             return
                 this.minerData.heldItem != null &&
                 this.depositPoint != null &&// Deposit Point hasn't be destroyed
-                this.depositPoint.isOpen();
+                this.depositPoint.IsAcceptingItems();
         } else {
             return
                 this.minerData.heldItem == null && // Miner isn't holding anything
@@ -51,7 +51,7 @@ public class TaskUnloadOres : TaskMovement<EntityWorker> {
             // Head to the deposit point.
             this.depositPoint = this.calculateAndSetPathToClosest<AbstractDepositPoint>(
                 true,
-                behavior => behavior.isOpen());
+                behavior => behavior.IsAcceptingItems());
 
             // Manualy set it
             this.agent.SetPath(this.navPath);

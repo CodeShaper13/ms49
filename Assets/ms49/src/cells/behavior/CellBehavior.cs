@@ -31,12 +31,12 @@ public abstract class CellBehavior : MonoBehaviour, ITooltipPrompt {
     /// <summary>
     /// Called when the Cell is right clicked.
     /// </summary>
-    public virtual void onRightClick() { }
+    public virtual void OnRightClick() { }
 
     /// <summary>
     /// Called when the Tile is destroyed.  This is where all cleanup should happen, not OnDestroy()
     /// </summary>
-    public virtual void onDestroy() { }
+    public virtual void OnBehaviorDestroy() { }
 
     public virtual void onNeighborChange(CellState triggererCell, Position triggererPos) { }
 
@@ -51,7 +51,7 @@ public abstract class CellBehavior : MonoBehaviour, ITooltipPrompt {
         return null;
     }
 
-    public virtual void getDebugText(StringBuilder sb, string indent) {
+    public virtual void GetDebugText(StringBuilder sb, string indent) {
         sb.AppendLine(indent + "Type: " + this.GetType().ToString());
     }
 }

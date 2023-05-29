@@ -19,33 +19,23 @@ public class MapGenerator : MonoBehaviour {
     [SerializeField, BoxGroup("Player Starting Settings")]
     private WorkerType[] _startingWorkers = new WorkerType[0];
 
-    //private List<FeatureBase> features;
-
     public int LayerCount => this._layers == null ? 0 : this._layers.Length;
     public int PlayerStartLayer => this._startingLayer;
     public int StartingMoney => this._startingMoney;
     public WorkerType[] StartingWorkers => this._startingWorkers;
 
-    /*
-    private void Awake() {
-        // Find all of the attached Feature components and sort them by priority.
-        this.features = new List<FeatureBase>();
-        foreach(FeatureBase task in this.GetComponentsInChildren<FeatureBase>()) {
-            this.features.Add(task);
-        }
-        this.features = this.features.OrderBy(e => e.Priority).ToList();
-    }
-    */
-
     /// <summary>
     /// Fully generates the Layer at the passed depth and places it
     /// into the World's storage.
     /// </summary>
-    public void generateLayer(World world, int depth) {
+    public void GenerateLayer(World world, int depth) {
         int layerSeed = world.seed | (depth + 1).GetHashCode(); // TODO is this a good algorithm?
 
-        MapAccessor accessor = new MapAccessor(world.MapSize, depth);
-        LayerData layerData = this.GetLayerFromDepth(depth);
+        MapAccessor accessor = new MapAccessor(world.MapSize);
+        LayerData layerData = this.GetLayerData(depth);
+        Layer layer = new Layer(world, depth);
+        world.storage.SetLayer(layer, depth);
+
 
         // Fill the map with the Layer's fill cell.
         for(int x = 0; x < accessor.size; x++) {
@@ -66,7 +56,6 @@ public class MapGenerator : MonoBehaviour {
         }
 
 
-        Layer layer = new Layer(world, depth);
         accessor.ApplyToLayer(layer);
 
 
@@ -84,15 +73,13 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
-
-        world.storage.SetLayer(layer, depth);
-
-
         // Generate all of the structures that belong on this Layer.
         Random.InitState(layerSeed);
         
-        foreach(StructurePlacer structure in this.GetGeneratorComponents<StructurePlacer>(depth)) {
-            structure.GenerateStructure(world, depth);
+        foreach(StructureBase structure in this.GetGeneratorComponents<StructureBase>(depth)) {
+            if(structure.enabled) {
+                structure.GenerateStructure(world, depth);
+            }
         }
     }
 
@@ -100,7 +87,7 @@ public class MapGenerator : MonoBehaviour {
     /// Returns the LayerData that provides data for the passed depth.
     /// If there is none set or the passed depth is out of bounds, null is returned.
     /// </summary>
-    public LayerData GetLayerFromDepth(int depth) {
+    public LayerData GetLayerData(int depth) {
         if(depth < 0 || depth >= this._layers.Length) {
             return null;
         }

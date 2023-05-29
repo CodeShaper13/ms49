@@ -30,11 +30,11 @@ public class Fog {
         for(int i = 0; i < this.fogMap.Length; i++) {
             array[i] = this.fogMap[i] ? (byte)1 : (byte)0;
         }
-        tag.setTag("fog", array);
+        tag.SetTag("fog", array);
     }
 
     public void readFromNbt(NbtCompound tag) {
-        byte[] array = tag.getByteArray("fog");
+        byte[] array = tag.GetByteArray("fog");
         for(int i = 0; i < Mathf.Min(this.fogMap.Length, array.Length); i++) {
             this.fogMap[i] = array[i] == 1;
         }

@@ -100,7 +100,7 @@ public class TaskFindFood : TaskMovement<EntityWorker> {
 
             // Try to move away from the chair so it "looks free".
             // If there no walkable space, stay on the chair.  Others will still be able to claim it.
-            Position? freeSpot = this.getFreeSpot(this.owner.position);
+            Position? freeSpot = this.getFreeSpot(this.owner.Position);
             if(freeSpot != null) {
                 NavPath path = this.agent.CalculatePath(
                     (Position)freeSpot,

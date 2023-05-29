@@ -59,4 +59,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryName: Deposit Point
-  _size: 12
+  _size: 25

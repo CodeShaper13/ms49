@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
   m_Name: MinecartLoader
   m_EditorClassIdentifier: 
-  structureName: 
+  structureName: Rail Stop
   _cost: 300
-  _description: Automatically loads Minecarts.  Feed item into the Loader with conveyor
-    belts
+  _description: Stops Minecarts
   _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 1
-  _buildTime: {fileID: 11400000, guid: ed40e64ee472be845b68a5910e25961f, type: 2}
+  _buildTime: 0
   _customPreview: {fileID: 0}
-  _cell: {fileID: 11400000, guid: 8bec58bdc35919c4eb8d603edfb7d1ae, type: 2}
+  _cell: {fileID: 11400000, guid: ea2f3655384601547a7971dbc4b150bb, type: 2}
+  _buildableSize: {x: 1, y: 1}
+  _gridRows:
+  - _row:
+    - 
+  _gridMappings: []

@@ -8,7 +8,7 @@ public class Storage {
     private Layer[] layers;
     private byte[] aboveGroundMap;
     /// <summary>
-    /// A lsit of all behaviors.  This exists so ALL behaviors on a
+    /// A list of all behaviors.  This exists so ALL behaviors on a
     /// layer can be iterated though faster.  Without this, you would
     /// have to check every tile for a behavior.
     /// </summary>
@@ -62,9 +62,9 @@ public class Storage {
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("aboveGroundMap", this.aboveGroundMap);
+        tag.SetTag("aboveGroundMap", this.aboveGroundMap);
 
-        tag.setTag("workerSpawnPoint", this.workerSpawnPoint);
+        tag.SetTag("workerSpawnPoint", this.workerSpawnPoint.AsVec3Int);
 
         // Write Layers:
         NbtList listLayers = new NbtList(NbtTagType.Compound);
@@ -76,16 +76,16 @@ public class Storage {
             }
         }
 
-        tag.setTag("layers", listLayers);
+        tag.SetTag("layers", listLayers);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.aboveGroundMap = tag.getByteArray("aboveGroundMap");
+        this.aboveGroundMap = tag.GetByteArray("aboveGroundMap");
 
-        this.workerSpawnPoint = tag.getPosition("workerSpawnPoint");
+        this.workerSpawnPoint = new Position(tag.GetVector3Int("workerSpawnPoint"));
 
         // Read Layers:
-        NbtList layers = tag.getList("layers");
+        NbtList layers = tag.GetList("layers");
         for(int i = 0; i < layers.Count; i++) {
             Layer layer = new Layer(this.world, i);
             NbtCompound layerCompound = layers.Get<NbtCompound>(i);
@@ -105,9 +105,9 @@ public class Storage {
 
             // After onCreate is called for all of the behaviors, let them read their
             // state from NBT.
-            NbtList listBehaviorTags = layerCompound.getList("meta");
+            NbtList listBehaviorTags = layerCompound.GetList("behaviorData");
             foreach(NbtCompound behaviorTag in listBehaviorTags) {
-                CellBehavior meta = layer.GetCellState(behaviorTag.getInt("xPos"), behaviorTag.getInt("yPos")).behavior;
+                CellBehavior meta = layer.GetCellState(behaviorTag.GetInt("xPos"), behaviorTag.GetInt("yPos")).behavior;
                 if(meta != null && meta is IHasData) {
                     ((IHasData)meta).ReadFromNbt(behaviorTag);
                 }

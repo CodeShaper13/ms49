@@ -49,6 +49,6 @@ MonoBehaviour:
   _flammable: 0
   _temperatureOutput: 0
   _supportsCeiling: 0
-  _includeInFogFloodLift: 0
+  _includeInFogFloodLift: 1
   _tintObjectTile: 0
   _behaviorPrefab: {fileID: 0}

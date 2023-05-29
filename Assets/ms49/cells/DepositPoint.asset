@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c5244bfc972c149b62c4e2dfdd7c94, type: 3}
   m_Name: DepositPoint
   m_EditorClassIdentifier: 
-  _cellName: deposit point
+  _cellName: Deposit Point
   _isSolid: 0
-  _floorOverlayTile: {fileID: 11400000, guid: 72df693eb1a915249bc1aef558934f23, type: 2}
-  _objectTile: {fileID: 11400000, guid: cffc7c8cc06bf7545b0302a4c3687e5c, type: 2}
-  _objectOverlayTile: {fileID: 11400000, guid: b0da90c2d34ef014ea2f367b5cfc7cf8, type: 2}
+  _floorOverlayTile: {fileID: 0}
+  _objectTile: {fileID: 11400000, guid: eb5d7c686421a4b43a50eab78720d3bf, type: 2}
+  _objectOverlayTile: {fileID: 0}
   _rotationalOverride: 0
   up:
     _enableOverride: 1
@@ -49,7 +49,7 @@ MonoBehaviour:
   _flammable: 1
   _temperatureOutput: 0
   _supportsCeiling: 0
-  _includeInFogFloodLift: 0
+  _includeInFogFloodLift: 1
   _tintObjectTile: 0
   _behaviorPrefab: {fileID: 4417719939516446295, guid: eadd08ad1619d5346bfa47c572005493,
     type: 3}

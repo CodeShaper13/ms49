@@ -670,10 +670,10 @@ TextureImporter:
     second: tiles_railEndDown
   - first:
       213: -6913125122176552986
-    second: tiles_173
+    second: tiles_railStopperUp
   - first:
       213: -1535365884315644770
-    second: tiles_174
+    second: tiles_railStopperDown
   - first:
       213: 9150728548764401942
     second: tiles_railEndUp
@@ -751,10 +751,10 @@ TextureImporter:
     second: tiles_furnace
   - first:
       213: -8672295044416735018
-    second: tiles_99
+    second: tiles_railStopperRight
   - first:
       213: 2664919574022166531
-    second: tiles_100
+    second: tiles_railStopperLeft
   - first:
       213: 4894293944757072678
     second: tiles_dirtRoad0
@@ -806,6 +806,30 @@ TextureImporter:
   - first:
       213: -2761380270151376322
     second: tiles_stopSign
+  - first:
+      213: 2157240733274199957
+    second: tiles_river
+  - first:
+      213: 3786829970477001853
+    second: tiles_riverEdge0
+  - first:
+      213: -3786654723308030243
+    second: tiles_riverEdge1
+  - first:
+      213: 2159160860920555353
+    second: tiles_riverEdge4
+  - first:
+      213: -4578638824508849805
+    second: tiles_riverEdge2
+  - first:
+      213: -4146349193529889183
+    second: tiles_riverEdge3
+  - first:
+      213: -1551363721616861341
+    second: tiles_largeTrackBottom
+  - first:
+      213: -6835276744072785760
+    second: tiles_largeTrackTop
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -970,27 +994,6 @@ TextureImporter:
       bones: []
       spriteID: 796a0b00d490c0ad0800000000000000
       internalID: -2734800647392024937
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_crate
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7ca51f6bc58d8430800000000000000
-      internalID: 3786829970477001853
       vertices: []
       indices: 
       edges: []
@@ -1524,12 +1527,12 @@ TextureImporter:
       name: tiles_depositPoint
       rect:
         serializedVersion: 2
-        x: 80
+        x: 16
         y: 80
         width: 16
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2277,27 +2280,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_depositPointFront
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 80
-        width: 16
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 597dfc1740f00fd10800000000000000
-      internalID: 2157240733274199957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: tiles_itemElevatorDown
       rect:
         serializedVersion: 2
@@ -2629,27 +2611,6 @@ TextureImporter:
       bones: []
       spriteID: 351ef164647172b50800000000000000
       internalID: 6568244172134801747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_dumptruck
-      rect:
-        serializedVersion: 2
-        x: 193
-        y: 222
-        width: 47
-        height: 34
-      alignment: 9
-      pivot: {x: 0.85106385, y: 0.29411766}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a09d0024083421a0800000000000000
-      internalID: -6835276744072785760
       vertices: []
       indices: 
       edges: []
@@ -4188,7 +4149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_173
+      name: tiles_railStopperUp
       rect:
         serializedVersion: 2
         x: 384
@@ -4209,7 +4170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_174
+      name: tiles_railStopperDown
       rect:
         serializedVersion: 2
         x: 400
@@ -4755,7 +4716,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_99
+      name: tiles_railStopperRight
       rect:
         serializedVersion: 2
         x: 416
@@ -4776,7 +4737,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_100
+      name: tiles_railStopperLeft
       rect:
         serializedVersion: 2
         x: 432
@@ -5140,8 +5101,8 @@ TextureImporter:
         y: 112
         width: 16
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -5149,6 +5110,174 @@ TextureImporter:
       bones: []
       spriteID: e32ead3564b9da9d0800000000000000
       internalID: -2761380270151376322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_river
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 597dfc1740f00fd10800000000000000
+      internalID: 2157240733274199957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_riverEdge0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ca51f6bc58d8430800000000000000
+      internalID: 3786829970477001853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_riverEdge1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd67b2a7799137bc0800000000000000
+      internalID: -3786654723308030243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_riverEdge4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 957a8100d51e6fd10800000000000000
+      internalID: 2159160860920555353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_riverEdge2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 371865e6f386570c0800000000000000
+      internalID: -4578638824508849805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_riverEdge3
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e6ce470653576c0800000000000000
+      internalID: -4146349193529889183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_largeTrackBottom
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36759972ae2787ae0800000000000000
+      internalID: -1551363721616861341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles_largeTrackTop
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a09d0024083421a0800000000000000
+      internalID: -6835276744072785760
       vertices: []
       indices: 
       edges: []

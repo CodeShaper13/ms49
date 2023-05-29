@@ -39,8 +39,8 @@ public class EntityWorker : EntityBase {
         this._nameText.gameObject.SetActive(false);
     }
 
-    public override void initialize(World world, int id) {
-        base.initialize(world, id);
+    public override void Initialize(World world, int id) {
+        base.Initialize(world, id);
 
         this.moveHelper = this.GetComponent<PathfindingAgent>();
         this.animator = this.GetComponentInChildren<WorkerAnimator>();
@@ -117,7 +117,7 @@ public class EntityWorker : EntityBase {
     public void setSleeping(bool sleeping) {
         if(sleeping) {
             if(!this.isSleeping) {
-                this.sleepParticle = this.world.particles.Spawn(this.worldPos + Vector2.up, this.depth, this.sleepingParticlePrefab);
+                this.sleepParticle = this.world.particles.Spawn(this.WorldPos + Vector2.up, this.depth, this.sleepingParticlePrefab);
             }
             this.isSleeping = true;
         } else {
@@ -138,7 +138,7 @@ public class EntityWorker : EntityBase {
         base.getDebugText(sb, indent);
 
         sb.AppendLine(indent + "Type: " + this.type.typeName);
-        sb.AppendLine(indent + "Name: " + this.info.fullName);
+        sb.AppendLine(indent + "Name: " + this.info.FullName);
         sb.AppendLine(indent + "Dead: " + this.isDead);
         sb.AppendLine(indent + "Sleeping: " + this.isSleeping);
         sb.AppendLine(indent + "Hunger: " + this.hunger.value);
@@ -153,16 +153,16 @@ public class EntityWorker : EntityBase {
         this.aiManager.generateDebugText(sb, indent);
     }
 
-    public override void writeToNbt(NbtCompound tag) {
-        base.writeToNbt(tag);
+    public override void WriteToNbt(NbtCompound tag) {
+        base.WriteToNbt(tag);
 
-        tag.setTag("energy", this.energy.value);
-        tag.setTag("hunger", this.hunger.value);
-        tag.setTag("temperature", this.temperature.value);
-        tag.setTag("happiness", this.happiness.value);
-        tag.setTag("isDead", this.isDead);
-        tag.setTag("workerInfo", this.info.writeToNbt());
-        tag.setTag("workerType", Main.instance.WorkerTypeRegistry.GetIdOfElement(this.type));
+        tag.SetTag("energy", this.energy.value);
+        tag.SetTag("hunger", this.hunger.value);
+        tag.SetTag("temperature", this.temperature.value);
+        tag.SetTag("happiness", this.happiness.value);
+        tag.SetTag("isDead", this.isDead);
+        tag.SetTag("workerInfo", this.info.writeToNbt());
+        tag.SetTag("workerType", Main.instance.WorkerTypeRegistry.GetIdOfElement(this.type));
 
         // Write Ai Meta objects to NBT
         foreach(IAiMeta meta in this.GetComponentsInChildren<IAiMeta>()) {
@@ -170,16 +170,16 @@ public class EntityWorker : EntityBase {
         }
     }
 
-    public override void readFromNbt(NbtCompound tag) {
-        base.readFromNbt(tag);
+    public override void ReadFromNbt(NbtCompound tag) {
+        base.ReadFromNbt(tag);
 
-        this.energy.value = tag.getFloat("energy");
-        this.hunger.value = tag.getFloat("hunger");
-        this.temperature.value = tag.getFloat("temperature");
-        this.happiness.value = tag.getFloat("happiness");
-        this.isDead = tag.getBool("isDead");
+        this.energy.value = tag.GetFloat("energy");
+        this.hunger.value = tag.GetFloat("hunger");
+        this.temperature.value = tag.GetFloat("temperature");
+        this.happiness.value = tag.GetFloat("happiness");
+        this.isDead = tag.GetBool("isDead");
         this.info = new WorkerInfo(tag.getCompound("workerInfo"));
-        this.setType(Main.instance.WorkerTypeRegistry[tag.getInt("workerType")]);
+        this.setType(Main.instance.WorkerTypeRegistry[tag.GetInt("workerType")]);
 
         // Read Ai Meta objects from NBT
         foreach(IAiMeta meta in this.GetComponentsInChildren<IAiMeta>()) {
@@ -198,7 +198,7 @@ public class EntityWorker : EntityBase {
         PopupWorkerStats popup = Main.instance.FindPopup<PopupWorkerStats>();
         if(popup != null) {
             popup.open();
-            popup.setWorker(this);
+            popup.SetWorker(this);
         }
     }
 }

@@ -16,7 +16,7 @@ public class DebugFastLoad : MonoBehaviour {
             NbtFile nbtFile = new NbtFile();
             nbtFile.LoadFromFile(path);
 
-            Main.instance.StartWorld(name, nbtFile.RootTag);
+            Main.instance.StartWorld(this.saveName, nbtFile.RootTag);
         }
         else {
             Main.instance.StartWorld(

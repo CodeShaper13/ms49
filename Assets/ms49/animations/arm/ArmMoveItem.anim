@@ -57,7 +57,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: HeldItem
+    path: Sprite/HeldItem
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves:
@@ -65,17 +65,29 @@ AnimationClip:
     - time: 0
       value: {fileID: -7810456424297438763, guid: e8fad20e546ee954eb1317d1e7454d3e,
         type: 3}
+    - time: 0.16666667
+      value: {fileID: -7810456424297438763, guid: e8fad20e546ee954eb1317d1e7454d3e,
+        type: 3}
+    - time: 0.18333334
+      value: {fileID: 4076807285386815025, guid: e8fad20e546ee954eb1317d1e7454d3e,
+        type: 3}
     - time: 0.33333334
       value: {fileID: 4076807285386815025, guid: e8fad20e546ee954eb1317d1e7454d3e,
         type: 3}
     - time: 0.6666667
       value: {fileID: -6980116260376450427, guid: e8fad20e546ee954eb1317d1e7454d3e,
         type: 3}
+    - time: 0.81666666
+      value: {fileID: -6980116260376450427, guid: e8fad20e546ee954eb1317d1e7454d3e,
+        type: 3}
+    - time: 0.8333333
+      value: {fileID: 2695143704416232840, guid: e8fad20e546ee954eb1317d1e7454d3e,
+        type: 3}
     - time: 1
       value: {fileID: 2695143704416232840, guid: e8fad20e546ee954eb1317d1e7454d3e,
         type: 3}
     attribute: m_Sprite
-    path: 
+    path: Sprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -86,14 +98,14 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3409784547
+      path: 1198125826
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 850496168
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -101,8 +113,12 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: -7810456424297438763, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+    - {fileID: -7810456424297438763, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+    - {fileID: 4076807285386815025, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
     - {fileID: 4076807285386815025, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
     - {fileID: -6980116260376450427, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+    - {fileID: -6980116260376450427, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
+    - {fileID: 2695143704416232840, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
     - {fileID: 2695143704416232840, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -168,7 +184,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: HeldItem
+    path: Sprite/HeldItem
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -214,7 +230,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: HeldItem
+    path: Sprite/HeldItem
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -260,7 +276,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: HeldItem
+    path: Sprite/HeldItem
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

@@ -43,10 +43,10 @@ public class Payroll : MonoBehaviour, ISaveableState {
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.lastPayTime = tag.getDouble("lastPayTime");
+        this.lastPayTime = tag.GetDouble("lastPayTime");
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("lastPayTime", this.lastPayTime);
+        tag.SetTag("lastPayTime", this.lastPayTime);
     }
 }

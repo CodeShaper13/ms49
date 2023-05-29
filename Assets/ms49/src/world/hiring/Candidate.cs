@@ -14,16 +14,16 @@ public class Candidate {
 
     public Candidate(NbtCompound tag) {
         this.info = new WorkerInfo(tag.getCompound("info"));
-        this.type = Main.instance.WorkerTypeRegistry.GetElement(tag.getInt("type"));
-        this.endAvailabilityTime = tag.getDouble("endAvailabilityTime");
+        this.type = Main.instance.WorkerTypeRegistry[tag.GetInt("type")];
+        this.endAvailabilityTime = tag.GetDouble("endAvailabilityTime");
     }
 
     public NbtCompound writeToNbt() {
         NbtCompound tag = new NbtCompound();
 
-        tag.setTag("info", this.info.writeToNbt());
-        tag.setTag("type", Main.instance.WorkerTypeRegistry.GetIdOfElement(this.type));
-        tag.setTag("endAvailabilityTime", this.endAvailabilityTime); // TODO should this be a long, will there be an overflow?
+        tag.SetTag("info", this.info.writeToNbt());
+        tag.SetTag("type", Main.instance.WorkerTypeRegistry.GetIdOfElement(this.type));
+        tag.SetTag("endAvailabilityTime", this.endAvailabilityTime); // TODO should this be a long, will there be an overflow?
 
         return tag;
     }

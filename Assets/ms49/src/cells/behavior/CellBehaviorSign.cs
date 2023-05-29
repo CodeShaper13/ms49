@@ -4,8 +4,8 @@ public class CellBehaviorSign : CellBehavior, IHasData {
 
     public string message { get; set; }
 
-    public override void onRightClick() {
-        base.onRightClick();
+    public override void OnRightClick() {
+        base.OnRightClick();
 
         PopupSign popup = Main.instance.FindPopup<PopupSign>();
         if(popup != null) {
@@ -19,10 +19,10 @@ public class CellBehaviorSign : CellBehavior, IHasData {
     }
 
     public void WriteToNbt(NbtCompound nbt) {
-        nbt.setTag("message", this.message);
+        nbt.SetTag("message", this.message);
     }
 
     public void ReadFromNbt(NbtCompound nbt) {
-        this.message = nbt.getString("message");
+        this.message = nbt.GetString("message");
     }
 }

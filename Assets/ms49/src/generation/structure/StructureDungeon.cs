@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Dungeon", menuName = "MS49/Structure/Dungeon", order = 1)]
-public class StructureDungeon : StructureBase {
+public class StructureDungeon : StructureData {
 
     [SerializeField]
     private CellData _chest = null;
@@ -9,7 +9,6 @@ public class StructureDungeon : StructureBase {
     private CellData _wall = null;
     [SerializeField]
     private LootTable _chestLootTable = null;
-
 
     [Space]
 

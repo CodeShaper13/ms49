@@ -41,7 +41,7 @@ public struct Position {
 
     public Position(Vector2Int pos, int depth) : this(pos.x, pos.y, depth) { }
 
-    public Position(EntityBase entity) : this(entity.getCellPos(), entity.depth) { }
+    public Position(EntityBase entity) : this(entity.GetCellPos(), entity.depth) { }
 
     public override string ToString() {
         return "[(" + this.x + ", " + this.y + ") depth=" + this.depth + "]";

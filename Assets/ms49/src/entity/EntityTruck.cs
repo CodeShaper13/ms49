@@ -90,6 +90,6 @@ public class EntityTruck : EntityBase {
     }
 
     private Position Func(int index) {
-        return this.position - this.rotation + (this.rotation * index);
+        return this.Position - this.rotation + (this.rotation * index);
     }
 }

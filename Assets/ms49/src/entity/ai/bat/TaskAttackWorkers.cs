@@ -14,8 +14,8 @@ public class TaskAttackWorkers : TaskBase<EntityBat> {
     public override bool shouldExecute() {
         foreach(EntityBase e in this.owner.world.entities.list) {
             if(e is EntityWorker) {
-                if(e.depth == this.owner.depth && Vector2.Distance(e.worldPos, this.owner.worldPos) < this._workerSpotRange) {
-                    NavPath p = this.agent.CalculatePath(e.position);
+                if(e.depth == this.owner.depth && Vector2.Distance(e.WorldPos, this.owner.WorldPos) < this._workerSpotRange) {
+                    NavPath p = this.agent.CalculatePath(e.Position);
                     if(p != null) {
                         this.navPath = p;
                         this.agent.SetPath(p);
@@ -36,8 +36,8 @@ public class TaskAttackWorkers : TaskBase<EntityBat> {
 
     public override void preform() {
         // Update the path if the worker moves to a new cell
-        if(this.target.position != this.navPath.EndPoint) {
-            this.navPath = this.agent.CalculatePath(this.target.position);
+        if(this.target.Position != this.navPath.EndPoint) {
+            this.navPath = this.agent.CalculatePath(this.target.Position);
             this.agent.SetPath(this.navPath);
 
             if(this.navPath != null) {
@@ -52,7 +52,7 @@ public class TaskAttackWorkers : TaskBase<EntityBat> {
             this.attackTimer -= Time.deltaTime;
         }
 
-        if(Vector2.Distance(this.target.worldPos, this.owner.worldPos) < 1f && this.attackTimer <= 0) {
+        if(Vector2.Distance(this.target.WorldPos, this.owner.WorldPos) < 1f && this.attackTimer <= 0) {
             // Attack
 
             // TODO

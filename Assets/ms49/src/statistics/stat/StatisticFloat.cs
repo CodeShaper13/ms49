@@ -9,10 +9,10 @@ public class StatisticFloat : StatisticBase<float> {
     }
 
     public override void readFromNbt(NbtCompound tag) {
-        this.value = tag.getFloat(this.saveName);
+        this.value = tag.GetFloat(this.saveName);
     }
 
     public override void writeToNbt(NbtCompound tag) {
-        tag.setTag(this.saveName, this.value);
+        tag.SetTag(this.saveName, this.value);
     }
 }

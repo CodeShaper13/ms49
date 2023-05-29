@@ -61,11 +61,11 @@ public class MilestoneManager : MonoBehaviour, ISaveableState {
         for(int i = 0; i < this._milestoneData.Length; i++) {
             lockFlags[i] = this._milestoneData[i].isUnlocked ? 1 : 0;
         }
-        tag.setTag("milestoneUnlockFlags", lockFlags);
+        tag.SetTag("milestoneUnlockFlags", lockFlags);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        int[] milestoneLockFlags = tag.getIntArray("milestoneUnlockFlags");
+        int[] milestoneLockFlags = tag.GetIntArray("milestoneUnlockFlags");
         for(int i = 0; i < this._milestoneData.Length; i++) {
             if(i >= milestoneLockFlags.Length) {
                 // No data about this milestone, assume it's locked

@@ -54,13 +54,13 @@ public class GameTime : MonoBehaviour, ISaveableState {
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("time", this.Time);
-        tag.setTag("multiplyerIndex", this.multiplyerIndex);
+        tag.SetTag("time", this.Time);
+        tag.SetTag("multiplyerIndex", this.multiplyerIndex);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this._time = tag.getDouble("time");
-        this.multiplyerIndex = Mathf.Clamp(tag.getInt("multiplyerIndex"), 0, this._timeMultipliers.Length - 1);
+        this._time = tag.GetDouble("time");
+        this.multiplyerIndex = Mathf.Clamp(tag.GetInt("multiplyerIndex"), 0, this._timeMultipliers.Length - 1);
     }
 
     /// <summary>

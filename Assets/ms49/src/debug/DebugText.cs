@@ -52,7 +52,7 @@ public class DebugText : MonoBehaviour {
                     CellBehavior behavior = world.GetCellBehavior(pos, false);
                     if(behavior != null) {
                         this.sb.AppendLine("Behavior:");
-                        behavior.getDebugText(this.sb, "  ");
+                        behavior.GetDebugText(this.sb, "  ");
                     }
                 }
 
@@ -63,7 +63,7 @@ public class DebugText : MonoBehaviour {
                 if(entity != null) {
                     this.sb.AppendLine("Entity:");
                     this.sb.AppendLine("  Entity ID: " + entity.id);
-                    this.sb.AppendLine("  Position: " + entity.position);
+                    this.sb.AppendLine("  Position: " + entity.Position);
                     this.sb.AppendLine("  Rotation: " + entity.rotation.name);
                     this.sb.AppendLine("  GUID: " + entity.guid.ToString());
                     entity.getDebugText(this.sb, "  ");

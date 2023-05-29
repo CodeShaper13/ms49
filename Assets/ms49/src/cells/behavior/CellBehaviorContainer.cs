@@ -14,8 +14,8 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
         base.OnCreate(world, state, pos);
     }
 
-    public override void onRightClick() {
-        base.onRightClick();
+    public override void OnRightClick() {
+        base.OnRightClick();
 
         PopupChest popup = Main.instance.FindPopup<PopupChest>();
         if(popup != null) {
@@ -30,28 +30,30 @@ public class CellBehaviorContainer : CellBehavior, IHasData, IContainer {
         return "[rmb] Open container";
     }
 
-    public override void onDestroy() {
-        base.onDestroy();
+    public override void OnBehaviorDestroy() {
+        base.OnBehaviorDestroy();
 
-        for(int i = 0; i < this.inventory.GetItemCount(); i++) {
-            Item item = this.inventory[i];
-            if(item != null) {
-                float f = 0.4f;
-                Vector2 v = new Vector2(
-                    this.pos.x + 0.5f + Random.Range(-f, f),
-                    this.pos.y + 0.1f + Random.Range(-f, f));
-                EntityItem e = (EntityItem) this.world.entities.Spawn(
-                    v,
-                    this.pos.depth,
-                    3);
-                e.setItem(item);
+        if(this.inventory != null) {
+            for(int i = 0; i < this.inventory.GetItemCount(); i++) {
+                Item item = this.inventory[i];
+                if(item != null) {
+                    float f = 0.4f;
+                    Vector2 v = new Vector2(
+                        this.pos.x + 0.5f + Random.Range(-f, f),
+                        this.pos.y + 0.1f + Random.Range(-f, f));
+                    EntityItem e = (EntityItem) this.world.entities.Spawn(
+                        v,
+                        this.pos.depth,
+                        3);
+                    e.SetItem(item);
+                }
             }
         }
     }
 
     public virtual void WriteToNbt(NbtCompound tag) {
         if(this.inventory != null) {
-            tag.setTag("inventory", this.inventory.WriteToNbt());
+            tag.SetTag("inventory", this.inventory.WriteToNbt());
         }
     }
 

@@ -7,12 +7,12 @@ public class TaskFreeFromUnwalkable : TaskMovement<EntityWorker> {
     private Position targetPos;
 
     public override bool shouldExecute() {
-        if(!this.owner.world.IsOutOfBounds(this.owner.position)) {
-            if(this.owner.world.GetCellState(this.owner.position).data.IsWalkable) {
+        if(!this.owner.world.IsOutOfBounds(this.owner.Position)) {
+            if(this.owner.world.GetCellState(this.owner.Position).data.IsWalkable) {
 
                 // Check if there is an adjacent cell that is free
                 foreach(Rotation r in Rotation.ALL) {
-                    Position p1 = this.owner.position + r;
+                    Position p1 = this.owner.Position + r;
                     if(!this.owner.world.IsOutOfBounds(p1) && this.owner.world.GetCellState(p1).data.IsWalkable) {
                         this.navPath = this.agent.CalculatePath(p1);
                         if(navPath != null) {
@@ -29,7 +29,7 @@ public class TaskFreeFromUnwalkable : TaskMovement<EntityWorker> {
     }
 
     public override bool continueExecuting() {
-        if(this.owner.worldPos != this.navPath.EndPoint.Center) {
+        if(this.owner.WorldPos != this.navPath.EndPoint.Center) {
             return true;
         }
 

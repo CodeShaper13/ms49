@@ -16,8 +16,8 @@ public abstract class CellBehaviorOccupiable : CellBehavior {
         this.occupant = worker;
     }
 
-    public override void getDebugText(StringBuilder sb, string indent) {
-        base.getDebugText(sb, indent);
+    public override void GetDebugText(StringBuilder sb, string indent) {
+        base.GetDebugText(sb, indent);
 
         sb.Append(indent + "Occupent: " + (this.isOccupied() ? this.occupant.name : "NONE"));
     }

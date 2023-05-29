@@ -11,7 +11,7 @@ public class TaskDepositStone : TaskMovement<EntityWorker> {
         if(this.minerData.heldItem != null) {
             this.depositPoint = this.calculateAndSetPathToClosest<AbstractDepositPoint>(
                 true,
-                behavior => behavior.isOpen());
+                behavior => behavior.IsAcceptingItems());
 
             if(this.navPath != null) {
                 return this.navPath != null;
@@ -24,7 +24,7 @@ public class TaskDepositStone : TaskMovement<EntityWorker> {
     }
 
     public override bool continueExecuting() {
-        if(this.minerData.heldItem != null && this.depositPoint != null && this.depositPoint.isOpen()) {
+        if(this.minerData.heldItem != null && this.depositPoint != null && this.depositPoint.IsAcceptingItems()) {
             return true;
         }
 

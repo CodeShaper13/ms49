@@ -46,7 +46,7 @@ public class DemoHighlighter : CellHighlightBase {
 
                 Vector2 particlePos;
                 if(this.destroyableEntity != null) {
-                    particlePos = this.destroyableEntity.worldPos;
+                    particlePos = this.destroyableEntity.WorldPos;
                     this.world.entities.Remove(this.destroyableEntity);
                 } else {
                     // Add to the destroyed stat.

@@ -1,6 +1,6 @@
-﻿using TMPro;
+﻿using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PopupWorkerStats : PopupWindow {
 
@@ -10,14 +10,14 @@ public class PopupWorkerStats : PopupWindow {
     private TMP_Text _textInfo = null;
     [SerializeField]
     private FaceUiPreview preview = null;
-    [SerializeField]
-    private Slider _sliderEnergy = null;
-    [SerializeField]
-    private Slider _sliderHunger = null;
-    [SerializeField]
-    private Slider _sliderTemperature = null;
-    [SerializeField]
-    private Slider _sliderHappiness = null;
+    [SerializeField, Required]
+    private ProgressBar _sliderEnergy = null;
+    [SerializeField, Required]
+    private ProgressBar _sliderHunger = null;
+    [SerializeField, Required]
+    private ProgressBar _sliderTemperature = null;
+    [SerializeField, Required]
+    private ProgressBar _sliderHappiness = null;
 
     private EntityWorker worker;
     private string infoTextTemplate;
@@ -26,15 +26,15 @@ public class PopupWorkerStats : PopupWindow {
         this.infoTextTemplate = this._textInfo.text;
     }
 
-    public void setWorker(EntityWorker worker) {
+    public void SetWorker(EntityWorker worker) {
         this.worker = worker;
 
         WorkerInfo info = this.worker.info;
 
-        this._textHeader.text = info.lastName;
+        this._textHeader.text = info.FullName;
 
         this._textInfo.text = string.Format(this.infoTextTemplate,
-            info.fullName, // Name
+            info.FullName, // Name
             this.worker.type.typeName, // Job
             info.pay, // Pay
             info.personality.displayName); // Personality
@@ -46,27 +46,34 @@ public class PopupWorkerStats : PopupWindow {
         base.onUpdate();
 
         if(this.worker != null) {
-            this.func(this._sliderEnergy, this.worker.energy);
-            this.func(this._sliderHunger, this.worker.hunger);
-            this.func(this._sliderTemperature, this.worker.temperature);
-            this.func(this._sliderHappiness, this.worker.happiness);
+            this.UpdateProgressBar(this._sliderEnergy, this.worker.energy);
+            this.UpdateProgressBar(this._sliderHunger, this.worker.hunger);
+            this.UpdateProgressBar(this._sliderTemperature, this.worker.temperature);
+            this.UpdateProgressBar(this._sliderHappiness, this.worker.happiness);
         }
     }
 
-    public void callback_fire() {
+    public void Callback_LocateWorker() {
+        if(this.worker != null) {
+            CameraController.instance.followTarget(this.worker);
+        }
+        this.Close();
+    }
+
+    public void Callback_FireWorker() {
         if(this.worker != null) {
             this.worker.world.entities.Remove(this.worker);
         }
         this.Close();
     }
 
-    private void func(Slider slider, UnlockableStat stat) {
-        slider.transform.parent.gameObject.SetActive(stat.isStatEnabled());
+    private void UpdateProgressBar(ProgressBar progressBar, UnlockableStat stat) {
+        progressBar.transform.parent.gameObject.SetActive(stat.isStatEnabled());
 
         if(stat.isStatEnabled()) {
-            slider.minValue = stat.minValue;
-            slider.maxValue = stat.maxValue;
-            slider.value = stat.value;
+            progressBar.minValue = stat.minValue;
+            progressBar.maxValue = stat.maxValue;
+            progressBar.Value = stat.value;
         }
     }
 }

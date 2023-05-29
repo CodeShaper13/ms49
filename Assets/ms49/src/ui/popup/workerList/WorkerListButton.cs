@@ -1,11 +1,12 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using NaughtyAttributes;
+using TMPro;
+using UnityEngine;
 
 public class WorkerListButton : MonoBehaviour {
 
-    [SerializeField]
-    private Text textName = null;
-    [SerializeField]
+    [SerializeField, Required]
+    private TMP_Text textName = null;
+    [SerializeField, Required]
     private FaceUiPreview preview = null;
 
     public EntityWorker worker { get; private set; }
@@ -13,22 +14,19 @@ public class WorkerListButton : MonoBehaviour {
     public void setWorker(EntityWorker worker) {
         this.worker = worker;
 
-        this.textName.text = worker.info.fullName;
-
-        if(this.preview != null) {
-            this.preview.setTarget(worker);
-        }
+        this.textName.text = worker.info.FullName;
+        this.preview.setTarget(worker);
     }
 
-    public void callback_click() {
+    public void Callback_ViewDetailedStats() {
         PopupWorkerStats popup = Main.instance.FindPopup<PopupWorkerStats>();
         if(popup != null) {
             popup.openAdditive();
-            popup.setWorker(this.worker);
+            popup.SetWorker(this.worker);
         }
     }
 
-    public void callback_mapPin() {
+    public void Callback_FollowWorker() {
         CameraController.instance.followTarget(this.worker);
     }
 }

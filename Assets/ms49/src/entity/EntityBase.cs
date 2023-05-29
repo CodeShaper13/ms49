@@ -2,13 +2,13 @@
 using fNbt;
 using System;
 using System.Text;
-using System.Collections.Generic;
 
 public abstract class EntityBase : MonoBehaviour {
 
     [SerializeField]
     private GameObject[] renderers = new GameObject[0];
 
+    private Collider2D[] colliders;
     private bool areRenderersVisible = true;
 
     public World world { get; private set; }
@@ -20,28 +20,30 @@ public abstract class EntityBase : MonoBehaviour {
     private void Awake() { } // Stop child classes from overriding.
 
     private void Start() { // Stop child classes from overriding.
-        this.toggleRendererVisability(false);
+        this.colliders = this.GetComponentsInChildren<Collider2D>();
+
+        this.SetRendererVisability(false);
 
         this.name += "(" + guid.ToString() + ")";
     }
 
-    public virtual void initialize(World world, int id) {
+    public virtual void Initialize(World world, int id) {
         this.world = world;
         this.id = id;
-        this.depth = depth;
+        this.depth = 0;
         this.rotation = Rotation.DOWN;
     }
 
     /// <summary>
     /// Called when the Entity enter the World for the first time.
     /// </summary>
-    public virtual void onEnterWorld() {
+    public virtual void OnEnterWorld() {
         this.guid = Guid.NewGuid();
     }
 
-    public virtual void onRenderingEnable() { }
+    public virtual void OnRenderingEnable() { }
 
-    public virtual void onRenderingDisable() { }
+    public virtual void OnRenderingDisable() { }
 
     public virtual void Update() { }
 
@@ -65,12 +67,12 @@ public abstract class EntityBase : MonoBehaviour {
         return false;
     }
 
-    public void toggleRendererVisability(bool visible) {
+    public void SetRendererVisability(bool visible) {
         if(visible == this.areRenderersVisible) {
-            return; // Nothing changes
+            return; // Nothing changes.
         } else {
-            // Enable/disable colliders
-            foreach(Collider2D sr in this.GetComponentsInChildren<Collider2D>()) {
+            // Enable/disable colliders.
+            foreach(Collider2D sr in this.colliders) {
                 sr.enabled = visible;
             }
 
@@ -81,9 +83,9 @@ public abstract class EntityBase : MonoBehaviour {
             }
 
             if(visible) {
-                this.onRenderingEnable();
+                this.OnRenderingEnable();
             } else {
-                this.onRenderingDisable();
+                this.OnRenderingDisable();
             }
 
             this.areRenderersVisible = visible;
@@ -93,43 +95,38 @@ public abstract class EntityBase : MonoBehaviour {
     /// <summary>
     /// Gets the Entity's position in cell units.
     /// </summary>
-    public Vector2Int getCellPos() {
+    public Vector2Int GetCellPos() {
         return this.world.WorldToCell(this.transform.position);
     }
 
     /// <summary>
     /// Get's the Entity's position in cell units.
     /// </summary>
-    public Position position {
-        get {
-            return new Position(this.getCellPos(), this.depth);
-        }
-    }
+    public Position Position => new Position(this.GetCellPos(), this.depth);
 
     /// <summary>
     /// Get's the Entity's position in world units.
     /// </summary>
-    public Vector2 worldPos {
-        get {
-            return this.transform.position;
-        }
+    public Vector2 WorldPos {
+        get => this.transform.position;
         set {
             this.transform.position = value;
         }
     }
 
-    public virtual void writeToNbt(NbtCompound tag) {
-        tag.setTag("id", this.id);
-        tag.setTag("position", this.worldPos);
-        tag.setTag("depth", this.depth);
-        tag.setTag("facing", this.rotation.id);
-        tag.setTag("guid", this.guid);
+    public virtual void WriteToNbt(NbtCompound tag) {
+        tag.SetTag("id", this.id);
+        tag.SetTag("position", this.WorldPos);
+        tag.SetTag("depth", this.depth);
+        tag.SetTag("facing", this.rotation);
+        tag.SetTag("guid", this.guid);
     }
 
-    public virtual void readFromNbt(NbtCompound tag) {
-        this.transform.position = tag.getVector2("position");
-        this.depth = tag.getInt("depth");
-        this.rotation = Rotation.ALL[Mathf.Clamp(tag.getInt("facing"), 0, 3)];
-        this.guid = tag.getGuid("guid");
+    public virtual void ReadFromNbt(NbtCompound tag) {
+        // id tag is read elsewhere.
+        this.transform.position = tag.GetVector2("position");
+        this.depth = tag.GetInt("depth");
+        this.rotation = tag.GetRotation("facing");
+        this.guid = tag.GetGuid("guid");
     }
 }

@@ -27,22 +27,27 @@ public class EntityList : MonoBehaviour, ISaveableState {
     private void LateUpdate() {
         // Only show Entities that are at the depth being rendered.
         foreach(EntityBase e in this.list) {
-            e.toggleRendererVisability(
+            e.SetRendererVisability(
                 e.depth == this._worldRenderer.getDepthRendering());
         }
     }
 
     public EntityBase Spawn(NbtCompound tag) {
-        int entityId = tag.getInt("id");
+        int entityId = tag.GetInt("id");
 
-        EntityBase entity = this.instantiateObj(entityId);
+        EntityBase entity = this.InstantiateObject(entityId);
 
         if(entity == null) {
-            return null;
+            return null; // Error logged in EntityList#instantiateObj()
         }
 
-        entity.initialize(this._world, entityId);
-        entity.readFromNbt(tag);
+        entity.Initialize(this._world, entityId);
+        try {
+            entity.ReadFromNbt(tag);
+        } catch(Exception e) {
+            Debug.LogWarningFormat("An exception was thrown reading an Entity (name = \"{0}\", id = \"{1}\") from disk.  Errors resulting from an uninitialized Entity may follow.", entity.name, entityId);
+            Debug.LogError(e.ToString());
+        }
 
         this.list.Add(entity);
 
@@ -57,7 +62,7 @@ public class EntityList : MonoBehaviour, ISaveableState {
     }
 
     public EntityBase Spawn(Vector2 postion, int depth, int entityId) {
-        EntityBase entity = this.instantiateObj(entityId);
+        EntityBase entity = this.InstantiateObject(entityId);
 
         if(entity == null) {
             return null; // Error logged in EntityList#instantiateObj()
@@ -66,8 +71,8 @@ public class EntityList : MonoBehaviour, ISaveableState {
         entity.transform.position = postion;
         entity.depth = depth;
 
-        entity.initialize(this._world, entityId);
-        entity.onEnterWorld();
+        entity.Initialize(this._world, entityId);
+        entity.OnEnterWorld();
 
         this.list.Add(entity);
 
@@ -105,14 +110,14 @@ public class EntityList : MonoBehaviour, ISaveableState {
         NbtList list = new NbtList(NbtTagType.Compound);
         foreach(EntityBase e in this.list) {
             NbtCompound compound = new NbtCompound();
-            e.writeToNbt(compound);
+            e.WriteToNbt(compound);
             list.Add(compound);
         }
-        tag.setTag("entities", list);
+        tag.SetTag("entities", list);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        NbtList entityTags = tag.getList("entities");
+        NbtList entityTags = tag.GetList("entities");
         foreach(NbtCompound tagEntity in entityTags) {
             EntityBase entity = this.Spawn(tagEntity);
         }
@@ -122,7 +127,7 @@ public class EntityList : MonoBehaviour, ISaveableState {
     /// Instantiates an Entity from a prefab.  If the prefab is missing
     /// a component of type EntityBase, an error is logged.
     /// </summary>
-    private EntityBase instantiateObj(int entityId) {
+    private EntityBase InstantiateObject(int entityId) {
         GameObject prefab = this._entityRegistry[entityId];
         if(prefab != null) {
             EntityBase entity = GameObject.Instantiate(prefab, this.transform).GetComponent<EntityBase>();

@@ -13,12 +13,12 @@ public class EntityFire : EntityBase {
 
     private float timeRemaining;
 
-    public override void initialize(World world, int id) {
-        base.initialize(world, id);
+    public override void Initialize(World world, int id) {
+        base.Initialize(world, id);
 
         this.timeRemaining = Random.Range(this.burnTimeRange.x, this.burnTimeRange.y);
 
-        this.StartCoroutine(EntityFire.fireSpread(this.world, this.position, this.fireSpreadRange));
+        this.StartCoroutine(EntityFire.fireSpread(this.world, this.Position, this.fireSpreadRange));
     }
 
     public override void Update() {
@@ -30,22 +30,22 @@ public class EntityFire : EntityBase {
 
         this.timeRemaining -= Time.deltaTime;
         if(this.timeRemaining <= 0) {
-            this.world.SetCell(this.position, this.ashCell);
-            this.world.tryCollapse(this.position);
+            this.world.SetCell(this.Position, this.ashCell);
+            this.world.tryCollapse(this.Position);
             this.world.entities.Remove(this);
         }
     }
 
-    public override void writeToNbt(NbtCompound tag) {
-        base.writeToNbt(tag);
+    public override void WriteToNbt(NbtCompound tag) {
+        base.WriteToNbt(tag);
 
-        tag.setTag("fireTime", this.timeRemaining);
+        tag.SetTag("fireTime", this.timeRemaining);
     }
 
-    public override void readFromNbt(NbtCompound tag) {
-        base.readFromNbt(tag);
+    public override void ReadFromNbt(NbtCompound tag) {
+        base.ReadFromNbt(tag);
 
-        this.timeRemaining = tag.getFloat("fireTime");
+        this.timeRemaining = tag.GetFloat("fireTime");
     }
 
     public static IEnumerator fireSpread(World world, Position thisPos, Vector2 fireSpreadRateRange) {
@@ -57,7 +57,7 @@ public class EntityFire : EntityBase {
         if(!world.IsOutOfBounds(newFirePos) && world.GetCellState(newFirePos).data.IsFlammable) {
             bool spaceFree = true;
             foreach(EntityBase e in world.entities.list) {
-                if(e is EntityFire && e.position == newFirePos) {
+                if(e is EntityFire && e.Position == newFirePos) {
                     spaceFree = false;
                     break;
                 }

@@ -56,26 +56,26 @@ public class TargetedSquares : MonoBehaviour, ISaveableState {
         NbtList targetedTilesList = new NbtList(NbtTagType.Compound);
         foreach(TargetedSquare square in this.list) {
             NbtCompound compound = new NbtCompound();
-            compound.setTag("x", square.pos.x);
-            compound.setTag("y", square.pos.y);
-            compound.setTag("depth", square.pos.depth);
-            compound.setTag("isPriority", square.isPriority);
+            compound.SetTag("x", square.pos.x);
+            compound.SetTag("y", square.pos.y);
+            compound.SetTag("depth", square.pos.depth);
+            compound.SetTag("isPriority", square.isPriority);
             targetedTilesList.Add(compound);
         }
-        tag.setTag("targetedTiles", targetedTilesList);
+        tag.SetTag("targetedTiles", targetedTilesList);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        NbtList listTargetedTags = tag.getList("targetedTiles");
+        NbtList listTargetedTags = tag.GetList("targetedTiles");
         foreach(NbtCompound targetedTag in listTargetedTags) {
             if(!targetedTag.Contains("x") || !targetedTag.Contains("y")) {
                 Debug.LogWarning("Targeted Tile found with a position of -1.  Ignoring!");
                 continue;
             }
-            int x = targetedTag.getInt("x");
-            int y = targetedTag.getInt("y");
-            int depth = targetedTag.getInt("depth");
-            bool priority = targetedTag.getBool("isPriority");
+            int x = targetedTag.GetInt("x");
+            int y = targetedTag.GetInt("y");
+            int depth = targetedTag.GetInt("depth");
+            bool priority = targetedTag.GetBool("isPriority");
             this.startTargeting(new Position(x, y, depth), priority);
         }
     }

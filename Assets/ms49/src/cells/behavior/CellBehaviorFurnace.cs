@@ -51,8 +51,8 @@ public class CellBehaviorFurnace : CellBehaviorContainer {
         }
     }
 
-    public override void onRightClick() {
-        base.onRightClick();
+    public override void OnRightClick() {
+        base.OnRightClick();
 
         PopupFurnace popup = Main.instance.FindPopup<PopupFurnace>();
         if(popup != null) {
@@ -69,17 +69,17 @@ public class CellBehaviorFurnace : CellBehaviorContainer {
     public override void ReadFromNbt(NbtCompound tag) {
         base.ReadFromNbt(tag);
 
-        this.smeltProgress = tag.getFloat("smeltTimer");
-        this.fuel = tag.getFloat("fuel");
-        this.fuelValue = tag.getFloat("fuelValue");
+        this.smeltProgress = tag.GetFloat("smeltTimer");
+        this.fuel = tag.GetFloat("fuel");
+        this.fuelValue = tag.GetFloat("fuelValue");
     }
 
     public override void WriteToNbt(NbtCompound tag) {
         base.WriteToNbt(tag);
 
-        tag.setTag("smeltTimer", this.smeltProgress);
-        tag.setTag("fuel", this.fuel);
-        tag.setTag("fuelValue", this.fuelValue);
+        tag.SetTag("smeltTimer", this.smeltProgress);
+        tag.SetTag("fuel", this.fuel);
+        tag.SetTag("fuelValue", this.fuelValue);
     }
 
     public override bool Deposit(Item item) {

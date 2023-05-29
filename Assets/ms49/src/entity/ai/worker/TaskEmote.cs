@@ -65,7 +65,7 @@ public class TaskEmote : TaskBase<EntityWorker> {
         foreach(EntityBase e in this.owner.world.entities.list) {
             if(e is EntityWorker) {
                 EntityWorker worker = (EntityWorker)e;
-                if(worker.depth == this.owner.depth && Vector2.Distance(worker.worldPos, this.owner.worldPos) < 3) {
+                if(worker.depth == this.owner.depth && Vector2.Distance(worker.WorldPos, this.owner.WorldPos) < 3) {
                     return "happy";
                 }
             }

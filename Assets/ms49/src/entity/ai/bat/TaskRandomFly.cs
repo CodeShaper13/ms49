@@ -25,7 +25,7 @@ public class TaskRandomFly : TaskMovement<EntityBat> {
 
             int x = this.func();
             int y = this.func();
-            Position dest = this.owner.position.Add(x, y);
+            Position dest = this.owner.Position.Add(x, y);
             if(!this.owner.world.IsOutOfBounds(dest) && this.owner.world.GetCellState(dest).data.IsWalkable) {
                 if(this.calculateAndSetPath(dest)) {
                     return true;

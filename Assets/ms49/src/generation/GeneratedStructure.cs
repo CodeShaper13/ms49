@@ -4,5 +4,5 @@
 public class GeneratedStructure {
 
     public Position pos;
-    public StructureBase structure;
+    public StructureData structure;
 }

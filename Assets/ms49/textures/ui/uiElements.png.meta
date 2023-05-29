@@ -223,16 +223,16 @@ TextureImporter:
     second: uiElements_frameSquareUncolored
   - first:
       213: 6321746793650293893
-    second: uiElements_statBarGreen
+    second: uiElements_progressBarGreen
   - first:
       213: 8051588982336062256
-    second: uiElements_statBarRed
+    second: uiElements_progressBarRed
   - first:
       213: -9222080851456819140
-    second: uiElements_statBarBlue
+    second: uiElements_progressBarBlue
   - first:
       213: -9085703086787801938
-    second: uiElements_statBarGreen
+    second: uiElements_progressBarGreen
   - first:
       213: 4016240830092330437
     second: uiElements_inventorySlot
@@ -283,7 +283,7 @@ TextureImporter:
     second: uiElements_techTreeNodeUnlocked
   - first:
       213: -7217613675809520452
-    second: uiElements_furnaceProgressBar
+    second: uiElements_progressBar
   - first:
       213: 6960823347846109579
     second: uiElements_furnaceProgressBarArrow
@@ -295,7 +295,7 @@ TextureImporter:
     second: uiElements_furnaceProgressBarArrowFill
   - first:
       213: 8377372764225170576
-    second: uiElements_furnaceSliderMask
+    second: uiElements_progressBarMask
   - first:
       213: 5724345866907313953
     second: uiElements_tabDecorationSelected
@@ -353,6 +353,15 @@ TextureImporter:
   - first:
       213: -3551467599054922040
     second: uiElements_techTreeNodeLockedHighlighted
+  - first:
+      213: 5237169821855460988
+    second: uiElements_btnGrayHighlighted
+  - first:
+      213: -73051452287208497
+    second: uiElements_mapPinHighlighted
+  - first:
+      213: -1245192830379459061
+    second: uiElements_darkFrame
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1257,27 +1266,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_screwMinus
-      rect:
-        serializedVersion: 2
-        x: 204
-        y: 1
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c7e271c843a2ea840800000000000000
-      internalID: 5237169821855460988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: uiElements_45
       rect:
         serializedVersion: 2
@@ -1470,8 +1458,8 @@ TextureImporter:
       name: uiElements_mapPin
       rect:
         serializedVersion: 2
-        x: 194
-        y: 177
+        x: 229
+        y: 113
         width: 12
         height: 17
       alignment: 0
@@ -1740,16 +1728,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_statBarYellow
+      name: uiElements_progressBarYellow
       rect:
         serializedVersion: 2
-        x: 253
-        y: 42
-        width: 2
-        height: 5
+        x: 249
+        y: 41
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1761,16 +1749,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_statBarRed
+      name: uiElements_progressBarRed
       rect:
         serializedVersion: 2
-        x: 244
-        y: 42
-        width: 2
-        height: 5
+        x: 242
+        y: 34
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1782,16 +1770,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_statBarBlue
+      name: uiElements_progressBarBlue
       rect:
         serializedVersion: 2
-        x: 247
-        y: 42
-        width: 2
-        height: 5
+        x: 249
+        y: 34
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1803,16 +1791,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_statBarGreen
+      name: uiElements_progressBarGreen
       rect:
         serializedVersion: 2
-        x: 250
-        y: 42
-        width: 2
-        height: 5
+        x: 242
+        y: 41
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2160,11 +2148,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_furnaceProgressBar
+      name: uiElements_progressBar
       rect:
         serializedVersion: 2
-        x: 193
-        y: 37
+        x: 241
+        y: 24
         width: 14
         height: 9
       alignment: 0
@@ -2202,27 +2190,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_progressBarFillRed
-      rect:
-        serializedVersion: 2
-        x: 193
-        y: 18
-        width: 14
-        height: 9
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 3}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b0e7e54d7bf28bee0800000000000000
-      internalID: -1245192830379459061
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: uiElements_furnaceProgressBarArrowFill
       rect:
         serializedVersion: 2
@@ -2244,13 +2211,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: uiElements_furnaceSliderMask
+      name: uiElements_progressBarMask
       rect:
         serializedVersion: 2
-        x: 209
-        y: 17
-        width: 2
-        height: 2
+        x: 241
+        y: 18
+        width: 4
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2365,27 +2332,6 @@ TextureImporter:
       bones: []
       spriteID: 650282d9943daf030800000000000000
       internalID: 3529365571120930902
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: uiElements_progressBarFillGreen
-      rect:
-        serializedVersion: 2
-        x: 193
-        y: 27
-        width: 14
-        height: 9
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 3}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc3381857187cfef0800000000000000
-      internalID: -73051452287208497
       vertices: []
       indices: 
       edges: []
@@ -2609,7 +2555,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
@@ -2630,7 +2576,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
@@ -2651,7 +2597,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
@@ -2659,6 +2605,69 @@ TextureImporter:
       bones: []
       spriteID: 8ce950ff807a6bec0800000000000000
       internalID: -3551467599054922040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_btnGrayHighlighted
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 185
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7e271c843a2ea840800000000000000
+      internalID: 5237169821855460988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_mapPinHighlighted
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 113
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc3381857187cfef0800000000000000
+      internalID: -73051452287208497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: uiElements_darkFrame
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 132
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e7e54d7bf28bee0800000000000000
+      internalID: -1245192830379459061
       vertices: []
       indices: 
       edges: []

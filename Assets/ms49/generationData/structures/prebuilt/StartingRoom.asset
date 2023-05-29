@@ -16,50 +16,46 @@ MonoBehaviour:
   gridSize: {x: 5, y: 3}
   tiles:
   - character: 99
-    buildable: {fileID: 11400000, guid: 4dc57877eda741a4a86fc333b1ce3de2, type: 2}
-    cell: {fileID: 0}
-    rotation: 0
-  - character: 98
-    buildable: {fileID: 11400000, guid: 5c0f1bf9fd6174a42935442e6b57f6fa, type: 2}
+    buildable: {fileID: 11400000, guid: 5c0ed959ac70ee646a9aa49a68d584f5, type: 2}
     cell: {fileID: 0}
     rotation: 0
   cells:
   - row:
     - 
+    - 
+    - 
+  - row:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  - row:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  - row:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  - row:
     - c
-    - 
-  - row:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-  - row:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-  - row:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-  - row:
-    - b
     - 
     - 
     - 

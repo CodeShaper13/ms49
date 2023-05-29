@@ -31,8 +31,8 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
     // Used for onDestroy()
     private static bool simpleRemove = false;
 
-    public override void onDestroy() {
-        base.onDestroy();
+    public override void OnBehaviorDestroy() {
+        base.OnBehaviorDestroy();
 
         if(!simpleRemove) {
             simpleRemove = true;
@@ -64,13 +64,13 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        NbtList tagList = tag.getList("entries");
+        NbtList tagList = tag.GetList("entries");
         foreach(NbtCompound compound in tagList) {
             this.entires.Add(new Entry(compound));
         }
 
-        this.isPrimary = tag.getBool("isPrimary");
-        this.constructionTime = tag.getFloat("constructionTime");
+        this.isPrimary = tag.GetBool("isPrimary");
+        this.constructionTime = tag.GetFloat("constructionTime");
     }
 
     public void WriteToNbt(NbtCompound tag) {
@@ -78,10 +78,10 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         foreach(Entry e in this.entires) {
             entriesTagList.Add(e.writeToNbt());
         }
-        tag.setTag("entries", entriesTagList);
+        tag.SetTag("entries", entriesTagList);
 
-        tag.setTag("isPrimary", this.isPrimary);
-        tag.setTag("constructionTime", this.constructionTime);
+        tag.SetTag("isPrimary", this.isPrimary);
+        tag.SetTag("constructionTime", this.constructionTime);
     }
 
     /// <summary>
@@ -127,9 +127,9 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
         public readonly bool addFogOnComplete;
 
         public Entry(NbtCompound tag) {
-            this.cell = Main.instance.CellRegistry[tag.getInt("cellId")];
-            this.position = new Position(tag.getVector3Int("offset"));
-            this.addFogOnComplete = tag.getBool("addFog");
+            this.cell = Main.instance.CellRegistry[tag.GetInt("cellId")];
+            this.position = new Position(tag.GetVector3Int("offset"));
+            this.addFogOnComplete = tag.GetBool("addFog");
         }
 
         public Entry(CellData cell, Position offset, bool addFog) {
@@ -140,9 +140,9 @@ public class CellBehaviorBuildSite : CellBehaviorOccupiable, IHasData {
 
         public NbtCompound writeToNbt() {
             NbtCompound tag = new NbtCompound();
-            tag.setTag("cellId", Main.instance.CellRegistry.GetIdOfElement(this.cell));
-            tag.setTag("offset", this.position.AsVec3Int);
-            tag.setTag("addFog", this.addFogOnComplete);
+            tag.SetTag("cellId", Main.instance.CellRegistry.GetIdOfElement(this.cell));
+            tag.SetTag("offset", this.position.AsVec3Int);
+            tag.SetTag("addFog", this.addFogOnComplete);
             return tag;
         }
     }

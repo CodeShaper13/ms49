@@ -102,7 +102,7 @@ public class Economy : MonoBehaviour, ISaveableState {
         MapGenerator generator = this._world.MapGenerator;
         for(int depth = 0; depth < generator.LayerCount; depth++) {
             if(this._world.IsDepthUnlocked(depth)) {
-                OreSettings[] oreSettings = generator.GetLayerFromDepth(depth).oreSpawnSettings;
+                OreSettings[] oreSettings = generator.GetLayerData(depth).oreSpawnSettings;
 
                 if(oreSettings != null) {
                     foreach(OreSettings setting in oreSettings) {
@@ -127,14 +127,14 @@ public class Economy : MonoBehaviour, ISaveableState {
     public List<Item> getAllItems() {
         List<Item> list = new List<Item>();
         for(int id = 0; id < this.reg.RegistrySize; id++) {
-            Item item = this.reg.GetElement(id);
+            Item item = this.reg[id];
 
             if(item == null) {
                 continue;
             }
 
             if(item.IncludeInEconemy) {
-                list.Add(this.reg.GetElement(id));
+                list.Add(this.reg[id]);
             }
         }
 
@@ -150,7 +150,7 @@ public class Economy : MonoBehaviour, ISaveableState {
         List<Item> items = new List<Item>();
 
         for(int id = 0; id < this.reg.RegistrySize; id++) {
-            Item item = this.reg.GetElement(id);
+            Item item = this.reg[id];
 
             if(item == null) {
                 continue;
@@ -169,19 +169,19 @@ public class Economy : MonoBehaviour, ISaveableState {
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        if(tag.hasKey("risingItemId")) {
+        if(tag.HasKey("risingItemId")) {
             this.risingItem = new RisingItem(
-                this.reg.GetElement(tag.getInt("risingItemId")),
-                tag.getFloat("risingCurveLength"));
-            this.risingItem.timer = tag.getFloat("risingTimer");
+                this.reg[tag.GetInt("risingItemId")],
+                tag.GetFloat("risingCurveLength"));
+            this.risingItem.timer = tag.GetFloat("risingTimer");
         }
     }
 
     public void WriteToNbt(NbtCompound tag) {
         if(this.risingItem != null) {
-            tag.setTag("risingItemId", this.reg.GetIdOfElement(this.risingItem.item));
-            tag.setTag("risingCurveLength", this.risingItem.curveLength);
-            tag.setTag("risingTimer", this.risingItem.timer);
+            tag.SetTag("risingItemId", this.reg.GetIdOfElement(this.risingItem.item));
+            tag.SetTag("risingCurveLength", this.risingItem.curveLength);
+            tag.SetTag("risingTimer", this.risingItem.timer);
         }
     }
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Mineshaft", menuName = "MS49/Structure/Mineshaft", order = 1)]
-public class StructureMineshaft : StructureBase {
+public class StructureMineshaft : StructureData {
 
     [SerializeField]
     private CellData _support = null;

@@ -6,19 +6,19 @@ public class CellBehaviorRailLoadPoint : AbstractDepositPoint, IMinecartInteract
     public override bool IsEmpty => this.minecart == null ? false : this.minecart.Inventory.IsEmpty;
     public EntityMinecart minecart { get; set; }
 
-    public override bool isOpen() {
+    public override bool IsAcceptingItems() {
         return this.minecart != null && !this.minecart.Inventory.IsFull;
     }
 
-    public override void onRightClick() {
+    public override void OnRightClick() {
         // Don't show container
     }
 
-    public override void onDestroy() {
-        base.onDestroy();
+    public override void OnBehaviorDestroy() {
+        base.OnBehaviorDestroy();
 
         if(this.minecart != null) {
-            this.minecart.release();
+            this.minecart.ReleaseFromInteractor();
         }
     }
 
@@ -26,7 +26,7 @@ public class CellBehaviorRailLoadPoint : AbstractDepositPoint, IMinecartInteract
         bool addedItem = this.minecart.Inventory.AddItem(item);
 
         if(this.minecart.Inventory.IsFull) {
-            this.minecart.release();
+            this.minecart.ReleaseFromInteractor();
             this.minecart = null;
         }
 
@@ -36,7 +36,7 @@ public class CellBehaviorRailLoadPoint : AbstractDepositPoint, IMinecartInteract
     public bool ShouldCartInteract(EntityMinecart cart) {
         return
             this.minecart == null && // There is no Minecart already here
-            cart.position == this.pos &&
+            cart.Position == this.pos &&
             !cart.Inventory.IsFull;
     }
 

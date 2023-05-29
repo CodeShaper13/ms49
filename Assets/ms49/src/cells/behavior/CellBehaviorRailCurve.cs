@@ -21,11 +21,11 @@ public class CellBehaviorRailCurve : CellBehavior, IHasData, ILeverReciever {
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.isFlipped = tag.getBool("isSwitchCurved");
+        this.isFlipped = tag.GetBool("isSwitchCurved");
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("isSwitchCurved", this.isFlipped);
+        tag.SetTag("isSwitchCurved", this.isFlipped);
     }
 
     private bool isValidRail(Rotation r) {

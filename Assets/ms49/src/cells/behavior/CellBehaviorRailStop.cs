@@ -1,12 +1,13 @@
 ﻿using fNbt;
+using System.Text;
 using UnityEngine;
 
 public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData {
 
     public static Mode alwaysStop = new Mode(0, "Always stop");
-    public static Mode neverStop = new Mode(0, "Never stop");
-    public static Mode stopIfFull = new Mode(0, "Stop if full");
-    public static Mode stopIfEmpty = new Mode(0, "Stop if empty");
+    public static Mode neverStop = new Mode(1, "Never stop");
+    public static Mode stopIfFull = new Mode(2, "Stop if full");
+    public static Mode stopIfEmpty = new Mode(3, "Stop if empty");
     public static Mode[] allModes = new Mode[] {
         alwaysStop, neverStop, stopIfFull, stopIfEmpty
     };
@@ -25,8 +26,8 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
         }
     }
 
-    public override void onRightClick() {
-        base.onRightClick();
+    public override void OnRightClick() {
+        base.OnRightClick();
 
         PopupRailStop popup = Main.instance.FindPopup<PopupRailStop>();
         if(popup != null) {
@@ -35,11 +36,16 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
         }
     }
 
-    public override void onDestroy() {
-        base.onDestroy();
+    public override void GetDebugText(StringBuilder sb, string indent) {
+        base.GetDebugText(sb, indent);
+        sb.AppendLine(indent + "Mode: " + this.mode.ToString());
+    }
+
+    public override void OnBehaviorDestroy() {
+        base.OnBehaviorDestroy();
 
         if(this.minecart != null) {
-            this.minecart.release();
+            this.minecart.ReleaseFromInteractor();
         }
     }
 
@@ -48,7 +54,7 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
     }
 
     public bool ShouldCartInteract(EntityMinecart cart) {
-        if(this.minecart != null || cart.position != this.pos) {
+        if(this.minecart != null || cart.Position != this.pos) {
             return false;
         }
 
@@ -67,21 +73,25 @@ public class CellBehaviorRailStop : CellBehavior, IMinecartInteractor, IHasData 
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.mode = CellBehaviorRailStop.GetModeFromId(tag.getInt("interactMode"));
+        this.mode = CellBehaviorRailStop.GetModeFromId(tag.GetInt("interactMode"));
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("interactMode", this.mode.id);
+        tag.SetTag("interactMode", this.mode.id);
     }
 
     public class Mode {
 
-        public int id;
-        public string displayName;
+        public readonly int id;
+        public readonly string displayName;
 
         public Mode(int id, string displayName) {
             this.id = id;
             this.displayName = displayName;
+        }
+
+        public override string ToString() {
+            return string.Format("Mode(id={0}, displayName={1})", this.id, this.displayName);
         }
     }
 }

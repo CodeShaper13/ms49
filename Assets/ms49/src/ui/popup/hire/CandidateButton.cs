@@ -37,7 +37,7 @@ public class CandidateButton : MonoBehaviour {
         if(this.candidate != null) {
             WorkerInfo info = this.candidate.info;
 
-            this.textName.text = info.fullName;
+            this.textName.text = info.FullName;
             this._textType.text = c.type.typeName;
             this._imgFrame.color = c.type.hireFrameColor;
             this.textPay.text = "$" + info.pay + " / Day";

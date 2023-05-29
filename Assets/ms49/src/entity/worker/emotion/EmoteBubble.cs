@@ -18,7 +18,7 @@ public class EmoteBubble : MonoBehaviour {
     }
 
     private void Update() {
-        if(!Pause.isPaused()) {
+        if(Pause.IsPaused) {
             if(this.timer > 0) {
                 this.timer -= Time.deltaTime;            
 

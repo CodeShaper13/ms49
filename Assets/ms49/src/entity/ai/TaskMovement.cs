@@ -29,7 +29,7 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
     public override void preform() {
         if(this.navPath != null) {
             Position endPos = this.navPath.EndPoint;
-            if(this.owner.depth == endPos.depth && Vector2.Distance(this.owner.worldPos, endPos.Center) == 0) {
+            if(this.owner.depth == endPos.depth && Vector2.Distance(this.owner.WorldPos, endPos.Center) == 0) {
                 // At the end of the path
                 if(!this.onReachCallbackCalled) {
                     this.onReachCallbackCalled = true;
@@ -103,7 +103,7 @@ public abstract class TaskMovement<T> : TaskBase<T> where T : EntityBase {
         // Sort all behaviors by distance.
         List<T1> behaviors = this.owner.world.GetAllBehaviors(predicate);
         behaviors = behaviors.OrderBy(
-            x => x.pos.Distance(this.owner.position)).ToList();
+            x => x.pos.Distance(this.owner.Position)).ToList();
 
         foreach(T1 b in behaviors) {
             Position pos = b.pos;

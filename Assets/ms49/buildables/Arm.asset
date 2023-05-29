@@ -10,15 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d37e93f4ea4985458531c2d78c9dd77, type: 3}
-  m_Name: MinecartUnloader
+  m_Name: Arm
   m_EditorClassIdentifier: 
   structureName: 
-  _cost: 300
-  _description: Automatically unloads Minecart's contents onto conveyor belts
+  _cost: 0
+  _description: 
   _tab: {fileID: 11400000, guid: e0b6f2b544debbf45b868fd290af11d3, type: 2}
   _fogOption: 0
   _overrideRotationMsg: 
   _displayRotation: 1
-  _buildTime: {fileID: 11400000, guid: ed40e64ee472be845b68a5910e25961f, type: 2}
-  _customPreview: {fileID: 0}
-  _cell: {fileID: 11400000, guid: e3e8f6107ba5aa24ebaf4aec41816580, type: 2}
+  _buildTime: 0
+  _customPreview: {fileID: -7810456424297438763, guid: e8fad20e546ee954eb1317d1e7454d3e,
+    type: 3}
+  _cell: {fileID: 11400000, guid: 3d0cc7a62c45aaa4faeea6de6bb3ec0c, type: 2}
+  _buildableSize: {x: 1, y: 1}
+  _gridRows:
+  - _row:
+    - 
+  _gridMappings: []

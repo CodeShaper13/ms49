@@ -4,17 +4,17 @@ public class CellBehaviorRailUnloadPoint : CellBehaviorOccupiable, IMinecartInte
 
     public EntityMinecart minecart { get; set; }
 
-    public override void onDestroy() {
-        base.onDestroy();
+    public override void OnBehaviorDestroy() {
+        base.OnBehaviorDestroy();
 
         if(this.minecart != null) {
-            this.minecart.release();
+            this.minecart.ReleaseFromInteractor();
         }
     }
 
     private void Update() {
         if(this.minecart != null && this.minecart.Inventory.IsEmpty) {
-            this.minecart.release();
+            this.minecart.ReleaseFromInteractor();
             this.minecart = null;
         }
     }
@@ -26,7 +26,7 @@ public class CellBehaviorRailUnloadPoint : CellBehaviorOccupiable, IMinecartInte
     public bool ShouldCartInteract(EntityMinecart cart) {
         return
             this.minecart == null &&
-            cart.position == this.pos &&
+            cart.Position == this.pos &&
             !cart.Inventory.IsEmpty;
     }
 }

@@ -63,9 +63,9 @@ public class TaskSleep : TaskMovement<EntityWorker> {
         if(this.bed != null) {
             // Try to move away from the bed so it "looks free".
             // If there no walkable space, stay on the bed.  Others will still be able to claim it.
-            Position? freeSpot = this.getFreeSpot(this.owner.position);
+            Position? freeSpot = this.getFreeSpot(this.owner.Position);
             if(freeSpot == null) {
-                freeSpot = this.getFreeSpot(this.owner.position + Rotation.UP); // Head of the bed.
+                freeSpot = this.getFreeSpot(this.owner.Position + Rotation.UP); // Head of the bed.
             }
 
             if(freeSpot != null) {

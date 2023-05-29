@@ -34,7 +34,7 @@ public class Layer {
         this.heatSources = new float[this.Area];
         this.hardness = new int[this.Area];
 
-        LayerData layerData = this.world.MapGenerator.GetLayerFromDepth(this.depth);
+        LayerData layerData = this.world.MapGenerator.GetLayerData(this.depth);
         if(layerData != null) { // Null if a layer is added through an external editor or the layer count is reduced
 
             // Set heat sourcess
@@ -58,7 +58,7 @@ public class Layer {
 
         // Cleanup the old CellBehavior if it exists.
         if(oldState.behavior != null) {
-            oldState.behavior.onDestroy();
+            oldState.behavior.OnBehaviorDestroy();
             if(oldState.behavior.cache) {
                 this.world.storage.cachedBehaviors.Remove(oldState.behavior);
             }
@@ -174,31 +174,31 @@ public class Layer {
             parents[i * 2] = state.parent.x;
             parents[(i * 2) + 1] = state.parent.y;
         }
-        tag.setTag("tiles", idArray);
-        tag.setTag("meta", metaArray);
-        tag.setTag("parents", parents);
+        tag.SetTag("tiles", idArray);
+        tag.SetTag("meta", metaArray);
+        tag.SetTag("parents", parents);
 
         // Write tile meta:
-        NbtList listTileMeta = new NbtList(NbtTagType.Compound);
+        NbtList listBehaviorData = new NbtList(NbtTagType.Compound);
         for(int x = 0; x < this.size; x++) {
             for(int y = 0; y < this.size; y++) {
-                CellBehavior meta = this.GetCellState(x, y).behavior;
-                if(meta != null && meta is IHasData) {
+                CellBehavior behavior = this.GetCellState(x, y).behavior;
+                if(behavior != null && behavior is IHasData) {
                     NbtCompound behaviorTag = new NbtCompound();
-                    behaviorTag.setTag("xPos", x);
-                    behaviorTag.setTag("yPos", y);
-                    ((IHasData)meta).WriteToNbt(behaviorTag);
-                    listTileMeta.Add(behaviorTag);
+                    behaviorTag.SetTag("xPos", x);
+                    behaviorTag.SetTag("yPos", y);
+                    ((IHasData)behavior).WriteToNbt(behaviorTag);
+                    listBehaviorData.Add(behaviorTag);
                 }
             }
         }
-        tag.setTag("meta", listTileMeta);
+        tag.SetTag("behaviorData", listBehaviorData);
 
         // Write fog:
         if(this.HasFog) {
             NbtCompound fogTag = new NbtCompound();
             this.fog.writeToNbt(fogTag);
-            tag.setTag("fog", fogTag);
+            tag.SetTag("fog", fogTag);
         }
 
         // Write temperature:
@@ -206,17 +206,17 @@ public class Layer {
         for(int i = 0; i < this.temperatures.Length; i++) {
             tempArray[i] = (int)(this.temperatures[i] * 1_000_000f);
         }
-        tag.setTag("temperature", tempArray);
+        tag.SetTag("temperature", tempArray);
 
         // Write hardness:
-        tag.setTag("hardness", this.hardness);
+        tag.SetTag("hardness", this.hardness);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
         // Read tiles:
-        int[] tileIds = tag.getIntArray("tiles");
-        int[] metas = tag.getIntArray("meta");
-        int[] parents = tag.getIntArray("parents");
+        int[] tileIds = tag.GetIntArray("tiles");
+        int[] metas = tag.GetIntArray("meta");
+        int[] parents = tag.GetIntArray("parents");
 
         int index = 0;
         for(int x  = 0; x < this.size; x++) {
@@ -248,13 +248,13 @@ public class Layer {
         }
 
         // Read temperatures:
-        int[] tempArray = tag.getIntArray("temperature");
+        int[] tempArray = tag.GetIntArray("temperature");
         for(int i = 0; i < Mathf.Min(this.temperatures.Length, tempArray.Length); i++) {
             this.temperatures[i] = tempArray[i] / 1_000_000f;
         }
 
         // Read hardness:
-        this.hardness = tag.getIntArray("hardness");
+        this.hardness = tag.GetIntArray("hardness");
     }
 
     private bool InBounds(int x, int y) {

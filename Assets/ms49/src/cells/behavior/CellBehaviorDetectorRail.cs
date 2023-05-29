@@ -21,7 +21,7 @@ public class CellBehaviorDetectorRail : CellBehavior, IHasData, IRenderTileOverr
         //    this.dirty();
         //    this.isTripped = false;
         //}
-        if(this.tripper != null && this.tripper.position != this.pos) {
+        if(this.tripper != null && this.tripper.Position != this.pos) {
             this.tripper = null;
         }
     }
@@ -36,12 +36,12 @@ public class CellBehaviorDetectorRail : CellBehavior, IHasData, IRenderTileOverr
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.isTripped = tag.getBool("isTripped");
+        this.isTripped = tag.GetBool("isTripped");
         //this.tripTimer = tag.getFloat("tripTimer");
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("isTripped", this.isTripped);
+        tag.SetTag("isTripped", this.isTripped);
         //tag.setTag("tripTimer", this.tripTimer);
     }
 

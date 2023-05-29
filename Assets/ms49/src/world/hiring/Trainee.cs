@@ -12,14 +12,14 @@ public class Trainee {
 
     public Trainee(NbtCompound tag) {
         this.info = new WorkerInfo(tag.getCompound("info"));
-        this.type = Main.instance.WorkerTypeRegistry.GetElement(tag.getInt("type"));
+        this.type = Main.instance.WorkerTypeRegistry[tag.GetInt("type")];
     }
 
     public NbtCompound writeToNbt() {
         NbtCompound tag = new NbtCompound();
 
-        tag.setTag("info", this.info.writeToNbt());
-        tag.setTag("type", Main.instance.WorkerTypeRegistry.GetIdOfElement(this.type));
+        tag.SetTag("info", this.info.writeToNbt());
+        tag.SetTag("type", Main.instance.WorkerTypeRegistry.GetIdOfElement(this.type));
 
         return tag;
     }

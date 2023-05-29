@@ -5,7 +5,7 @@
 
     public EntityTruck truck;
 
-    public override void onRightClick() {
+    public override void OnRightClick() {
         // Don't let the parent class open a Container Popup.
     }
 
@@ -18,7 +18,7 @@
         }
     }
 
-    public override bool isOpen() {
+    public override bool IsAcceptingItems() {
         return true;
     }
 }

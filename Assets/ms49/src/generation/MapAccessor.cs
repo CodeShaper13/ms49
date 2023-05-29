@@ -2,14 +2,12 @@
 
     public readonly CellData[] cells;
     public readonly int[] metas;
-    public readonly int depth;
     public readonly int size;
 
-    public MapAccessor(int mapSize, int depth) {
+    public MapAccessor(int mapSize) {
+        this.size = mapSize;
         this.cells = new CellData[mapSize * mapSize];
         this.metas = new int[mapSize * mapSize];
-        this.depth = depth;
-        this.size = mapSize;
     }
 
     /// <summary>
@@ -32,6 +30,10 @@
         this.metas[index] = meta;
     }
 
+    /// <summary>
+    /// Returns the Cell at the passed position.  If the position is
+    /// out of bounds, null, is returned.
+    /// </summary>
     public CellData GetCell(int x, int y) {
         if(this.OutOfBounds(x, y)) {
             return null;

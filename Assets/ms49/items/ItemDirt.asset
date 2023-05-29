@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: ItemDirt
   m_EditorClassIdentifier: 
   sprite: {fileID: 4547986755193944361, guid: e8fad20e546ee954eb1317d1e7454d3e, type: 3}
-  itemName: Dirt
+  itemName: Rock
   moneyValue: 25
+  _fuelValue: 0
   _includeInEconemy: 0
   _graphColor: {r: 0.627451, g: 0.5764706, b: 0.5568628, a: 1}
+  _darkGraphColor: {r: 1, g: 0, b: 1, a: 1}

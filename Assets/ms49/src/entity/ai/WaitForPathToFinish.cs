@@ -13,7 +13,7 @@ public class WaitForPathToFinish : CustomYieldInstruction {
     public override bool keepWaiting {
         get {
             if(this.worker.moveHelper.path == this.path) {
-                if(this.path.EndPoint.Center == this.worker.worldPos) {
+                if(this.path.EndPoint.Center == this.worker.WorldPos) {
                     // Worker is at the end of the path
                     return true;
                 }

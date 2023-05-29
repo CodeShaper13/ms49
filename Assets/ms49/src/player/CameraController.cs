@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour {
 
                     if(behavior != null) {
                         if(rmb) {
-                            behavior.onRightClick();
+                            behavior.OnRightClick();
                         }
 
                         string tooltipText = behavior.GetTooltipText();
@@ -219,20 +219,20 @@ public class CameraController : MonoBehaviour {
     public NbtCompound writeToNbt() {
         NbtCompound tag = new NbtCompound();
 
-        tag.setTag("layer", this.currentLayer);
-        tag.setTag("zoomLevel", this.currentZoom);
+        tag.SetTag("layer", this.currentLayer);
+        tag.SetTag("zoomLevel", this.currentZoom);
         Transform camTrans = this.mainCam.transform;
-        tag.setTag("cameraPos", new Vector2(camTrans.position.x, camTrans.position.y));
-        tag.setTag("inCreativeMode", this.inCreativeMode);
+        tag.SetTag("cameraPos", new Vector2(camTrans.position.x, camTrans.position.y));
+        tag.SetTag("inCreativeMode", this.inCreativeMode);
 
         return tag;
     }
 
     public void readFromNbt(NbtCompound tag) {
-        this.changeLayer(tag.getInt("layer"), false);
-        this.setZoom(tag.getInt("zoomLevel", this.minZoom));
-        this.setCameraPos(tag.getVector2("cameraPos"));
-        this.inCreativeMode = tag.getBool("inCreativeMode");
+        this.changeLayer(tag.GetInt("layer"), false);
+        this.setZoom(tag.GetInt("zoomLevel", this.minZoom));
+        this.setCameraPos(tag.GetVector2("cameraPos"));
+        this.inCreativeMode = tag.GetBool("inCreativeMode");
     }
 
     private void moveCamera() {

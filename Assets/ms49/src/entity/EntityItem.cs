@@ -10,8 +10,8 @@ public class EntityItem : EntityBase {
 
     public Item item { get; private set; }
 
-    public override void initialize(World world, int id) {
-        base.initialize(world, id);
+    public override void Initialize(World world, int id) {
+        base.Initialize(world, id);
 
         this.sr.transform.localPosition = new Vector2(
             Random.Range(-this.spriteRndShift.x, this.spriteRndShift.x),
@@ -19,30 +19,30 @@ public class EntityItem : EntityBase {
     }
 
     public override void Update() {
+        base.Update();
+
         if(Pause.IsPaused) {
             return;
         }
-
-        base.Update();
 
         if(this.item == null) {
             Debug.LogWarning("EntityItem has no item field set!");
         }
     }
 
-    public override void writeToNbt(NbtCompound tag) {
-        base.writeToNbt(tag);
+    public override void WriteToNbt(NbtCompound tag) {
+        base.WriteToNbt(tag);
 
-        tag.setTag("itemId", Main.instance.ItemRegistry.GetIdOfElement(this.item));
+        tag.SetTag("itemId", Main.instance.ItemRegistry.GetIdOfElement(this.item));
     }
 
-    public override void readFromNbt(NbtCompound tag) {
-        base.readFromNbt(tag);
+    public override void ReadFromNbt(NbtCompound tag) {
+        base.ReadFromNbt(tag);
 
-        this.setItem(Main.instance.ItemRegistry.GetElement(tag.getInt("itemId")));
+        this.SetItem(Main.instance.ItemRegistry[tag.GetInt("itemId")]);
     }
 
-    public void setItem(Item item) {
+    public void SetItem(Item item) {
         if(item == null) {
             Debug.LogWarning("Can't set EntityItem#item to null");
         } else {

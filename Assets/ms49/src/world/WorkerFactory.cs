@@ -82,7 +82,7 @@ public class WorkerFactory : MonoBehaviour {
         List<Personality> list = new List<Personality>();
 
         for(int i = 0; i < Main.instance.PersonalityRegistry.RegistrySize; i++) {
-            Personality p = Main.instance.PersonalityRegistry.GetElement(i);
+            Personality p = Main.instance.PersonalityRegistry[i];
 
             if(p != null && p.canHave(type)) {
                 list.Add(p);

@@ -39,11 +39,11 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
         NbtCompound tagUnlockStates = tag.getCompound("unlockState");
         foreach(var node in this._graph.nodes) {
             if(node is NodeTechTree techNode) {
-                techNode.IsUnlocked = tagUnlockStates.getBool(techNode.SaveName);
+                techNode.IsUnlocked = tagUnlockStates.GetBool(techNode.SaveName);
             }
         }
 
-        if(tag.hasKey("targetTechnology")) {
+        if(tag.HasKey("targetTechnology")) {
             // TODO
             //NodeTechTree node = this.GetNode(tag.getString("targetTechnology"));
             //ResearchProgress progress = new ResearchProgress(node);
@@ -55,10 +55,10 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
         NbtCompound tagUnlockStates = new NbtCompound();
         foreach(var node in this._graph.nodes) {
             if(node is NodeTechTree techNode) {
-                tagUnlockStates.setTag(techNode.SaveName, techNode.IsUnlocked);
+                tagUnlockStates.SetTag(techNode.SaveName, techNode.IsUnlocked);
             }
         }
-        tag.setTag("unlockState", tagUnlockStates);
+        tag.SetTag("unlockState", tagUnlockStates);
 
         if(this.targetTechnology != null) {
             // TODO
@@ -181,14 +181,14 @@ public class TechnologyTree : MonoBehaviour, ISaveableState {
         }
 
         public ResearchProgress(TechnologyTree tree, NbtCompound tag) {
-            this.technology = tree.GetNode(tag.getString("node"));
-            this.itemsContributed = tag.getIntArray("contributions");
+            this.technology = tree.GetNode(tag.GetString("node"));
+            this.itemsContributed = tag.GetIntArray("contributions");
         }
 
         public NbtCompound WriteToNbt() {
             NbtCompound tag = new NbtCompound();
-            tag.setTag("node", this.technology.SaveName);
-            tag.setTag("contributions", this.itemsContributed);
+            tag.SetTag("node", this.technology.SaveName);
+            tag.SetTag("contributions", this.itemsContributed);
             return tag;
         }
 

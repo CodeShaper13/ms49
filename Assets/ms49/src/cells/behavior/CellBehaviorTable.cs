@@ -35,26 +35,26 @@ public class CellBehaviorTable : CellBehaviorOccupiable, IHasData {
         this.updateChairFlag();
     }
 
-    public override void getDebugText(StringBuilder sb, string indent) {
-        base.getDebugText(sb, indent);
+    public override void GetDebugText(StringBuilder sb, string indent) {
+        base.GetDebugText(sb, indent);
 
         sb.AppendLine(indent + "PlateState: " + this.plateState);
         sb.AppendLine(indent + "Chair Position: " + this.chairPos);
     }
 
     public void ReadFromNbt(NbtCompound tag) {
-        this.plateState = (EnumPlateState)tag.getInt("plateState");
+        this.plateState = (EnumPlateState)tag.GetInt("plateState");
     }
 
     public void WriteToNbt(NbtCompound tag) {
-        tag.setTag("plateState", (int)this.plateState);
+        tag.SetTag("plateState", (int)this.plateState);
     }
 
     /// <summary>
     /// Returns true if the table's chair is occupied and hte occupant is in the chair.
     /// </summary>
     public bool isOccupantSitting() {
-        return this.chair != null && this.isOccupied() && this.getOccupant().position.Distance(this.chairPos) <= 0f;
+        return this.chair != null && this.isOccupied() && this.getOccupant().Position.Distance(this.chairPos) <= 0f;
     }
 
     private void updateChairFlag() {

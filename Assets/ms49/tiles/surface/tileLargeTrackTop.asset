@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: tileRailUnloadPoint_x
+  m_Name: tileLargeTrackTop
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 3006911661186945869, guid: 83e6f32abdc9b244cbe11ac906944047,
+  m_Sprite: {fileID: -6835276744072785760, guid: e8fad20e546ee954eb1317d1e7454d3e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:

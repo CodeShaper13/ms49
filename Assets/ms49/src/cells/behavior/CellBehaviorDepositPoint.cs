@@ -1,6 +1,6 @@
 ﻿public class CellBehaviorDepositPoint : AbstractDepositPoint {
 
-    public override bool isOpen() {
+    public override bool IsAcceptingItems() {
         return !this.IsFull;
     }
 }

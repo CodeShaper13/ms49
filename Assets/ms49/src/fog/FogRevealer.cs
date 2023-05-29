@@ -19,7 +19,7 @@ public class FogRevealer : MonoBehaviour {
             return;
         }
 
-        Vector2Int currentPos = this.entity.getCellPos();
+        Vector2Int currentPos = this.entity.GetCellPos();
         if(currentPos != this.cellPosLastFrame) {
             this.liftFog();
         }
